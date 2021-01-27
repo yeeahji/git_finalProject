@@ -1,10 +1,10 @@
-//테이블 생성!
+//테이블 생성
 CREATE TABLE product(
-     product_seq number PRIMARY KEY, -- 상품번호
-     store_nickname REFERENCES store(store_nickname), -- 판매자(상점 이름)
-     category_code REFERENCES category(category_code), -- 카테고리 코드
+     product_seq number PRIMARY KEY, -- 상품번호(PK)
+     mem_id REFERENCES members(mem_id), -- 판매자 ID(FK)
+     category_code REFERENCES category(cate_code), -- 카테고리 코드(FK)
      product_subject VARCHAR2(200) NOT NULL, -- 상품명
-     product_content VARCHAR2(5000), -- 상품 글 내용
+     product_content VARCHAR2(4000), -- 상품 글 내용
      product_img1 VARCHAR2(1000) NOT NULL, -- 상품 이미지1
      product_img2 VARCHAR2(1000), -- 상품 이미지2
      product_img3 VARCHAR2(1000), -- 상품 이미지3
@@ -26,4 +26,4 @@ CREATE TABLE product(
 CREATE SEQUENCE seq_product NOCYCLE NOCACHE;
 
 //데이터 삽입(예제)
-INSERT INTO product VALUES (seq_product.NEXTVAL, '테스트', 101, '입던옷', '입던옷입니다', 'ex.png', 'ex2.png', 'ex3.png', 25000, '서울', 0, 0, '원피스', '옷', '투피스', '쓰리피스', '포피스');
+INSERT INTO product VALUES (seq_product.NEXTVAL, 'test1', 101, '입던옷', '입던옷입니다', 'ex.png', 'ex2.png', 'ex3.png', 25000, '서울', 0, 0, '원피스', '옷', '투피스', '쓰리피스', '포피스');
