@@ -1,0 +1,13 @@
+.classpath
+.project
+.springBeans
+.settings/
+target/
+src/main/resources/log4j.xml
+src/main/resources/META-INF/
+src/main/webapp/WEB-INF/classes/
+src/main/webapp/META-INF/
+
+pom.xml
+src/main/resources/spring/db.properties
+src/main/webapp/WEB-INF/web.xml

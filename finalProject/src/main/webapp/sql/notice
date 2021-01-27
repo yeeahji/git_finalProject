@@ -1,0 +1,43 @@
+CREATE TABLE noticeBoard(
+     notice_seq           
+     notice_option1 VARCHAR2(40) NOT NULL,   --분류
+     notice_subject VARCHAR2(4000) NOT NULL,  -- 제목
+     admin_Id VARCHAR2(40) NOT NULL,  -- 작성자
+     notice_content VARCHAR2(4000) NOT NULL,  -- 내용
+     logtime DATE DEFAULT SYSDATE      -- 날짜
+ );
+
+CREATE TABLE faq(
+     faq_seq         
+     notice_option1 VARCHAR2(40) NOT NULL,  -분류
+     faq_cate VARCHAR2(40) NOT NULL,,  -- 소분류
+     faq_subject VARCHAR2(4000) NOT NULL,  -- 제목
+     admin_Id VARCHAR2(40) NOT NULL,  -- 작성자
+     faq_content VARCHAR2(4000) NOT NULL,  -- 내용
+     logtime DATE DEFAULT SYSDATE      -- 날짜
+ );
+
+CREATE TABLE qnaboard(
+     qnaCate_main_name VARCHAR2(50) NOT NULL,  --카테고리 선택1
+     qnaCate_sub_name VARCHAR2(50) NOT NULL,  -- 카테고리 선택2
+     mem_Id VARCHAR2(40),  -- 작성자
+     qna_content VARCHAR2(4000) NOT NULL,  -- 내용
+  	 qna_picture1 VARCHAR2(500), 
+     qna_picture2 VARCHAR2(500), 
+     qna_picture3 VARCHAR2(500),
+     qna_picture4 VARCHAR2(500),
+     qna_picture5 VARCHAR2(500),
+     logtime DATE DEFAULT SYSDATE      -- 날짜
+ );
+ 
+ 
+CREATE TABLE qnaCategory(
+     qnaCate_main_id VARCHAR2(50) NOT NULL,  --카테고리 id
+     qnaCate_main_name VARCHAR2(50) NOT NULL, -- 카테고리 name
+     qnaCate_sub_id VARCHAR2(50) NOT NULL, -- 서브 카테고리 id
+     qnaCate_sub_name VARCHAR2(50) NOT NULL, -- 서브 카테고리 name
+     qnaCate_Content VARCHAR2(4000)   		--양식
+ );
+
+ALTER TABLE qna
+ADD FOREIGN KEY (MEM_ID) REFERENCES MEMBERS(MEM_ID);

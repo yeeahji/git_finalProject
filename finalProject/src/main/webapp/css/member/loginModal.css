@@ -1,0 +1,38 @@
+@charset "UTF-8";
+
+/* 로그인 모달    ================================================ */
+#loginModalHidden { 
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    background: rgba(0, 0, 0, 0.6);
+    z-index: 10000; 
+    display: none;
+    -webkit-box-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    justify-content: center;
+}
+
+#loginModalDisplay{
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    background: rgba(0, 0, 0, 0.6);
+    z-index: 10000;
+    display: flex;
+    -webkit-box-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    justify-content: center;
+}
+#loginModalWrap{
+	padding: 60px;
+    background: rgb(255, 255, 255);
+    width: 600px;
+	
+}

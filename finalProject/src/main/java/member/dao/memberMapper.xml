@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="memberSQL" >
+	
+<!-- ▶  회원가입 -->
+ 	<insert id="join" parameterType="member">
+ 		insert into members values(#{mem_id}, #{mem_pwd}, #{mem_name}, #{mem_email}, 
+ 									#{mem_add1},#{mem_add2}, #{mem_postcode},
+ 									'','', '',	
+ 									#{mem_tel}, 
+ 									'', '',	
+ 									sysdate)
+ 	</insert> 
+<!-- ▶ 아이디 중복 체크 / 회원정보수정용 회원 데이터 전체 출력  -->
+ 	<select id="getData" parameterType="String" resultType="member">
+ 		select * from members where mem_id = #{mem_id}
+ 	</select>
+ 	
+<!-- ▶  우편번호 검색 -->
+ 	<select id="searchPost" parameterType="java.util.Map" resultType="zipcode">
+ 		select * from newzipcode where sido like ('%' || #{sido} || '%') 
+ 								and nvl(sigungu,'0') like ('%' || #{sigungu} || '%') 
+ 								and roadname like ('%' || #{roadname} || '%')	
+ 	</select>
+ 	
+<!-- ========================================================================= -->
+<!-- ▶  로그인 / 본인 재확인-->
+ 	<select id="login" parameterType="java.util.Map" resultType="member">
+ 		select * from members where mem_id = #{id} and mem_pwd = #{pwd}
+ 	</select>
+ 	
+<!-- ========================================================================= -->
+<!-- ▶  -->
+ 	<select id="certify" parameterType="java.util.Map" resultType="member">
+ 		select * from members where mem_id = #{mem_id} and mem_pwd = #{mem_pwd}
+ 	</select>
+ 	
+<!-- ▶  수정 데이터로 업데이트 -->
+ 	<update id="update" parameterType="member" >
+ 		update members set mem_name = #{mem_name}
+	 						, mem_pwd = #{mem_pwd}
+	 						, mem_email = #{mem_email}
+	 						, mem_tel = #{mem_tel}
+	 						, mem_postcode = #{mem_postcode}
+	 						, mem_add1 = #{mem_add1}
+	 						, mem_add2 = #{mem_add2}
+ 		where mem_id = #{mem_id}
+ 	</update>
+
+<!-- ▶  탈퇴 -->
+ 	<delete id="withdraw" parameterType="String">
+ 		delete from members where mem_id=#{mem_id}
+ 	</delete>
+ 	
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

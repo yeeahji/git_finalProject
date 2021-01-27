@@ -1,0 +1,29 @@
+//테이블 생성!
+CREATE TABLE product(
+     product_seq number PRIMARY KEY, -- 상품번호
+     store_nickname REFERENCES store(store_nickname), -- 판매자(상점 이름)
+     category_code REFERENCES category(category_code), -- 카테고리 코드
+     product_subject VARCHAR2(200) NOT NULL, -- 상품명
+     product_content VARCHAR2(5000), -- 상품 글 내용
+     product_img1 VARCHAR2(1000) NOT NULL, -- 상품 이미지1
+     product_img2 VARCHAR2(1000), -- 상품 이미지2
+     product_img3 VARCHAR2(1000), -- 상품 이미지3
+     product_price NUMBER NOT NULL, -- 상품 가격
+     product_location VARCHAR2(50) NOT NULL, -- 거래 지역
+     product_condition NUMBER NOT NULL, -- 상품상태(0:중고상품 1:새상품)
+     product_delivery_fee NUMBER NOT NULL, -- 배송비 포함 여부(0:불포함 1:포함)
+     product_hashtag1 VARCHAR2(50), -- 상품태그1
+     product_hashtag2 VARCHAR2(50), -- 상품태그2
+     product_hashtag3 VARCHAR2(50), -- 상품태그3
+     product_hashtag4 VARCHAR2(50), -- 상품태그4
+     product_hashtag5 VARCHAR2(50), -- 상품태그5
+     product_view NUMBER DEFAULT 0, -- 조회수
+     product_manage NUMBER DEFAULT 1, -- 판매관리(1:판매중 2:예약중-거래약속중 3:판매완료)
+     product_logtime DATE DEFAULT SYSDATE NOT NULL -- 상품 게시 날짜
+ );
+ 
+//시퀀스
+CREATE SEQUENCE seq_product NOCYCLE NOCACHE;
+
+//데이터 삽입(예제)
+INSERT INTO product VALUES (seq_product.NEXTVAL, '테스트', 101, '입던옷', '입던옷입니다', 'ex.png', 'ex2.png', 'ex3.png', 25000, '서울', 0, 0, '원피스', '옷', '투피스', '쓰리피스', '포피스');

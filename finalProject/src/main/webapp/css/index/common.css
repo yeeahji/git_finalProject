@@ -1,0 +1,38 @@
+@charset "UTF-8";
+@import url(common.css);
+
+/* index의 공통 */
+#section {
+	width: 100%;
+	height: 100%;
+	float: left;
+}
+
+.fixed-top {
+	position: sticky !important;
+}
+
+.container {
+	width: 1024px;
+}
+
+/* skip css */
+.skip a {
+	display : block;
+	overflow: hidden;											
+	position : absolute;
+	left : 0;
+	top : -1000em;
+	z-index : 9999;
+	width : 100%;
+	background-color: navy;
+	color :white;
+	font : bold 1.3em Tahoma, sans-serif;
+	text-decoration : none;
+	text-align: center;	
+}
+
+.skip a:hover, .skip a:active, .skip a:focus {
+	top:0;
+	padding: 0.5em 0;
+}
