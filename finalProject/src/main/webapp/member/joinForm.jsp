@@ -55,6 +55,7 @@
             <td>
                 <input placeholder="이메일 인증번호" type="text" name="emailNum" id="emailNum" size=24px;>
                 <input type="button" name="certifyEmailBtn" id="certifyEmailBtn" value="인증번호 발송">
+                <input type="hidden" id="randomNum" name="randomNum">
                 <div class="caution" id="emailNumDiv"></div>
             </td>
         </tr>
