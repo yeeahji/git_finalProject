@@ -26,8 +26,8 @@
 	</select>
 <!-- 글등록 -->
 	<insert id="qnaWrite" parameterType="notice.bean.QnaBoardDTO" >
-		insert into qnaboard(qnaCate_main_name,qnaCate_sub_name,qna_content,qna_picture)
-		 				values(#{qnaCate_main_name},#{qnaCate_sub_name},#{qna_content},#{qna_picture})
+		insert into qnaboard(qnaCate_main_name,qnaCate_sub_name,qna_content,qna_picture1,qna_picture2,qna_picture3,qna_picture4,qna_picture5)
+		 				values(#{qnaCate_main_name},#{qnaCate_sub_name},#{qna_content},#{qna_picture1},#{qna_picture2},#{qna_picture3},#{qna_picture4},#{qna_picture5})
 	</insert>
 <!-- 상담목록 불러오기 -->
 	<select id="getQnaList" resultType="notice.bean.QnaBoardDTO">
