@@ -7,9 +7,8 @@
 <script defer src="${pageContext.request.contextPath}/js/store/store.js"></script>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/store/store.css">
 <!-- 프로필 사진 변경 위해 설정; 에이작스 통신 시 폼 아이디만 필요 -->			
-
 <!-- <form id="storeForm" method="post"  enctype="multipart/form-data"> -->
-
+<form id="storeForm">
 <div id="storeBody">
 <div id="storeWrap">
 	<div id="storeTop">
@@ -41,8 +40,7 @@
 		                 <label for="inputImage" class="btn_model">
 							<span id="btnChangeProfile" class="btn2" onclick="">프로필 사진 변경</span>
 						 </label>
-
-		                 <!-- <input type="file" name="profileImg" id="inputImage" accept="image/*" multiple>  -->
+		                 <input type="file" name="profileImg" id="inputImage" accept="image/*"> 
 
 					</div><!-- //imageEdit -->
 				</div><!-- //(2)background2 -->
@@ -51,7 +49,6 @@
 		<div id="profileRight">
 			<div class="storeTitleWrap">
 				<div class="nickName">닉네임<button class="nickNameEdit" id="nickNameEdit">닉네임 수정</button></div>
-				<!-- <div class="identification">본인인증완료</div> -->
 			</div><!-- //storeTitleWrap -->
 			<div id="middleWrap">
 				<!-- (1) 상점후기 수 -->
@@ -64,8 +61,8 @@
 				</div>
 			</div><!-- middleWrap -->
 			<!-- 상점 주인 : 소개글 -->
-			<div class="introduce">안녕하세</div> <!-- 내상점/남의상점 공통 -->
-<!-- 			<div class="introduceEdit"><button class="introduceEditBtn">소개글 수정</button></div>  -->
+			<div class="introduce"></div> <!-- 내상점/남의상점 공통 -->
+				<div class="introduceEdit"><button class="introduceEditBtn">소개글 수정</button></div> 
 			<!-- 남의 상점 : 신고하기 -->
 			<div id="singo">
 				<a class="singoBtn">
@@ -89,7 +86,7 @@
 			<!-- [상품]/[상품후기]/[구매내역]/[찜]/[내상품관리] -->
 			<div class="contentStore">
 				<c:if test="${displayNum==1 }">
-					<%-- <jsp:include page="../store/productPg.jsp"/> --%>
+					<jsp:include page="../store/productPg.jsp"/>
 				</c:if>
 			</div>
 			<div class="listGap">
@@ -226,5 +223,5 @@
 </div><!-- //storeWrap -->
 </div><!-- //storeBody -->
 
-<!-- </form> -->
+</form>
 

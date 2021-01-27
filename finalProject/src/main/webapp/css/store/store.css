@@ -11,6 +11,11 @@ body, input, textarea, select, button {
 }
 div {
     display: block;
+    margin: 0px;
+    padding: 0px;
+    border: 0px;
+    font: inherit;
+    vertical-align: baseline;
 }
 a {
     color: rgb(33, 33, 33); 
@@ -63,14 +68,15 @@ textarea {
 }
 /****************** 전체 틀  ******************/
 #storeBody {
-	display: flex;  /*반응형 */
+	/* display: flex;  */ /*반응형 */
     -webkit-box-pack: center;
     justify-content: center;
     background: rgb(255, 255, 255);
+    height: 100%;
 }
 #storeWrap {
-	width: 1024px;
-	margin: 20px auto; /* 헤더,풋터랑 여백 크기 조정 */
+	width: 1040px;
+	margin: 25px auto;  /*헤더,풋터랑 여백 크기 조정 */
 	/* border: 1px solid red; */
 }
 #storeTop {
@@ -82,8 +88,12 @@ textarea {
 }
 #storeBottom {
 	margin-bottom: 30px;
-	height: 579px;
- 	/* border: 1px solid blue; */
+	height: 100%; 
+ 	/* border: 1px solid blue;  */
+}
+.contentStore {
+	display: block;
+	/* border: 1px solid pink; */
 }
 /****************** storeTop  ******************/
 /* 프로필 */
@@ -241,23 +251,6 @@ textarea {
     font-size: 11px;
     margin-left: 10px;
 }
-/* 본인인증확인 */
-/* .identification {
-	font-size: 11px;
-    color: rgb(77, 77, 77);
-    position: relative;
-}
-.identification::after {
-    content: "OK";
-    color: rgb(255, 255, 255);
-    font-size: 9px;
-    background: rgb(255, 195, 34);
-    border-radius: 6px;
-    position: absolute;
-    padding: 2px 4px 1px;
-    top: -1px;
-    left: -25px;
-} */
 /* 에코 지수 + 판매내역 + 조회수?(+아이콘) */
 #middleWrap {
 	height: 45px;
@@ -276,7 +269,7 @@ textarea {
     display: flex;
 }
 .storeIndication > img {
-	margin-right: 8px; /* 원래 10px */
+	margin-right: 10px; /* 원래 10px */
 }
 .storeIndication > .indicateNum {
 	margin-left: 5px;
@@ -778,7 +771,7 @@ textarea {
     width: 100%;
     height: 194px;
 }
-.deliveryFee {
+/* .deliveryFee {
 	background: rgba(0, 0, 0, 0.4);
     font-size: 13px;
     padding: 2px 3px 3px;
@@ -786,8 +779,8 @@ textarea {
     left: 10px;
     bottom: 10px;
     color: rgb(255, 255, 255);
-}
-.sellCheck {
+} */
+/* .sellCheck {
 	position: absolute;
     top: 0px;
     left: 0px;
@@ -800,7 +793,7 @@ textarea {
     -webkit-box-align: center;
     align-items: center;
     color: rgb(255, 255, 255);
-}
+} */
 .productName {
 	position: relative;
     font-size: 14px;
@@ -845,6 +838,11 @@ textarea {
     text-overflow: ellipsis;
     white-space: nowrap;
     position: relative;
+}
+.location > img{
+	position: absolute;
+    left: 10px;
+    top: calc(50% - 8px);
 }
 .listGap {
 	width: 100%;
