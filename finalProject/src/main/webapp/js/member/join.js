@@ -124,7 +124,7 @@ $('#certifyEmailBtn').click(function(){
 	});
 });
 
-
+//이메일 인증 확인
 $("#emailNum").on("keyup",function(){
 	let emailNum = $(this).val();
 	$.ajax({
@@ -134,7 +134,6 @@ $("#emailNum").on("keyup",function(){
 		dataType: 'json',
 		success: function(result){
 			if(result.emailNum == result.randomNum){
-				
 				$('#emailNumDiv').text('인증 완료되었습니다.').css('color','blue');
 				 $("#tel1").focus();
 			}else{
