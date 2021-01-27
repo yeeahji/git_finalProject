@@ -26,4 +26,4 @@ CREATE TABLE product(
 CREATE SEQUENCE seq_product NOCYCLE NOCACHE;
 
 //데이터 삽입(예제)
-INSERT INTO product VALUES (seq_product.NEXTVAL, 'test1', 101, '입던옷', '입던옷입니다', 'ex.png', 'ex2.png', 'ex3.png', 25000, '서울', 0, 0, '원피스', '옷', '투피스', '쓰리피스', '포피스');
+INSERT INTO product VALUES (seq_product.NEXTVAL, 'test1', 101, '입던옷', '입던옷입니다', 'ex.png', 'ex2.png', 'ex3.png', 25000, '서울', 0, 0, '원피스', '옷', '투피스', '쓰리피스', '포피스', 0, 1, sysdate);
