@@ -13,7 +13,7 @@ $(document).ready(function(){
 		success: function(data){
 			//alert(JSON.stringify(data));
 			$.each(data.list, function(index, items){
-				$("select[name='qnaCate_main_name']").append("<option value='"+items.qnaCate_main_id+"'>"+items.qnaCate_main_name+"</option>");
+				$("select[name='qnaCate_main_name']").append("<option value='"+items.qnaCate_main_id+"' name='"+items.qnaCate_main_name+"'>"+items.qnaCate_main_name+"</option>");
 			})
 		}
 	});
@@ -30,7 +30,7 @@ $(document).ready(function(){
 				success: function(data){
 					$("select[name='qnaCate_sub_name']").children().remove();//기존리스트삭제
 					$.each(data.list, function(index, items){
-						$("select[name='qnaCate_sub_name']").append("<option value='"+items.qnaCate_sub_id+"'>"+items.qnaCate_sub_name+"</option>");
+						$("select[name='qnaCate_sub_name']").append("<option value='"+items.qnaCate_sub_id+"' name='"+items.qnaCate_sub_name+"'>"+items.qnaCate_sub_name+"</option>");
 					})
 				}
 			});		

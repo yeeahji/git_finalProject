@@ -22,9 +22,14 @@ CREATE TABLE qnaboard(
      qnaCate_sub_name VARCHAR2(50) NOT NULL,  -- 카테고리 선택2
      mem_Id VARCHAR2(40),  -- 작성자
      qna_content VARCHAR2(4000) NOT NULL,  -- 내용
-     qna_picture VARCHAR2(500), 
+  	 qna_picture1 VARCHAR2(500), 
+     qna_picture2 VARCHAR2(500), 
+     qna_picture3 VARCHAR2(500),
+     qna_picture4 VARCHAR2(500),
+     qna_picture5 VARCHAR2(500),
      logtime DATE DEFAULT SYSDATE      -- 날짜
  );
+ 
  
 CREATE TABLE qnaCategory(
      qnaCate_main_id VARCHAR2(50) NOT NULL,  --카테고리 id

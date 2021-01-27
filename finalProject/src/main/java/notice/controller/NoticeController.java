@@ -121,8 +121,8 @@ public class NoticeController {
 								@RequestParam("img[]") List<MultipartFile> list) {
 		String filePath = "D:\\git_home\\git_exam\\finalProject\\src\\main\\webapp\\storage";
 		
-		//System.out.println(list.size());
 		for(MultipartFile img: list) {
+			System.out.println("사진이름:"+img.getOriginalFilename());
 			String fileName = img.getOriginalFilename();
 			File file = new File(filePath, fileName);
 			
@@ -132,10 +132,14 @@ public class NoticeController {
 			}catch (IOException e) {
 				e.printStackTrace();
 			}
-			qnaBoardDTO.setQna_picture(fileName);
-			qnaBoardDTO.setQna_picture("");
+			System.out.println("2 : "+fileName);
+			qnaBoardDTO.setQna_picture1(fileName);
+			qnaBoardDTO.setQna_picture2(fileName);
+			qnaBoardDTO.setQna_picture3(fileName);
+			qnaBoardDTO.setQna_picture4(fileName);
+			qnaBoardDTO.setQna_picture5(fileName);
+			//qnaBoardDTO.setQna_picture("");
 		
-			System.out.println(qnaBoardDTO.getQna_picture());
 			//DB
 			noticeService.qnaWrite(qnaBoardDTO);
 			
