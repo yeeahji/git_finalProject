@@ -1,0 +1,132 @@
+//테이블 생성
+CREATE TABLE category(
+     category_code NUMBER PRIMARY KEY,           -- 카테고리 코드
+     category_name VARCHAR2(5ㅎ0) NOT NULL,        -- 카테고리 이름
+     category_parent NUMBER NULL REFERENCES category(category_code)  -- 카테고리 부모
+ );
+
+
+//데이터 삽입
+INSERT INTO category (category_code, category_name) VALUES (100, '여성의류');
+INSERT INTO category (category_code, category_name) VALUES (200, '남성의류');
+INSERT INTO category (category_code, category_name) VALUES (300, '패션잡화');
+INSERT INTO category (category_code, category_name) VALUES (400, '생활/가구/식품');
+INSERT INTO category (category_code, category_name) VALUES (500, '디지털/가전');
+INSERT INTO category (category_code, category_name) VALUES (600, '도서/취미/애완');
+INSERT INTO category (category_code, category_name) VALUES (700, '스포츠/레저');
+INSERT INTO category (category_code, category_name) VALUES (800, '스타굿즈');
+INSERT INTO category (category_code, category_name) VALUES (900, '뷰티/미용');
+INSERT INTO category (category_code, category_name) VALUES (1000, '차량/오토바이');
+INSERT INTO category (category_code, category_name) VALUES (1100, '기타');
+
+INSERT INTO category (category_code, category_name, category_parent) VALUES (101, '패딩/점퍼', 100);
+INSERT INTO category (category_code, category_name, category_parent) VALUES (102, '코트', 100);
+INSERT INTO category (category_code, category_name, category_parent) VALUES (103, '자켓/야상', 100);
+INSERT INTO category (category_code, category_name, category_parent) VALUES (104, '조끼/베스트', 100);
+INSERT INTO category (category_code, category_name, category_parent) VALUES (105, '니트/스웨터', 100);
+INSERT INTO category (category_code, category_name, category_parent) VALUES (106, '맨투맨/후드티', 100);
+INSERT INTO category (category_code, category_name, category_parent) VALUES (107, '가디건', 100);
+INSERT INTO category (category_code, category_name, category_parent) VALUES (108, '원피스', 100);
+INSERT INTO category (category_code, category_name, category_parent) VALUES (109, '블라우스', 100);
+INSERT INTO category (category_code, category_name, category_parent) VALUES (110, '셔츠/남방', 100);
+INSERT INTO category (category_code, category_name, category_parent) VALUES (111, '긴팔 티셔츠', 100);
+INSERT INTO category (category_code, category_name, category_parent) VALUES (112, '반팔 티셔츠', 100);
+INSERT INTO category (category_code, category_name, category_parent) VALUES (113, '면/캐주얼 바지', 100);
+INSERT INTO category (category_code, category_name, category_parent) VALUES (114, '청바지', 100);
+INSERT INTO category (category_code, category_name, category_parent) VALUES (115, '반바지', 100);
+INSERT INTO category (category_code, category_name, category_parent) VALUES (116, '트레이닝/운동복', 100);
+INSERT INTO category (category_code, category_name, category_parent) VALUES (117, '언더웨어/속옷', 100);
+INSERT INTO category (category_code, category_name, category_parent) VALUES (118, '비즈니스 정장', 100);
+INSERT INTO category (category_code, category_name, category_parent) VALUES (119, '빅사이즈', 100);
+
+INSERT INTO category (category_code, category_name, category_parent) VALUES (201, '패딩/점퍼', 200);
+INSERT INTO category (category_code, category_name, category_parent) VALUES (202, '코트', 200);
+INSERT INTO category (category_code, category_name, category_parent) VALUES (203, '자켓/야상', 200);
+INSERT INTO category (category_code, category_name, category_parent) VALUES (204, '조끼/베스트', 200);
+INSERT INTO category (category_code, category_name, category_parent) VALUES (205, '니트/스웨터', 200);
+INSERT INTO category (category_code, category_name, category_parent) VALUES (206, '맨투맨/후드티', 200);
+INSERT INTO category (category_code, category_name, category_parent) VALUES (207, '가디건', 200);
+INSERT INTO category (category_code, category_name, category_parent) VALUES (208, '셔츠/남방', 200);
+INSERT INTO category (category_code, category_name, category_parent) VALUES (209, '긴팔 티셔츠', 200);
+INSERT INTO category (category_code, category_name, category_parent) VALUES (210, '반팔 티셔츠', 200);
+INSERT INTO category (category_code, category_name, category_parent) VALUES (211, '면/캐주얼 바지', 200);
+INSERT INTO category (category_code, category_name, category_parent) VALUES (212, '청바지', 200);
+INSERT INTO category (category_code, category_name, category_parent) VALUES (213, '반바지', 200);
+INSERT INTO category (category_code, category_name, category_parent) VALUES (214, '트레이닝/운동복', 200);
+INSERT INTO category (category_code, category_name, category_parent) VALUES (215, '언더웨어/속옷', 200);
+INSERT INTO category (category_code, category_name, category_parent) VALUES (216, '비즈니스 정장', 200);
+INSERT INTO category (category_code, category_name, category_parent) VALUES (217, '빅사이즈', 200);
+
+INSERT INTO category (category_code, category_name, category_parent) VALUES (301, '모자', 300);
+INSERT INTO category (category_code, category_name, category_parent) VALUES (302, '가방', 300);
+INSERT INTO category (category_code, category_name, category_parent) VALUES (303, '운동화/캐주얼화', 300);
+INSERT INTO category (category_code, category_name, category_parent) VALUES (304, '여성화', 300);
+INSERT INTO category (category_code, category_name, category_parent) VALUES (305, '남성화', 300);
+INSERT INTO category (category_code, category_name, category_parent) VALUES (306, '지갑', 300);
+INSERT INTO category (category_code, category_name, category_parent) VALUES (307, '시계', 300);
+INSERT INTO category (category_code, category_name, category_parent) VALUES (308, '안경/선글라스', 300);
+INSERT INTO category (category_code, category_name, category_parent) VALUES (309, '벨트/장갑/기타', 300);
+INSERT INTO category (category_code, category_name, category_parent) VALUES (310, '주얼리/액세서리', 300);
+INSERT INTO category (category_code, category_name, category_parent) VALUES (311, '여행용 가방/소품', 300);
+
+INSERT INTO category (category_code, category_name, category_parent) VALUES (401, '생활용품', 400);
+INSERT INTO category (category_code, category_name, category_parent) VALUES (402, '주방용품', 400);
+INSERT INTO category (category_code, category_name, category_parent) VALUES (403, '가구', 400);
+INSERT INTO category (category_code, category_name, category_parent) VALUES (404, '식품', 400);
+
+INSERT INTO category (category_code, category_name, category_parent) VALUES (501, '가전제품', 500);
+INSERT INTO category (category_code, category_name, category_parent) VALUES (502, '음반/영상 관련기기', 500);
+INSERT INTO category (category_code, category_name, category_parent) VALUES (503, 'PC/모니터/주변기기', 500);
+INSERT INTO category (category_code, category_name, category_parent) VALUES (504, '게임기/게임 타이틀', 500);
+INSERT INTO category (category_code, category_name, category_parent) VALUES (505, '노트북/넷북', 500);
+INSERT INTO category (category_code, category_name, category_parent) VALUES (506, '카메라/DSLR', 500);
+INSERT INTO category (category_code, category_name, category_parent) VALUES (507, '모바일', 500);
+
+INSERT INTO category (category_code, category_name, category_parent) VALUES (601, '베이비의류(0~2세)', 600);
+INSERT INTO category (category_code, category_name, category_parent) VALUES (602, '여아의류(3~6세)', 600);
+INSERT INTO category (category_code, category_name, category_parent) VALUES (603, '남아의류(3~6세)', 600);
+INSERT INTO category (category_code, category_name, category_parent) VALUES (604, '여주니어의류(7세~)', 600);
+INSERT INTO category (category_code, category_name, category_parent) VALUES (605, '남주니어의류(7세~)', 600);
+INSERT INTO category (category_code, category_name, category_parent) VALUES (606, '유아동 용품', 600);
+INSERT INTO category (category_code, category_name, category_parent) VALUES (607, '유아동 신발/잡화', 600);
+INSERT INTO category (category_code, category_name, category_parent) VALUES (608, '교육/완구/인형', 600);
+INSERT INTO category (category_code, category_name, category_parent) VALUES (609, '기저귀/수유/이유식', 600);
+
+INSERT INTO category (category_code, category_name, category_parent) VALUES (701, '도서/문구', 700);
+INSERT INTO category (category_code, category_name, category_parent) VALUES (702, '취미/키덜트', 700);
+INSERT INTO category (category_code, category_name, category_parent) VALUES (703, '예술/악기/수공예품', 700);
+INSERT INTO category (category_code, category_name, category_parent) VALUES (704, '기프티콘/쿠폰/상품권', 700);
+INSERT INTO category (category_code, category_name, category_parent) VALUES (705, '티켓/항공권', 700);
+INSERT INTO category (category_code, category_name, category_parent) VALUES (706, '반려동물용품', 700);
+
+INSERT INTO category (category_code, category_name, category_parent) VALUES (801, '헬스/요가/골프', 800);
+INSERT INTO category (category_code, category_name, category_parent) VALUES (802, '축구/야구/농구', 800);
+INSERT INTO category (category_code, category_name, category_parent) VALUES (803, '자전거/MTB', 800);
+INSERT INTO category (category_code, category_name, category_parent) VALUES (804, '등산', 800);
+INSERT INTO category (category_code, category_name, category_parent) VALUES (805, '낚시/캠핑 용품', 800);
+INSERT INTO category (category_code, category_name, category_parent) VALUES (806, '수영', 800);
+INSERT INTO category (category_code, category_name, category_parent) VALUES (807, '스키/스노우보드', 800);
+INSERT INTO category (category_code, category_name, category_parent) VALUES (808, '기타구기 스포츠', 800);
+INSERT INTO category (category_code, category_name, category_parent) VALUES (809, '전동 킥보드/전동 휠', 800);
+
+INSERT INTO category (category_code, category_name, category_parent) VALUES (901, '남자 아이돌', 900);
+INSERT INTO category (category_code, category_name, category_parent) VALUES (902, '여자 아이돌', 900);
+INSERT INTO category (category_code, category_name, category_parent) VALUES (903, '남자 배우', 900);
+INSERT INTO category (category_code, category_name, category_parent) VALUES (904, '여자 배우', 900);
+INSERT INTO category (category_code, category_name, category_parent) VALUES (905, '기타 방송인', 900);
+
+INSERT INTO category (category_code, category_name, category_parent) VALUES (1001, '메이크업', 1000);
+INSERT INTO category (category_code, category_name, category_parent) VALUES (1002, '스킨케어', 1000);
+INSERT INTO category (category_code, category_name, category_parent) VALUES (1003, '헤어/바디', 1000);
+INSERT INTO category (category_code, category_name, category_parent) VALUES (1004, '향수/아로마', 1000);
+INSERT INTO category (category_code, category_name, category_parent) VALUES (1005, '미용기기', 1000);
+INSERT INTO category (category_code, category_name, category_parent) VALUES (1006, '남성화장품', 1000);
+INSERT INTO category (category_code, category_name, category_parent) VALUES (1007, '네일아트/케어', 1000);
+INSERT INTO category (category_code, category_name, category_parent) VALUES (1008, '다이어트/이색뷰티', 1000);
+
+INSERT INTO category (category_code, category_name, category_parent) VALUES (1101, '타이어 휠', 1100);
+INSERT INTO category (category_code, category_name, category_parent) VALUES (1102, '차량 용품', 1100);
+INSERT INTO category (category_code, category_name, category_parent) VALUES (1103, '튜닝 용품', 1100);
+INSERT INTO category (category_code, category_name, category_parent) VALUES (1104, '오토바이/스쿠터', 1100);
+INSERT INTO category (category_code, category_name, category_parent) VALUES (1105, '네비게이션/블랙박스', 1100);
+INSERT INTO category (category_code, category_name, category_parent) VALUES (1106, '카오디오/영상', 1100);
