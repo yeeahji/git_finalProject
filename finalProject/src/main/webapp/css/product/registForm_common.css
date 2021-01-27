@@ -1,0 +1,149 @@
+@charset "UTF-8";
+/* regist_common.css */
+html {
+    line-height: 1.15;
+    text-size-adjust: 100%;
+}
+body {
+    background-color: rgb(249, 249, 249);
+    font-size: 14px;
+    line-height: 1;
+}
+html, body {
+    font-family: "Noto Sans KR", sans-serif;
+    font-weight: 400;
+    color: rgb(33, 33, 33);
+}
+html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, main, menu, nav, output, ruby, section, summary, time, mark, audio, video {
+    margin: 0px;
+    padding: 0px;
+    border: 0px;
+    font: inherit;
+    vertical-align: baseline;
+}
+body, input, textarea, select, button {
+    -webkit-font-smoothing: antialiased;
+    direction: ltr;
+    text-align: left;
+    color: rgb(33, 33, 33);
+    letter-spacing: -0.5px;
+    outline: 0px;
+    border: 0px;
+}
+article, aside, details, figcaption, figure, footer, header, hgroup, main, menu, nav, section {
+    display: block;
+}
+
+*, ::before, ::after { 
+	box-sizing: border-box;
+}
+
+a {
+	color: #666;
+    text-decoration: none;
+    cursor: pointer;
+    background-color: transparent;
+}
+a:hover, a:focus {
+	color: #222;
+	text-decoration: underline;
+}
+
+b {
+    font-weight: bold;
+}
+b, strong {
+    font-weight: bolder;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-size: 14px;
+    font-weight: 400;
+    margin: 0px;
+}
+
+img {
+    vertical-align: bottom;
+    border-style: none;
+}
+
+ol, ul { 
+	list-style: none;
+}
+
+p {
+    display: block;
+    margin-block-start: 1em;
+    margin-block-end: 1em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+}
+
+small {
+    font-size: 80%;
+}
+
+button {
+    background-color: transparent;
+    cursor: pointer;
+    outline: none;
+}
+button, input {
+    padding: 0px;
+    border: 0px;
+    overflow: visible;
+}
+button, select {
+    text-transform: none;
+}
+button, input, optgroup, select, textarea {
+    font-family: inherit;
+    font-size: 100%;
+    line-height: 1.15;
+    margin: 0px;
+}
+button, [type="button"], [type="reset"], [type="submit"] {
+    appearance: button;
+}
+
+input[type="file" i] {
+    appearance: initial;
+    background-color: initial;
+    cursor: default;
+    align-items: baseline;
+    color: inherit;
+    text-overflow: ellipsis;
+    white-space: pre;
+    text-align: start !important;
+    padding: initial;
+    border: initial;
+    overflow: hidden;
+}
+input[type="radio" i] {
+    background-color: initial;
+    cursor: default;
+    appearance: radio;
+    box-sizing: border-box;
+    margin: 3px 3px 0px 5px;
+    padding: initial;
+    border: initial;
+}
+[type="checkbox"], [type="radio"] {
+    box-sizing: border-box;
+    padding: 0px;
+}
+
+button, input[type="text"], input[type="tel"], input[type="number"] {
+    appearance: none;
+}
+
+label {
+    cursor: default;
+}
+
+
+
+/*애매*/
+li[Attributes Style] {
+    -webkit-user-drag: none;
+}

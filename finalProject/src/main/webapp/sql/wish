@@ -1,0 +1,11 @@
+--찜 wish
+
+CREATE TABLE wish(
+	mem_id REFERENCES members(mem_id), -- 판매자(상점 이름)
+	product_seq REFERENCES  product(product_seq) --제품(상품번호)
+);
+
+--FK
+alter table wish add FOREIGN KEY (mem_id) REFERENCES members(mem_id );
+
+alter table wish add FOREIGN KEY (product_seq ) REFERENCES product(product_seq );

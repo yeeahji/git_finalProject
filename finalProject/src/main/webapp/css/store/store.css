@@ -1,0 +1,856 @@
+@charset "UTF-8";
+/****************** 기본 설정  ******************/
+body, input, textarea, select, button {
+    -webkit-font-smoothing: antialiased;
+    direction: ltr;
+    text-align: left;
+    color: rgb(33, 33, 33);
+    letter-spacing: -0.5px;
+    outline: 0px;
+    border: 0px;
+}
+div {
+    display: block;
+}
+a {
+    color: rgb(33, 33, 33); 
+    text-decoration: none;
+    cursor: pointer;
+    background-color: transparent;
+}
+img {
+    vertical-align: bottom;
+    border-style: none;
+}
+button {
+    background-color: transparent;
+    cursor: pointer;
+    outline: none;
+}
+button, input {
+	padding: 0px;
+    border: 0px;
+}
+textarea {
+    -webkit-writing-mode: horizontal-tb !important;
+    text-rendering: auto;
+    color: -internal-light-dark(black, white);
+    letter-spacing: normal;
+    word-spacing: normal;
+    text-transform: none;
+    text-indent: 0px;
+    text-shadow: none;
+    display: inline-block;
+    text-align: start;
+    appearance: textarea;
+    background-color: -internal-light-dark(rgb(255, 255, 255), rgb(59, 59, 59));
+    -webkit-rtl-ordering: logical;
+    flex-direction: column;
+    resize: auto;
+    cursor: text;
+    white-space: pre-wrap;
+    overflow-wrap: break-word;
+    margin: 0em;
+    font: 400 13.3333px Arial;
+    border-width: 1px;
+    border-style: solid;
+    border-color: -internal-light-dark(rgb(118, 118, 118), rgb(133, 133, 133));
+    border-image: initial;
+    padding: 2px;
+}
+*, ::before, ::after {
+    box-sizing: border-box;
+}
+/****************** 전체 틀  ******************/
+#storeBody {
+	display: flex;  /*반응형 */
+    -webkit-box-pack: center;
+    justify-content: center;
+    background: rgb(255, 255, 255);
+}
+#storeWrap {
+	width: 1024px;
+	margin: 20px auto; /* 헤더,풋터랑 여백 크기 조정 */
+	/* border: 1px solid red; */
+}
+#storeTop {
+	display: flex;
+	width: 100%;
+	margin-bottom: 30px;
+	height: 310px;
+	/* border: 1px solid blue;  */
+}
+#storeBottom {
+	margin-bottom: 30px;
+	height: 579px;
+ 	/* border: 1px solid blue; */
+}
+/****************** storeTop  ******************/
+/* 프로필 */
+#profileLeftWrap {
+	flex-shrink: 0;
+}
+#profileLeft {
+    width: 310px;
+    height: 310px;
+    position: relative;
+    color: rgb(255, 255, 255);
+}
+#profileLeft .background1 {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+.backgroundImg {
+    position: absolute;
+    background-size: cover;
+    background-repeat: no-repeat;
+    z-index: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url(https://m.bunjang.co.kr/pc-static/media/pattern-shop.066ca385.png);
+    background-color: rgb(181, 181, 181);
+}
+#profileLeft .background2 {
+	position: inherit;
+    display: flex;
+    width: 100%;
+    height: 100%;
+    -webkit-box-pack: center;
+    justify-content: center;
+    -webkit-box-align: center;
+    align-items: center;
+    flex-direction: column;
+    box-shadow: rgba(4, 0, 0, 0.03) 0px 5px 10px 0px;
+}
+.profileImage {
+	border-radius: 50%;
+    margin-bottom: 15px;
+}
+.profileNickname {
+	font-size: 16px;
+    margin-bottom: 10px;
+}
+.storeStar {
+	display: flex;
+}
+/* 프로필 사진 변경 -> 라벨 클릭 + [파일]버튼숨김   */
+.imageEdit {
+    display: flex;
+    margin-top: 20px;
+}
+.imageEditLink:first-child {
+    margin-left: 0px;
+}
+.imageEdit label{
+	width: 110px;
+    height: 40px;
+    display: flex;
+    -webkit-box-pack: center;
+    justify-content: center;
+    -webkit-box-align: center;
+    align-items: center;
+    margin-left: 10px;
+    font-size: 13px;
+    border: 1px solid rgb(255, 255, 255);
+    cursor: pointer;
+}
+.imageEdit input[type=file]{
+	position: absolute;
+    overflow: hidden;
+	clip: rect(0,0,0,0);
+	width: 1px;
+    height: 1px;
+    margin: -1px;
+    padding: 0;
+    border: 0;
+}
+.imageEdit btn2{
+	color: #333;
+}
+/* 상단 - 오른쪽 */
+#profileRight {
+    flex: 1 0 0%;
+    padding: 0px 30px;
+    border-top: 1px solid rgb(238, 238, 238);
+    border-right: 1px solid rgb(238, 238, 238);
+    border-bottom: 1px solid rgb(238, 238, 238);
+    display: flex;
+    height: 310px;
+    flex-direction: column;
+}
+#profileRight .storeTitleWrap {
+	font-size: 18px;
+    height: 75px;
+    font-weight: 600;
+    display: flex;
+    -webkit-box-align: center;
+    align-items: center;
+    -webkit-box-pack: justify;
+    justify-content: space-between;
+    flex-shrink: 0;
+}
+.nickName {
+	display: flex;
+    -webkit-box-align: center;
+    align-items: center;
+}
+/* 닉네임 수정 버튼 클릭 후 */
+.nickNameWrapDiv {
+	display: flex;
+   /*border: 1px solid red;*/
+    height: 52px;
+    width: 305px;
+    display: block;
+    margin-top: 21px;
+}
+.nickNameWrap {
+	display: flex;
+    border: 1px solid rgb(238, 238, 238);
+    height: 32px;
+    width: 305px;
+}
+.nickNameWrap input{
+	margin: 0px 15px;
+    font-size: 14px;
+    -webkit-box-flex: 1;
+    flex-grow: 1;
+    appearance: none;
+}
+.nickNameWrap button {
+    font-size: 13px;
+    display: flex;
+    -webkit-box-align: center;
+    align-items: center;
+    padding: 0px 15px;
+    color: rgb(136, 136, 136);
+    background: rgb(250, 250, 250);
+    border-left: 1px solid rgb(238, 238, 238);
+}
+.nickNameEdit {
+	height: 20px;
+    display: flex;
+    -webkit-box-align: center;
+    align-items: center;
+    padding: 0px 5px;
+    color: rgb(136, 136, 136);
+    border: 1px solid rgb(238, 238, 238);
+    font-size: 11px;
+    margin-left: 10px;
+}
+/* 본인인증확인 */
+/* .identification {
+	font-size: 11px;
+    color: rgb(77, 77, 77);
+    position: relative;
+}
+.identification::after {
+    content: "OK";
+    color: rgb(255, 255, 255);
+    font-size: 9px;
+    background: rgb(255, 195, 34);
+    border-radius: 6px;
+    position: absolute;
+    padding: 2px 4px 1px;
+    top: -1px;
+    left: -25px;
+} */
+/* 에코 지수 + 판매내역 + 조회수?(+아이콘) */
+#middleWrap {
+	height: 45px;
+    display: flex;
+    -webkit-box-align: center;
+    align-items: center;
+    border-top: 1px solid rgb(250, 250, 250);
+    border-bottom: 1px solid rgb(250, 250, 250);
+    margin-bottom: 20px;
+    flex-shrink: 0;
+}
+#middleWrap .storeIndication {
+	margin-right: 30px;
+    font-size: 11px; /* 글씨체 바꾸면 13px로 바꾸기!! */
+    color: rgb(136, 136, 136);
+    display: flex;
+}
+.storeIndication > img {
+	margin-right: 8px; /* 원래 10px */
+}
+.storeIndication > .indicateNum {
+	margin-left: 5px;
+    color: rgb(33, 33, 33);
+}
+/* 소개글 */
+.introduce {
+    -webkit-box-flex: 1;
+    flex-grow: 1;
+    width: 100%;
+    overflow-y: auto;
+    line-height: 1.57;
+    white-space: pre-wrap;
+}
+.introduceEdit {
+    height: 56px;
+    display: flex;
+    -webkit-box-align: center;
+    align-items: center;
+    flex-shrink: 0;
+}
+.introduceEditBtn {
+  height: 20px;
+    display: flex;
+    -webkit-box-align: center;
+    align-items: center;
+    padding: 0px 5px;
+    color: rgb(136, 136, 136);
+    border: 1px solid rgb(238, 238, 238);
+    font-size: 11px;
+}
+/* 소개글 수정 버튼 클릭 후  */
+.introduceWrap {
+	-webkit-box-flex: 1;
+    flex-grow: 1;
+    overflow-y: auto;
+    margin-bottom: 20px;
+    display: flex;
+}
+.introduceWrap > textarea {
+	height: 148px;
+	-webkit-box-flex: 1;
+    flex-grow: 1;
+    resize: none;
+    border: 1px solid rgb(238, 238, 238);	
+	
+}
+.introduceWrap > button {
+	width: 100px;
+    display: flex;
+    -webkit-box-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    justify-content: center;
+    border-top: 1px solid rgb(238, 238, 238);
+    border-right: 1px solid rgb(238, 238, 238);
+    border-bottom: 1px solid rgb(238, 238, 238);
+    background: rgb(250, 250, 250);
+    color: rgb(136, 136, 136);	
+}
+/* 남의 상점 - 신고하기 버튼 */
+#singo {
+	height: 56px;
+    display: flex;
+    -webkit-box-align: center;
+    align-items: center;
+    flex-shrink: 0;
+}
+#singo .singoBtn {
+	display: flex;
+    -webkit-box-align: center;
+    align-items: center;
+    color: rgb(136, 136, 136); /* 겹치는 태그때매 jsp내부에서 style지정해야 먹힘,, */
+    font-size: 13px;
+}
+#singo .singoBtn > img {
+	margin-right: 3px;
+}
+/* 신고하기 모달창 */
+#modalHidden { /* .gDUZll */
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    background: rgba(0, 0, 0, 0.6);
+    z-index: 10000; /* 헤더보다 위에 뜨게 하기 위해서 값 매우 크게 줌 */
+    display: none;
+    -webkit-box-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    justify-content: center;
+}
+
+#modalDisplay{
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    background: rgba(0, 0, 0, 0.6);
+    z-index: 10000; /* 헤더보다 위에 뜨게 하기 위해서 값 매우 크게 줌 */
+    display: flex;
+    -webkit-box-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    justify-content: center;
+}
+.singoModalWrap {
+	padding: 60px;
+    background: rgb(255, 255, 255);
+    width: 600px;
+}
+#singoModalTop {
+	display: flex;
+    -webkit-box-pack: justify;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+#singoModalTop > .title {
+    letter-spacing: 5.2px;
+    font-size: 26px;
+    padding-bottom: 30px;
+    border-bottom: 1px solid rgb(33, 33, 33);
+    margin-bottom: 45px;
+}
+.singoCategory {
+	border-top: 1px solid rgb(238, 238, 238);
+}
+
+.singoCategory:last-child {
+	border-color: rgb(204, 204, 204);
+}
+
+.singoTitle {
+	width: 100%;
+    display: flex;
+    -webkit-box-align: center;
+    align-items: center;
+    -webkit-box-pack: justify;
+    justify-content: space-between;
+    color: rgb(102, 102, 102);
+    height: 60px;
+    font-size: 16px;
+    padding-left: 20px;
+}
+.singoTitle > button {
+	display: flex;
+    -webkit-box-align: center;
+    align-items: center;
+    height: 100%;
+    padding: 0px 20px;	
+}
+.singoTitle img {
+	transition: transform 0.4s ease-out 0s;
+}
+
+.singoContent {
+    background: rgb(249, 249, 249);
+    padding: 0px 20px;
+    height: 0px;
+    overflow: hidden;
+    transition: height 0.3s ease-out 0s;	
+}
+.singoContentOther {
+    background: rgb(249, 249, 249);
+    padding: 0px 20px;
+    height: 0px;
+    overflow: hidden;
+    transition: height 0.3s ease-out 0s;	
+}
+
+.contentList {
+	height: 30px;
+    display: flex;
+    -webkit-box-align: center;
+    align-items: center;
+    font-size: 14px;
+}
+.contentList button, .contentList a {
+    color: rgb(247, 47, 51);		
+}
+
+/* 마지막 리스트(인풋박스있는) */
+.contentListInput {
+	display: flex;
+    margin-top: 10px;
+    -webkit-box-align: center;
+    align-items: center;
+    border: 1px solid rgb(238, 238, 238);
+    width: 100%;
+    background: rgb(255, 255, 255);
+    font-size: 13px;
+}
+.contentListInput input {
+	flex: 1 1 0%;
+    height: 36px;
+    padding: 0px 20px;	
+}
+.contentListInput button {
+	border: 1px solid rgb(238, 238, 238);
+    height: 28px;
+    display: flex;
+    -webkit-box-align: center;
+    align-items: center;
+    width: 56px;
+    -webkit-box-pack: center;
+    justify-content: center;
+    margin-right: 10px;
+    color: rgb(136, 136, 136);
+}
+/* 기타사유_textarea div 부분 */
+.contetnListTextarea {
+	width: 100%;
+    padding: 10px 0px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;	
+}
+.contetnListTextarea textarea {
+	width: 100%;
+    height: 80px;
+    resize: none;
+    padding: 10px 20px;
+    margin-bottom: 10px;
+    border: 1px solid rgb(238, 238, 238);	
+}
+.contetnListTextarea button {
+	border: 1px solid rgb(238, 238, 238);
+    height: 28px;
+    display: flex;
+    -webkit-box-align: center;
+    align-items: center;
+    width: 56px;
+    -webkit-box-pack: center;
+    justify-content: center;
+    color: rgb(136, 136, 136);
+    font-size: 13px;
+    background: rgb(255, 255, 255);
+}
+/* 신고 카테고리 클릭 */
+.singoTitleOpen {
+	width: 100%;
+    display: flex;
+    -webkit-box-align: center;
+    align-items: center;
+    -webkit-box-pack: justify;
+    justify-content: space-between;
+    color: rgb(102, 102, 102);
+    height: 60px;
+    font-size: 16px;
+    padding-left: 20px;
+    background: rgb(249, 249, 249); /* 기존 신고 타이틀에서 추가된 */
+}
+.singoTitleOpen img {
+	transform: rotate(180deg);
+	transition: transform 0.4s ease-out 0s;
+}
+.singoTitleOpen button {
+	display: flex;
+    -webkit-box-align: center;
+    align-items: center;
+    height: 100%;
+    padding: 0px 20px;
+}
+
+.singoContentOpen {
+	background: rgb(249, 249, 249);
+    padding: 0px 20px;
+    overflow: hidden;
+    transition: height 0.3s ease-out 0s;
+    height: 150px;
+}
+.singoContentOtherOpen {
+	background: rgb(249, 249, 249);
+    padding: 0px 20px;
+    overflow: hidden;
+    transition: height 0.3s ease-out 0s;
+    height: 180px;
+}
+.directAsk {
+    border: 1px solid rgb(238, 238, 238);
+    color: rgb(136, 136, 136);
+    font-size: 13px;
+    height: 32px !important;
+} 
+
+.singoContent {
+	background: rgb(249, 249, 249);
+    padding: 0px 20px;
+    height: 0px;
+    overflow: hidden;
+    transition: height 0.3s ease-out 0s;
+	
+}
+
+
+/****************** storeBottom  ******************/
+/* 메뉴 바 */
+.menuBar {
+    display: flex;
+    height: 50px;
+}
+/* 현재 보고 있는 메뉴 */
+.now:first-child {
+    border-left: 1px solid rgb(33, 33, 33);
+}
+.now {
+	flex: 1 1 0%;
+    -webkit-box-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    justify-content: center;
+    display: flex;
+    border-top: 1px solid rgb(33, 33, 33);
+    border-right: 1px solid rgb(33, 33, 33);
+    border-bottom: 1px solid rgb(255, 255, 255);
+    background: rgb(255, 255, 255);
+    color: rgb(33, 33, 33);
+    font-weight: 600;
+}
+/* 현재 보고있는 메뉴의 왼쪽메뉴 */
+.before:first-child {
+    border-left: 1px solid rgb(238, 238, 238);
+}
+.before {
+	flex: 1 1 0%;
+    -webkit-box-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    justify-content: center;
+    display: flex;
+    border-top: 1px solid rgb(238, 238, 238);
+    border-bottom: 1px solid rgb(33, 33, 33);
+    background: rgb(250, 250, 250);
+    color: rgb(136, 136, 136);
+    border-right: 1px solid rgb(33, 33, 33);		
+}
+/* 메뉴바 기본 값 */
+.default {
+	flex: 1 1 0%;
+    -webkit-box-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    justify-content: center;
+    display: flex;
+    border-top: 1px solid rgb(238, 238, 238);
+    border-right: 1px solid rgb(238, 238, 238);
+    border-bottom: 1px solid rgb(33, 33, 33);
+    background: rgb(250, 250, 250);
+    color: rgb(136, 136, 136);
+}
+#productTop {
+    font-size: 18px;
+    padding: 50px 0px 20px;
+    border-bottom: 1px solid rgb(238, 238, 238);
+    display: flex;
+    -webkit-box-pack: justify;
+    justify-content: space-between;
+}
+#productTop .productNum {
+	color: rgb(247, 47, 51);
+}
+#productTop .categoryWrap {
+	width: 140px;
+}
+#productTop .categoryInner {
+	border: 1px solid rgb(238, 238, 238);
+    display: flex;
+    width: 100%;
+    height: 28px;
+    -webkit-box-align: center;
+    align-items: center;
+    position: relative;
+    font-size: 12px;
+    color: rgb(77, 77, 77);
+    background: rgb(255, 255, 255);
+}
+.categoryMain {
+	display: flex;
+    -webkit-box-align: center;
+    align-items: center;
+    padding: 0px 25px 0px 10px;
+    position: relative;
+    width: 100%;
+}
+.categoryMain img {
+	position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);	
+}
+.categoryList {
+	position: absolute;
+    top: 27px;
+    left: -1px;
+    width: calc(100% + 2px);
+    background: rgb(255, 255, 255);
+    max-height: 280px;
+    overflow-y: auto;
+    z-index: 1;
+    border-left: 1px solid rgb(238, 238, 238);
+    border-bottom: 1px solid rgb(238, 238, 238);
+    border-right: 1px solid rgb(238, 238, 238);
+    display: none;
+}
+.categoryCheck {
+    width: 100%;
+    height: 28px;
+    padding: 0px 10px;
+    display: flex;
+    -webkit-box-align: center;
+    align-items: center;
+    color: rgb(247, 47, 51);
+}
+.categoryOther {
+	width: 100%;
+    height: 28px;
+    padding: 0px 10px;
+    display: flex;
+    -webkit-box-align: center;
+    align-items: center;
+}
+#productList {
+    margin-top: 30px;
+}
+#productList .productListTop {
+	margin-bottom: 25px;
+}
+#productList .listTopInner {
+    display: flex;
+    width: 100%;
+    -webkit-box-pack: justify;
+    justify-content: space-between;
+    -webkit-box-align: center;
+    align-items: center;
+}
+.mainGroup {
+	display: flex;
+    font-size: 16px;
+}
+.mainGroupNum {
+    color: rgb(136, 136, 136);
+    margin-left: 20px;
+}
+.group {
+	font-size: 13px;
+    display: flex;
+}
+.groupChecked {
+	margin-right: 20px;
+    position: relative;
+    display: block;
+    color: rgb(247, 47, 51) !important;
+}
+.groupChecked::after {
+    content: "";
+    position: absolute;
+    top: 1px;
+    right: -10px;
+    width: 1px;
+    height: 12px;
+    border-right: 1px solid rgb(204, 204, 204);
+}
+.groupOther {
+	margin-right: 20px;
+    position: relative;
+    display: block;
+}
+.groupOther::after {
+    content: "";
+    position: absolute;
+    top: 1px;
+    right: -10px;
+    width: 1px;
+    height: 12px;
+    border-right: 1px solid rgb(204, 204, 204);
+}
+/* 상품 리스트 */
+.listWrap {
+    display: flex;
+    flex-wrap: wrap;
+}
+.productOne:nth-last-child(-n+5):nth-child(5n+1), .productOne:nth-last-child(-n+5):nth-child(5n+1) ~ .productOne {
+    margin-bottom: 0px;
+}
+.productOne{
+    width: 196px;
+    margin-right: 11px;
+    margin-bottom: 11px;
+}
+.productOneInner {
+    border: 1px solid rgb(238, 238, 238);
+    background: rgb(255, 255, 255);
+    display: block;
+}
+.productImg {
+	position: relative;
+    width: 100%;
+    height: 194px;
+}
+.deliveryFee {
+	background: rgba(0, 0, 0, 0.4);
+    font-size: 13px;
+    padding: 2px 3px 3px;
+    position: absolute;
+    left: 10px;
+    bottom: 10px;
+    color: rgb(255, 255, 255);
+}
+.sellCheck {
+	position: absolute;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6);
+    display: flex;
+    -webkit-box-pack: center;
+    justify-content: center;
+    -webkit-box-align: center;
+    align-items: center;
+    color: rgb(255, 255, 255);
+}
+.productName {
+	position: relative;
+    font-size: 14px;
+    padding-bottom: 20px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+}
+.productDetail {
+    display: flex;
+    -webkit-box-pack: justify;
+    justify-content: space-between;
+    -webkit-box-align: center;
+    align-items: center;
+    height: 20px;
+}
+.productPrice {
+	font-size: 16px;
+    font-weight: 600;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+}
+.productPrice::after {
+    content: "원";
+    font-size: 13px;
+    margin-left: 3px;
+}
+.productUpdate {
+	font-size: 12px;
+    color: rgb(136, 136, 136);
+}
+.location {
+    height: 40px;
+    border-top: 1px solid rgb(238, 238, 238);
+    font-size: 12px;
+    display: block;
+    padding: 14px 10px 14px 35px;
+    color: rgb(102, 102, 102);
+    width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    position: relative;
+}
+.listGap {
+	width: 100%;
+    display: flex;
+    -webkit-box-pack: center;
+    justify-content: center;
+    margin: 40px 0px 100px;
+    background-color: green;
+}
