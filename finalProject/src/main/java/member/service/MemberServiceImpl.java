@@ -6,6 +6,7 @@ import java.util.Map;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.stereotype.Service;
 
 import member.bean.MemberDTO;
@@ -16,6 +17,8 @@ import member.dao.MemberDAO;
 public class MemberServiceImpl implements MemberService {
 	@Autowired
 	private MemberDAO memberDAO;
+	@Autowired
+	private JavaMailSenderImpl mailSender;
 	
 //	[회원가입] ----------------------------------------------------------
 	@Override
