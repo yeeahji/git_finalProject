@@ -1,33 +1,75 @@
 // *********************** storeTop ***********************
-// 닉네임 수정 + 유효성 검사 
+// #닉네임 (유효성 검사 + 수정)
 $('.storeTitleWrap').on("click", '#nickNameEdit', function(){
-	alert("수정");//test
+	// 닉네임 수정 창으로 변경
 	$('div .storeTitleWrap').html(
 			"<div class='nickNameWrapDiv'>" +
-			"<div class='nickNameWrap'>" +
-			"<input type='text' value='닉네임'>" +
-			"<button type='button'>확인</button></div>" +
-			"<div id='nicknameDiv' style='color:red; font-size:8pt; font-weight:bold;'></div></div>" +
-			"<div class='identification'>본인인증완료</div>");
+				"<div class='nickNameWrap'>" +
+					"<input id='nickname' type='text'>" + // value="원래 닉"
+					"<button type='button'>확인</button>" +
+				"</div>" +
+				"<div id='nicknameDiv'>" +
+				"</div>" +
+			"</div>");
+
+	// 확인 버튼 클릭
 	$('.nickNameWrap > button').click(function(){
-		$('.nickNameWrap > input').empty();
+		$('.nickNameWrap > input').empty(); 
+		$('#nicknameDiv').empty();
+		
 		if($('.nickNameWrap > input').val() == ''){
-			$('#nicknameDiv').text('닉네임을 입력하세요');}
-		else {
-			alert("닉네임이 변경되었습니다.");
-			// 닉네임 이미 존재 -> confirm창  or div 다시 입력하도록
-			// 닉네임 사용가능 -> 변경되었습니다 창 + 확인누르면 변경된 닉네임으로 저장
-			$('div .storeTitleWrap').html(
-				"<div class='nickName'>"+$('.nickNameWrap > input').val()+
-				"<button class='nickNameEdit' id='nickNameEdit'>닉네임 수정</button></div>"+
-				"<div class='identification'>본인인증완료</div>");
-		}
-	});
+			$('#nicknameDiv').text('닉네임을 입력하세요');
+			$('#nicknameDiv').css('color', 'magenta');
+    		$('#nicknameDiv').css('font-size', '8pt');
+    		$('#nicknameDiv').css('font-weight','bold');
+		}else {
+			$.ajax({
+				type:'get', 
+				url: '/market/store/getMember',
+				data: 'nickname='+$('#nickname').val(),
+					   
+			    success: function(data){ //storeDTO가 넘어오면
+			    	if(data==''){
+			    		alert("닉네임이 변경되었습니다.");
+			    		//닉네임 수정 - 로그인 시 (세션?)아이디 들고 닉네임 변경
+			    		/*$.ajax({
+							type:'get',
+							url: '/market/store/nicknameUpdate',
+							data: {'nickname': $('#nickname').val(),
+								   'mem_id': data.mem_ID },
+						    success: function(result){
+						    	if(result!=0){
+						    		alert("닉네임이 변경되었습니다.");
+						    	}   	
+						    },
+						    error: function(err){
+						    	alert(err);
+						    }
+						});*/
+		
+			    		// html 변경
+			    		$('div .storeTitleWrap').html(
+			    				"<div class='nickName'>"+$('.nickNameWrap > input').val()+
+			    				"<button class='nickNameEdit' id='nickNameEdit'>닉네임 수정</button></div>");
+			    	}else {
+			    		console.log(data);
+			    		$('#nicknameDiv').text('이미 사용중인 닉네임');
+			    		$('#nicknameDiv').css('color', 'red');
+			    		$('#nicknameDiv').css('font-size', '8pt');
+			    		$('#nicknameDiv').css('font-weight','bold');
+			    	}//else	
+			    },
+			    error: function(err){
+			    	alert(err);
+			    }
+			}); 
+		}// else
+	});// 클릭 이벤트
 });
 
-// 내상점 : 소개글 수정
+
+// #소개글 수정
 $('#profileRight').on("click", '.introduceEditBtn', function(){
-	alert("소개글 수정");//test
 
 	$('div .introduce').attr('class','introduceWrap');
 	$('.introduceWrap').html(
@@ -35,7 +77,18 @@ $('#profileRight').on("click", '.introduceEditBtn', function(){
 	$('div .introduceEdit').remove();
 	
 	$('.introduceWrap > button').click(function(){
-			alert("소개글 수정 완료");//test
+			//alert($('.introduceWrap > textarea').val()); // test
+			/*$.ajax({
+				type:'get',
+				url: '/market/store/introduceRegister',
+				data: {'introduce':$('.introduceWrap > textarea').val()},
+			    success: function(result){
+			    	
+			    },
+			    error: function(err){
+			    	alert(err);
+			    }
+			});*/
 			$('div .introduceWrap').attr('class','introduce');
 			$('.introduce').text($('textarea').val()); // DB
 			$('.introduce').after("<div class='introduceEdit'>"+
@@ -43,9 +96,9 @@ $('#profileRight').on("click", '.introduceEditBtn', function(){
 	});
 });
 
-// 남의 상점 : 신고하기 버튼(모달)
+// #신고하기 버튼 - 남의 상점(모달)
 $('#profileRight').on("click", '.singoBtn', function(){
-	alert("모달 창 오픈");
+	//alert("모달 창 오픈");
 	// 클래스명 찾아서 display:none ---> display:flex 으로
 	$("#modalHidden").attr('id','modalDisplay'); 
 	
@@ -104,25 +157,22 @@ $('#profileRight').on("click", '.singoBtn', function(){
 		}else if(className == 'singoContentOpen' || className=='singoContent'){
 			$(openInBtn).parent().next().attr('class', 'singoContent');				
 		}
-		alert("모달 창 닫기");
+		//alert("모달 창 닫기");
 		// display:flex ---> display:none 으로
 		$("#modalDisplay").attr('id','modalHidden'); 
-	});
+		});
 });//
 
 
-// 프로필 사진 변경 (1/20~) 
-// 참고 중인 사이트 
-// https://ming9mon.tistory.com/94
-// https://bin-repository.tistory.com/118
-
-/*$(document).ready(function(e){
+// #프로필 사진 변경
+// *참고 중인 사이트 (https://ming9mon.tistory.com/94, https://bin-repository.tistory.com/118)
+$('.background2').on("click", '.imageEdit>label', function(){
+//$('.imageEdit>label').click(function(){
 	$("input[type='file']").change(function(e){
-		  alert("1. 실행함?"); //test
 	      $('#preview').empty(); // div 내용 비우기;empty -> 요소의 내용을 삭제
-	     
+	      
 	      var files = e.target.files;
-	      var arr =Array.prototype.slice.call(files);
+	      var arr = Array.prototype.slice.call(files);
 	      
 	      //업로드 가능 파일인지 체크
 	      for(var i=0;i<files.length;i++){
@@ -131,18 +181,31 @@ $('#profileRight').on("click", '.singoBtn', function(){
 	        }
 	      } 
 	      
-	      // 여기어디선가 변경하면 디비랑 연동하는 코드,,,
+	      // DB
+	      var formData = new FormData($('#storeForm')[0]);
+	      $.ajax({
+	            type:'post',
+	            enctype: 'multipart/form-data',
+	            processData: false, //데이터를 컨텐트 타입에 맞게 변환 여부
+				contentType: false, //요청 컨텐트 타입
+	            url: '/market/store/profileImgUpdate',
+	            data: formData,
+	            success: function(data){
+	                //alert("이미지 등록 완료");//test
+	             },
+	            error: function(err){
+	                alert(err);
+	            }
+	      });
 	      
-	      preview(arr);// 사진등록
+	      console.log(arr[0].name); //파일이름 찍어봄
 	      
+	      preview(arr);// 사진 등록
 	    });//file change
 	
-
 	function checkExtension(fileName,fileSize){
-		  alert("2. 체크익스텐션 - 파일확장자와 크기 확인");//test
-	      //var regex = new RegExp("(.*?)\.(exe|sh|zip|alz)$");
-	      // 가능한 이미지 파일 : jpg, gif, bmp, tif, png
-		  var regex = new RegExp("(.*?)\.(jpg|gif|bmp|tif|png)$");
+		  console.log("2. 체크익스텐션 - 파일확장자와 크기 확인");//test
+		  var regex = new RegExp("(.*?)\.(jpg|gif|bmp|tif|png)$"); // 가능한 이미지 파일
 	      var maxSize = 5000000; //5MB였나?  파일 크기는 다시 정해야 할 듯
 	      
 	      if(fileSize >= maxSize){
@@ -152,7 +215,7 @@ $('#profileRight').on("click", '.singoBtn', function(){
 	      }
 	      
 	      if(regex.test(fileName)){
-	          alert("3. 파일이 등록되었습니다(test)"); //test
+	          console.log("3. 파일이 등록되었습니다(test)"); //test
 	      }else {
 	    	  alert('jpg, gif, bmp, tif, png 형식의 파일만 첨부하실 수 있습니다.');
 		      $("input[type='file']").val("");  //파일 초기화
@@ -178,8 +241,11 @@ $('#profileRight').on("click", '.singoBtn', function(){
 	        }
 	      });//arr.forEach
 	 }
+}); //프로필 사진 변경
 
-});*/
+// #별다섯개(상품후기평점)
+// DB에서 점수 받아와서 뿌리기 ( 점수계산은 데이터 넣을 때....)
+
 
 
 
@@ -187,7 +253,6 @@ $('#profileRight').on("click", '.singoBtn', function(){
 // *********************** storeBottom ***********************
 // 메뉴바 클릭
 $('#storeBottom').on('click', '.default, .before', function(){
-	alert("test");
 	var nowMenu = $(this).attr('class','now');
 	nowMenu.prevAll().attr('class','default');
 	nowMenu.prev().attr('class','before');
@@ -218,6 +283,73 @@ $('.listTopInner').on('click', '.groupOther', function(){
 	clicked.nextAll().attr('class','groupOther');
 });
 
+//******** 내부 페이지 이동 ([상품]/[상품후기]/[구매내역]/[찜]/[내상품관리]) ******** 
+//컨트롤러 이동안하고 jsp 파일 불러옴
+$('#productPg').click(function(){
+	 $("#productPg").removeAttr("href") //href="#" 새로고침 삭제
+	 $.ajax({
+	        type : "GET",
+	        url : "../store/productPg.jsp",
+	        dataType : "text",
+	        success : function(data) {
+	            $('.contentStore').html(data);
+	        }, error : function(err) {
+	        	console.log(err);
+	        }
+	 });
+});
+$('#reviews').click(function(){
+	 $("#reviews").removeAttr("href") //href="#" 새로고침 삭제
+	 $.ajax({
+	        type : "GET",
+	        url : "../store/reviews.jsp",
+	        dataType : "text",
+	        success : function(data) {
+	            $('.contentStore').html(data);
+	        }, error : function(err) {
+	        	console.log(err);
+	        }
+	 });
+});
+$('#purchases').click(function(){
+	 $("#purchases").removeAttr("href")
+	 $.ajax({
+	        type : "GET",
+	        url : "../store/purchases.jsp",
+	        dataType : "text",
+	        success : function(data) {
+	            $('.contentStore').html(data);
+	        }, error : function(err) {
+	        	console.log(err);
+	        }
+	 });
+});
+$('#favorites').click(function(){
+	 $("#favorites").removeAttr("href")
+	 $.ajax({
+	        type : "GET",
+	        url : "../store/favorites.jsp",
+	        dataType : "text",
+	        success : function(data) {
+	            $('.contentStore').html(data);
+	        }, error : function(err) {
+	        	console.log(err);
+	        }
+	 });
+});    
+$('#productManage').click(function(){
+	 $("#productManage").removeAttr("href")
+	 $.ajax({
+	        type : "GET",
+	        url : "../store/productManage.jsp",
+	        dataType : "text",
+	        success : function(data) {
+	            $('.contentStore').html(data);
+	        }, error : function(err) {
+	        	console.log(err);
+	        }
+	 });
+});    
 
 
 

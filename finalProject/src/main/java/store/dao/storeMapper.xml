@@ -4,5 +4,39 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="storeSQL">
-
+	<select id="storeProductList" resultType="product.bean.ProductDTO">
+		select*from product order by decode(product_manage,3,1)desc, product_seq desc
+	</select>
+	
+	<!-- 상품 총 개수 -->
+	<select id="storeProductTotalA" resultType="int">
+   		  select count(*) from product
+   	</select>
+   	
+   	<!-- 회원정보얻기 -->
+  	<select id="getMember" parameterType="String" resultType="store.bean.StoreDTO"> 
+ 	    select * from store where store_nickname = #{nickname}
+ 	</select>
+ 	
+ 	<!-- 닉네임 수정 -->
+ 	<update id="nicknameUpdate" parameterType="java.util.Map">
+ 		update store set store_nickname = #{nickname} where mem_id = #{mem_id}
+ 	</update>
+ 	
+ 	<!-- 찜 리스트 출력 -->
+ <!-- 	<select id="storeFavoritesList" parameterType="String" resultType="store.bean.ProductDTOTest">
+		select product_seq, product_subject, product_img1, product_price, product_location, product_delivery_fee, product_manage, product_logtime
+		from wishtest
+		join product using(product_seq)
+		where mem_id = #{mem_id}
+	</select> 
+	 -->
+	
+	
+ 	
+ 	
 </mapper>
+
+
+
+
