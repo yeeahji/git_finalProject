@@ -1,8 +1,8 @@
 //테이블 생성
 CREATE TABLE product(
      product_seq number PRIMARY KEY, -- 상품번호(PK)
-     mem_id REFERENCES members(mem_id), -- 판매자 ID(FK)
-     category_code REFERENCES category(cate_code), -- 카테고리 코드(FK)
+     mem_id NOT NULL REFERENCES members(mem_id), -- 판매자 ID(FK)
+     cate_code NOT NULL REFERENCES category(cate_code), -- 카테고리 코드(FK)
      product_subject VARCHAR2(200) NOT NULL, -- 상품명
      product_content VARCHAR2(4000), -- 상품 글 내용
      product_img1 VARCHAR2(1000) NOT NULL, -- 상품 이미지1
@@ -20,10 +20,16 @@ CREATE TABLE product(
      product_view NUMBER DEFAULT 0, -- 조회수
      product_manage NUMBER DEFAULT 1, -- 판매관리(1:판매중 2:예약중-거래약속중 3:판매완료)
      product_logtime DATE DEFAULT SYSDATE NOT NULL -- 상품 게시 날짜
- );
+);
  
 //시퀀스
 CREATE SEQUENCE seq_product NOCYCLE NOCACHE;
 
 //데이터 삽입(예제)
 INSERT INTO product VALUES (seq_product.NEXTVAL, 'test1', 101, '입던옷', '입던옷입니다', 'ex.png', 'ex2.png', 'ex3.png', 25000, '서울', 0, 0, '원피스', '옷', '투피스', '쓰리피스', '포피스', 0, 1, sysdate);
+
+//
+회원탈퇴 시 -- ON DELETE CASCADE 옵션 부여해서 부모(members 혹은 product)쪽이 지워지면
+그 부모의 자식키를 갖고있는 자식의 데이터도 지워지게 하기?
+product는 그냥 놔두는게 나을수도
+https://tibang.tistory.com/entry/참조키외래키-FORIGN-KEY
