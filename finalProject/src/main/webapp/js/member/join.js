@@ -28,6 +28,8 @@ $('#joinBtn').click(function(){
 //		$('#repwdDiv').text('비밀번호를 확인하세요');
 //	else if($('#email1').val()==''||$('#email2').val()=='')
 //		$('#emailDiv').text('이메일을 입력하세요');
+//	else if($('#emailNum).val()=='')
+//		$('#emailNumDiv').text('');
 //	else if($('#tel2').val()==''|| $('#tel3').val()=='')
 //		$('#telDiv').text('전화번호를 입력하세요');
 //	else if($('#postcode').val()=='')
@@ -105,16 +107,42 @@ $('#email2').focusout(function(){
 		}
 	}
 });
-//이메일 인증번호 확인 기능 
+//이메일 인증번호 버튼 클릭(인증번호 발송)
 $('#certifyEmailBtn').click(function(){
-	$('#emailNumDiv').text('작성하신 이메일로 인증번호를 발송했습니다');
-	
-//	- 이메일 인증번호 : 유효성 검사 + 이메일 인증번호 일치 여부 검사
-	if($('#emailNum').val()=='' && $('#joinBtn').click())// 여기 안됨!!!!!!!!!!!!!!!!
-		$('#emailNumDiv').text('이메일 인증번호를 입력하세요');
-//	else if($('#emailNum').val()== 이메일 인증번호 )
-//		$('#emailNumDiv').text('이메일 인증번호가 다릅니다');
+	$('#email').val($('#email1').val() + '@' + $('#email2').val()); 
+	$.ajax({
+		type: 'post',
+		url: '/market/member/sendMail',
+		data: 'mem_email='+$('#email').val(),
+		dataType : 'json',
+		success: function(result){
+			$('#randomNum').val(result.randomNum); 
+			$('#emailNumDiv').text('작성하신 이메일로 인증번호를 발송했습니다');
+		},error: function(err){
+			console.log(err);
+		}
+	});
 });
+
+//이메일 인증 확인
+$("#emailNum").on("keyup",function(){
+	let emailNum = $(this).val();
+	$.ajax({
+		type: 'post',
+		url: '/market/member/confirmMail',
+		data: 'emailNum='+emailNum+"&randomNum="+$('#randomNum').val(),
+		dataType: 'json',
+		success: function(result){
+			if(result.emailNum == result.randomNum){
+				$('#emailNumDiv').text('인증 완료되었습니다.').css('color','blue');
+				 $("#tel1").focus();
+			}else{
+				$('#emailNumDiv').text('인증번호가 일치하지 않습니다!');
+			}
+		}
+	});
+});
+
 
 //7. 전화번호 4자리 숫자 다 쓰면 다음 칸으로 자동 포커스 넘어가기
 $("#tel2").on("keyup",function(){
