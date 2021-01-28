@@ -67,9 +67,8 @@ public class NoticeController {
 	//fag에 소분류 불러오기
 	@RequestMapping(value="/getFagContent", method=RequestMethod.POST)
 	@ResponseBody
-	public ModelAndView getFagContent(@RequestParam(required=false, defaultValue="1") int i) {
-		List<NoticeDTO> list = noticeService.getFagContent(i);
-		
+	public ModelAndView getFagContent(@RequestParam(required=false, defaultValue="1") int select2) {
+		List<NoticeDTO> list = noticeService.getFagContent(select2);
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("list", list);
 		mav.setViewName("jsonView");
@@ -118,11 +117,12 @@ public class NoticeController {
 	@RequestMapping(value="qnaWrite", method=RequestMethod.POST)
 	@ResponseBody
 	public void qnaWrite(@ModelAttribute QnaBoardDTO qnaBoardDTO,
-								@RequestParam("img[]") List<MultipartFile> list) {
+						 @RequestParam("img[]") List<MultipartFile> list) {
 		String filePath = "D:\\git_home\\git_exam\\finalProject\\src\\main\\webapp\\storage";
 		
 		for(MultipartFile img: list) {
 			System.out.println("사진이름:"+img.getOriginalFilename());
+			System.out.println(list.size());
 			String fileName = img.getOriginalFilename();
 			File file = new File(filePath, fileName);
 			
@@ -134,12 +134,7 @@ public class NoticeController {
 			}
 			System.out.println("2 : "+fileName);
 			qnaBoardDTO.setQna_picture1(fileName);
-			qnaBoardDTO.setQna_picture2(fileName);
-			qnaBoardDTO.setQna_picture3(fileName);
-			qnaBoardDTO.setQna_picture4(fileName);
-			qnaBoardDTO.setQna_picture5(fileName);
-			//qnaBoardDTO.setQna_picture("");
-		
+			qnaBoardDTO.setQna_picture2("");
 			//DB
 			noticeService.qnaWrite(qnaBoardDTO);
 			

@@ -24,7 +24,6 @@
 	  			<div class="notice_qnaList_inner"></div>
 	  			</a>
   			</nav>
-  				
   			<ul class="main_ul">
   			</ul>
   		</main><br>

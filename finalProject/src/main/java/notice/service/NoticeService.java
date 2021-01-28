@@ -11,7 +11,7 @@ public interface NoticeService {
 
 	public void noticeBoardWrite(Map<String, String> map);
 
-	public List<NoticeDTO> getFagContent(int i);
+	public List<NoticeDTO> getFagContent(int select2);
 
 	public List<QnaDTO> getMain_id();
 

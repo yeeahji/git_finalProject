@@ -149,7 +149,7 @@ ol, ul {
 }
 .qnaListB { /* 변경된 클래스*/
 	position: relative;
-    height: 350px;
+    height: 430px;
     will-change: height;
     overflow: hidden;
     transition: height 300ms ease-out 0s;
@@ -276,6 +276,29 @@ img {
     white-space: pre-wrap;
     padding: 20px 0px;
 }
+
+.qnaListA_div_section_file {
+	display: flex;
+    flex-wrap: wrap;
+}
+.fileBtn {
+	width: 158px;
+    margin-right: 8px;
+    z-index: 1;
+}
+button {
+    background-color: transparent;
+    cursor: pointer;
+    outline: none;
+}
+.qnaListA_div_section_file img {
+	width: 100%;
+}
+img {
+    vertical-align: bottom;
+    border-style: none;
+}
+
 /* ================================= */
 /* ================================= */
 

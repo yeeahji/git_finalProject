@@ -22,8 +22,8 @@ public class NoticeServiceImpl implements NoticeService {
 	}
 
 	@Override
-	public List<NoticeDTO> getFagContent(int i) {
-		List<NoticeDTO> list = noticeDAO.getFagContent(i);
+	public List<NoticeDTO> getFagContent(int select2) {
+		List<NoticeDTO> list = noticeDAO.getFagContent(select2);
 		return list;
 	}
 

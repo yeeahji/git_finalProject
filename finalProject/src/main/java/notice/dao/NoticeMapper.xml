@@ -10,7 +10,7 @@
 	</insert>
 <!-- 공지사항 -->
 	<select id="getFagContent" parameterType="Integer" resultType="notice.bean.NoticeDTO">
-		select * from noticeBoard where select1=2 and select2=#{i}
+		select * from noticeBoard where select1=2 and select2=#{select2}
 	</select>
 <!-- qna 대분류 -->
 	<select id="getMain_id" resultType="notice.bean.QnaDTO">
@@ -26,8 +26,8 @@
 	</select>
 <!-- 글등록 -->
 	<insert id="qnaWrite" parameterType="notice.bean.QnaBoardDTO" >
-		insert into qnaboard(qnaCate_main_name,qnaCate_sub_name,qna_content,qna_picture1,qna_picture2,qna_picture3,qna_picture4,qna_picture5)
-		 				values(#{qnaCate_main_name},#{qnaCate_sub_name},#{qna_content},#{qna_picture1},#{qna_picture2},#{qna_picture3},#{qna_picture4},#{qna_picture5})
+		insert into qnaboard(qnaCate_main_name,qnaCate_sub_name,qna_content,qna_picture1,qna_picture2)
+		 				values(#{qnaCate_main_name},#{qnaCate_sub_name},#{qna_content},#{qna_picture1},#{qna_picture2})
 	</insert>
 <!-- 상담목록 불러오기 -->
 	<select id="getQnaList" resultType="notice.bean.QnaBoardDTO">

@@ -39,7 +39,19 @@ function resultHtml(data){
 				html += "<h2 class='div_subject_h2'>문의내용</h2>";	
 				html += "<time class='div_subject_time'>"+items.logtime+"</time></div></div>";	
 				html += "<p class='qnaListA_div_section_content'>"+items.qna_content+"</p>";	
+					if(items.qna_picture1 != null){
+						html += "<div class='qnaListA_div_section_file'>";
+						html += "<button class='fileBtn'>";
+						html += "<img src='/market/storage/"+items.qna_picture1+"' alt='상담첨부파일'>";
+						html += "</button></div>";
+					}
 				html += "</section></div></article>";	
 				});
 				$('.main_ul').append(html);
 }
+
+
+
+
+
+
