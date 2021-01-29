@@ -1,4 +1,4 @@
-//테이블 생성!
+//테이블 생성
 CREATE TABLE product(
      product_seq number PRIMARY KEY, -- 상품번호(PK)
      mem_id NOT NULL REFERENCES members(mem_id), -- 판매자 ID(FK)
