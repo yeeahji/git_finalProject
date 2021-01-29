@@ -21,7 +21,7 @@ img {
     vertical-align: bottom;
     border-style: none;
 }
-table {
+#prodMangeTable { /* table */
 	border-collapse: collapse;
     border-spacing: 0px;
 }
@@ -164,7 +164,7 @@ main {
 }
 /* .sortProdManageBtn */
 /* 테이블 */
-.productManageWrap table{
+.productManageWrap #prodMangeTable{ /* table */
 	width: 100%;
     text-align: center;
     table-layout: fixed;
@@ -174,50 +174,50 @@ main {
     border-top: 1px solid rgb(30, 29, 41);
     border-bottom: 1px solid rgb(30, 29, 41);
 }
-.productManageWrap table thead > tr {
+.productManageWrap #prodMangeTable thead > tr {
 	height: 2.5rem;
 }
-.productManageWrap table tr > :first-child {
+.productManageWrap #prodMangeTable tr > :first-child {
 	width: 10.5rem;
 }
-.productManageWrap table thead > tr > th {
+.productManageWrap #prodMangeTable thead > tr > th {
 	vertical-align: middle;
 }
-.productManageWrap table tr > * {
+.productManageWrap #prodMangeTable tr > * {
 	flex-shrink: 0;
 }
-.productManageWrap table tbody > tr {
+.productManageWrap #prodMangeTable tbody > tr {
 	border-bottom: 1px solid rgb(220, 219, 228);
 }
-.productManageWrap table tr > td:first-child {
+.productManageWrap #prodMangeTable tr > td:first-child {
 	height: 9.5rem;
 }
-.productManageWrap table tr > td {
+.productManageWrap #prodMangeTable tr > td {
 	vertical-align: middle;
     padding: 0.5rem;
     line-height: 1;
 }
-.productManageWrap table tr > td a {
+.productManageWrap #prodMangeTable tr > td a {
 	color: rgb(0, 114, 230);
 }
-.productManageWrap table tr > td:first-child img {
+.productManageWrap #prodMangeTable tr > td:first-child img {
 	width: 100%;
 }
 /* 판매상태 */
-.productManageWrap table tr > :nth-child(2){
+.productManageWrap #prodMangeTable tr > :nth-child(2){
 	width: 8rem;
 }
-.tabSortProdWrap1 {
+/* .tabSortProdWrap1 {
 	position: relative;
     box-sizing: border-box;
-}
-.tabSortProdWrap2 {
+} */
+/* .tabSortProdWrap2 {
 	width: 100%;
     height: 3rem;
     display: flex;
     border: 1px solid rgb(195, 194, 204);
     border-radius: 2px;
-}
+} */
 .tabSortProdTitle {
 	-webkit-box-align: center;
     align-items: center;
@@ -370,10 +370,40 @@ main {
     color: rgb(155, 153, 169);
     visibility: hidden;
 }
-
-
-
-
+/* 판매상태 버튼 클릭 이벤트 */
+.btnListWrap {
+	position: absolute;
+    top: calc(100% + 4px);
+    left: 0px;
+    width: 100%;
+    border-radius: 2px;
+    box-shadow: rgb(0 0 0 / 12%) 0px 2px 8px 0px;
+    z-index: 1;
+    background: rgb(255, 255, 255);
+}
+.btnList {
+	max-height: 12.5rem;
+    overflow-y: scroll;
+}
+.nowList {
+	width: 100%;
+    height: 2.5rem;
+    display: flex;
+    -webkit-box-align: center;
+    align-items: center;
+    padding: 0px 1rem;
+    background: rgb(234, 233, 241);
+    color: rgb(30, 29, 41);
+}
+.default {
+	width: 100%;
+    height: 2.5rem;
+    display: flex;
+    -webkit-box-align: center;
+    align-items: center;
+    padding: 0px 1rem;
+    color: rgb(94, 92, 107);
+}
 
 
 

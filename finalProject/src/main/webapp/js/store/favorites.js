@@ -65,7 +65,7 @@ $(document).ready(function(){
 				
 				
 				$('.favoriteOneWrap'+index).css('width', '502px');
-				$('.favoriteOneWrap'+indexzsw  ).css('margin-bottom', '20px');
+				$('.favoriteOneWrap'+index).css('margin-bottom', '20px');
 		
 	
 				// 배송비 *배송비 별도는 표시 없음

@@ -37,7 +37,7 @@
 		</div><!-- Wrap1 -->
 	</header>
 	
-	<table>
+	<table id="prodMangeTable">
 		<thead>
 			<tr>
 				<th>사진</th>
@@ -49,43 +49,8 @@
 				<th>기능</th>
 			</tr>
 		</thead>
-		<tbody>
-			<!-- 상품 하나(행) !!!!!!!!!!-->
-			<!--  <tr>
-				<td>
-					<a href="#">
-						<img src="https://media.bunjang.co.kr/product/143691568_1_1610895976_w304.jpg" alt="상품이미지">
-					</a> 
-				</td>
-				<td>
-					<div class="tabSortProdWrap1">
-						<div class="tabSortProdWrap2">
-							<div class="tabSortProdTitle">
-								<div class="tabSortProdText">판매 중</div>
-								<input id="tabSortProdTextInner" readonly tabindex="0" aria-autocomplete="list" class="css-tabSortProdTextInner" value="">
-							</div>
-							<div class="tabSortProdBtn"></div>
-						</div>//Wrap2
-					</div>//Wrap1
-				</td>
-				<td>
-					<a href="#">장갑(상품명)</a>
-				</td>
-				<td>
-					1000000원
-				</td>
-				<td>
-				0
-				</td>
-				<td>
-					2021-01-08 00:16
-				</td>
-				<td>
-					<button type="button" class="upBtn">UP</button>
-					<a class="editBtn" href="#">수정</a>
-					<button type="button" class="deleteBtn">삭제</button>
-				</td>
-			</tr>  -->
+		<tbody id="prodMangeTbody">
+			<!-- productManage.js -->
 		</tbody>
 	</table>
 </main>
