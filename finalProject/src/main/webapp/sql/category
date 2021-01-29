@@ -1,4 +1,4 @@
-//테이블 생성!!
+//테이블 생성
 CREATE TABLE category(
      cate_code NUMBER PRIMARY KEY,           -- 카테고리 코드
      cate_name VARCHAR2(50) NOT NULL,        -- 카테고리 이름
