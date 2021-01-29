@@ -21,6 +21,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import product.bean.ProductDTO;
+import store.bean.ReviewDTO;
 import store.bean.StoreDTO;
 import store.service.StoreService;
 
@@ -38,7 +39,7 @@ public class StoreController {
 		 return "/index";
 	}
 	
-	// 상점 상단 ----------------------------------------------------------
+	// 상점 정보 ----------------------------------------------------------
 	// 	(1) 닉네임  - 닉네임 중복체크 (및 회원 정보 가져오는)
 	@RequestMapping(value="/getMember", method=RequestMethod.GET)
 	@ResponseBody
@@ -93,14 +94,15 @@ public class StoreController {
 	
 	
 	// 상점 메뉴 ----------------------------------------------------------
-	// [상품] 상품 리스트 가져오기
+	// [상품] 
+	// 상품 리스트 가져오기
 	@RequestMapping(value="storeProductList", method=RequestMethod.POST)
 	@ResponseBody
-	public ModelAndView storeProductList() {
+	public ModelAndView storeProductList(@RequestParam String mem_id) {
 		// 상품 리스트
-		List<ProductDTO> productList = storeService.storeProductList();
+		List<ProductDTO> productList = storeService.storeProductList(mem_id);
 		// 상품 총 개수
-		int productTotalA = storeService.storeProductTotalA();
+		int productTotalA = storeService.storeProductTotalA(mem_id);
 		
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("productList", productList);
@@ -109,25 +111,80 @@ public class StoreController {
 		return mav;
 	}
 	
+	// [상품후기] 
+	// 후기 리스트 가져오기
+	@RequestMapping(value="storeReviewsList", method=RequestMethod.POST)
+	@ResponseBody
+	public ModelAndView storeReviewsList(@RequestParam String mem_id) {
+		// 후기 리스트
+		List<ReviewDTO> reviewsList = storeService.storeReviewsList(mem_id); // 상점 주인의 아이디
+		// 후기 총 개수
+		int reviewTotalA = storeService.storeReviewTotalA(mem_id);
+		
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("reviewsList", reviewsList);
+		mav.addObject("reviewTotalA", reviewTotalA);
+		mav.setViewName("jsonView");
+		return mav;
+	}
 	
-	// [찜] 찜 리스트 가져오기
-//	@RequestMapping(value="storeFavoritesList", method=RequestMethod.POST)
-//	@ResponseBody
-//	public ModelAndView storeFavoritesList(@RequestParam String mem_id) {
-//		// 찜 리스트
-//		List<ProductDTO> favoritesList = storeService.storeFavoritesList(mem_id);
-//		
-//		// 찜 총 개수
-//		
-//		ModelAndView mav = new ModelAndView();
-//		mav.addObject("favoritesList", favoritesList);
-//		mav.setViewName("jsonView");
-//		return mav;
-//	}
-//	
+	// [찜] 
+	// 찜 리스트 가져오기
+	@RequestMapping(value="storeFavoritesList", method=RequestMethod.POST)
+	@ResponseBody
+	public ModelAndView storeFavoritesList(@RequestParam String mem_id) {
+		//mem_id 는 상점 주인 아이디
+		// 찜 리스트
+		List<ProductDTO> favoritesList = storeService.storeFavoritesList(mem_id);
+		// 찜 총 개수
+		int favoritesTotalA = storeService.storeFavoritesTotalA(mem_id);
+		
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("favoritesList", favoritesList);
+		mav.addObject("favoritesTotalA", favoritesTotalA);
+		mav.setViewName("jsonView");
+		return mav;
+	}
+ 
+	// 판매 완료(product_manage == 3) 상품 삭제
+	@RequestMapping(value="storeSoldOutDelete", method=RequestMethod.POST)
+	@ResponseBody
+	public void storeSoldOutDelete() {
+		storeService.storeSoldOutDelete();
+	}
 	
+	// [내 상품 관리]
+	// 상품 리스트
+	@RequestMapping(value="productManageList", method=RequestMethod.POST)
+	@ResponseBody
+	public ModelAndView productManageList(@RequestParam String mem_id) {
+		
+		List<ProductDTO> productManageList = storeService.storeProductList(mem_id);
+		// 해당 상품의 찜(wish) 수
+		//int favoritesOfProd = storeService.favoritesOfProd(mem_id);
+		
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("productManageList", productManageList);
+		mav.setViewName("jsonView");
+		return mav;
+	}
 	
-	
+	// 각 상품의 찜 수
+	@RequestMapping(value="favoritesOfProd", method=RequestMethod.POST)
+	@ResponseBody
+	public int favoritesOfProd(@RequestParam Map<String, String> map) { //mem_id, product_seq
+		// 해당 상품의 찜(wish) 수
+		int favoritesOfProd = storeService.favoritesOfProd(map);
+		
+		return favoritesOfProd;
+	}
 	
 
 }
+
+
+
+
+
+
+

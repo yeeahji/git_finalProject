@@ -9,7 +9,8 @@
     justify-content: space-between;
 }
 .reviewsNum {
-	color: rgb(247, 47, 51);
+	/* color: rgb(247, 47, 51); */
+	color: #0a58ca;
 }
 .reviewWrap {
 	padding: 20px;

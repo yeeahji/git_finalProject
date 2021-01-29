@@ -3,6 +3,7 @@ $(document).ready(function(){
 	$.ajax({
 		type: 'post',
 		url: '/market/store/storeProductList',
+		data: 'mem_id='+'test1', //test1이 올린 물품들만
 		dataType: 'json',
 		success : function(data){
 			console.log(data); // test

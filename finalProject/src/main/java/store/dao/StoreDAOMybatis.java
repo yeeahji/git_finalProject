@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import product.bean.ProductDTO;
+import store.bean.ReviewDTO;
 import store.bean.StoreDTO;
 
 @Repository
@@ -18,14 +19,13 @@ public class StoreDAOMybatis implements StoreDAO {
 	private SqlSession sqlSession;
 
 	@Override
-	public List<ProductDTO> storeProductList() {
-		System.out.println(sqlSession.selectList("storeSQL.storeProductList"));
-		return sqlSession.selectList("storeSQL.storeProductList");
+	public List<ProductDTO> storeProductList(String mem_id) {
+		return sqlSession.selectList("storeSQL.storeProductList", mem_id);
 	}
 
 	@Override
-	public int storeProductTotalA() {
-		return sqlSession.selectOne("storeSQL.storeProductTotalA");
+	public int storeProductTotalA(String mem_id) {
+		return sqlSession.selectOne("storeSQL.storeProductTotalA", mem_id);
 	}
 
 	@Override
@@ -41,5 +41,31 @@ public class StoreDAOMybatis implements StoreDAO {
 	@Override
 	public List<ProductDTO> storeFavoritesList(String mem_id) {
 		return sqlSession.selectList("storeSQL.storeFavoritesList", mem_id);
+	}
+
+	@Override
+	public int storeFavoritesTotalA(String mem_id) {
+		return sqlSession.selectOne("storeSQL.storeFavoritesTotalA", mem_id);
+	}
+
+	@Override
+	public void storeSoldOutDelete() {
+		sqlSession.delete("storeSQL.storeSoldOutDelete");	
+		
+	}
+
+	@Override
+	public List<ReviewDTO> storeReviewsList(String mem_id) {
+		return sqlSession.selectList("storeSQL.storeReviewsList", mem_id);
+	}
+
+	@Override
+	public int storeReviewTotalA(String mem_id) {
+		return sqlSession.selectOne("storeSQL.storeReviewTotalA", mem_id);
+	}
+
+	@Override
+	public int favoritesOfProd(Map<String, String> map) {
+		return sqlSession.selectOne("storeSQL.favoritesOfProd", map);
 	}
 }

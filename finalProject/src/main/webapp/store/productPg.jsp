@@ -40,6 +40,6 @@
 		</div>
 	</div><!-- //productListTop -->
 	<div class="listWrap">
-	
-	</div><!-- //listWrap -->	
+		<!-- productPg.js -->
+	</div>
 </div><!-- productList -->

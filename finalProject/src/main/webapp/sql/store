@@ -9,11 +9,7 @@ STORE_SCOREAVG NUMBER DEFAULT 0 -- 상점 평점(별) - MAX 10
 );
 
 
-
-
--- 상점 데이터 삽입 
--- ( store_img:null -> 상점 기본 이미지 )
-
+-- 상점 데이터 삽입  ( store_img:null -> 상점 기본 이미지 )
 INSERT INTO store(MEM_ID, STORE_NICKNAME, STORE_INTRO, STORE_ECHO, STORE_SCOREAVG) 
 VALUES('test1', '김테스트의 상점', '안사요', 10, 4);
 
@@ -21,9 +17,28 @@ INSERT INTO store(MEM_ID, STORE_NICKNAME, STORE_IMG, STORE_INTRO, STORE_ECHO, ST
 VALUES('test2', '김테스트2님의 장터', 'kakao.png', '교환 안됩니다', 80, 2);
 
 
+-- [찜] 테스트 
+insert into wish values('test1', 7, sysdate); --test1이 test2가 올린 곰인형(7) 찜
+insert into wish values('test1', 8, sysdate); --test1이 test2가 올린 펭수인형(8) 찜
+insert into wish values('test1', 9, sysdate); --test1이 test2가 올린 장갑(9) 찜
+insert into wish values('test2', 1, sysdate); --test2가 test1이 올린 1번 찜
 
 
--- [상품] 리스트 출력을 위한 product 테스트 데이터들
+-- [상점후기] 데이터 (test2가 test1의 상점이 올린 초록니트 후기)
+insert into review(product_seq, mem_id, review_content, review_score, review_date, review_seq)
+values (3, 'test2', '정말 너무 예뻐요 색도 맘에들어요 감사합니다 너무친절하세요~', 8, sysdate, seq_review.NEXTVAL);
+
+insert into review(product_seq, mem_id, review_content, review_score, review_date, review_seq)
+values (6, 'test2', '아주 오렌지같아요~ ', 5, sysdate, seq_review.NEXTVAL);
+-- test1이 test2가 올린 곰인형 사서 상점 후기 남김
+insert into review(product_seq, mem_id, review_content, review_score, review_date, review_seq)
+values (7, 'test1', '곰인형 넘 귀엽네요 하하하 ', 2, sysdate, seq_review.NEXTVAL);
+
+
+-- [상품] 테스트 
+-- test1 (김테스트의 상점)이 올린 물건들
+INSERT INTO product VALUES (seq_product.NEXTVAL, 'test1', 101, '입던옷', '입던옷입니다', 'ex.png', 'ex2.png',
+'ex3.png', 25000, '서울', 0, 0, '원피스', '옷', '투피스', '쓰리피스', '포피스', 0, 1, sysdate);
 
 INSERT INTO product(product_seq, mem_id, cate_code, product_subject, product_content, product_img1, product_price, product_location, product_condition, product_delivery_fee, product_hashtag1, product_hashtag2, product_hashtag3,  product_view, product_manage, product_logtime)
 VALUES (seq_product.NEXTVAL, 'test1', 105, '노랑니트', '이뻐요ㅋㅋ', 'yellow.jpg', 1800000, '서울', 0, 1, '여성니트', '봄니트', '니트', 0, 1, sysdate);
@@ -40,3 +55,12 @@ VALUES (seq_product.NEXTVAL, 'test1', 205, '빨강니트', '레드레드', 'red.
 INSERT INTO product(product_seq, mem_id, cate_code, product_subject, product_content, product_img1, product_price, product_location, product_condition, product_delivery_fee, product_hashtag1, product_hashtag2, product_hashtag3,  product_view, product_manage, product_logtime)
 VALUES (seq_product.NEXTVAL, 'test1', 205, '오렌지니트', '오렌지', 'orange.png', 9999999, '서울', 0, 0, '주황니트', '오렌지니트', '니트', 0, 3, sysdate);
 
+-- test2(김테스트2님의 장터)이 올린 물건들
+INSERT INTO product(product_seq, mem_id, cate_code, product_subject, product_content, product_img1, product_price, product_location, product_condition, product_delivery_fee, product_hashtag1, product_hashtag2, product_hashtag3,  product_view, product_manage, product_logtime)
+VALUES (seq_product.NEXTVAL, 'test2', 608, '곰인형', '팔아요', 'bear.jpg', 5000, '서울', 0, 1, '곰인형', '인형', '리본곰인형', 0, 1, sysdate);
+
+INSERT INTO product(product_seq, mem_id, cate_code, product_subject, product_content, product_img1, product_price, product_location, product_condition, product_delivery_fee, product_hashtag1, product_hashtag2, product_hashtag3,  product_view, product_manage, product_logtime)
+VALUES (seq_product.NEXTVAL, 'test2', 608, '펭수인형', '펭수 잘가', 'peng.jpg', 80000, '수원', 0, 0, '펭수', '펭귄인형', '펭수인형', 0, 1, sysdate);
+
+INSERT INTO product(product_seq, mem_id, cate_code, product_subject, product_content, product_img1, product_price, product_location, product_condition, product_delivery_fee, product_hashtag1, product_hashtag2, product_hashtag3,  product_view, product_manage, product_logtime)
+VALUES (seq_product.NEXTVAL, 'test2', 309, '장갑', '따뜻한 겨울을 위해', 'gloves.jpg', 3200, '서울', 0, 1, '장갑', '알록달록장갑', '겨울장갑', 0, 2, sysdate);

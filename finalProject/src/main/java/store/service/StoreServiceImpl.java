@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import product.bean.ProductDTO;
+import store.bean.ReviewDTO;
 import store.bean.StoreDTO;
 import store.dao.StoreDAO;
 
@@ -16,13 +17,13 @@ public class StoreServiceImpl implements StoreService {
 	private StoreDAO storeDAO;
 
 	@Override
-	public List<ProductDTO> storeProductList() {
-		return storeDAO.storeProductList();
+	public List<ProductDTO> storeProductList(String mem_id) {
+		return storeDAO.storeProductList(mem_id);
 	}
 
 	@Override
-	public int storeProductTotalA() {
-		return storeDAO.storeProductTotalA();
+	public int storeProductTotalA(String mem_id) {
+		return storeDAO.storeProductTotalA(mem_id);
 	}
 
 	@Override
@@ -39,4 +40,30 @@ public class StoreServiceImpl implements StoreService {
 	public List<ProductDTO> storeFavoritesList(String mem_id) {
 		return storeDAO.storeFavoritesList(mem_id);
 	}
+
+	@Override
+	public int storeFavoritesTotalA(String mem_id) {
+		return storeDAO.storeFavoritesTotalA(mem_id);
+	}
+
+	@Override
+	public void storeSoldOutDelete() {
+		storeDAO.storeSoldOutDelete();
+	}
+
+	@Override
+	public List<ReviewDTO> storeReviewsList(String mem_id) {
+		return storeDAO.storeReviewsList(mem_id);
+	}
+
+	@Override
+	public int storeReviewTotalA(String mem_id) {
+		return storeDAO.storeReviewTotalA(mem_id);
+	}
+
+	@Override
+	public int favoritesOfProd(Map<String, String> map) {
+		return storeDAO.favoritesOfProd(map);
+	}
+	
 }
