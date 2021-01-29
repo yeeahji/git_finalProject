@@ -13,37 +13,39 @@ public class AdminController {
 	public String index() {
 		return "/admin/index";
 	}
-	@RequestMapping(value="/login", method=RequestMethod.GET)
-	public String login() {
-		return "/admin/login";
+	
+	@RequestMapping(value="/memberList", method=RequestMethod.GET)
+	public String memberList(Model model) {
+		model.addAttribute("display11", "/admin/memberManagement/memberList.jsp");
+		return "/admin/index";
 	}
 	
-	@RequestMapping(value="/menu", method=RequestMethod.GET)
-	public String menu() {
-		return "/admin/menu";
-	}
-	
-	@RequestMapping(value="/member", method=RequestMethod.GET)
-	public String member(Model model) {
-		model.addAttribute("display", "/admin/page/member.jsp");
-		return "/admin/menu";
-	}
-	
-	@RequestMapping(value="/productManagement", method=RequestMethod.GET)
-	public String productManagement(Model model) {
-		model.addAttribute("display", "/admin/page/productManagement.jsp");
-		return "/admin/menu";
-	}
-	
-	@RequestMapping(value="/boardManagement", method=RequestMethod.GET)
-	public String boardManagement(Model model) {
-		model.addAttribute("display", "/admin/page/boardManagement.jsp");
-		return "/admin/menu";
-	}
-	
-	@RequestMapping(value="/noticeManagement", method=RequestMethod.GET)
-	public String noticeManagement(Model model) {
-		model.addAttribute("display", "/admin/page/noticeManagement.jsp");
-		return "/admin/menu";
-	}
+//	@RequestMapping(value="/login", method=RequestMethod.GET)
+//	public String login() {
+//		return "/admin/login";
+//	}
+//	
+//	@RequestMapping(value="/member", method=RequestMethod.GET)
+//	public String member(Model model) {
+//		model.addAttribute("display", "/admin/page/member.jsp");
+//		return "/admin/menu";
+//	}
+//	
+//	@RequestMapping(value="/productManagement", method=RequestMethod.GET)
+//	public String productManagement(Model model) {
+//		model.addAttribute("display", "/admin/page/productManagement.jsp");
+//		return "/admin/menu";
+//	}
+//	
+//	@RequestMapping(value="/boardManagement", method=RequestMethod.GET)
+//	public String boardManagement(Model model) {
+//		model.addAttribute("display", "/admin/page/boardManagement.jsp");
+//		return "/admin/menu";
+//	}
+//	
+//	@RequestMapping(value="/noticeManagement", method=RequestMethod.GET)
+//	public String noticeManagement(Model model) {
+//		model.addAttribute("display", "/admin/page/noticeManagement.jsp");
+//		return "/admin/menu";
+//	}
 }

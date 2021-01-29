@@ -23,7 +23,7 @@
 	<resources mapping="/js/**" location="/js/" />
 	<resources mapping="/css/**" location="/css/" />
 	<resources mapping="/index/**" location="/index/" />
-	<resources mapping="/admin/**" location="/admin" />
+	<resources mapping="/admin/**" location="/admin/" />
 
 	<!-- JSON -->
 	<beans:bean id="jsonView" class="org.springframework.web.servlet.view.json.MappingJackson2JsonView">
