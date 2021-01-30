@@ -6,7 +6,7 @@ CREATE TABLE members(
 	mem_id varchar2(50) PRIMARY KEY,
 	mem_pwd varchar2(50) NOT NULL,
 	mem_name varchar2(50) NOT NULL,
-	mem_email varchar2(70) NOT NULL,
+	mem_email varchar2(70) UNIQUE NOT NULL,
 	mem_add1 varchar2(100) NOT NULL,
     mem_add2 varchar2(100) NOT NULL,
 	mem_postcode number,
