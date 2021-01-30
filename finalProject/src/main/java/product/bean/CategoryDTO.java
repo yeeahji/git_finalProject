@@ -4,7 +4,7 @@ import lombok.Data;
 
 @Data
 public class CategoryDTO {
-	private int category_code;
-	private String category_name;
-	private String caategory_parent; //기본값이 null이라 String
+	private int cate_code;
+	private String cate_name;
+	private String caat_parent; //기본값이 null이라 String
 }
