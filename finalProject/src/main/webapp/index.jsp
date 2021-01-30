@@ -19,7 +19,6 @@
 
 </head>
 <body>
-
 	<div id="headerLogin">
 		<jsp:include page="/index/headerLogin.jsp" />
 	</div>
