@@ -3,12 +3,14 @@ let email_rule=/^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*
 
 
 $(document).ready(function(){
+	
 	$('#findIdFormDiv').hide();
 	$('#findPwdFormDiv').hide();
 	
 	$('#chooseIdForm').click(function(){
 		$('#findPwdFormDiv').hide();
 		$('#findIdFormDiv').show();
+		
 		
 		$('#findNameDiv').empty();
 		$('#findEmailDiv').empty();
@@ -40,8 +42,9 @@ $(document).ready(function(){
 //=============================================================================================
 	//비밀번호 수정
 	$('#choosePwdForm').click(function(){
-		$('#findidFormDiv').hide();
+		$('#findIdFormDiv').hide();
 		$('#findPwdFormDiv').show();
+		
 		
 		$('#idDivP').empty();
 		$('#emailDivP').empty();
