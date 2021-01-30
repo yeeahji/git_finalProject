@@ -1,11 +1,11 @@
 @charset "UTF-8";
+
 @import url(common.css);
 
 /* index의 공통 */
 #section {
-	width: 100%;
-	height: 100%;
-	float: left;
+	width: 1024px;
+	margin: 0 auto;
 }
 
 .fixed-top {
@@ -18,21 +18,21 @@
 
 /* skip css */
 .skip a {
-	display : block;
-	overflow: hidden;											
-	position : absolute;
-	left : 0;
-	top : -1000em;
-	z-index : 9999;
-	width : 100%;
+	display: block;
+	overflow: hidden;
+	position: absolute;
+	left: 0;
+	top: -1000em;
+	z-index: 9999;
+	width: 100%;
 	background-color: navy;
-	color :white;
-	font : bold 1.3em Tahoma, sans-serif;
-	text-decoration : none;
-	text-align: center;	
+	color: white;
+	font: bold 1.3em Tahoma, sans-serif;
+	text-decoration: none;
+	text-align: center;
 }
 
 .skip a:hover, .skip a:active, .skip a:focus {
-	top:0;
+	top: 0;
 	padding: 0.5em 0;
 }

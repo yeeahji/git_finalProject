@@ -20,11 +20,17 @@
 	<!-- 최근 본 상품 시작 -->
 	<div class="recently">
 		<div class="recentlyText">최근본상품</div>
-		<div class="recentlyCount">
-			<a id="toRecently" class="toRecently"> <i
-				class="far fa-hand-point-down"></i>&nbsp; <span>0</span>
-			</a>
-		</div>
+		<div class="recentlyProduct">
+			<span id=recentCnt></span>
+				<ul></ul> <!-- 최근본상품  -->
+
+				<div id="paging">
+					<a class="prevBtn" style="cursor: pointer">이전</a>
+					<span id="currentPage"></span>
+					<span id="totalPageCount"></span>
+					<a class="nextBtn" style="cursor: pointer">다음</a>
+				</div>
+			</div>	
 	</div>
 	<!-- 최근 본 상품 끝 -->
 
@@ -33,3 +39,7 @@
 	</div>
 </div>
 <!--사이드 배너 끝 -->
+
+<script type="text/javascript"
+	src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script type="text/javascript" src="/market/js/index/nav.js"></script>

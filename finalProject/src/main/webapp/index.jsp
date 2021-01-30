@@ -9,7 +9,7 @@
 <link rel="stylesheet" href="/market/css/index/index.css">
 <link rel="stylesheet" href="/market/css/bootstrap/bootstrap.min.css">
 
-<!-- font awesome 5.10.0-->
+<!-- font awesome 5.10.0--> 
 <link
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css"
 	rel="stylesheet">
@@ -20,45 +20,43 @@
 </head>
 <body>
 
-	<!-- header -->
-	<div id="header" class="fixed-top flex"> <!-- sticky-top -->
-		<div id="headerLogin" class="container">
-			<jsp:include page="/index/headerLogin.jsp" />
-		</div>
-		<div id="headerMain">
-			<div class="container" >
-				<jsp:include page="/index/header.jsp" />
-			</div>
-		</div>
+	<div id="headerLogin">
+		<jsp:include page="/index/headerLogin.jsp" />
+	</div>
 
+	<!-- header -->
+	<div id="header" class="flex">
+		<!-- sticky-top -->
+		<div id="headerMain">
+			<jsp:include page="/index/header.jsp" />
+		</div>
 	</div>
 
 	<!-- container -->
-	<div class="content container">
+	<div class="content">
 
 		<!-- section -->
-		<div id="section">
-			<div class="row">
+		<div id="section" >
+			<div>
 				<c:if test="${not empty display}">
 					<jsp:include page="${display}" />
 				</c:if>
 				<c:if test="${empty display }">
-					<jsp:include page="/index/display.jsp" />
+					<jsp:include page="/index/display.jsp"  />
 				</c:if>
 			</div>
 		</div>
 		<!-- 아이템  -->
 	</div>
-	
+
 	<!-- nav -->
 	<div id="nav">
 		<jsp:include page="/index/nav.jsp" />
 	</div>
-	<div class="content container">
+
 	<!-- footer -->
-	<div id="footer">
+	<div id="section">
 		<jsp:include page="/index/footer.jsp" />
-	</div>
 	</div>
 
 	<ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
