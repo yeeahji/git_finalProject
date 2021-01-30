@@ -36,10 +36,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	
 	<select id="getMyLocation" parameterType="String" resultType="member">
-		SELECT mem_location FROM members WHERE mem_id='test1'
+		SELECT mem_location FROM members WHERE mem_id=#{mem_id}
 	</select>
 	
 	<select id="getMyRecentLocation" parameterType="String" resultType="member">
-		SELECT mem_recentLocation FROM members WHERE mem_id='test1'
+		SELECT mem_recentLocation FROM members WHERE mem_id=#{mem_id}
 	</select>
 </mapper>
