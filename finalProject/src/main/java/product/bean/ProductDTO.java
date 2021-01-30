@@ -18,7 +18,7 @@ public class ProductDTO {
 	private String product_img3;
 	private String product_img4;
 	private String product_img5;
-	private int product_price;
+	private String product_price;
 	private String product_location;
 	private int product_condition;
 	private int product_delivery_fee;
@@ -29,5 +29,6 @@ public class ProductDTO {
 	private String product_hashtag5;
 	private int product_view;
 	private int product_manage;
-	private Date product_logtime;
+	private String product_logtime;
+
 }

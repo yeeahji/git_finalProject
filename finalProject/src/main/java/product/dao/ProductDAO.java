@@ -17,4 +17,7 @@ public interface ProductDAO {
 
 	public String getMyRecentLocation(String mem_id);
 
+	public List<ProductDTO> getProductList(); //목록
+
+
 }

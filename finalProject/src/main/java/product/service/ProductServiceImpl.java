@@ -34,4 +34,10 @@ public class ProductServiceImpl implements ProductService {
 	public String getMyRecentLocation(String mem_id) {
 		return productDAO.getMyRecentLocation(mem_id);
 	}
+	
+	@Override	
+	public List<ProductDTO> getProductList() {
+		return productDAO.getProductList();
+
+	}
 }
