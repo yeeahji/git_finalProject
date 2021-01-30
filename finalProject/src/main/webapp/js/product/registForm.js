@@ -9,46 +9,6 @@ $('#registForm').ready(function(){
 
 
 
-/*
-fileBuffer.push(image);
-
-//이미지 태그 생성
-$('<li/>', {
-	draggable: 'false',
-	class: 'registUserImages'
-		
-}).append($('<div/>', {
-	
-})).append($('<img/>',{
-	src: this.result,
-	alt: '상품이미지',
-	id: 'product_img'
-	
-})).append($('<button/>',{
-	type: 'button',
-	class: 'image_cancleBtn'
-	
-})).appendTo($('.registImages'));			
-
-//첫번째 이미지를 대표이미지로 설정
-if($('.registUserImages').length == 0){
-	index = 0;
-	$('.imageNotRepresentive').addClass('imageRepresentive').text('대표이미지');		
-}
-
-//X버튼 클릭 시 deleteImage 함수 호출
-$('.image_cancleBtn').click(deleteImage);
-
-//상품이미지(0/5) 개수 변경
-$('.image_sub small').text(`(${$('.registUserImages').length}/5)`);
-
-if(index < input.files.length-1) {
-	reader.readAsDataURL(input.files[++index]);
-}
-*/
-
-
-
 /* 상품 이미지 */
 $('#inputImage').on('change', readURL); //파일 올릴 때마다 readURL 함수 호출
 const fileBuffer = []; //파일저장용 전역변수
@@ -271,77 +231,6 @@ $('#searchAddr').click(function(){
 
 
 
-/*
-//연관태그
-$('#tagInput').on('keyup', hashTagEvent);
-$('#tagInput').on('keydown', function(event) {if(event.keyCode == 13 || event.keyCode==32) event.preventDefault();});
-const $inputDiv = $('#tagInput').closest('div.hash_divArea');
-
-//태그생성 
-function hashTagEvent(event) {
-	event.preventDefault();
-	const $this = $(this);
-	if($this.val().length > 8) {
-		alert('태그명은 8자 이내로 작성해주세요');
-		$this.val($this.val().substring(0,8));
-		return false;
-	}
-	
-	if(!(event.keyCode == 13 || event.keyCode == 32)) return false; //13=엔터, 32=스페이스바
-	if(!document.getElementById('tagInput').value.trim().length) return false;
-	
-	let $ul; 
-	
-	if($('.hash_div').length == 0) {
-		const $div = $('<div></div>').addClass('hash_div');
-		$ul = $('<ul></ul>').addClass('hash_ul');
-		$div.append($ul);
-		$('.hash_divArea').before($div);
-	} else {
-		$ul = $('.hash_ul');
-	}
-	//products-tag-hash--div = hash_div
-	//products-tag-hash--li = hash_li
-	const $li = $('<li></li>').addClass('hash_li');
-	const $btn = $('<button></button>').addClass('hash_btnText').text(`#${$(this).val()}`).dblclick(editTag).click(function(e) {e.preventDefault();});
-	const $closeBtn = $('<button></button>').addClass('hash_btnClose').click(deleteTag);
-	const $fas = $('<i></i>').addClass('fas fa-times');
-	
-	const $frag = $(document.createDocumentFragment());
-	$frag.append($li);
-	$closeBtn.append($fas);
-	$li.append($btn, $closeBtn);
-	$ul.append($frag);
-	$(this).val('');
-		
-	if($('li.hash_li').length == 5) {
-		$inputDiv.hide();
-	}
-}
-
-//태그 삭제 
-function deleteTag(e) {
-	e.preventDefault();
-	$(this).closest('li').remove();
-	if($inputDiv.css('display') == 'none') {
-		$inputDiv.show();
-	}
-}
-
-//태그 수정
-function editTag(e) {
-	e.preventDefault();
-	const $this = $(this);
-	const val = $this.text();
-	$this.closest('li').remove();
-	$('#tagInput').val(val.substring(1));
-	if($inputDiv.css('display') == 'none') {
-		$inputDiv.show();
-	}
-}
-*/
-
-
 
 /* 태그 영역 */
 function initTagArea() {
@@ -349,7 +238,7 @@ function initTagArea() {
 	$('#tagInput').on('keydown', function(event) {if(event.keyCode == 13 || event.keyCode==32) event.preventDefault();});
 	const $inputDiv = $('#tagInput').closest('div.tagInputWrap');
 
-	/* 태그생성 */
+	//태그 생성
 	function hashTagEvent(event) {
 		event.preventDefault();
 		const $this = $(this);
@@ -390,7 +279,7 @@ function initTagArea() {
 		}
 	}
 	
-	/* 태그 삭제 */
+	//태그 삭제
 	function deleteTag(e) {
 		e.preventDefault();
 		$(this).closest('li').remove();
@@ -399,7 +288,7 @@ function initTagArea() {
 		}
 	}
 
-	/* 태그 수정 */
+	//태그 수정
 	function editTag(e) {
 		e.preventDefault();
 		const $this = $(this);
@@ -418,7 +307,7 @@ function initTagArea() {
 
 
 
-//등록하기
+/* 등록하기 */
 $('#registBtn').click(function(){
 	$('#imageDiv').hide();
 	$('#subjectDiv').hide();
@@ -436,61 +325,13 @@ $('#registBtn').click(function(){
 	else{
 		alert("뜽록");
 		
-		
-		console.log(fileBuffer);
-		console.log($('.hash_btnText'));
-		
-
 		$.each(fileBuffer, function(index, items){
 			console.log(items.name);
-		});//each
-		
+		});
 		$.each($('.hash_btnText'), function(index, items){
 			console.log(items.innerText);
-		});//each
-		
-		/*
-		let formData = new FormData($('#registForm')[0]); //form 안의 모든 name으로 된 데이터 읽기
-		console.log("첫번째 : " + formData);
-		
-		$.ajax({
-			type: 'post',
-			enctype: 'multipart/form-data',
-			processData: false, //데이터를 컨텐트 타입에 맞게 변환 여부
-			contentType: false, //요청 컨텐트 타입
-			url: '/market/product/productRegist',
-			data: formData,
-			success: function(data){
-				alert("이미지 등록 완료");
-				location.href = '/market/product/productDetail';
-			},
-			error: function(err){
-				console.log(err);
-			}
-			
 		});
-		*/
 		
-		//-----------------------------------------------------------------
-		/*
-		$(function(){
-		    $('#registForm').ajaxForm({
-		        beforeSubmit: function(data, form, option) {
-		            console.log(data);
-		            return true;
-		        },
-		        success: function(returnData) {
-		            console.log("returnData : "+returnData);
-		            func(returnData);
-		        },
-		        error: function(x,e){
-		            console.log("[AF]ajax status : "+x.status);
-		            console.log(e);
-		        }
-		    });
-		});
-		*/
-
 		$('#registForm').ajaxForm({
 			type: 'post',
 			enctype: 'multipart/form-data',
@@ -498,17 +339,41 @@ $('#registBtn').click(function(){
 			contentType: false, //요청 컨텐트 타입
 			url: '/market/product/productRegist',
 			dataType: 'json',
-			beforeSubmit: function(data, form, option) {
+			beforeSubmit: function(data, form, option) { //submit 전 실행
 				console.log(data);
-				// 동적 사진 정보 동적 할당
+				//이미지 정보 동적 할당
 				fileBuffer.forEach(function(e, i) {
-					const obj = {
+					const imgObj = {
 						name : 'img',
 						id : 'product_img'+i,
 						type : 'file',
 						value : e
 					}
-					data.push(obj);
+					data.push(imgObj);
+				});
+				
+				//카테고리 설정
+				const cateObj = {
+						name : 'cate_code',
+						value : cate_code
+				}
+				data.push(cateObj);
+				
+				//배송비 설정
+				const deliveryFeeObj = {
+						name : 'product_delivery_fee',
+						value : $('#freeDelivery').prop('checked') ? 1 : 0
+				}
+				data.push(deliveryFeeObj);
+				
+				//태그 정보 동적 할당
+				$('.hash_btnText').each(function(i, e) {
+					const tagObj = {
+							name : 'hashtag',
+							id : 'product_hashtag'+i,
+							value : e.innerText
+					}
+					data.push(tagObj);
 				});
 			},
 			success: function(data) {

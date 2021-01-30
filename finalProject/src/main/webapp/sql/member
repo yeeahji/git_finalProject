@@ -1,6 +1,5 @@
 //테이블 생성 순서
 members, category -> product, store -> review, purchase, wish -> complain
-members, qnaCategory, notice -> faq
 
 //테이블 생성
 CREATE TABLE members(

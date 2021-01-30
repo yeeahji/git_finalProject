@@ -21,11 +21,6 @@ public class ProductServiceImpl implements ProductService {
 	}
 
 	@Override
-	public List<CategoryDTO> getLargeCategoryList() {
-		return productDAO.getLargeCategoryList();
-	}
-
-	@Override
 	public List<CategoryDTO> getSmallCategoryList(String cate_parent) {
 		return productDAO.getSmallCategoryList(cate_parent);
 	}

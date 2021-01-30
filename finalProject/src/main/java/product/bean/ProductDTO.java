@@ -16,6 +16,8 @@ public class ProductDTO {
 	private String product_img1;
 	private String product_img2;
 	private String product_img3;
+	private String product_img4;
+	private String product_img5;
 	private int product_price;
 	private String product_location;
 	private int product_condition;

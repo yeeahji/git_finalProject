@@ -71,7 +71,7 @@
 							<div class="subject_con">
 								<div class="contentArea">
 									<div class="subjectBox">
-										<input type="text" placeholder="상품 제목을 입력해주세요." class="subjectInput" id="product_subject">
+										<input type="text" placeholder="상품 제목을 입력해주세요." class="subjectInput" id="product_subject" name="product_subject">
 										<button type="button" class="subjectCancle"></button>
 									</div>
 									<div class="subjectSize"><span>0</span>/40</div>
@@ -105,7 +105,7 @@
 								</div>
 								<div class="categoryDiv" id="categoryDiv">카테고리를 선택해주세요.</div>
 								
-								<h3 class="selectedCategory">선택한 카테고리 : <b id="selectedCategory"></b></h3>
+								<h3 class="selectedCategory">선택한 카테고리 : <b id="selectedCategory" name="cate_code"></b></h3>
 							</div>
 						</li><!-- 카테고리 -->
 						
@@ -118,7 +118,7 @@
 									<button type="button" id="myRecentLocation">최근 지역</button>
 									<button type="button" id="searchAddr">주소 검색</button>
 								</div>
-								<input placeholder="선호 거래 지역을 검색해주세요." class="locationInput" id="product_location">
+								<input placeholder="선호 거래 지역을 검색해주세요." class="locationInput" id="product_location" name="product_location">
 								<div class="locationDiv" id="locationDiv">거래지역을 선택해주세요.</div>
 								<div class="add_description">
 									<b>* 주소 검색 후 구매자에게 알려주고 싶은 주소 범위까지만 나타나도록 주소를 수정해주세요.</b><br>
@@ -135,13 +135,13 @@
 								<div class="contentArea">
 									<label for="중고상품" class="usedCondition">
 										<span id="usedConditionSpan">
-										<input type="radio" name="conditions" id="usedCondition" value="0">중고상품
+										<input type="radio" name="product_condition" id="usedCondition" value="0">중고상품
 										</span>
 									</label>
 									
 									<label for="새상품" class="newCondition">
 										<span id="newConditionSpan">
-										<input type="radio" name="conditions" id="newCondition" value="1">새상품
+										<input type="radio" name="product_condition" id="newCondition" value="1">새상품
 										</span>
 									</label>
 								</div>
@@ -153,13 +153,12 @@
 							<div class="price_sub">가격<span>*</span></div>
 							<div class="price_con">
 								<div class="priceBox">
-									<input type="text" placeholder="숫자만 입력해주세요." class="priceInput" id="product_price">원
+									<input type="text" placeholder="숫자만 입력해주세요." class="priceInput" id="product_price" name="product_price">원
 								</div>
 
 								<!-- 배송비 포함 여부 -->
 								<div class="deliveryArea">
 									<div class="deliveryBox">
-										<!-- <span class="freeDeliveryBefore"></span> -->
 										<label for="freeDelivery" class="freeDelivery">
 											<input id="freeDelivery" type="checkbox">배송비 포함
 										</label>
@@ -173,7 +172,7 @@
 						<li class="list">
 							<div class="instruction_sub">설명</div>
 							<div class="instruction_con">
-								<textarea placeholder="상품 설명을 입력해주세요." rows="6" class="instruction" id="product_content"></textarea>
+								<textarea placeholder="상품 설명을 입력해주세요." rows="6" class="instruction" id="product_content" name="product_content"></textarea>
 								<div class="text">
 									<a target="_blank" href="/market/notice/fag">
 										<img src="/market/image/product/warning_icon.svg">거래금지품목

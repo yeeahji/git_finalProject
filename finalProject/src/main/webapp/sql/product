@@ -8,6 +8,8 @@ CREATE TABLE product(
      product_img1 VARCHAR2(1000) NOT NULL, -- 상품 이미지1
      product_img2 VARCHAR2(1000), -- 상품 이미지2
      product_img3 VARCHAR2(1000), -- 상품 이미지3
+     product_img4 VARCHAR2(1000), -- 상품 이미지4
+     product_img5 VARCHAR2(1000), -- 상품 이미지5
      product_price NUMBER NOT NULL, -- 상품 가격
      product_location VARCHAR2(50) NOT NULL, -- 거래 지역
      product_condition NUMBER NOT NULL, -- 상품상태(0:중고상품 1:새상품)
@@ -26,10 +28,4 @@ CREATE TABLE product(
 CREATE SEQUENCE seq_product NOCYCLE NOCACHE;
 
 //데이터 삽입(예제)
-INSERT INTO product VALUES (seq_product.NEXTVAL, 'test1', 101, '입던옷', '입던옷입니다', 'ex.png', 'ex2.png', 'ex3.png', 25000, '서울', 0, 0, '원피스', '옷', '투피스', '쓰리피스', '포피스', 0, 1, sysdate);
-
-//
-회원탈퇴 시 -- ON DELETE CASCADE 옵션 부여해서 부모(members 혹은 product)쪽이 지워지면
-그 부모의 자식키를 갖고있는 자식의 데이터도 지워지게 하기?
-product는 그냥 놔두는게 나을수도
-https://tibang.tistory.com/entry/참조키외래키-FORIGN-KEY
+INSERT INTO product VALUES (seq_product.NEXTVAL, 'test1', 101, '입던옷', '입던옷입니다', 'ex.png', 'ex2.png', 'ex3.png', 'ex4.png', 'ex5.png', 25000, '서울', 0, 0, '원피스', '옷', '투피스', '쓰리피스', '포피스', 0, 1, sysdate);
