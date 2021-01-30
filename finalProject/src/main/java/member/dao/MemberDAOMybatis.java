@@ -30,7 +30,6 @@ public class MemberDAOMybatis implements MemberDAO {
 
 	@Override
 	public int join(MemberDTO memberDTO) {
-		System.out.println("aaaaa");
 		return sqlSession.insert("memberSQL.join", memberDTO);
 	}
 	
@@ -59,7 +58,21 @@ public class MemberDAOMybatis implements MemberDAO {
 	@Override
 	public void withdraw(String id) {
 		sqlSession.delete("memberSQL.withdraw", id);
-		
+	}
+
+	@Override
+	public MemberDTO findId(String mem_email) {
+		return sqlSession.selectOne("memberSQL.findId", mem_email);
+	}
+
+	@Override
+	public MemberDTO findPwd(Map<String, String> map ) {
+		return sqlSession.selectOne("memberSQL.findPwd",  map);
+	}
+
+	@Override
+	public void resetPwd(Map<String, String> map) {
+		sqlSession.update("memberSQL.resetPwd",  map);
 	}
 	
 	

@@ -26,4 +26,10 @@ public interface MemberService {
 
 	public void withdraw(String id);
 
+	public MemberDTO findId(String mem_email);
+
+	public MemberDTO findPwd(Map<String, String> map);
+
+	public void resetPwd(Map<String, String> map);
+
 }

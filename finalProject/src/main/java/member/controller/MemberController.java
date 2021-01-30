@@ -1,9 +1,11 @@
 package member.controller;
 
 import java.io.IOException;
-import java.io.PrintWriter;
+import java.text.DateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import java.util.Random;
 
@@ -20,7 +22,6 @@ import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -88,25 +89,15 @@ public class MemberController {
         } catch (Exception e) {
             System.out.println(e);
         }
-		ModelAndView mv = new ModelAndView(); 
-        mv.addObject("randomNum", randomNum);
-        mv.setViewName("jsonView");
-        System.out.println("mv : "+mv); 
-
-//        response_email.setContentType("text/html; charset=UTF-8");
-//        PrintWriter out_email = response_email.getWriter();
-//        out_email.println("<script>alert('이메일이 발송되었습니다. 인증번호를 입력해주세요.');</script>");
-//        out_email.flush();
+		ModelAndView mav = new ModelAndView(); 
+        mav.addObject("randomNum", randomNum);
+        mav.setViewName("jsonView");
         
-        return mv;
+        return mav;
 	}
 //	- 이메일 인증번호 확인
 	@RequestMapping(value = "/confirmMail", method = RequestMethod.POST)
     public ModelAndView confirmMail(@RequestParam String emailNum, @RequestParam String randomNum, HttpServletResponse response_equals) throws IOException {
-     	System.out.println("마지막 : 내가 넣은 값 : "+emailNum);
-        System.out.println("마지막 : 랜덤넘버 : "+randomNum);
-        
-        //페이지이동과 자료를 동시에 하기위해 ModelAndView를 사용해서 이동할 페이지와 자료를 담음
         ModelAndView mav = new ModelAndView();
         mav.setViewName("jsonView");
         mav.addObject("emailNum",emailNum);
@@ -148,10 +139,15 @@ public class MemberController {
 	@RequestMapping(value = "/login", method =RequestMethod.POST)
 	@ResponseBody
 	public String login(@RequestParam Map<String, String> map, HttpSession session) {
-	
-		
+		String kakaoNickname = map.get("id");
+		String kakaoEmail = map.get("email");
+		System.out.println("프로필 카카오 닉네임 : "+ kakaoNickname);
+		System.out.println("카카오 이메일 : "+ kakaoEmail);
 		return memberService.login(map, session );
 	}
+
+	
+	
 //	- 로그아웃
 	@RequestMapping(value ="/logout", method=RequestMethod.GET)
 	public String logout(HttpSession session) {
@@ -159,10 +155,133 @@ public class MemberController {
 		return "/index";
 	}
 //	[아이디 비번 찾기]===================================================================================
-	@RequestMapping(value = "/findId", method =RequestMethod.GET)
-	public String findId() {
-		return "/member/findId";
+	
+	@RequestMapping(value = "/findIdForm", method =RequestMethod.GET)
+	public String findIdForm() {
+		return "/member/findIdForm";
 	}
+//	- 아이디찾기
+	@RequestMapping(value = "/findId", method =RequestMethod.POST)
+	public ModelAndView findId(HttpServletRequest request, @RequestParam String mem_email)throws IOException  {
+		
+		ModelAndView mav = new ModelAndView(); 
+		
+		MemberDTO memberDTO = memberService.findId(mem_email);
+		
+		if(memberDTO==null) {
+			mav.addObject("findId", null);
+			mav.setViewName("jsonView");
+		}else {
+			String findId= memberDTO.getMem_id();
+			
+			String sender = "brighthannah12@gmail.com";
+			String recipient = mem_email;
+			System.out.println("recipient : "+recipient);
+			String title = "▣ 아나바다 마켓 :: 아이디를 확인하세요 ▣";
+			String content = System.getProperty("line.separator")
+							+ System.getProperty("line.separator")
+		                    + "안녕하세요. 아나바다 마켓 아이디 찾기 서비스 확인 메일입니다."
+		                    + System.getProperty("line.separator")
+		                    + System.getProperty("line.separator")
+		                    + "고객님의 아이디는 '" +findId+ "'입니다. "
+		                    + System.getProperty("line.separator")
+		                    + System.getProperty("line.separator")
+		                    + "이용해주셔서 감사합니다."; 
+			try {
+	            MimeMessage message = mailSender.createMimeMessage();
+	            MimeMessageHelper messageHelper = new MimeMessageHelper(message,true, "UTF-8");
+
+	            messageHelper.setFrom(sender); // 보내는사람 생략하면 정상작동을 안함
+	            messageHelper.setTo(recipient); // 받는사람 이메일
+	            messageHelper.setSubject(title); // 메일제목은 생략이 가능하다
+	            messageHelper.setText(content); // 메일 내용
+	            
+	            mailSender.send(message);
+	        } catch (Exception e) {
+	            System.out.println(e);
+	        }
+			
+	        mav.addObject("findId", findId);
+	        mav.setViewName("jsonView");
+		}//else
+//		System.out.println("mav : "+ mav);
+        return mav;
+	}
+//	- 비밀번호 찾기
+	@RequestMapping(value = "/findPwd", method =RequestMethod.POST)
+	@ResponseBody
+	public ModelAndView findPwd(HttpServletRequest request, @RequestParam String mem_id, @RequestParam String mem_email)throws IOException  {
+		
+		ModelAndView mav = new ModelAndView(); 
+		
+		Map <String, String> map = new HashMap<String, String>();
+		map.put("mem_id", mem_id);
+		map.put("mem_email", mem_email);
+		MemberDTO memberDTO = memberService.findPwd(map);
+		System.out.println("dto: "+memberDTO);
+		
+		if(memberDTO==null) {
+			mav.addObject("member", null);
+			mav.setViewName("jsonView");
+		}else {
+			int randomNum = new Random().nextInt(7845126);
+			
+			String sender = "brighthannah12@gmail.com";
+			String recipient = mem_email;
+			System.out.println("recipient : "+recipient);
+			String title = "▣ 아나바다 마켓 :: 비밀번호 수정을 위한 인증번호를 확인하세요 ▣";
+			String content = System.getProperty("line.separator")
+							+ System.getProperty("line.separator")
+		                    + "안녕하세요. 아나바다 마켓 비밀번호 수정용 본인 인증번호입니다."
+		                    + System.getProperty("line.separator")
+		                    + System.getProperty("line.separator")
+		                    + "인증번호는 '" +randomNum+ "'입니다. "
+		                    + System.getProperty("line.separator")
+		                    + System.getProperty("line.separator")
+		                    + "이용해주셔서 감사합니다."; 
+			try {
+	            MimeMessage message = mailSender.createMimeMessage();
+	            MimeMessageHelper messageHelper = new MimeMessageHelper(message,true, "UTF-8");
+
+	            messageHelper.setFrom(sender); // 보내는사람 생략하면 정상작동을 안함
+	            messageHelper.setTo(recipient); // 받는사람 이메일
+	            messageHelper.setSubject(title); // 메일제목은 생략이 가능하다
+	            messageHelper.setText(content); // 메일 내용
+	            
+	            mailSender.send(message);
+	        } catch (Exception e) {
+	            System.out.println(e);
+	        }
+	        mav.addObject("randomNum", randomNum);
+	        mav.setViewName("jsonView");
+		}//else
+        return mav;
+	}
+	
+//	- 비밀번호용 인증코드 인증
+	@RequestMapping(value = "/confirmPwdcode", method = RequestMethod.POST)
+    public ModelAndView confirmPwdcode(@RequestParam String certifyNum, @RequestParam String randomNum, HttpServletResponse response_equals) throws IOException {
+     	System.out.println("마지막 : 내가 넣은 값 : "+certifyNum);
+        System.out.println("마지막 : 랜덤넘버 : "+randomNum);
+        
+        ModelAndView mav = new ModelAndView();
+        mav.setViewName("jsonView");
+        mav.addObject("certifyNum",certifyNum);
+        mav.addObject("randomNum",randomNum);
+
+        return mav;
+	}
+//	- 비밀번호 재설정
+	@ResponseBody
+	@RequestMapping(value = "/resetPwd", method = RequestMethod.POST)
+	public void resetPwd(@RequestParam String mem_pwd, String mem_email) {
+		Map <String, String> map = new HashMap<String, String>();
+		map.put("mem_pwd", mem_pwd);
+		map.put("mem_email", mem_email);
+		
+		memberService.resetPwd(map);
+	}
+	
 //	[회원정보수정] ===================================================================================
 //	- 본인 재확인 페이지 이동
 	@RequestMapping(value = "/certifyForm", method =RequestMethod.GET)

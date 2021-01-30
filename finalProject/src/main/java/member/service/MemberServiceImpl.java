@@ -44,7 +44,13 @@ public class MemberServiceImpl implements MemberService {
 //	[로그인] ----------------------------------------------------------
 	@Override
 	public String login(Map<String, String> map, HttpSession session) {
-		
+//		카카오로그인 시
+		if (map.get("email")!=null) {
+			session.setAttribute("memId", map.get("id"));
+			session.setAttribute("memEmail", map.get("email"));
+			return "success";
+		}
+//		일반 로그인 시 
 		MemberDTO memberDTO = memberDAO.login(map);
 		
 		if(memberDTO == null) {
@@ -52,7 +58,7 @@ public class MemberServiceImpl implements MemberService {
 		}else {
 			session.setAttribute("memName", memberDTO.getMem_name());
 			session.setAttribute("memId", memberDTO.getMem_id());
-			session.setAttribute("memPwd", memberDTO.getMem_pwd());
+			session.setAttribute("memEmail", memberDTO.getMem_email());
 			return "success";
 		}
 	}
@@ -79,6 +85,34 @@ public class MemberServiceImpl implements MemberService {
 	@Override
 	public void withdraw(String id) {
 		memberDAO.withdraw(id);
+	}
+
+	@Override
+	public MemberDTO findId(String mem_email) {
+		MemberDTO memberDTO = memberDAO.findId(mem_email);
+		
+		if(memberDTO == null) {
+			return null;
+		}else {
+			return memberDTO;
+		}
+	}
+
+	@Override
+	public MemberDTO findPwd(Map<String, String> map) {
+		MemberDTO memberDTO = memberDAO.findPwd(map);
+		
+		if(memberDTO == null) {
+			return null;
+		}else {
+			return memberDTO;
+		}
+	}
+
+	@Override
+	public void resetPwd(Map<String, String> map) {
+		memberDAO.resetPwd(map);
+		
 	}
 	
 }

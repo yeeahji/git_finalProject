@@ -38,10 +38,19 @@ input[type=text], input[type=password], input[type=tel]{
     
 /*     ========================   */
     #joinBtn, #loginBtn, #updateBtn{
-        height: 50px;
         background-color: #0a58ca;
         border : 0px;
         width : 365px;
+        height: 60px;
+        color: white;
+        font-weight: bold;
+        font-size: 14pt;
+    }
+    #chooseIdBtn, #choosePwdBtn{
+        background-color: #0a58ca;
+        border : 0px;
+        width : 400px;
+        height: 70px;
         color: white;
         font-weight: bold;
         font-size: 14pt;
