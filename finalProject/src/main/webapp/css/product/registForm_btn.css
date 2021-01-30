@@ -1,0 +1,106 @@
+@charset "UTF-8";
+/* 라디오 버튼 */
+.usedCondition {
+    display: flex;
+    font-size: 1rem;
+    -webkit-box-align: center;
+    align-items: center;
+    position: relative;
+    margin-right: 2rem;
+}
+.usedCondition input[type="radio"] {
+    display: none;
+}
+.usedCondition::before {
+	content: "";
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: 20px 20px;
+    width: 2rem;
+    height: 2rem;
+    padding: 0.5rem;
+    background-image: url("/market/image/product/origin_radioBtn.svg");
+    border-radius: 50%;
+}
+.usedCondition:hover::before {
+    background-color: rgba(30, 29, 41, 0.06);
+}
+.newCondition {
+    display: flex;
+    font-size: 1rem;
+    -webkit-box-align: center;
+    align-items: center;
+    position: relative;
+    margin-right: 2rem;
+}
+.newCondition input[type="radio"] {
+    display: none;
+}
+.newCondition::before {
+	content: "";
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: 20px 20px;
+    width: 2rem;
+    height: 2rem;
+    padding: 0.5rem;
+    background-image: url("/market/image/product/origin_radioBtn.svg");
+    border-radius: 50%;
+}
+.newCondition:hover::before {
+    background-color: rgba(30, 29, 41, 0.06);
+}
+
+.usedActive::before {
+    background-image: url("/market/image/product/blue_radioBtn.svg");
+}
+.usedActive:hover::before {
+    background-color: rgba(10, 88, 202, 0.08);
+}
+.newActive::before {
+    background-image: url("/market/image/product/blue_radioBtn.svg");
+}
+.newActive:hover::before {
+    background-color: rgba(10, 88, 202, 0.08);
+}
+
+
+
+
+/* 체크버튼 */
+.deliveryArea {
+    display: flex;
+    margin-top: 1rem;
+}
+.deliveryBox {
+    margin-right: 2rem;
+}
+.freeDelivery {
+    display: flex;
+    -webkit-box-align: center;
+    align-items: center;
+    cursor: pointer;
+}
+.freeDelivery input[type="checkbox"] {
+    display: none;
+}
+.freeDelivery::before {
+    content: "";
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: 20px 20px;
+    width: 2rem;
+    height: 2rem;
+    padding: 0.5rem;
+    background-image: url("/market/image/product/origin_checkBtn.svg");
+    border-radius: 50%;
+}
+.freeDelivery:hover::before {
+    background-color: rgba(30, 29, 41, 0.06);
+}
+.deliveryActive::before {
+    background-image: url("/market/image/product/blue_checkBtn.svg");
+}
+.deliveryActive:hover::before {
+    background-color: rgba(10, 88, 202, 0.08);
+}

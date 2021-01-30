@@ -1,0 +1,75 @@
+//테이블 생성 순서
+members, category -> product, store -> review, purchase, wish -> complain
+
+//테이블 생성
+CREATE TABLE members(
+	mem_id varchar2(50) PRIMARY KEY,
+	mem_pwd varchar2(50) NOT NULL,
+	mem_name varchar2(50) NOT NULL,
+	mem_email varchar2(70) NOT NULL,
+	mem_add1 varchar2(100) NOT NULL,
+    mem_add2 varchar2(100) NOT NULL,
+	mem_postcode number,
+	mem_recentAdd1 varchar2(100),
+    mem_recentAdd2 varchar2(100),
+	mem_recentPostcode number,
+	mem_tel varchar2(20) NOT NULL,
+	mem_location varchar2(50),
+	mem_recentLocation varchar2(50),
+	mem_logtime DATE DEFAULT SYSDATE NOT NULL
+);
+
+INSERT INTO members (mem_id,
+	 	mem_pwd,
+		mem_name,
+	 	mem_email,
+		mem_add1,
+		mem_add2,
+        mem_postcode,
+		mem_recentAdd1,
+		mem_recentAdd2,
+        mem_recentPostcode,	
+		mem_tel,
+        mem_location,
+		mem_recentLocation) 
+	VALUES ('test1',	
+		123,
+		'김테스트',
+		'test@naver.com',
+		'서울특별시 서초구 강남대로 459',
+        '강남빌딩',
+		12345,
+		'서울특별시 종로구 종로 69',
+		'종로빌딩',
+        99999,
+		'010-1111-1111',
+		'서울',
+		'경기');
+        
+        
+INSERT INTO members (mem_id,
+	 	mem_pwd,
+		mem_name,
+	 	mem_email,
+		mem_add1,
+		mem_add2,
+        mem_postcode,
+		mem_recentAdd1,
+		mem_recentAdd2,
+        mem_recentPostcode,	
+		mem_tel,
+        mem_location,
+		mem_recentLocation) 
+	VALUES ('test2',	
+		123,
+		'김테스트2',
+		'test2@naver.com',
+		'서울특별시 서초구 강남대로 222',
+        '서초빌딩',
+		22222,
+		'서울특별시 종로구 종로 22',
+        '을지로빌딩',
+		22222,
+		'010-2222-2222',
+		'부산',
+		'광주');

@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="productSQL">
+	<insert id="productRegist" parameterType="product">
+		INSERT INTO product VALUES(seq_product.NEXTVAL,
+								   'test1',
+								   #{cate_code},
+								   #{product_subject},
+								   #{product_content},
+								   #{product_img1},
+								   #{product_img2},
+								   #{product_img3},
+								   #{product_img4},
+								   #{product_img5},
+								   #{product_price},
+								   #{product_location},
+								   #{product_condition},
+								   #{product_delivery_fee},
+								   #{product_hashtag1},
+								   #{product_hashtag2},
+								   #{product_hashtag3},
+								   #{product_hashtag4},
+								   #{product_hashtag5},
+								   0,
+								   1,
+								   SYSDATE)
+	</insert>
+	
+	<select id="getSmallCategoryList" parameterType="String" resultType="category">
+		SELECT * FROM category
+		WHERE cate_parent=#{cate_parent}
+		ORDER BY cate_code
+	</select>
+	
+	<select id="getMyLocation" parameterType="String" resultType="member">
+		SELECT mem_location FROM members WHERE mem_id=#{mem_id}
+	</select>
+	
+	<select id="getMyRecentLocation" parameterType="String" resultType="member">
+		SELECT mem_recentLocation FROM members WHERE mem_id=#{mem_id}
+	</select>
+</mapper>

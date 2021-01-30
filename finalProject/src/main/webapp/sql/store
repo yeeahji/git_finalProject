@@ -1,0 +1,42 @@
+-- 상점 테이블 생성
+CREATE TABLE STORE(
+MEM_ID PRIMARY KEY REFERENCES members(mem_id), -- 외래키를 PK로
+STORE_NICKNAME VARCHAR2(50) NOT NULL, -- 상점 닉네임
+STORE_IMG VARCHAR2(1000), -- 상점 프로필 사진 
+STORE_INTRO VARCHAR2(4000), -- 상점 소개글
+STORE_ECHO NUMBER DEFAULT 0, -- 에코지수 - MAX 100
+STORE_SCOREAVG NUMBER DEFAULT 0 -- 상점 평점(별) - MAX 10
+);
+
+
+
+
+-- 상점 데이터 삽입 
+-- ( store_img:null -> 상점 기본 이미지 )
+
+INSERT INTO store(MEM_ID, STORE_NICKNAME, STORE_INTRO, STORE_ECHO, STORE_SCOREAVG) 
+VALUES('test1', '김테스트의 상점', '안사요', 10, 4);
+
+INSERT INTO store(MEM_ID, STORE_NICKNAME, STORE_IMG, STORE_INTRO, STORE_ECHO, STORE_SCOREAVG) 
+VALUES('test2', '김테스트2님의 장터', 'kakao.png', '교환 안됩니다', 80, 2);
+
+
+
+
+-- [상품] 리스트 출력을 위한 product 테스트 데이터들
+
+INSERT INTO product(product_seq, mem_id, cate_code, product_subject, product_content, product_img1, product_price, product_location, product_condition, product_delivery_fee, product_hashtag1, product_hashtag2, product_hashtag3,  product_view, product_manage, product_logtime)
+VALUES (seq_product.NEXTVAL, 'test1', 105, '노랑니트', '이뻐요ㅋㅋ', 'yellow.jpg', 1800000, '서울', 0, 1, '여성니트', '봄니트', '니트', 0, 1, sysdate);
+
+INSERT INTO product(product_seq, mem_id, cate_code, product_subject, product_content, product_img1, product_price, product_location, product_condition, product_delivery_fee, product_hashtag1, product_hashtag2, product_hashtag3,  product_view, product_manage, product_logtime)
+VALUES (seq_product.NEXTVAL, 'test1', 105, '초록니트', '초록초록', 'green.jpg', 180, '경기도 수원', 0, 0, '초록니트', '남여공용', '니트', 0, 3, sysdate);
+
+INSERT INTO product(product_seq, mem_id, cate_code, product_subject, product_content, product_img1, product_price, product_location, product_condition, product_delivery_fee, product_hashtag1, product_hashtag2, product_hashtag3,  product_view, product_manage, product_logtime)
+VALUES (seq_product.NEXTVAL, 'test1', 205, '검정니트', '검정검정', 'black.jpg', 19900, '경기도 안산', 1, 1, '검정니트', '남성니트', '니트', 0, 2, sysdate);
+
+INSERT INTO product(product_seq, mem_id, cate_code, product_subject, product_content, product_img1, product_price, product_location, product_condition, product_delivery_fee, product_hashtag1, product_hashtag2, product_hashtag3,  product_view, product_manage, product_logtime)
+VALUES (seq_product.NEXTVAL, 'test1', 205, '빨강니트', '레드레드', 'red.jpg', 1990000, '인천', 1, 1, '검정니트', '남성니트', '니트', 0, 1, sysdate);
+
+INSERT INTO product(product_seq, mem_id, cate_code, product_subject, product_content, product_img1, product_price, product_location, product_condition, product_delivery_fee, product_hashtag1, product_hashtag2, product_hashtag3,  product_view, product_manage, product_logtime)
+VALUES (seq_product.NEXTVAL, 'test1', 205, '오렌지니트', '오렌지', 'orange.png', 9999999, '서울', 0, 0, '주황니트', '오렌지니트', '니트', 0, 3, sysdate);
+

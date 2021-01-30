@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="noticeSQL">
+
+<!--공지사항등록 -->
+	<insert id="noticeBoardWrite" parameterType="java.util.Map">
+		insert into noticeBoard(seq,select1,select2,subject,adminName,content) values(seq_board.nextval,#{select1},#{select2},#{subject},#{adminName},#{content})
+	</insert>
+<!-- 공지사항 -->
+	<select id="getFagContent" parameterType="Integer" resultType="notice.bean.NoticeDTO">
+		select * from noticeBoard where select1=2 and select2=#{select2}
+	</select>
+<!-- qna 대분류 -->
+	<select id="getMain_id" resultType="notice.bean.QnaDTO">
+	 	select DISTINCT qnaCate_main_id, qnaCate_main_name from qnaCategory order by qnaCate_main_id
+	</select>
+<!-- qna 소분류 -->
+	<select id="getSub_id" parameterType="Integer" resultType="notice.bean.QnaDTO">
+	 	select qnaCate_sub_id, qnaCate_sub_name from qnaCategory where qnaCate_main_id=#{qnaCate_main_id}
+	</select>
+<!-- qna 양식 -->
+	<select id="qnaCate_Content" parameterType="Integer" resultType="notice.bean.QnaDTO">
+	 	select qnaCate_Content from qnaCategory where qnaCate_sub_id=#{qnaCate_sub_id}
+	</select>
+<!-- 글등록 -->
+	<insert id="qnaWrite" parameterType="notice.bean.QnaBoardDTO" >
+		insert into qnaboard(qnaCate_main_name,qnaCate_sub_name,qna_content,qna_picture1,qna_picture2)
+		 				values(#{qnaCate_main_name},#{qnaCate_sub_name},#{qna_content},#{qna_picture1},#{qna_picture2})
+	</insert>
+<!-- 상담목록 불러오기 -->
+	<select id="getQnaList" resultType="notice.bean.QnaBoardDTO">
+	 	select * from qnaboard
+	</select>
+
+
+
+</mapper>

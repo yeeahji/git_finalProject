@@ -1,0 +1,63 @@
+--공지사항,자주묻는질문 등록, 출력할떄 사용 
+CREATE TABLE noticeBoard(  예전꺼(삭제예정)
+     notice_seq           
+	SELECT1   NOT NULL VARCHAR2(20)   
+	SELECT2            VARCHAR2(40)   제이쿼리 $(this).nameTag
+	SUBJECT   NOT NULL VARCHAR2(4000) 
+	ADMINNAME NOT NULL VARCHAR2(40)   
+	CONTENT   NOT NULL VARCHAR2(4000) 
+	LOGTIME            DATE  
+ );
+ CREATE TABLE noticeBoard(  수정한거, 다른테이블과 연관 x
+    noticeBoard_number  number generated always as identity primary key,        --기본키         
+	option1_id     NOT NULL VARCHAR2(20),   --대분류id
+	option1_name   NOT NULL VARCHAR2(200),  --대분류name   
+	option2_id     NOT NULL VARCHAR2(20),   --소분류id  
+	option2_name   NOT NULL VARCHAR2(200),  --소분류name   
+	notice_subject NOT NULL VARCHAR2(4000), --제목
+	notice_content NOT NULL VARCHAR2(4000), --내용
+	notice_picture          VARCHAR2(4000), --사진
+	logtime        DATE DEFAULT SYSDATE,
+ );
+
+--1대1 문의사항 페이지에 사용
+CREATE TABLE qnaCategory(   다른테이블과 연관 x
+	qnaCate_number	  number generated always as identity primary key, --기본키
+    qnaCate_main_id   VARCHAR2(20)  NOT NULL, --대분류 id
+    qnaCate_main_name VARCHAR2(100) NOT NULL, --대분류 name
+    qnaCate_sub_id    VARCHAR2(20)  NOT NULL, --소분류 id
+    qnaCate_sub_name  VARCHAR2(100) NOT NULL, --소분류 name
+    qnaCate_Content   VARCHAR2(4000)   	   --양식
+ );
+
+--1대1일 문의 글등록,출력에 사용
+CREATE TABLE qnaboard( 예전꺼(삭제예정)
+     qnaCate_main_name VARCHAR2(50) NOT NULL,   --카테고리 선택1
+     qnaCate_sub_name  VARCHAR2(50) NOT NULL,   --카테고리 선택2
+     mem_Id            VARCHAR2(40),            --작성자
+     qna_content       VARCHAR2(4000) NOT NULL, --내용
+  	 qna_picture1      VARCHAR2(500), 
+     qna_picture2      VARCHAR2(500), 
+     qna_picture3      VARCHAR2(500),
+     qna_picture4      VARCHAR2(500),
+     qna_picture5      VARCHAR2(500),
+     logtime           DATE DEFAULT SYSDATE      --날짜
+ );
+ CREATE TABLE qnaboard( 수정한거, 사용예정
+ 	qnaboard_number	  number generated always as identity primary key, --기본키
+    qnaCate_main_name VARCHAR2(20)  NOT NULL,  --대분류 id
+    qnaCate_main_id   VARCHAR2(100) NOT NULL,  --대분류 name
+    qnaCate_sub_name  VARCHAR2(20)  NOT NULL,  --소분류 id
+    qnaCate_sub_id    VARCHAR2(100) NOT NULL,  --소분류 name
+    mem_id            ,  --작성자, 외래키
+    qna_content VARCHAR2(4000) NOT NULL,       --내용
+  	qna_picture1 VARCHAR2(500), 
+    qna_picture2 VARCHAR2(500), 
+    qna_picture3 VARCHAR2(500),
+    qna_picture4 VARCHAR2(500),
+    qna_picture5 VARCHAR2(500),
+    logtime DATE DEFAULT SYSDATE,      -- 날짜
+    
+    FOREIGN KEY (mem_id) REFERENCES MEMBERS (mem_id)
+ );
+ generated always as identitym, auto_increment 둘다 자동으로 1씩 증가시켜주는 조건
