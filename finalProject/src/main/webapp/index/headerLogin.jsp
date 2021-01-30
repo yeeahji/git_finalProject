@@ -23,7 +23,7 @@
    style="text-decoration: none; color:#61615b;">로그인</a>&emsp;&emsp;&emsp;
 </c:if>
 <c:if test="${memId != null}">      
-${memId}님 환영합니다.&emsp;
+<span>${memId}님 환영합니다.&emsp;</span>
 <a href="/market/member/logout" 
    style="text-decoration: none; color:#61615b;">로그아웃</a>&emsp;
 <a href="/market/member/certifyForm" 

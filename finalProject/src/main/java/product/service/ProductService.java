@@ -14,7 +14,5 @@ public interface ProductService {
 	public String getMyLocation(String mem_id);
 
 	public String getMyRecentLocation(String mem_id);
-	
-	public List<ProductDTO> getProductList(); //상품목록
 
 }

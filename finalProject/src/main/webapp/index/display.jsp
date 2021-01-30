@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
 <!-- 광고 -->
 <div class="adPlace">
@@ -52,7 +52,7 @@
 				<div id="itemSolid">
 					<img src="${list.img1}" class="rounded float-start" alt="갤럭시 S21"
 						style="margin-bottom: 30px;">
-					<h5>${list.subject}</h5> 
+					<h5>${list.subject}</h5>
 					<div class="price-time">
 						<p class="displayPrice">${list.price}</p>
 						<h5 class="displayTime">${list.logtime}</h5>
@@ -66,10 +66,8 @@
 
 
 <div id="moreShow">
-	<p>
-		<a href="#" class="pe-auto">더 보기<br>▼
-		</a>
-	</p>
+	<a id="pe-auto" class="pe-auto" onclick="addPage()">더 보기<br>▼
+	</a>
 </div>
 
 

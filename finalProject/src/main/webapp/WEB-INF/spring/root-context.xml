@@ -7,6 +7,16 @@
 	
 	<context:component-scan base-package="spring.conf"/>
 	
+	<!-- chat -->
+	<context:component-scan base-package="chat.bean"/>
+	<context:component-scan base-package="chat.dao"/>
+	<context:component-scan base-package="chat.service"/>
+	
+	<!-- index -->
+	<context:component-scan base-package="index.bean"/>
+	<context:component-scan base-package="index.dao"/>
+	<context:component-scan base-package="index.service"/>
+	
 	<!-- Member -->
 	<context:component-scan base-package="member.bean"/>
 	<context:component-scan base-package="member.dao"/>

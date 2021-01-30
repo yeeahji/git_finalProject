@@ -1,0 +1,22 @@
+--테이블 생성
+CREATE TABLE chatroom_id(
+	
+	mem_id
+	your mem_id
+	
+);
+
+
+CREATE TABLE message_id(
+	sender
+	receiver
+	content
+	sendTime
+	chatroom_id   ???
+	messageReadTime
+	mem_id
+	your mem_id
+	
+);
+
+

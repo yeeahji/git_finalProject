@@ -110,16 +110,6 @@ public class ProductController {
 		return "/index";
 	}
 
-	@RequestMapping(value ="/getProductList", method=RequestMethod.POST)
-	@ResponseBody
-	public ModelAndView getProductList() {
-		List<ProductDTO> list = productService.getProductList();	
-
-		ModelAndView mav = new ModelAndView();
-		mav.addObject("list", list);
-		mav.setViewName("jsonView");
-		return mav;
-	}
 
 }
 

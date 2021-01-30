@@ -1,8 +1,10 @@
 package product.service;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.commons.collections.map.HashedMap;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -34,10 +36,5 @@ public class ProductServiceImpl implements ProductService {
 	public String getMyRecentLocation(String mem_id) {
 		return productDAO.getMyRecentLocation(mem_id);
 	}
-	
-	@Override	
-	public List<ProductDTO> getProductList() {
-		return productDAO.getProductList();
 
-	}
 }

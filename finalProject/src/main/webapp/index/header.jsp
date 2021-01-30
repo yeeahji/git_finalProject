@@ -16,7 +16,8 @@
 	<div class="search-area">
 		<!-- 검색 입력 -->
 		<div class="input-group">
-			<input type="text" placeholder="상품명, @상점명 입력"> <i class="fas fa-search"></i>
+			<input type="text" placeholder="상품명, @상점명 입력"> <i
+				class="fas fa-search"></i>
 		</div>
 	</div>
 
@@ -26,8 +27,9 @@
 			class="fas fa-won-sign"></i> 판매하기
 		</a> <a onclick="location.href='/market/store/store'"> <i
 			class="fas fa-user-check"></i> 내 상점
-		</a> <a><i class="far fa-comments"></i> 번개톡</a> <a><i
-			class="fas fa-book-open"></i> 커뮤니티</a>
+		</a> <a id="chat"><i
+			class="far fa-comments"></i> 바다톡</a> <a><i class="fas fa-book-open"></i>
+			커뮤니티</a>
 	</div>
 
 </div>

@@ -6,58 +6,47 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <mapper namespace="productSQL">
 
 	<insert id="productRegist" parameterType="product">
-		INSERT INTO product VALUES(seq_product.NEXTVAL,
-								   'test1',
-								   #{cate_code},
-								   #{product_subject},
-								   #{product_content},
-								   #{product_img1},
-								   #{product_img2},
-								   #{product_img3},
-								   #{product_img4},
-								   #{product_img5},
-								   #{product_price},
-								   #{product_location},
-								   #{product_condition},
-								   #{product_delivery_fee},
-								   #{product_hashtag1},
-								   #{product_hashtag2},
-								   #{product_hashtag3},
-								   #{product_hashtag4},
-								   #{product_hashtag5},
-								   0,
-								   1,
-								   SYSDATE)
+		INSERT INTO product
+		VALUES(seq_product.NEXTVAL,
+		'test1',
+		#{cate_code},
+		#{product_subject},
+		#{product_content},
+		#{product_img1},
+		#{product_img2},
+		#{product_img3},
+		#{product_img4},
+		#{product_img5},
+		#{product_price},
+		#{product_location},
+		#{product_condition},
+		#{product_delivery_fee},
+		#{product_hashtag1},
+		#{product_hashtag2},
+		#{product_hashtag3},
+		#{product_hashtag4},
+		#{product_hashtag5},
+		0,
+		1,
+		SYSDATE)
 	</insert>
-	
-	<select id="getSmallCategoryList" parameterType="String" resultType="category">
+
+	<select id="getSmallCategoryList" parameterType="String"
+		resultType="category">
 		SELECT * FROM category
 		WHERE cate_parent=#{cate_parent}
 		ORDER BY cate_code
 	</select>
-	
-	<select id="getMyLocation" parameterType="String" resultType="member">
+
+	<select id="getMyLocation" parameterType="String"
+		resultType="member">
 		SELECT mem_location FROM members WHERE mem_id=#{mem_id}
 	</select>
-	
-	<select id="getMyRecentLocation" parameterType="String" resultType="member">
-		SELECT mem_recentLocation FROM members WHERE mem_id=#{mem_id}
-	</select>
 
-	<!-- 상품 목록 -->
-	<select id="getProductList" resultType="product">
-		SELECT product_seq, store_nickname, category_code, product_subject,
-		product_content, product_img1, product_img2, product_img3,
-		to_char(product_price, 'FM99,999,999') ||'원' as product_price ,
-		product_location, product_condition , product_delivery_fee ,
-		product_hashtag1
-		,product_hashtag2,product_hashtag3,product_hashtag4,product_hashtag5,
-		product_view , product_manage ,
-		ROUND((sysdate-product_logtime)*24*60) as product_logtime FROM product 
-		WHERE product_manage=1 ORDER
-		BY product_logtime asc
-		<!-- SELECT * FROM (SELECT rownum rn, tt.* FROM (select * FROM product 
-			WHERE 1=1 ORDER BY seq desc) tt) WHERE rn BETWEEN #{startNum} and #{endNum} -->
+	<select id="getMyRecentLocation" parameterType="String"
+		resultType="member">
+		SELECT mem_recentLocation FROM members WHERE
+		mem_id=#{mem_id}
 	</select>
 
 
