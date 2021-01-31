@@ -64,7 +64,7 @@
                             </a>
                             <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne" data-parent="#sidenavAccordion">
                                 <nav class="sb-sidenav-menu-nested nav">
-                                    <a class="nav-link" href="/market/admin/">전체 상품 목록</a>
+                                    <a class="nav-link" href="/market/admin/productList">전체 상품 목록</a>
                                     <a class="nav-link" href="/market/admin/">신고된 상품 관리</a>
                                 </nav>
                             </div>
@@ -76,7 +76,7 @@
                             </a>
                             <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne" data-parent="#sidenavAccordion">
                                 <nav class="sb-sidenav-menu-nested nav">
-                                    <a class="nav-link" href="/market/admin/">전체 상점 목록</a>
+                                    <a class="nav-link" href="/market/admin/storeList">전체 상점 목록</a>
                                     <a class="nav-link" href="layout-#">2</a>
                                 </nav>
                             </div>
@@ -88,10 +88,8 @@
                             </a>
                             <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne" data-parent="#sidenavAccordion">
                                 <nav class="sb-sidenav-menu-nested nav">
-     								<a class="nav-link" href="layout-static.html">문제점이</a>
+     								<a class="nav-link" href="/market/admin/boardList">게시글목록</a>
                                     <a class="nav-link" href="layout-sidenav-light.html">이게 다같은 코드라서</a>
-                                    <a class="nav-link" href="layout-#">전부 다열려</a>
-                                    <a class="nav-link" href="layout-#">보기힘듬</a>
                                 </nav>
                             </div>
                             
@@ -102,7 +100,7 @@
                             </a>
                             <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne" data-parent="#sidenavAccordion">
                                 <nav class="sb-sidenav-menu-nested nav">
-                                    <a class="nav-link" href="/market/admin/">1대1 상담 게시판</a>
+                                    <a class="nav-link" href="/market/admin/memberQnaList">1대1 상담 게시판</a>
                                     <a class="nav-link" href="/market/admin/">2</a>
                                 </nav>
                             </div>
@@ -114,7 +112,7 @@
                             </a>
                             <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne" data-parent="#sidenavAccordion">
                                 <nav class="sb-sidenav-menu-nested nav">
-                                    <a class="nav-link" href="layout-#">1</a>
+                                    <a class="nav-link" href="/market/admin/">1</a>
                                     <a class="nav-link" href="layout-#">2</a>
                                 </nav>
                             </div>
@@ -126,10 +124,11 @@
                             </a>
                             <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne" data-parent="#sidenavAccordion">
                                 <nav class="sb-sidenav-menu-nested nav">
-                                    <a class="nav-link" href="/market/admin/">공지사항 등록</a>
+                                    <a class="nav-link" href="/market/admin/noticeWrite">공지사항 등록</a>
                                     <a class="nav-link" href="/market/admin/">공지사항 관리</a>
                                 </nav>
                             </div>
+                            
                             
                             
                             <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages" aria-expanded="false" aria-controls="collapsePages">
@@ -181,8 +180,10 @@
                 </nav>
             </div>
             
-<!--  ======================================================= -->     
-<!--  ======================================================= -->
+            
+<%-- ======================================================= --%>
+<%-- ======================================================= --%>
+
 
             <div id="layoutSidenav_content">
                 <main>
@@ -204,8 +205,10 @@
                     </div>
                 </main>
             
-<!--  ======================================================= -->     
-<!--  ======================================================= -->
+            
+<%-- ======================================================= --%>
+<%-- ======================================================= --%>
+               
                
                 <footer class="py-4 bg-light mt-auto">
                     <div class="container-fluid">
