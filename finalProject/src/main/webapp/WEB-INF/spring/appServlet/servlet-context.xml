@@ -13,6 +13,7 @@
 	<context:component-scan base-package="store.controller"/>
 	<context:component-scan base-package="product.controller"/>
 	<context:component-scan base-package="notice.controller"/>
+	<context:component-scan base-package="admin.controller"/>
 	
 	<!-- Enables the Spring MVC @Controller programming model -->
 	<annotation-driven />
@@ -24,6 +25,7 @@
 	<resources mapping="/js/**" location="/js/" />
 	<resources mapping="/css/**" location="/css/" />
 	<resources mapping="/index/**" location="/index/" />
+	<resources mapping="/admin/**" location="/admin/" />
 
 	<!-- JSON -->
 	<beans:bean id="jsonView" class="org.springframework.web.servlet.view.json.MappingJackson2JsonView">

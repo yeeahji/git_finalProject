@@ -1,7 +1,3 @@
-//$(document).ready(function(){
-//	$('.f_artP').hide();
-//});
-
 $('.f_revel2_5_1').on('click', '.fmi_nav_up', function(){
 	   var check = $(this).attr('class','fmi_nav_down');
 	   
@@ -14,34 +10,31 @@ $('.f_revel2_5_1').on('click', '.fmi_nav_up', function(){
 			data: {'select2': $(this).attr('id')},
 			dataType: 'json',
 			success: function(data){
-				alert(JSON.stringify(data));
-				resultHtml(data);
+				//alert(JSON.stringify(data));
+				
+				
+				var html="";
+				$.each(data.list, function(index, items){
+					html += "<li class='inner_li'>";
+					html += "<article class='f01'>";
+					
+					html += "<button class='f_artBtn'>";
+					html += "<span class='f_artBtn_subject'>";
+					html += "<h1>"+items.subject+"</h1></span>";
+					html += "<div class='f_artBtn_arrow'></div></button>";
+					
+					html += "<div class='f_artP_"+index+"'>";
+					html += "<p>"+items.content+"</p>";
+					html += "</div></article></li>";
+				});
+				
+				$('.fmi_ul').append(html);
 			}
-		});
-//	   $('.fmi_ul').on('click','span',function(){
-//			$(this).find('.f_artP').slideToggle();
-//		});
+		}); //ajax
+	   
 });
-
-function resultHtml(data){
-	var html;
-	$.each(data.list, function(index, items){
-		html += "<li class='inner_li'>";
-		html += "<article class='f01'>";
-		html += "<button class='f_artBtn'>";
-		html += "<div class='f_artBtn_subject'>";
-		html += "<h1>"+items.subject+"</h1></div>";
-		html += "<span class='f_artBtn_arrow'></span></button>";
-		html += "<span class='f_artP'>";
-		html += "<p>"+items.content+"</p>";
-		html += "</span></article></li>";
-	});
-	$('.fmi_ul').append(html);
-	
+$('.fag_main_inner').on('click','span',function(){
 	$('.f_artP').hide();
-	$('.fmi_ul').on('click','button',function(){
-		$(this).next().slideToggle();
-		//alert($(this).attr("class"));
-	});
-}
-
+	//alert($(this).parent().next().prop('tagName'));
+	$(this).parent().next().slideToggle();
+});

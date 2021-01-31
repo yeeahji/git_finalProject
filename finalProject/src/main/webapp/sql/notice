@@ -30,6 +30,10 @@ CREATE TABLE qnaCategory(   다른테이블과 연관 x
     qnaCate_Content   VARCHAR2(4000)   	   --양식
  );
 
+소분류를 기준으로 대분류를 불러온다.
+
+
+
 --1대1일 문의 글등록,출력에 사용
 CREATE TABLE qnaboard( 예전꺼(삭제예정)
      qnaCate_main_name VARCHAR2(50) NOT NULL,   --카테고리 선택1
@@ -43,21 +47,17 @@ CREATE TABLE qnaboard( 예전꺼(삭제예정)
      qna_picture5      VARCHAR2(500),
      logtime           DATE DEFAULT SYSDATE      --날짜
  );
+ 
  CREATE TABLE qnaboard( 수정한거, 사용예정
- 	qnaboard_number	  number generated always as identity primary key, --기본키
+ 	qnaboard_number	  number generated always as identity primary key, --기본키 seq로 변경
     qnaCate_main_name VARCHAR2(20)  NOT NULL,  --대분류 id
     qnaCate_main_id   VARCHAR2(100) NOT NULL,  --대분류 name
     qnaCate_sub_name  VARCHAR2(20)  NOT NULL,  --소분류 id
     qnaCate_sub_id    VARCHAR2(100) NOT NULL,  --소분류 name
-    mem_id            ,  --작성자, 외래키
+    mem_id    		  NOT NULL REFERENCES members(mem_id),  --작성자, 외래키
     qna_content VARCHAR2(4000) NOT NULL,       --내용
-  	qna_picture1 VARCHAR2(500), 
-    qna_picture2 VARCHAR2(500), 
-    qna_picture3 VARCHAR2(500),
-    qna_picture4 VARCHAR2(500),
-    qna_picture5 VARCHAR2(500),
-    logtime DATE DEFAULT SYSDATE,      -- 날짜
-    
-    FOREIGN KEY (mem_id) REFERENCES MEMBERS (mem_id)
+  	qna_img1 VARCHAR2(500), 
+    qna_img2 VARCHAR2(500),
+    logtime DATE DEFAULT SYSDATE      -- 날짜
  );
  generated always as identitym, auto_increment 둘다 자동으로 1씩 증가시켜주는 조건
