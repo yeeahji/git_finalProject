@@ -3,20 +3,15 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <meta charset="utf-8" />
-        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <meta name="description" content="" />
         <meta name="author" content="" />
-        <title>Dashboard - SB Admin</title>
+        <title>Static Navigation - SB Admin</title>
         <link href="/market/admin/css/styles.css" rel="stylesheet" />
-        <link href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css" rel="stylesheet" crossorigin="anonymous" />
         <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/js/all.min.js" crossorigin="anonymous"></script>
     </head>
-    
-    
-    <body class="sb-nav-fixed">
-        <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
+<body>
+    <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
             <a class="navbar-brand" href="/market/admin/index.jsp">아나바다</a>
             <button class="btn btn-link btn-sm order-1 order-lg-0" id="sidebarToggle" href="#"><i class="fas fa-bars"></i></button>
             
@@ -69,7 +64,7 @@
                             </a>
                             <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne" data-parent="#sidenavAccordion">
                                 <nav class="sb-sidenav-menu-nested nav">
-                                    <a class="nav-link" href="/market/admin/productList">전체 상품 목록</a>
+                                    <a class="nav-link" href="/market/admin/">전체 상품 목록</a>
                                     <a class="nav-link" href="/market/admin/">신고된 상품 관리</a>
                                 </nav>
                             </div>
@@ -81,7 +76,7 @@
                             </a>
                             <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne" data-parent="#sidenavAccordion">
                                 <nav class="sb-sidenav-menu-nested nav">
-                                    <a class="nav-link" href="/market/admin/storeList">전체 상점 목록</a>
+                                    <a class="nav-link" href="/market/admin/">전체 상점 목록</a>
                                     <a class="nav-link" href="layout-#">2</a>
                                 </nav>
                             </div>
@@ -93,8 +88,10 @@
                             </a>
                             <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne" data-parent="#sidenavAccordion">
                                 <nav class="sb-sidenav-menu-nested nav">
-     								<a class="nav-link" href="/market/admin/boardList">게시글목록</a>
+     								<a class="nav-link" href="layout-static.html">문제점이</a>
                                     <a class="nav-link" href="layout-sidenav-light.html">이게 다같은 코드라서</a>
+                                    <a class="nav-link" href="layout-#">전부 다열려</a>
+                                    <a class="nav-link" href="layout-#">보기힘듬</a>
                                 </nav>
                             </div>
                             
@@ -105,7 +102,7 @@
                             </a>
                             <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne" data-parent="#sidenavAccordion">
                                 <nav class="sb-sidenav-menu-nested nav">
-                                    <a class="nav-link" href="/market/admin/memberQnaList">1대1 상담 게시판</a>
+                                    <a class="nav-link" href="/market/admin/">1대1 상담 게시판</a>
                                     <a class="nav-link" href="/market/admin/">2</a>
                                 </nav>
                             </div>
@@ -117,7 +114,7 @@
                             </a>
                             <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne" data-parent="#sidenavAccordion">
                                 <nav class="sb-sidenav-menu-nested nav">
-                                    <a class="nav-link" href="/market/admin/">1</a>
+                                    <a class="nav-link" href="layout-#">1</a>
                                     <a class="nav-link" href="layout-#">2</a>
                                 </nav>
                             </div>
@@ -129,7 +126,7 @@
                             </a>
                             <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne" data-parent="#sidenavAccordion">
                                 <nav class="sb-sidenav-menu-nested nav">
-                                    <a class="nav-link" href="/market/admin/noticeWrite">공지사항 등록</a>
+                                    <a class="nav-link" href="/market/admin/">공지사항 등록</a>
                                     <a class="nav-link" href="/market/admin/">공지사항 관리</a>
                                 </nav>
                             </div>
@@ -190,18 +187,27 @@
             <div id="layoutSidenav_content">
                 <main>
                     <div class="container-fluid">
-						<h1 class="mt-4">관리자 로그인</h1>
-	                       <ol class="breadcrumb mb-4">
-	                           <li class="breadcrumb-item active">가나다라</li>
-	                       </ol>
+                        <h1 class="mt-4">Static Navigation</h1>
+                        <ol class="breadcrumb mb-4">
+                            <li class="breadcrumb-item"><a href="index.html">Dashboard</a></li>
+                            <li class="breadcrumb-item active">Static Navigation</li>
+                        </ol>
+                        <div class="card mb-4">
+                            <div class="card-body">
+                                <p class="mb-0">
+                                	공지사항등록
+                                </p>
+                            </div>
+                        </div>
+                        <div style="height: 100vh"></div>
+                        <div class="card mb-4"><div class="card-body">When scrolling, the navigation stays at the top of the page. This is the end of the static navigation demo.</div></div>
                     </div>
                 </main>
-                
+            
 <!--  ======================================================= -->     
-<!--  ======================================================= --> 
-          
-                <!-- footer -->
-				<footer class="py-4 bg-light mt-auto">
+<!--  ======================================================= -->
+               
+                <footer class="py-4 bg-light mt-auto">
                     <div class="container-fluid">
                         <div class="d-flex align-items-center justify-content-between small">
                             <div class="text-muted">Copyright &copy; Your Website 2020</div>
@@ -215,13 +221,7 @@
                 </footer>
             </div>
         </div>
-        
-        
-        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" crossorigin="anonymous"></script>
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
-        <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js" crossorigin="anonymous"></script>
-        <script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js" crossorigin="anonymous"></script>
-        <script src="/market/admin/js/scripts.js"></script>
-    </body>
-</html>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+    <script src="/market/admin/dist/js/scripts.js"></script>
+</body>

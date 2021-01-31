@@ -1,8 +1,3 @@
-/*!
-    * Start Bootstrap - SB Admin v6.0.2 (https://startbootstrap.com/template/sb-admin)
-    * Copyright 2013-2020 Start Bootstrap
-    * Licensed under MIT (https://github.com/StartBootstrap/startbootstrap-sb-admin/blob/master/LICENSE)
-    */
     (function($) {
     "use strict";
 
@@ -10,6 +5,10 @@
     var path = window.location.href; // because the 'href' property of the DOM element is the absolute path
         $("#layoutSidenav_nav .sb-sidenav a.nav-link").each(function() {
             if (this.href === path) {
+            	alert("this.href = "+this.href);
+            	// http://localhost:8080/market/admin/memberList
+            	alert("path = "+path);
+            	// http://localhost:8080/market/admin/memberList
                 $(this).addClass("active");
             }
         });
@@ -20,3 +19,8 @@
         $("body").toggleClass("sb-sidenav-toggled");
     });
 })(jQuery);
+
+//$(document).ready(function(){
+//	var path = window.location.href;
+//	alert(path);
+//});
