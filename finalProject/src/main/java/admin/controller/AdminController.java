@@ -17,7 +17,7 @@ public class AdminController {
 	@RequestMapping(value="/memberList", method=RequestMethod.GET)
 	public String memberList(Model model) {
 		model.addAttribute("display11", "/admin/memberManagement/memberList.jsp");
-		return "/admin/index";
+		return "/admin/dist/index";
 	}
 	
 //	@RequestMapping(value="/login", method=RequestMethod.GET)
