@@ -16,7 +16,24 @@
     });
 })(jQuery);
 
-
-    $(document).ready(function() {
-        $('#example').DataTable();
-    } );
+   
+$(document).ready(function() {
+	$("#example").DataTable({	
+		"serverSide" : true,
+		"processing" : true,
+//		"destroy" : true,
+		"ajax" : {
+			"type" : "post",
+			"url" : "/market/admin/getMemberList"
+//			"dataType" : "json"
+			},
+			"columns" : [
+					{"data": "mem_id"},
+					{"data": "mem_pwd"},
+					{"data": "mem_name"},
+					{"data": "mem_tel"},
+					{"data": "mem_location"}
+				]
+	});
+} );
+ 

@@ -5,7 +5,6 @@
     var path = window.location.href; // because the 'href' property of the DOM element is the absolute path
         $("#layoutSidenav_nav .sb-sidenav a.nav-link").each(function() {
             if (this.href === path) {
-            	alert("this.href = "+this.href);
                 $(this).addClass("active");
             }
         });
@@ -17,7 +16,3 @@
     });
 })(jQuery);
 
-//$(document).ready(function(){
-//	var path = window.location.href;
-//	alert(path);
-//});

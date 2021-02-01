@@ -8,13 +8,7 @@
         <meta name="author" content="" />
         <title>Static Navigation - SB Admin</title>
         <link href="/market/admin/css/styles.css" rel="stylesheet" />
-        <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/css/bootstrap.css" rel="stylesheet" />
-        <link href="https://cdn.datatables.net/1.10.23/css/dataTables.bootstrap4.min.css" rel="stylesheet" />
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/js/all.min.js" crossorigin="anonymous"></script>
-        <script src="https://code.jquery.com/jquery-3.5.1.js" crossorigin="anonymous"></script>
-        <script src="https://cdn.datatables.net/1.10.23/js/jquery.dataTables.min.js" crossorigin="anonymous"></script>
-        <script src="https://cdn.datatables.net/1.10.23/js/dataTables.bootstrap4.min.js" crossorigin="anonymous"></script>
-	
+	  <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/js/all.min.js" crossorigin="anonymous"></script>
 	</head>
 <body>
     <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
@@ -196,94 +190,31 @@
                     <div class="container-fluid">
                         <h3 class="mt-4">전체 회원리스트</h3>
                         <hr>                  
-                        <div class="btn-group btn-group-sm" role="group" aria-label="Basic example">
-						  <button type="button" class="btn btn-primary" onclick="">가나다순</button>
-						  <button type="button" class="btn btn-primary" onclick="">판매순</button>
-						  <button type="button" class="btn btn-primary" onclick="">구매순</button>
-						  <button type="button" class="btn btn-primary" onclick="">물건등록순</button>
-						  <button type="button" class="btn btn-primary" onclick="">후기순</button>
-						</div>
-						
-						<form class="d-none d-md-inline-block form-inline ml-auto mr-0 mr-md-3 my-2 my-md-0 pull-right">
-			                <div class="input-group">
-			                    <input class="form-control" type="text" placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2" />
-			                    <div class="input-group-append">
-			                        <button class="btn btn-primary" type="button"><i class="fas fa-search"></i></button>
-			                    </div>
-			                </div>
-			            </form>
-			            
 						<br>
 						<table id="example" class="table table-striped table-bordered" style="width:100%">
 				        <thead>
 				            <tr>
+				                <th>Id</th>
+				                <th>Pw</th>
 				                <th>Name</th>
-				                <th>Position</th>
-				                <th>Office</th>
-				                <th>Age</th>
-				                <th>Start date</th>
-				                <th>Salary</th>
+				                <th>Tel</th>
+				                <th>Location</th>
 				            </tr>
 				        </thead>
 				        <tbody>
-				            <tr>
-				                <td>Tiger Nixon</td>
-				                <td>System Architect</td>
-				                <td>Edinburgh</td>
-				                <td>61</td>
-				                <td>2011/04/25</td>
-				                <td>$320,800</td>
-				            </tr>
-				            <tr>
-				                <td>Garrett Winters</td>
-				                <td>Accountant</td>
-				                <td>Tokyo</td>
-				                <td>63</td>
-				                <td>2011/07/25</td>
-				                <td>$170,750</td>
-				            </tr>
-				            <tr>
-				                <td>Ashton Cox</td>
-				                <td>Junior Technical Author</td>
-				                <td>San Francisco</td>
-				                <td>66</td>
-				                <td>2009/01/12</td>
-				                <td>$86,000</td>
-				            </tr>
+				          
 						  </tbody>
 						   <tfoot>
 				            <tr>
+				              	<th>Id</th>
+				                <th>Pw</th>
 				                <th>Name</th>
-				                <th>Position</th>
-				                <th>Office</th>
-				                <th>Age</th>
-				                <th>Start date</th>
-				                <th>Salary</th>
+				                <th>Tel</th>
+				                <th>Location</th>
 				            </tr>
 				        </tfoot>
 						</table>
-						
-					<div class="container">
-						<nav aria-label="Page navigation example">
-						  <ul class="pagination">
-						    <li class="page-item">
-						      <a class="page-link" href="#" aria-label="Previous">
-						        <span aria-hidden="true">&laquo;</span>
-						      </a>
-						    </li>
-						    <li class="page-item"><a class="page-link" href="#">1</a></li>
-						    <li class="page-item"><a class="page-link" href="#">2</a></li>
-						    <li class="page-item"><a class="page-link" href="#">3</a></li>
-						    <li class="page-item">
-						      <a class="page-link" href="#" aria-label="Next">
-						        <span aria-hidden="true">&raquo;</span>
-						      </a>
-						    </li>
-						  </ul>
-						</nav>
-						
-						
-					</div>   
+
 						                        
                     </div>
                 </main>
@@ -310,4 +241,9 @@
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
     <script src="/market/admin/js/memberList.js"></script>
+    
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css" type="text/css"/>
+    <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js" type="text/javascript" ></script>
+    
+
 </body>

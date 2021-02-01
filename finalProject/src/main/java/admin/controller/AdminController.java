@@ -1,18 +1,31 @@
 package admin.controller;
 
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import admin.bean.TestMemberDTO;
+import admin.service.TestMemberService;
 
 @Controller
 @RequestMapping(value="admin")
 public class AdminController {
+	@Autowired
+	private TestMemberService testMemberService;
 	
 	//메인페이지
 	@RequestMapping(value="/adminIndex", method=RequestMethod.GET)
 	public String index() {
 		return "/admin/adminIndex";
+	}
+	//로그인
+	@RequestMapping(value="/login", method=RequestMethod.GET)
+	public String login() {
+		return "/admin/login";
 	}
 	//전체회원리스트
 	@RequestMapping(value="/memberList", method=RequestMethod.GET)
@@ -57,6 +70,13 @@ public class AdminController {
 	
 	
 	
+	//회원정보출력
+	@RequestMapping(value="/getMemberList", method=RequestMethod.POST)
+	@ResponseBody
+	public List<TestMemberDTO> getMemberList(){
+		List<TestMemberDTO> list = testMemberService.getMemberList();
+		return list;
+	}
 	
 	
 }
