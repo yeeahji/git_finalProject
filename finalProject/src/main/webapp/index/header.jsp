@@ -15,20 +15,23 @@
 	<!-- 검색창 영역 -->
 	<div class="search-area">
 		<!-- 검색 입력 -->
+		<form id="searchForm" name="searchForm">
 		<div class="input-group">
-			<input type="text" placeholder="상품명, @상점명 입력"> <i
+			<input id="searchProduct" name="searchProduct" type="text" placeholder="상품명, @상점명 입력"> <i id="searchBtn" style="cursor: pointer;"
+				onclick="location.href='/market/index/searchDisplay'"
 				class="fas fa-search"></i>
 		</div>
+		</form>
 	</div>
 
 	<!-- 우측메뉴 -->
-	<div class="header-btn">
-		<a onclick="location.href='/market/product/registForm'"> <i
-			class="fas fa-won-sign"></i> 판매하기
-		</a> <a onclick="location.href='/market/store/store'"> <i
+	<div  class="header-btn">
+		<a onclick="location.href='/market/product/registForm'"> <i style="color:#0a58ca;"
+			class="fas fa-won-sign"></i> 판매하기  
+		</a><a onclick="location.href='/market/store/store'"> <i style="color:#0a58ca;"
 			class="fas fa-user-check"></i> 내 상점
-		</a> <a id="chat"><i
-			class="far fa-comments"></i> 바다톡</a> <a><i class="fas fa-book-open"></i>
+		</a> <a id="chat"><i style="color:#0a58ca;"
+			class="far fa-comments"></i> 바다톡</a> <a><i class="fas fa-book-open" style="color:#0a58ca;"></i>
 			커뮤니티</a>
 	</div>
 
@@ -36,11 +39,11 @@
 
 <div class="dropdown-area">
 	<div class="dropdown">
-		<a id="btn_menu" class="cateList" data-bs-toggle="dropdown"
+		<a id="btn_menu" class="cateList" data-bs-toggle="dropdown" 
 			aria-expanded="false">
 			<div class="dropmenu">
 				<ul>
-					<li><a class="fas fa-bars"></a>
+					<li><a class="fas fa-bars" style="height: 30px; weight:30px;"></a>
 						<ul>
 							전체 카테고리
 							<a href="#" class="cateBig">여성의류</a>
@@ -66,4 +69,13 @@
 <script type="text/javascript"
 	src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <script type="text/javascript" src="/market/js/index/header.js"></script>
+<script type="text/javascript">
+//로그인 함수
+$("#searchProduct").keydown(function(key) {
+	if (key.keyCode == 13) {
+		$('#searchBtn').trigger('click');//강제로 이벤트를 발생
+	
+	}
+});
+</script>
 

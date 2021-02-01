@@ -23,15 +23,31 @@ public class IndexServiceImpl implements IndexService {
 		int end;
 		int default_count = 20;
 		int pageSize = 10;
-	
+		
+		
+
 		if (page > 0) {
-			start = default_count + (page-1) * pageSize ;
+			start = default_count + 1 + (page-1) * pageSize ;
 			end = default_count + page * pageSize;
 			param.put("start", start);
 			param.put("end", end);
+			
+			System.out.println("start :" + start);
+			System.out.println("end :" + end);
+			
 		}
-		
+
 		return indexDAO.getProductList(param);
 
+	}
+
+	@Override
+	public int wishProduct(String id) {
+		return indexDAO.wishProduct(id);
+	}
+
+	@Override
+	public List<ProductDTO> searchProductList(Map map) {
+		return indexDAO.searchProductList(map);
 	}
 }
