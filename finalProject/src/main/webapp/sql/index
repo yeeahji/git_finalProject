@@ -1,0 +1,85 @@
+
+--테스트용
+INSERT INTO product VALUES 
+(seq_product.NEXTVAL, 'test1', 101, '입던 옷 야상', '입던옷입니다', 'ex2.PNG', 'ex2.PNG', 'ex2.PNG', '', '', 25000, '서울', 0, 0, '원피스', '옷', '투피스', '쓰리피스', '포피스'
+,0, 1, sysdate);
+INSERT INTO product VALUES 
+(seq_product.NEXTVAL, 'test1', 102, '입던 옷 구찌', '입던옷입니다', 'ex3.JPG', 'ex3.JPG', 'ex3.JPG', '', '', 600000, '서울', 0, 0, '원피스', '옷', '투피스', '쓰리피스', '포피스'
+,0, 1, sysdate);
+INSERT INTO product VALUES 
+(seq_product.NEXTVAL, 'test1', 103, '디바 걸 수트 자켓', '디바 걸 수트 자켓', '103.JPG', '103.JPG', '', '', '103.JPG', 30000, '서울', 0, 0, '원피스', '옷', '투피스', '쓰리피스', '포피스'
+,0, 1, sysdate);
+
+INSERT INTO product VALUES 
+(seq_product.NEXTVAL, 'test1', 201, '미개봉 피파 패딩', '미개봉 피파 패딩', '201.JPG', '201.JPG', '', '', '201.JPG', 170000, '서울', 0, 0, '원피스', '옷', '투피스', '쓰리피스', '포피스'
+,0, 1, sysdate);
+INSERT INTO product VALUES 
+(seq_product.NEXTVAL, 'test1', 208, '입던 옷 셔츠', '입던옷입니다', '202.jpg', '202.jpg', '202.jpg', '', '', 25000, '서울', 0, 0, '원피스', '옷', '투피스', '쓰리피스', '포피스'
+,0, 1, sysdate);
+INSERT INTO product VALUES 
+(seq_product.NEXTVAL, 'test1', 211, '입던 옷 바지', '입던옷입니다', '202banding.jpg', '202banding.jpg', '', '', '202banding.jpg', 20000, '서울', 0, 0, '원피스', '옷', '투피스', '쓰리피스', '포피스'
+,0, 1, sysdate);
+
+INSERT INTO product VALUES 
+(seq_product.NEXTVAL, 'test1', 302, '학원 용 가방', '학원 용 가방', '302.jpg', '302.jpg', '302.jpg', '', '', 35000, '서울', 0, 0, '원피스', '옷', '투피스', '쓰리피스', '포피스'
+,0, 1, '21-01-25');
+INSERT INTO product VALUES 
+(seq_product.NEXTVAL, 'test1', 306, '프라다 카드 지갑', '프라다 카드 지갑', '306.jpg', '306.jpg', '306.jpg', '', '', 290000, '서울', 0, 0, '원피스', '옷', '투피스', '쓰리피스', '포피스'
+,0, 1, '21-01-27');
+commit;
+INSERT INTO product VALUES 
+(seq_product.NEXTVAL, 'test1', 402, '알리 커피 머신', '알리 커피 머신', '402.JPG', '402.JPG', '402.JPG', '', '', 120000, '서울', 0, 0, '원피스', '옷', '투피스', '쓰리피스', '포피스'
+,0, 1, sysdate);
+INSERT INTO product VALUES 
+(seq_product.NEXTVAL, 'test1', 404, '해바라기씨', '해바라기씨', '404.jpg', '404.jpg', '404.jpg', '', '', 6000, '서울', 0, 0, '원피스', '옷', '투피스', '쓰리피스', '포피스'
+,0, 1, sysdate);
+INSERT INTO product VALUES 
+(seq_product.NEXTVAL, 'test1', 503, '미개봉 캐릭터마우스', '미개봉 캐릭터마우스', '503.JPG', '503.JPG', '503.JPG', '', '', 10000, '서울', 0, 0, '원피스', '옷', '투피스', '쓰리피스', '포피스'
+,0, 1, sysdate);
+INSERT INTO product VALUES 
+(seq_product.NEXTVAL, 'test1', 502, '소녀시대 앨범', '소녀시대 앨범', '502.jpg', '502.jpg', '502.jpg', '', '', 4000, '서울', 0, 0, '원피스', '옷', '투피스', '쓰리피스', '포피스'
+,0, 1, sysdate);
+
+INSERT INTO product VALUES 
+(seq_product.NEXTVAL, 'test1', 601, '신생아 신발', '신생아 신발', '601.JPG', '601.JPG', '601.JPG', '', '', 23000, '서울', 0, 0, '원피스', '옷', '투피스', '쓰리피스', '포피스'
+,0, 1, sysdate);
+INSERT INTO product VALUES 
+(seq_product.NEXTVAL, 'test1', 602, '엘사 옷 6세용', '엘사 옷 6세용', '602.JPG', '602.JPG', '602.JPG', '', '', 60000, '서울', 0, 0, '원피스', '옷', '투피스', '쓰리피스', '포피스'
+,0, 1, sysdate);
+
+INSERT INTO product VALUES 
+(seq_product.NEXTVAL, 'test1', 701, '중고책 2종 세트', '중고책 2종 세트', '701.JPG', '701.JPG', '701.JPG', '', '', 3000, '서울', 0, 0, '원피스', '옷', '투피스', '쓰리피스', '포피스'
+,0, 1, sysdate);
+INSERT INTO product VALUES 
+(seq_product.NEXTVAL, 'test1', 703, '통기타 입문용', '통기타 입문용', '703.JPG', '703.JPG', '703.JPG', '', '', 30000, '서울', 0, 0, '원피스', '옷', '투피스', '쓰리피스', '포피스'
+,0, 1, sysdate);
+
+INSERT INTO product VALUES 
+(seq_product.NEXTVAL, 'test1', 801, '요가매트', '요가매트', '801.JPG', '801.JPG', '801.JPG', '', '', 7000, '서울', 0, 0, '원피스', '옷', '투피스', '쓰리피스', '포피스'
+,0, 1, sysdate);
+INSERT INTO product VALUES 
+(seq_product.NEXTVAL, 'test1', 802, '토트넘 축구공', '토트넘 축구공', '802.JPG', '802.JPG', '802.JPG', '', '', 32000, '서울', 0, 0, '원피스', '옷', '투피스', '쓰리피스', '포피스'
+,0, 1, sysdate);
+
+INSERT INTO product VALUES 
+(seq_product.NEXTVAL, 'test1', 901, '엑소 백현 포카', '백현 포카', '901.JPG', '901.JPG', '901.JPG', '', '', 5000, '서울', 0, 0, '원피스', '옷', '투피스', '쓰리피스', '포피스'
+,0, 1, sysdate);
+INSERT INTO product VALUES 
+(seq_product.NEXTVAL, 'test1', 902, '여자아이들 우기 포카', '여자아이들 우기 포카', '902.JPG', '902.JPG', '902.JPG', '', '', 5000, '서울', 0, 0, '원피스', '옷', '투피스', '쓰리피스', '포피스'
+,0, 1, sysdate);
+
+INSERT INTO product VALUES 
+(seq_product.NEXTVAL, 'test1', 1001, '디올 립스틱 미개봉', '디올 립스틱 미개봉', '1001.JPG', '1001.JPG', '1001.JPG', '', '', 20000, '서울', 0, 0, '원피스', '옷', '투피스', '쓰리피스', '포피스'
+,0, 1, sysdate);
+INSERT INTO product VALUES 
+(seq_product.NEXTVAL, 'test1', 1002, '더 페이스샵 스킨 케어 미개봉', '더 페이스샵 스킨 케어 미개봉', '1002.jfif', '1002.jfif', '1002.jfif', '', '', 13000, '서울', 0, 0, '원피스', '옷', '투피스', '쓰리피스', '포피스'
+,0, 1, sysdate);
+
+INSERT INTO product VALUES 
+(seq_product.NEXTVAL, 'test1', 1101, '차량용 보조 타이어', '차량용 보조 타이어', '1101.JPG', '1101.JPG', '1101.JPG', '', '', 20000, '서울', 0, 0, '원피스', '옷', '투피스', '쓰리피스', '포피스'
+,0, 1, sysdate);
+INSERT INTO product VALUES 
+(seq_product.NEXTVAL, 'test1', 1102, '차량용 방향제 미개봉', '더 페이스샵 스킨 케어 미개봉', '1102.JPG', '1102.JPG', '1102.JPG', '', '', 13000, '서울', 0, 0, '원피스', '옷', '투피스', '쓰리피스', '포피스'
+,0, 1, sysdate);
+
+commit; 

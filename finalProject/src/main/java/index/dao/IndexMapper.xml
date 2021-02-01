@@ -4,39 +4,86 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="indexSQL">
+
+
 	<!-- 상품 목록 -->
 	<select id="getProductList" parameterType="java.util.HashMap" resultType="product">
-		SELECT * FROM
-		(
-			SELECT
+		SELECT * 
+		FROM ( SELECT 
 				rownum rn,
-				product_seq,
-				store_nickname,
-				category_code,
-				product_subject,
-				product_content,
-				product_img1,
-				product_img2,
-				product_img3,
-				to_char(product_price, 'FM99,999,999') ||'원' as product_price ,
-				product_location, product_condition , product_delivery_fee ,
-				product_hashtag1,
-				product_hashtag2,
-				product_hashtag3,
-				product_hashtag4,
-				product_hashtag5,
-				product_view,
-				product_manage ,
-				ROUND((sysdate-product_logtime)*24*60) as product_logtime
-			FROM product
-			WHERE product_manage=1
-			ORDER BY product_logtime asc
-		)
-		WHERE rn BETWEEN nvl(#{start},0) AND nvl(#{end},20) ORDER BY product_logtime asc
+				a.* 
+				FROM
+				( SELECT
+					product_seq,
+					mem_id,
+					cate_code,
+					product_subject,
+					product_content,
+					product_img1,
+					product_img2,
+					product_img3,
+					product_img4,
+					product_img5,
+					to_char(product_price, 'FM99,999,999') ||'원' as product_price ,
+					product_location, product_condition , product_delivery_fee ,
+					product_hashtag1,
+					product_hashtag2,
+					product_hashtag3,
+					product_hashtag4,
+					product_hashtag5,
+					product_view,
+					product_manage ,
+					ROUND((sysdate-product_logtime)*24*60) as product_logtime
+				FROM product
+				WHERE product_manage=1 
+				ORDER BY product_logtime asc
+				) a
+			)
+		WHERE rn BETWEEN nvl(#{start},1) AND nvl(#{end},20) 
 			
 		<!-- SELECT * FROM (SELECT rownum rn, tt.* FROM (select * FROM product 
 			WHERE 1=1 ORDER BY seq desc) tt) WHERE rn BETWEEN #{startNum} and #{endNum} -->
 	</select>
 
+
+	<!-- 찜한 상품 수 -->
+ 	<select id="wishProduct" parameterType="String" resultType="int">
+ 		select count(*) from wish where mem_id = #{id}
+ 	</select>
+ 	
+ 	
+ 	<!-- 검색 목록 -->
+	<select id="searchProductList" parameterType="java.util.HashMap" resultType="product">
+		SELECT * 
+		FROM ( SELECT 
+				rownum rn,
+				a.* 
+				FROM
+				( SELECT
+					product_seq,
+					mem_id,
+					cate_code,
+					product_subject,
+					product_content,
+					product_img1,
+					product_img2,
+					product_img3,
+					to_char(product_price, 'FM99,999,999') ||'원' as product_price ,
+					product_location, product_condition , product_delivery_fee ,
+					product_hashtag1,
+					product_hashtag2,
+					product_hashtag3,
+					product_hashtag4,
+					product_hashtag5,
+					product_view,
+					product_manage ,
+					ROUND((sysdate-product_logtime)*24*60) as product_logtime
+				FROM product
+				WHERE product_manage=1 and product_subject Like '%' || #{searchProduct} || '%' 
+				ORDER BY product_logtime asc
+				) a
+			)
+		WHERE rn BETWEEN nvl(#{start},1) AND nvl(#{end},20) 
+	</select>
 
 </mapper>
