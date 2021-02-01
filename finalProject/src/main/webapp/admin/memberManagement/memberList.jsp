@@ -191,8 +191,17 @@
                         <h3 class="mt-4">전체 회원리스트</h3>
                         <hr>                  
 						<br>
-						<table id="example" class="table table-striped table-bordered" style="width:100%">
-				        <thead>
+						
+						<div class="btn-group btn-group-sm" role="group" aria-label="Basic outlined example">
+						  <button type="button" class="btn btn-outline-primary" >가나다순</button>
+						  <button type="button" class="btn btn-outline-primary">가입일자순</button>
+						  <button type="button" class="btn btn-outline-primary">판매등록순</button>
+						</div>
+						<br>
+						
+					<div class="table-responsive-xxl">
+						<table class="table table-bordered table-striped ">
+				        <thead class="table-dark">
 				            <tr>
 				                <th>Id</th>
 				                <th>Pw</th>
@@ -202,9 +211,37 @@
 				            </tr>
 				        </thead>
 				        <tbody>
-				          
-						  </tbody>
-						   <tfoot>
+				        	<tr>
+				                <th>1</th>
+				                <th>2</th>
+				                <th>3</th>
+				                <th>4</th>
+				                <th>5</th>
+				            </tr>
+				            <tr>
+				                <th>1</th>
+				                <th>2</th>
+				                <th>3</th>
+				                <th>4</th>
+				                <th>5</th>
+				            </tr>
+				            <tr>
+				                <th>1</th>
+				                <th>2</th>
+				                <th>3</th>
+				                <th>4</th>
+				                <th>5</th>
+				            </tr>
+				            <tr>
+				                <th>1</th>
+				                <th>2</th>
+				                <th>3</th>
+				                <th>4</th>
+				                <th>5</th>
+				            </tr>
+				        </tbody>
+				        
+					   	<tfoot class="table-secondary">
 				            <tr>
 				              	<th>Id</th>
 				                <th>Pw</th>
@@ -214,6 +251,7 @@
 				            </tr>
 				        </tfoot>
 						</table>
+					</div>
 
 						                        
                     </div>
