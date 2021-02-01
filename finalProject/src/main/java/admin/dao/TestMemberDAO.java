@@ -8,4 +8,6 @@ public interface TestMemberDAO {
 
 	public List<TestMemberDTO> getMemberList();
 
+	public int getTotalA();
+
 }

@@ -5,7 +5,10 @@
 <mapper namespace="adminSQL">
 
 	<select id="getMemberList" resultType="admin.bean.TestMemberDTO">
-		select * from testMembers;
+		select * from testMembers order by mem_id desc
 	</select>
-
+<!-- 총글수 -->
+	<select id="getTotalA" resultType="Integer">
+		select count(*) from testMembers
+	</select>
 </mapper>

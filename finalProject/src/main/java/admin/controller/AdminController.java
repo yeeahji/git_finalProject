@@ -1,16 +1,15 @@
 package admin.controller;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
 
+import admin.bean.BoardPaging;
 import admin.bean.TestMemberDTO;
 import admin.service.TestMemberService;
 
@@ -74,7 +73,19 @@ public class AdminController {
 	
 	
 	//회원정보출력
-	
+	@RequestMapping(value="/getMemberList", method=RequestMethod.GET)
+	public ModelAndView getMemberList(@RequestParam(required=false, defaultValue="1") String pg) {
+		List<TestMemberDTO> list = testMemberService.getMemberList();
+		
+		//페이징처리
+		BoardPaging boardPaging = testMemberService.boardPaging(pg);
+				
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("list", list);
+		mav.addObject("pg", pg);
+		mav.setViewName("jsonView");
+		return mav;
+	}
 	
 	
 }

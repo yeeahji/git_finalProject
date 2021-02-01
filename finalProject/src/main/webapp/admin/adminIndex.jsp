@@ -50,90 +50,16 @@
                             <a class="nav-link" href="/market/admin/index.jsp">HOME</a>
                             
                             <div class="sb-sidenav-menu-heading">Interface</div>
-                            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">
-                                <div class="sb-nav-link-icon"></div>
-                                	회원관리
-                                <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
-                            </a>
-                            <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne" data-parent="#sidenavAccordion">
-                                <nav class="sb-sidenav-menu-nested nav">
-                                    <a class="nav-link" href="/market/admin/memberList">전체 회원 목록</a>
-                                    <a class="nav-link" href="/market/admin/reportedMemberList">신고회원 관리</a>
-                                </nav>
-                            </div>
-                            
-                             <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">
-                                <div class="sb-nav-link-icon"></div>
-                                	상품관리
-                                <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
-                            </a>
-                            <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne" data-parent="#sidenavAccordion">
-                                <nav class="sb-sidenav-menu-nested nav">
-                                    <a class="nav-link" href="/market/admin/productList">전체 상품 목록</a>
-                                    <a class="nav-link" href="/market/admin/">신고된 상품 관리</a>
-                                </nav>
-                            </div>
-                            
-                             <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">
-                                <div class="sb-nav-link-icon"></div>
-                                	상점관리
-                                <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
-                            </a>
-                            <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne" data-parent="#sidenavAccordion">
-                                <nav class="sb-sidenav-menu-nested nav">
-                                    <a class="nav-link" href="/market/admin/storeList">전체 상점 목록</a>
-                                    <a class="nav-link" href="layout-#">2</a>
-                                </nav>
-                            </div>
-                            
-                             <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">
-                                <div class="sb-nav-link-icon"></div>
-                                	게시판관리
-                                <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
-                            </a>
-                            <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne" data-parent="#sidenavAccordion">
-                                <nav class="sb-sidenav-menu-nested nav">
-     								<a class="nav-link" href="/market/admin/boardList">게시글목록</a>
-                                    <a class="nav-link" href="layout-sidenav-light.html">이게 다같은 코드라서</a>
-                                </nav>
-                            </div>
-                            
-                             <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">
-                                <div class="sb-nav-link-icon"></div>
-                                	고객문의사항
-                                <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
-                            </a>
-                            <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne" data-parent="#sidenavAccordion">
-                                <nav class="sb-sidenav-menu-nested nav">
-                                    <a class="nav-link" href="/market/admin/memberQnaList">1대1 상담 게시판</a>
-                                    <a class="nav-link" href="/market/admin/">2</a>
-                                </nav>
-                            </div>
-                            
-                             <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">
-                                <div class="sb-nav-link-icon"></div>
-                                	신고자 관리
-                                <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
-                            </a>
-                            <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne" data-parent="#sidenavAccordion">
-                                <nav class="sb-sidenav-menu-nested nav">
-                                    <a class="nav-link" href="/market/admin/">1</a>
-                                    <a class="nav-link" href="layout-#">2</a>
-                                </nav>
-                            </div>
-                            
-                             <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">
-                                <div class="sb-nav-link-icon"></div>
-                                	공지사항 등록
-                                <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
-                            </a>
-                            <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne" data-parent="#sidenavAccordion">
-                                <nav class="sb-sidenav-menu-nested nav">
-                                    <a class="nav-link" href="/market/admin/noticeWrite">공지사항 등록</a>
-                                    <a class="nav-link" href="/market/admin/">공지사항 관리</a>
-                                </nav>
-                            </div>
-                            
+                            <ul>
+	                            <a class="nav-link" href="/market/admin/memberList">전체 회원 목록</a>
+	                            <a class="nav-link" href="/market/admin/reportedMemberList">신고회원 관리</a>
+	                            <a class="nav-link" href="/market/admin/productList">전체 상품 목록</a>
+	                            <a class="nav-link" href="/market/admin/">신고된 상품 관리</a>
+	                            <a class="nav-link" href="/market/admin/storeList">전체 상점 목록</a>
+	                            <a class="nav-link" href="/market/admin/boardList">게시글목록</a>
+	                            <a class="nav-link" href="/market/admin/noticeWrite">공지사항 등록</a>
+	                            <a class="nav-link" href="/market/admin/">공지사항 관리</a>
+                    		</ul>
                             
                             <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages" aria-expanded="false" aria-controls="collapsePages">
                                 <div class="sb-nav-link-icon"></div>

@@ -19,6 +19,11 @@ public class TestMemberDAOMybatis implements TestMemberDAO {
 	public List<TestMemberDTO> getMemberList() {
 		return sqlSession.selectList("adminSQL.getMemberList");
 	}
+
+	@Override
+	public int getTotalA() {
+		return sqlSession.selectOne("adminSQL.getTotalA");
+	}
 	
 	
 }

@@ -8,7 +8,7 @@
         <meta name="author" content="" />
         <title>Static Navigation - SB Admin</title>
         <link href="/market/admin/css/styles.css" rel="stylesheet" />
-	  <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/js/all.min.js" crossorigin="anonymous"></script>
+	
 	</head>
 <body>
     <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
@@ -42,94 +42,19 @@
                     <div class="sb-sidenav-menu">
                         <div class="nav">
                             <div class="sb-sidenav-menu-heading">Core</div>
-                            <a class="nav-link" href="/market/admin/index.jsp">HOME</a>
+                            <a class="nav-link" href="/market/admin/index">HOME</a>
                             
                             <div class="sb-sidenav-menu-heading">Interface</div>
-                            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">
-                                <div class="sb-nav-link-icon"></div>
-                                	회원관리
-                                <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
-                            </a>
-                            <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne" data-parent="#sidenavAccordion">
-                                <nav class="sb-sidenav-menu-nested nav">
-                                    <a class="nav-link" href="/market/admin/memberList">전체 회원 목록</a>
-                                    <a class="nav-link" href="/market/admin/reportedMemberList">신고회원 관리</a>
-                                </nav>
-                            </div>
-                            
-                             <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">
-                                <div class="sb-nav-link-icon"></div>
-                                	상품관리
-                                <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
-                            </a>
-                            <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne" data-parent="#sidenavAccordion">
-                                <nav class="sb-sidenav-menu-nested nav">
-                                    <a class="nav-link" href="/market/admin/productList">전체 상품 목록</a>
-                                    <a class="nav-link" href="/market/admin/">신고된 상품 관리</a>
-                                </nav>
-                            </div>
-                            
-                             <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">
-                                <div class="sb-nav-link-icon"></div>
-                                	상점관리
-                                <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
-                            </a>
-                            <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne" data-parent="#sidenavAccordion">
-                                <nav class="sb-sidenav-menu-nested nav">
-                                    <a class="nav-link" href="/market/admin/storeList">전체 상점 목록</a>
-                                    <a class="nav-link" href="layout-#">2</a>
-                                </nav>
-                            </div>
-                            
-                             <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">
-                                <div class="sb-nav-link-icon"></div>
-                                	게시판관리
-                                <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
-                            </a>
-                            <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne" data-parent="#sidenavAccordion">
-                                <nav class="sb-sidenav-menu-nested nav">
-     								<a class="nav-link" href="/market/admin/boardList">게시글목록</a>
-                                    <a class="nav-link" href="layout-sidenav-light.html">이게 다같은 코드라서</a>
-                                </nav>
-                            </div>
-                            
-                             <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">
-                                <div class="sb-nav-link-icon"></div>
-                                	고객문의사항
-                                <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
-                            </a>
-                            <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne" data-parent="#sidenavAccordion">
-                                <nav class="sb-sidenav-menu-nested nav">
-                                    <a class="nav-link" href="/market/admin/memberQnaList">1대1 상담 게시판</a>
-                                    <a class="nav-link" href="/market/admin/">2</a>
-                                </nav>
-                            </div>
-                            
-                             <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">
-                                <div class="sb-nav-link-icon"></div>
-                                	신고자 관리
-                                <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
-                            </a>
-                            <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne" data-parent="#sidenavAccordion">
-                                <nav class="sb-sidenav-menu-nested nav">
-                                    <a class="nav-link" href="/market/admin/">1</a>
-                                    <a class="nav-link" href="layout-#">2</a>
-                                </nav>
-                            </div>
-                            
-                             <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">
-                                <div class="sb-nav-link-icon"></div>
-                                	공지사항 등록
-                                <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
-                            </a>
-                            <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne" data-parent="#sidenavAccordion">
-                                <nav class="sb-sidenav-menu-nested nav">
-                                    <a class="nav-link" href="/market/admin/noticeWrite">공지사항 등록</a>
-                                    <a class="nav-link" href="/market/admin/">공지사항 관리</a>
-                                </nav>
-                            </div>
-                            
-                            
+	                           <ul>
+		                            <a class="nav-link" href="/market/admin/memberList">전체 회원 목록</a>
+		                            <a class="nav-link" href="/market/admin/reportedMemberList">신고회원 관리</a>
+		                            <a class="nav-link" href="/market/admin/productList">전체 상품 목록</a>
+		                            <a class="nav-link" href="/market/admin/">신고된 상품 관리</a>
+		                            <a class="nav-link" href="/market/admin/storeList">전체 상점 목록</a>
+		                            <a class="nav-link" href="/market/admin/boardList">게시글목록</a>
+		                            <a class="nav-link" href="/market/admin/noticeWrite">공지사항 등록</a>
+		                            <a class="nav-link" href="/market/admin/">공지사항 관리</a>
+	                    		</ul>
                             
                             <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages" aria-expanded="false" aria-controls="collapsePages">
                                 <div class="sb-nav-link-icon"></div>
@@ -189,70 +114,102 @@
                 <main>
                     <div class="container-fluid">
                         <h3 class="mt-4">전체 회원리스트</h3>
-                        <hr>                  
-						<br>
+                        <hr>                  		
+						<div class="row">
+                            <div class="col-xl-6">
+                                <div class="card mb-4">
+                                    <div class="card-header">
+                                        <i class="fas fa-chart-area mr-1"></i>
+                                        (이름)회원 정보
+                                    </div>
+                                    <div class="card-body">
+                                    	이름 ,아이디, 주소, ?
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xl-6">
+                                <div class="card mb-4">
+                                    <div class="card-header">
+                                        <i class="fas fa-chart-bar mr-1"></i>
+                                       (이름)상세정보
+                                    </div>
+                                    <div class="card-body">
+                                    	물건등록갯수, 구매갯수, 신고수, 등급, 가입일자
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
 						
-						<div class="btn-group btn-group-sm" role="group" aria-label="Basic outlined example">
-						  <button type="button" class="btn btn-outline-primary" >가나다순</button>
-						  <button type="button" class="btn btn-outline-primary">가입일자순</button>
-						  <button type="button" class="btn btn-outline-primary">판매등록순</button>
-						</div>
-						<br>
+						<nav class="navbar navbar-expand-lg navbar-light bg-light">
+						  <div class="container-fluid">
+						  
+						    <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+						      <div class="btn-group btn-group-sm me-auto mb-2 mb-lg-0" role="group" aria-label="Basic outlined example">
+								  <button type="button" class="btn btn-outline-primary" id="">가나다순</button>
+								  <button type="button" class="btn btn-outline-primary" id="">가입일자순</button>
+								  <button type="button" class="btn btn-outline-primary" id="">판매등록순</button>
+							  </div>
+							  
+						      <form class="d-flex">
+						        <input class="form-control me-2 " type="search" placeholder="Search" aria-label="Search">
+						        <button class="btn btn-outline-success" type="submit" id="memberSearch">Search</button>
+						      </form>  
+						    </div>
+						    
+						  </div>
+						</nav>
+						
 						
 					<div class="table-responsive-xxl">
-						<table class="table table-bordered table-striped ">
-				        <thead class="table-dark">
-				            <tr>
-				                <th>Id</th>
-				                <th>Pw</th>
-				                <th>Name</th>
-				                <th>Tel</th>
-				                <th>Location</th>
-				            </tr>
-				        </thead>
-				        <tbody>
-				        	<tr>
-				                <th>1</th>
-				                <th>2</th>
-				                <th>3</th>
-				                <th>4</th>
-				                <th>5</th>
-				            </tr>
-				            <tr>
-				                <th>1</th>
-				                <th>2</th>
-				                <th>3</th>
-				                <th>4</th>
-				                <th>5</th>
-				            </tr>
-				            <tr>
-				                <th>1</th>
-				                <th>2</th>
-				                <th>3</th>
-				                <th>4</th>
-				                <th>5</th>
-				            </tr>
-				            <tr>
-				                <th>1</th>
-				                <th>2</th>
-				                <th>3</th>
-				                <th>4</th>
-				                <th>5</th>
-				            </tr>
-				        </tbody>
-				        
-					   	<tfoot class="table-secondary">
-				            <tr>
-				              	<th>Id</th>
-				                <th>Pw</th>
-				                <th>Name</th>
-				                <th>Tel</th>
-				                <th>Location</th>
-				            </tr>
-				        </tfoot>
+						<table class="table table-bordered table-striped table table-sm">
+					        <thead class="table-dark">
+					            <tr>
+					                <th>Id</th>
+					                <th>Pw</th>
+					                <th>Name</th>
+					                <th>Tel</th>
+					                <th>Location</th>
+					            </tr>
+					        </thead>
+					        <tbody id="tobody">
+					        	
+					        </tbody>
+						   	<tfoot class="table-secondary">
+					            <tr>
+					              	<th>Id</th>
+					                <th>Pw</th>
+					                <th>Name</th>
+					                <th>Tel</th>
+					                <th>Location</th>
+					            </tr>
+					        </tfoot>
 						</table>
 					</div>
-
+<!-- 					페이징 -->
+<input type="hidden" name="pg" value="1">
+ 		<div id="boardPagingDiv" class="paging" align="center">dd</div>
+ 		
+					<nav aria-label="Page navigation example">
+					  <ul class="pagination justify-content-center">
+					    
+					    <li class="page-item">
+					      <a class="page-link" href="#" aria-label="Previous">
+					        <span aria-hidden="true">&laquo;</span>
+					      </a>
+					    </li>
+					    
+					    <li class="page-item"><a class="page-link" href="#">1</a></li>
+					    <li class="page-item"><a class="page-link" href="#">2</a></li>
+					    <li class="page-item"><a class="page-link" href="#">3</a></li>
+					    
+					    <li class="page-item">
+					      <a class="page-link" href="#" aria-label="Next">
+					        <span aria-hidden="true">&raquo;</span>
+					      </a>
+					    </li>
+					    
+					  </ul>
+					</nav>
 						                        
                     </div>
                 </main>
@@ -276,12 +233,11 @@
                 </footer>
             </div>
         </div>
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.min.js" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/js/all.min.js" crossorigin="anonymous"></script>
     <script src="/market/admin/js/memberList.js"></script>
-    
-    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css" type="text/css"/>
-    <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js" type="text/javascript" ></script>
-    
+<!--     <link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css" type="text/css"/> -->
+<!--     <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js" type="text/javascript" ></script> -->
 
 </body>
