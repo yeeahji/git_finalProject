@@ -3,7 +3,7 @@ package index.service;
 import java.util.List;
 import java.util.Map;
 
-import index.bean.ProductDTO;
+import product.bean.ProductDTO;
 
 public interface IndexService {
 

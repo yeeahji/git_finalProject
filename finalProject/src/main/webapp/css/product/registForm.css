@@ -1,6 +1,5 @@
 @charset "UTF-8";
 .registWrap {
-	/* position: relative; */
 	background: rgb(255, 255, 255);
     font-size: 16px;
 }
@@ -235,7 +234,7 @@
 	flex-flow: row wrap;
 }
 .subject_con > .contentArea input {
-	width: 1000px; /* 원래 100% */
+	width: 100%; /* 원래 100% */
 	border-width: 1px;
 	border-style: solid;
 	border-color: rgb(195, 194, 204);

@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import org.springframework.web.servlet.ModelAndView;
 
-import index.bean.ProductDTO;
+import product.bean.ProductDTO;
 import index.service.IndexService;
 
 @Controller

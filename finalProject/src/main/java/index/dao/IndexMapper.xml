@@ -68,6 +68,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 					product_img1,
 					product_img2,
 					product_img3,
+					product_img4,
+					product_img5,
 					to_char(product_price, 'FM99,999,999') ||'원' as product_price ,
 					product_location, product_condition , product_delivery_fee ,
 					product_hashtag1,

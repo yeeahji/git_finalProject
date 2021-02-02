@@ -7,7 +7,7 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import index.bean.ProductDTO;
+import product.bean.ProductDTO;
 import index.dao.IndexDAO;
 
 @Service
