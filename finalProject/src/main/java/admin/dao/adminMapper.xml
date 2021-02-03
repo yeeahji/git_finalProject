@@ -4,11 +4,34 @@
  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="adminSQL">
 
-	<select id="getMemberList" resultType="admin.bean.TestMemberDTO">
-		select * from testMembers order by mem_id desc
+	<select id="getMemberList" parameterType="java.util.Map" resultType="member.bean.MemberDTO">
+		select * from(select rownum rn, tt.* from(
+		select * from members)tt)
+		where rn between #{startNum} and #{endNum}
 	</select>
 <!-- 총글수 -->
 	<select id="getTotalA" resultType="Integer">
-		select count(*) from testMembers
+		select count(*) from members
 	</select>
+<!-- 조건검색 -->
+	<select id="getSearchMember" parameterType="java.util.Map" resultType="member.bean.MemberDTO">
+		<![CDATA[
+		select * from
+		(select rownum rn, tt.* from
+		(select * from members where ${searchType} like '%'||#{keyword}||'%')tt
+		)where rn>=#{startNum} and rn<=#{endNum}
+		]]>
+	</select>
+<!-- 검색한 후 총글수 -->
+	<select id="getTotalB" resultType="Integer">
+		select count(*) from members where ${searchType} like '%'||#{keyword}||'%'
+	</select>
+	
+	<select id="getMemberView" parameterType="String" resultType="member.bean.MemberDTO">
+		select * from members where mem_id like #{id}
+	</select>
+	
+	
+	
+	
 </mapper>

@@ -1,17 +1,20 @@
 package admin.controller;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import admin.bean.BoardPaging;
-import admin.bean.TestMemberDTO;
 import admin.service.TestMemberService;
+import member.bean.MemberDTO;
+
 
 @Controller
 @RequestMapping(value="admin")
@@ -31,7 +34,8 @@ public class AdminController {
 	}
 	//전체회원리스트
 	@RequestMapping(value="/memberList", method=RequestMethod.GET)
-	public String memberList() {
+	public String memberList(@RequestParam(required=false, defaultValue="1") String pg, Model model) {
+		model.addAttribute("pg", pg);
 		return "/admin/memberManagement/memberList";
 	}
 	//신고된회원리스트
@@ -75,17 +79,49 @@ public class AdminController {
 	//회원정보출력
 	@RequestMapping(value="/getMemberList", method=RequestMethod.GET)
 	public ModelAndView getMemberList(@RequestParam(required=false, defaultValue="1") String pg) {
-		List<TestMemberDTO> list = testMemberService.getMemberList();
-		
-		//페이징처리
+		List<MemberDTO> list = testMemberService.getMemberList(pg);
+		//페이징처리??
 		BoardPaging boardPaging = testMemberService.boardPaging(pg);
 				
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("list", list);
 		mav.addObject("pg", pg);
+		mav.addObject("boardPaging", boardPaging);
 		mav.setViewName("jsonView");
 		return mav;
 	}
+	//회원검색
+	@RequestMapping(value="getSearchMember", method=RequestMethod.POST)
+		public ModelAndView getSearchMember(@RequestParam Map<String,String> map) {
+		List<MemberDTO> list = testMemberService.getSearchMember(map); //pg, keyword
+		
+		//페이징 처리
+		BoardPaging boardPaging = testMemberService.searchBoardPaging(map);
+		
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("pg", map.get("pg"));
+		mav.addObject("list", list);
+		mav.addObject("boardPaging", boardPaging);
+		mav.setViewName("jsonView");
+		return mav;
+	}
+	//회원정보
+	@RequestMapping(value="memberView", method=RequestMethod.POST)
+	public ModelAndView memberView(@RequestParam String id) {	
+		
+		MemberDTO memberDTO= testMemberService.getMemberView(id);
+		
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("memberDTO", memberDTO);
+		mav.setViewName("jsonView");
+	
+		return mav;
+	}
+	
+	
+
+	
+	
 	
 	
 }

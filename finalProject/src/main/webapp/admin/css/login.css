@@ -1,5 +1,4 @@
 @charset "UTF-8";
-@charset "UTF-8";
 /*!
 * Start Bootstrap - SB Admin v6.0.2 (https://startbootstrap.com/template/sb-admin)
 * Copyright 2013-2020 Start Bootstrap
@@ -4580,7 +4579,7 @@ input[type=button].btn-block {
 
 .page-link {
   position: relative;
-  display: inline-block;
+  display: block;
   padding: 0.5rem 0.75rem;
   margin-left: -1px;
   line-height: 1.25;
@@ -6081,7 +6080,7 @@ a.close.disabled {
 }
 
 .bg-primary {
-  background-color: #007bff !important;
+  background-color: #666660!important;
 }
 
 a.bg-primary:hover, a.bg-primary:focus,
@@ -10101,8 +10100,8 @@ body {
   overflow-y: auto;
 }
 .sb-nav-fixed #layoutSidenav #layoutSidenav_content {
-  padding-left: 110px;
-  top: 30px;
+  padding-left: 225px;
+  top: 56px;
 }
 
 #layoutError {
@@ -10180,7 +10179,7 @@ body {
   transition: transform 0.15s ease;
 }
 .sb-sidenav .sb-sidenav-menu .nav .nav-link.collapsed .sb-sidenav-collapse-arrow {
-  transform: rotate(-90deg);
+  transform: rotate(-180deg);
 }
 .sb-sidenav .sb-sidenav-menu .nav .sb-sidenav-menu-nested {
   margin-left: 1.5rem;
@@ -10248,5 +10247,3 @@ body {
 .sb-sidenav-light .sb-sidenav-footer {
   background-color: #e9ecef;
 }
-
-

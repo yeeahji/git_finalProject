@@ -7,12 +7,12 @@
         <meta name="description" content="" />
         <meta name="author" content="" />
         <title>Static Navigation - SB Admin</title>
-        <link href="/market/admin/css/styles.css" rel="stylesheet" />
+        <link href="/market/admin/css/memberList.css" rel="stylesheet" />
 	
 	</head>
 <body>
     <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
-            <a class="navbar-brand" href="/market/admin/index.jsp">아나바다</a>
+            <a class="navbar-brand" href="/market/admin/adminIndex">아나바다</a>
             <button class="btn btn-link btn-sm order-1 order-lg-0" id="sidebarToggle" href="#"><i class="fas fa-bars"></i></button>
             
             <!-- Navbar Search-->
@@ -42,7 +42,7 @@
                     <div class="sb-sidenav-menu">
                         <div class="nav">
                             <div class="sb-sidenav-menu-heading">Core</div>
-                            <a class="nav-link" href="/market/admin/index">HOME</a>
+                            <a class="nav-link" href="/market/admin/adminIndex">HOME</a>
                             
                             <div class="sb-sidenav-menu-heading">Interface</div>
 	                           <ul>
@@ -56,46 +56,13 @@
 		                            <a class="nav-link" href="/market/admin/">공지사항 관리</a>
 	                    		</ul>
                             
-                            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages" aria-expanded="false" aria-controls="collapsePages">
-                                <div class="sb-nav-link-icon"></div>
-                                	이게 필요할까?
-                                <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
-                            </a>
-                            <div class="collapse" id="collapsePages" aria-labelledby="headingTwo" data-parent="#sidenavAccordion">
-                                <nav class="sb-sidenav-menu-nested nav accordion" id="sidenavAccordionPages">
-                                    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#pagesCollapseAuth" aria-expanded="false" aria-controls="pagesCollapseAuth">
-                                        Authentication
-                                        <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
-                                    </a>
-                                    <div class="collapse" id="pagesCollapseAuth" aria-labelledby="headingOne" data-parent="#sidenavAccordionPages">
-                                        <nav class="sb-sidenav-menu-nested nav">
-                                            <a class="nav-link" href="login.html">Login</a>
-                                            <a class="nav-link" href="register.html">Register</a>
-                                            <a class="nav-link" href="password.html">Forgot Password</a>
-                                        </nav>
-                                    </div>
-                                    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#pagesCollapseError" aria-expanded="false" aria-controls="pagesCollapseError">
-                                        Error
-                                        <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
-                                    </a>
-                                    <div class="collapse" id="pagesCollapseError" aria-labelledby="headingOne" data-parent="#sidenavAccordionPages">
-                                        <nav class="sb-sidenav-menu-nested nav">
-                                            <a class="nav-link" href="401.html">401 Page</a>
-                                            <a class="nav-link" href="404.html">404 Page</a>
-                                            <a class="nav-link" href="500.html">500 Page</a>
-                                        </nav>
-                                    </div>
-                                </nav>
-                            </div>
+
                             <div class="sb-sidenav-menu-heading">Addons</div>
                             <a class="nav-link" href="charts.jsp">
                                 <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
                                 Charts
                             </a>
-                            <a class="nav-link" href="tables.jsp">
-                                <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
-                                Tables
-                            </a>
+                            
                         </div>
                     </div>
                     <div class="sb-sidenav-footer">
@@ -110,109 +77,153 @@
 <%-- ======================================================= --%>
 
 
-            <div id="layoutSidenav_content">
-                <main>
-                    <div class="container-fluid">
-                        <h3 class="mt-4">전체 회원리스트</h3>
-                        <hr>                  		
-						<div class="row">
-                            <div class="col-xl-6">
-                                <div class="card mb-4">
-                                    <div class="card-header">
-                                        <i class="fas fa-chart-area mr-1"></i>
-                                        (이름)회원 정보
-                                    </div>
-                                    <div class="card-body">
-                                    	이름 ,아이디, 주소, ?
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-xl-6">
-                                <div class="card mb-4">
-                                    <div class="card-header">
-                                        <i class="fas fa-chart-bar mr-1"></i>
-                                       (이름)상세정보
-                                    </div>
-                                    <div class="card-body">
-                                    	물건등록갯수, 구매갯수, 신고수, 등급, 가입일자
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-						
-						<nav class="navbar navbar-expand-lg navbar-light bg-light">
-						  <div class="container-fluid">
-						  
-						    <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
-						      <div class="btn-group btn-group-sm me-auto mb-2 mb-lg-0" role="group" aria-label="Basic outlined example">
-								  <button type="button" class="btn btn-outline-primary" id="">가나다순</button>
-								  <button type="button" class="btn btn-outline-primary" id="">가입일자순</button>
-								  <button type="button" class="btn btn-outline-primary" id="">판매등록순</button>
-							  </div>
-							  
-						      <form class="d-flex">
-						        <input class="form-control me-2 " type="search" placeholder="Search" aria-label="Search">
-						        <button class="btn btn-outline-success" type="submit" id="memberSearch">Search</button>
-						      </form>  
-						    </div>
-						    
-						  </div>
-						</nav>
-						
-						
-					<div class="table-responsive-xxl">
-						<table class="table table-bordered table-striped table table-sm">
-					        <thead class="table-dark">
-					            <tr>
-					                <th>Id</th>
-					                <th>Pw</th>
-					                <th>Name</th>
-					                <th>Tel</th>
-					                <th>Location</th>
-					            </tr>
-					        </thead>
-					        <tbody id="tobody">
-					        	
-					        </tbody>
-						   	<tfoot class="table-secondary">
-					            <tr>
-					              	<th>Id</th>
-					                <th>Pw</th>
-					                <th>Name</th>
-					                <th>Tel</th>
-					                <th>Location</th>
-					            </tr>
-					        </tfoot>
-						</table>
-					</div>
-<!-- 					페이징 -->
-<input type="hidden" name="pg" value="1">
- 		<div id="boardPagingDiv" class="paging" align="center">dd</div>
- 		
-					<nav aria-label="Page navigation example">
-					  <ul class="pagination justify-content-center">
-					    
-					    <li class="page-item">
-					      <a class="page-link" href="#" aria-label="Previous">
-					        <span aria-hidden="true">&laquo;</span>
-					      </a>
-					    </li>
-					    
-					    <li class="page-item"><a class="page-link" href="#">1</a></li>
-					    <li class="page-item"><a class="page-link" href="#">2</a></li>
-					    <li class="page-item"><a class="page-link" href="#">3</a></li>
-					    
-					    <li class="page-item">
-					      <a class="page-link" href="#" aria-label="Next">
-					        <span aria-hidden="true">&raquo;</span>
-					      </a>
-					    </li>
-					    
-					  </ul>
-					</nav>
-						                        
-                    </div>
-                </main>
+       <div id="layoutSidenav_content">
+           <main>
+               <div class="container-fluid">
+                   <h3 class="mt-4">전체 회원리스트</h3>
+                   <hr>                  		
+<div class="row">
+	<div class="col-xl-8">
+	    <div class="card mb-4">
+	        <div class="card-header">
+	            <i class="fas fa-chart-area mr-1"></i>
+	            상세정보
+	            &nbsp;&nbsp;&nbsp;&nbsp;
+		        <button type="button" class="btn btn-secondary btn-sm">수정</button>
+		        <button type="button" class="btn btn-danger btn-sm">영구정지</button>
+	        </div>
+	        <div class="card-body">
+	        	<table class="table table-bordered border-primary table-sm">
+				  <tbody>
+				    <tr>
+				      <th width="10%">이름</th><th width="40%"><span id="nameSpan"></span></th> 
+				      <th width="10%">Tel</th><th width="40%"><span id="HpSpan"></span></th>
+				    </tr>
+				    <tr>
+				      <th>생년월일</th><th><span id="birthSpan"></span></th> 
+				      <th>상점이름</th><th><span id="storeSpan"></span></th>
+				    </tr>
+				    <tr>
+				      <th>e-Mail</th><th><span id="emailSpan"></span></th> 
+				      <th>등급</th><th><span id="revelSpan"></span></th>
+				    </tr>
+				    <tr>
+				    	<th rowspan="2">주소</th><th colspan="3"><span id="add1Span"></span></th>
+				    </tr>
+				    <tr>
+				    	<th colspan="3" id="add2Span"><span></span></th>
+				    </tr>
+				  </tbody>
+				</table>
+	        </div>
+	    </div>
+	</div>
+	
+	<div class="col-xl-4">
+	    <div class="card mb-4">
+	        <div class="card-header">
+	            <i class="fas fa-chart-bar mr-1"></i>
+	           상점이름
+	        </div>
+	        <div class="card-body">
+	        	<table class="table table-bordered border-primary table-sm">
+				  <tbody>
+				    <tr>
+				      <th width="30%">가입일자</th><th width="70%"><span id="logSpan"></span></th> 
+				    </tr>
+				    <tr>
+				      <th>등급</th><th width=""><span id="revelSpan"></span></th> 
+				    </tr>
+				    <tr>
+				      <th>판매중인 물건</th><th><span id="productSellSpan"></span>개</th> 
+				    </tr>
+				    <tr>
+				      <th>구매한총 물건</th><th><span id="productBuySpan"></span></th> 
+				    </tr>
+				    <tr>
+				      <th>신고수</th><th><span id="reportedSpan"></span></th> 
+				    </tr>
+				  </tbody>
+				</table>
+	        </div>
+	    </div>
+	</div>
+</div>
+	
+	<nav class="navbar navbar-expand-lg navbar-light bg-light">
+	  <div class="container-fluid">
+	  
+	    <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+	      <div class="btn-group btn-group-sm me-auto mb-2 mb-lg-0" role="group" aria-label="Basic outlined example">
+			  <button type="button" class="btn btn-outline-primary" id="">가나다순</button>
+			  <button type="button" class="btn btn-outline-primary" id="">가입일자순</button>
+			  <button type="button" class="btn btn-outline-primary" id="">판매등록순</button>
+		  </div>
+		  &nbsp;&nbsp;
+			<select class="form-select form-select-sm" id="print" aria-label=".form-select-sm example">
+			  <option selected>n개씩보기</option>
+			  <option value="10">10개</option>
+			  <option value="20">20개</option>
+			  <option value="30">30개</option>
+			  <option value="50">50개</option>
+			  <option value="100">100개</option>
+			</select>
+		  &nbsp;&nbsp;
+	      <form class="d-flex" id="memberSearchForm">
+	      	<input type="hidden" id="searchPg" name="searchPg" value="1">
+	      	<select class="form-select form-select-sm" id="searchType" aria-label=".form-select-sm example">
+			  <option selected>선택</option>
+			  <option value="mem_name">이름</option>
+			  <option value="mem_id">아이디</option>
+			</select>
+	        <input class="form-control me-2" type="search" name="keyword" id="keyword" placeholder="Search" aria-label="Search">
+	        <button class="btn btn-outline-success" type="button" id="memberSearchBtn">Search</button>
+	      </form>  
+	    </div>
+	    
+	  </div>
+	</nav>
+	
+<div class="table-responsive-xxl">
+	<table id="memberTable" class="table table-bordered table-striped table table-sm">
+        <thead class="table-dark">
+            <tr>
+                <th>mem_id</th>
+                <th>mem_name</th>
+                <th>mem_email</th>
+                <th>mem_tel1</th>
+                <th>mem_add1</th>
+            </tr>
+        </thead>
+        <tbody id="tbody">
+        	<tr></tr>
+        	
+        </tbody>
+	   	<tfoot class="table-secondary">
+            <tr>
+              	<th>mem_id</th>
+                <th>mem_name</th>
+                <th>mem_email</th>
+                <th>mem_tel1</th>
+                <th>mem_add1</th>
+            </tr>
+        </tfoot>
+	</table>
+</div>
+
+<!-- 페이징 -->
+<input type="hidden" id="pg" name="pg" value="${pg }">
+<!-- 페이징 -->
+	<nav aria-label="Page navigation example">
+	  <ul class="pagination justify-content-center">
+	    
+		<div id="boardPagingDiv" class="paging" align="center"></div>
+	  
+	  </ul>
+	</nav>
+	                        
+    </div>
+</main>
             
             
 <%-- ======================================================= --%>
@@ -237,7 +248,22 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/js/all.min.js" crossorigin="anonymous"></script>
     <script src="/market/admin/js/memberList.js"></script>
-<!--     <link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css" type="text/css"/> -->
-<!--     <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js" type="text/javascript" ></script> -->
-
+<!--     <link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.css" type="text/css"/> -->
+<!--     <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.js" type="text/javascript" ></script> -->
+	
+	<script type="text/javascript">
+	function boardPaging(pg){
+		$('#pg').val(pg);
+		 var keyword = document.getElementById("keyword").value;
+		
+		 if(keyword ==''){
+			location.href = '/market/admin/memberList?pg='+pg;
+		 }else{
+			$('#memberSearchBtn').trigger('click','research');
+		 }
+		
+		
+		
+	}
+	</script>
 </body>

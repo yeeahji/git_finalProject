@@ -26,17 +26,17 @@ public class BoardPaging {
 		if(endPage > totalP) endPage = totalP;
 		
 		if(startPage > pageBlock)
-			pagingHTML.append("[<span id='paging' onclick='boardPaging("+(startPage-1)+")'>이전</span>]");
+			pagingHTML.append("<a class='page-link' onclick='boardPaging("+(startPage-1)+")' aria-label='Previous'><span aria-hidden='true' >&laquo;이전</span></a>");
 		
 		for(int i=startPage; i<=endPage; i++) {
 			if(i == currentPage)
-				pagingHTML.append("[<span id='currentPaging' onclick='boardPaging("+i+")'>"+i+"</span>]");
+				pagingHTML.append("<a class='page-link' id='currentPaging' onclick='boardPaging("+i+")'>"+i+"</a>");
 			else
-				pagingHTML.append("[<span id='paging' onclick='boardPaging("+i+")'>"+i+"</span>]");
+				pagingHTML.append("<a class='page-link' id='paging' onclick='boardPaging("+i+")'>"+i+"</a>");
 		}//for
 		
 		if(endPage < totalP)
-			pagingHTML.append("[<span id='paging'onclick='boardPaging("+(endPage+1)+")'>다음</span>]");
+			pagingHTML.append("<a class='page-link' onclick='boardPaging("+(endPage+1)+")' aria-label='Next'><span aria-hidden='true' >&raquo;다음</span></a>");
 	}
 
 }
