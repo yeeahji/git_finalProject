@@ -7,7 +7,7 @@
 <div class="first">
 	<div class="main-logo">
 		<img src="/market/image/index/fleamarket.png"
-			style="height: 100%; cursor: pointer;" alt="로고들어갈 곳"
+			style="height: 70%; cursor: pointer;" alt="로고들어갈 곳"
 			onclick="location.href='/market/index.jsp'">
 		<!-- <h5>플리마켓</h5> -->
 	</div>

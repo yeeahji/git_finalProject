@@ -151,8 +151,9 @@ body {
 /* 메인 상단 검색 */
 .search-area {
 	float: left;
-	margin-left: 10px;
-	margin-right: 80px;
+	margin-top: 20px;
+	margin-left: 35px;
+	margin-right: 55px;
 }
 
 .search-area div {
