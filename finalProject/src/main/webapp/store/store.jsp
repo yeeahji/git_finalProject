@@ -82,7 +82,7 @@
 			<a href="#" id="favorites" class="default">찜</a><!-- favorites  -->
 			<a href="#" id="productManage" class="default">내 상품관리</a><!-- productManage -->
 		</div><!-- // menuBar-->
-		<div class="content">
+		<div class="storeContent">
 			<!-- [상품]/[상품후기]/[구매내역]/[찜]/[내상품관리] -->
 			<div class="contentStore">
 				<c:if test="${displayNum==1 }">

@@ -93,3 +93,5 @@ function getList(page) {
 function test(seq) {
 	location.href = "/market/product/productDetail?seq=" + seq
 }
+
+

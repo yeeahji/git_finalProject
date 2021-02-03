@@ -5,7 +5,6 @@ CREATE TABLE wish(
 	product_seq REFERENCES  product(product_seq) --제품(상품번호)
 );
 
---FK
-alter table wish add FOREIGN KEY (mem_id) REFERENCES members(mem_id );
 
-alter table wish add FOREIGN KEY (product_seq ) REFERENCES product(product_seq );
+--
+insert into wish values('test1', 'product_seq'값);

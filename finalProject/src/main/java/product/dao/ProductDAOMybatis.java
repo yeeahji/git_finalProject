@@ -23,11 +23,6 @@ public class ProductDAOMybatis implements ProductDAO {
 	}
 
 	@Override
-	public List<CategoryDTO> getLargeCategoryList() {
-		return sqlSession.selectList("productSQL.getLargeCategoryList");
-	}
-
-	@Override
 	public List<CategoryDTO> getSmallCategoryList(String cate_parent) {
 		return sqlSession.selectList("productSQL.getSmallCategoryList", cate_parent);
 	}
