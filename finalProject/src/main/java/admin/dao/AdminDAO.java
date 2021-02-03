@@ -3,10 +3,9 @@ package admin.dao;
 import java.util.List;
 import java.util.Map;
 
-import admin.bean.TestMemberDTO;
 import member.bean.MemberDTO;
 
-public interface TestMemberDAO {
+public interface AdminDAO {
 
 	public List<MemberDTO> getMemberList(Map<String, Integer> map);
 

@@ -8,16 +8,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import admin.bean.AdminBoardPaging;
-import admin.bean.TestMemberDTO;
-import admin.dao.TestMemberDAO;
+import admin.dao.AdminDAO;
 import member.bean.MemberDTO;
 
 @Service
-public class TestMemberServiceImpl implements TestMemberService {
+public class AdminServiceImpl implements AdminService {
 	@Autowired
-	private TestMemberDAO testMemberDAO;	
+	private AdminDAO adminDAO;	
 	@Autowired
-	private AdminBoardPaging boardPaging;
+	private AdminBoardPaging adminBoardPaging;
 
 	@Override
 	public List<MemberDTO> getMemberList(String pg) {
@@ -28,22 +27,22 @@ public class TestMemberServiceImpl implements TestMemberService {
 		Map <String, Integer> map = new HashedMap<String, Integer>();
 		map.put("startNum", startNum);
 		map.put("endNum", endNum);
-		List<MemberDTO> list = testMemberDAO.getMemberList(map);
+		List<MemberDTO> list = adminDAO.getMemberList(map);
 		return list;
 	}
 
 	@Override
 	public AdminBoardPaging boardPaging(String pg) {
-		int totalA = testMemberDAO.getTotalA();
+		int totalA = adminDAO.getTotalA();
 		
-		boardPaging.setCurrentPage(Integer.parseInt(pg));
-		boardPaging.setPageBlock(10);
-		boardPaging.setPageSize(10);//위에endNum,startNum과 맞아야함
-		boardPaging.setTotalA(totalA);
+		adminBoardPaging.setCurrentPage(Integer.parseInt(pg));
+		adminBoardPaging.setPageBlock(10);
+		adminBoardPaging.setPageSize(10);//위에endNum,startNum과 맞아야함
+		adminBoardPaging.setTotalA(totalA);
 		
-		boardPaging.makePagingHTML();
+		adminBoardPaging.makePagingHTML();
 		
-		return boardPaging;
+		return adminBoardPaging;
 	}
 //검색
 	@Override
@@ -54,26 +53,26 @@ public class TestMemberServiceImpl implements TestMemberService {
 		
 		map.put("startNum", startNum+"");
 		map.put("endNum", endNum+"");
-		return testMemberDAO.getSearchMember(map);
+		return adminDAO.getSearchMember(map);
 	}
 
 	@Override
 	public AdminBoardPaging searchBoardPaging(Map<String, String> map) {
-		int totalB = testMemberDAO.getTotalB(map);
+		int totalB = adminDAO.getTotalB(map);
 		
-		boardPaging.setCurrentPage(Integer.parseInt(map.get("pg")));
-		boardPaging.setPageBlock(5);
-		boardPaging.setPageSize(10);//위에endNum,startNum과 맞아야함
-		boardPaging.setTotalA(totalB);
+		adminBoardPaging.setCurrentPage(Integer.parseInt(map.get("pg")));
+		adminBoardPaging.setPageBlock(5);
+		adminBoardPaging.setPageSize(10);//위에endNum,startNum과 맞아야함
+		adminBoardPaging.setTotalA(totalB);
 		
-		boardPaging.makePagingHTML();
+		adminBoardPaging.makePagingHTML();
 		
-		return boardPaging;
+		return adminBoardPaging;
 	}
 
 	@Override
 	public MemberDTO getMemberView(String id) {
-		MemberDTO memberDTO = testMemberDAO.getMemberView(id);
+		MemberDTO memberDTO = adminDAO.getMemberView(id);
 		return memberDTO;
 	}
 

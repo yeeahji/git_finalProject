@@ -8,12 +8,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
-import admin.bean.TestMemberDTO;
 import member.bean.MemberDTO;
 
 @Repository
 @Transactional
-public class TestMemberDAOMybatis implements TestMemberDAO {
+public class AdminDAOMybatis implements AdminDAO {
 	@Autowired
 	private SqlSession sqlSession;
 

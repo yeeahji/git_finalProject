@@ -4,10 +4,9 @@ import java.util.List;
 import java.util.Map;
 
 import admin.bean.AdminBoardPaging;
-import admin.bean.TestMemberDTO;
 import member.bean.MemberDTO;
 
-public interface TestMemberService {
+public interface AdminService {
 
 	public List<MemberDTO> getMemberList(String pg);
 
