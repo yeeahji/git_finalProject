@@ -6,7 +6,7 @@ import lombok.Data;
 
 @Data
 @Component
-public class BoardPaging {
+public class AdminBoardPaging {
 	private int currentPage; //현재페이지
 	//현재페이지라는 표시로 다른 페이지랑 색을 다르게 해야 한다.
 	private int pageBlock; //[이전][1][2][3][다음]

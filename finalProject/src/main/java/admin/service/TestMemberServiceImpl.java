@@ -7,7 +7,7 @@ import org.apache.commons.collections4.map.HashedMap;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import admin.bean.BoardPaging;
+import admin.bean.AdminBoardPaging;
 import admin.bean.TestMemberDTO;
 import admin.dao.TestMemberDAO;
 import member.bean.MemberDTO;
@@ -17,7 +17,7 @@ public class TestMemberServiceImpl implements TestMemberService {
 	@Autowired
 	private TestMemberDAO testMemberDAO;	
 	@Autowired
-	private BoardPaging boardPaging;
+	private AdminBoardPaging boardPaging;
 
 	@Override
 	public List<MemberDTO> getMemberList(String pg) {
@@ -33,7 +33,7 @@ public class TestMemberServiceImpl implements TestMemberService {
 	}
 
 	@Override
-	public BoardPaging boardPaging(String pg) {
+	public AdminBoardPaging boardPaging(String pg) {
 		int totalA = testMemberDAO.getTotalA();
 		
 		boardPaging.setCurrentPage(Integer.parseInt(pg));
@@ -58,7 +58,7 @@ public class TestMemberServiceImpl implements TestMemberService {
 	}
 
 	@Override
-	public BoardPaging searchBoardPaging(Map<String, String> map) {
+	public AdminBoardPaging searchBoardPaging(Map<String, String> map) {
 		int totalB = testMemberDAO.getTotalB(map);
 		
 		boardPaging.setCurrentPage(Integer.parseInt(map.get("pg")));

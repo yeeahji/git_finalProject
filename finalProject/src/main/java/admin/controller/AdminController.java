@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import admin.bean.BoardPaging;
+import admin.bean.AdminBoardPaging;
 import admin.service.TestMemberService;
 import member.bean.MemberDTO;
 
@@ -81,7 +81,7 @@ public class AdminController {
 	public ModelAndView getMemberList(@RequestParam(required=false, defaultValue="1") String pg) {
 		List<MemberDTO> list = testMemberService.getMemberList(pg);
 		//페이징처리??
-		BoardPaging boardPaging = testMemberService.boardPaging(pg);
+		AdminBoardPaging boardPaging = testMemberService.boardPaging(pg);
 				
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("list", list);
@@ -96,7 +96,7 @@ public class AdminController {
 		List<MemberDTO> list = testMemberService.getSearchMember(map); //pg, keyword
 		
 		//페이징 처리
-		BoardPaging boardPaging = testMemberService.searchBoardPaging(map);
+		AdminBoardPaging boardPaging = testMemberService.searchBoardPaging(map);
 		
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("pg", map.get("pg"));
