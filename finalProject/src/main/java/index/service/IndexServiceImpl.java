@@ -50,8 +50,9 @@ public class IndexServiceImpl implements IndexService {
 
 		Map<String, Object> param = new HashMap<String, Object>();
 		// 검색어
-		if (keyword.contains("\\@")) {
+		if (keyword.substring(0, 1).equals("@")) {
 			// 상점명
+			keyword = keyword.substring(1, keyword.length());
 			param.put("storeName", keyword);
 		} else {
 			// 상품명
