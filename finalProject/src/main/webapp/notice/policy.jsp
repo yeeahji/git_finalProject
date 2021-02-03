@@ -5,7 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link rel="stylesheet" href="../css/notice/policy.css?ver=1">
+<link rel="stylesheet" href="../css/notice/policy.css">
 </head>
 <body>
 <div class="root">
@@ -26,7 +26,7 @@
 						<a class="notice_none" href="/market/notice/fag">자주묻는 질문</a>
 					</nav>
 					<main calss="policy_main">
-						<div calss="policy_main_inner">
+						<div calss="pm_inner" id="pm_inner">
 							<div classs="main_content1">
 								<div class="main_content1_text1">
 									<h2>
