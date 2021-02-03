@@ -1,5 +1,6 @@
 package index.controller;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -19,17 +20,16 @@ import product.bean.ProductDTO;
 import index.service.IndexService;
 
 @Controller
-@RequestMapping(value="index")
+@RequestMapping(value = "index")
 public class IndexController {
 	@Autowired
 	private IndexService indexService;
-	
 
-	@RequestMapping(value ="/getProductList", method=RequestMethod.POST)
+	@RequestMapping(value = "/getProductList", method = RequestMethod.POST)
 	@ResponseBody
-	public ModelAndView getProductList(@RequestParam(name = "page") int page ) {
-		List<ProductDTO> list = indexService.getProductList(page);	
-		
+	public ModelAndView getProductList(@RequestParam(name = "page") int page) {
+		List<ProductDTO> list = indexService.getProductList(page);
+
 		System.out.println(" /getProductList ");
 		System.out.println(" page " + page);
 
@@ -38,55 +38,49 @@ public class IndexController {
 		mav.setViewName("jsonView");
 		return mav;
 	}
-	
-	@RequestMapping(value ="/wishProduct", method=RequestMethod.POST)
+
+	@RequestMapping(value = "/wishProduct", method = RequestMethod.POST)
 	@ResponseBody
 	public ModelAndView wishProduct(HttpSession session) {
 		String id = (String) session.getAttribute("memId");
-		int su = indexService.wishProduct(id);	
+		int su = indexService.wishProduct(id);
 
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("su", su);
 		mav.setViewName("jsonView");
 		return mav;
 	}
-	
-	
-	
-	@RequestMapping(value= "/searchDisplay", method=RequestMethod.GET)
-	public String searchProduct(Model model) {
-		
-		 model.addAttribute("display", "/index/searchDisplay.jsp");
-		 return "/index";
+
+	@RequestMapping(value = "/searchDisplay", method = RequestMethod.GET)
+	public String searchProduct(Model model, @RequestParam(value = "keyword") String keyword,
+			@RequestParam(value = "page", required = false, defaultValue = "0") String page,
+			@RequestParam(value = "order", required = false) String order) {
+
+		System.out.println("searchDisplay");
+		System.out.println("keyword	: " + keyword);
+		System.out.println("page	: " + page);
+		System.out.println("order	: " + order);
+
+		indexService.searchProductList(keyword, Integer.parseInt(page), order, model);
+
+		model.addAttribute("display", "/index/searchDisplay.jsp");
+
+		return "/index";
 	}
-	
-	
-	
-	@RequestMapping(value= "/searchProductList", method=RequestMethod.POST)
-	@ResponseBody
-	public ModelAndView searchProductList(@RequestParam Map<String, String> map, Model model) {
-		List<ProductDTO> list = indexService.searchProductList(map);	
-		
-		System.out.println(" /searchProductList ");
-		System.out.println("map"+map);
-		
-		ModelAndView mav = new ModelAndView();
-		mav.addObject("list", list);
-		mav.setViewName("jsonView");
-		return mav;
-	}
+
+//	
+//	@RequestMapping(value= "/searchProductList", method=RequestMethod.POST)
+//	@ResponseBody
+//	public ModelAndView searchProductList(@RequestParam Map<String, String> map, Model model) {
+//		List<ProductDTO> list = indexService.searchProductList(map);	
+//		
+//		System.out.println(" /searchProductList ");
+//		System.out.println("map"+map);
+//		
+//		ModelAndView mav = new ModelAndView();
+//		mav.addObject("list", list);
+//		mav.setViewName("jsonView");
+//		return mav;
+//	}
 
 }
-
-
-
-
-
-
-
-
-
-
-
-
-

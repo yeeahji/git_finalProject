@@ -31,4 +31,14 @@ public class IndexDAOMybatis implements IndexDAO {
 	public List<ProductDTO> searchProductList(Map map) {
 		return sqlSession.selectList("indexSQL.searchProductList", map);
 	}
+
+	@Override
+	public int searchProductCount(Map map) {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne("indexSQL.searchProductCount", map);
+	}
+	
+	
+	
+	
 }

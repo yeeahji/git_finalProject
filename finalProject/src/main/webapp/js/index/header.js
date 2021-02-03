@@ -4,3 +4,7 @@ $('#chat').click(function(){
 });
 
 
+function search(){
+	var keyword = $("#searchProduct").val()
+	location.href='/market/index/searchDisplay?keyword=' + keyword
+}

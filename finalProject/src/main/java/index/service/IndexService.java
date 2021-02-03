@@ -1,7 +1,8 @@
 package index.service;
 
 import java.util.List;
-import java.util.Map;
+
+import org.springframework.ui.Model;
 
 import product.bean.ProductDTO;
 
@@ -11,6 +12,6 @@ public interface IndexService {
 
 	public int wishProduct(String id); //찜한 상품 수
 
-	public List<ProductDTO> searchProductList(Map map); //검색
+	public void searchProductList(String keyword, int page, String order, Model model); //검색
 
 }

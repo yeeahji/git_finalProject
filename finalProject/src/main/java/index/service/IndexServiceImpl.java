@@ -6,35 +6,34 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.ui.Model;
 
-import product.bean.ProductDTO;
 import index.dao.IndexDAO;
+import product.bean.ProductDTO;
 
 @Service
 public class IndexServiceImpl implements IndexService {
 	@Autowired
 	private IndexDAO indexDAO;
 
-	@Override	
+	@Override
 	public List<ProductDTO> getProductList(int page) {
-		
+
 		Map param = new HashMap<String, Object>();
 		int start;
 		int end;
 		int default_count = 20;
 		int pageSize = 10;
-		
-		
 
 		if (page > 0) {
-			start = default_count + 1 + (page-1) * pageSize ;
+			start = default_count + 1 + (page - 1) * pageSize;
 			end = default_count + page * pageSize;
 			param.put("start", start);
 			param.put("end", end);
-			
+
 			System.out.println("start :" + start);
 			System.out.println("end :" + end);
-			
+
 		}
 
 		return indexDAO.getProductList(param);
@@ -47,7 +46,43 @@ public class IndexServiceImpl implements IndexService {
 	}
 
 	@Override
-	public List<ProductDTO> searchProductList(Map map) {
-		return indexDAO.searchProductList(map);
+	public void searchProductList(String keyword, int page, String order, Model model) {
+
+		Map<String, Object> param = new HashMap<String, Object>();
+		// 검색어
+		if (keyword.contains("\\@")) {
+			// 상점명
+			param.put("storeName", keyword);
+		} else {
+			// 상품명
+			param.put("productSubject", keyword);
+		}
+
+		int pageSize = 20;
+		if (page == 0)
+			page = 1;
+
+		int start = (page - 1) * pageSize;
+		int end = (page) * pageSize;
+
+		
+		param.put("start", start);
+		param.put("end", end);
+		param.put("order", order);
+
+		// 목록 조회
+		List<ProductDTO> list = indexDAO.searchProductList(param);
+		// 개수 조회
+		int count = indexDAO.searchProductCount(param);
+
+		System.out.println("list	: " + list);
+		System.out.println("count	: " + count);
+
+		model.addAttribute("list", list);
+		model.addAttribute("count", count);
+		model.addAttribute("page", page);
+		model.addAttribute("keyword", keyword);
+		model.addAttribute("order", order);
+
 	}
 }

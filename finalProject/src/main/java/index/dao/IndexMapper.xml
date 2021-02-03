@@ -51,6 +51,18 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  		select count(*) from wish where mem_id = #{id}
  	</select>
  	
+ 		
+ 	<!-- 검색 목록 WHERE 조건 -->	
+	<sql id="searchProductCnd">
+			AND p.product_manage = 1
+			AND p.mem_id = s.mem_id
+			<if test=" productSubject != null and productSubject != '' "> 
+			AND p.product_subject Like '%' || #{productSubject} || '%'
+			</if> 
+			<if test=" storeName != null and storeName != '' "> 
+			AND s.store_nickname Like '%' || #{storeName} || '%'
+			</if>
+	</sql>
  	
  	<!-- 검색 목록 -->
 	<select id="searchProductList" parameterType="java.util.HashMap" resultType="product">
@@ -60,32 +72,55 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 				a.* 
 				FROM
 				( SELECT
-					product_seq,
-					mem_id,
-					cate_code,
-					product_subject,
-					product_content,
-					product_img1,
-					product_img2,
-					product_img3,
-					product_img4,
-					product_img5,
-					to_char(product_price, 'FM99,999,999') ||'원' as product_price ,
-					product_location, product_condition , product_delivery_fee ,
-					product_hashtag1,
-					product_hashtag2,
-					product_hashtag3,
-					product_hashtag4,
-					product_hashtag5,
-					product_view,
-					product_manage ,
-					ROUND((sysdate-product_logtime)*24*60) as product_logtime
-				FROM product
-				WHERE product_manage=1 and product_subject Like '%' || #{searchProduct} || '%' 
-				ORDER BY product_logtime asc
+					p.product_seq,
+					p.mem_id,
+					p.cate_code,
+					p.product_subject,
+					p.product_content,
+					p.product_img1,
+					p.product_img2,
+					p.product_img3,
+					p.product_img4,
+					p.product_img5,
+					to_char(p.product_price, 'FM99,999,999') ||'원' as product_price ,
+					p.product_location, 
+					p.product_condition , 
+					p.product_delivery_fee ,
+					p.product_hashtag1,
+					p.product_hashtag2,
+					p.product_hashtag3,
+					p.product_hashtag4,
+					p.product_hashtag5,
+					p.product_view,
+					p.product_manage ,
+					ROUND((sysdate - p.product_logtime)*24*60) as product_logtime,
+					s.store_nickname
+				FROM product p, store s
+				WHERE 1=1  
+				<include refid="searchProductCnd"></include>
+				ORDER BY 
+				<!-- 최신순 -->
+				<choose>
+					<when test=' order == "A" '> p.product_logtime asc </when>
+					<when test=' order == "B" '> p.product_view asc </when>
+					<when test=' order == "C" '> p.product_price asc </when>
+					<when test=' order == "D" '> p.product_price asc </when>
+					<otherwise>
+						p.product_logtime asc
+					</otherwise>
+				</choose>
+				
 				) a
 			)
 		WHERE rn BETWEEN nvl(#{start},1) AND nvl(#{end},20) 
 	</select>
+	
+	<select id="searchProductCount" parameterType="java.util.HashMap" resultType="int">
+		SELECT count(0)
+		FROM product p, store s
+		WHERE 1=1
+		<include refid="searchProductCnd"></include>
+	</select>
+
 
 </mapper>

@@ -15,13 +15,10 @@
 	<!-- 검색창 영역 -->
 	<div class="search-area">
 		<!-- 검색 입력 -->
-		<form id="searchForm" name="searchForm">
 		<div class="input-group">
-			<input id="searchProduct" name="searchProduct" type="text" placeholder="상품명, @상점명 입력"> <i id="searchBtn" style="cursor: pointer;"
-				onclick="location.href='/market/index/searchDisplay'"
-				class="fas fa-search"></i>
+			<input id="searchProduct" name="searchProduct" type="text" placeholder="상품명, @상점명 입력"> 
+			<i id="searchBtn" style="cursor: pointer;" onclick="search()" class="fas fa-search"></i>
 		</div>
-		</form>
 	</div>
 
 	<!-- 우측메뉴 -->
@@ -73,9 +70,10 @@
 //로그인 함수
 $("#searchProduct").keydown(function(key) {
 	if (key.keyCode == 13) {
-		$('#searchBtn').trigger('click');//강제로 이벤트를 발생
-	
+		search();
 	}
 });
+
+
 </script>
 
