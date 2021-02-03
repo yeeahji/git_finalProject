@@ -3,25 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
-<style>
-
-#display-list {
-	width: 100%
-}
-
-.productListTop {
-	height: 30px;
-}
-
-.productListTop a {
-	cursor: pointer;
-}
-
-.productListTop a.actvie {
-	color: blue;
-	font-weight: bold;
-}
-</style>
+<link rel="stylesheet" href="/market/css/index/searchDisplay.css">
 
 <input type="hidden" id="keyword" name="keyword" value="${keyword}">
 <input type="hidden" id="order" name="order" value="${order}">

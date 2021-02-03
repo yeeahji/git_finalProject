@@ -1,0 +1,34 @@
+@charset "UTF-8";
+
+#display-list {
+	width: 100%
+}
+
+#productTop{
+	margin-top:10px;
+	
+}
+
+#productName{
+  font-size:20px;
+  color:#0a58ca;
+  font-weight: bold;
+}
+
+.productNum{
+	font-size:17px;
+  	color:#0a58ca;
+}
+
+.productListTop {
+	height: 30px;
+}
+
+.productListTop a {
+	cursor: pointer;
+}
+
+.productListTop a.actvie {
+	color: blue;
+	font-weight: bold;
+}

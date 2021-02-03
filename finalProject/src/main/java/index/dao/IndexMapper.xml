@@ -101,12 +101,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 				ORDER BY 
 				<!-- 최신순 -->
 				<choose>
-					<when test=' order == "A" '> p.product_logtime asc </when>
+					<when test=' order == "A" '> p.product_logtime desc </when>
 					<when test=' order == "B" '> p.product_view asc </when>
 					<when test=' order == "C" '> p.product_price asc </when>
-					<when test=' order == "D" '> p.product_price asc </when>
+					<when test=' order == "D" '> p.product_price desc </when>
 					<otherwise>
-						p.product_logtime asc
+						p.product_logtime desc
 					</otherwise>
 				</choose>
 				
