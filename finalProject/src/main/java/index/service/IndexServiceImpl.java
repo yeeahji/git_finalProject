@@ -86,4 +86,9 @@ public class IndexServiceImpl implements IndexService {
 		model.addAttribute("order", order);
 
 	}
+
+	@Override
+	public List<ProductDTO> recentlyList(List<String> list) {
+		 return indexDAO.recentlyList(list);
+	}
 }

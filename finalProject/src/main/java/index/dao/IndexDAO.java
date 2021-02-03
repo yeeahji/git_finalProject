@@ -15,4 +15,6 @@ public interface IndexDAO {
 	
 	public int searchProductCount(Map map); //검색
 
+	public List<ProductDTO> recentlyList(List<String> list); //최근본상품
+
 }

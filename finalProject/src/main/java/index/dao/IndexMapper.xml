@@ -121,6 +121,19 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		WHERE 1=1
 		<include refid="searchProductCnd"></include>
 	</select>
+	
+	<select id="recentlyList" parameterType="java.util.List" resultType="product">
+		SELECT 
+				p.product_seq,
+				p.product_subject,
+				p.product_img1,
+				to_char(p.product_price, 'FM99,999,999') ||'원' as product_price
+		FROM product p
+		WHERE 1=1
+		<foreach collection="list" item="item" separator="," open="AND p.product_seq IN (" close=")">
+			#{item}
+		</foreach>
+	</select>
 
 
 </mapper>

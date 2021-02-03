@@ -14,4 +14,6 @@ public interface IndexService {
 
 	public void searchProductList(String keyword, int page, String order, Model model); //검색
 
+	public List<ProductDTO> recentlyList(List<String> list); //최근본상품
+
 }

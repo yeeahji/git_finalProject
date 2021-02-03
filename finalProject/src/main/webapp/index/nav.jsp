@@ -21,8 +21,10 @@
 	<div class="recently">
 		<div class="recentlyText">최근본상품</div>
 		<div class="recentlyProduct">
-			<span id=recentCnt></span>
-				<ul></ul> <!-- 최근본상품  -->
+			<span id="recentlyCnt"></span>
+				<ul id="recentlyList">
+				
+				</ul> <!-- 최근본상품  -->
 
 				<div id="paging">
 					<a class="prevBtn" style="cursor: pointer">이전</a>
