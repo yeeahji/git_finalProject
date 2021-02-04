@@ -19,19 +19,14 @@
 
 	<!-- 최근 본 상품 시작 -->
 	<div class="recently">
-		<div class="recentlyText">최근본상품</div>
+		<div class="recentlyText" >최근본상품 (<span id="recentlyCnt" ></span>)</div>
 		<div class="recentlyProduct">
-			<span id="recentlyCnt"></span>
-				<ul id="recentlyList">
+			
+				<ul id="recentlyList" >
 				
 				</ul> <!-- 최근본상품  -->
 
-				<div id="paging">
-					<a class="prevBtn" style="cursor: pointer">이전</a>
-					<span id="currentPage"></span>
-					<span id="totalPageCount"></span>
-					<a class="nextBtn" style="cursor: pointer">다음</a>
-				</div>
+				<div id="recentlyPagingDiv" class="paging" style="float: left;"></div>
 			</div>	
 	</div>
 	<!-- 최근 본 상품 끝 -->

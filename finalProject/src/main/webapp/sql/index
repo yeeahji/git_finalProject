@@ -92,4 +92,8 @@ INSERT INTO product VALUES
 (seq_product.NEXTVAL, 'va', 301, '핵인싸템 프로펠러 헬리콥터 모자', '핵인싸템 프로펠러 헬리콥터 모자 캡 인싸되세요', '301.JPG', '301.JPG', '301.JPG', '', '', 
 3000, '인천 계양', 0, 0, '헬리콥터', '모자', '인싸템', '파티템', '유퀴즈', 0, 1, sysdate);
 
+INSERT INTO product VALUES 
+(seq_product.NEXTVAL, 'test', 303, '나이키레볼루션 275', '두번신었습니다.. 직거래만 가능', '303.JPG', '303.JPG', '303.JPG', '', '', 
+40000, '대전', 0, 0, '나이키', '나이키레볼루션', '운동화', '캐줘얼화', '나이키레볼루션5', 0, 1, sysdate);
+
 commit; 

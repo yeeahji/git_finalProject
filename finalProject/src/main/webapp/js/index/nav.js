@@ -25,13 +25,13 @@ $(document).ready(function() {
 		success : function(data) {
 			var list = data.recentlyList;
 			var count = data.recentlyList.length
-			$("#recentlyCnt").text(count);
+			$("#recentlyCnt").text(count).css('text-align','center');
 			if ( count != 0){
 				var view = $("#recentlyList");
 				
 				$.each(list, function(){
 					var html ="";
-					html += "<img src=/marget/' +  + '>" + '' + this.product_subject + '</img>';
+					html += "<img style='height: 60px; width: 60px; cursor: pointer; float: left;' src=/market/storage/"+ this.product_img1 + ">" + '</img><br>';
 					html += "";
 					html += "";
 					html += "";
