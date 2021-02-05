@@ -151,8 +151,9 @@ body {
 /* 메인 상단 검색 */
 .search-area {
 	float: left;
-	margin-left: 10px;
-	margin-right: 80px;
+	margin-top: 20px;
+	margin-left: 35px;
+	margin-right: 55px;
 }
 
 .search-area div {
@@ -210,7 +211,7 @@ body {
 .navBanner {
 	position: fixed;
 	top: 130px;
-	right: calc(50% - 665px);
+	right: calc(50% - 630px);
 	z-index: 1050;
 }
 
@@ -219,7 +220,7 @@ body {
 	padding: 10px; 0 px;
 	background: white;
 	margin: 10px 0px;
-	width: 130px;
+	width: 100px;
 	height: 70px;
 	border: 1px solid gray;
 }
@@ -238,18 +239,19 @@ body {
 .recently {
 	background: white;
 	margin: 10px 0px;
-	padding: 10px; 0 px;
-	width: 130px;
-	height: 220px;
+	padding: 0px;
+	width: 100px;
+	height: 280px;
 	border: 1px solid gray;
 }
 
 .recentlyText {
+	margin-top:10px;
 	font-size: 12px;
 	text-align: center;
 }
 
-.recentlyCount {
+.recentlyCnt {
 	margin-top: 5px;
 	font-size: 12px;
 	text-align: center;
@@ -262,7 +264,7 @@ body {
 /* TOP */
 .totheTop {
 	margin: 10px 0px;
-	width: 130px;
+	width: 100px;
 	height: 40px;
 	border: 1px solid gray;
 	text-align: center;

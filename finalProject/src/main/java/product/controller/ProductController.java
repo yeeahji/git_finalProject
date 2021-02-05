@@ -3,6 +3,7 @@ package product.controller;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -109,7 +110,20 @@ public class ProductController {
 	}
 	
 	@RequestMapping(value="productDetail", method=RequestMethod.GET)
-	public String registDetail(@RequestParam String seq, Model model) {
+	public String registDetail(@RequestParam String seq, Model model, HttpSession session) {
+		
+		 ArrayList<String> list = (ArrayList)session.getAttribute("recentlyProduct");
+		 
+		 if(list==null)
+		 {
+		  list = new ArrayList<String>();
+		  session.setAttribute("recentlyProduct", list);
+		 }
+		 list.add(seq);
+
+		ProductDTO productDTO = productService.productDetail(seq);
+		 
+		model.addAttribute("productDTO", productDTO);
 		model.addAttribute("display", "/product/productDetail.jsp");
 		return "/index";
 	}
