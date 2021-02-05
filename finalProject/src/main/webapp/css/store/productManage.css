@@ -50,7 +50,7 @@ main {
     border: 1px solid rgb(195, 194, 204);
     border-radius: 2px;
 }
-.productSearchBtn {
+#productSearchBtn {
 	position: absolute;
     top: 0px;
     right: 0px;
@@ -86,7 +86,7 @@ main {
     overflow: hidden;
     box-sizing: border-box;
 }
-.sortNumText, .sortProdManageText, .tabSortProdText {
+.sortNumText, .sortProdManageText {/* .tabSortProdText */
 	color: rgb(51, 51, 51);
     margin-left: 2px;
     margin-right: 2px;
@@ -112,8 +112,8 @@ main {
     position: relative;
     transform: scale(0);
 }
-.sortNumTextBtn, .sortProdManageBtn, .tabSortProdBtn {
-   background-position: 0px center;
+.sortNumTextBtn, .sortProdManageBtn{ /* , .tabSortProdBtn  */
+    background-position: 0px center;
     background-repeat: no-repeat;
     background-size: 1rem 1rem;
     width: 2rem;
@@ -207,17 +207,6 @@ main {
 .productManageWrap #prodMangeTable tr > :nth-child(2){
 	width: 8rem;
 }
-/* .tabSortProdWrap1 {
-	position: relative;
-    box-sizing: border-box;
-} */
-/* .tabSortProdWrap2 {
-	width: 100%;
-    height: 3rem;
-    display: flex;
-    border: 1px solid rgb(195, 194, 204);
-    border-radius: 2px;
-} */
 .tabSortProdTitle {
 	-webkit-box-align: center;
     align-items: center;
@@ -276,16 +265,6 @@ main {
 .productManageWrap table tr > :nth-child(7) {
     width: 4rem;
 }
-.upBtn {
-	width: 3.25rem;
-    height: 2rem;
-    text-align: center;
-    border-radius: 2px;
-    border: 1px solid rgb(195, 194, 204);
-    color: rgb(255, 80, 88);
-    margin-bottom: 0.5rem;
-    /* margin-top: */ 
-}
 .editBtn {
 	width: 3.25rem;
     height: 2rem;
@@ -299,18 +278,8 @@ main {
     color: rgb(0, 114, 230);
     margin-bottom: 0.5rem;
 }
-/* 삭제 버튼 생성  */
-.deleteBtn {
-	width: 3.25rem;
-    height: 2rem;
-    text-align: center;
-    border-radius: 2px;
-    border: 1px solid rgb(195, 194, 204);
-    color: black;
-    font-size: 10pt;
-} 
-
 /* footer */
+/* 페이징처리  */
 .footerWrap {
 	padding: 2rem 0px 3rem;
     display: flex;
@@ -320,7 +289,11 @@ main {
 .pagintWrap {
 	display: flex;
 }
-.beforePage {
+/* StorePaging */
+#storePagingDiv {
+	display: flex;
+}
+#currentPaging {
 	width: 33px;
     height: 33px;
     display: flex;
@@ -329,33 +302,12 @@ main {
     -webkit-box-align: center;
     align-items: center;
     margin-right: 12px;
-    border: 1px solid rgb(204, 204, 204);
-    background: rgb(255, 255, 255);
-    border-radius: 2px;
-    color: rgb(155, 153, 169);
-    visibility: hidden;
-}
-.beforePageIcon {
-	transform: rotate(180deg);
-}
-.page {
-	width: 33px;
-    height: 33px;
-    display: flex;
-    -webkit-box-pack: center;
-    justify-content: center;
-    -webkit-box-align: center;
-    align-items: center;
-    margin-right: 12px;
-    border: 1px solid rgb(255, 80, 88);
+    border: 1px solid rgb(3, 155, 229);
     border-radius: 2px;
     color: rgb(255, 255, 255);
-    background: rgb(255, 80, 88);
+    background: rgb(3, 155, 229);
 }
-.afterPage:last-child {
-	margin-right: 0px;
-}
-.afterPage {
+#paging {
 	width: 33px;
     height: 33px;
     display: flex;
@@ -368,11 +320,10 @@ main {
     background: rgb(255, 255, 255);
     border-radius: 2px;
     color: rgb(155, 153, 169);
-    visibility: hidden;
 }
 /* 판매상태 버튼 클릭 이벤트 */
 .btnListWrap {
-	position: absolute;
+    position: absolute;
     top: calc(100% + 4px);
     left: 0px;
     width: 100%;
@@ -381,29 +332,181 @@ main {
     z-index: 1;
     background: rgb(255, 255, 255);
 }
-.btnList {
-	max-height: 12.5rem;
-    overflow-y: scroll;
+#spanWrap_Of_Wrap1 {
+	z-index: 9999;
+    border: 0px;
+    clip: rect(1px, 1px, 1px, 1px);
+    height: 1px;
+    width: 1px;
+    position: absolute;
+    overflow: hidden;
+    padding: 0px;
+    white-space: nowrap;
 }
-.nowList {
+/* 상태변경 모달창 */
+#conditionModal {
+	display: none
+}
+.condiMadalWrap1 {
+    position: fixed;
+    z-index: 9000;
+    
+}
+.condiMadalWrap2 {
+	position: fixed;
+    inset: 0px;
+}
+.condiMadalWrap3 {
+	display: flex;
+    flex-direction: column;
+    -webkit-box-pack: center;
+    justify-content: center;
+    -webkit-box-align: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    z-index: 3100;
+    -webkit-box-orient: vertical;
+}
+.condiModalTop {
+	position: relative;
+    border-radius: 2px 2px 0px 0px;
+    padding: 1.5rem 1.5rem 0px;
+    max-width: 18.5rem;
+    width: 75%;
+    background-color: rgb(255, 255, 255);
+    overflow: hidden auto;
+    z-index: 3102;
+}
+.condiModalTopText {
+    margin-bottom: 5px;
+    white-space: pre-wrap;
+    font-size: 15px;
+    text-align: center;
+    line-height: 1.4;
+}
+
+.condiModalBottom {
+	position: relative;
+    border-radius: 0px 0px 2px 2px;
+    padding: 1.5rem;
+    max-width: 18.5rem;
+    width: 75%;
+    background-color: rgb(255, 255, 255);
+    z-index: 3102;
+}
+.modalBottomBtn {
+	border-radius: 2px;
+    width: 100%;
+    height: 3rem;
+    background-color: rgb(10, 88, 202);
+    font-weight: bold;
+    color: rgb(255, 255, 255);
+    text-align: center;
+}
+.condiModalEndWrap {
+	position: absolute;
+    inset: 0px;
+    background-color: rgba(0, 0, 0, 0.4);
+    -webkit-tap-highlight-color: rgba(255, 255, 255, 0);
+    user-select: none;
+    z-index: 3101;
+}
+/* 삭제 버튼 모달  */
+#deleteModal {
+	width: 100%;
+    height: 100%;
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    background: rgba(0, 0, 0, 0.6);
+    z-index: 3000;
+    -webkit-box-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    justify-content: center;
+    display: none;
+}
+.deleteModalWrap {
+	width: 18.5rem;
+    background: rgb(255, 255, 255);
+    padding: 1.5rem;
+    border-radius: 2px;
+}
+.deleteModalText {
+	white-space: pre-wrap;
+    word-break: keep-all;
+    text-align: center;
+    font-size: 15px;
+    margin-bottom: 1.5rem;
+    line-height: 1.4;
+}
+.deleteModalBtm {
+	display: flex;
+    flex-direction: row-reverse;
+}
+.deleteModalBtm > button:first-child {
+	margin-left: 0.5rem;
+}
+.deleteModalBtm > button {
+	flex: 1 1 0%;
+}
+.deleteModalBtm button {
+	height: 3rem;
+    text-align: center;
+    font-size: 1rem;
+}
+.dltModalOkBtn {
+	color: rgb(255, 255, 255);
+    background: rgb(10, 88, 202);
+    font-weight: bold;
+}
+.dltModalCancelBtn {
+	background-color: rgb(244, 244, 250);
+    color: rgb(114, 112, 127);
+}
+/* 검색 - 등록된 상품이 없습니다. */
+.noRegistered {
+	width: 100%;
+    text-align: center;
+    background-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI2MCIgaGVpZ2h0PSI2MCIgdmlld0JveD0iMCAwIDYwIDYwIj4KICAgIDxwYXRoIGZpbGw9IiNEQ0RCRTQiIGZpbGwtcnVsZT0iZXZlbm9kZCIgZD0iTTU3IDBhMyAzIDAgMCAxIDMgM3YyN2MwIC43OTUtLjMxNCAxLjU2LS44NzggMi4xMjFsLTI3IDI3YTIuOTkxIDIuOTkxIDAgMCAxLTQuMjQyIDBsLTI3LTI3YTIuOTk3IDIuOTk3IDAgMCAxIDAtNC4yNDJsMjctMjdBMy4wMDUgMy4wMDUgMCAwIDEgMzAgMGgyN3pNMzAgNTIuNzU4TDM0Ljc2IDQ4IDEyIDI1LjI0MiA3LjI0MyAzMCAzMCA1Mi43NTh6bTI0LTI0VjZIMzEuMjQ0bC0xNSAxNUwzOSA0My43NThsMTUtMTV6TTQ1IDE4YTMgMyAwIDEgMSAwLTYgMyAzIDAgMCAxIDAgNnoiLz4KPC9zdmc+Cg==);
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: 5rem;
+    height: 21rem;
+    padding-top: 14rem;
+    color: rgb(155, 153, 169);
+}
+/* 상품상태별 전체 정렬 */
+.nowCondition {
 	width: 100%;
     height: 2.5rem;
     display: flex;
     -webkit-box-align: center;
     align-items: center;
-    padding: 0px 1rem;
+    padding: 0px 0.7rem;
     background: rgb(234, 233, 241);
     color: rgb(30, 29, 41);
 }
-.default {
+.defaultList {
 	width: 100%;
     height: 2.5rem;
     display: flex;
     -webkit-box-align: center;
     align-items: center;
-    padding: 0px 1rem;
+    padding: 0px 0.7rem;
     color: rgb(94, 92, 107);
 }
+
+
+
+
+
+
+
+
+
+
 
 
 

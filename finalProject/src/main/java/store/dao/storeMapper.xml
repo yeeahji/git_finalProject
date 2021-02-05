@@ -4,26 +4,77 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="storeSQL">
-	<!-- 상점 정보 -->
-   	<!-- 회원정보얻기 -->
+	<!-- [상점 정보] -->
+   	<!-- 회원정보얻기/닉넴 유효성 검사 -->
   	<select id="getMember" parameterType="String" resultType="store"> 
- 	    select * from store where store_nickname = #{nickname}
+ 	    select * 
+ 	    from store 
+ 	    where store_nickname = #{nickname}
  	</select>
  	
  	<!-- 닉네임 수정 -->
  	<update id="nicknameUpdate" parameterType="java.util.Map">
- 		update store set store_nickname = #{nickname} where mem_id = #{mem_id}
+ 		update store 
+ 		set store_nickname = #{nickname} 
+ 		where mem_id = #{mem_id}
+ 	</update>
+ 	
+ 	<!-- 상점 소개글 업뎃 -->
+   	<update id="introUpdate" parameterType="java.util.Map">
+   		update store 
+		set store_intro = #{store_intro}
+		where mem_id = #{mem_id}
+   	</update>
+   	
+   	<!-- 상점 프사 업뎃  -->
+   	<update id="profileImgUpdate" parameterType="java.util.Map">
+   		update store 
+		set store_img = #{store_img}
+		where mem_id = #{mem_id}
+   	</update>
+   	
+   	<!-- 에코지수 판매 횟수  salesNum-->
+   	<select id="salesNum" parameterType="String" resultType="int">
+		select count(*)
+		from purchase
+		where seller_id = #{my_id}
+   	</select>
+   	
+   	<!-- 에코지수 업데이트 -->
+   	<update id="echoUpdate" parameterType="java.util.Map">
+ 		update store 
+		set store_echo = #{store_echo}
+		where mem_id = #{mem_id}
  	</update>
  	
 	<!-- [상품] -->
 	<!-- 해당 아이디의 상품 리스트 출력 -->
-	<select id="storeProductList" parameterType="String" resultType="product">
-		select*from product where mem_id = #{mem_id} order by decode(product_manage,3,1) desc, product_logtime desc
+	<select id="storeProductList" parameterType="java.util.Map" resultType="product">
+		select product_seq, mem_id, product_subject, product_content, product_img1, TO_CHAR(product_price, '999,999,999') as product_price, product_location, product_delivery_fee, product_manage, TO_CHAR(product_logtime,'YYYY-MM-DD') as product_logtime 
+		from product 
+		where mem_id = #{mem_id} 
+		<choose>
+			<when test="sortNum==0"> <!-- 최신순 정렬; 판매완료상품은 맨뒤로 -->
+				order by decode(product_manage,3,1) desc, product_logtime desc
+			</when> 
+			<when test="sortNum==1"> <!-- 인기순  -->
+				<!-- 추가!! -->
+			</when> 
+			<when test="sortNum==2"> <!-- 저가순 -->
+				order by product_price 
+			</when> 
+			<when test="sortNum==3"> <!-- 고가순 -->
+				order by product_price desc
+			</when> 
+			
+		</choose>
 	</select>
 	
 	<!-- 해당 아이디의  상품 총 개수 -->
 	<select id="storeProductTotalA" parameterType="String" resultType="int">
-   		 select count(*) from product where mem_id = #{mem_id}
+   		select count(*) 
+   		from product 
+   		where mem_id = #{mem_id}
    	</select>
    	
 	<!-- [상품후기] -->
@@ -37,12 +88,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		order by review_seq desc
 	</select>
  	
- 	<!-- 총 개수 -->
+ 	<!-- 총 리뷰 개수 -->
  	<select id="storeReviewTotalA" parameterType="String" resultType="int">
-   		  select count(*)
-		  from product
-          join review using(product_seq)
-          where product.mem_id = #{mem_id}
+   		select count(*)
+		from product
+        join review using(product_seq)
+        where product.mem_id = #{mem_id}
    	</select>
  	
  	<!-- [찜] -->
@@ -75,34 +126,157 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	<!-- 해당 상점이 찜한 상품 수-->
 	<select id="storeFavoritesTotalA" parameterType="String" resultType="int">
-   		  select count(*) from wish where mem_id = #{mem_id}
+   		select count(*) from wish where mem_id = #{mem_id}
    	</select>
 	
 	<!-- 판매 완료된 상품 삭제 -->
  	<delete id="storeSoldOutDelete">
-		  delete 
-		  from wish
-		  where product_seq = (select product_seq 
+		delete 
+		from wish
+		where product_seq = (select product_seq 
                                from product 
                                join wish using(product_seq) 
                                where product_manage = 3)
 	</delete>
 	
 	<!-- [내상품관리] -->
+	<!-- 해당 아이디의 상품 리스트 출력 -->
+	<select id="productManageList" parameterType="String" resultType="product">
+		select product_seq, mem_id, cate_code, product_subject, product_img1, TO_CHAR(product_price, '999,999,999') as product_price, product_condition, product_manage, TO_CHAR(product_logtime,'YYYY-MM-DD HH24:MI') as product_logtime
+		from (select  rownum rn, tt.* from 
+		(select * from product where mem_id = #{mem_id} and product_manage
+		<!-- 상품상태별 정렬  -->
+			<choose>
+				<when test="product_manage!=0">
+					= #{product_manage}
+				</when> 
+				<!-- 전체 -->
+				<when test="product_manage==0">
+					between 1 and 3
+				</when>
+			</choose>
+		order by decode(product_manage,3,1) desc, product_logtime desc)tt) 
+		where rn between #{startNum} and #{endNum}
+	</select>
+	
 	<!-- 각 상품의 찜(된) 개수 -->
  	<select id="favoritesOfProd" parameterType="java.util.Map" resultType="int">
-   		  select count(*)
-		  from product
-		  join wish using(product_seq)
-		  where product.mem_id = #{mem_id} and product_seq = #{product_seq}
+   		select count(*)
+		from product
+		join wish using(product_seq)
+		where product.mem_id = #{mem_id} and product_seq = #{product_seq}
    	</select>
+   	
+   	<!-- 상품 검색  리스트 -->
+   	<select id="productManageSearch" parameterType="java.util.Map" resultType="product">
+		select product_seq, mem_id, cate_code, product_subject, product_img1, TO_CHAR(product_price, '999,999,999') as product_price, product_condition, product_manage, TO_CHAR(product_logtime,'YYYY-MM-DD HH24:MI') as product_logtime
+		from (select  rownum rn, tt.* from 
+		(select * from product
+		where mem_id = #{mem_id} and product_subject like '%'||#{searchKeyword}||'%' and product_manage
+		<!-- 상품상태별 정렬  -->
+		<choose>
+			<when test="product_manage!=0">
+				= #{product_manage}
+			</when> 
+			<!-- 전체 -->
+			<when test="product_manage==0">
+				between 1 and 3
+			</when>
+		</choose>
+		order by decode(product_manage,3,1) desc, product_logtime desc)tt) 
+		where rn between #{startNum} and #{endNum}
+	</select>
+	
+   	<!-- 판매상태 변경 -->
+   	<update id="prodManageUpdate" parameterType="java.util.Map">
+   		update product
+		set product_manage = #{product_manage}
+		where mem_id = #{mem_id} and product_seq = #{product_seq} 
+   	</update>
+   	
+   	<!-- [내상품관리] 판매상태별 물품 총 개수 -->
+   	<!-- 해당 아이디의  상품 총 개수 -->
+	<select id="prodManageTotalA" parameterType="java.util.Map" resultType="int">
+   		select count(*) from product where mem_id = #{mem_id} and product_manage
+		<!-- 상품상태별 정렬  -->
+		<choose>
+			<when test="product_manage!=0">
+				= #{product_manage}
+			</when> 
+			<!-- 전체 -->
+			<when test="product_manage==0">
+				between 1 and 3
+			</when>
+		</choose>
+   	</select>
+   	
+   	<!-- 검색 상품 총개수 -->
+	<select id="productSearchTot" parameterType="java.util.Map" resultType="int">
+   		select count(*)
+		from product
+		where mem_id = #{mem_id} and product_subject like '%'||#{searchKeyword}||'%' and product_manage
+		<!-- 상품상태별 정렬  -->
+		<choose>
+			<when test="product_manage!=0">
+				= #{product_manage}
+			</when> 
+			<!-- 전체 -->
+			<when test="product_manage==0">
+				between 1 and 3
+			</when>
+		</choose>
+   	</select>
+   	
+   	<!-- UP하기 사용 -->
+   	<update id="productUp" parameterType="java.util.Map">
+   		update product 
+		set product_logtime = sysdate
+		where mem_id = #{mem_id} and product_seq = #{product_seq}
+   	</update>
+   	
+   	<!-- 상품 삭제 -->
+   	<delete id="productDlt" parameterType="java.util.Map">
+		delete 
+		from product
+		where mem_id = #{mem_id} and product_seq=#{product_seq}
+	</delete>
+	
+	<!-- 상품 한 개의 정보 -->
+	<select id="existProd" parameterType="java.util.Map" resultType="product">
+   		select*
+   		from product 
+   		where mem_id = #{mem_id} and product_seq = #{product_seq}
+   	</select>
+   	
+   	<!-- 구매내역 리스트 -->
+   	<select id="purchaseList" parameterType="String" resultType="purchase">
+		select store_nickname, my_id, product_seq, product_img1, product_subject, TO_CHAR(product_price, '999,999,999') as product_price, TO_CHAR(product_logtime,'YYYY-MM-DD HH24:MI') as purchase_logtime
+		from (select  rownum rn, tt.* from 
+				(select * 
+				from purchase 
+				join store on(seller_id=mem_id)
+				join product using(product_seq)
+				where my_id = #{my_id} 
+				order by purchase_logtime desc)tt) 
+		where rn between #{startNum} and #{endNum}
+	</select>
+	
+	<!-- 구매내역 총 개수 -->
+	<select id="purchaseTotalA" parameterType="String" resultType="int">
+		select count(*)
+		from purchase
+		where my_id = #{my_id}
+   	</select>
+   	
+   	<!-- 상점 기본 정보 -->
+   	<select id="storeInfo" parameterType="String" resultType="store">
+		select*
+		from store 
+		where mem_id = #{mem_id}
+	</select>
    	
    	
 </mapper>
-
-
-
-
 
 
 

@@ -1,5 +1,6 @@
 package store.dao;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -9,6 +10,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import product.bean.ProductDTO;
+import store.bean.PurchaseDTO;
 import store.bean.ReviewDTO;
 import store.bean.StoreDTO;
 
@@ -19,8 +21,8 @@ public class StoreDAOMybatis implements StoreDAO {
 	private SqlSession sqlSession;
 
 	@Override
-	public List<ProductDTO> storeProductList(String mem_id) {
-		return sqlSession.selectList("storeSQL.storeProductList", mem_id);
+	public List<ProductDTO> storeProductList(Map<String, String> map) {
+		return sqlSession.selectList("storeSQL.storeProductList", map);
 	}
 
 	@Override
@@ -68,4 +70,86 @@ public class StoreDAOMybatis implements StoreDAO {
 	public int favoritesOfProd(Map<String, String> map) {
 		return sqlSession.selectOne("storeSQL.favoritesOfProd", map);
 	}
+
+	@Override
+	public List<ProductDTO> productManageList(Map<String, String> map) {
+		return sqlSession.selectList("storeSQL.productManageList", map);
+	}
+
+	@Override
+	public List<ProductDTO> productManageSearch(Map<String, String> map) {
+		return sqlSession.selectList("storeSQL.productManageSearch", map);
+	}
+
+	@Override
+	public int prodManageUpdate(Map<String, String>  map) {
+		return sqlSession.update("storeSQL.prodManageUpdate", map);
+	}
+
+	@Override
+	public int prodManageTotalA(String mem_id, String product_manage) {
+		Map<String, String> map = new HashMap<String, String>();
+		map.put("mem_id", mem_id);
+		map.put("product_manage", product_manage);
+		return sqlSession.selectOne("storeSQL.prodManageTotalA", map);
+	}
+
+	@Override
+	public int prodManageTotalA(Map<String, String> map) {
+		return sqlSession.selectOne("storeSQL.productSearchTot", map);
+	}
+
+	@Override
+	public int productUp(Map<String, String> map) {
+		return sqlSession.update("storeSQL.productUp", map);
+	}
+
+	@Override
+	public int productDlt(Map<String, String> map) {
+		return sqlSession.delete("storeSQL.productDlt", map);
+	}
+
+	@Override
+	public ProductDTO existProd(Map<String, String> map) {
+		return sqlSession.selectOne("storeSQL.existProd", map);
+	}
+
+	@Override
+	public List<PurchaseDTO> purchaseList(Map<String, String> map) {
+		return sqlSession.selectList("storeSQL.purchaseList", map);
+	}
+	// 구매내역 총 개수
+	@Override
+	public int purchaseTotalA(String my_id) {
+		return sqlSession.selectOne("storeSQL.purchaseTotalA", my_id);
+	}
+	// 상점 기본 정보
+	@Override
+	public StoreDTO storeInfo(String mem_id) {
+		return sqlSession.selectOne("storeSQL.storeInfo", mem_id);
+	}
+	// 상점 소개글 업뎃
+	@Override
+	public int introUpdate(Map<String, String> map) {
+		return sqlSession.update("storeSQL.introUpdate", map);
+	}
+
+	@Override
+	public void profileImgUpdate(Map<String, String> map) {
+		sqlSession.update("storeSQL.profileImgUpdate", map);
+	}
+	// 에코지수 판매 
+	@Override
+	public int salesNum(String mem_id) {
+		return sqlSession.selectOne("storeSQL.salesNum", mem_id);
+	}
+
+	@Override
+	public void echoUpdate(Map<String, String> map) {
+		sqlSession.update("storeSQL.echoUpdate", map);
+	}
+
+	
+	
+	
 }

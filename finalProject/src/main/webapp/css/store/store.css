@@ -253,27 +253,53 @@ textarea {
 }
 /* 에코 지수 + 판매내역 + 조회수?(+아이콘) */
 #middleWrap {
-	height: 45px;
+	height: 50px;
     display: flex;
     -webkit-box-align: center;
     align-items: center;
     border-top: 1px solid rgb(250, 250, 250);
     border-bottom: 1px solid rgb(250, 250, 250);
-    margin-bottom: 20px;
+    margin-bottom: 15px;
     flex-shrink: 0;
+    
+    justify-content: space-between; /* 가운데 띄우기 */
+}
+/* 에코지수  */
+.echoIndication {
+	margin-left: 6px;
+}
+.echoIndiText {    
+	margin-left: 3px;
+	margin-top: 0.7px;
+    font-size: 11.5px;
+    color: #5a5a5a;
+    display: flex;
+}
+.echoInfoiImg {
+	margin-left: 2px;
 }
 #middleWrap .storeIndication {
 	margin-right: 30px;
-    font-size: 11px; /* 글씨체 바꾸면 13px로 바꾸기!! */
+    font-size: 13px; /* 글씨체 바꾸면 13px로 바꾸기!! */
     color: rgb(136, 136, 136);
     display: flex;
+}
+.rigthIndi {
+	display: flex;
 }
 .storeIndication > img {
 	margin-right: 10px; /* 원래 10px */
 }
-.storeIndication > .indicateNum {
+/* 상점후기 수*/
+.storeIndication > .reviewIndicateNum {
 	margin-left: 5px;
     color: rgb(33, 33, 33);
+}
+/* 상품판매 수 */
+.storeIndication > .sellIndicateNum {
+	margin-left: 5px;
+    color: rgb(33, 33, 33);
+  
 }
 /* 소개글 */
 .introduce {
@@ -632,10 +658,10 @@ textarea {
     justify-content: space-between;
 }
 #productTop .productNum {
-	/* color: rgb(247, 47, 51); */
+	font-size: 13pt;
 	color: #0a58ca;
 }
-#productTop .categoryWrap {
+/* #productTop .categoryWrap {
 	width: 140px;
 }
 #productTop .categoryInner {
@@ -685,7 +711,7 @@ textarea {
     display: flex;
     -webkit-box-align: center;
     align-items: center;
-    /* color: rgb(247, 47, 51); */
+    color: rgb(247, 47, 51);
     color: #0a58ca;
 }
 .categoryOther {
@@ -695,7 +721,7 @@ textarea {
     display: flex;
     -webkit-box-align: center;
     align-items: center;
-}
+} */
 #productList {
     margin-top: 30px;
 }
@@ -798,6 +824,10 @@ textarea {
     align-items: center;
     color: rgb(255, 255, 255);
 } */
+.productNameWrap {
+	padding: 15px 10px;
+    height: 80px;
+}
 .productName {
 	position: relative;
     font-size: 14px;
@@ -839,11 +869,11 @@ textarea {
     color: rgb(102, 102, 102);
     width: 100%;
     overflow: hidden;
-    text-overflow: ellipsis;
+    text-overflow: ellipsis; 
     white-space: nowrap;
     position: relative;
 }
-.location > img{
+.location  img{
 	position: absolute;
     left: 10px;
     top: calc(50% - 8px);
@@ -855,4 +885,15 @@ textarea {
     justify-content: center;
     margin: 40px 0px 100px;
     background-color: green;
+}
+/* 툴팁 테스트 */
+#tooltip {
+    position: absolute;
+    z-index: 999;
+    color: white;
+    font-size: 15px;   
+}
+#tooltip .tipBody {
+    background-color: #323232;
+    padding: 8px;
 }

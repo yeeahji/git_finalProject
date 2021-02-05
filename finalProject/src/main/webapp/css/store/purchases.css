@@ -1,0 +1,184 @@
+@charset "UTF-8";
+/* common */
+button, [type="button"], [type="reset"], [type="submit"] {
+    appearance: button;
+}
+button {
+    background-color: transparent;
+    cursor: pointer;
+    outline: none;
+}
+body, input, textarea, select, button {
+    -webkit-font-smoothing: antialiased;
+    direction: ltr;
+    text-align: left;
+    color: rgb(33, 33, 33);
+    letter-spacing: -0.5px;
+    outline: 0px;
+    border: 0px;
+}
+img {
+    vertical-align: bottom;
+    border-style: none;
+}
+/* 헤더 */
+.purchasesTitleWrap {
+	font-size: 18px;
+    padding: 50px 0px 20px;
+    border-bottom: 1px solid rgb(238, 238, 238); 
+    display: flex;
+    -webkit-box-pack: justify;
+    justify-content: space-between;
+}
+.purchasesTitle {
+	display: block;
+    margin: 0px;
+    padding: 0px;
+    border: 0px;
+    font: inherit;
+    vertical-align: baseline;
+}
+.purchasesNum {
+	font-size: 13pt;
+	color: #0a58ca;
+}
+}
+/* 구매내역 */
+main {
+	display: block;
+}
+#purchaseTable { /* table */
+	border-collapse: collapse;
+    border-spacing: 0px;
+}
+#purchaseTable {
+	width: 100%;
+    text-align: center;
+    table-layout: fixed;
+}
+#purchaseTable thead {
+	font-weight: 500;
+    border-top: 1px solid rgb(30, 29, 41);
+    border-bottom: 1px solid rgb(30, 29, 41);
+}
+#purchaseTable thead > tr {
+	height: 2.5rem;
+}
+#purchaseTable tr > :first-child {
+	width: 10.5rem;
+}
+#purchaseTable thead > tr > th {
+	vertical-align: middle;
+}
+#purchaseTable tr > * {
+	flex-shrink: 0;
+}
+#purchaseTable tbody > tr {
+	border-bottom: 1px solid rgb(220, 219, 228);
+}
+#purchaseTable tr > td:first-child {
+	height: 9.5rem;
+}
+#purchaseTable tr > td {
+	vertical-align: middle;
+    padding: 0.5rem;
+    line-height: 1;
+}
+#purchaseTable tr > td a {
+	color: rgb(0, 114, 230);
+}
+#purchaseTable tr > td:first-child img {
+	width: 100%;
+}
+#purchaseTable tr > :nth-child(2){ /* 상품명 */
+	width: 14rem
+}
+#purchaseTable tr > :nth-child(3) { /* 가격 */
+    width: 11rem;
+}
+#purchaseTable tr > :nth-child(4) { /* 판매자 상점명 */
+    width: 17rem;
+}
+#purchaseTable tr > td:last-child { /* 거래일시 */
+    display: flex;
+    flex-direction: column;
+    -webkit-box-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    justify-content: center;
+    height: 11rem; 
+}
+#purchaseTable tr > :nth-child(5) { /* 거래일시 */
+    width: 13rem;
+}
+/* 거래완료  */
+.completedImg {
+	position: relative;
+    display: flex;
+    -webkit-box-align: center;
+    align-items: center;
+    border: 1px solid rgb(234, 233, 241);
+    border-radius: 2px;
+}
+.completedImgBack {
+	position: absolute;
+    display: flex;
+    flex-direction: column;
+    -webkit-box-pack: center;
+    justify-content: center;
+    -webkit-box-align: center;
+    align-items: center;
+    left: 0px;
+    top: 0px;
+    width: 100%;
+    height: 100%;
+    background: rgba(30, 29, 41, 0.56);
+    font-size: 0.875rem;
+    font-weight: bold;
+    color: rgb(255, 255, 255);
+}
+.completedImgBack > img {
+	width: 20px;
+    height: 20px;
+    margin-bottom: 0.25rem;
+}
+/* footer */
+.footerWrap {
+	padding: 2rem 0px 3rem;
+    display: flex;
+    -webkit-box-pack: center;
+    justify-content: center;
+}
+/* PurchasePaging */
+#purchasePagingDiv {
+	display: flex;
+}
+#currentPaging {
+	width: 33px;
+    height: 33px;
+    display: flex;
+    -webkit-box-pack: center;
+    justify-content: center;
+    -webkit-box-align: center;
+    align-items: center;
+    margin-right: 12px;
+    border: 1px solid rgb(3, 155, 229);
+    border-radius: 2px;
+    color: rgb(255, 255, 255);
+    background: rgb(3, 155, 229);
+}
+#paging {
+	width: 33px;
+    height: 33px;
+    display: flex;
+    -webkit-box-pack: center;
+    justify-content: center;
+    -webkit-box-align: center;
+    align-items: center;
+    margin-right: 12px;
+    border: 1px solid rgb(204, 204, 204);
+    background: rgb(255, 255, 255);
+    border-radius: 2px;
+    color: rgb(155, 153, 169);
+}
+

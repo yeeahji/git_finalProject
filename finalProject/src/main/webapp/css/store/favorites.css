@@ -9,7 +9,7 @@
     justify-content: space-between;
 }
 .favoritesNum {
-	/* color: rgb(247, 47, 51); */
+	font-size: 13pt;
 	color: #0a58ca;
 }
 /* bottom */

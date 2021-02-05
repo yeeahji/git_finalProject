@@ -12,6 +12,15 @@
 	</div>
 </div>
 <div class="reviewsBottom">
+	<!-- 상품후기 추가  -->
+	<div class="reviewFormWrap">
+		<div class="reviewForm">
+			<div class="reviewContent"><textarea class="reviewTextarea"></textarea></div>
+			<div class="reviewRegis"></div>
+		</div><!-- //reviewForm  -->
+	</div><!-- //reviewFormWrap -->
+	
+	`
 	<!-- reviews.js -->
 </div>
 

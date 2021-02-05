@@ -1,0 +1,14 @@
+-- 구매내역 & 판매내역(seller_id='내아이디'로 조회)
+
+CREATE TABLE purchase (
+    my_id varchar2(50), -- 내 아이디(구매자)
+    seller_id varchar2(50),-- 거래 상대방 ID(=판매자)
+    product_seq number, -- 상품
+    purchase_logtime DATE DEFAULT SYSDATE NOT NULL, -- 거래일시
+    CONSTRAINTS fk_myId FOREIGN KEY(my_id) REFERENCES members(mem_id),
+    CONSTRAINTS fk_sellerId FOREIGN KEY(seller_id) REFERENCES members(mem_id),
+    CONSTRAINTS fk_productSeq FOREIGN KEY(product_seq) REFERENCES product(product_seq)
+);
+
+-- 예시 데이터
+insert into purchase values('test1', 'test2', 7, sysdate); --test1(나)이 test2의 7번 상품(곰인형) 구매함

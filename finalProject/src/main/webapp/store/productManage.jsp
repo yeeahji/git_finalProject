@@ -1,28 +1,29 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.min.js"></script>  
-<script defer src="${pageContext.request.contextPath}/js/store/productManage.js"></script>
+<script defer src="${pageContext.request.contextPath}/js/store/productManage.js?ver=1"></script>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/store/productManage.css">    
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/store/store.css">  
-    
+
+<script defer src="${pageContext.request.contextPath}/js/store/store.js"></script>
+
+
+<input type="hidden" id="pg" value="${pg }"> <!-- 상품리스트 pg; 디폴트 1-->
 <main class="productManageWrap">
 	<header class="productSearchWrap">
 		<form class="productSearchForm">
-			<input type="text" placeholder="상품명을 입력해주세요." value>
-			<button type="submit" class="productSearchBtn"></button>
-		</form>
 		
-		<div class="sortNumWrap1">
-			<div class="sortNumWrap2">
-				<div class="sortNumWrap3">
-					<div class="sortNumTitle">
-						<div class="sortNumText">10개씩</div>
-						<input id="sortNumTextInner" readonly tabindex="0" aria-autocomplete="list" class="css-sortNumTextInner" value="">	
-					</div><!-- //sortNumTitle -->
-					<div class="sortNumTextBtn"></div>
-				</div><!-- //sortNumWrap3 -->
-			</div><!-- //sortNumWrap2 -->
-		</div><!-- //sortNumWrap1 -->
+			<input type="hidden" name="pg" value="1"> <!-- 검색관련 pg; 검색을 위해 무조건 일페이지로 셋팅  -->
+			
+			<input type="hidden" name="hiddenVal" value=""> 
+			
+			<input type="hidden" class="hiddenProdMange" value="0">  <!-- 기본:0 전체선택 -->
+			
+			<input class="prodSearchInput" type="text" placeholder="상품명을 입력해주세요." value="">
+			
+			<button type="submit" id="productSearchBtn"></button>
+			
+		</form>
 		
 		<div class="sortProdManageWrap1">
 			<div class="sortProdManageWrap2">
@@ -54,14 +55,39 @@
 		</tbody>
 	</table>
 </main>
+<!-- 페이징 처리-->
 <footer class="footerWrap">
-	<div class="pagingWrap">
-		<a class="beforePage">
-			<img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMiIgaGVpZ2h0PSIxMiIgdmlld0JveD0iMCAwIDEyIDEyIj4KICAgIDxwYXRoIGZpbGw9IiM5Qjk5QTkiIGZpbGwtcnVsZT0iZXZlbm9kZCIgZD0iTTMuNiAxMmEuNTk2LjU5NiAwIDAgMCAuNDQ5LS4yMDJsNC44LTUuNGEuNi42IDAgMCAwIDAtLjc5N2wtNC44LTUuNGEuNi42IDAgMSAwLS44OTcuNzk3TDcuNTk4IDYgMy4xNTIgMTFBLjYuNiAwIDAgMCAzLjYgMTIiLz4KPC9zdmc+Cg==" width="12" height="12" alt="페이징 아이콘" class="beforePageIcon">
-		</a>
-		<a class="page">1</a>
-		<a class="afterPage">
-			<img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMiIgaGVpZ2h0PSIxMiIgdmlld0JveD0iMCAwIDEyIDEyIj4KICAgIDxwYXRoIGZpbGw9IiM5Qjk5QTkiIGZpbGwtcnVsZT0iZXZlbm9kZCIgZD0iTTMuNiAxMmEuNTk2LjU5NiAwIDAgMCAuNDQ5LS4yMDJsNC44LTUuNGEuNi42IDAgMCAwIDAtLjc5N2wtNC44LTUuNGEuNi42IDAgMSAwLS44OTcuNzk3TDcuNTk4IDYgMy4xNTIgMTFBLjYuNiAwIDAgMCAzLjYgMTIiLz4KPC9zdmc+Cg==" width="12" height="12" alt="페이징 아이콘">
-		</a>
-	</div>
+		
+		<div id="storePagingDiv" class="paging" align="center"></div>
+		
 </footer>
+<!-- 상태변경 모달 -->
+<div id="conditionModal">
+	<div class="condiMadalWrap1">
+		<div class="condiMadalWrap2">
+			<div class="condiMadalWrap3">
+					<div class="condiModalTop">
+						<div class="condiModalTopText"><p>z</p></div>
+					</div><!-- ModalTop -->
+					<div class="condiModalBottom">
+						<button class="modalBottomBtn">확인</button>
+					</div><!-- ModalBottom -->
+
+				<div class="condiModalEndWrap"></div>
+			</div>
+		</div>
+	</div><!-- //condiModalWrap2 -->
+</div><!-- //conditionModal -->
+<!-- 삭제버튼 모달 -->
+<div id="deleteModal">
+	<div class="deleteModalWrap"><p class="deleteModalText">상품을 삭제하시겠습니까?</p>
+		<div class="deleteModalBtm">
+			<button type="button" class="dltModalOkBtn">확인</button>
+			<button type="button" class="dltModalCancelBtn">취소</button>
+		</div>
+	</div>
+</div><!-- //deleteModal -->
+
+
+
+

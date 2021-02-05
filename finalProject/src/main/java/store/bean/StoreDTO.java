@@ -7,10 +7,10 @@ import lombok.Setter;
 @Getter
 @Setter
 public class StoreDTO {
-	private String MEM_ID;
-	private String STORE_NICKNAME;
-	private String STORE_IMG;
-	private String STORE_INTRO;
-	private int STORE_ECHO;
-	private int STORE_SCOREAVG;
+	private String mem_id;
+	private String store_nickname;
+	private String store_img;
+	private String store_intro;
+	private int store_echo;
+	private int store_scoreavg;
 }

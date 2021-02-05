@@ -9,7 +9,7 @@
     justify-content: space-between;
 }
 .reviewsNum {
-	/* color: rgb(247, 47, 51); */
+	font-size: 13pt;
 	color: #0a58ca;
 }
 .reviewWrap {
@@ -109,8 +109,24 @@
     top: 1px;
     right: -14px;
 }
-
-
-
+/* 상품후기 작성 창 */
+.reviewForm {
+	border-right: 1px solid rgb(238, 238, 238);
+    border-bottom: 1px solid rgb(238, 238, 238);
+    border-left: 1px solid rgb(238, 238, 238);
+}
+.reviewContent {
+	width: 100%;
+    padding: 20px;
+    height: 80px;
+    border-bottom: 1px solid rgb(238, 238, 238);
+}
+.reviewTextarea {
+	width: 100%;
+    height: 100%;
+    resize: none;
+    font-size: 13px;
+    line-height: 1.5
+}
 
 

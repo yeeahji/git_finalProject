@@ -4,13 +4,14 @@ import java.util.List;
 import java.util.Map;
 
 import product.bean.ProductDTO;
+import store.bean.PurchaseDTO;
 import store.bean.ReviewDTO;
 import store.bean.StoreDTO;
 
 public interface StoreDAO {
 
-	public List<ProductDTO> storeProductList(String mem_id);
-
+	public List<ProductDTO> storeProductList(Map<String, String> map);
+	//기본 총글수
 	public int storeProductTotalA(String mem_id);
 
 	public StoreDTO getMember(String nickname);
@@ -29,4 +30,34 @@ public interface StoreDAO {
 
 	public int favoritesOfProd(Map<String, String> map);
 
+	public List<ProductDTO> productManageList(Map<String, String> map);
+
+	public List<ProductDTO> productManageSearch(Map<String, String> map);
+
+	public int prodManageUpdate(Map<String, String> map);
+	
+	public int prodManageTotalA(String mem_id, String product_manage);
+	
+	public int prodManageTotalA(Map<String, String> map);
+	
+	public int productUp(Map<String, String> map);
+	
+	public int productDlt(Map<String, String> map);
+	
+	public ProductDTO existProd(Map<String, String> map);
+	
+	public List<PurchaseDTO> purchaseList(Map<String, String> map);
+	
+	public int purchaseTotalA(String my_id);
+	// 상점 기본 정보
+	public StoreDTO storeInfo(String mem_id);
+	// 상점 소개글 업뎃
+	public int introUpdate(Map<String, String> map);
+	// 프사 업뎃
+	public void profileImgUpdate(Map<String, String> map);
+	
+	public int salesNum(String mem_id);
+	
+	public void echoUpdate(Map<String, String> map);
+	
 }

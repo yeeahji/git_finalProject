@@ -6,5 +6,7 @@
 		<typeAlias type="member.bean.ZipcodeDTO" alias="zipcode"/>
 		<typeAlias type="product.bean.ProductDTO" alias="product"/>
 		<typeAlias type="store.bean.StoreDTO" alias="store"/>
+		<typeAlias type="store.bean.ReviewDTO" alias="review"/>
+		<typeAlias type="store.bean.PurchaseDTO" alias="purchase"/>
 	</typeAliases>
 </configuration>
