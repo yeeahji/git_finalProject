@@ -17,6 +17,12 @@ public class MemberDAOMybatis implements MemberDAO {
 	@Autowired
 	private SqlSession sqlSession;
 	
+//	[시큐리티: 권한 가져오기] ----------------------------------------------------------	
+	@Override
+	public List<String> getAuth(String mem_id) {
+		return sqlSession.selectList("memberSQL.getAuth", mem_id);
+	}	
+	
 //	[회원가입] ----------------------------------------------------------
 	@Override
 	public MemberDTO checkId(String id) {

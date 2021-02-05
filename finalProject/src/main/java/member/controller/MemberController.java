@@ -1,11 +1,11 @@
 package member.controller;
 
 import java.io.IOException;
-import java.text.DateFormat;
-import java.util.Date;
+import java.security.Principal;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Locale;
 import java.util.Map;
 import java.util.Random;
 
@@ -19,6 +19,9 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -39,10 +42,9 @@ public class MemberController {
 	private MemberService memberService;
 	
 	@Autowired  
-    JavaMailSender mailSender;  
+    JavaMailSender mailSender;
 	
-	private static final Logger logger=LoggerFactory.getLogger(MemberController.class);
-	private static final String String = null;
+	//private static final Logger logger=LoggerFactory.getLogger(MemberController.class);
 	
 //	[회원가입]===================================================================================
 	@RequestMapping(value = "/joinForm", method =RequestMethod.GET)
@@ -131,23 +133,45 @@ public class MemberController {
  	}
 //	[로그인]===================================================================================
 //	- 로그인 페이지 이동
-	@RequestMapping(value = "/loginForm", method =RequestMethod.GET)
-	public String loginForm() {
-		return "/member/loginForm";
+	@RequestMapping(value = "/loginForm", method={RequestMethod.GET, RequestMethod.POST})
+	public String loginForm(Model model) { //headerLogin, security-context에서 GET방식, loginFailHandler에선 POST방식으로 오므로 둘 다 설정해줌 
+		model.addAttribute("display", "/member/loginForm.jsp");
+		return "/index";
 	}
 //	- 로그인
 	@RequestMapping(value = "/login", method =RequestMethod.POST)
 	@ResponseBody
-	public String login(@RequestParam Map<String, String> map, HttpSession session) {
-		String kakaoNickname = map.get("id");
-		String kakaoEmail = map.get("email");
-		System.out.println("프로필 카카오 닉네임 : "+ kakaoNickname);
-		System.out.println("카카오 이메일 : "+ kakaoEmail);
-		return memberService.login(map, session );
+	public void login(@RequestParam Map<String, String> map) {
+		memberService.login(map);
+	}
+//	- 카카오
+	@RequestMapping(value = "/kakao", method =RequestMethod.POST)
+	@ResponseBody
+	public String kakao(@RequestParam Map<String, String> map, HttpSession session) {
+		MemberDTO memberDTO = new MemberDTO();
+		memberDTO.setMem_id(map.get("mem_id"));
+		memberDTO.setMem_email(map.get("mem_email"));
+		memberDTO.setEnabled(true);
+		memberDTO.setAuthorities(Arrays.asList(new String[]{"ROLE_USER"}));
+		
+		return memberService.kakao(memberDTO);
 	}
 
-	
-	
+//	- 로그인 실패
+	@RequestMapping(value="/loginFail", method=RequestMethod.POST)
+	public String loginFail() throws Exception {
+		return "/member/loginFail";
+	}
+//	- 로그인 거부(권한이 없을 때 접근 거부 페이지 = 403 에러 페이지)
+	@RequestMapping(value="/accessDenied")
+	public String accessDeniedPage() throws Exception {
+		return "/member/accessDenied";
+	}
+//	- 중복 로그인
+	@RequestMapping(value="/accessDuplicated")
+	public String accessDuplicated() throws Exception {
+		return "/member/accessDuplicated";
+	}
 //	- 로그아웃
 	@RequestMapping(value ="/logout", method=RequestMethod.GET)
 	public String logout(HttpSession session) {

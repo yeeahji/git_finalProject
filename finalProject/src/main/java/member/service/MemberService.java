@@ -1,5 +1,6 @@
 package member.service;
 
+import java.security.Principal;
 import java.util.List;
 import java.util.Map;
 
@@ -10,7 +11,9 @@ import member.bean.ZipcodeDTO;
 
 public interface MemberService {
 
-	public String login(Map<String, String> map, HttpSession session);
+	public void login(Map<String, String> map);
+	
+	public String kakao(MemberDTO memberDTO);
 
 	public String checkId(String id);
 
@@ -31,5 +34,7 @@ public interface MemberService {
 	public MemberDTO findPwd(Map<String, String> map);
 
 	public void resetPwd(Map<String, String> map);
+
+	
 
 }

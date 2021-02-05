@@ -37,6 +37,10 @@
 	<context:component-scan base-package="notice.dao"/>
 	<context:component-scan base-package="notice.service"/>
 
+	<!-- admin -->
+	<context:component-scan base-package="admin.bean"/>
+	<context:component-scan base-package="admin.dao"/>
+	<context:component-scan base-package="admin.service"/>
 
 	<!-- 이메일 인증 -->
 	<bean id="mainSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">

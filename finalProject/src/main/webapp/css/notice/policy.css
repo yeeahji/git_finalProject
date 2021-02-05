@@ -50,13 +50,13 @@ a {
 }
 .p_revel2_1 {
 	width: 100%;
-    display: none;
     -webkit-box-pack: center;
     justify-content: center;
     position: sticky;
     top: 0px;
     left: 0px;
     z-index: 40;
+    display: flex;
 }
 .p_revel2_2 {
 	display: flex;
@@ -156,13 +156,13 @@ a {
 main {
 	display: block;
 }
-.policy_main_inner{
+#pm_inner{
 	color: rgb(30, 29, 41);
     background: rgb(255, 255, 255);
     padding: 4rem 3.5rem;
 	
 }
-.policy_main_inner > div {
+#pm_inner > div {
     display: flex;
     flex-direction: row;
 }

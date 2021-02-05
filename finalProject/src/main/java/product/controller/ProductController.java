@@ -6,6 +6,8 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -94,13 +96,15 @@ public class ProductController {
 	
 	@RequestMapping(value="getMyLocation", method=RequestMethod.POST) //내 위치 불러오기
 	@ResponseBody
-	public String getMyLocation(@RequestParam String mem_id) {
+	public String getMyLocation(HttpSession session) {
+		String mem_id = (String)session.getAttribute("memId");
 		return productService.getMyLocation(mem_id);
 	}
 	
 	@RequestMapping(value="getMyRecentLocation", method=RequestMethod.POST) //최근 위치 불러오기
 	@ResponseBody
-	public String getMyRecentLocation(@RequestParam String mem_id) {
+	public String getMyRecentLocation(HttpSession session) {
+		String mem_id = (String)session.getAttribute("memId");
 		return productService.getMyRecentLocation(mem_id);
 	}
 	

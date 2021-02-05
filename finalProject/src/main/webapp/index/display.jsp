@@ -66,7 +66,7 @@
 
 
 <div id="moreShow">
-	<a id="pe-auto" class="pe-auto" onclick="addPage()">더 보기<br>▼
+	<a id="pe-auto" class="pe-auto" onclick="addPage()" style="height: 100%; cursor: pointer;">더 보기<br>▼
 	</a>
 </div>
 

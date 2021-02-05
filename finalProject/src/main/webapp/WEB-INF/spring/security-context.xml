@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:security="http://www.springframework.org/schema/security"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+		http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/security
+		http://www.springframework.org/schema/security/spring-security-5.3.xsd">
+	
+   	<!-- auto-config="true" 로 설정시 가장 기본적인 로그인페이지가 생성 -->
+   	<!-- use-expressions : SPEL(spring express language) 사용여부. default는 true(true로 해야 access 속성 사용 가능) --> 
+    <security:http auto-config="true" use-expressions="true">
+    	<!-- [ 권한별 접근 가능한 url 등록 ] -->
+    	<!-- hasAnyRole: 설정된 role 중 하나면 접근 가능, hasRole: 설정된  role만 접근 가능 -->
+    	<!-- permitAll : 모든사용자 접근 가능(항상 아래에 위치! 순서 영향 있음. 보통 허용->금지 순서) <-> denyAll -->
+        <!-- <security:intercept-url pattern="/favicon.ico" access="hasRole('ROLE_ANONYMOUS')"/> -->
+    	<security:intercept-url pattern="/resources/**" access="permitAll" /> <!-- 정적리소스는 접근 허용 (로그인 화면 안깨지게) -->
+        <security:intercept-url pattern="/chat/**" access="hasRole('ROLE_USER')"/>
+        <security:intercept-url pattern="/store/**" access="hasRole('ROLE_USER')"/> <!-- 다른 사람 상점은 볼 수 있도록 수정하기 -->
+        <security:intercept-url pattern="/product/registForm" access="hasRole('ROLE_USER')"/>
+        <security:intercept-url pattern="/admin/**" access="hasRole('ROLE_ADMIN')"/> <!-- 관리자페이지는 관리자만 접근 -->
+        <security:intercept-url pattern="/**" access="permitAll"/>
+
+        <!-- [ 로그인 설정(사용자 지정) ] -->
+        <!-- login-page: 로그인 페이지의 url, login-processing-url: 로그인을 처리하는 url -->
+        <!-- always-use-default-target: 로그인 성공 후 default url로 갈 것인지 설정(T/F) -->
+        <!-- default-target-url: 로그인 성공 시 이동할 url, authentication-failure-url: 로그인 실패 시 이동할 url -->
+		<!-- username-parameter: 사용자 계정명을 어떤 파라미터로 받을지 설정함(loginForm의 input 태그의 name과 동일하게 작성) -->
+		<!-- authentication-failure-handler-ref: 로그인 실패 시 해당 클래스 호출(ex 로그인 실패 수에 따른 자동 로그인 방지) <-> success -->
+ 		<security:form-login login-page="/member/loginForm"
+							 login-processing-url="/member/login"
+							 default-target-url="/"
+							 authentication-failure-handler-ref="memberLoginFailHandler"
+ 							 username-parameter="mem_id"
+							 password-parameter="mem_pwd"/>
+							
+		<!-- [ 로그아웃 설정 ] -->	
+		<!-- logout-url : 로그아웃을 처리하는 url, logout-success-url : 로그아웃 성공 시 이동할 url -->
+		<!-- invalidate-session: 세션 삭제 여부, delete-cookies: 쿠키 삭제 여부 -->
+        <security:logout logout-url="/member/logout"
+        				 logout-success-url="/"
+        				 invalidate-session="true"
+        				 delete-cookies="true" />
+        
+        <!-- [ 접근 권한 에러 페이지(403에러 대체) ] -->
+        <security:access-denied-handler error-page="/member/accessDenied"/>
+        
+        <!-- [ 중복 로그인 방지 ] -->
+		<!-- max-sessions: 중복 로그인 가능한 세션 수, expired-url: 중복 시 이동할 url -->
+		<security:session-management>
+			<security:concurrency-control max-sessions="1" expired-url="/member/accessDuplicated" />
+		</security:session-management>
+		
+		<!-- [ 자동 로그인 ] -->
+		<security:remember-me data-source-ref="dataSource" 
+				              remember-me-parameter="remember-me" 
+				              token-validity-seconds="604800"/> <!-- 7일 -->
+		
+		<!-- [ csrf 사용 여부(SSL(보안-https)과 관련) ] -->
+        <security:csrf disabled="true"/> <!-- true: 사용 안함 (default는 false) -->
+        
+    </security:http>
+ 
+ 	<!-- [ 패스워드 단방향 암호화 ] -->
+	<bean id="passwordEncoder" class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder"/>
+
+    <security:authentication-manager>
+    	<!-- [ 커스텀클래스 참조하는 DB 인증 방식 ] -->
+   		<security:authentication-provider user-service-ref="memberServiceImpl">
+		</security:authentication-provider>
+		<!--
+		<security:authentication-provider>
+        	[ 인메모리 방식 ]
+        	
+            <security:user-service>
+                <security:user name="user" password="1234" authorities="ROLE_USER"/>
+                <security:user name="admin" password="1234" authorities="ROLE_ADMIN"/>  
+            </security:user-service>
+           
+            
+            [ DB 인증 방식 ]
+            users-by-username-query: 사용자 인증 가져오기
+            authorities-by-username-query: 권한 인증 가져오기
+            username, password, enabled(0:비활성-휴면,정지 1:활성), authority 컬럼은 스프링에서 지정된 컬럼명이므로 테이블의 컬럼명과 다르면 as로 별칭 설정 필요
+            CASE WHEN x = y THEN a ELSE b END : 조건 x=y 가 true일 경우 a이고 그렇지 않으면 b
+            <security:jdbc-user-service data-source-ref="dataSource"
+								users-by-username-query="SELECT mem_id AS username,
+														 		mem_pwd AS password,
+																enabled
+														 FROM members WHERE mem_id=?"
+								authorities-by-username-query="SELECT mem_id AS username,
+															   		  authority
+															   FROM members WHERE mem_id=?"
+			/>
+								
+        </security:authentication-provider>
+        -->
+    </security:authentication-manager>
+
+</beans>

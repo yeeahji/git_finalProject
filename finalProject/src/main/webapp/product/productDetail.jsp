@@ -4,8 +4,77 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>상품상세정보</title>
 <link rel="stylesheet" href="../css/product/productDetail.css">
+<script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script src="/resources/vendor/jquery/jquery-3.5.1.min.js"></script>
+<script src="../js/product/product.js"></script>
+<script type="text/javascript">
+	var imgCommonPreview = new Image();
+	function viewPic(filepath) {
+		if (filepath == "") {
+			alert('등록된 이미지가 없습니다.');
+			return;
+		}
+		imgCommonPreview.src = filepath;
+		setTimeout("createPreviewWin(imgCommonPreview)", 100);
+	}
+	function createPreviewWin(imgCommonPreview) {
+		if (!imgCommonPreview.complete) {
+			setTimeout("createPreviewWin(imgCommonPreview)", 100);
+			return;
+		}
+		var scrollsize = 17;
+		var swidth = screen.width - 10;
+		var sheight = screen.height - 90;
+		var wsize = imgCommonPreview.width;
+		var hsize = imgCommonPreview.height;
+		if (wsize < 50)
+			wsize = 50; // 가로 최소 크기
+		if (hsize < 50)
+			hsize = 50; // 세로 최소 크기
+		if (wsize > swidth)
+			wsize = swidth; // 가로 최대 크기
+		if (hsize > sheight)
+			hsize = sheight; // 세로 최대 크기
+
+		// 세로가 최대크기를 초과한경우 세로스크롤바 자리 확보
+		if ((wsize < swidth - scrollsize) && hsize >= sheight)
+			wsize += scrollsize;
+		// 가로가 최대크기를 초과한경우 가로스크롤바 자리 확보
+		if ((hsize < sheight - scrollsize) && wsize >= swidth)
+			hsize += scrollsize;
+		// IE 6,7 전용 : 가로세로 크기가 보통일때 세로 스크롤바 자리 확보
+		if ((wsize < swidth - scrollsize)
+				&& hsize < sheight
+				&& (navigator.userAgent.indexOf("MSIE 6.0") > -1 || navigator.userAgent
+						.indexOf("MSIE 7.0") > -1))
+			wsize += scrollsize;
+
+		// 듀얼 모니터에서 팝업 가운데 정렬하기 
+		var mtWidth = document.body.clientWidth;
+		// 현재 브라우저가 있는 모니터의 화면 폭 사이즈 
+		var mtHeight = document.body.clientHeight;
+		// 현재 브라우저가 있는 모니터의 화면 높이 사이즈 
+		var scX = window.screenLeft;
+		// 현재 브라우저의 x 좌표(모니터 두 대를 합한 총 위치 기준) 
+		var scY = window.screenTop;
+		// 현재 브라우저의 y 좌표(모니터 두 대를 합한 총 위치 기준) 
+		var popX = scX + (mtWidth - wsize) / 2 - 50;
+		// 팝업 창을 띄울 x 위치 지정(모니터 두 대를 합한 총 위치 기준) 
+		var popY = scY + (mtHeight - hsize) / 2 - 50;
+		// 팝업 창을 띄울 y 위치 지정(모니터 두 대를 합한 총 위치 기준) 
+		// window.open('주소', '이름(공란가능)', '속성');
+		imageWin = window.open("", "", "top=" + popY + ",left=" + popX
+				+ ",width=" + wsize + ",height=" + hsize
+				+ ",scrollbars=yes,resizable=yes,status=no");
+		imageWin.document
+				.write("<html><title>Preview</title><body style='margin:0;cursor:pointer;' title='Close' onclick='window.close()'>");
+		imageWin.document.write("<img src='" + imgCommonPreview.src + "'>");
+		imageWin.document.write("</body></html>");
+	}
+</script>
 </head>
 <body>
 	<div class="detail__area">
@@ -20,18 +89,18 @@
 					<div class="detail-menu-cbox__area">
 						<div class="detail-menu-cbox__div">
 							<div class="detail-menu-cbox__display">
-								<select name="combobox">
+								<select name="combobox" id="cate_name">
 									<option value="test1">1차카테고리</option>
 									<option value="test2">카테고리</option>
 									<option value="test2">카테고리</option>
 								</select>
-							</div>
-							<div class="detail-menu-cbox__list">
-								<select name="combobox">
-									<option value="test1">2차카테고리</option>
-									<option value="test2">카테고리</option>
-									<option value="test2">카테고리</option>
-								</select>
+								<div class="detail-menu-cbox__list">
+									<select name="combobox" id="cate_parent">
+										<option value="test1">2차카테고리</option>
+										<option value="test2">카테고리</option>
+										<option value="test2">카테고리</option>
+									</select>
+								</div>
 							</div>
 						</div>
 					</div>
@@ -47,20 +116,40 @@
 							<!-- 상세 상품 이미지 1장-->
 							<div class="swiper-wrapper">
 								<div class="swiper-slide">
-									<img src="../image/product_test.png" alt="상세 상품 이미지" />
+									<img src="../image/product/product_test.png" alt="상세 상품 이미지"
+										id="product_img" />
 								</div>
+
+								<div class="swiper-slide">
+									<img src="../image/product/1.png" alt="상세 상품 이미지"
+										id="product_img" />
+								</div>
+
+								<div class="swiper-slide">
+									<img src="../image/product/2.png" alt="상세 상품 이미지"
+										id="product_img" />
+								</div> 
 							</div>
 							<div class="detail-info__image__watermark"></div>
 							<!-- 확대 버튼-->
-							<button class="detail-info__image--enlg">
+							<button class="detail-info__image--enlg"
+								onclick="javascript:viewPic('../image/product/product_test.png')">
 								<i class="fas fa-search"></i> 확대
 							</button>
 							<div
-								class="detail-info__image--prev swiper-button-next swiper-button-white"></div>
+								class="detail-info__image--prev swiper-button-next swiper-button-white"
+								onclick="moveSlides(-1)">&#10094;</div>
 							<div
-								class="detail-info__image--next swiper-button-prev swiper-button-white"></div>
+								class="detail-info__image--next swiper-button-prev swiper-button-white"
+								onclick="moveSlides(1)">&#10095;</div>
 							<!-- 이미지 개수 ~ -->
-							<div class="swiper-pagination"></div>
+							<div class="swiper-pagination">
+								<div style="text-align: center">
+									<span class="dot" onclick="currentSlide(0)"></span> <span
+										class="dot" onclick="currentSlide(1)"></span> <span
+										class="dot" onclick="currentSlide(2)"></span>
+								</div>
+							</div>
 						</div>
 					</div>
 					<div class="detail-info__text__div">
@@ -69,7 +158,7 @@
 								<div class="detail-info__text-header">
 									<div class="detail-info__text-title">양말</div>
 									<div class="detail-info__text-price__div">
-										<div class="detail-info__price">
+										<div class="detail-info__price" id="product_price">
 											1,200<span>원</span>
 										</div>
 									</div>
@@ -78,17 +167,17 @@
 									<div class="detail-info__text-body-top">
 										<!-- 찜, 조회수, 시간 -->
 										<div class="detail-info__text-body-topL">
-											<div class="detail-info--topL-item">
+											<!-- <div class="detail-info--topL-item">
 												<i class="fas fa-heart"></i>
-												<div id="zzimCount">3</div>
-											</div>
+												<div id="zzim">3</div>
+											</div> -->
 											<div class="detail-info--topL-item">
 												<i class="fas fa-eye"></i>
-												<div id="viewCount">34</div>
+												<div id="view">34</div>
 											</div>
 											<div class="detail-info--topL-item">
 												<i class="fas fa-clock"></i>
-												<div class="">1 일전</div>
+												<div id="product_logtime">1 일전</div>
 											</div>
 										</div>
 										<button class="detail-info__text-body-topR">
@@ -99,22 +188,25 @@
 										<!-- 아이템 한개 -->
 										<div class="detail-info__text-body-bItem">
 											<div class="detail-info__text-body-bItem-title">상품상태</div>
-											<div class="detail-info__text-body-bItem-content">새상품</div>
+											<div class="detail-info__text-body-bItem-content"
+												id="product_condition">새상품</div>
 										</div>
 										<!-- 아이템 한개 -->
-										<div class="detail-info__text-body-bItem">
+										<!-- <div class="detail-info__text-body-bItem">
 											<div class="detail-info__text-body-bItem-title">교환여부</div>
 											<div class="detail-info__text-body-bItem-content">교환불가능</div>
-										</div>
+										</div> -->
 										<!-- 아이템 한개 -->
 										<div class="detail-info__text-body-bItem">
 											<div class="detail-info__text-body-bItem-title">배송비</div>
-											<div class="detail-info__delivery">배송비 별도</div>
+											<div class="detail-info__delivery" id="product_delivery_fee">배송비
+												별도</div>
 										</div>
 										<!-- 아이템 한개 -->
 										<div class="detail-info__text-body-bItem">
-											<div class="detail-info__text-body-bItem-title">거래지역</div>
-											<div class="detail-info__location">서울</div>
+											<div class="detail-info__text-body-bItem-title"
+												id="product_location">거래지역</div>
+											<div class="detail-info__location" id="product_location">서울</div>
 										</div>
 									</div>
 								</div>
@@ -132,7 +224,7 @@
 									</div>
 								</div>
 								<button class="detail-call__btn" id="callBtn">연락하기</button>
-								<button class="detail-buy_btn" id="buyBtn">바로구매</button>
+								<!-- <button class="detail-buy_btn" id="buyBtn">바로구매</button> -->
 							</div>
 							<!-- 신고 모달-->
 							<div class="detail-modal" id="productReportModal">
@@ -225,14 +317,68 @@
 					</div>
 				</div>
 			</div>
+
+			<!-- 연관상품목록 -->
+			<div class="product-rel-body">
+				<div class="product-rel-div">
+					<div class="product-rel-contents">
+						<div class="product-rel-content-div">
+							<a class="product-rel-content-a" href="#">
+								<div class="product-rel-contents-div">
+									<img src="../image/product/product_test.png" width="194"
+										height="194" alt="상세 상품 이미지">
+								</div>
+								<div class="product-rel-content-disc">
+									<div class="product-rel-content-disc-title">연관상품1</div>
+								</div>
+							</a>
+						</div>
+						<div class="product-rel-content-div">
+							<a class="product-rel-content-a" href="#">
+								<div class="product-rel-contents-div">
+									<img src="../image/product/product_test.png" width="194"
+										height="194" alt="상세 상품 이미지">
+								</div>
+								<div class="product-rel-content-disc">
+									<div class="product-rel-content-disc-title">연관상품2</div>
+								</div>
+							</a>
+						</div>
+						<div class="product-rel-content-div">
+							<a class="product-rel-content-a" href="#">
+								<div class="product-rel-contents-div">
+									<img src="../image/product/product_test.png" width="194"
+										height="194" alt="상세 상품 이미지">
+								</div>
+								<div class="product-rel-content-disc">
+									<div class="product-rel-content-disc-title">연관상품3</div>
+								</div>
+							</a>
+						</div>
+						<div class="product-rel-content-div">
+							<a class="product-rel-content-a" href="#">
+								<div class="product-rel-contents-div">
+									<img src="../image/product/product_test.png" width="194"
+										height="194" alt="상세 상품 이미지">
+								</div>
+								<div class="product-rel-content-disc">
+									<div class="product-rel-content-disc-title">연관상품4</div>
+								</div>
+							</a>
+						</div>
+					</div>
+				</div>
+			</div>
+
 			<!-- 상품 정보 -->
 			<div class="detail-product__area">
 				<!-- 상품 설명 및 댓글 -->
 				<div class="detail-explain__div">
 					<div class="detail-explain__tabs">
 						<div class="detail-explain__tab">
-							<span>상품 정보</span> <span class="detail-explain-span">상품문의</span>
-							<span class="tab__count">(1)</span>
+							<span>상품 정보</span>
+							<!--  <span class="detail-explain-span"></span>
+							<span class="tab__count"></span>-->
 						</div>
 					</div>
 					<div class="detail-explain__content">
@@ -241,7 +387,7 @@
 							<div class="detail-explain__title">상품정보</div>
 							<div class="detail-explain__article">
 								<div class="detail-article__margin"></div>
-								<div class="detail-article__text">양말이요</div>
+								<div class="detail-article__text">양말이요 팔아요</div>
 								<div class="detail-article__seller-list">
 									<!-- 지역 아이템 -->
 									<div class="detail-article__seller-item">
@@ -249,7 +395,7 @@
 											<i class="fas fa-map-marker-alt fa-2x"></i> 거래지역
 										</div>
 										<div class="detail-article-item__body">
-											<div class="detail-article--location">서울</div>
+											<div class="detail-article--location" id="product_location">서울</div>
 										</div>
 									</div>
 									<!-- 카테고리 아이템 -->
@@ -258,7 +404,7 @@
 											<i class="fas fa-folder fa-2x"></i> 카테고리
 										</div>
 										<div class="detail-article-item__body">
-											<a class="detail-article--category"> 의류<i
+											<a class="detail-article--category" id="cate_name"> 의류<i
 												class="fas fa-chevron-right"></i>
 											</a>
 										</div>
@@ -269,7 +415,8 @@
 											<i class="fas fa-tags fa-2x"></i> 상품태그
 										</div>
 										<div class="detail-article-item__body">
-											<div class="detail-article--tag-list">
+											<div class="detail-article--tag-list" id="product_hashtag">
+												양말/스타킹
 												<!-- 태그 아이템 1개 -->
 											</div>
 										</div>
@@ -277,97 +424,16 @@
 								</div>
 							</div>
 						</div>
-						<!-- 댓글 영역-->
-						<div class="detail-comment__area">
-							<div class="detail-comment__header">
-								상품문의 <span class="detail--empha">1</span>
-							</div>
-							<div class="detail-comment__body">
-								<div class="detail-comment__input">
-									<textarea class="detail-comment__textarea" id="commentTextArea"
-										placeholder="상품문의 입력"></textarea>
-								</div>
-								<div class="detail-comment__reg">
-									<div class="detail-comment__reg-count" id="commentSize">0/100</div>
-									<button class="detail-comment__reg-btn">
-										<i class="fas fa-pencil-alt"></i> 등록
-									</button>
-								</div>
-							</div>
-							<div class="detail-comment__history">
-								<!-- 댓글 아이템 1개 -->
-								<div class="detail-history__area" data-commentno="33">
-									<div class="detail-history__item">
-										<a class="detail-history__left" href="#"> <img
-											src="/resources/images/user/qna/customer.svg" alt="프로필 이미지">
-										</a>
-										<div class="detail-history__right">
-											<div class="detail-right__head">
-												<div class="detail-right__title">댓글단사람이름</div>
-												<div class="detail-right__time">1 일전</div>
-											</div>
-											<div class="detail-right__body">양말 사요</div>
-											<div class="detail-right__footer">
-												<div class="right-footer__btn comment-response-btn">
-													<i class="fas fa-comment"></i> 댓글 달기
-												</div>
-												<div class="right-footer__btn comment-report-btn">
-													<i class="fas fa-lightbulb"></i> 신고 하기
-												</div>
-											</div>
-										</div>
-									</div>
-								</div>
-								<!-- 댓글 신고 모달-->
-								<div class="comment-report-modal__area">
-									<div class="comment-report-modal__div">
-										<div class="creport-modal__head">
-											<div class="creport-modal__title">신고하기</div>
-											<button class="creport-modal__close">
-												<i class="fas fa-times fa-2x"></i>
-											</button>
-										</div>
-										<div class="creport-modal__body">
-											<div class="creport-modal__item">
-												<div class="creport-modal__item-title">
-													<span>광고(교신 및 상점홍보)</span>
-													<button type="button">
-														<i class="fas fa-chevron-down fa-2x"></i>
-													</button>
-												</div>
-												<div class="creport-modal__item-content">
-													<div class="creport-modal__link">
-														<button type="button">교환신청</button>
-													</div>
-													<div class="creport-modal__link">
-														<button type="button">상점홍보</button>
-													</div>
-													<div class="creport-modal__link">
-														<button type="button">타사이트,어플광고</button>
-													</div>
-													<div class="creport-modal__input">
-														<input type="text" placeholder="기타(사유)">
-														<button type="button">등록</button>
-													</div>
-												</div>
-											</div>
-										</div>
-									</div>
-								</div>
-								<div class="detail-comment__bottom-margin"></div>
-							</div>
-						</div>
-
 					</div>
 				</div>
 				<!-- 상점 정보-->
 				<div class="detail-store__area">
 					<div class="detail-export__link-list">
 						<button id="kakao-link-btn" class="detail-export_kakao">
-							<img src="../images/kakao.png" width="10px" />
+							<img src="../image/product/kakao.png" width="10px" />
 						</button>
 						<button type="button" class="detail-export__url" id="shareUrlBtn">
-							<img src="../images/url.png" alt="url 아이콘"> <span
+							<img src="../image/product/url.png" alt="url 아이콘"> <span
 								class="url__msg"> 클릭하여 복사하기 </span>
 						</button>
 					</div>
@@ -375,45 +441,37 @@
 						<div class="detail-store__title">상점정보</div>
 						<div class="detail-store__content">
 							<div class="detail-store__content--title">
-								<a class="store-content-title__left" href="/shop/76/products.do">
-									<img src="../image/profile_test.png" alt="판매자 프로필 이미지" />
+								<a class="store-content-title__left" href="#"> <img
+									src="../image/product/profile_test.png" alt="판매자 프로필 이미지"
+									id="store_img" />
 								</a>
 								<div class="store-content-title__right">
-									<a class="store-content-title__link"
-										href="/shop/76/products.do"> 판매자이름</a>
+									<a class="store-content-title__link" href="#"
+										id="store_nickname "> 판매자이름</a>
 									<div class="store-content-info__list">
-										<a class="store-content-info__item"
-											href="/shop/76/products.do"> 상품 16</a>
+										<a class="store-content-info__score" id="store_scoreAvg">
+											평균평점</a>
 									</div>
 								</div>
 							</div>
-							<!-- 판매자 상품 이미지 -->
-							<div class="detail-store__image-list">
-								<!-- 상품 이미지 1개 -->
-								<div class="detail-store__image-item">
-									<a class="detail-store__image-link"> <img
-										src="/image/product_test.png" alt="상품 이미지">
-										<div class="detail-store__image-price">
+							<!-- 판매자 에코지수 -->
+							<div class="detail-store__eco">
+								<!-- 에코지수 이미지-->
+								<div class="detail-store__image-eco">
+									<a class="detail-store__image-ecoIcon"> <img
+										src="../image/product/seedling-solid.svg" width="126px"
+										height="96px" alt="에코지수이미지" /> <i class="fas fa-seedling"></i>
+										<!-- <div class="detail-store__image-price">
 											<span>100</span>원
-										</div>
+										</div>  -->
 									</a>
 								</div>
-								<!-- 상품 이미지 1개 -->
-								<div class="detail-store__image-item">
-									<a class="detail-store__image-link"> <img
-										src="/image/product_test.png" alt="상품 이미지">
-										<div class="detail-store__image-price">
-											<span>200</span>원
-										</div>
-									</a>
+								<!-- 에코지수 상세 -->
+								<div class="detail-store__eco">
+									에코지수<a class="detail-store__text-eco" id="store_echo">10 </a>
 								</div>
 							</div>
-							<!-- 상품 더보기 -->
-							<div class="detail-store__more-btn">
-								<a class="detail-store__more-link"> <span
-									class="detail--empha">2 개</span> 상품 더보기
-								</a>
-							</div>
+
 							<!-- 상점 리뷰 -->
 							<div class="detail-store__review-div">
 								<div class="detail-review__head">
@@ -426,15 +484,14 @@
 										</div>
 										<a class="detail-review-nothing--link"> 후기작성 </a>
 									</div>
-									<!-- 상점후기 댓글 1개-->
 								</div>
 							</div>
 							<!-- 하단 버튼 -->
 							<div class="detail-bottom__btns">
-								<div class="detail-bottom__call-btn" id="bottomCallBtn">
-									연락하기</div>
+								<!--  <div class="detail-bottom__call-btn" id="bottomCallBtn">
+									연락하기</div>-->
 								<div class="detail-bottom__buy-btn" id="bottomBuyBtn">
-									바로구매</div>
+									연락하기</div>
 							</div>
 						</div>
 
@@ -442,16 +499,16 @@
 
 				</div>
 			</div>
-			<!-- 연락하기 모달-->
-			<div class="detail-modal" id="callModal">
+
+			<!--<div class="detail-modal" id="callModal">
 				<div class="call-modal__area">
 					<button class="call-modal__close">
 						<i class="fas fa-times"></i>
 					</button>
-					<img src="../.image./profile_test.png" alt="연락하기 프로필 이미지"
+					<img src="../image/product/profile_test.png" alt="연락하기 프로필 이미지"
 						class="call-modal__profile">
 					<div class="call-modal__title">
-						<div class="call-modal__title-text">판매자이름</div>
+						<div class="call-modal__title-text" id="store_nickname ">판매자이름</div>
 					</div>
 					<div class="call-modal__content">
 						<div class="call-modal__item">
@@ -464,35 +521,35 @@
 							<div class="call-modal__item-title">상점별점후기</div>
 							<div class="call-modal__item-content">
 								<div class="call-modal__item-stars">
-									<img src="../images/zero.png" width="15px" height="14px" /> <img
-										src="../images/zero.png" width="15px" height="14px" /> <img
-										src="../images/zero.png" width="15px" height="14px" /> <img
-										src="../images/zero.png" width="15px" height="14px" /> <img
-										src="../images/zero.png" width="15px" height="14px" />
+									<img src="../images/product/zero.png" width="15px"
+										height="14px" /> <img src="../images/product/zero.png"
+										width="15px" height="14px" /> <img
+										src="../images/product/zero.png" width="15px" height="14px" />
+									<img src="../images/product/zero.png" width="15px"
+										height="14px" /> <img src="../images/product/zero.png"
+										width="15px" height="14px" />
 								</div>
 							</div>
 						</div>
 						<div class="call-modal__item">
-							<div class="call-modal__item-title">상점연락처</div>
+							<div class="call-modal__item-title" id="mem_tel">상점연락처</div>
 							<div class="call-modal__item-content">연락처 비공개</div>
 						</div>
 					</div>
 					<div class="call-modal__btn">
-						<button class="call-modal__link"
-							data-href="/talk/user/76.do?productNo=78">
+						<button class="call-modal__link">
 							<i class="fas fa-phone"></i> 연락하기
 						</button>
 					</div>
 				</div>
 			</div>
-			<!-- 바로구매 모달 -->
-			<div class="detail-modal" id="buyModal">
+			
+			 <div class="detail-modal" id="buyModal">
 				<form name="myPurchase" id="purchases" method="POST"
 					action="purchases.do">
 					<div class="buy-modal__area">
 						<h2 class="buy-modal__title">
-							<!-- 메인 로고 -->
-							<img src="../image/profile_test.png" alt="">안전결제 <a
+							<img src="../image/product/profile_test.png" alt="">안전결제 <a
 								href="#" target="_blank" rel="noopener noreferrer"> <i
 								class="fas fa-truck"></i> 안전결제란?
 							</a>
@@ -515,9 +572,9 @@
 							</a>
 						</div>
 					</div>
-				</form>
-			</div>
+				</form> -->
 		</div>
 	</div>
+
 </body>
 </html>

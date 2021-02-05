@@ -4,7 +4,7 @@ members, category -> product, store -> review, purchase, wish -> complain
 //테이블 생성
 CREATE TABLE members(
 	mem_id varchar2(50) PRIMARY KEY,
-	mem_pwd varchar2(50) NOT NULL,
+	mem_pwd char(60),
 	mem_name varchar2(50) NOT NULL,
 	mem_email varchar2(70) UNIQUE NOT NULL,
 	mem_add1 varchar2(100) NOT NULL,
@@ -18,7 +18,6 @@ CREATE TABLE members(
 	mem_recentLocation varchar2(50),
 	mem_logtime DATE DEFAULT SYSDATE NOT NULL,
 	enabled number DEFAULT 1 NOT NULL, -- 계정 사용 가능 여부 / 시큐리티
-	grade number NOT NULL, -- 일반 사용자(1), 관리자(0) / 시큐리티
 	authority varchar2(50) NOT NULL -- 권한 부여할 role 이름 / 시큐리티 
 );
 
@@ -36,7 +35,6 @@ INSERT INTO members (mem_id,
         mem_location,
 		mem_recentLocation,
 		enabled,
-		grade,
 		authority)
 	VALUES ('test1',	
 		'{noop}123',
@@ -51,7 +49,6 @@ INSERT INTO members (mem_id,
 		'010-1111-1111',
 		'서울',
 		'경기',
-		1,
 		1,
 		'ROLE_USER');
         
@@ -70,7 +67,6 @@ INSERT INTO members (mem_id,
         mem_location,
 		mem_recentLocation,
 		enabled,
-		grade,
 		authority)
 	VALUES ('test2',	
 		'{noop}123',
@@ -85,7 +81,6 @@ INSERT INTO members (mem_id,
 		'010-2222-2222',
 		'부산',
 		'광주',
-		1,
 		1,
 		'ROLE_USER');
 		
@@ -104,7 +99,6 @@ INSERT INTO members (mem_id,
         mem_location,
 		mem_recentLocation,
 		enabled,
-		grade,
 		authority)
 	VALUES ('admin1',	
 		'{noop}123',
@@ -120,5 +114,4 @@ INSERT INTO members (mem_id,
 		'부산',
 		'광주',
 		1,
-		0,
 		'ROLE_ADMIN');

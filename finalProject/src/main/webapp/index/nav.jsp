@@ -9,7 +9,7 @@
 		<div class="favoritesText">찜한상품</div>
 		<div class="favoritesCount">
 			<p id="toFavorites" class="toFavorites">
-				<i class="fas fa-heart"></i>&nbsp; <span>0</span>
+				<i class="fas fa-heart"></i>&nbsp; <span id="wishProduct">0</span>
 			</p>
 		</div>
 		<!-- favoritesCount -->

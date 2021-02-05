@@ -8,6 +8,8 @@ import member.bean.ZipcodeDTO;
 
 public interface MemberDAO {
 
+	public List<String> getAuth(String mem_id);
+	
 	public MemberDTO login(Map<String, String> map);
 
 	public MemberDTO checkId(String id);
