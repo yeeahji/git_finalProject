@@ -20,8 +20,6 @@ public interface MemberDAO {
 
 	public void update(MemberDTO memberDTO);
 
-	public MemberDTO certify(Map<String, String> map);
-
 	public void withdraw(String id);
 
 	public MemberDTO findId(String mem_email);

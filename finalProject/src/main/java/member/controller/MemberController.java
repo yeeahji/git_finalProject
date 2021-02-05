@@ -4,7 +4,9 @@ import java.io.IOException;
 import java.security.Principal;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
@@ -22,6 +24,8 @@ import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.context.SecurityContext;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -133,12 +137,26 @@ public class MemberController {
 //	- 카카오
 	@RequestMapping(value = "/kakao", method =RequestMethod.POST)
 	@ResponseBody
-	public String kakao(@RequestParam Map<String, String> map, HttpSession session) {
+	public String kakao(@RequestParam Map<String, String> map, HttpSession session, HttpServletRequest request) {
 		MemberDTO memberDTO = new MemberDTO();
 		memberDTO.setMem_id(map.get("mem_id"));
 		memberDTO.setMem_email(map.get("mem_email"));
 		memberDTO.setEnabled(true);
 		memberDTO.setAuthorities(Arrays.asList(new String[]{"ROLE_USER"}));
+
+		 SecurityContext context = SecurityContextHolder.getContext(); // 인증 객체를 얻습니다. Authentication
+		 Authentication authentication = context.getAuthentication(); // 로그인한 사용자정보를 가진 객체를 얻습니다.
+		 Principal principal = request.getUserPrincipal();
+		 System.out.println("사용자 정보 : " + principal);
+		 
+		 Collection<? extends GrantedAuthority> authorities = authentication.getAuthorities();
+		 
+		 Iterator<? extends GrantedAuthority> iter = authorities.iterator();
+
+		while (iter.hasNext()) {
+			GrantedAuthority auth = iter.next();
+			System.out.println(auth.getAuthority());
+		}
 		
 		return memberService.kakao(memberDTO);
 	}
@@ -303,11 +321,11 @@ public class MemberController {
 //	- 본인 재확인
 	@ResponseBody
 	@RequestMapping(value = "/certify", method =RequestMethod.POST)
-	public String certify(@RequestParam String mem_id, @RequestParam String mem_pwd) {
-		
+	public String certify(@RequestParam String mem_id, @RequestParam String mem_pwd) {		
 		Map <String, String> map = new HashMap<String, String>();
 		map.put("mem_id", mem_id);
 		map.put("mem_pwd", mem_pwd);
+		
 		return memberService.certify(map);
 	}
 //	- 마이페이지 이동

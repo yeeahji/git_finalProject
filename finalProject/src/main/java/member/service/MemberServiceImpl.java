@@ -104,11 +104,13 @@ public class MemberServiceImpl implements MemberService, UserDetailsService {
 
 	@Override
 	public String  certify(Map<String, String> map) {
-		MemberDTO memberDTO = memberDAO.certify(map);
-		if(memberDTO == null)//인증 실패 
-			return "no";
-		else 
+		MemberDTO memberDTO = memberDAO.getData(map.get("mem_id"));
+		
+		//pwEncoder.matches : (사용자가 입력한 패스워드(평문), 암호화된 패스워드)를 비교해주는 메소드
+		if(pwEncoder.matches(map.get("mem_pwd"), memberDTO.getMem_pwd())) //인증 성공		
 			return "yes";
+		else 
+			return "no";
 	}
 
 	@Override

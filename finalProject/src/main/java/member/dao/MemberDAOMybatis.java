@@ -57,11 +57,6 @@ public class MemberDAOMybatis implements MemberDAO {
 	
 	
 //	[회원정보수정] ----------------------------------------------------------
-	@Override
-	public MemberDTO certify(Map<String, String> map) {
-		MemberDTO memberDTO = sqlSession.selectOne("memberSQL.certify", map);
-		return memberDTO;
-	}
 	
 	@Override
 	public MemberDTO getData(String id) {

@@ -10,6 +10,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  		select authority from members where mem_id = #{mem_id}
  	</select>
 
+
 <!-- ========================================================================= --> 		
 <!-- ▶  회원가입 -->
  	<insert id="join" parameterType="member">
@@ -36,7 +37,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  	<select id="findId" parameterType="String" resultType="member">
  		select * from members where mem_email = #{mem_email}
  	</select>
-<!-- ▶비밀번호찾기-->
+<!-- ▶ 비밀번호찾기-->
  	<select id="findPwd" parameterType="java.util.Map" resultType="member">
  		select * from members where mem_id = #{mem_id} and mem_email = #{mem_email}
  	</select>
@@ -45,12 +46,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  		update members set mem_pwd = #{mem_pwd} where mem_email = #{mem_email}
  	</update>
  	
- 	
- <!-- 카카오 로그인======================================= -->
+
+<!-- ========================================================================= -->
+<!-- ▶ 카카오 로그인 -->
  	<select id="checkEmail" parameterType="String" resultType="member">
  		select * from members where mem_email = #{email}
  	</select>
-<!--  	처음 로그인한 카카오 데이터 회원가입 -->
+<!-- ▶ 처음 로그인한 카카오 데이터 회원가입 -->
  	<insert id="joinKakao" parameterType="java.util.Map">
  		insert into members values(#{email}, #{mem_pwd}, '주문 정보를 등록해주세요', #{email}, 
  									'주문 정보를 등록해주세요','주문 정보를 등록해주세요', '',
@@ -59,21 +61,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  									'', '',	
  									sysdate, 1)
  	</insert> 
-<!--  	카카오 데이터의 유니크 값 email가져오기 -->
+<!-- ▶ 카카오 데이터의 유니크 값 email가져오기 -->
  	<select id="selectKakao" parameterType="java.util.Map" resultType="member">
  		select * from members where mem_email = #{email}
  	</select>
- 	
- 	
- 	
- 	
- 	
+
+
 <!-- ========================================================================= -->
-<!-- ▶ 마이페이지 -->
- 	<select id="certify" parameterType="java.util.Map" resultType="member">
- 		select * from members where mem_id = #{mem_id} and mem_pwd = #{mem_pwd}
- 	</select>
- 	
 <!-- ▶  수정 데이터로 업데이트 -->
  	<update id="update" parameterType="member" >
  		update members set mem_name = #{mem_name}
@@ -85,7 +79,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	 						, mem_add2 = #{mem_add2}
  		where mem_id = #{mem_id}
  	</update>
-
 <!-- ▶  탈퇴 -->
  	<delete id="withdraw" parameterType="String">
  		delete from members where mem_id=#{mem_id}

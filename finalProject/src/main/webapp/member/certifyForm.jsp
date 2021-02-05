@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -10,6 +11,7 @@
 </head>
 <body>
 <form id ="certifyForm" name="certifyForm" ></form>
+<sec:authentication property="principal" var="member"/> <!-- 사용자 정보 가져오기 -->
 	<div align="center">
 	<br><br><br><br><br><br>
 	<table border="1" cellpadding="50">
@@ -20,7 +22,7 @@
 		<input placeholder="비밀번호" id="certifyPwd"name="certifyPwd" type="password" style="width:200px">
 		<input id = "certifyBtn" type = "button" value = "본인인증" >
 		</div>
-		<input type="hidden" id="certifyId" name="certifyId" value="${sessionScope.memId}">
+		<input type="hidden" id="certifyId" name="certifyId" value="${member.username}">
 		<div class="caution" id = "certifyPwdDiv"></div> 
 	</td></tr>
 	</table>
