@@ -211,7 +211,7 @@ body {
 .navBanner {
 	position: fixed;
 	top: 130px;
-	right: calc(50% - 665px);
+	right: calc(50% - 630px);
 	z-index: 1050;
 }
 
@@ -220,7 +220,7 @@ body {
 	padding: 10px; 0 px;
 	background: white;
 	margin: 10px 0px;
-	width: 130px;
+	width: 100px;
 	height: 70px;
 	border: 1px solid gray;
 }
@@ -240,8 +240,8 @@ body {
 	background: white;
 	margin: 10px 0px;
 	padding: 0px;
-	width: 130px;
-	height: 240px;
+	width: 100px;
+	height: 280px;
 	border: 1px solid gray;
 }
 
@@ -264,7 +264,7 @@ body {
 /* TOP */
 .totheTop {
 	margin: 10px 0px;
-	width: 130px;
+	width: 100px;
 	height: 40px;
 	border: 1px solid gray;
 	text-align: center;

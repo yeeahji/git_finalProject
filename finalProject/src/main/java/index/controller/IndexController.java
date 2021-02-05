@@ -53,12 +53,13 @@ public class IndexController {
 
 	@RequestMapping(value = "/recentlyProduct", method = RequestMethod.POST)
 	@ResponseBody
-	public ModelAndView recentlyProduct(HttpSession session) {
+	public ModelAndView recentlyProduct(HttpSession session,
+			@RequestParam(value = "page", required = false, defaultValue = "0") String page) {
 		List<String> list = (List) session.getAttribute("recentlyProduct");
 		
 		List<ProductDTO> recentlyList = indexService.recentlyList(list);
 		
-		System.out.println("recentlyList" +recentlyList);
+		//System.out.println("recentlyList:" +recentlyList);
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("recentlyList", recentlyList);
 		mav.setViewName("jsonView");

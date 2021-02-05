@@ -135,7 +135,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 
 
-	<!-- 검색 목록 -->
+	<!-- 카테고리 목록 -->
 	<select id="cateProductList" parameterType="java.util.HashMap" resultType="product">
 		SELECT * 
 		FROM ( SELECT 
