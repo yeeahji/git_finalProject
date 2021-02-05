@@ -12,5 +12,7 @@
 		<typeAlias type="store.bean.StoreDTO" alias="store"/>
 		<typeAlias type="board.bean.BoardDTO" alias="board"/>
 		<typeAlias type="board.bean.CommentDTO" alias="comment"/>
+		<typeAlias type="store.bean.ReviewDTO" alias="review"/>
+		<typeAlias type="store.bean.PurchaseDTO" alias="purchase"/>
 	</typeAliases>
 </configuration>
