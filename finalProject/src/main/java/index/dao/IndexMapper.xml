@@ -11,35 +11,31 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		SELECT * 
 		FROM ( SELECT 
 				rownum rn,
-				a.* 
-				FROM
-				( SELECT
-					product_seq,
-					mem_id,
-					cate_code,
-					product_subject,
-					product_content,
-					product_img1,
-					product_img2,
-					product_img3,
-					product_img4,
-					product_img5,
-					to_char(product_price, 'FM99,999,999') ||'원' as product_price ,
-					product_location, product_condition , product_delivery_fee ,
-					product_hashtag1,
-					product_hashtag2,
-					product_hashtag3,
-					product_hashtag4,
-					product_hashtag5,
-					product_view,
-					product_manage ,
-					ROUND((sysdate-product_logtime)*24*60) as product_logtime
-				FROM product
-				WHERE product_manage=1 
-				ORDER BY product_logtime asc
-				) a
-			)
-		WHERE rn BETWEEN nvl(#{start},1) AND nvl(#{end},20) 
+				product_seq,
+				mem_id,
+				cate_code,
+				product_subject,
+				product_content,
+				product_img1,
+				product_img2,
+				product_img3,
+				product_img4,
+				product_img5,
+				to_char(product_price, 'FM99,999,999') ||'원' as product_price ,
+				product_location, product_condition , product_delivery_fee ,
+				product_hashtag1,
+				product_hashtag2,
+				product_hashtag3,
+				product_hashtag4,
+				product_hashtag5,
+				product_view,
+				product_manage ,
+				ROUND((sysdate-product_logtime)*24*60) as product_logtime
+			FROM product
+			WHERE product_manage=1
+			ORDER BY product_logtime asc
+		)
+		WHERE rn BETWEEN nvl(#{start},0) AND nvl(#{end},20) ORDER BY product_logtime asc
 			
 		<!-- SELECT * FROM (SELECT rownum rn, tt.* FROM (select * FROM product 
 			WHERE 1=1 ORDER BY seq desc) tt) WHERE rn BETWEEN #{startNum} and #{endNum} -->
