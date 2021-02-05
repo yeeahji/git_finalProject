@@ -4,7 +4,7 @@ input[type=text], input[type=password], input[type=tel]{
         border : 0px;
         height : 30px;
         margin : 5px;
-        border-bottom: #9dbcea 1px solid;
+        border-bottom: rgba(136, 136, 136, 0.5) 1px solid;
         font-size: 12pt;
     }
     .caution{
@@ -63,15 +63,7 @@ input[type=text], input[type=password], input[type=tel]{
         text-decoration: none;
         color:black;
     }
-    #kakao{
-        height: 50px;
-        background-color: #ecd500;
-        border : 0px;
-        width : 365px;
-        color: white;
-        font-weight: bold;
-        font-size: 14pt;
-    }
+
     #tel1, #sido{
     	height: 50px;
     	font-size: 14pt;
@@ -84,5 +76,14 @@ input[type=text], input[type=password], input[type=tel]{
 	display:block;
 	margin: 0px auto;
 }
-
+.logo_image{
+	width: 56px;
+	height: 56px;
+	display:block;
+	margin: 0px auto;
+	display: inline;
+}
+.loginModalCloseBtn{
+	float: right;
+}
 

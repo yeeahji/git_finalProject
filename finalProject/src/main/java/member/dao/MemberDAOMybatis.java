@@ -29,10 +29,6 @@ public class MemberDAOMybatis implements MemberDAO {
 		return sqlSession.selectOne("memberSQL.getData", id);
 	}
 
-	@Override
-	public List<ZipcodeDTO> searchPost(Map<String, String> map) {
-		return sqlSession.selectList("memberSQL.searchPost", map);
-	}
 
 	@Override
 	public int join(MemberDTO memberDTO) {
@@ -44,6 +40,23 @@ public class MemberDAOMybatis implements MemberDAO {
 	public MemberDTO login(Map<String, String> map) {
 		return sqlSession.selectOne("memberSQL.login", map);
 	}
+	
+//	카카오
+	@Override
+	public MemberDTO checkEmail(String email) {
+		return sqlSession.selectOne("memberSQL.checkEmail", email);
+	}
+	@Override
+	public void joinKakao(Map<String, String> map) {
+		sqlSession.insert("memberSQL.joinKakao", map);
+		
+	}
+	@Override
+	public MemberDTO selectKakao(Map<String, String> map) {
+		return sqlSession.selectOne("memberSQL.selectKakao", map);
+	}
+	
+	
 //	[회원정보수정] ----------------------------------------------------------
 	@Override
 	public MemberDTO certify(Map<String, String> map) {
@@ -80,6 +93,10 @@ public class MemberDAOMybatis implements MemberDAO {
 	public void resetPwd(Map<String, String> map) {
 		sqlSession.update("memberSQL.resetPwd",  map);
 	}
+
+	
+
+	
 	
 	
 }

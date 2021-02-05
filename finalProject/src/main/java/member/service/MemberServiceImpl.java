@@ -62,10 +62,6 @@ public class MemberServiceImpl implements MemberService, UserDetailsService {
 			return "exist";
 	}
 
-	@Override
-	public List<ZipcodeDTO> searchPost(Map<String, String> map) {
-		return memberDAO.searchPost(map);
-	}
 
 	@Override
 	public int join(MemberDTO memberDTO) {
@@ -76,7 +72,6 @@ public class MemberServiceImpl implements MemberService, UserDetailsService {
 	}
 	
 //	[로그인] ----------------------------------------------------------
-	@Override
 	public void login(Map<String, String> map) {
 		memberDAO.login(map);
 	}
@@ -96,6 +91,7 @@ public class MemberServiceImpl implements MemberService, UserDetailsService {
 		
 		return "success";
 	}
+
 	
 	@Override
 	public MemberDTO getData(String id) {

@@ -14,7 +14,6 @@ public interface MemberDAO {
 
 	public MemberDTO checkId(String id);
 
-	public List<ZipcodeDTO> searchPost(Map<String, String> map);
 
 	public int join(MemberDTO memberDTO);
 
@@ -31,5 +30,11 @@ public interface MemberDAO {
 	public MemberDTO findPwd(Map<String, String> map);
 
 	public void resetPwd(Map<String, String> map);
+
+	public MemberDTO checkEmail(String string);
+
+	public void joinKakao(Map<String, String> map);
+
+	public MemberDTO selectKakao(Map<String, String> map);
 
 }

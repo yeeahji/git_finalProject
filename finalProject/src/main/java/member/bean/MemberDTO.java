@@ -34,6 +34,7 @@ public class MemberDTO implements UserDetails {
 	private String mem_recentAdd2;
 	private String mem_location;
 	private String mem_recentLocation;
+
 	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern = "yyyy.mm.dd")
 	private Date mem_logtime;
 	

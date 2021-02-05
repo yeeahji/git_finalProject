@@ -1,0 +1,92 @@
+@charset "UTF-8";
+/* write=========================================================== */
+.WritingContent {
+    position: relative;
+    padding-top: 12px;
+    padding-bottom: 50px;
+}
+div {
+    display: block;
+}
+.WritingWrap {
+    color: #000;
+}
+body {
+    position: relative;
+    -webkit-text-size-adjust: none;
+    font-weight: 400;
+    font-family: Apple SD Gothic Neo,맑은 고딕,Malgun Gothic,돋움,dotum,sans-serif;
+    color: var(--skinTextColor);
+}
+
+.WritingContent:after {
+    content: "";
+    display: block;
+    clear: both;
+}
+/* 제목 */
+
+element.style {
+    height: 40px;
+}
+.FlexableTextArea .textarea_input {
+    display: block;
+    width: 100%;
+    min-height: 40px;
+    padding: 11px 12px 10px;
+    border: 1px solid #ebecef;
+    box-sizing: border-box;
+    overflow: hidden;
+    resize: none;
+    word-break: break-all;
+    font-size: 15px;
+    letter-spacing: -.23px;
+    line-height: 17px;
+    outline: none;
+}
+button, textarea {
+    font-family: Apple SD Gothic Neo,맑은 고딕,Malgun Gothic,돋움,dotum,sans-serif;
+}
+body, button, dd, dl, dt, fieldset, form, h1, h2, h3, h4, h5, h6, input, legend, li, ol, p, select, table, td, textarea, th, ul {
+    margin: 0;
+    padding: 0;
+}
+textarea {
+	font-weight: 400;
+    -webkit-writing-mode: horizontal-tb !important;
+    text-rendering: auto;
+    color: -internal-light-dark(black, white);
+    letter-spacing: normal;
+    word-spacing: normal;
+    text-transform: none;
+    text-indent: 0px;
+    text-shadow: none;
+    display: inline-block;
+    text-align: start;
+    appearance: textarea;
+    background-color: -internal-light-dark(rgb(255, 255, 255), rgb(59, 59, 59));
+    -webkit-rtl-ordering: logical;
+    flex-direction: column;
+    resize: auto;
+    cursor: text;
+    white-space: pre-wrap;
+    overflow-wrap: break-word;
+    column-count: initial !important;
+    margin: 0em;
+    font: 400 13.3333px Arial;
+    border-width: 1px;
+    border-style: solid;
+    border-color: -internal-light-dark(rgb(118, 118, 118), rgb(133, 133, 133));
+    border-image: initial;
+    padding: 2px;
+}
+.WritingWrap {
+    color: #000;
+}
+.caution{
+	color : rgba(153, 0, 33, 0.781);
+    border : 1px;
+    font-size: 10pt;
+    font-weight: bold;
+    float:left;
+}

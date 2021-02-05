@@ -108,22 +108,6 @@ public class MemberController {
         return mav;
  
 	}
-//	- 우편번호 확인 창
-	@RequestMapping(value ="/postForm", method=RequestMethod.GET)
-	public String checkPost() {
-		return "/member/postForm";
-	}
-//	- 우편번호 가져오기
-	@RequestMapping(value ="/searchPost", method=RequestMethod.POST)
-	public ModelAndView searchPost(@RequestParam Map<String, String> map) {
-		List<ZipcodeDTO> list = memberService.searchPost(map);
-		
-		ModelAndView mav = new ModelAndView();
-		mav.setViewName("jsonView");
-		mav.addObject("list", list);
-		
-		return mav;
-	}
 //	- 회원가입
 	@RequestMapping(value ="/join", method=RequestMethod.POST)
 	public ModelAndView join(@ModelAttribute MemberDTO memberDTO) {
@@ -131,6 +115,9 @@ public class MemberController {
 		
 		return new ModelAndView("redirect:/");
  	}
+	
+	
+	
 //	[로그인]===================================================================================
 //	- 로그인 페이지 이동
 	@RequestMapping(value = "/loginForm", method={RequestMethod.GET, RequestMethod.POST})
@@ -174,10 +161,13 @@ public class MemberController {
 	}
 //	- 로그아웃
 	@RequestMapping(value ="/logout", method=RequestMethod.GET)
-	public String logout(HttpSession session) {
+	public ModelAndView logout(HttpSession session) {
 		session.invalidate(); 
-		return "/index";
+		return new ModelAndView("redirect:/");
 	}
+	
+	
+	
 //	[아이디 비번 찾기]===================================================================================
 	
 	@RequestMapping(value = "/findIdForm", method =RequestMethod.GET)
@@ -227,8 +217,7 @@ public class MemberController {
 			
 	        mav.addObject("findId", findId);
 	        mav.setViewName("jsonView");
-		}//else
-//		System.out.println("mav : "+ mav);
+		}
         return mav;
 	}
 //	- 비밀번호 찾기
@@ -242,7 +231,6 @@ public class MemberController {
 		map.put("mem_id", mem_id);
 		map.put("mem_email", mem_email);
 		MemberDTO memberDTO = memberService.findPwd(map);
-		System.out.println("dto: "+memberDTO);
 		
 		if(memberDTO==null) {
 			mav.addObject("member", null);
@@ -252,7 +240,6 @@ public class MemberController {
 			
 			String sender = "brighthannah12@gmail.com";
 			String recipient = mem_email;
-			System.out.println("recipient : "+recipient);
 			String title = "▣ 아나바다 마켓 :: 비밀번호 수정을 위한 인증번호를 확인하세요 ▣";
 			String content = System.getProperty("line.separator")
 							+ System.getProperty("line.separator")
@@ -320,15 +307,14 @@ public class MemberController {
 	public String certify(@RequestParam String mem_id, @RequestParam String mem_pwd) {
 		
 		Map <String, String> map = new HashMap<String, String>();
-		System.out.println(mem_id);
-		System.out.println(mem_pwd);
 		map.put("mem_id", mem_id);
 		map.put("mem_pwd", mem_pwd);
 		return memberService.certify(map);
 	}
 //	- 마이페이지 이동
 	@RequestMapping(value = "/myPage", method =RequestMethod.GET)
-	public String myPage(Model model) {
+	public String myPage(HttpSession session, Model model) {
+		model.addAttribute("id", (String) session.getAttribute("memId"));
 		model.addAttribute("display", "/member/myPage.jsp");
 		return "/index";
 	}

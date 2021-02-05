@@ -52,6 +52,5 @@
 		</sec:authorize>
 		
 	</div><!-- login-box -->
-	
-</div><!-- login-btn -->
 
+</div><!-- login-btn -->

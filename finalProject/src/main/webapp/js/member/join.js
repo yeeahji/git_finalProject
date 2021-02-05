@@ -172,56 +172,66 @@ $('#tel3').focusout(function(){
 
 
 //우편 번호
-$('#checkPostBtn').click(function(){
-	window.open("/market/member/postForm.jsp", "postForm", "width=700 height= 500 scrollbars=yes");
+var mapContainer = document.getElementById('map'), // 지도를 표시할 div
+mapOption = {
+    center: new daum.maps.LatLng(37.537187, 127.005476), // 지도의 중심좌표
+    level: 5 // 지도의 확대 레벨
+};
+
+//지도를 미리 생성
+var map = new daum.maps.Map(mapContainer, mapOption);
+//주소-좌표 변환 객체를 생성
+var geocoder = new daum.maps.services.Geocoder();
+//마커를 미리 생성
+var marker = new daum.maps.Marker({
+position: new daum.maps.LatLng(37.537187, 127.005476),
+map: map
 });
 
-//우편 번호 창 검색
-$('#searchPostBtn').click(function(){
-	$.ajax({
-		type:'post',
-		url:'/market/member/searchPost',
-		data:$('#postForm').serialize(),
-		dataType:'json',
-		success:function(result){
-			$('#postTable tr:gt(2)').remove(); 
-			
-//			▶ 검색결과 출력
-			$.each(result.list, function(index, items){ 
-				let address = items.sido+' '
-							+ items.sigungu+' '
-							+ items.yubmyundong+' '
-							+ items.ri +' '
-							+ items.roadname +' '
-							+ items.buildingname;
-				address = address.replace(/null/g, '');
-				
-				$('<tr/>').append($('<td/>',{ 
-					align: 'center',
-					text: items.zipcode
-					})).append($('<td/>',{
-						colspan:'3',
-						}).append($('<a/>',{ 
-							href:'#',
-							id:'addressA',
-							text: address
-							}))
-				).appendTo($('#postTable'));
-			});//each
-			
-//			 ▶ 선택한 주소의 값을 회원가입 창에 전달하기
-			$('a').click(function(){//클릭한 a태그
-				$('#postcode', opener.document).val($(this).parent().prev().text());
-				$('#add1', opener.document).val($(this).text());
-				$('#add2', opener.document).focus();
-				window.close();
-			});
-		},error: function(err){
-			console.log(request.status + "\n message : " +request.responseText +"\n err:");
-			alert(err);
-		}
-	});
+
+function sample5_execDaumPostcode() {
+new daum.Postcode({
+    oncomplete: function(data) {
+        var addr = data.address; // 최종 주소 변수
+        // 주소 정보를 해당 필드에 넣는다.
+        document.getElementById('postcode').value = data.zonecode;
+        document.getElementById("add1").value = addr;
+        // 주소로 상세 정보를 검색
+        geocoder.addressSearch(data.address, function(results, status) {
+            // 정상적으로 검색이 완료됐으면
+            if (status === daum.maps.services.Status.OK) {
+
+                var result = results[0]; //첫번째 결과의 값을 활용
+
+                // 해당 주소에 대한 좌표를 받아서
+                var coords = new daum.maps.LatLng(result.y, result.x);
+                // 지도를 보여준다.
+                mapContainer.style.display = "block";
+                map.relayout();
+                // 지도 중심을 변경한다.
+                map.setCenter(coords);
+                // 마커를 결과값으로 받은 위치로 옮긴다.
+                marker.setPosition(coords)
+            }
+        });
+    }
+}).open({
+    popupName: 'postcodePopup' //팝업 이름을 설정(영문,한글,숫자 모두 가능, 영문 추천)
 });
+}
+new daum.Postcode({
+    onclose: function(state) {
+        //state는 우편번호 찾기 화면이 어떻게 닫혔는지에 대한 상태 변수 이며, 상세 설명은 아래 목록에서 확인하실 수 있습니다.
+        if(state === 'FORCE_CLOSE'){
+            //사용자가 브라우저 닫기 버튼을 통해 팝업창을 닫았을 경우, 실행될 코드를 작성하는 부분입니다.
+
+        } else if(state === 'COMPLETE_CLOSE'){
+            //사용자가 검색결과를 선택하여 팝업창이 닫혔을 경우, 실행될 코드를 작성하는 부분입니다.
+            //oncomplete 콜백 함수가 실행 완료된 후에 실행됩니다.
+        }
+    }
+});
+
 
 //약관동의--------------------------------------------------------------
 
