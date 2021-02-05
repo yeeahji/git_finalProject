@@ -91,4 +91,38 @@ public class IndexServiceImpl implements IndexService {
 	public List<ProductDTO> recentlyList(List<String> list) {
 		 return indexDAO.recentlyList(list);
 	}
+
+	@Override
+	public void cateProductList(String cate_code, int page, String order, Model model) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		
+
+		int pageSize = 20;
+		if (page == 0)
+			page = 1;
+
+		int start = (page - 1) * pageSize;
+		int end = (page) * pageSize;
+
+		
+		map.put("start", start);
+		map.put("end", end);
+		map.put("order", order);
+		map.put("cate_code", Integer.parseInt(cate_code));
+
+		// 목록 조회
+		List<ProductDTO> list = indexDAO.cateProductList(map);
+		// 개수 조회
+		int count = indexDAO.cateProductCount(map);
+
+		System.out.println("list	: " + list);
+		System.out.println("count	: " + count);
+
+		model.addAttribute("list", list);
+		model.addAttribute("count", count);
+		model.addAttribute("page", page);
+		model.addAttribute("cate_code", cate_code);
+		model.addAttribute("order", order);
+		
+	}
 }

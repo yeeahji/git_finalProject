@@ -25,16 +25,15 @@ $(document).ready(function() {
 		success : function(data) {
 			var list = data.recentlyList;
 			var count = data.recentlyList.length
-			$("#recentlyCnt").text(count).css('text-align','center');
+			$("#recentlyCnt").text(count).css('color','red');
 			if ( count != 0){
 				var view = $("#recentlyList");
 				
+				
 				$.each(list, function(){
 					var html ="";
-					html += "<img style='height: 60px; width: 60px; cursor: pointer; float: left;' src=/market/storage/"+ this.product_img1 + ">" + '</img><br>';
-					html += "";
-					html += "";
-					html += "";
+					html += "<img style='height: 60px; width: 60px; cursor: pointer; float: left;' 'onclick=recentlyProductDetail("+this.product_seq+");' src=/market/storage/"+ this.product_img1 + ">" + '</img><br>';
+
 					
 					view.append(html)
 				})
@@ -50,3 +49,8 @@ $(document).ready(function() {
 	});	
 	
 });
+
+function recentlyProductDetail(seq) {
+	location.href = "/market/product/productDetail?seq="+seq;
+	
+}

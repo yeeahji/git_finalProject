@@ -239,18 +239,19 @@ body {
 .recently {
 	background: white;
 	margin: 10px 0px;
-	padding: 10px; 0 px;
+	padding: 0px;
 	width: 130px;
-	height: 220px;
+	height: 240px;
 	border: 1px solid gray;
 }
 
 .recentlyText {
+	margin-top:10px;
 	font-size: 12px;
 	text-align: center;
 }
 
-.recentlyCount {
+.recentlyCnt {
 	margin-top: 5px;
 	font-size: 12px;
 	text-align: center;

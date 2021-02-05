@@ -17,4 +17,8 @@ public interface IndexDAO {
 
 	public List<ProductDTO> recentlyList(List<String> list); //최근본상품
 
+	public List<ProductDTO> cateProductList(Map<String, Object> map); //카테고리
+
+	public int cateProductCount(Map<String, Object> param); //카테고리
+
 }

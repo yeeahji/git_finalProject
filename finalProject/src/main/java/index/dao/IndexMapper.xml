@@ -5,7 +5,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 <mapper namespace="indexSQL">
 
-
 	<!-- 상품 목록 -->
 	<select id="getProductList" parameterType="java.util.HashMap" resultType="product">
 		SELECT * 
@@ -135,5 +134,63 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		</foreach>
 	</select>
 
+
+	<!-- 검색 목록 -->
+	<select id="cateProductList" parameterType="java.util.HashMap" resultType="product">
+		SELECT * 
+		FROM ( SELECT 
+				rownum rn,
+				a.* 
+				FROM
+				( SELECT
+					p.product_seq,
+					p.mem_id,
+					p.cate_code,
+					p.product_subject,
+					p.product_content,
+					p.product_img1,
+					p.product_img2,
+					p.product_img3,
+					p.product_img4,
+					p.product_img5,
+					to_char(p.product_price, 'FM99,999,999') ||'원' as product_price ,
+					p.product_location, 
+					p.product_condition , 
+					p.product_delivery_fee ,
+					p.product_hashtag1,
+					p.product_hashtag2,
+					p.product_hashtag3,
+					p.product_hashtag4,
+					p.product_hashtag5,
+					p.product_view,
+					p.product_manage ,
+					ROUND((sysdate - p.product_logtime)*24*60) as product_logtime,
+					s.store_nickname
+				FROM product p, store s
+				WHERE 
+				p.cate_code=#{cate_code}
+				ORDER BY 
+				<!-- 최신순 -->
+				<choose>
+					<when test=' order == "A" '> p.product_logtime desc </when>
+					<when test=' order == "B" '> p.product_view asc </when>
+					<when test=' order == "C" '> p.product_price asc </when>
+					<when test=' order == "D" '> p.product_price desc </when>
+					<otherwise>
+						p.product_logtime desc
+					</otherwise>
+				</choose>
+				
+				) a
+			)
+		WHERE rn BETWEEN nvl(#{start},1) AND nvl(#{end},20) 
+	</select>
+	
+	<select id="cateProductCount" parameterType="java.util.HashMap" resultType="int">
+		SELECT count(0)
+		FROM product p, store s
+		WHERE 
+		p.cate_code=#{cate_code}
+	</select>
 
 </mapper>

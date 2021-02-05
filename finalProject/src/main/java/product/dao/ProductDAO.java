@@ -16,4 +16,6 @@ public interface ProductDAO {
 
 	public String getMyRecentLocation(String mem_id);
 
+	public ProductDTO productDetail(String seq); //상품 상세페이지
+
 }

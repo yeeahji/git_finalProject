@@ -43,17 +43,18 @@
 					<li><a class="fas fa-bars" style="height: 30px; weight:30px;"></a>
 						<ul>
 							전체 카테고리
-							<a href="#" class="cateBig">여성의류</a>
-							<a href="#" class="cateBig">남성의류</a>
-							<a href="#" class="cateBig">패션잡화</a>
-							<a href="#" class="cateBig">생활/가구/식품</a>
-							<a href="#" class="cateBig">디지털/가전</a>
-							<a href="#" class="cateBig">도서/취미/애완</a>
-							<a href="#" class="cateBig">스포츠/레저</a>
-							<a href="#" class="cateBig">스타굿즈</a>
-							<a href="#" class="cateBig">뷰티/미용</a>
-							<a href="#" class="cateBig">차량/오토바이</a>
-							<a href="#" class="cateBig">기타</a>
+							<a href="/market/index/cateDisplay?cate_code=100" class="cateBig">여성의류</a>
+							<a href="/market/index/cateDisplay?cate_code=200" class="cateBig">남성의류</a>
+							<a href="/market/index/cateDisplay?cate_code=300" class="cateBig">패션잡화</a>
+							<a href="/market/index/cateDisplay?cate_code=400" class="cateBig">생활/가구/식품</a>
+							<a href="/market/index/cateDisplay?cate_code=500" class="cateBig">디지털/가전</a>
+							<a href="/market/index/cateDisplay?cate_code=600" class="cateBig">유아동/출산</a>
+							<a href="/market/index/cateDisplay?cate_code=700" class="cateBig">도서/취미/애완</a>
+							<a href="/market/index/cateDisplay?cate_code=800" class="cateBig">스포츠/레저</a>
+							<a href="/market/index/cateDisplay?cate_code=900" class="cateBig">스타굿즈</a>
+							<a href="/market/index/cateDisplay?cate_code=1000" class="cateBig">뷰티/미용</a>
+							<a href="/market/index/cateDisplay?cate_code=1100" class="cateBig">차량/오토바이</a>
+							<a href="/market/index/cateDisplay?cate_code=1200" class="cateBig">기타</a>
 						</ul></li>
 				</ul>
 			</div>

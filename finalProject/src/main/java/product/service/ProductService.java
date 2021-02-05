@@ -15,4 +15,6 @@ public interface ProductService {
 
 	public String getMyRecentLocation(String mem_id);
 
+	public ProductDTO productDetail(String seq); //상품 디테일
+
 }

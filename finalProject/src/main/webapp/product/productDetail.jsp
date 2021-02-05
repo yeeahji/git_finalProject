@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+	
 <!DOCTYPE html>
 <html>
 <head>
@@ -47,7 +50,7 @@
 							<!-- 상세 상품 이미지 1장-->
 							<div class="swiper-wrapper">
 								<div class="swiper-slide">
-									<img src="../image/product/product_test.png" alt="상세 상품 이미지"
+									<img src="/market/storage/${productDTO.product_img1}" alt="상세 상품 이미지"
 										id="product_img" />
 								</div>
 							</div>
@@ -68,10 +71,10 @@
 						<div class="detail-info__text__div2">
 							<div class="detail-info__text__div3">
 								<div class="detail-info__text-header">
-									<div class="detail-info__text-title">양말</div>
+									<div class="detail-info__text-title">${productDTO.product_subject}</div>
 									<div class="detail-info__text-price__div">
 										<div class="detail-info__price" id="product_price">
-											1,200<span>원</span>
+											${productDTO.product_price}<span>원</span>
 										</div>
 									</div>
 								</div>
@@ -85,11 +88,26 @@
 											</div> -->
 											<div class="detail-info--topL-item">
 												<i class="fas fa-eye"></i>
-												<div id="view">34</div>
+												<div id="view">${productDTO.product_view}</div>
 											</div>
 											<div class="detail-info--topL-item">
 												<i class="fas fa-clock"></i>
-												<div id="product_logtime">1 일전</div>
+												
+												<c:set var="b_time" value="${productDTO.product_logtime}" />
+												<c:set var="time"
+													value="${ b_time > (60 * 24) ? Math.round( b_time / (60 * 24) ) : ( b_time > 60 ? Math.round( b_time / 60 ) : b_time ) }" />
+										
+												<c:if test="${60 > b_time }">
+													<c:set var="unit" value="분 전" />
+												</c:if>
+												<c:if test="${ b_time > 60 }">
+													<c:set var="unit" value="시간 전" />
+												</c:if>
+												<c:if test="${ b_time > (60 * 24) }">
+													<c:set var="unit" value="일 전" />
+												</c:if>
+												
+												<div id="product_logtime"> ${time}${unit}</div>
 											</div>
 										</div>
 										<button class="detail-info__text-body-topR">
@@ -246,7 +264,7 @@
 							<div class="detail-explain__title">상품정보</div>
 							<div class="detail-explain__article">
 								<div class="detail-article__margin"></div>
-								<div class="detail-article__text">양말이요 팔아요</div>
+								<div class="detail-article__text">${productDTO.product_content}</div>
 								<div class="detail-article__seller-list">
 									<!-- 지역 아이템 -->
 									<div class="detail-article__seller-item">
@@ -254,7 +272,7 @@
 											<i class="fas fa-map-marker-alt fa-2x"></i> 거래지역
 										</div>
 										<div class="detail-article-item__body">
-											<div class="detail-article--location" id="product_location">서울</div>
+											<div class="detail-article--location" id="product_location">${prductDTO.product_location}</div>
 										</div>
 									</div>
 									<!-- 카테고리 아이템 -->

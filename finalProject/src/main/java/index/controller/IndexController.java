@@ -69,32 +69,33 @@ public class IndexController {
 	public String searchProduct(Model model, @RequestParam(value = "keyword") String keyword,
 			@RequestParam(value = "page", required = false, defaultValue = "0") String page,
 			@RequestParam(value = "order", required = false) String order) {
-
-		System.out.println("searchDisplay");
-		System.out.println("keyword	: " + keyword);
-		System.out.println("page	: " + page);
-		System.out.println("order	: " + order);
-
+		
 		indexService.searchProductList(keyword, Integer.parseInt(page), order, model);
 
+		String productState="";
+		// 검색어
+		if (keyword.substring(0, 1).equals("@")) {
+			productState = " 회원이 올린 상품";
+		} else {
+			productState = " 의 검색 결과";
+		}
+		
+		model.addAttribute("productState", productState);
 		model.addAttribute("display", "/index/searchDisplay.jsp");
 
 		return "/index";
 	}
 
-//	
-//	@RequestMapping(value= "/searchProductList", method=RequestMethod.POST)
-//	@ResponseBody
-//	public ModelAndView searchProductList(@RequestParam Map<String, String> map, Model model) {
-//		List<ProductDTO> list = indexService.searchProductList(map);	
-//		
-//		System.out.println(" /searchProductList ");
-//		System.out.println("map"+map);
-//		
-//		ModelAndView mav = new ModelAndView();
-//		mav.addObject("list", list);
-//		mav.setViewName("jsonView");
-//		return mav;
-//	}
+	@RequestMapping(value = "/cateDisplay", method = RequestMethod.GET)
+	public String cateDisplay(Model model,
+			@RequestParam(value = "page", required = false, defaultValue = "0") String page,
+			@RequestParam(value = "cate_code") String cate_code,
+			@RequestParam(value = "order", required = false) String order) {
+		
+		indexService.cateProductList(cate_code, Integer.parseInt(page), order, model);
+		model.addAttribute("display", "/index/cateDisplay.jsp");
+
+		return "/index";
+	}
 
 }

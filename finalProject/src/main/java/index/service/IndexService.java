@@ -16,4 +16,6 @@ public interface IndexService {
 
 	public List<ProductDTO> recentlyList(List<String> list); //최근본상품
 
+	public void cateProductList(String cate_code, int page, String order, Model model); //카테고리
+
 }

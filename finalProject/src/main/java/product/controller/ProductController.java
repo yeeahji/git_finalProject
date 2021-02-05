@@ -121,7 +121,9 @@ public class ProductController {
 		 }
 		 list.add(seq);
 
-		
+		ProductDTO productDTO = productService.productDetail(seq);
+		 
+		model.addAttribute("productDTO", productDTO);
 		model.addAttribute("display", "/product/productDetail.jsp");
 		return "/index";
 	}

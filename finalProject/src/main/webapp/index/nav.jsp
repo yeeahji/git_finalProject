@@ -19,9 +19,9 @@
 
 	<!-- 최근 본 상품 시작 -->
 	<div class="recently">
-		<div class="recentlyText" >최근본상품 (<span id="recentlyCnt" ></span>)</div>
+		<div class="recentlyText" >최근본상품 </div>
 		<div class="recentlyProduct">
-			
+			<span id="recentlyCnt" style="margin-left:60px;"></span>
 				<ul id="recentlyList" >
 				
 				</ul> <!-- 최근본상품  -->
