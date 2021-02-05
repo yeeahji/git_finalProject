@@ -11,7 +11,7 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/js/all.min.js" crossorigin="anonymous"></script>
     </head>
 <body>
-    <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
+   <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
             <a class="navbar-brand" href="/market/admin/adminIndex">아나바다</a>
             <button class="btn btn-link btn-sm order-1 order-lg-0" id="sidebarToggle" href="#"><i class="fas fa-bars"></i></button>
             
@@ -47,13 +47,12 @@
                             <div class="sb-sidenav-menu-heading">Interface</div>
 	                           <ul>
 		                            <a class="nav-link" href="/market/admin/memberList">전체 회원 목록</a>
-		                            <a class="nav-link" href="/market/admin/reportedMemberList">신고회원 관리</a>
 		                            <a class="nav-link" href="/market/admin/productList">전체 상품 목록</a>
-		                            <a class="nav-link" href="/market/admin/">신고된 상품 관리</a>
 		                            <a class="nav-link" href="/market/admin/storeList">전체 상점 목록</a>
 		                            <a class="nav-link" href="/market/admin/boardList">게시글목록</a>
+		                            <a class="nav-link" href="/market/admin/reportedMG">신고관리</a>
+		                            <a class="nav-link" href="/market/admin/notice">공지사항 관리</a>
 		                            <a class="nav-link" href="/market/admin/noticeWrite">공지사항 등록</a>
-		                            <a class="nav-link" href="/market/admin/">공지사항 관리</a>
 	                    		</ul>
                             
 
@@ -71,31 +70,6 @@
                     </div>
                 </nav>
             </div>
-            
-            
-<%-- ======================================================= --%>
-<%-- ======================================================= --%>
-
-
-            <div id="layoutSidenav_content">
-                <main>
-                    <div class="container-fluid">
-                        <h1 class="mt-4">Static Navigation</h1>
-                        <ol class="breadcrumb mb-4">
-                            <li class="breadcrumb-item"><a href="index.html">Dashboard</a></li>
-                            <li class="breadcrumb-item active">Static Navigation</li>
-                        </ol>
-                        <div class="card mb-4">
-                            <div class="card-body">
-                                <p class="mb-0">
-                                	공지사항등록
-                                </p>
-                            </div>
-                        </div>
-                        <div style="height: 100vh"></div>
-                        <div class="card mb-4"><div class="card-body">When scrolling, the navigation stays at the top of the page. This is the end of the static navigation demo.</div></div>
-                    </div>
-                </main>
             
             
 <%-- ======================================================= --%>

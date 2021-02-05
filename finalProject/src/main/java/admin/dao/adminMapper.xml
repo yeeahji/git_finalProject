@@ -26,11 +26,25 @@
 	<select id="getTotalB" resultType="Integer">
 		select count(*) from members where ${searchType} like '%'||#{keyword}||'%'
 	</select>
-	
-	<select id="getMemberView" parameterType="String" resultType="member.bean.MemberDTO">
-		select * from members where mem_id like #{id}
+<!-- 상세보기 -->	
+	<select id="getMemberView" parameterType="String" resultType="admin.bean.AdminMembersDTO">
+		select * from members join store using(mem_id) where mem_id like #{id}
 	</select>
-	
+
+<!-- 상점리스트출력 -->
+	<select id="getStoreList" parameterType="java.util.Map" resultType="store.bean.StoreDTO">
+		select * from(select rownum rn, tt.* from(
+		select * from store join members using(mem_id))
+		tt)where rn between #{startNum} and #{endNum}
+	</select>
+<!-- 상점리스트 총개수 -->
+	<select id="getTotalC" resultType="Integer">
+		select count(*) from store join members using(mem_id)
+	</select>
+<!-- 상점 상세보기 -->	
+	<select id="getStoreView" parameterType="String" resultType="store.bean.StoreDTO">
+		select * from store join members using(mem_id) where mem_id like #{id}
+	</select>
 	
 	
 	

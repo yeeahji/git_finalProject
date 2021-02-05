@@ -46,14 +46,13 @@
                             
                             <div class="sb-sidenav-menu-heading">Interface</div>
 	                           <ul>
-		                            <a class="nav-link" href="/market/admin/memberList">전체 회원 목록</a>
-		                            <a class="nav-link" href="/market/admin/reportedMemberList">신고회원 관리</a>
+		                             <a class="nav-link" href="/market/admin/memberList">전체 회원 목록</a>
 		                            <a class="nav-link" href="/market/admin/productList">전체 상품 목록</a>
-		                            <a class="nav-link" href="/market/admin/">신고된 상품 관리</a>
 		                            <a class="nav-link" href="/market/admin/storeList">전체 상점 목록</a>
 		                            <a class="nav-link" href="/market/admin/boardList">게시글목록</a>
+		                            <a class="nav-link" href="/market/admin/reportedMG">신고관리</a>
+		                            <a class="nav-link" href="/market/admin/notice">공지사항 관리</a>
 		                            <a class="nav-link" href="/market/admin/noticeWrite">공지사항 등록</a>
-		                            <a class="nav-link" href="/market/admin/">공지사항 관리</a>
 	                    		</ul>
                             
 
@@ -75,28 +74,140 @@
             
 <%-- ======================================================= --%>
 <%-- ======================================================= --%>
+   <div id="layoutSidenav_content">
+           <main>
+               <div class="container-fluid">
+                   <h3 class="mt-4">전체 상품목록</h3>
+                   <hr>                  		
+<div class="row">
+	<div class="col-xl-7">
+	    <div class="card mb-4">
+	        <div class="card-header">
+	            <i class="fas fa-chart-area mr-1"></i>
+	            상세정보
+	            &nbsp;&nbsp;&nbsp;&nbsp;
+		        <button type="button" class="btn btn-secondary btn-sm">수정</button>
+		        <button type="button" class="btn btn-danger btn-sm">삭제</button>
+	        </div>
+	        <div class="card-body">
+	        	<table class="table table-bordered border-primary table-sm">
+				  <tbody>
+				    <tr>
+				      <th width="10%">이름</th><th width="40%"><span id="Span"></span></th> 
+				      <th width="10%">상점이름</th><th width="40%"><span id="Span"></span></th>
+				    </tr>
+				    <tr>
+				      <th>가격</th><th><span id="Span"></span></th> 
+				      <th>수량</th><th><span id="Span"></span></th>
+				    </tr>
+				    <tr>
+				      <th>올린날짜</th><th><span id="Span"></span></th> 
+				      <th>품목</th><th><span id="Span"></span></th>
+				    </tr>
+				    <tr>
+				    	<th>내용</th><th colspan="3"><span id="Span"></span></th>
+				    </tr>
+				  </tbody>
+				</table>
+	        </div>
+	    </div>
+	</div>
+	
+	<div class="col-xl-5">
+	    <div class="card mb-4">
+	        <div class="card-header">
+	            <i class="fas fa-chart-bar mr-1"></i>
+	           	사진
+	        </div>
+	        <div class="card-body">
+	        	<table class="table table-bordered border-primary table-sm">
+				  <tbody>
+				   이미지 넣기
+				  </tbody>
+				</table>
+	        </div>
+	    </div>
+	</div>
+</div>
+	
+	<nav class="navbar navbar-expand-lg navbar-light bg-light">
+	  <div class="container-fluid">
+	  
+	    <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+	      <div class="btn-group btn-group-sm me-auto mb-2 mb-lg-0" role="group" aria-label="Basic outlined example">
+			  <button type="button" class="btn btn-outline-primary" id="">가나다순</button>
+			  <button type="button" class="btn btn-outline-primary" id="">판매등록순</button>
+			  <button type="button" class="btn btn-outline-primary" id="">가격순</button>
+		  </div>
+		  &nbsp;&nbsp;&nbsp;&nbsp;
+	      <form class="d-flex" id="memberSearchForm">
+	      	<input type="hidden" id="pg" name="pg" value="1">
+	      	<select class="form-select form-select-sm" id="searchType" aria-label=".form-select-sm example">
+			  <option selected>카테고리1</option>
+			  <option value="mem_name">이름</option>
+			  <option value="mem_id">아이디</option>
+			</select>
+			&nbsp;&nbsp;
+			<select class="form-select form-select-sm" id="searchType" aria-label=".form-select-sm example">
+			  <option selected>카테고리2</option>
+			  <option value="mem_name">이름</option>
+			  <option value="mem_id">아이디</option>
+			</select>
+			&nbsp;&nbsp;
+			<select class="form-select form-select-sm" id="searchType" aria-label=".form-select-sm example">
+			  <option selected>선택</option>
+			  <option value="mem_name">제목</option>
+			  <option value="mem_id">아이디</option>
+			</select>
+			&nbsp;&nbsp;
+	        <input class="form-control me-2" type="search" name="keyword" id="keyword" placeholder="조회" aria-label="Search">
+	        <button class="btn btn-outline-success" type="button" id="memberSearchBtn">Search</button>
+	      </form>  
+	    </div>
+	    
+	  </div>
+	</nav>
+	
+<div class="table-responsive-xxl">
+	<table id="memberTable" class="table table-bordered table-striped table table-sm">
+        <thead class="table-dark">
+            <tr>
+                <th>mem_id</th>
+                <th>mem_name</th>
+                <th>mem_email</th>
+                <th>mem_tel1</th>
+                <th>mem_add1</th>
+            </tr>
+        </thead>
+        <tbody id="tbody">
+        	<tr></tr>
+        	
+        </tbody>
+	   	<tfoot class="table-secondary">
+            <tr>
+              	<th>mem_id</th>
+                <th>mem_name</th>
+                <th>mem_email</th>
+                <th>mem_add1</th>
+                <th>mem_tel</th>
+            </tr>
+        </tfoot>
+	</table>
+</div>
 
-
-            <div id="layoutSidenav_content">
-                <main>
-                    <div class="container-fluid">
-                        <h1 class="mt-4">Static Navigation</h1>
-                        <ol class="breadcrumb mb-4">
-                            <li class="breadcrumb-item"><a href="index.html">Dashboard</a></li>
-                            <li class="breadcrumb-item active">Static Navigation</li>
-                        </ol>
-                        <div class="card mb-4">
-                            <div class="card-body">
-                                <p class="mb-0">
-                                	전체상품리스트
-                                </p>
-                            </div>
-                        </div>
-                        <div style="height: 100vh"></div>
-                        <div class="card mb-4"><div class="card-body">When scrolling, the navigation stays at the top of the page. This is the end of the static navigation demo.</div></div>
-                    </div>
-                </main>
-            
+<!-- 페이징 -->
+<input type="hidden" id="pg" name="pg" value="${pg }">
+<!-- 페이징 -->
+	<nav aria-label="Page navigation example">
+	  <ul class="pagination justify-content-center">
+	    
+		<div id="boardPagingDiv" class="paging" align="center"></div>
+	  
+	  </ul>
+	</nav>
+	                        
+    </div>
+</main>
             
 <%-- ======================================================= --%>
 <%-- ======================================================= --%>

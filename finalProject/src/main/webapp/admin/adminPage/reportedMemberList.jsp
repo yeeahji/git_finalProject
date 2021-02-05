@@ -11,7 +11,7 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/js/all.min.js" crossorigin="anonymous"></script>
     </head>
 <body>
-    <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
+     <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
             <a class="navbar-brand" href="/market/admin/adminIndex">아나바다</a>
             <button class="btn btn-link btn-sm order-1 order-lg-0" id="sidebarToggle" href="#"><i class="fas fa-bars"></i></button>
             
@@ -46,14 +46,13 @@
                             
                             <div class="sb-sidenav-menu-heading">Interface</div>
 	                           <ul>
-		                            <a class="nav-link" href="/market/admin/memberList">전체 회원 목록</a>
-		                            <a class="nav-link" href="/market/admin/reportedMemberList">신고회원 관리</a>
+		                             <a class="nav-link" href="/market/admin/memberList">전체 회원 목록</a>
 		                            <a class="nav-link" href="/market/admin/productList">전체 상품 목록</a>
-		                            <a class="nav-link" href="/market/admin/">신고된 상품 관리</a>
 		                            <a class="nav-link" href="/market/admin/storeList">전체 상점 목록</a>
 		                            <a class="nav-link" href="/market/admin/boardList">게시글목록</a>
+		                            <a class="nav-link" href="/market/admin/reportedMG">신고관리</a>
+		                            <a class="nav-link" href="/market/admin/notice">공지사항 관리</a>
 		                            <a class="nav-link" href="/market/admin/noticeWrite">공지사항 등록</a>
-		                            <a class="nav-link" href="/market/admin/">공지사항 관리</a>
 	                    		</ul>
                             
 
@@ -72,13 +71,13 @@
                 </nav>
             </div>
             
-            
+                 
 <%-- ======================================================= --%>
 <%-- ======================================================= --%>
-   <div id="layoutSidenav_content">
+      <div id="layoutSidenav_content">
            <main>
                <div class="container-fluid">
-                   <h3 class="mt-4">전체 상품목록</h3>
+                   <h3 class="mt-4">신고 회원리스트</h3>
                    <hr>                  		
 <div class="row">
 	<div class="col-xl-8">
@@ -210,7 +209,7 @@
 	                        
     </div>
 </main>
-            
+       
 <%-- ======================================================= --%>
 <%-- ======================================================= --%>
                
@@ -229,7 +228,8 @@
                 </footer>
             </div>
         </div>
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
-    <script src="/market/admin/dist/js/scripts.js"></script>
+    <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js" crossorigin="anonymous"></script>
+    <script src="/market/admin/js/reportedMemberList.js"></script>
 </body>

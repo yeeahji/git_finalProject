@@ -6,15 +6,13 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <meta name="description" content="" />
         <meta name="author" content="" />
-        <title>Static Navigation - SB Admin</title>
-
-        <link href="/market/admin/css/memberList.css" rel="stylesheet" />
-	
-	</head>
+        <title>전체상점</title>
+        <link href="/market/admin/css/storeList.css" rel="stylesheet">
+        <link rel="icon" href="data:;base64,=">
+    </head>
 <body>
     <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
             <a class="navbar-brand" href="/market/admin/adminIndex">아나바다</a>
-
             <button class="btn btn-link btn-sm order-1 order-lg-0" id="sidebarToggle" href="#"><i class="fas fa-bars"></i></button>
             
             <!-- Navbar Search-->
@@ -48,22 +46,22 @@
                             
                             <div class="sb-sidenav-menu-heading">Interface</div>
 	                           <ul>
-		                            <a class="nav-link" href="/market/admin/memberList">전체 회원 목록</a>
-		                            <a class="nav-link" href="/market/admin/reportedMemberList">신고회원 관리</a>
+		                             <a class="nav-link" href="/market/admin/memberList">전체 회원 목록</a>
 		                            <a class="nav-link" href="/market/admin/productList">전체 상품 목록</a>
-		                            <a class="nav-link" href="/market/admin/">신고된 상품 관리</a>
 		                            <a class="nav-link" href="/market/admin/storeList">전체 상점 목록</a>
 		                            <a class="nav-link" href="/market/admin/boardList">게시글목록</a>
+		                            <a class="nav-link" href="/market/admin/reportedMG">신고관리</a>
+		                            <a class="nav-link" href="/market/admin/notice">공지사항 관리</a>
 		                            <a class="nav-link" href="/market/admin/noticeWrite">공지사항 등록</a>
-		                            <a class="nav-link" href="/market/admin/">공지사항 관리</a>
 	                    		</ul>
+                            
 
                             <div class="sb-sidenav-menu-heading">Addons</div>
                             <a class="nav-link" href="charts.jsp">
                                 <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
                                 Charts
                             </a>
-
+                            
                         </div>
                     </div>
                     <div class="sb-sidenav-footer">
@@ -72,14 +70,15 @@
                     </div>
                 </nav>
             </div>
-
+            
+                 
 <%-- ======================================================= --%>
 <%-- ======================================================= --%>
 
        <div id="layoutSidenav_content">
            <main>
                <div class="container-fluid">
-                   <h3 class="mt-4">전체 회원리스트</h3>
+                   <h3 class="mt-4">전체 상점리스트</h3>
                    <hr>                  		
 <div class="row">
 	<div class="col-xl-8">
@@ -89,25 +88,25 @@
 	            상세정보
 	            &nbsp;&nbsp;&nbsp;&nbsp;
 		        <button type="button" class="btn btn-secondary btn-sm">수정</button>
-		        <button type="button" class="btn btn-danger btn-sm">영구정지</button>
+		        <button type="button" class="btn btn-danger btn-sm">삭제</button>
 	        </div>
 	        <div class="card-body">
 	        	<table class="table table-bordered border-primary table-sm">
 				  <tbody>
 				    <tr>
 				      <th width="10%">이름</th><th width="40%"><span id="nameSpan"></span></th> 
-				      <th width="10%">Tel</th><th width="40%"><span id="HpSpan"></span></th>
+				      <th width="10%">상점이름</th><th width="40%"><span id="storeNameSpan"></span></th>
 				    </tr>
 				    <tr>
-				      <th>생년월일</th><th><span id="birthSpan"></span></th> 
-				      <th>상점이름</th><th><span id="storeSpan"></span></th>
+				      <th>판매등록상품수</th><th><span id="sellProductSpan"></span></th> 
+				      <th>후기수</th><th><span id="repleSpan"></span></th>
 				    </tr>
 				    <tr>
-				      <th>e-Mail</th><th><span id="emailSpan"></span></th> 
-				      <th>등급</th><th><span id="revelSpan"></span></th>
+				      <th>사진유무</th><th><span id="pictureSpan"></span></th> 
+				      <th>등급</th><th><span id="echoSpan"></span></th>
 				    </tr>
 				    <tr>
-				    	<th rowspan="2">주소</th><th colspan="3"><span id="add1Span"></span></th>
+				    	<th rowspan="2">상점소개글</th><th colspan="3"><span id="introSpan"></span></th>
 				    </tr>
 				    <tr>
 				    	<th colspan="3" id="add2Span"><span></span></th>
@@ -134,13 +133,7 @@
 				      <th>등급</th><th width=""><span id="revelSpan"></span></th> 
 				    </tr>
 				    <tr>
-				      <th>판매중인 물건</th><th><span id="productSellSpan"></span>개</th> 
-				    </tr>
-				    <tr>
-				      <th>구매한총 물건</th><th><span id="productBuySpan"></span></th> 
-				    </tr>
-				    <tr>
-				      <th>신고수</th><th><span id="reportedSpan"></span></th> 
+				      <th>신고당한 수</th><th><span id="reportedSpan"></span>번</th> 
 				    </tr>
 				  </tbody>
 				</table>
@@ -159,39 +152,39 @@
 			  <button type="button" class="btn btn-outline-primary" id="">판매등록순</button>
 		  </div>
 		  &nbsp;&nbsp;
-			<select class="form-select form-select-sm" id="print" aria-label=".form-select-sm example">
-			  <option selected>n개씩보기</option>
-			  <option value="10">10개</option>
+			<select class="form-select form-select-sm" id="selectPrint" aria-label=".form-select-sm example" >
+			  <option value="10" selected>10개</option>
 			  <option value="20">20개</option>
 			  <option value="30">30개</option>
 			  <option value="50">50개</option>
 			  <option value="100">100개</option>
 			</select>
+			
 		  &nbsp;&nbsp;
-	      <form class="d-flex" id="memberSearchForm">
+		  
+	      <form class="d-flex" id="storeSearchForm">
 	      	<input type="hidden" id="searchPg" name="searchPg" value="1">
 	      	<select class="form-select form-select-sm" id="searchType" aria-label=".form-select-sm example">
 			  <option selected>선택</option>
-			  <option value="mem_name">이름</option>
+			  <option value="mem_name">상점이름</option>
 			  <option value="mem_id">아이디</option>
 			</select>
-	        <input class="form-control me-2" type="search" name="keyword" id="keyword" placeholder="Search" aria-label="Search">
-	        <button class="btn btn-outline-success" type="button" id="memberSearchBtn">Search</button>
+	        <input class="form-control me-2" type="search" name="storeKeyword" id="storeKeyword" placeholder="Search" aria-label="Search">
+	        <button class="btn btn-outline-success" type="button" id="storeSearchBtn">Search</button>
 	      </form>  
+	      
 	    </div>
-	    
 	  </div>
 	</nav>
 	
 <div class="table-responsive-xxl">
-	<table id="memberTable" class="table table-bordered table-striped table table-sm">
+	<table id="storeTable" class="table table-bordered table-striped table table-sm">
         <thead class="table-dark">
             <tr>
                 <th>mem_id</th>
-                <th>mem_name</th>
-                <th>mem_email</th>
-                <th>mem_tel1</th>
-                <th>mem_add1</th>
+                <th>store_nickname</th>
+<!--                 <th>mem_name</th> -->
+                <th>store_echo</th>
             </tr>
         </thead>
         <tbody id="tbody">
@@ -201,10 +194,9 @@
 	   	<tfoot class="table-secondary">
             <tr>
               	<th>mem_id</th>
-                <th>mem_name</th>
-                <th>mem_email</th>
-                <th>mem_tel1</th>
-                <th>mem_add1</th>
+                <th>store_nickname</th>
+<!--                 <th>mem_name</th> -->
+                <th>store_echo</th>
             </tr>
         </tfoot>
 	</table>
@@ -212,6 +204,7 @@
 
 <!-- 페이징 -->
 <input type="hidden" id="pg" name="pg" value="${pg }">
+<input type="hidden" id="viewNum" name="viewNum" value="${viewNum }">
 <!-- 페이징 -->
 	<nav aria-label="Page navigation example">
 	  <ul class="pagination justify-content-center">
@@ -223,7 +216,6 @@
 	                        
     </div>
 </main>
-            
             
 <%-- ======================================================= --%>
 <%-- ======================================================= --%>
@@ -246,21 +238,6 @@
     <script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.min.js" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/js/all.min.js" crossorigin="anonymous"></script>
-    <script src="/market/admin/js/memberList.js"></script>
-<!--     <link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.css" type="text/css"/> -->
-<!--     <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.js" type="text/javascript" ></script> -->
-	
-	<script type="text/javascript">
-	function boardPaging(pg){
-		$('#pg').val(pg);
-		 var keyword = document.getElementById("keyword").value;
-		
-		 if(keyword ==''){
-			location.href = '/market/admin/memberList?pg='+pg;
-		 }else{
-			$('#memberSearchBtn').trigger('click','research');
-		 }
+    <script src="/market/admin/js/storeList.js"></script>
 
-	}
-	</script>
 </body>

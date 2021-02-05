@@ -1,57 +1,123 @@
+
 $(document).ready(function() {
+		$.ajax({
+			type: 'get',
+			url: '/market/admin/getMemberList',
+			data: {'pg': $('#pg').val(),
+				'viewNum': $('#viewNum').val()},
+				dataType: 'json',
+				success: function(data){
+					$("#tbody tr:gt(0)").remove();
+					$.each(data.list, function(index, items){
+						$('<tr/>').append($('<td/>',{
+							text: items.mem_id
+						})).append($('<td/>',{
+						}).append($('<a/>',{
+							href: '#',
+							text: items.mem_name,
+							id: 'subjectA',
+							class: items.seq+""
+						}))
+						).append($('<td/>',{
+							text: items.mem_email
+						})).append($('<td/>',{
+							text: items.mem_tel1
+						})).append($('<td/>',{
+							text: items.mem_add1
+						})).appendTo($('#tbody'));
+					});
+					
+					//페이징처리
+					$('#boardPagingDiv').html(data.adminBoardPaging.pagingHTML);
+					
+					//클릭
+					$('#memberTable').on('click','#subjectA',function(){
+						let id = $(this).parent().prev().text();
+						$.ajax({
+							type: 'post',
+							url: '/market/admin/memberView',
+							data: {'id': id},
+							dataType: 'json',
+							success: function(data){
+								//alert(JSON.stringify(data));
+								//1명의 데이터를 위에다 뿌리기
+								$('#nameSpan').text(data.adminMembersDTO.mem_name)
+								$('#HpSpan').text(data.adminMembersDTO.mem_tel)
+								$('#birthSpan').text(data.adminMembersDTO.mem_pwd)
+								$('#add1Span').text(data.adminMembersDTO.mem_add1)
+								$('#add2Span').text(data.adminMembersDTO.mem_add2)
+								$('#storeSpan').text(data.adminMembersDTO.store_nickname)
+								$('#echoSpan').text(data.adminMembersDTO.store_echo)
+								$('#emailSpan').text(data.adminMembersDTO.mem_email)
+								$('#logSpan').text(data.adminMembersDTO.mem_logtime)
+								
+							}
+						});
+						
+					});
+					
+				}
+		
+		});
+	
+});//ready
+
+//selectPrint눌렀을때 (20개보기 50개보기..)
+$('#selectPrint').change(function(){
+	var viewNum = $(this).val();
+	$('#viewNum').val(viewNum);
+	
 	$.ajax({
 		type: 'get',
 		url: '/market/admin/getMemberList',
-		data: {'pg': $('#pg').val()},
-		dataType: 'json',
-		success: function(data){
-			console.log(data);
-			$.each(data.list, function(indx, items){
-				$('<tr/>').append($('<td/>',{
-					text: items.mem_id
-				})).append($('<td/>',{
-				}).append($('<a/>',{
-					href: '#',
-					text: items.mem_name,
-					id: 'subjectA',
-		            class: items.seq+""
-				}))
-				).append($('<td/>',{
-					text: items.mem_email
-				})).append($('<td/>',{
-					text: items.mem_tel1
-				})).append($('<td/>',{
-					text: items.mem_add1
-				})).appendTo($('#tbody'));
-			});
-			
-			//페이징처리
-	         $('#boardPagingDiv').html(data.boardPaging.pagingHTML);
-	         
-	        //클릭
-	         $('#memberTable').on('click','#subjectA',function(){
-	        	 let id = $(this).parent().prev().text();
-	        	 //let pg = data.pg;
-	        	 $.ajax({
-	        		 type: 'post',
-	        		 url: '/market/admin/memberView',
-	        		 data: {'id': id},
-	        		 dataType: 'json',
-	        		 success: function(data){
-	        			 //alert(JSON.stringify(data));
-	        			 //1명의 데이터를 위에다 뿌리기
-	        			 $('#nameSpan').text(data.memberDTO.mem_name)
-	        			 $('#HpSpan').text(data.memberDTO.mem_tel)
-	        			 $('#birthSpan').text(data.memberDTO.mem_pwd)
-	        			 $('#addSpan').text(data.memberDTO.mem_location)
-	        		 }
-	        	 });
-	        	 
-	         });
-	         
-		}
+		data: {'pg': $('#pg').val(),
+			'viewNum': $('#viewNum').val()},
+			dataType: 'json',
+			success: function(data){
+				$("#tbody tr:gt(0)").remove();
+				$.each(data.list, function(index, items){
+					$('<tr/>').append($('<td/>',{
+						text: items.mem_id
+					})).append($('<td/>',{
+					}).append($('<a/>',{
+						href: '#',
+						text: items.mem_name,
+						id: 'subjectA',
+						class: items.seq+""
+					}))
+					).append($('<td/>',{
+						text: items.mem_email
+					})).append($('<td/>',{
+						text: items.mem_tel1
+					})).append($('<td/>',{
+						text: items.mem_add1
+					})).appendTo($('#tbody'));
+				});
+				
+				//페이징처리
+				$('#boardPagingDiv').html(data.adminBoardPaging.pagingHTML);
+				
+				//클릭
+				$('#memberTable').on('click','#subjectA',function(){
+					let id = $(this).parent().prev().text();
+					$.ajax({
+						type: 'post',
+						url: '/market/admin/memberView',
+						data: {'id': id},
+						dataType: 'json',
+						success: function(data){
+							//alert(JSON.stringify(data));
+							//1명의 데이터를 위에다 뿌리기
+							$('#nameSpan').text(data.memberDTO.mem_name)
+							$('#HpSpan').text(data.memberDTO.mem_tel)
+							$('#birthSpan').text(data.memberDTO.mem_pwd)
+							$('#addSpan').text(data.memberDTO.mem_location)
+						}
+					});
+				});
+			}
 	});
-} );
+});
 
 //검색
 $('#memberSearchBtn').click(function(event, str){
@@ -66,7 +132,8 @@ $('#memberSearchBtn').click(function(event, str){
 			url: '/market/admin/getSearchMember',
 			data: {'pg': $('#pg').val(),
 				   'searchType':$('#searchType').val(),
-				   'keyword':$('#keyword').val()},
+				   'keyword':$('#keyword').val(),
+				   'viewNum': $('#viewNum').val()},
 			dataType: 'json',
 			success: function(data){
 				$("#tbody tr:gt(0)").remove();
@@ -90,7 +157,7 @@ $('#memberSearchBtn').click(function(event, str){
 				});//each
 				
 				//페이징처리
-		         $('#boardPagingDiv').html(data.boardPaging.pagingHTML);
+		         $('#boardPagingDiv').html(data.adminBoardPaging.pagingHTML);
 		         
 		         //클릭
 		         $('#memberTable').on('click','#subjectA',function(){
