@@ -1,0 +1,16 @@
+
+CREATE TABLE boards(
+     board_seq NUMBER NOT NULL,               -- 글번호(시퀀스 객체 이용)
+     mem_id VARCHAR2(20) NOT NULL,           -- 아이디
+     board_subject VARCHAR2(255) NOT NULL,    -- 제목
+     board_content VARCHAR2(4000) NOT NULL,   -- 내용 
+
+     board_ref NUMBER NOT NULL,                 -- 그룹번호
+     board_lev NUMBER DEFAULT 0 NOT NULL,     -- 단계
+     board_step NUMBER DEFAULT 0 NOT NULL,    -- 글순서
+     board_pseq NUMBER DEFAULT 0 NOT NULL,    -- 원글번호
+     board_reply NUMBER DEFAULT 0 NOT NULL,   -- 답변수
+
+     board_hit NUMBER DEFAULT 0,              -- 조회수
+     board_logtime DATE DEFAULT SYSDATE
+ );

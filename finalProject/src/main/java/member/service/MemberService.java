@@ -7,7 +7,6 @@ import java.util.Map;
 import javax.servlet.http.HttpSession;
 
 import member.bean.MemberDTO;
-import member.bean.ZipcodeDTO;
 
 public interface MemberService {
 

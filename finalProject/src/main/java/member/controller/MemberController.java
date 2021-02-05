@@ -32,7 +32,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import member.bean.MemberDTO;
-import member.bean.ZipcodeDTO;
 import member.service.MemberService;
 
 @Controller

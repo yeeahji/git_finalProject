@@ -16,7 +16,6 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import member.bean.MemberDTO;
-import member.bean.ZipcodeDTO;
 import member.dao.MemberDAO;
 
 @Service
