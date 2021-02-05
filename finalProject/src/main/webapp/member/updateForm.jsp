@@ -70,16 +70,22 @@
         </tr>
         <tr>
             <td>
-                <input placeholder="우편번호" name="mem_postcode"id="postcode" type="text" size="24"
-						value="${memberDTO.mem_postcode }" readonly>
-                <input type="button" name="checkPostBtn" id="checkPostBtn" value="우편번호 ">
+            
+            	<input placeholder="우편번호" name="mem_postcode"id="postcode" type="text" 
+            	value="${memberDTO.mem_postcode }"  size="24" readonly>
+                <input type="button" name="checkPostBtn" id="checkPostBtn" value="우편번호 " onclick="sample5_execDaumPostcode()">
             	<div class="caution" id="postcodeDiv"></div>
+               
             	
                 <input placeholder="주소" type="text" name="mem_add1" id="add1" size=40px
                 		value="${memberDTO.mem_add1 }" readonly><br>
                 <input placeholder="상세 주소" type="text" name="mem_add2" id="add2" size=40px;
                 		value="${memberDTO.mem_add2 }">
                 <div class="caution" id="addDiv"></div>
+                 <div id="map" style="width:365px;height:365px;margin-top:10px;display:none"></div>
+                
+                
+                
             </td>
         </tr>
         <tr>
@@ -89,7 +95,10 @@
         </tr>
     </table>
     </form>
+    <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+<script src="//dapi.kakao.com/v2/maps/sdk.js?appkey=a038dceda6f2c98fdcda082f8520e744&libraries=services"></script> 
 <script type = "text/javascript" src = "https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <script type = "text/javascript" src = "../js/member/update.js?ver=2"></script>
+   
 </body>
 </html>

@@ -14,7 +14,6 @@ public interface MemberService {
 
 	public String checkId(String id);
 
-	public List<ZipcodeDTO> searchPost(Map<String, String> map);
 
 	public int join(MemberDTO memberDTO);
 

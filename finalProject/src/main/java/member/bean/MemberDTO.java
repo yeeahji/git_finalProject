@@ -15,7 +15,7 @@ public class MemberDTO {
 					mem_add1, mem_add2, 
 					mem_recentAdd1, mem_recentAdd2,
 					mem_location, mem_recentLocation; 
-	private int mem_postcode, mem_recentPostcode;
+	private int mem_postcode, mem_recentPostcode, mem_kakao;
 	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern = "yyyy.mm.dd")
 	private Date mem_logtime;
 }

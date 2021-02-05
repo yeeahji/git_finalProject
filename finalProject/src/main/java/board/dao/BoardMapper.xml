@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ <mapper namespace = "boardSQL">
+ 
+ 
+<!--  [글 목록]=============================================================================== -->
+ 
+<!--  ▶ 글 목록 페이징 처리 -->
+	<select id = "showList" parameterType = "java.util.Map" resultType = "board">
+		select * from (select rownum rn, tt.* from
+						(select * from boards
+							order by board_ref desc, board_step asc)tt
+						)where rn between #{startNum} and #{endNum}
+	 </select>
+<!--  ▶ 게시글 개수 가져오기 -->
+ 	<select id = "getArticlesNum" resultType = "Integer">
+ 		 select count(*) from boards
+ 	</select>
+ 	
+ <!--▶ 검색 글 리스트-->
+	<select id = "getBoardSearch" parameterType = "java.util.Map" resultType = "board">
+	<![CDATA[
+		select * from 
+ 		(select rownum rn, tt.* from 
+ 		(select * from boards where ${searchType} like '%'||#{searchText}||'%' order by board_ref desc, board_step asc)tt 
+ 		)where rn>=#{startNum} and rn<=#{endNum}
+ 		]]> 
+	</select>
+	
+	<!-- 	글 검색2. 글 개수 -->
+	<select id = "getBoardSearchTotal" parameterType = "java.util.Map" resultType = "Integer">
+		select count(*) from boards where ${searchType} like '%'||'${searchText}'||'%'
+	</select>
+		
+<!--  [글쓰기]=============================================================================== -->
+ 	<insert id = "write" parameterType = "java.util.Map">
+ 		insert into boards (board_seq, mem_id,  board_subject, board_content, board_ref)
+ 					 values(seq_boards.nextval
+ 					 		, #{sessionId}
+ 					 		, #{subject}
+ 					 		, #{content}
+ 					 		, seq_boards.nextval)
+ 	</insert>
+ <!--  [글보기]=============================================================================== -->
+ <!--  ▶ 작성한 글확인 -->
+ 	<select id = "getArticle" parameterType = "Integer" resultType ="board">
+ 		select * from boards where board_seq=#{seq}
+ 	</select>
+ 	
+<!--  ▶  조회수 증가 -->
+ 	<update id = "hitUpdate" parameterType = "Integer">
+ 		update boards set board_hit = board_hit+1 where board_seq = #{seq}
+ 	</update>
+ 	
+<!-- ▶수정 -->
+ 	<update id="modifyArticle" parameterType = "java.util.Map">
+ 		update boards set board_subject = #{subject}, board_content=#{content}, board_logtime = sysdate where board_seq = #{seq}
+ 	</update>
+ 	
+<!-- 삭제1. 원글 답글수 줄이기 + 글 삭제-->
+ 	<delete id = "deleteArticle" parameterType = "Integer"> 
+		begin
+			update boards set board_reply=(board_reply-1) where board_seq = (select board_pseq from boards where board_seq=#{seq});
+			update boards set board_subject=concat('[원글이 삭제된 답글]',board_subject) where board_pseq=#{seq};
+			delete from boards where board_seq = #{seq};
+	   	end;
+   	</delete>
+ <!--  [답글]=============================================================================== -->   	
+   	<!--  ▶ 답글 쓰기. 3개의 작업을 하는 reply작업을 한번에 하결하도록 한다. -->
+	<insert id = "reply" parameterType="java.util.Map">
+		begin
+		<!--  답글1. 선답글 밀어내기 -->
+			update boards set board_step=board_step+1 where board_ref = #{ref} and board_step>#{step};
+			
+		<!--  답글2. 답글 추가하기-->
+			insert into boards values(seq_boards.nextval, 
+									#{sessionId},#{subject},#{content},#{ref},
+									#{board_lev},#{board_step},#{pseq}, 0, 0, sysdate);
+		<!--  답글3. 원글의 답글 수 올리기 -->		
+			update boards set board_reply=board_reply+1 where board_seq=#{seq};
+		end;
+	</insert>
+
+
+
+ 	
+ </mapper>

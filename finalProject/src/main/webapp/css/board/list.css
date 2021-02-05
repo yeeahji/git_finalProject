@@ -1,0 +1,45 @@
+@charset "UTF-8";
+.logo_image{
+	width: 56px;
+	height: 56px;
+	display:block;
+	margin: 0px auto;
+	display: inline;
+	
+}
+.title{
+	font-size : 25pt;
+        color : #0a58ca;
+}
+input[type=button]{
+        height: 30px;
+        background-color: #0a58ca;
+        border : 0px;
+        width : 120px;
+        color: white;
+        font-weight: bold;
+    }
+input[type=search]{
+    border : 0px;
+    height : 30px;
+    margin : 5px;
+    border-bottom: #9dbcea 1px solid;
+    font-size: 12pt;
+}
+
+
+#boardListTable{
+	 border-width: 1px;
+    border-style: solid;
+    border-color: -internal-light-dark(rgb(118, 118, 118), rgb(133, 133, 133));
+}
+
+
+
+
+
+
+
+
+
+

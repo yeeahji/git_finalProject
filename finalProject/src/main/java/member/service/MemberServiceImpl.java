@@ -31,10 +31,6 @@ public class MemberServiceImpl implements MemberService {
 			return "exist";
 	}
 
-	@Override
-	public List<ZipcodeDTO> searchPost(Map<String, String> map) {
-		return memberDAO.searchPost(map);
-	}
 
 	@Override
 	public int join(MemberDTO memberDTO) {
@@ -44,14 +40,34 @@ public class MemberServiceImpl implements MemberService {
 //	[로그인] ----------------------------------------------------------
 	@Override
 	public String login(Map<String, String> map, HttpSession session) {
+//		map: 일반-id, pwd / 카카오 - id, email
+		
+		MemberDTO memberDTO;
+		
 //		카카오로그인 시
 		if (map.get("email")!=null) {
+			
+			//카카오 로그인 -> 이메일을 id로 쓴다
+			memberDTO = memberDAO.checkEmail(map.get("email"));
+			
+			if(memberDTO == null) {//DB에 없는 카카오 계정이면, DB에 등록한다.
+				String pwd = ((Math.random()*999999-1)+1)+""; //임의로 넣어줄 비밀번호 난수값
+				map.put("mem_pwd", pwd);
+				//카카오 닉네임/이메일로 회원가입 등록
+				memberDAO.joinKakao(map);
+			}
 			session.setAttribute("memId", map.get("id"));
 			session.setAttribute("memEmail", map.get("email"));
+			
+			memberDTO = memberDAO.selectKakao(map);
+			session.setAttribute("memKakao", memberDTO.getMem_kakao());
+			session.setAttribute("memId", map.get("id"));
+			session.setAttribute("memEmail", map.get("email"));
+			
 			return "success";
-		}
+		}//if
 //		일반 로그인 시 
-		MemberDTO memberDTO = memberDAO.login(map);
+		memberDTO = memberDAO.login(map);
 		
 		if(memberDTO == null) {
 			return "fail";
@@ -59,9 +75,11 @@ public class MemberServiceImpl implements MemberService {
 			session.setAttribute("memName", memberDTO.getMem_name());
 			session.setAttribute("memId", memberDTO.getMem_id());
 			session.setAttribute("memEmail", memberDTO.getMem_email());
+			session.setAttribute("memKakao", memberDTO.getMem_kakao());
 			return "success";
 		}
 	}
+
 	
 	@Override
 	public MemberDTO getData(String id) {

@@ -12,6 +12,11 @@
 	<context:component-scan base-package="chat.dao"/>
 	<context:component-scan base-package="chat.service"/>
 	
+	<!-- Board -->
+	<context:component-scan base-package="board.bean"/>
+	<context:component-scan base-package="board.dao"/>
+	<context:component-scan base-package="board.service"/>
+	
 	<!-- index -->
 	<context:component-scan base-package="index.bean"/>
 	<context:component-scan base-package="index.dao"/>

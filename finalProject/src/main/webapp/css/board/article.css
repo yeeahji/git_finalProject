@@ -1,0 +1,291 @@
+@charset "UTF-8";
+#board_subject{
+	
+}
+element.style {
+    height: 40px;
+}
+.textarea_input {
+    display: block;
+    width: 100%;
+    min-height: 40px;
+    padding: 11px 12px 10px;
+    border: 1px solid #ebecef;
+    box-sizing: border-box;
+    overflow: hidden;
+    resize: none;
+    word-break: break-all;
+    font-size: 15px;
+    letter-spacing: -.23px;
+    line-height: 17px;
+    outline: none;
+}
+button, textarea {
+    font-family: Apple SD Gothic Neo,맑은 고딕,Malgun Gothic,돋움,dotum,sans-serif;
+}
+body, button, dd, dl, dt, fieldset, form, h1, h2, h3, h4, h5, h6, input, legend, li, ol, p, select, table, td, textarea, th, ul {
+    margin: 0;
+    padding: 0;
+}
+textarea {
+	font-weight: 400;
+    -webkit-writing-mode: horizontal-tb !important;
+    text-rendering: auto;
+    color: -internal-light-dark(black, white);
+    letter-spacing: normal;
+    word-spacing: normal;
+    text-transform: none;
+    text-indent: 0px;
+    text-shadow: none;
+    display: inline-block;
+    text-align: start;
+    appearance: textarea;
+    background-color: -internal-light-dark(rgb(255, 255, 255), rgb(59, 59, 59));
+    -webkit-rtl-ordering: logical;
+    flex-direction: column;
+    resize: auto;
+    cursor: text;
+    white-space: pre-wrap;
+    overflow-wrap: break-word;
+    column-count: initial !important;
+    margin: 0em;
+    font: 400 13.3333px Arial;
+    border-width: 1px;
+    border-style: solid;
+    border-color: -internal-light-dark(rgb(118, 118, 118), rgb(133, 133, 133));
+    border-image: initial;
+    padding: 2px;
+}
+.WritingWrap {
+    color: #000;
+}
+.caution{
+	color : rgba(153, 0, 33, 0.781);
+    border : 1px;
+    font-size: 10pt;
+    font-weight: bold;
+    float:left;
+}
+
+/* 신고하기 모달창 */
+#modalHidden { /* .gDUZll */
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    background: rgba(0, 0, 0, 0.6);
+    z-index: 10000; /* 헤더보다 위에 뜨게 하기 위해서 값 매우 크게 줌 */
+    display: none;
+    -webkit-box-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    justify-content: center;
+}
+
+#modalDisplay{
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    background: rgba(0, 0, 0, 0.6);
+    z-index: 10000; /* 헤더보다 위에 뜨게 하기 위해서 값 매우 크게 줌 */
+    display: flex;
+    -webkit-box-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    justify-content: center;
+}
+.singoModalWrap {
+   padding: 60px;
+    background: rgb(255, 255, 255);
+    width: 600px;
+}
+#singoModalTop {
+   display: flex;
+    -webkit-box-pack: justify;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+#singoModalTop > .title {
+    letter-spacing: 5.2px;
+    font-size: 26px;
+    padding-bottom: 30px;
+    border-bottom: 1px solid rgb(33, 33, 33);
+    margin-bottom: 45px;
+}
+.singoCategory {
+   border-top: 1px solid rgb(238, 238, 238);
+}
+
+.singoCategory:last-child {
+   border-color: rgb(204, 204, 204);
+}
+
+.singoTitle {
+   width: 100%;
+    display: flex;
+    -webkit-box-align: center;
+    align-items: center;
+    -webkit-box-pack: justify;
+    justify-content: space-between;
+    color: rgb(102, 102, 102);
+    height: 60px;
+    font-size: 16px;
+    padding-left: 20px;
+}
+.singoTitle > button {
+   display: flex;
+    -webkit-box-align: center;
+    align-items: center;
+    height: 100%;
+    padding: 0px 20px;   
+}
+.singoTitle img {
+   transition: transform 0.4s ease-out 0s;
+}
+
+.singoContent {
+    background: rgb(249, 249, 249);
+    padding: 0px 20px;
+    height: 0px;
+    overflow: hidden;
+    transition: height 0.3s ease-out 0s;   
+}
+.singoContentOther {
+    background: rgb(249, 249, 249);
+    padding: 0px 20px;
+    height: 0px;
+    overflow: hidden;
+    transition: height 0.3s ease-out 0s;   
+}
+
+.contentList {
+   height: 30px;
+    display: flex;
+    -webkit-box-align: center;
+    align-items: center;
+    font-size: 14px;
+}
+.contentList button, .contentList a {
+    /* color: rgb(247, 47, 51); */   
+    color: #0a58ca;   
+}
+
+/* 마지막 리스트(인풋박스있는) */
+.contentListInput {
+   display: flex;
+    margin-top: 10px;
+    -webkit-box-align: center;
+    align-items: center;
+    border: 1px solid rgb(238, 238, 238);
+    width: 100%;
+    background: rgb(255, 255, 255);
+    font-size: 13px;
+}
+.contentListInput input {
+   flex: 1 1 0%;
+    height: 36px;
+    padding: 0px 20px;   
+}
+.contentListInput button {
+   border: 1px solid rgb(238, 238, 238);
+    height: 28px;
+    display: flex;
+    -webkit-box-align: center;
+    align-items: center;
+    width: 56px;
+    -webkit-box-pack: center;
+    justify-content: center;
+    margin-right: 10px;
+    color: rgb(136, 136, 136);
+}
+/* 기타사유_textarea div 부분 */
+.contetnListTextarea {
+   width: 100%;
+    padding: 10px 0px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;   
+}
+.contetnListTextarea textarea {
+   width: 100%;
+    height: 80px;
+    resize: none;
+    padding: 10px 20px;
+    margin-bottom: 10px;
+    border: 1px solid rgb(238, 238, 238);   
+}
+.contetnListTextarea button {
+   border: 1px solid rgb(238, 238, 238);
+    height: 28px;
+    display: flex;
+    -webkit-box-align: center;
+    align-items: center;
+    width: 56px;
+    -webkit-box-pack: center;
+    justify-content: center;
+    color: rgb(136, 136, 136);
+    font-size: 13px;
+    background: rgb(255, 255, 255);
+}
+/* 신고 카테고리 클릭 */
+.singoTitleOpen {
+   width: 100%;
+    display: flex;
+    -webkit-box-align: center;
+    align-items: center;
+    -webkit-box-pack: justify;
+    justify-content: space-between;
+    color: rgb(102, 102, 102);
+    height: 60px;
+    font-size: 16px;
+    padding-left: 20px;
+    background: rgb(249, 249, 249); /* 기존 신고 타이틀에서 추가된 */
+}
+.singoTitleOpen img {
+   transform: rotate(180deg);
+   transition: transform 0.4s ease-out 0s;
+}
+.singoTitleOpen button {
+   display: flex;
+    -webkit-box-align: center;
+    align-items: center;
+    height: 100%;
+    padding: 0px 20px;
+}
+
+.singoContentOpen {
+   background: rgb(249, 249, 249);
+    padding: 0px 20px;
+    overflow: hidden;
+    transition: height 0.3s ease-out 0s;
+    height: 230px;
+}
+.singoContentOtherOpen {
+   background: rgb(249, 249, 249);
+    padding: 0px 20px;
+    overflow: hidden;
+    transition: height 0.3s ease-out 0s;
+    height: 230px;
+}
+.directAsk {
+    border: 1px solid rgb(238, 238, 238);
+    color: rgb(136, 136, 136);
+    font-size: 13px;
+    height: 32px !important;
+} 
+
+.singoContent {
+   background: rgb(249, 249, 249);
+    padding: 0px 20px;
+    height: 0px;
+    overflow: hidden;
+    transition: height 0.3s ease-out 0s;
+   
+}
+#comment_content{
+	width: 85%;
+	display: inline-block;
+}

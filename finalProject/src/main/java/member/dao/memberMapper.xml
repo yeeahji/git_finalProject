@@ -12,20 +12,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  									'','', '',	
  									#{mem_tel}, 
  									'', '',	
- 									sysdate)
+ 									sysdate, 0)
  	</insert> 
 <!-- ▶ 아이디 중복 체크 / 회원정보수정용 회원 데이터 전체 출력  -->
  	<select id="getData" parameterType="String" resultType="member">
  		select * from members where mem_id = #{mem_id}
  	</select>
  	
-<!-- ▶  우편번호 검색 -->
- 	<select id="searchPost" parameterType="java.util.Map" resultType="zipcode">
- 		select * from newzipcode where sido like ('%' || #{sido} || '%') 
- 								and nvl(sigungu,'0') like ('%' || #{sigungu} || '%') 
- 								and roadname like ('%' || #{roadname} || '%')	
- 	</select>
- 	
+
 <!-- ========================================================================= -->
 <!-- ▶  로그인 / 본인 재확인-->
  	<select id="login" parameterType="java.util.Map" resultType="member">
@@ -45,8 +39,30 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  	</update>
  	
  	
+ <!-- 카카오 로그인======================================= -->
+ 	<select id="checkEmail" parameterType="String" resultType="member">
+ 		select * from members where mem_email = #{email}
+ 	</select>
+<!--  	처음 로그인한 카카오 데이터 회원가입 -->
+ 	<insert id="joinKakao" parameterType="java.util.Map">
+ 		insert into members values(#{email}, #{mem_pwd}, '주문 정보를 등록해주세요', #{email}, 
+ 									'주문 정보를 등록해주세요','주문 정보를 등록해주세요', '',
+ 									'','', '',	
+ 									'주문 정보', 
+ 									'', '',	
+ 									sysdate, 1)
+ 	</insert> 
+<!--  	카카오 데이터의 유니크 값 email가져오기 -->
+ 	<select id="selectKakao" parameterType="java.util.Map" resultType="member">
+ 		select * from members where mem_email = #{email}
+ 	</select>
+ 	
+ 	
+ 	
+ 	
+ 	
 <!-- ========================================================================= -->
-<!-- ▶  -->
+<!-- ▶ 마이페이지 -->
  	<select id="certify" parameterType="java.util.Map" resultType="member">
  		select * from members where mem_id = #{mem_id} and mem_pwd = #{mem_pwd}
  	</select>
