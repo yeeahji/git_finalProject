@@ -46,14 +46,13 @@
                             
                             <div class="sb-sidenav-menu-heading">Interface</div>
 	                           <ul>
-		                            <a class="nav-link" href="/market/admin/memberList">전체 회원 목록</a>
-		                            <a class="nav-link" href="/market/admin/reportedMemberList">신고회원 관리</a>
+		                             <a class="nav-link" href="/market/admin/memberList">전체 회원 목록</a>
 		                            <a class="nav-link" href="/market/admin/productList">전체 상품 목록</a>
-		                            <a class="nav-link" href="/market/admin/">신고된 상품 관리</a>
 		                            <a class="nav-link" href="/market/admin/storeList">전체 상점 목록</a>
 		                            <a class="nav-link" href="/market/admin/boardList">게시글목록</a>
+		                            <a class="nav-link" href="/market/admin/reportedMG">신고관리</a>
+		                            <a class="nav-link" href="/market/admin/notice">공지사항 관리</a>
 		                            <a class="nav-link" href="/market/admin/noticeWrite">공지사항 등록</a>
-		                            <a class="nav-link" href="/market/admin/">공지사항 관리</a>
 	                    		</ul>
                             
 
@@ -229,7 +228,6 @@
                 </footer>
             </div>
         </div>
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
     <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js" crossorigin="anonymous"></script>
     <script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js" crossorigin="anonymous"></script>

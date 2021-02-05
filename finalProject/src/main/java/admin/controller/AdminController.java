@@ -12,8 +12,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import admin.bean.AdminBoardPaging;
+import admin.bean.AdminMembersDTO;
 import admin.service.AdminService;
 import member.bean.MemberDTO;
+import store.bean.StoreDTO;
 
 
 @Controller
@@ -34,8 +36,12 @@ public class AdminController {
 	}
 	//전체회원리스트
 	@RequestMapping(value="/memberList", method=RequestMethod.GET)
-	public String memberList(@RequestParam(required=false, defaultValue="1") String pg, Model model) {
+	public String memberList(@RequestParam(required=false, defaultValue="1") String pg,
+							 @RequestParam(required=false, defaultValue="20") String viewNum,
+							 Model model) {
+		System.out.println("컨트롤러= "+ pg+","+viewNum);
 		model.addAttribute("pg", pg);
+		model.addAttribute("viewNum", viewNum);
 		return "/admin/adminPage/memberList";
 	}
 	//신고된회원리스트
@@ -55,7 +61,9 @@ public class AdminController {
 	}
 	//전체상품리스트
 	@RequestMapping(value="/storeList", method=RequestMethod.GET)
-	public String storeList() {
+	public String storeList(@RequestParam(required=false, defaultValue="1") String pg,
+							Model model) {
+		model.addAttribute("pg", pg);
 		return "/admin/adminPage/storeList";
 	}
 	//게시글리스트
@@ -78,22 +86,26 @@ public class AdminController {
 	
 	//회원정보출력
 	@RequestMapping(value="/getMemberList", method=RequestMethod.GET)
-	public ModelAndView getMemberList(@RequestParam(required=false, defaultValue="1") String pg) {
-		List<MemberDTO> list = adminService.getMemberList(pg);
-		//페이징처리??
-		AdminBoardPaging adminBoardPaging = adminService.boardPaging(pg);
+	public ModelAndView getMemberList(@RequestParam(required=false, defaultValue="1") String pg,
+									  @RequestParam(required=false, defaultValue="20") String viewNum) {
+		System.out.println("컨트롤러, list로 들어가는 viewNum = "+viewNum);
+		List<MemberDTO> list = adminService.getMemberList(pg,viewNum);
+		//페이징처리
+		System.out.println("컨트롤러, 페이징으로 들어가는 viewNum = "+viewNum);
+		AdminBoardPaging adminBoardPaging = adminService.boardPaging(pg,viewNum);
 				
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("list", list);
 		mav.addObject("pg", pg);
+		mav.addObject("viewNum", viewNum);
 		mav.addObject("adminBoardPaging", adminBoardPaging);
 		mav.setViewName("jsonView");
 		return mav;
 	}
 	//회원검색
-	@RequestMapping(value="getSearchMember", method=RequestMethod.POST)
+	@RequestMapping(value="/getSearchMember", method=RequestMethod.POST)
 		public ModelAndView getSearchMember(@RequestParam Map<String,String> map) {
-		List<MemberDTO> list = adminService.getSearchMember(map); //pg, keyword
+		List<MemberDTO> list = adminService.getSearchMember(map); //pg, keyword, searchType, viewNum
 		
 		//페이징 처리
 		AdminBoardPaging adminBoardPaging = adminService.searchBoardPaging(map);
@@ -106,19 +118,46 @@ public class AdminController {
 		return mav;
 	}
 	//회원정보
-	@RequestMapping(value="memberView", method=RequestMethod.POST)
+	@RequestMapping(value="/memberView", method=RequestMethod.POST)
 	public ModelAndView memberView(@RequestParam String id) {	
 		
-		MemberDTO memberDTO= adminService.getMemberView(id);
+		AdminMembersDTO adminMembersDTO= adminService.getMemberView(id);
 		
 		ModelAndView mav = new ModelAndView();
-		mav.addObject("memberDTO", memberDTO);
+		mav.addObject("adminMembersDTO", adminMembersDTO);
 		mav.setViewName("jsonView");
 	
 		return mav;
 	}
 	
 	
+	//상점전체 출력
+	@RequestMapping(value="/getStoreList", method=RequestMethod.GET)
+	public ModelAndView getStoreList(@RequestParam(required=false, defaultValue="1") String pg) {
+		List<StoreDTO> storeList = adminService.getStoreList(pg);
+		//페이징처리
+		AdminBoardPaging adminStoreBP = adminService.StoreBP(pg);
+				
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("storeList", storeList);
+		mav.addObject("pg", pg);
+		mav.addObject("adminStoreBP", adminStoreBP);
+		mav.setViewName("jsonView");
+		return mav;
+	}
+	//상점정보
+	@RequestMapping(value="/storeView", method=RequestMethod.POST)
+	public ModelAndView getstoreView(@RequestParam String id) {	
+		
+		StoreDTO storeDTO= adminService.getStoreView(id);
+		
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("storeDTO", storeDTO);
+		mav.setViewName("jsonView");
+	
+		return mav;
+	}
+		
 
 	
 	

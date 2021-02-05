@@ -8,7 +8,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import admin.bean.AdminMembersDTO;
 import member.bean.MemberDTO;
+import store.bean.StoreDTO;
 
 @Repository
 @Transactional
@@ -37,9 +39,26 @@ public class AdminDAOMybatis implements AdminDAO {
 	}
 
 	@Override
-	public MemberDTO getMemberView(String id) {
+	public AdminMembersDTO getMemberView(String id) {
 		return sqlSession.selectOne("adminSQL.getMemberView", id);
 	}
+	//상점출력
+	@Override
+	public List<StoreDTO> getStoreList(Map<String, Integer> map) {
+		return sqlSession.selectList("adminSQL.getStoreList", map);
+	}
+
+	@Override
+	public int getTotalC() {
+		return sqlSession.selectOne("adminSQL.getTotalC");
+	}
+
+	@Override
+	public StoreDTO getStoreView(String id) {
+		return sqlSession.selectOne("adminSQL.getStoreView", id);
+	}
+
+
 	
 	
 }

@@ -18,4 +18,5 @@ public class MemberDTO {
 	private int mem_postcode, mem_recentPostcode;
 	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern = "yyyy.mm.dd")
 	private Date mem_logtime;
+	
 }
