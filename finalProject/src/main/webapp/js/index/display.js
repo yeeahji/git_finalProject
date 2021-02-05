@@ -63,7 +63,7 @@ function getList(page) {
 						time_unit = "시간 전"
 					}
 
-					html = '<div class="item col-3"' + 'onclick="test('
+					html = '<div class="item col-3"' + 'onclick="productDetailSeq('
 							+ this.product_seq + ');"'
 							+ 'style="cursor: pointer;">'
 							+ '<div class="item">' + '<div id="itemSolid">'
@@ -90,7 +90,7 @@ function getList(page) {
 
 }
 
-function test(seq) {
+function productDetailSeq(seq) {
 	location.href = "/market/product/productDetail?seq=" + seq
 }
 

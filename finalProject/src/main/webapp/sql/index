@@ -82,4 +82,18 @@ INSERT INTO product VALUES
 (seq_product.NEXTVAL, 'test1', 1102, '차량용 방향제 미개봉', '더 페이스샵 스킨 케어 미개봉', '1102.JPG', '1102.JPG', '1102.JPG', '', '', 13000, '서울', 0, 0, '원피스', '옷', '투피스', '쓰리피스', '포피스'
 ,0, 1, sysdate);
 
+INSERT INTO product VALUES 
+(seq_product.NEXTVAL, 'va', 202, '남자 코드 공유 코트', '공유가 입던 그 코트입니다', '202c.JPG', '202c.JPG', '202c.JPG', '', '', 
+100000, '부산', 0, 0, '코트', '공유', '남자코트', '공유코트', '남성코트',0, 1, sysdate);
+INSERT INTO product VALUES 
+(seq_product.NEXTVAL, 'va', 203, '빌리버드 남자 자켓 미개봉', '개봉 안한 옷입니다.', '203.JPG', '203.JPG', '203.JPG', '', '', 
+50000, '전주', 0, 0, '빌리버드', '남자', '자켓', '미개봉', '남성자켓', 0, 1, sysdate);
+INSERT INTO product VALUES 
+(seq_product.NEXTVAL, 'va', 301, '핵인싸템 프로펠러 헬리콥터 모자', '핵인싸템 프로펠러 헬리콥터 모자 캡 인싸되세요', '301.JPG', '301.JPG', '301.JPG', '', '', 
+3000, '인천 계양', 0, 0, '헬리콥터', '모자', '인싸템', '파티템', '유퀴즈', 0, 1, sysdate);
+
+INSERT INTO product VALUES 
+(seq_product.NEXTVAL, 'test', 303, '나이키레볼루션 275', '두번신었습니다.. 직거래만 가능', '303.JPG', '303.JPG', '303.JPG', '', '', 
+40000, '대전', 0, 0, '나이키', '나이키레볼루션', '운동화', '캐줘얼화', '나이키레볼루션5', 0, 1, sysdate);
+
 commit; 
