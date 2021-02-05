@@ -16,7 +16,9 @@
 	<!-- 상단 회원 -->
 	<div class="login-box">
 		<sec:authentication property="principal" var="member"/> <!-- 사용자 정보 가져오기 -->
+		<!-- ${pageContext.request.userPrincipal} : 사용자 principal 확인 -->
 		
+		<!-- 비회원 -->
 		<sec:authorize access="isAnonymous()">
 		<a href="/market/member/joinForm" 
 		   style="text-decoration: none; color:#61615b;">회원가입</a>&emsp;
@@ -24,7 +26,7 @@
 		   style="text-decoration: none; color:#61615b;">로그인</a>&emsp;
 		</sec:authorize>
 		
-		<!-- 일반 유저 : 권한으로 구분(시큐리티 세션) -->
+		<!-- 권한이 있을 때(회원, 관리자) -->
 		<sec:authorize access="isAuthenticated()">   
 		<span>${member.username}님 환영합니다.&emsp;</span>
 		<a href="/market/member/logout" 
@@ -34,18 +36,8 @@
 		<a href="#" 
 		   style="text-decoration: none; color:#61615b;">알림 ▼</a>&emsp;&emsp;&emsp;
 		</sec:authorize>
-		
-		<!-- 카카오 유저 : 세션으로 구분 -->
-		<c:if test="${mem_id != null}">      
-		<span>${mem_id}님 환영합니다.&emsp;</span>
-		<a href="/market/member/logout" 
-		   style="text-decoration: none; color:#61615b;">로그아웃</a>&emsp;
-		<a href="/market/member/certifyForm" 
-		   style="text-decoration: none; color:#61615b;">내 계정 관리</a>&emsp;&emsp;&emsp;
-		<a href="#" 
-		   style="text-decoration: none; color:#61615b;">알림 ▼</a>&emsp;&emsp;&emsp;
-		</c:if>   
-		
+
+		<!-- 관리자 -->
 		<sec:authorize access="hasRole('ROLE_ADMIN')"> 
 		<a href="/market/admin/adminIndex" 
 		   style="text-decoration: none; color:#61615b;">관리자 페이지</a>

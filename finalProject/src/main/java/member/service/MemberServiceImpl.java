@@ -75,19 +75,32 @@ public class MemberServiceImpl implements MemberService, UserDetailsService {
 		memberDAO.login(map);
 	}
 	
+//	@Override
+//	public String kakao(MemberDTO memberDTO) {
+//		//카카오로 최초 로그인 시 회원가입 시키기
+//		if(memberDAO.getData(memberDTO.getMem_id()) == null) {
+//			memberDAO.join(memberDTO); 
+//		}
+//		
+//		loadUserByUsername(memberDTO.getMem_id());
+//
+//		
+//		return "success";
+//	}
+	
 	@Override
-	public String kakao(MemberDTO memberDTO) {
-		if(memberDAO.getData(memberDTO.getMem_id()) == null) {
-			memberDAO.join(memberDTO); //카카오 로그인으로 최초 로그인 시 회원가입 시키기
+	public String kakao(Map<String, String> map) {
+		//카카오로 최초 로그인 시 회원가입 시키기
+		if(memberDAO.getData(map.get("mem_id")) == null) {
+			MemberDTO memberDTO = new MemberDTO();
+			memberDTO.setMem_id(map.get("mem_id"));
+			memberDTO.setMem_name(map.get("mem_name"));
+			memberDTO.setMem_email(map.get("mem_id"));
+			memberDTO.setEnabled(true);
+			memberDTO.setAuthorities(Arrays.asList(new String[]{"ROLE_USER"}));
+		
+			memberDAO.join(memberDTO); 
 		}
-		
-		loadUserByUsername(memberDTO.getMem_id());
-		
-		Map<String, String> map = new HashMap<String, String>();
-		map.put("mem_id", memberDTO.getMem_id());
-		map.put("mem_email", memberDTO.getMem_email());
-		memberDAO.login(map);
-		
 		return "success";
 	}
 

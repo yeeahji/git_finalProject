@@ -21,14 +21,19 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.security.web.authentication.WebAuthenticationDetails;
+import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -131,34 +136,47 @@ public class MemberController {
 //	- 로그인
 	@RequestMapping(value = "/login", method =RequestMethod.POST)
 	@ResponseBody
-	public void login(@RequestParam Map<String, String> map) {
+	public void login(@RequestParam Map<String, String> map, HttpServletRequest request) {
 		memberService.login(map);
 	}
 //	- 카카오
-	@RequestMapping(value = "/kakao", method =RequestMethod.POST)
+//	@RequestMapping(value="/kakao", method=RequestMethod.POST)
+//	@ResponseBody
+//	public String kakao(@RequestParam Map<String, String> map, HttpSession session, HttpServletRequest request) {
+//		//memberDTO에 정보 저장
+//		MemberDTO memberDTO = new MemberDTO();
+//		memberDTO.setMem_id(map.get("mem_id"));
+//		memberDTO.setMem_name(map.get("mem_name"));
+//		memberDTO.setMem_email(map.get("mem_id"));
+//		memberDTO.setEnabled(true);
+//		memberDTO.setAuthorities(Arrays.asList(new String[]{"ROLE_USER"}));
+//		
+//		//인증 객체 얻기
+//		SecurityContext securityContext = SecurityContextHolder.getContext(); 
+//		//권한 부여하기
+//		Authentication authentication = new UsernamePasswordAuthenticationToken(memberDTO.getMem_id(), memberDTO.getMem_pwd(), memberDTO.getAuthority());
+//		//로그인한 사용자 정보를 가진 객체 얻기
+//		securityContext.setAuthentication(authentication);
+//		
+//		Principal principal = request.getUserPrincipal();
+//		
+//		System.out.println("사용자 정보 : " + principal);
+//		System.out.println("권한 : " + memberDTO.getAuthority());
+//		
+//		return memberService.kakao(memberDTO);
+//	}
+//	- 카카오	
+	@RequestMapping(value="/kakao", method=RequestMethod.POST)
 	@ResponseBody
-	public String kakao(@RequestParam Map<String, String> map, HttpSession session, HttpServletRequest request) {
-		MemberDTO memberDTO = new MemberDTO();
-		memberDTO.setMem_id(map.get("mem_id"));
-		memberDTO.setMem_email(map.get("mem_email"));
-		memberDTO.setEnabled(true);
-		memberDTO.setAuthorities(Arrays.asList(new String[]{"ROLE_USER"}));
-
-		 SecurityContext context = SecurityContextHolder.getContext(); // 인증 객체를 얻습니다. Authentication
-		 Authentication authentication = context.getAuthentication(); // 로그인한 사용자정보를 가진 객체를 얻습니다.
-		 Principal principal = request.getUserPrincipal();
-		 System.out.println("사용자 정보 : " + principal);
-		 
-		 Collection<? extends GrantedAuthority> authorities = authentication.getAuthorities();
-		 
-		 Iterator<? extends GrantedAuthority> iter = authorities.iterator();
-
-		while (iter.hasNext()) {
-			GrantedAuthority auth = iter.next();
-			System.out.println(auth.getAuthority());
-		}
+	public String kakao(@RequestParam Map<String, String> map) {
+		List<GrantedAuthority> roles = new ArrayList<GrantedAuthority>(1); //권한 설정
+		roles.add(new SimpleGrantedAuthority("ROLE_USER"));	
+		User user = new User(map.get("mem_id"), "", roles); //계정 생성
 		
-		return memberService.kakao(memberDTO);
+		Authentication auth = new UsernamePasswordAuthenticationToken(user, null, roles); //인증하기
+		SecurityContextHolder.getContext().setAuthentication(auth); //권한 부여
+
+		return memberService.kakao(map);
 	}
 
 //	- 로그인 실패

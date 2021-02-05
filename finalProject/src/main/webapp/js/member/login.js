@@ -16,12 +16,13 @@ function kakaoLogin(){
 	                   	$.ajax({
 	        				type : 'post',
 	        				url : '/market/member/kakao',
-	        				data : {'mem_id': JSON.stringify(kakao_account.profile.nickname),
-	        						'mem_email': kakao_account.email},
+	        				data : {'mem_id': kakao_account.email,
+	        						'mem_name': JSON.stringify(kakao_account.profile.nickname),
+	        						},
 	        				dataType : 'text', 
 	        				success : function(result){
 	        					if(result == 'success'){
-	        						location.reload(true);
+	        						location.href="/market/index";
 	        					}else if(result =='fail'){
 	        						$('#failLoginDiv').text("가입하지 않은 아이디이거나, 잘못된 계정 정보입니다.");
 	        					}

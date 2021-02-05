@@ -12,7 +12,7 @@ public interface MemberService {
 
 	public void login(Map<String, String> map);
 	
-	public String kakao(MemberDTO memberDTO);
+	public String kakao(Map<String, String> map);
 
 	public String checkId(String id);
 
