@@ -30,8 +30,12 @@ public interface MemberDAO {
 
 	public MemberDTO checkEmail(String string);
 
-	public void joinKakao(Map<String, String> map);
+	public void joinKakao(MemberDTO memberDTO);
 
 	public MemberDTO selectKakao(Map<String, String> map);
+
+	public int distinguishKakao(String mem_id);
+
+	public MemberDTO sessionLogin(Map<String, String> map);
 
 }

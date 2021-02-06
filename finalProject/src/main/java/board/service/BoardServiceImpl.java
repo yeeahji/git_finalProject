@@ -27,13 +27,13 @@ public class BoardServiceImpl implements BoardService {
 	
 	public String sessionId(HttpSession session) {
 		String sessionId = null;
-		int memKakao=Integer.parseInt(session.getAttribute("memKakao").toString());
-		System.out.println("memKakao:"+memKakao);
+		int sessionKakao=Integer.parseInt(session.getAttribute("sessionKakao").toString());
+		System.out.println("memKakao:"+sessionKakao);
 
-		if(memKakao==1) {//카카오 로그인 시
-			sessionId = (String) session.getAttribute("memEmail");
-		}else if(memKakao==0){
-			sessionId = (String) session.getAttribute("memId");
+		if(sessionKakao==1) {//카카오 로그인 시
+			sessionId = (String) session.getAttribute("sessionEmail");
+		}else if(sessionKakao==0){
+			sessionId = (String) session.getAttribute("sessionId");
 		}
 
 		return sessionId;

@@ -1,21 +1,21 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec" %>
+    
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>아나바다 커뮤니티</title>
 	<link rel="stylesheet" href="../css/board/list.css">
-	<link rel="stylesheet" type="text/css" href="/market/css/member/member.css?ver=2">
-	<link rel="stylesheet" type="text/css" href="/market/css/member/loginModal.css?ver=3">
 	
 	<script type="text/javascript" src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
 	<script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 	
 	<script type="text/javascript" src="../js/board/list.js"></script>
-	<script type="text/javascript" src="/market/js/member/login.js?ver=1"></script>
 </head>
 <body>
+
 <div id="root">
  <div class="section1">
   <div class="section2">
@@ -25,10 +25,22 @@
   	<div class="section2-4"></div>
   	<div class="section2-5">
   		<div class="section2-5-1" align="center">
+  		<sec:authentication property="principal" var="member"/> <!-- 사용자 정보 가져오기 -->
+  		
   			<nav class="notice_navBar"></nav>
   			<main class="notice_main">
 				<h3 class="title">커뮤니티</h3>
-				<input value="글쓰기" type="button" id="goWriteBtn" style="float:right;"><br><br>
+				<!-- 비회원 -->
+				<sec:authorize access="isAnonymous()">	
+				<input value="글쓰기" type="button" 
+						onclick="location.href='/market/member/loginForm'"  style="float:right;">
+				</sec:authorize>
+				<br><br>
+				<!-- 권한이 있을 때(회원) -->
+				<sec:authorize access="isAuthenticated()">   
+				<input value="글쓰기" type="button" id="goWriteBtn" style="float:right;">
+				</sec:authorize>
+				<br><br>
 				<input type="hidden" id="pg" value ="${pg }"><!-- controller에서 넘어오는 pg값 -->
 				<input type="hidden" id="memId" value ="${memId }">
 	
@@ -41,6 +53,14 @@
 				<th width="100">조회수</th>
 				<th width="150">작성일</th>
 			</tr>
+			<!-- 비회원 -->
+			<sec:authorize access="isAnonymous()">	
+			<input id="subjectA" type="hidden" onclick="location.href='/market/member/loginForm'" >
+			</sec:authorize>
+			<!-- 권한이 있을 때(회원) -->
+			<sec:authorize access="isAuthenticated()">   
+			<input id="subjectA" type="hidden" >
+			</sec:authorize>
 		</table><br>
 	
 <!-- - 페이징 처리 -->
@@ -62,6 +82,7 @@
 			
 		
 		</main>
+		
 		</div><!-- section2-5-1 -->
   	</div>
   	</div>

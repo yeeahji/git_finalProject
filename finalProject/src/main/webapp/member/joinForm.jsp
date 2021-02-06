@@ -91,10 +91,10 @@
                 <fieldset>
                 <input type="checkbox" id="all" class="check" name="14years">전체 선택<br>
                 <hr>
-                <input type="checkbox" name="check" class="check" id="check1" value="">본인은 만 14세 이상입니다.(필수)<br>
-                <input type="checkbox" name="check" class="check"id="check2" value=""><a href="#" id="personalData">개인정보처리방침(필수)</a><br>
-                <input type="checkbox" name="check" class="check"id="check3" value=""><a href="#" id="serviceTerm">아나바다 마켓 이용약관(필수)</a><br>
-                <input type="checkbox" name="check" class="check" value="">이벤트 알림 메일 수신(선택)
+                <input type="checkbox" id="requirementCheck"class="allcheck">본인은 만 14세 이상입니다.(필수)<br>
+                <input type="checkbox" id="requirementCheck"class="allcheck"><a href="#" id="personalData">개인정보처리방침(필수)</a><br>
+                <input type="checkbox" id="requirementCheck"class="allcheck"><a href="#" id="serviceTerm">아나바다 마켓 이용약관(필수)</a><br>
+                <input type="checkbox" class="allcheck" name="mem_agree" onchange="agree(this);">이벤트 알림 메일 수신(선택)
                 </fieldset>
                 <div class="caution" id="checkboxDiv"></div>
             </td>

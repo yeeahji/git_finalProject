@@ -67,7 +67,7 @@ textarea {
     float:left;
 }
 
-/* 신고하기 모달창 */
+/* 신고하기 모달창 -----------------------------------------------------------------*/
 #modalHidden { /* .gDUZll */
     width: 100%;
     height: 100%;
@@ -286,6 +286,11 @@ textarea {
    
 }
 #comment_content{
+	width: 85%;
+	display: inline-block;
+}
+#modifyContent{
+	colspan: 4;
 	width: 85%;
 	display: inline-block;
 }

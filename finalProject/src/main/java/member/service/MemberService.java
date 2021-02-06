@@ -33,6 +33,10 @@ public interface MemberService {
 
 	public void resetPwd(Map<String, String> map);
 
+	public void sessionLogin(Map<String, String> map, HttpSession session);
+
+	public String checkEmail(String mem_email);
+
 	
 
 }

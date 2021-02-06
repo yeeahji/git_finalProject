@@ -138,7 +138,8 @@ $(document).ready(function(){
 							//수정 창으로 변환
 							$('#commentListTable .commentArea'+items.comment_seq).attr('class', 'commentModifyArea'+items.comment_seq);
 							$('.commentModifyArea'+items.comment_seq).html(
-								"<textarea id='modifyContent'></textarea><button type='button' id='sendModifyBtn'>수정</button>");
+								"<td style='width:800px' colspan='3'><textarea class='textarea_input' id='modifyContent'></textarea></td><td><input type='button' id='sendModifyBtn' value='수정'></td>");
+//							$(!'#commentListTable .commentModifyArea'+items.comment_seq).attr('class', 'commentArea'+items.comment_seq);
 							
 							//기존 댓글 불러오기
 							$.ajax({
@@ -147,6 +148,7 @@ $(document).ready(function(){
 								data : 'comment_seq='+items.comment_seq,
 								dataType:'text',
 								success: function(data){//data=comment content
+									console.log(data);
 									$('#commentListTable #modifyContent').val(data);
 								},error: function(err){
 									console.log(err);

@@ -54,6 +54,7 @@ public class MemberController {
 	
 	//private static final Logger logger=LoggerFactory.getLogger(MemberController.class);
 	
+	
 //	[회원가입]===================================================================================
 	@RequestMapping(value = "/joinForm", method =RequestMethod.GET)
 	public String joinForm() {
@@ -65,6 +66,14 @@ public class MemberController {
 	public String checkId(@RequestParam String id) {
 		return memberService.checkId(id);
 	}
+	
+//	- 이메일 중복체크
+	@RequestMapping(value ="/checkEmail", method=RequestMethod.POST)
+	@ResponseBody
+	public String checkEmail(@RequestParam String mem_email) {
+		return memberService.checkEmail(mem_email);
+	}
+	
 //	- 이메일 보내기
 	@ResponseBody
 	@RequestMapping(value ="/sendMail", method=RequestMethod.POST)
@@ -120,7 +129,7 @@ public class MemberController {
 	@RequestMapping(value ="/join", method=RequestMethod.POST)
 	public ModelAndView join(@ModelAttribute MemberDTO memberDTO) {
 		memberService.join(memberDTO);
-		
+		System.out.println("memberDTO agree:"+memberDTO.getMem_agree());
 		return new ModelAndView("redirect:/");
  	}
 	
@@ -138,6 +147,17 @@ public class MemberController {
 	@ResponseBody
 	public void login(@RequestParam Map<String, String> map, HttpServletRequest request) {
 		memberService.login(map);
+		
+	}
+	@RequestMapping(value = "/sessionLogin", method =RequestMethod.POST)
+	@ResponseBody
+	public void sessionLogin(HttpServletRequest request, HttpSession session, Principal principal) {
+		String sessionId = principal.getName();
+		MemberDTO memberDTO =memberService.getData(sessionId);
+	
+		session.setAttribute("sessionId", memberDTO.getMem_id());
+		session.setAttribute("sessionEmail", memberDTO.getMem_email());
+		session.setAttribute("sessionKakao", memberDTO.getMem_kakao());
 	}
 //	- 카카오
 //	@RequestMapping(value="/kakao", method=RequestMethod.POST)

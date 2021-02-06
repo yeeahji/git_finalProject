@@ -35,13 +35,13 @@ public class BoardController {
 	
 	public String sessionId(HttpSession session) {
 		String sessionId = null;
-		int memKakao=Integer.parseInt(session.getAttribute("memKakao").toString());
-		System.out.println("memKakao:"+memKakao);
-
-		if(memKakao==1) {//카카오 로그인 시
-			sessionId = (String) session.getAttribute("memEmail");
-		}else if(memKakao==0){
-			sessionId = (String) session.getAttribute("memId");
+		int sessionKakao=Integer.parseInt(session.getAttribute("sessionKakao").toString());
+		System.out.println("sessionKakao:"+sessionKakao);
+//
+		if(sessionKakao==1) {//카카오 로그인 시
+			sessionId = (String) session.getAttribute("sessionEmail");
+		}else if(sessionKakao==0){
+			sessionId = (String) session.getAttribute("sessionId");
 		}
 
 		return sessionId;
@@ -52,7 +52,7 @@ public class BoardController {
 	@RequestMapping(value = "list", method =RequestMethod.GET)
 	public String list(@RequestParam(required=false, defaultValue="1") String pg, Model model, HttpSession session) {
 		model.addAttribute("pg", pg);
-		model.addAttribute("memId", (String)session.getAttribute("memId"));
+		model.addAttribute("sessionId", (String)session.getAttribute("sessionId"));
 		model.addAttribute("display", "/board/list.jsp");
 		return "/index";
 	}
@@ -137,6 +137,7 @@ public class BoardController {
 								 HttpSession session) {
 		//조회수 새로고침 방지
 		if(cookie != null) {
+			System.out.println("글번호: "+seq);
 			boardService.hitUpdate(seq); //조회수 증가
 			cookie.setMaxAge(0); //쿠키 삭제
 			response.addCookie(cookie); //쿠키 삭제된걸 클라이언트에게 보내주기.

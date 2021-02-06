@@ -46,8 +46,9 @@ public class MemberDAOMybatis implements MemberDAO {
 		return sqlSession.selectOne("memberSQL.checkEmail", email);
 	}
 	@Override
-	public void joinKakao(Map<String, String> map) {
-		sqlSession.insert("memberSQL.joinKakao", map);
+	public void joinKakao(MemberDTO memberDTO) {
+		System.out.println("aaaa");
+		sqlSession.insert("memberSQL.joinKakao", memberDTO);
 		
 	}
 	@Override
@@ -86,6 +87,18 @@ public class MemberDAOMybatis implements MemberDAO {
 	@Override
 	public void resetPwd(Map<String, String> map) {
 		sqlSession.update("memberSQL.resetPwd",  map);
+	}
+
+	@Override
+	public int distinguishKakao(String mem_id) {
+		
+		return  sqlSession.selectOne("memberSQL.distinguishKakao", mem_id);
+	}
+
+	@Override
+	public MemberDTO sessionLogin(Map<String, String> map) {
+		return sqlSession.selectOne("memberSQL.login", map);
+		
 	}
 
 	

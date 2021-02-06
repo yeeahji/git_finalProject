@@ -20,7 +20,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  									#{mem_tel}, 
  									'', '',	
  									sysdate,
- 									1, 'ROLE_USER', 0)
+ 									1, 'ROLE_USER', 0, #{mem_agree})
  	</insert> 
 <!-- ▶ 아이디 중복 체크 / 회원정보수정용 회원 데이터 전체 출력  -->
  	<select id="getData" parameterType="String" resultType="member">
@@ -53,13 +53,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  		select * from members where mem_email = #{email}
  	</select>
 <!-- ▶ 처음 로그인한 카카오 데이터 회원가입 -->
- 	<insert id="joinKakao" parameterType="java.util.Map">
- 		insert into members values(#{email}, #{mem_pwd}, '주문 정보를 등록해주세요', #{email}, 
- 									'주문 정보를 등록해주세요','주문 정보를 등록해주세요', '',
+ 	<insert id="joinKakao" parameterType="member">
+ 		insert into members values(#{mem_id}, #{mem_pwd}, #{mem_name}, #{mem_email}, 
+ 									#{mem_add1},#{mem_add2}, #{mem_postcode},
  									'','', '',	
- 									'주문 정보', 
+ 									#{mem_tel}, 
  									'', '',	
- 									sysdate, 1)
+ 									sysdate,
+ 									1, 'ROLE_USER', 1, #{mem_agree})
  	</insert> 
 <!-- ▶ 카카오 데이터의 유니크 값 email가져오기 -->
  	<select id="selectKakao" parameterType="java.util.Map" resultType="member">
@@ -83,6 +84,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  	<delete id="withdraw" parameterType="String">
  		delete from members where mem_id=#{mem_id}
  	</delete>
+ 	
+ 	
+ 	<select id="distinguishKakao" parameterType="String" resultType="Integer">
+ 		select mem_kakao from members where mem_id = #{mem_id}
+ 	</select>
+ 	
  	
 </mapper>
 

@@ -1,12 +1,24 @@
 //[목록 출력]
 $(document).ready(function(){
+	
+	$.ajax({
+		type: 'post',
+		url: '/market/member/sessionLogin',
+		success: function(){// 글 리스트. 페이지. 세
+			console.log("세션 아이디, 이메일, 카카오 구분 정보 저장 완료");
+		}, error:function(err){
+			console.log("세션 안생김! err"+err);
+		}
+	});
+	
 	$.ajax({
 		type: 'post',
 		url: '/market/board/showList',
 		data: {'pg': $('#pg').val()},  //list.jsp의 히든 pg값
 		dataType: 'json',
 		success: function(data){// 글 리스트. 페이지. 세션 아이디. 보드페이징
-			console.log("list.js -showList: "+data.sessionId);
+			console.log("list.js -showList: "+(JSON.stringify(data.list)));
+			
 			$.each(data.list, function(index, items){
 				$('<tr/>').append($('<td/>',{
 					align: 'center',
@@ -38,23 +50,13 @@ $(document).ready(function(){
 						src : '../image/board/reply.gif'
 					}));
 				}
-				
 			});//each
 			
 //			글 제목 클릭 시, 
 			$('#boardListTable').on('click', '#subjectA', function(){
-				
-				//로그인 안되어 있다면 로그인하러 가기 
-				if(data.sessionId == null){
-					$('#loginModalHidden').css('display','flex');
-					$('#loginModalWrap').on("click", '.loginModalCloseBtn', function(){
-						$('#loginModalHidden').css('display','none');
-						$('#id').val('');
-						$('#pwd').val('');
-					});
-				}
-				//로그인 되어 있다면, 글 보기 화면으로 가기
-				else{
+				if (data.sessionId==null){
+					location.href='/market/member/loginForm';
+				}else{
 					let seq = $(this).parent().prev().text();
 					let pg = data.pg;
 					location.href = '/market/board/articleForm?seq='+seq+"&pg="+pg;
@@ -64,20 +66,7 @@ $(document).ready(function(){
 			//페이징 처리
 			$('#boardPagingDiv').html(data.boardPaging.pagingHTML);
 //											↑이 변수안에 페이지 넘버가 들어있다.
-			//글쓰기 버튼 클릭 시
-			$('#goWriteBtn').click(function(){
-				if(data.sessionId == null){
-					$('#loginModalHidden').css('display','flex');
-					$('#loginModalWrap').on("click", '.loginModalCloseBtn', function(){
-						$('#loginModalHidden').css('display','none');
-						$('#id').val('');
-						$('#pwd').val('');
-					});
-				}else{
-					console.log("else:"+data.sessionId);
-					location.href = '/market/board/writeForm';
-				}
-			});
+
 			
 			
 		},error: function(data, status, opt){
@@ -86,7 +75,10 @@ $(document).ready(function(){
 		}
 	});//리스트 출력
 	
-	
+	//글쓰기 버튼 클릭 시
+	$('#goWriteBtn').click(function(){
+		location.href = '/market/board/writeForm';
+	});
 	
 	//[검색]======================================================================================================================
 	$('#boardSearchBtn').click(function(event, str){ //paging함수에서 발생한 이벤트를 그대로 받아온다.

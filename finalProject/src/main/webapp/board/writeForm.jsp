@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec" %>
+    
 <!DOCTYPE html>
 <html>
 <head>
@@ -29,7 +31,17 @@
   			<div id="contentAreaDiv" class="caution"></div>
   			</div></div>
   			<div align="center">
-  			<input value="등록" type="button" id="writeBtn"></div>
+  			<sec:authentication property="principal" var="member"/> <!-- 사용자 정보 가져오기 -->
+  			<!-- 비회원 (세션 시간 만료)-->
+  			<sec:authorize access="isAnonymous()">
+  			<input value="등록" type="button" onclick="location.href='/market/member/loginForm'">
+  			</sec:authorize>
+  			<!-- 권한이 있을 때(회원) -->
+			<sec:authorize access="isAuthenticated()"> 
+			<input value="등록" type="button" id="writeBtn">
+			</sec:authorize>
+  			</div>
+  			
 		</div><!-- section2-5-1 -->
   	</div>
   	</div><!-- section2 -->

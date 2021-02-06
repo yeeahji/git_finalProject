@@ -60,7 +60,15 @@ public class MemberServiceImpl implements MemberService, UserDetailsService {
 		else //사용 불가
 			return "exist";
 	}
-
+	@Override
+	public String checkEmail(String mem_email) {
+		MemberDTO memberDTO = memberDAO.checkEmail(mem_email);
+		if(memberDTO == null) {//사용 가능			
+			return "non_exist";
+		}
+		else //사용 불가
+			return "exist";
+	}
 
 	@Override
 	public int join(MemberDTO memberDTO) {
@@ -74,7 +82,17 @@ public class MemberServiceImpl implements MemberService, UserDetailsService {
 	public void login(Map<String, String> map) {
 		memberDAO.login(map);
 	}
-	
+	@Override
+	public void sessionLogin(Map<String, String> map, HttpSession session) {
+		
+		MemberDTO memberDTO = memberDAO.sessionLogin(map);
+		session.setAttribute("memName", memberDTO.getMem_name());
+		session.setAttribute("memId", memberDTO.getMem_id());
+		session.setAttribute("memEmail", memberDTO.getMem_email());
+		session.setAttribute("memKakao", memberDTO.getMem_kakao());
+		System.out.println("세션 정보 : "+session.getAttribute("memId"));
+		
+	}
 //	@Override
 //	public String kakao(MemberDTO memberDTO) {
 //		//카카오로 최초 로그인 시 회원가입 시키기
@@ -99,7 +117,7 @@ public class MemberServiceImpl implements MemberService, UserDetailsService {
 			memberDTO.setEnabled(true);
 			memberDTO.setAuthorities(Arrays.asList(new String[]{"ROLE_USER"}));
 		
-			memberDAO.join(memberDTO); 
+			memberDAO.joinKakao(memberDTO); 
 		}
 		return "success";
 	}
@@ -158,6 +176,10 @@ public class MemberServiceImpl implements MemberService, UserDetailsService {
 		memberDAO.resetPwd(map);
 		
 	}
+
+	
+
+	
 
 
 
