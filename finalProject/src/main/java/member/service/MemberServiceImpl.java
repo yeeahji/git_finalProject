@@ -177,6 +177,12 @@ public class MemberServiceImpl implements MemberService, UserDetailsService {
 		
 	}
 
+	@Override
+	public int distinguishKakao(String mem_id) {
+		
+		return memberDAO.distinguishKakao(mem_id);
+	}
+
 	
 
 	

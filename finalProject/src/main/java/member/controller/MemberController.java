@@ -129,7 +129,6 @@ public class MemberController {
 	@RequestMapping(value ="/join", method=RequestMethod.POST)
 	public ModelAndView join(@ModelAttribute MemberDTO memberDTO) {
 		memberService.join(memberDTO);
-		System.out.println("memberDTO agree:"+memberDTO.getMem_agree());
 		return new ModelAndView("redirect:/");
  	}
 	
@@ -245,7 +244,6 @@ public class MemberController {
 			
 			String sender = "brighthannah12@gmail.com";
 			String recipient = mem_email;
-			System.out.println("recipient : "+recipient);
 			String title = "▣ 아나바다 마켓 :: 아이디를 확인하세요 ▣";
 			String content = System.getProperty("line.separator")
 							+ System.getProperty("line.separator")
@@ -327,10 +325,7 @@ public class MemberController {
 //	- 비밀번호용 인증코드 인증
 	@RequestMapping(value = "/confirmPwdcode", method = RequestMethod.POST)
     public ModelAndView confirmPwdcode(@RequestParam String certifyNum, @RequestParam String randomNum, HttpServletResponse response_equals) throws IOException {
-     	System.out.println("마지막 : 내가 넣은 값 : "+certifyNum);
-        System.out.println("마지막 : 랜덤넘버 : "+randomNum);
-        
-        ModelAndView mav = new ModelAndView();
+     	ModelAndView mav = new ModelAndView();
         mav.setViewName("jsonView");
         mav.addObject("certifyNum",certifyNum);
         mav.addObject("randomNum",randomNum);
@@ -351,9 +346,13 @@ public class MemberController {
 //	[회원정보수정] ===================================================================================
 //	- 본인 재확인 페이지 이동
 	@RequestMapping(value = "/certifyForm", method =RequestMethod.GET)
-	public String certifyForm(HttpSession session, Model model) {
+	public String certifyForm(HttpSession session, Model model, Principal principal) {
+		int sessionKakao = memberService.distinguishKakao(principal.getName());
+		if (sessionKakao==1) {
+			model.addAttribute("display", "/member/myPage.jsp");
+			return "/index";
+		}
 		model.addAttribute("display", "/member/certifyForm.jsp");
-		
 		return "/index";
 	}
 //	- 본인 재확인
@@ -375,17 +374,19 @@ public class MemberController {
 	}
 //	- 회원정보 페이지 이동
 	@RequestMapping(value = "/updateForm", method =RequestMethod.GET)
-	public String updateForm(HttpSession session, Model model) {
-		String id = (String) session.getAttribute("memId");
+	public String updateForm(HttpSession session, Model model, Principal principal) {
+		String id = (String) session.getAttribute("sessionId");
 		MemberDTO memberDTO = memberService.getData(id);
 		
-		String[] tel = memberDTO.getMem_tel().split("-",3);
-		String[] email = memberDTO.getMem_email().split("@",2);
-		
 		Map<String, String> map = new HashMap<String, String>();
-		map.put("tel1", tel[0]);
-		map.put("tel2", tel[1]);
-		map.put("tel3", tel[2]);
+		int sessionKakao = memberService.distinguishKakao(principal.getName());
+		if (sessionKakao==0) {
+			String[] tel = memberDTO.getMem_tel().split("-",3);
+			map.put("tel1", tel[0]);
+			map.put("tel2", tel[1]);
+			map.put("tel3", tel[2]);
+		}
+		String[] email = memberDTO.getMem_email().split("@",2);
 		map.put("email1", email[0]);
 		map.put("email2", email[1]);
 		

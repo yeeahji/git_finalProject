@@ -10,7 +10,7 @@
 </head> 
 
 <body>
-<a href="../index.jsp">
+	<a href="../index.jsp">
 	<img class="logo_full" src="/market/image/member/logo_full.png" alt="풀로고">
 	</a>
     <p  id ="title" name = "title" align ="center"><strong>회 원 가 입</strong></p>

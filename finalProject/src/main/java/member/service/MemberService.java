@@ -37,6 +37,8 @@ public interface MemberService {
 
 	public String checkEmail(String mem_email);
 
+	public int distinguishKakao(String mem_id);
+
 	
 
 }

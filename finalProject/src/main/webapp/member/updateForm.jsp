@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core"  %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -10,6 +11,9 @@
 </head>
     
 <body>
+	<a href="../index.jsp">
+	<img class="logo_full" src="/market/image/member/logo_full.png" alt="풀로고">
+	</a>
     <p id ="title" name = "title" align ="center"><strong>회원정보수정</strong></p>
     <hr>
     <form id="updateForm">
@@ -17,16 +21,17 @@
        
         <tr>
             <td>
-                <input placeholder="아이디" type="text" name="mem_id" id="id" size=40px
-                value="${sessionScope.memId}">
+                <input placeholder="아이디" type="text" name="mem_id" id="id" size=40px readonly
+                value="${sessionScope.sessionId}">
             </td>
         </tr>
         <tr>
             <td>
                 <input placeholder="이름" type="text" name="mem_name" id="name" size=40px; 
-                value="${sessionScope.memName}" readonly>
+                value="${memberDTO.mem_name}" readonly>
             </td>
         </tr>
+        <c:if test="${sessionKakao }==0"><!-- 일반로그인일때만 비밀번호 영역이 보이게 한다. -->
         <tr>
             <td>
                 <input placeholder="비밀번호 8-15자(영문+숫자+특문(.!@#$%^&+=))" type="password" 
@@ -41,6 +46,7 @@
                 <div class="caution" id="repwdDiv"></div>
             </td>
         </tr>
+        </c:if>
         <tr>
             <td>
                 <input placeholder="이메일 (abc123)" type="text" name="text" id="email1" size=15px; 
