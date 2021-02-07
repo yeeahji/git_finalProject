@@ -12,7 +12,7 @@
     
 <body>
 	<a href="../index.jsp">
-	<img class="logo_full" src="/market/image/member/logo_full.png" alt="풀로고">
+	<img class="logo_full" src="/market/image/member/logo_full.png" alt="메인">
 	</a>
     <p id ="title" name = "title" align ="center"><strong>회원정보수정</strong></p>
     <hr>

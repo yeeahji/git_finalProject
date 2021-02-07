@@ -36,9 +36,8 @@ $('#joinBtn').click(function(){
 		$('#postcodeDiv').text('우편번호를 검색하여 입력하세요');
 	else if($('#add1').val()==''||$('#add2').val()=='')
 		$('#addDiv').text('주소를 입력하세요');
-	else if(! $('#requirementCheck:checked').val()){
+	else if(! $('#requirementCheck:checked').val())
 		$('#checkboxDiv').text('필수동의사항에 체크하세요');
-		alert("??");}
 	else{
 		$('#email').val($('#email1').val() + '@' + $('#email2').val()); 
 		$('#tel').val($('#tel1').val() + '-' + $('#tel2').val() + '-' +$('#tel3').val()); 

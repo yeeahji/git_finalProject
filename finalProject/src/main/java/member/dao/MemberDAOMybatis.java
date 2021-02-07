@@ -47,7 +47,6 @@ public class MemberDAOMybatis implements MemberDAO {
 	}
 	@Override
 	public void joinKakao(MemberDTO memberDTO) {
-		System.out.println("aaaa");
 		sqlSession.insert("memberSQL.joinKakao", memberDTO);
 		
 	}
@@ -70,8 +69,8 @@ public class MemberDAOMybatis implements MemberDAO {
 	}
 
 	@Override
-	public void withdraw(String id) {
-		sqlSession.delete("memberSQL.withdraw", id);
+	public void withdraw(Map<String, String> map) {
+		sqlSession.delete("memberSQL.withdraw", map);
 	}
 
 	@Override
@@ -91,7 +90,8 @@ public class MemberDAOMybatis implements MemberDAO {
 
 	@Override
 	public int distinguishKakao(String mem_id) {
-		
+		System.out.println("distinguishKakao memId:"+mem_id);
+		//mem_kakao 컬럼 만들기 전에 생긴 회원정보일 경우 mem_kakao가 null이라서 에러 발생.
 		return  sqlSession.selectOne("memberSQL.distinguishKakao", mem_id);
 	}
 

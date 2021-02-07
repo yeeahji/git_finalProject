@@ -1,0 +1,11 @@
+CREATE TABLE withdraw(
+    mem_id PRIMARY KEY REFERENCES members(mem_id), -- 탈퇴 신청 아이디
+    withdraw_lowFrequency VARCHAR2(50), -- 탈퇴사유: 낮은 이용빈도
+    withdraw_rejoin VARCHAR2(50), -- 탈퇴사유: 재가입
+    withdraw_lowContents VARCHAR2(50),-- 탈퇴사유: 적은 콘텐츠
+    withdraw_protectInfo VARCHAR2(50), -- 탈퇴사유: 개인정보보호
+    withdraw_lowBenefit VARCHAR2(50), --탈퇴사유:적은 혜택
+    withdraw_others VARCHAR2(50), --탈퇴사유: 기타
+    withdraw_detailReason VARCHAR2(3000), --개선사항(주관식)
+    withdraw_logtime DATE DEFAULT SYSDATE NOT NULL --탈퇴 신청일
+);

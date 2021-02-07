@@ -145,8 +145,8 @@ public class MemberServiceImpl implements MemberService, UserDetailsService {
 	}
 
 	@Override
-	public void withdraw(String id) {
-		memberDAO.withdraw(id);
+	public void withdraw(Map<String, String> map) {
+		memberDAO.withdraw(map);
 	}
 
 	@Override
