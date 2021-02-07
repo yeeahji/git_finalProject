@@ -54,7 +54,7 @@
 	</div>
 
 	<!-- footer -->
-	<div id="section">
+	<div>
 		<jsp:include page="/index/footer.jsp" />
 	</div>
 
