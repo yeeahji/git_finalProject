@@ -95,8 +95,6 @@ $(document).ready(function(){
 				data : $('#boardSearchForm').serialize(), //pg, searchType, searchText
 				dataType : 'json',
 				success:function(result){
-//					alert(JSON.stringify(result));
-					
 					$('#boardListTable tr:gt(0)').remove();
 					
 //					- 검색결과 출력

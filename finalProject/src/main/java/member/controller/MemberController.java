@@ -409,11 +409,20 @@ public class MemberController {
 	}
 //	- 탈퇴
 	@RequestMapping(value ="/withdraw", method=RequestMethod.POST)
-	public String withdraw(@RequestParam String id, HttpSession session) {
+	public ModelAndView withdraw(@RequestParam Map<String, String> map, HttpSession session) {
+//		map:탈퇴사유 6항목 + 개선사항(주관식) 
+		String mem_id = (String)session.getAttribute("sessionId");
+		String mem_pwd = (((char)((int)(Math.random()*26)+65)) + ((Math.random()*9999999-1)+1))+"";
+		//영문+숫자 랜덤조합. 이메일은 unique라 'out'이라는 중복값이 들어갈 수 없다
+		String mem_email= (((char)((int)(Math.random()*26)+65)) + ((Math.random()*9999999-1)+1))+"";
 		
-		memberService.withdraw(id);
+		
+		map.put("mem_id", mem_id);
+		map.put("mem_pwd", mem_pwd); //탈퇴한 회원의 비밀번호에 난수 숫자를 입력하여 로그인 방지
+		map.put("mem_email", mem_email);
+		memberService.withdraw(map);
 		session.invalidate(); 
-		return "/index";
+		return new ModelAndView("redirect:/");
 	}
 //	- 
 	

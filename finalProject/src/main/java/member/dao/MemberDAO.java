@@ -20,7 +20,7 @@ public interface MemberDAO {
 
 	public void update(MemberDTO memberDTO);
 
-	public void withdraw(String id);
+	public void withdraw(Map<String, String> map);
 
 	public MemberDTO findId(String mem_email);
 

@@ -1,0 +1,110 @@
+@charset "UTF-8";
+element.style {
+    height: 40px;
+}
+body{
+	padding : 40px 400px 100px 400px;
+	line-height: 1.6;
+	font-size: 10pt;
+}
+textarea {
+	height:150px;
+	display: block;
+    width: 100%;
+    border: 1px solid #ebecef;
+    box-sizing: border-box;
+    overflow: hidden;
+    resize: none;
+    word-break: break-all;
+    font-size: 12px;
+    letter-spacing: -.23px;
+    line-height: 1.5;
+    outline: none;
+	font-family: Apple SD Gothic Neo,맑은 고딕,Malgun Gothic,돋움,dotum,sans-serif;
+	font-weight: 400;
+    -webkit-writing-mode: horizontal-tb !important;
+    text-rendering: auto;
+    color: -internal-light-dark(black, white);
+    letter-spacing: normal;
+    word-spacing: normal;
+    text-transform: none;
+    text-indent: 0px;
+    text-shadow: none;
+    text-align: start;
+    appearance: textarea;
+    background-color: -internal-light-dark(rgb(255, 255, 255), rgb(59, 59, 59));
+    -webkit-rtl-ordering: logical;
+    flex-direction: column;
+    cursor: text;
+    white-space: pre-wrap;
+    overflow-wrap: break-word;
+    column-count: initial !important;
+    margin: 0em;
+    border-width: 1px;
+    border-style: solid;
+    border-color: -internal-light-dark(rgb(118, 118, 118), rgb(133, 133, 133));
+    border-image: initial;
+    padding: 2px;
+}
+
+input[type=checkbox]{
+	display: inline-block;
+	content: "";
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: 20px 20px;
+    width: 2rem;
+    height: 2rem;
+    padding: 0.5rem;
+    background-image: url(/market/image/product/origin_checkBtn.svg);
+    border-radius: 50%;
+	background-image: url(/market/image/product/blue_checkBtn.svg);
+}
+.alert{
+	color: rgba(153, 0, 33, 0.781);
+	
+}
+hr{
+	color: black;
+}
+.check_box{
+	display: inline-block;
+}
+.logo_full{
+	width:200px;
+	height:auto;
+}
+#withdraw{
+	text-align:center;
+}
+textareaDiv{
+	float:right;
+}
+.caution{
+    color : rgba(153, 0, 33, 0.781);
+    border : 1px;
+    font-size: 10pt;
+    font-weight: bold;
+}
+#withdrawBtn{
+	background-color: #0a58ca;
+        border : 0px;
+        width : 365px;
+        height: 60px;
+        color: white;
+        font-weight: bold;
+        font-size: 14pt;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+

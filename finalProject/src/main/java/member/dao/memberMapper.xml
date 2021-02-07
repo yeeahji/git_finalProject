@@ -81,11 +81,35 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  		where mem_id = #{mem_id}
  	</update>
 <!-- ▶  탈퇴 -->
- 	<delete id="withdraw" parameterType="String">
- 		delete from members where mem_id=#{mem_id}
+ 	<delete id="withdraw" parameterType="java.util.Map">
+ 		begin
+<!-- 	 	1. 탈퇴 db에 사유 추가 -->
+ 			insert into withdraw values
+ 						(#{mem_id}
+ 						,#{withdraw_lowFrequency}, #{withdraw_rejoin}
+ 						,#{withdraw_lowContents}, #{withdraw_protectInfo}
+ 						,#{withdraw_lowBenefit}, #{withdraw_others}
+ 						,#{withdraw_detailReason}, sysdate );
+<!--  		2. members에 아이디 제외 데이터 삭제 -->
+			UPDATE members SET 
+						mem_postcode = 0
+						,mem_recentPostcode = 0
+						, mem_name='out' 
+						, mem_pwd=#{mem_pwd}
+						, mem_email=#{mem_email}
+						, mem_add1='out' 
+						, mem_add2='out' 
+						, mem_recentAdd1='out' 
+						, mem_recentAdd2='out' 
+						, mem_tel='out' 
+						, mem_location='out' 
+						, mem_recentLocation='out' 
+						, mem_agree ='out' 
+				WHERE mem_id = #{mem_id};
+ 		end;
  	</delete>
  	
- 	
+<!--  	카카오로그인/일반로그인 구분 -->
  	<select id="distinguishKakao" parameterType="String" resultType="Integer">
  		select mem_kakao from members where mem_id = #{mem_id}
  	</select>

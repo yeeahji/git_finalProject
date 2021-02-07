@@ -47,7 +47,6 @@ public class BoardDAOmybatis implements BoardDAO {
 //	[글쓰기]===============================================================================
 	@Override
 	public void write(Map<String, String> map) {
-		System.out.println("3:"+map);
 		sqlSession.insert("boardSQL.write",map);
 		
 	}
@@ -98,7 +97,6 @@ public class BoardDAOmybatis implements BoardDAO {
 	
 	@Override
 	public void deleteComment(String comment_seq) {
-		System.out.println("3:"+comment_seq);
 		sqlSession.selectList("commentSQL.deleteComment", Integer.parseInt(comment_seq));
 	}
 

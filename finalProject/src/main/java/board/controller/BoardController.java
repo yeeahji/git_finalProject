@@ -86,7 +86,8 @@ public class BoardController {
 //	- 검색 결과 리스트
 	@RequestMapping(value="getBoardSearch", method=RequestMethod.POST)
 	public ModelAndView getBoardSearch(@RequestParam Map<String,String> map) {
-		
+		//map : pg, searchType, searchText
+		System.out.println(map.get("pg")+"/"+map.get("searchType")+"/"+map.get("searchText"));
 		List<BoardDTO>list = boardService.getBoardSearch(map);
 		
 //		검색값 페이징 처리
