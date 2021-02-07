@@ -60,10 +60,13 @@ public class IndexController {
 	@ResponseBody
 	public ModelAndView recentlyProduct(HttpSession session,
 			@RequestParam(value = "page", required = false, defaultValue = "0") String page) {
+		
 		List<String> list = (List) session.getAttribute("recentlyProduct");
-		
-		List<ProductDTO> recentlyList = indexService.recentlyList(list);
-		
+		List<ProductDTO> recentlyList = null;
+		if (  list != null && list.size() != 0) {
+			recentlyList = indexService.recentlyList(list);
+		}
+			
 		//System.out.println("recentlyList:" +recentlyList);
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("recentlyList", recentlyList);
