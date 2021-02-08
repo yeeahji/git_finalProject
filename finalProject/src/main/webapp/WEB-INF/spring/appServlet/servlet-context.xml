@@ -17,7 +17,11 @@
 	<context:component-scan base-package="board.controller"/>
 	
 	<!-- Enables the Spring MVC @Controller programming model -->
-	<annotation-driven />
+	<annotation-driven>
+		<argument-resolvers>
+				<beans:bean class="org.springframework.security.web.method.annotation.AuthenticationPrincipalArgumentResolver"/>
+		</argument-resolvers>
+	</annotation-driven>
 
 	<!-- Handles HTTP GET requests for /resources/** by efficiently serving up static resources in the ${webappRoot}/resources directory -->
 	<resources mapping="/resources/**" location="/resources/" />
