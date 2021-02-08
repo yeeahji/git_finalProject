@@ -63,10 +63,15 @@ public class AdminController {
 	public String boardList() {
 		return "/admin/adminPage/boardList";
 	}
-	//공지사항등록
+	//공지사항
 	@RequestMapping(value="/noticeMG", method=RequestMethod.GET)
 	public String noticeWrite() {
 		return "/admin/adminPage/noticeMG";
+	}
+	//고객상담관리
+	@RequestMapping(value="/memberQna", method=RequestMethod.GET)
+	public String memberQna() {
+		return "/admin/adminPage/memberQna";
 	}
 	
 	

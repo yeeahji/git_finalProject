@@ -6,7 +6,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <meta name="description" content="" />
         <meta name="author" content="" />
-        <title>공지사항 관리</title>
+        <title>고객상담 관리</title>
         <link href="/market/admin/css/styles.css" rel="stylesheet" />
         
     </head>
@@ -78,7 +78,7 @@
 <div id="layoutSidenav_content">
            <main>
                <div class="container-fluid">
-                   <h3 class="mt-4">공지사항 관리</h3>
+                   <h3 class="mt-4">고객상담 관리</h3>
                    <hr>                  		
 <div class="row">
 	<div class="col-xl-4">
