@@ -29,7 +29,7 @@
   		
   			<nav class="notice_navBar"></nav>
   			<main class="notice_main">
-				<h3 class="title">커뮤니티</h3>
+				<h3 class="title"><strong>커뮤니티</strong></h3>
 				<!-- 비회원 -->
 				<sec:authorize access="isAnonymous()">	
 				<input value="글쓰기" type="button" 

@@ -38,31 +38,30 @@
     <h3>▶ 아나바다 마켓 회원에서 탈퇴하려는 이유가 무엇인가요?<span class="alert">(필수, 복수선택 가능)</span></h3>
     <div class="box">
         <div class="check_box">
-            <input type="checkbox" name="withdraw_lowFrequency" id="withdraw_lowFrequency" value="이용빈도 낮음" class="reason">
+            <input type="checkbox" name="withdraw_lowFrequency" id="withdraw_lowFrequency" value="1" class="reason">
             <label for="reason_0">이용빈도 낮음&emsp;&emsp;</label>
         </div>
         <div class="check_box">
-            <input type="checkbox" name="withdraw_rejoin" id="withdraw_rejoin" value="재가입" class="reason">
+            <input type="checkbox" name="withdraw_rejoin" id="withdraw_rejoin" value="1" class="reason">
             <label for="reason_1">재가입&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;</label>
         </div>
         <div class="check_box">
-            <input type="checkbox" name="withdraw_lowContents" id="withdraw_lowContents" value="콘텐츠/제품정보/상품 부족" class="reason">
+            <input type="checkbox" name="withdraw_lowContents" id="withdraw_lowContents" value="1" class="reason">
             <label for="reason_2">콘텐츠/제품정보/상품 부족</label>
         </div><br>
         <div class="check_box">
-            <input type="checkbox" name="withdraw_protectInfo" id="withdraw_protectInfo" value="개인정보보호" class="reason">
+            <input type="checkbox" name="withdraw_protectInfo" id="withdraw_protectInfo" value="1" class="reason">
             <label for="reason_3">개인정보보호&emsp; &emsp;</label>
         </div>
         <div class="check_box">
-            <input type="checkbox" name="withdraw_lowBenefit" id="withdraw_lowBenefit" value="회원특혜/쇼핑혜택 부족" class="reason">
+            <input type="checkbox" name="withdraw_lowBenefit" id="withdraw_lowBenefit" value="1" class="reason">
             <label for="reason_4">회원특혜/쇼핑혜택 부족</label>
         </div>
         <div class="check_box">
-            <input type="checkbox" name="withdraw_others" id="withdraw_others" value="기타" class="reason">
+            <input type="checkbox" name="withdraw_others" id="withdraw_others" value="1" class="reason">
             <label for="reason_5">기타</label>
         </div>
 		<div id="reasonDiv" class="caution"></div>
-<!--         <input type="hidden" name="withdrawal[reason]" id="withdrawal_reason"> -->
     </div>
 </div>
 <div class="field">

@@ -2,6 +2,10 @@
 #board_subject{
 	
 }
+input[type=button]:hover{
+	background: #0d47a1;
+	
+}
 element.style {
     height: 40px;
 }
@@ -261,14 +265,14 @@ textarea {
     padding: 0px 20px;
     overflow: hidden;
     transition: height 0.3s ease-out 0s;
-    height: 230px;
+    height: 150px;
 }
 .singoContentOtherOpen {
    background: rgb(249, 249, 249);
     padding: 0px 20px;
     overflow: hidden;
     transition: height 0.3s ease-out 0s;
-    height: 230px;
+    height: 180px;
 }
 .directAsk {
     border: 1px solid rgb(238, 238, 238);
@@ -285,6 +289,7 @@ textarea {
     transition: height 0.3s ease-out 0s;
    
 }
+/* end 신고하기 모달창 -----------------------------------------------------------------*/
 #comment_content{
 	width: 85%;
 	display: inline-block;

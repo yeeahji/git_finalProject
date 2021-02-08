@@ -32,9 +32,9 @@
 		<a href="/market/member/logout" 
 		   style="text-decoration: none; color:#61615b;">로그아웃</a>&emsp;
 		<a href="/market/member/certifyForm" 
-		   style="text-decoration: none; color:#61615b;">내 계정 관리</a>&emsp;&emsp;&emsp;
+		   style="text-decoration: none; color:#61615b;">내 계정 관리</a>&emsp;
 		<a href="#" 
-		   style="text-decoration: none; color:#61615b;">알림 ▼</a>&emsp;&emsp;&emsp;
+		   style="text-decoration: none; color:#61615b;">알림 ▼</a>&emsp;
 		</sec:authorize>
 
 		<!-- 관리자 -->

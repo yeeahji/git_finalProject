@@ -7,6 +7,10 @@ body{
 	line-height: 1.6;
 	font-size: 10pt;
 }
+input[type=button]:hover{
+	background: #0d47a1;
+	
+}
 textarea {
 	height:150px;
 	display: block;

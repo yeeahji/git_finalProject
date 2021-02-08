@@ -7,6 +7,10 @@
 	display: inline;
 	
 }
+input[type=button]:hover{
+	background: #0d47a1;
+	
+}
 .title{
 	font-size : 25pt;
         color : #0a58ca;

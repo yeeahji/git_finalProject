@@ -7,7 +7,7 @@
 <title>마이페이지</title>
 <link rel="stylesheet" type="text/css" href="../css/member/member.css?ver=1">
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-<script type="text/javascript" src="../js/member/myPage.js"></script>
+<!-- <script type="text/javascript" src="../js/member/myPage.js"></script> -->
 
 </head>
 <body>
@@ -25,7 +25,12 @@
 	<br><br><br><br><br><br>
 </div>	
 </form>
-
+<script type="text/javascript">
+$('#myboardBtn').click(function(){
+	location.href="/market/board/list" //위치 이동만 하고 아래 getBoardSearch ajax 작업 x. alert이 뜨는데... alert이 먼저 뜨고 위치 이동으한다.
+		
+});
+</script>
 </body>
 
 </html>

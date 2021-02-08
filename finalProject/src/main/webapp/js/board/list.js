@@ -17,7 +17,7 @@ $(document).ready(function(){
 		data: {'pg': $('#pg').val()},  //list.jsp의 히든 pg값
 		dataType: 'json',
 		success: function(data){// 글 리스트. 페이지. 세션 아이디. 보드페이징
-			console.log("list.js -showList: "+(JSON.stringify(data.list)));
+			console.log("list.js -showList: "+(JSON.stringify(data)));
 			
 			$.each(data.list, function(index, items){
 				$('<tr/>').append($('<td/>',{
@@ -141,6 +141,8 @@ $(document).ready(function(){
 	});
 	
 });//document.ready
+
+
 
 //페이지 이동
 function boardPaging(pg){

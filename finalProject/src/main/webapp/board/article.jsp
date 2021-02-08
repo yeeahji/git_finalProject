@@ -138,7 +138,7 @@
             <div class="singoCategory">
                <div class="singoTitle">
                   <span>1:1문의하기</span>
-                  <button class="directAsk">1:1문의하기</button>
+                  <button class="directAsk" onclick="location.href='/market/notice/qna'">1:1문의하기</button>
                   <!-- 문의하기 링크와 연결!!!!!!!!!!!!!! -->
                </div>
                <div class="singoContent"></div>
