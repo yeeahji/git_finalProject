@@ -78,10 +78,14 @@ body {
 	margin-top: 20px;
 }
 
+.dropdown-button {
+	margin-top : 20px;
+	height: 25px;
+}
+
 .dropdown-area {
-	display: flex;
-	align-items: center;
-	height: 70px;
+	display: inline-block;
+	height: 0px;
 }
 
 #headerMain .dropdown i {
@@ -116,18 +120,7 @@ body {
 }
 
 .cateList {
-	position: absolute;
-	top: 27px;
-	left: -1px;
-	width: calc(100% + 2px);
-	background: rgb(255, 255, 255);
-	max-height: 280px;
-	overflow-y: auto;
-	z-index: 1;
-	border-left: 1px solid rgb(238, 238, 238);
-	border-bottom: 1px solid rgb(238, 238, 238);
-	border-right: 1px solid rgb(238, 238, 238);
-	display: none;
+	font-size : 20px;
 }
 
 .fas fa-bars {

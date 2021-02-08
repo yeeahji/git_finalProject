@@ -33,10 +33,19 @@ $(document).ready(function(){
 		url : '/market/index/recentlyProduct',
 		dataType : 'json',
 		success : function(data) {
+			
+			if ( data.recentlyList.length == 0){
+				$("#recentlyCnt").text("").css('color','gray');
+
+			}
+			
 			recentyleList = data.recentlyList;
 			if ( data.recentlyList != null){
 				recentyleCount = data.recentlyList.length
+				
 				$("#recentlyCnt").text(recentyleCount).css('color','red');
+				
+
 				recentyleTotalPage = Math.floor(recentyleCount / recentylePageSize);
 				recentyleTotalPage = recentyleCount % recentylePageSize == 0 ? recentyleTotalPage : recentyleTotalPage + 1
 				recentlyContent( recentylePage, recentyleList)

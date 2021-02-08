@@ -16,50 +16,71 @@
 	<div class="search-area">
 		<!-- 검색 입력 -->
 		<div class="input-group">
-			<input id="searchProduct" name="searchProduct" type="text" placeholder="상품명, @상점명 입력"> 
-			<i id="searchBtn" style="cursor: pointer;" onclick="search()" class="fas fa-search"></i>
+			<input id="searchProduct" name="searchProduct" type="text"
+				placeholder="상품명, @상점명 입력"> <i id="searchBtn"
+				style="cursor: pointer;" onclick="search()" class="fas fa-search"></i>
 		</div>
 	</div>
 
 	<!-- 우측메뉴 -->
-	<div  class="header-btn">
-		<a onclick="location.href='/market/product/registForm'"> <i style="color:#0a58ca;"
-			class="fas fa-won-sign"></i> 판매하기  
-		</a><a onclick="location.href='/market/store/store'"> <i style="color:#0a58ca;"
-			class="fas fa-user-check"></i> 내 상점
-		</a> <a id="chat"><i style="color:#0a58ca;"
-			class="far fa-comments"></i> 바다톡</a> 
-		<a onclick="location.href='/market/board/list?pg=1'"><i class="fas fa-book-open" style="color:#0a58ca;" ></i>
-			커뮤니티</a>
+	<div class="header-btn">
+		<a onclick="location.href='/market/product/registForm'"> <i
+			style="color: #0a58ca;" class="fas fa-won-sign"></i> 판매하기
+		</a><a onclick="location.href='/market/store/store'"> <i
+			style="color: #0a58ca;" class="fas fa-user-check"></i> 내 상점
+		</a> <a id="chat"><i style="color: #0a58ca;" class="far fa-comments"></i>
+			바다톡</a> <a onclick="location.href='/market/board/list?pg=1'"><i
+			class="fas fa-book-open" style="color: #0a58ca;"></i> 커뮤니티</a>
 	</div>
 
 </div>
 
+<div class="dropdown-button">
+	<a id="btn_menu" class="cateList" data-bs-toggle="dropdown"
+		aria-expanded="false"> <i class="fas fa-bars"></i>
+	</a>
+</div>
 <div class="dropdown-area">
-	<div class="dropdown">
-		<a id="btn_menu" class="cateList" data-bs-toggle="dropdown" 
-			aria-expanded="false">
-			<div class="dropmenu">
-				<ul>
-					<li><a class="fas fa-bars" style="height: 30px; weight:30px;"></a>
-						<ul>
-							전체 카테고리
-							<a href="/market/index/cateDisplay?cate_code=100" class="cateBig">여성의류</a>
-							<a href="/market/index/cateDisplay?cate_code=200" class="cateBig">남성의류</a>
-							<a href="/market/index/cateDisplay?cate_code=300" class="cateBig">패션잡화</a>
-							<a href="/market/index/cateDisplay?cate_code=400" class="cateBig">생활/가구/식품</a>
-							<a href="/market/index/cateDisplay?cate_code=500" class="cateBig">디지털/가전</a>
-							<a href="/market/index/cateDisplay?cate_code=600" class="cateBig">유아동/출산</a>
-							<a href="/market/index/cateDisplay?cate_code=700" class="cateBig">도서/취미/애완</a>
-							<a href="/market/index/cateDisplay?cate_code=800" class="cateBig">스포츠/레저</a>
-							<a href="/market/index/cateDisplay?cate_code=900" class="cateBig">스타굿즈</a>
-							<a href="/market/index/cateDisplay?cate_code=1000" class="cateBig">뷰티/미용</a>
-							<a href="/market/index/cateDisplay?cate_code=1100" class="cateBig">차량/오토바이</a>
-							<a href="/market/index/cateDisplay?cate_code=1200" class="cateBig">기타</a>
-						</ul></li>
-				</ul>
-			</div>
-		</a>
+	<div>
+		<div class="dropmenu">
+			<ul>
+				<li id="category_1st">
+					<ul>
+						<p>전체 카테고리</p>
+						<a href="/market/index/cateDisplay?cate_code=100">여성의류</a>
+						<a href="/market/index/cateDisplay?cate_code=200">남성의류</a>
+						<a href="/market/index/cateDisplay?cate_code=300">패션잡화</a>
+						<a href="/market/index/cateDisplay?cate_code=400">생활/가구/식품</a>
+						<a href="/market/index/cateDisplay?cate_code=500">디지털/가전</a>
+						<a href="/market/index/cateDisplay?cate_code=600">유아동/출산</a>
+						<a href="/market/index/cateDisplay?cate_code=700">도서/취미/애완</a>
+						<a href="/market/index/cateDisplay?cate_code=800">스포츠/레저</a>
+						<a href="/market/index/cateDisplay?cate_code=900">스타굿즈</a>
+						<a href="/market/index/cateDisplay?cate_code=1000">뷰티/미용</a>
+						<a href="/market/index/cateDisplay?cate_code=1100">차량/오토바이</a>
+						<a href="/market/index/cateDisplay?cate_code=1200">기타</a>
+					</ul>
+				</li>
+				<li id="category_2st">
+					<ul>
+						<p>여성의류</p>
+						<a href="/market/index/cateDisplay?cate_code=100">원피스</a>
+						<a href="/market/index/cateDisplay?cate_code=200">치마</a>
+						<a href="/market/index/cateDisplay?cate_code=300">자켓</a>
+						<a href="/market/index/cateDisplay?cate_code=400">생활/가구/식품</a>
+						<a href="/market/index/cateDisplay?cate_code=500">디지털/가전</a>
+						<a href="/market/index/cateDisplay?cate_code=600">유아동/출산</a>
+						<a href="/market/index/cateDisplay?cate_code=700">도서/취미/애완</a>
+						<a href="/market/index/cateDisplay?cate_code=800">스포츠/레저</a>
+						<a href="/market/index/cateDisplay?cate_code=900">스타굿즈</a>
+						<a href="/market/index/cateDisplay?cate_code=1000">뷰티/미용</a>
+						<a href="/market/index/cateDisplay?cate_code=1100">차량/오토바이</a>
+						<a href="/market/index/cateDisplay?cate_code=1200">기타</a>
+					</ul>
+				</li>
+			</ul>
+		</div>
+
 	</div>
 </div>
 
@@ -69,13 +90,11 @@
 	src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <script type="text/javascript" src="/market/js/index/header.js"></script>
 <script type="text/javascript">
-//로그인 함수
-$("#searchProduct").keydown(function(key) {
-	if (key.keyCode == 13) {
-		search();
-	}
-});
-
-
+	//로그인 함수
+	$("#searchProduct").keydown(function(key) {
+		if (key.keyCode == 13) {
+			search();
+		}
+	});
 </script>
 
