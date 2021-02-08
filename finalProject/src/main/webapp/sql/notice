@@ -60,4 +60,14 @@ CREATE TABLE qnaboard( 예전꺼(삭제예정)
     qna_img2 VARCHAR2(500),
     logtime DATE DEFAULT SYSDATE      -- 날짜
  );
+ 
  generated always as identitym, auto_increment 둘다 자동으로 1씩 증가시켜주는 조건
+ 
+ insert into qnaboard(qnaCate_main_name,qnaCate_main_id,qnaCate_sub_name,qnaCate_sub_id,mem_id,qna_content)
+ values(1,'계정문의',1,'가입/재가입','test31','가나다라 마바사 아자차카 타파하');
+ insert into qnaboard(qnaCate_main_name,qnaCate_main_id,qnaCate_sub_name,qnaCate_sub_id,mem_id,qna_content)
+ values(1,'계정문의',2,'계정정보 변경','test31','가나다라 마바사 아자차카 타파하하하하핳');
+insert into qnaboard(qnaCate_main_name,qnaCate_main_id,qnaCate_sub_name,qnaCate_sub_id,mem_id,qna_content)
+ values(2,'거래신고',3,'상품 미발송','test1','가나다라 마바사 아자하하하핳');
+  insert into qnaboard(qnaCate_main_name,qnaCate_main_id,qnaCate_sub_name,qnaCate_sub_id,mem_id,qna_content)
+ values(4,'광고',8,'상점관리','test20','가나다라 마바사 타파하하하하핳');

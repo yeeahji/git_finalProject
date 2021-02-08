@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import admin.bean.AdminMembersDTO;
 import member.bean.MemberDTO;
+import product.bean.ProductDTO;
 import store.bean.StoreDTO;
 
 @Repository
@@ -27,11 +28,17 @@ public class AdminDAOMybatis implements AdminDAO {
 	public int getTotalA() {
 		return sqlSession.selectOne("adminSQL.getTotalA");
 	}
-
+	
 	@Override
 	public List<MemberDTO> getSearchMember(Map<String, String> map) {
 		return sqlSession.selectList("adminSQL.getSearchMember", map);
 	}
+	
+	@Override
+	public int totalSellProduct(String id) {
+		return sqlSession.selectOne("adminSQL.totalSellProduct", id);
+	}
+	
 	//검색한 후 총글
 	@Override
 	public int getTotalB(Map<String, String> map) {
@@ -42,6 +49,7 @@ public class AdminDAOMybatis implements AdminDAO {
 	public AdminMembersDTO getMemberView(String id) {
 		return sqlSession.selectOne("adminSQL.getMemberView", id);
 	}
+	
 	//상점출력
 	@Override
 	public List<StoreDTO> getStoreList(Map<String, Integer> map) {
@@ -54,8 +62,23 @@ public class AdminDAOMybatis implements AdminDAO {
 	}
 
 	@Override
-	public StoreDTO getStoreView(String id) {
+	public AdminMembersDTO getStoreView(String id) {
 		return sqlSession.selectOne("adminSQL.getStoreView", id);
+	}
+	//상점조건검색
+	@Override
+	public List<StoreDTO> getSearchStoreList(Map<String, String> map) {
+		return sqlSession.selectList("adminSQL.getSearchStoreList", map);
+	}
+	//상점조건건색 페이징
+	@Override
+	public int getTotalD(Map<String, String> map) {
+		return sqlSession.selectOne("adminSQL.getTotalD", map);
+	}
+	//상점상세보기_물건출력
+	@Override
+	public List<ProductDTO> getProductList(String id) {
+		return sqlSession.selectList("adminSQL.getProductList", id);
 	}
 
 

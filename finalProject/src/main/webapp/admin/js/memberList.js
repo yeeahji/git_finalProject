@@ -1,4 +1,3 @@
-
 $(document).ready(function() {
 		$.ajax({
 			type: 'get',
@@ -26,7 +25,7 @@ $(document).ready(function() {
 							text: items.mem_add1
 						})).appendTo($('#tbody'));
 					});
-					
+					$('#totalMember').text(data.totalMember)
 					//페이징처리
 					$('#boardPagingDiv').html(data.adminBoardPaging.pagingHTML);
 					
@@ -39,17 +38,21 @@ $(document).ready(function() {
 							data: {'id': id},
 							dataType: 'json',
 							success: function(data){
-								//alert(JSON.stringify(data));
+								alert(JSON.stringify(data));
 								//1명의 데이터를 위에다 뿌리기
 								$('#nameSpan').text(data.adminMembersDTO.mem_name)
 								$('#HpSpan').text(data.adminMembersDTO.mem_tel)
 								$('#birthSpan').text(data.adminMembersDTO.mem_pwd)
 								$('#add1Span').text(data.adminMembersDTO.mem_add1)
 								$('#add2Span').text(data.adminMembersDTO.mem_add2)
-								$('#storeSpan').text(data.adminMembersDTO.store_nickname)
-								$('#echoSpan').text(data.adminMembersDTO.store_echo)
+								$('#store1NameSpan').text(data.adminMembersDTO.store_nickname)
+								$('#store2NameSpan').text(data.adminMembersDTO.store_nickname)
+								$('#echo1Span').text(data.adminMembersDTO.store_echo)
+								$('#echo2Span').text(data.adminMembersDTO.store_echo)
 								$('#emailSpan').text(data.adminMembersDTO.mem_email)
 								$('#logSpan').text(data.adminMembersDTO.mem_logtime)
+								$('#productSellSpan').text(data.totalSellProduct)
+								
 								
 							}
 						});
@@ -108,10 +111,18 @@ $('#selectPrint').change(function(){
 						success: function(data){
 							//alert(JSON.stringify(data));
 							//1명의 데이터를 위에다 뿌리기
-							$('#nameSpan').text(data.memberDTO.mem_name)
-							$('#HpSpan').text(data.memberDTO.mem_tel)
-							$('#birthSpan').text(data.memberDTO.mem_pwd)
-							$('#addSpan').text(data.memberDTO.mem_location)
+							$('#nameSpan').text(data.adminMembersDTO.mem_name)
+							$('#HpSpan').text(data.adminMembersDTO.mem_tel)
+							$('#birthSpan').text(data.adminMembersDTO.mem_pwd)
+							$('#add1Span').text(data.adminMembersDTO.mem_add1)
+							$('#add2Span').text(data.adminMembersDTO.mem_add2)
+							$('#store1NameSpan').text(data.adminMembersDTO.store_nickname)
+							$('#store2NameSpan').text(data.adminMembersDTO.store_nickname)
+							$('#echo1Span').text(data.adminMembersDTO.store_echo)
+							$('#echo2Span').text(data.adminMembersDTO.store_echo)
+							$('#emailSpan').text(data.adminMembersDTO.mem_email)
+							$('#logSpan').text(data.adminMembersDTO.mem_logtime)
+							$('#productSellSpan').text(data.totalSellProduct)
 						}
 					});
 				});
@@ -171,12 +182,18 @@ $('#memberSearchBtn').click(function(event, str){
 		        		 success: function(data){
 		        			 //alert(JSON.stringify(data));
 		        			 //1명의 데이터를 위에다 뿌리기
-		        			 $('#nameSpan').text(data.memberDTO.mem_name)
-		        			 $('#HpSpan').text(data.memberDTO.mem_tel)
-		        			 $('#birthSpan').text(data.memberDTO.mem_pwd)
-		        			 $('#emailSpan').text(data.memberDTO.mem_email )
-		        			 $('#add1Span').text(data.memberDTO.mem_add1)
-		        			 $('#add2Span').text(data.memberDTO.mem_add2)
+		        			 $('#nameSpan').text(data.adminMembersDTO.mem_name)
+								$('#HpSpan').text(data.adminMembersDTO.mem_tel)
+								$('#birthSpan').text(data.adminMembersDTO.mem_pwd)
+								$('#add1Span').text(data.adminMembersDTO.mem_add1)
+								$('#add2Span').text(data.adminMembersDTO.mem_add2)
+								$('#store1NameSpan').text(data.adminMembersDTO.store_nickname)
+								$('#store2NameSpan').text(data.adminMembersDTO.store_nickname)
+								$('#echo1Span').text(data.adminMembersDTO.store_echo)
+								$('#echo2Span').text(data.adminMembersDTO.store_echo)
+								$('#emailSpan').text(data.adminMembersDTO.mem_email)
+								$('#logSpan').text(data.adminMembersDTO.mem_logtime)
+								$('#productSellSpan').text(data.totalSellProduct)
 		        		 }
 		        	 });
 		        	 

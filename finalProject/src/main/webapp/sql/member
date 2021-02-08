@@ -23,4 +23,5 @@ CREATE TABLE members(
 
 alter table members add mem_kakao number;
 
+
 alter table members add mem_agree varchar(20);
