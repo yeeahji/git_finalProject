@@ -35,8 +35,8 @@ function search() {
 $("#btn_menu").hover(function() {
 	// 카테고리 첫번째만 보이기
 	$(".dropmenu").show();
-	$(".dropmenu ul > li").hide();
-	$(".dropmenu ul > li").first().show();
+	// $(".dropmenu ul > li").hide();
+	// $(".dropmenu ul > li").first().show();
 })
 
 // 첫번째 카테고리 마우스 오버 이벤트
@@ -47,9 +47,9 @@ $(".dropmenu li:first a").hover(function() {
 })
 
 // 첫번째 카테고리 항목 마우스 오버 이벤트
-$(".dropmenu ul > li > ul >a").hover(
+$(".dropmenu ul > li > ul > a").hover(
 		function() {
-
+			// mouseover
 			var upper_cate_code = $(this).attr("data-category")
 			var upper_cate_name = $(this).text();
 			// 두번쨰 li
@@ -66,17 +66,19 @@ $(".dropmenu ul > li > ul >a").hover(
 			$.each(categoray_list, function() {
 				if (this.cate_parent == upper_cate_code)
 					$(next_li_ul).append(
-							'<a href="/market/index/cateDisplay?cate_code=' + this.cate_code + ' ">'
-									+ this.cate_name + '</a>')
+							'<a href="/market/index/cateDisplay?cate_code='
+									+ this.cate_code + ' ">' + this.cate_name
+									+ '</a>')
 			})
 
+		}, function() {
+			// mouseout
 		})
 
 // 카테고리 창 마우스 벗어나면
 // 모든 카테고리 숨김
-$(".dropmenu").hover(function() {
-}, function() {
-	$(".dropmenu").hide();
+$(".dropmenu").mouseleave(function() {
+	console.log(this.className)
 	$(".dropmenu li:first a").removeClass("active");
-	// $(".dropmenu ul > li").hide();
+	$(".dropmenu").hide();
 })

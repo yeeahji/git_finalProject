@@ -115,10 +115,16 @@ public class IndexServiceImpl implements IndexService {
 		List<ProductDTO> list = indexDAO.cateProductList(map);
 		// 개수 조회
 		int count = indexDAO.cateProductCount(map);
-
+		// 부모 카테고리 조회
+		String cate_parent = indexDAO.cateParentName(cate_code);
+		// 자식 카테고리 조회
+		String cate_name = indexDAO.cateCodeName(cate_code);
+		
 		System.out.println("list	: " + list);
 		System.out.println("count	: " + count);
 
+		model.addAttribute("cate_name", cate_name);
+		model.addAttribute("cate_parent", cate_parent);
 		model.addAttribute("list", list);
 		model.addAttribute("count", count);
 		model.addAttribute("page", page);

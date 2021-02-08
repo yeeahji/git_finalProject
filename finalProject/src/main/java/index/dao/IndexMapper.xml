@@ -196,5 +196,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			cate_parent
 		 FROM category 
 	</select>
+	
+	<select id="cateParentName" resultType="String">
+		select cate_name from category where cate_code=#{cate_code}
+	</select>
+	
+
+	<select id="cateCodeName" resultType="String">
+		select cate_name from category where cate_code=#{cate_code}
+	</select>
 
 </mapper>

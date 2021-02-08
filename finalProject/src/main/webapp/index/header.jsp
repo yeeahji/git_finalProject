@@ -36,10 +36,10 @@
 </div>
 
 <div class="dropdown-button">
-	<a id="btn_menu" class="cateList" data-bs-toggle="dropdown"
-		aria-expanded="false"> <i class="fas fa-bars"></i>
+	<a id="btn_menu" class="cateList"> <i class="fas fa-bars"></i>
 	</a>
 </div>
+
 <div class="dropdown-area">
 	<div>
 		<div class="dropmenu">

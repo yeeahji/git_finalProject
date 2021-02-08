@@ -24,4 +24,8 @@ public interface IndexDAO {
 
 	public List<CategoryDTO> categoryList(); //새부 카테고리
 
+	public String cateParentName(String cate_code); //부모카테고리이름
+
+	public String cateCodeName(String cate_code); //자식카테고리이름
+
 }

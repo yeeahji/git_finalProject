@@ -1,9 +1,17 @@
 @charset "UTF-8";
 
+@media all and (min-width: 992px) {
+	.dropmenu {
+		display: none;
+	}
+	.dropdown-button:hover .dropmenu {
+		display: block;
+	}
+}
+
 .dropmenu {
-	height : 100%;
-	width : 100%;
-	display : none;
+	height: 100%;
+	width: 100%;
 	position: relative;
 	top: 5px;
 	border: 1px solid #eee;
@@ -23,7 +31,6 @@
 	padding: 0px;
 }
 
-
 .dropmenu li a {
 	font-size: 20px;
 	display: block;
@@ -38,13 +45,14 @@
 }
 
 .dropmenu li ul {
+	display : block;
 	border: 1px solid #eee;
 	background: white;
-	position: relative;
 	width: 250px;
-	overflow-y : auto;
+	overflow-y: auto;
 	background: white;
 	height: 430px;
+	min-height: 430px;
 }
 
 .dropmenu li:hover ul {
@@ -65,7 +73,7 @@
 
 .dropmenu li p {
 	border: 1px solid #eee;
-	background : white;
+	background: white;
 	padding: 12px 30px 12px 30px;
 	display: block;
 	font-size: 14px;
@@ -83,22 +91,17 @@
 	text-align: left;
 }
 
-.dropmenu ul li:first-child a.active
-{
+.dropmenu ul li:first-child a.active {
 	border: 0px;
 	color: #ffffff;
 	background: #0d47a1;
 	text-decoration: none;
 }
 
-
-.dropmenu ul li:nth-child(2) a:hover
-{
+.dropmenu ul li:nth-child(2) a:hover {
 	color: #0d47a1;
 	text-decoration: underline;
 }
-
-
 
 .dropmenu p {
 	clear: left;

@@ -85,7 +85,7 @@ body {
 
 .dropdown-area {
 	display: inline-block;
-	height: 0px;
+	height: 0px; 
 }
 
 #headerMain .dropdown i {

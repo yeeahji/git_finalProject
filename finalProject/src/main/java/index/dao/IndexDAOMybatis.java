@@ -57,6 +57,16 @@ public class IndexDAOMybatis implements IndexDAO {
 	public List<CategoryDTO> categoryList() {
 		return sqlSession.selectList("indexSQL.categoryList");
 	}
+
+	@Override
+	public String cateParentName(String cate_code) {
+		return sqlSession.selectOne("indexSQL.cateParentName", Integer.parseInt(cate_code));
+	}
+
+	@Override
+	public String cateCodeName(String cate_code) {
+		return sqlSession.selectOne("indexSQL.cateCodeName", Integer.parseInt(cate_code));
+	}
 	
 	
 	
