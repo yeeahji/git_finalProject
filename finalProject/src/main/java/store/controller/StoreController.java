@@ -41,18 +41,22 @@ public class StoreController {
 	
 	// 외부에서 상점으로 페이지 이동 
 	@RequestMapping(value= "/store", method=RequestMethod.GET)
-	public String store(Model model,  HttpServletResponse response) {
-	
+	public String store(Model model,
+						HttpServletResponse response) {
 		// (test)상점 들어왔을 때 쿠키 추가 ★★★★★ ㄴ일단 여기에 추가함
-		 Cookie cookie = new Cookie("UP", "10");// (이름, 값) 생성
-		 cookie.setMaxAge(60*5); // 5분으로 설정
-		 response.addCookie(cookie); // 응답에 쿠키 추가; 클라이언트에게 보내기
-		 System.out.println("쿠키생성");
-			
-		 model.addAttribute("display", "/store/store.jsp");
-		 model.addAttribute("displayNum", "1");
-		 return "/index";
+		Cookie cookie = new Cookie("UP", "10");// (이름, 값) 생성
+		cookie.setMaxAge(60*5); // 5분으로 설정
+		response.addCookie(cookie); // 응답에 쿠키 추가; 클라이언트에게 보내기
+		System.out.println("쿠키생성");
+		 //------------------------------------이거쿠키  로그인으로 옮기기
+		
+		model.addAttribute("display", "/store/store.jsp");
+		model.addAttribute("displayNum", "1");	
+		return "/index";
 	}
+
+	
+	
 	
 	// [상점] ----------------------------------------------------------------
 	// 상점 기본 정보
@@ -123,7 +127,7 @@ public class StoreController {
 	@RequestMapping(value="echoCalc", method=RequestMethod.POST)
 	@ResponseBody
 	public ModelAndView echoCalc(@RequestParam String mem_id) {
-		System.out.println("아디는 ->"+mem_id);
+		//System.out.println("아디는 ->"+mem_id);
 		// mem_id의 구매횟수
 		int purchaseNum = storeService.purchaseTotalA(mem_id); //구매내역에서 만든
 		// mem_id의 판매횟수
@@ -143,7 +147,7 @@ public class StoreController {
 		}else if(actSum > 8 && actSum <= 10) {
 			actSum = 100; 
 		}
-		System.out.println("엨트썸"+actSum);
+		//System.out.println("엨트썸"+actSum);
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("actSum", actSum);
 		mav.addObject("salesNum", salesNum); // 상점 판매횟수

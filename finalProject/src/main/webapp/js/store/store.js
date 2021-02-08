@@ -1,22 +1,42 @@
-// test2로 테스트 중
+// 내상점-남의상점 구분
+var loginId = $('.loginId').val();
+var paramId = $('.hiddenId').val();
+
+var userId;
+
+if(loginId == paramId){ // 내 상점
+	userId = loginId; // 둘 중 암거나 ㄱㅊ
+}else if(loginId != paramId){ // 남의 상점
+	userId = paramId;
+}
 // 상점 기본 정보
 var isStore = false; // ajax 중복 호출 방지
 $(document).ready(function(){
+	if(paramId==''){
+		userId = loginId;
+	}
+	
 	if(isStore) return;
 	isStore = true;
 	
 	$.ajax({
 		type: 'GET',
 		url: '/market/store/storeInfo',
-		data: {'mem_id' : 'test2'}, // 상점 주인의 아이디
+		data: {'mem_id' : userId}, // 상점 주인의 아이디
 		dataType: 'json',
-		success : function(data){ 
-			//console.log('스토어 기본정보->'+JSON.stringify(data));
-			
+		success : function(data){
 			$.each(data, function(key, value){
 				// [프로필] 
 				// 프로필 상점명
 				$('.profileNickname').text(value.store_nickname);
+				
+				//console.log('디스프레이넘은 -->'+$('.hiddenDisNum').val());
+				//if($('.hiddenDisNum').val() == 2){
+				console.log('트루값넣은애'+$('.goProductManage').val() );
+				if($('.goProductManage').val() == 'true'){
+					$('#productManage').trigger('click', 'str');
+				}
+				
 				
 				// 프로필 사진
 				if(value.store_img != null){
@@ -43,7 +63,7 @@ $(document).ready(function(){
 					      
 					      // DB
 					      var formData = new FormData($('#profileImgForm')[0]);
-					      formData.append('mem_id','test2'); // 나중에 세션아이디로 수정,,
+					      formData.append('mem_id',userId); // 나중에 세션아이디로 수정,,
 					     
 					      $.ajax({
 					            type:'post',
@@ -144,7 +164,7 @@ $(document).ready(function(){
 							$.ajax({
 								type:'get',
 								url: '/market/store/introUpdate',
-								data: {'mem_id' : 'test2',
+								data: {'mem_id' : userId,
 									   'store_intro':$('.introduceWrap > textarea').val()},
 								dataType: 'json',
 							    success: function(data){
@@ -164,25 +184,25 @@ $(document).ready(function(){
 
 				// # 에코지수 store_ECHO
 				var echoIndi = value.store_echo; // data에서 불러온 에코지수 
-				$('.echoIndication > img').attr('src','/market/image/store/echo'+echoIndi+'.svg');
+				$('.echoIndication > img').attr('src','/market/image/store/echo'+echoIndi+'.svg'); // 0이면 알아서 아래서 업뎃
 				
 				// 에코지수 설정 ( 판매+구매 )
 				$.ajax({
 					type:'post',
 					url: '/market/store/echoCalc', 
-					data: {'mem_id' : 'test2'},
+					data: {'mem_id' : userId},
 					dataType: 'json',
 				    success: function(data){
 				    	actSum = data.actSum; // actSum = purchaseNum + salesNum;
 				    	
 				    	if(value.store_echo != actSum){
-				    		console.log("현재 에코지수와 달름");
+				    		//console.log("현재 에코지수와 달름");
 				    		
 				    		//에코지수 업데이트
 				    		$.ajax({
 								type:'post',
 								url: '/market/store/echoUpdate',
-								data: {'mem_id' : 'test2',
+								data: {'mem_id' : userId,
 									   'store_echo': actSum },
 							    success: function(data){
 							    	console.log('!!에코지수 업데이트 완료');
@@ -191,7 +211,7 @@ $(document).ready(function(){
 							    }
 				    		});//ajax 
 				    	}else{
-				    		console.log("원래 값과 같음");
+				    		//console.log("원래 값과 같음");
 				    	}
 				    	
 				    	// 다시 넘어온 actSum으로 이미지 설정
@@ -249,7 +269,7 @@ $(document).ready(function(){
 							    		$.ajax({ // 닉 변경
 											type:'get',
 											url: '/market/store/nicknameUpdate',
-											data: {'mem_id': 'test2', // 현재 상점주인의 아이디
+											data: {'mem_id': userId, // 현재 상점주인의 아이디
 												   'nickname': $('#nickname').val(),},
 										    success: function(result){ // update 변경 체크 숫자 넘어옴
 										    	if(result!=0) {
@@ -415,6 +435,8 @@ $('#storeBottom').on('click', '.default, .before', function(){
 
 //******** 내부 페이지 이동 ([상품]/[상품후기]/[구매내역]/[찜]/[내상품관리]) ******** 
 //컨트롤러 이동안하고 jsp 파일 불러옴
+//var paramId = $('.hiddenId').val();
+
 var isProd = false; //중복호출방지
 $('#productPg').click(function(){
 	if(isProd) return;
@@ -439,7 +461,7 @@ $('#reviews').click(function(){
 	 $("#reviews").removeAttr("href") //href="#" 새로고침 삭제
 	 $.ajax({
 	        type : "GET",
-	        url : "../store/reviews.jsp",
+	        url : "../store/reviews.jsp?id="+paramId, // 내상점, 남의 상점 후기쓰기 구분 
 	        dataType : "text",
 	        success : function(data) {
 	            $('.contentStore').html(data);
@@ -449,6 +471,7 @@ $('#reviews').click(function(){
 	        }
 	 });
 });
+
 var isPur = false;
 $('#purchases').click(function(){
 	if(isPur) return;

@@ -1,8 +1,11 @@
+// 내상점-남의상점 구분
+var userId = $('.loginId').val();
+
 $(document).ready(function(){
 	$.ajax({
 		type: 'post',
 		url: '/market/store/storeFavoritesList',
-		data: 'mem_id='+'test1', // 상점 주인의 아이디
+		data: 'mem_id='+userId, // 상점 주인의 아이디
 		dataType: 'json',
 		success : function(data){
 			console.log(data); // test

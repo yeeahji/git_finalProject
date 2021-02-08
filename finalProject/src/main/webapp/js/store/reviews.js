@@ -1,8 +1,21 @@
+// 상점 후기 작성 창 - 일단 따로 뺌
+// 후기 작성 버튼 누른 사람만 창 보이도록..?
+// 내상점-남의상점 구분
+var loginId = $('.loginId').val();
+var paramId = $('.hiddenId').val();
+
+var userId;
+if(loginId == paramId){ // 내 상점
+	userId = loginId; // 둘 중 암거나 ㄱㅊ
+}else if(loginId != paramId){ // 남의 상점
+	userId = paramId;
+}
+
 $(document).ready(function(){
 	$.ajax({
 		type: 'post',
 		url: '/market/store/storeReviewsList',
-		data: 'mem_id='+'test1', //현재 test1의 상점일 때
+		data: 'mem_id=' + userId, 
 		dataType: 'json',
 		success : function(data){
 			console.log(data); // test
@@ -93,4 +106,88 @@ $(document).ready(function(){
 			console.log(err);
 		}
 	});//ajax
+	
+	
+	// textarea 글자 수 세기
+	$(function() {
+	      $('.reviewTextarea').keyup(function (e){
+	          var content = $(this).val();
+	         /* $(this).height(((content.split('\n').length + 1) * 1.5) + 'em');*/
+	          $('.numOfChar').html(content.length + '/100&ensp;');
+	      });
+	      $('.numOfChar').keyup();
+	});
+	
+	// textarea 글자 수 초과
+	$('.reviewTextarea').on('keyup', function() {
+		if($(this).val().length > 100) {
+			alert("최대 100자까지 입력 가능합니다.");
+			$(this).val($(this).val().substring(0, 100));
+		}
+	});
+	
+	//별 1~5
+	var starScore = 0; //초기값 0
+	// 클릭 - > 노랑별
+	$('.reviewForm').on('click', '.review_star1, .review_star2, .review_star3, .review_star4, .review_star5', function(){
+		
+		for(var i=1; i<=5; i++){ 
+			if($(this).attr('class') == 'review_star'+i){
+				for(var j=1; j<=i; j++){
+					$('.review_star'+j).attr('class', 'yellowStar'+j);
+					$('.yellowStar'+j).attr('src','data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAcCAYAAAB2+A+pAAAAAXNSR0IArs4c6QAAArVJREFUSA2tVs1rE0EUf28TWr8uBQU/AqLGhAh+QWhrTECwePJiC1r0IHit4MU/Qw8evAoe9OZRTwqCNVEpaC+Wpqle4gfiURobdvN8b9JdZ7a7k822C8u++b3fx87sZFqAlBc1jpfkTikHJ60Qer1pdac0SB9MOANyp7wwjY7eF49Q1/0iWhzJHsWJ5a/D+qSbcdedDoL0OgAHF+mCUVtivR6cFzCGXmqaLx4EcNtEoLSIQADZHFaXvweuCYrhZ0zeFT9U/FXNWIIsgzJ8MNL/7+tbRWF+L+Y51FLTQmEvdLyfvLYZ3Y9NPNiZ2Y/l5m8dt9VZqufPAmZ22UhBb92bCodKTzBc781Ro/gy4NoK8tZQHXsePSWiMzbudvUQ8RO/5nUHz60swdjoBKJzr79DtyvC9BFvyVBZnGl8Y6oXLvL5+5hnf8iUbW3Es/wGjnMTK81XvpOxq1XDGT3FxGc+YatP5SWeWqh4GjPWQ+hN/haPHxDQHh1PWiPgH+bewVrrUZQmNljIVD+WBw+fcPh4lDgO49APkKEbWFltxXPiOhs40YUszLcXOfzEAKpqc+hnqOZOI752bXzjG0cSP7bHGC9E9qLBAvQ10d0NdHDwGs7wbLNWF62puKzRoMhycDDRbKTSBibQ2DfXQukA/O3Kn8BNL8hCdTzycTkVfgc+LHqwYySH5aUf4Z4/3mToN9Sz414Nh/Lvssuhd6HauiS31ILpOqVhrY6Fa3sw0jVdoHYsOeNYW73PYXwE8s01CCa7Wb9CWr0ldWwwvS0d5l/ypC/gkIeQ2VfGWnPRx/ynwqQnnOCiyb5HABhFbDCQWmb2gl/oOJex2rqNlUbHUGsD6SmOcFnT/88kfrktwTTLBi8Ad5/E8yvPtQxrqbiiEW2C3W2Y0bt8js/qOQNMMRAP8YqS/gMbzegG1X8tjgAAAABJRU5ErkJggg==');
+				}// for2
+				starScore = i;
+				console.log("별점수는->"+starScore);
+			}//if
+		}// for1
+		
+		// 노란별 상태 - 재클릭 
+		$('.reviewForm').on('click', '.yellowStar1, .yellowStar2, .yellowStar3, .yellowStar4, .yellowStar5', function(){
+			//1별 -> 2345 없어지게
+			for(var i=1; i<=5; i++){ 
+				if($(this).attr('class') == 'yellowStar'+i){
+					if(i==1){
+						$('.yellowStar'+1).attr('class', 'review_star'+1);
+						$('.review_star'+1).attr('src','data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAcCAYAAAB2+A+pAAAAAXNSR0IArs4c6QAAAqNJREFUSA2tVk1rE0EYzrYbSKQXRYIfCaUiggaJJiH+AIsnL1poRQ+CBy8VvOivUA8evHgoeNCbRz3pH5B8HlIvYpG0VULxJBqMZn2eZWc7O5nZ7I5deJl33vf5yMzsTpvJWD6tVussw5KembMlgnc9CCsJa2PP81YYVq4gOTbEXq+3NB6PP5ObzWZPVSqVrbQ6ViuGKbfZf+Rc1JKMVsaO44RbLOdJDAUm9Va32+0TONtthM+FsYcoVqvVXSGaZEy9YhheE6Y0YM5aEjMZk9oY5PB8JSFdTWpPp6m2utlsHoXEN8S8IvUX82P1en1PqRunbrfbvYitOmRESI3JZLIMrGpKxDzOeb3T6byT4MYU2J8Orz2IvQLqghF5sI0ujG/O1Wq1j/l8/hImjxHewXrsq1GbHvSiZ+SM8alcxupfIE7uU/4/g+EO4jY+ufdCLWLMYr/fPzIajZ7DPLwkBNhmhOHrXC53t1wuf5f5U8aiidXfgflTxIKopRlh+ANxH6vc0PGMxgTjxTsN45dIGzpyTO0DTG/hLD+ZMLHGJMHYxep7GM+ZROQ6DDexygrGP3JdzWfeXPg2D8P0jEo0zYklx9QX9ZnGAPIlcwUhwUjszBdzpjFWcCOBWQSShBN7xribj+Os+Cdw6gei7l+P6C1HXDFBb4J6EXf3V7Un5lOCohGMq6opRH+j9wAv0BUG86AWUgPOaljQJLHGEFyTOZhvIhpYyROMvAK9IG+wp2AjXLnH3LjV+IQW8cu3ED4Gws8KhcLDUqn0SxXhfDAY5IfD4SPg1zkPftgSduUL5+pjXDEEuM3gO0OQruIyuGcypSh7xBBLDrnUYE/3xBnzbX7ruu55bOcbHVlXI5YccmGc7ovA/81FXJf+lunEk9aoQS0d/h/pAwlu3rYpxwAAAABJRU5ErkJggg==');		
+						starScore = 0;
+					}
+					
+					for(var j=5; j>i; j--){ //1제외 1누르면 2~5 없어지게
+						$('.yellowStar'+j).attr('class', 'review_star'+j);
+						$('.review_star'+j).attr('src','data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAcCAYAAAB2+A+pAAAAAXNSR0IArs4c6QAAAqNJREFUSA2tVk1rE0EYzrYbSKQXRYIfCaUiggaJJiH+AIsnL1poRQ+CBy8VvOivUA8evHgoeNCbRz3pH5B8HlIvYpG0VULxJBqMZn2eZWc7O5nZ7I5deJl33vf5yMzsTpvJWD6tVussw5KembMlgnc9CCsJa2PP81YYVq4gOTbEXq+3NB6PP5ObzWZPVSqVrbQ6ViuGKbfZf+Rc1JKMVsaO44RbLOdJDAUm9Va32+0TONtthM+FsYcoVqvVXSGaZEy9YhheE6Y0YM5aEjMZk9oY5PB8JSFdTWpPp6m2utlsHoXEN8S8IvUX82P1en1PqRunbrfbvYitOmRESI3JZLIMrGpKxDzOeb3T6byT4MYU2J8Orz2IvQLqghF5sI0ujG/O1Wq1j/l8/hImjxHewXrsq1GbHvSiZ+SM8alcxupfIE7uU/4/g+EO4jY+ufdCLWLMYr/fPzIajZ7DPLwkBNhmhOHrXC53t1wuf5f5U8aiidXfgflTxIKopRlh+ANxH6vc0PGMxgTjxTsN45dIGzpyTO0DTG/hLD+ZMLHGJMHYxep7GM+ZROQ6DDexygrGP3JdzWfeXPg2D8P0jEo0zYklx9QX9ZnGAPIlcwUhwUjszBdzpjFWcCOBWQSShBN7xribj+Os+Cdw6gei7l+P6C1HXDFBb4J6EXf3V7Un5lOCohGMq6opRH+j9wAv0BUG86AWUgPOaljQJLHGEFyTOZhvIhpYyROMvAK9IG+wp2AjXLnH3LjV+IQW8cu3ED4Gws8KhcLDUqn0SxXhfDAY5IfD4SPg1zkPftgSduUL5+pjXDEEuM3gO0OQruIyuGcypSh7xBBLDrnUYE/3xBnzbX7ruu55bOcbHVlXI5YccmGc7ovA/81FXJf+lunEk9aoQS0d/h/pAwlu3rYpxwAAAABJRU5ErkJggg==');		
+						
+						if(i>1){
+							starScore = j-1;
+						}// if
+						
+					}// for2
+				}//if
+			}// for1
+		});// 재클릭
+	});// 처음 별 클릭
+
+	
+	
+});	//$(document).ready
+		
+
+//등록 버튼 클릭
+//$('.storeContent').on('click', '.reviewRegisBtn', function(){
+$('.reviewRegis > button').click(function(){
+	console.log("등록버튼클릭");
+	//$('#reviewTextareaDiv').empty();
+	
+	if($('.reviewTextarea').val()==''){
+		console.log("값이업짜나?");
+		$('#reviewTextareaDiv').text('최소 20자 이상 입력해주세요.');
+		$('#reviewTextareaDiv').css('color', '	#FF0000');
+		$('#reviewTextareaDiv').css('font-size', '10pt');
+		$('#reviewTextareaDiv').css('font-weight','bold');
+	}
+	
 });
+
+
+
+

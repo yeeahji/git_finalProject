@@ -1,3 +1,14 @@
+// 내상점-남의상점 구분
+var loginId = $('.loginId').val();
+var paramId = $('.hiddenId').val();
+
+var userId;
+if(loginId == paramId){ // 내 상점
+	userId = loginId; // 둘 중 암거나 ㄱㅊ
+}else if(loginId != paramId){ // 남의 상점
+	userId = paramId;
+}
+
 // 기본 - 상품 리스트 가져오기
 var sortNum = $('.hiddenSortNum').val(); // 기본은 최신순 0 
 
@@ -5,7 +16,7 @@ $(document).ready(function(){
 	$.ajax({
 		type: 'post',
 		url: '/market/store/storeProductList',
-		data: {'mem_id':'test1', //test1이 올린 물품들만
+		data: {'mem_id' : userId, //test1이 올린 물품들만
 			   'sortNum' : sortNum}, //정렬번호
 		dataType: 'json',
 		success : function(data){
@@ -139,7 +150,7 @@ $('.listTopInner').on('click', '.groupOther', function(){
 	$.ajax({
 		type: 'post',
 		url: '/market/store/storeProductList',
-		data: {'mem_id':'test1', //test1이 올린 물품들만
+		data: {'mem_id': userId, //test1이 올린 물품들만
 			   'sortNum' : sortNum}, //정렬번호
 		dataType: 'json',
 		success : function(data){

@@ -1,13 +1,13 @@
+var userId = $('.loginId').val();
+
 $(document).ready(function(){
 	$.ajax({
 		type: 'GET',
 		url: '/market/store/purchaseList',
-		data: {'my_id' : 'test1', // 상점 주인 아이디
+		data: {'my_id' : userId, // 상점 주인 아이디
 			   'pg' : $('#pg').val()},
 		dataType: 'json',
-		success : function(data){ 
-			console.log(JSON.stringify(data)); //purchaseList
-			
+		success : function(data){
 			$('#purchaseTbody > tr').remove();
 			
 			$.each(data.purchaseList, function(index, items){
@@ -52,12 +52,10 @@ function purchasePaging(pg){
 	$.ajax({
 		type: 'GET',
 		url: '/market/store/purchaseList',
-		data: {'my_id' : 'test1', // 상점 주인 아이디
+		data: {'my_id' : userId, // 상점 주인 아이디
 			   'pg' : pg},
 		dataType: 'json',
-		success : function(data){ 
-			console.log(JSON.stringify(data)); //purchaseList
-			
+		success : function(data){
 			$('#purchaseTbody > tr').remove();
 			
 			$.each(data.purchaseList, function(index, items){
