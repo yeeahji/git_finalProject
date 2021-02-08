@@ -1,9 +1,12 @@
 package product.service;
 
 import java.util.List;
+import java.util.Map;
 
 import product.bean.CategoryDTO;
 import product.bean.ProductDTO;
+import product.bean.RelProdPaging;
+import store.bean.StoreDTO;
 
 public interface ProductService {
 
@@ -16,5 +19,21 @@ public interface ProductService {
 	public String getMyRecentLocation(String mem_id);
 
 	public ProductDTO productDetail(String seq); //상품 디테일
+
+	public List<ProductDTO> getRelatedProducts(String rel_pg, String seq);
+
+	public RelProdPaging relProdPaging(String rel_pg);
+
+	public String getProdCateName(String seq);
+
+	public StoreDTO getStoreInfo(String seq);
+
+	public int getStoreProdNum(String seq);
+
+	public List<ProductDTO> getStoreProduct(String seq);
+
+	public int getZzimNum(String seq);
+
+	public void zzimInsert(Map<String, String> map);
 
 }

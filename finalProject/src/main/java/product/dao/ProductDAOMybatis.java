@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import product.bean.CategoryDTO;
 import product.bean.ProductDTO;
+import store.bean.StoreDTO;
 
 @Repository
 @Transactional
@@ -40,6 +41,42 @@ public class ProductDAOMybatis implements ProductDAO {
 	@Override
 	public ProductDTO productDetail(String seq) {
 		return sqlSession.selectOne("productSQL.productDetail", Integer.parseInt(seq));
+	}
+
+	@Override
+	public List<ProductDTO> getRelatedProducts(Map<String, String> map) {
+		return sqlSession.selectList("productSQL.getRelatedProducts", map);
+	}
+
+	@Override
+	public String getProdCateName(String seq) {
+		return sqlSession.selectOne("productSQL.getProdCateName", seq);
+	}
+
+	@Override
+	public StoreDTO getStoreInfo(String seq) {
+		return sqlSession.selectOne("productSQL.getStoreInfo", seq);
+	}
+
+	@Override
+	public int getStoreProdNum(String seq) {
+		return sqlSession.selectOne("productSQL.getStoreProdNum", seq);
+	}
+
+	@Override
+	public List<ProductDTO> getStoreProduct(String seq) {
+		return sqlSession.selectList("productSQL.getStoreProduct", seq);
+	}
+
+	@Override
+	public int getZzimNum(String seq) {
+		return sqlSession.selectOne("productSQL.getZzimNum", seq);
+	}
+
+	@Override
+	public void zzimInsert(Map<String, String> map) {
+		sqlSession.insert("productSQL.zzimInsert", map);
+		
 	}
 	
 }

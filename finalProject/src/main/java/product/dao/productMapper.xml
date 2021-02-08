@@ -69,4 +69,80 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		FROM product WHERE product_seq=#{seq}
 	</select>
 
+	<!-- 연관상품 리스트 -->
+	<select id="getRelatedProducts" parameterType="java.util.Map" resultType="product">
+		select *
+		from (select  rownum rn, tt.* from 
+	         (select * 
+	         from product
+	         where cate_code = (select cate_code 
+	         					from product 
+	         					where product_seq = #{seq})
+	         	   and product_manage=1
+	         order by product_logtime desc)tt) 
+		where rn between #{startNum} and #{endNum}
+	</select>
+	
+	<!-- 상품정보 - 카테고리 이름 getProdCateName  -->
+	<select id="getProdCateName" parameterType="String" resultType="String">
+		select cate_name
+		from product
+		join category using(cate_code)
+		where product_seq = #{seq}
+	</select>
+	
+	<!-- seq로 상점 조회 -->
+	<select id="getStoreInfo" parameterType="String" resultType="store">
+		select mem_id, store_nickname, store_img, store_echo, store_scoreavg
+		from store
+		join product using(mem_id)
+		where product_seq = #{seq}
+	</select>
+	
+	<!-- 상점 물건 총 개수 -->
+	<select id="getStoreProdNum" parameterType="String" resultType="int"> 
+		select count(*)
+		from product
+		where mem_id = (select mem_id
+		                from store
+		                join product using(mem_id)
+		                where product_seq = #{seq})
+	</select>
+	
+	<!-- 상점주인이 올린 상품 2개 -->
+	<select id="getStoreProduct" parameterType="String" resultType="product">
+		select product_seq, mem_id, product_subject, product_content, product_img1, TO_CHAR(product_price, '999,999,999') as product_price, product_location, product_delivery_fee, product_manage, product_logtime
+		from (select*
+		      from product
+		      where mem_id = (select mem_id
+				              from store
+				              join product using(mem_id)
+				              where product_seq=26)
+				              order by product_logtime desc)
+		where rownum<![CDATA[<]]>3
+	</select>
+	
+	<!-- 해당 상품이 찜 받은 수 -->
+	<select id="getZzimNum" parameterType="String" resultType="int"> 
+		select count(*)
+		from wish
+		where product_seq = #{seq}
+	</select>
+	
+	<!-- 찜(+1) 업데이트  -->
+	<insert id="zzimInsert" parameterType="java.util.Map">
+		insert into wish values(#{mem_id}, #{seq}, sysdate)
+	</insert>
+	
+	
+	
+	
+	
 </mapper>
+
+
+
+
+
+
+

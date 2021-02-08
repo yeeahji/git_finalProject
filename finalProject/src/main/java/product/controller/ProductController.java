@@ -27,7 +27,10 @@ import product.bean.CategoryDTO;
 import org.springframework.web.servlet.ModelAndView;
 
 import product.bean.ProductDTO;
+import product.bean.RelProdPaging;
 import product.service.ProductService;
+import store.bean.ReviewDTO;
+import store.bean.StoreDTO;
 
 @Controller
 @RequestMapping(value="product")
@@ -120,15 +123,107 @@ public class ProductController {
 		  session.setAttribute("recentlyProduct", list);
 		 }
 		 list.add(seq);
-
-		ProductDTO productDTO = productService.productDetail(seq);
 		 
-		model.addAttribute("productDTO", productDTO);
+		// 상품 정보 받아옴
+		ProductDTO productDTO = productService.productDetail(seq);
+		//model.addAttribute("productDTO", productDTO);
+		model.addAttribute("product_logtime", productDTO.getProduct_logtime());
+		model.addAttribute("seq", seq);
 		model.addAttribute("display", "/product/productDetail.jsp");
 		return "/index";
 	}
+	
+	// 상품상세페이지 - 상품 정보 받아오기
+	@RequestMapping(value="getProductDetail", method=RequestMethod.GET)
+	@ResponseBody
+	public ModelAndView getProductDetail(@RequestParam String seq) {
+		ProductDTO productDTO = productService.productDetail(seq);
+		ModelAndView mav = new ModelAndView();
+		
+		mav.addObject("productDTO", productDTO);
+		mav.setViewName("jsonView");
+		return mav;
+	}
+	
+	// 연관상품
+	@RequestMapping(value="getRelatedProducts", method=RequestMethod.GET)
+	@ResponseBody
+	public ModelAndView getRelatedProducts(@RequestParam(required=false, defaultValue="1") String pg,
+										   @RequestParam String seq) {
+		// 연관상품 24개  (한 페이지 당 6개 출력)
+		List<ProductDTO> relProdList = productService.getRelatedProducts(pg, seq);
+		
+		RelProdPaging relProdPaging = productService.relProdPaging(pg); 
+		
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("pg", pg);
+		mav.addObject("relProdList", relProdList);
+		mav.addObject("relProdPaging", relProdPaging);
+		mav.setViewName("jsonView");
+		return mav;
+	}
 
-
+	// 카테고리 이름
+	@RequestMapping(value="getProdCateName", method=RequestMethod.GET)
+	@ResponseBody
+	public ModelAndView getProdCateName(@RequestParam String seq) {
+		String cateName = productService.getProdCateName(seq);
+		
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("cateName", cateName);
+		mav.setViewName("jsonView");
+		return mav;
+	}
+	
+	// seq로 상점 정보 조회 + 물건 총 개수
+	@RequestMapping(value="getStoreInfo", method=RequestMethod.GET)
+	@ResponseBody
+	public ModelAndView getStoreInfo(@RequestParam String seq) {
+		// 상점
+		StoreDTO storeDTO = productService.getStoreInfo(seq);
+		// 상점 물건 총 개수
+		int storeProdNum = productService.getStoreProdNum(seq);
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("storeDTO", storeDTO);
+		mav.addObject("storeProdNum", storeProdNum);
+		mav.setViewName("jsonView");
+		return mav;
+	}
+	
+	// 상점 정보 - 최신 상품 2개 
+	@RequestMapping(value="getStoreProduct", method=RequestMethod.GET)
+	@ResponseBody
+	public ModelAndView getStoreProduct(@RequestParam String seq) {
+		List<ProductDTO> getStoreProdList = productService.getStoreProduct(seq);
+		
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("getStoreProdList", getStoreProdList);
+		mav.setViewName("jsonView");
+		return mav;
+	}
+	
+	// 해당 상품이 찜 받은 수
+	@RequestMapping(value="getZzimNum", method=RequestMethod.GET)
+	@ResponseBody
+	public ModelAndView getZzimNum(@RequestParam String seq) {
+		int zzimNum = productService.getZzimNum(seq);
+		
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("zzimNum", zzimNum);
+		mav.setViewName("jsonView");
+		return mav;
+	}
+	
+	// 찜 업데이트
+	@RequestMapping(value="zzimInsert", method=RequestMethod.GET)
+	@ResponseBody
+	public ModelAndView zzimInsert(@RequestParam Map<String, String> map) {
+		productService.zzimInsert(map);
+		
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("jsonView");
+		return mav;
+	}
 }
 
 

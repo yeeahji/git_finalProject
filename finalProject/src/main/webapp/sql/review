@@ -2,7 +2,7 @@ CREATE TABLE review(
 product_seq PRIMARY KEY REFERENCES product(product_seq), -- 상품번호
 mem_id NOT NULL REFERENCES members(mem_id), -- 후기 쓴 사람의 아이디
 review_content VARCHAR2(1000) NOT NULL, -- 후기 내용 (최소 20자 이상)
-review_score NUMBER NOT NULL, -- 개인 평점(최소 별반개 이상 평가)
+review_score NUMBER NOT NULL, -- 개인 평점
 review_date DATE DEFAULT SYSDATE NOT NULL, -- 후기 작성일
 review_seq number not null 
 );

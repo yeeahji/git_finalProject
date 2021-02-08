@@ -1,17 +1,21 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-
+<%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec" %>
+<sec:authentication property="principal" var="member"/> <!-- 사용자 정보 가져오기 -->
+<!-- store메인 시큐리티 로그인 중인 아이디 -->
+<input type="hidden" class="loginId" value="${member.username}">
+<!-- store 메인  주소로넘어온 -->
+<input type="hidden" class="hiddenId" value="${param.id }">
 
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.min.js"></script>  
 <script defer src="${pageContext.request.contextPath}/js/store/store.js"></script>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/store/store.css">
 <script defer src="${pageContext.request.contextPath}/js/store/reviews.js"></script><!-- 상점 상품후기 수 -->
 
+
 <div id="storeBody">
 <div id="storeWrap">
-
-
 	<div id="storeTop">
 		<div id="profileLeftWrap">
 			<div id="profileLeft">
@@ -35,19 +39,19 @@
 						<img width="15" height="14" class="star5" alt="별" src="" >
 					</div>
 					
-					<form id="profileImgForm"> <!-- 프로필 사진 변경 위해 설정; 에이작스 통신 시 폼 아이디만 필요 -->
-					
 					<!-- 프로필 사진 변경 -->
-					<div class="imageEdit">
-		                 <label for="store_img" class="btn_model">
-							<span id="btnChangeProfile" class="btn2" onclick="">프로필 사진 변경</span>
-						 </label>
-						 
-		                 <input type="file" name="profileImg_Name" id="store_img" accept="image/*"> 
-
-					</div><!-- //imageEdit -->
-					
-					</form> <!-- 일단 form 여기까지로 잡음 -->
+					<c:if test="${member.username == param.id || empty param.id}">
+					<form id="profileImgForm">
+						<div class="imageEdit">
+			                 <label for="store_img" class="btn_model">
+									<span id="btnChangeProfile" class="btn2" onclick="">프로필 사진 변경</span>
+							 </label>
+							 
+			                 <input type="file" name="profileImg_Name" id="store_img" accept="image/*"> 
+	
+						</div><!-- //imageEdit -->
+					</form> 
+					</c:if>
 					
 				</div><!-- //(2)background2 -->
 			</div>
@@ -58,7 +62,9 @@
 				<!-- 닉네임 & 닉네임 수정 버튼 -->
 				<div class="nickName">
 					<div class="nickNameText" name="store_nickname"></div>
-					<button class="nickNameEdit" id="nickNameEdit">닉네임 수정</button>
+					<c:if test="${member.username == param.id || empty param.id}">
+						<button class="nickNameEdit" id="nickNameEdit">닉네임 수정</button>
+					</c:if>
 				</div><!-- //nickName -->
 			</div><!-- //storeTitleWrap -->
 			<div id="middleWrap">
@@ -87,15 +93,19 @@
 				</div>
 			</div><!-- middleWrap -->
 			<!-- 상점 주인 : 소개글 -->
-			<div class="introduce"></div> <!-- 내상점/남의상점 공통 -->
-				<div class="introduceEdit"><button class="introduceEditBtn">소개글 수정</button></div> 
+			<div class="introduce"></div>
+				<c:if test="${member.username == param.id || empty param.id}">
+					<div class="introduceEdit"><button class="introduceEditBtn">소개글 수정</button></div> 
+				</c:if>
 			<!-- 남의 상점 : 신고하기 -->
-			<div id="singo">
-				<a class="singoBtn">
-				<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABwAAAAcCAYAAAByDd+UAAAAAXNSR0IArs4c6QAAAgtJREFUSA3tVrtOAkEUdQnKkvADFGtpIR01DYXyMLGwVisLjFEbE42FhYWJiY0YEwsqtLYwkZcFf2C3FJZuwQdIAvgAz8EdGHZZwpJIInGS3blzzzn3zty5m6wyM8Iol8tqs9lca7Vaq6CHFUUJUtZut6uYnj0ez4PP57uPRqMN+ocNZRhILJ/Pr2M6Q3BtGBebMIAfJxKJu6E8JxCn8tbr9SvgKXIQsIIpg7kUCARe6avVavPYyDLMLcyL9GHc+P3+XZz282fZ//b2L3srkQwJPuA9iMfj17C/eoyOpeOtI1m6UCjswL6AnYKW4DZf1jGwpCwjhLdMhvtZicViT1bhoHWxWFzCPT9COwvtxqDy2hKyQRqNxgtEGkT7EKVFcF3X5wzDOAW2SR/wrKZpJ6FQ6F1wsNk94JfADFVVF6yN5BFEMbMbzWQVllH4OTMZTnAIPMiHNn0yxyx9hTEYS8Zo2xKarU+MDdJ3ZwjSORlBMaw+U5MhLsUSdHtCIGGiEJa6LJeGpO3EkuW2E4Lc+ahF68tkYFl5TXuQT2hFLFljS4gSBUiIRCJvMpE2GwRde45AVT606bPyhFbEknHH71AmCdvsxiOs+Yw1bCccK4oL0X9CF8UajTr9JXX8LHK5XHu0IrljTbyk7rb3F9nKb92VUzEmfofdLk0mk7bfDaddjuMXlZz4Caf/Dr8BRaXTUmgtW58AAAAASUVORK5CYII=" width="14" height="14" alt="신고하기 아이콘">
-				<span style="color:rgb(136, 136, 136);">신고하기</span>
-				</a>
-			</div> 
+			<c:if test="${member.username != param.id && not empty param.id}">
+				<div id="singo">
+					<a class="singoBtn">
+					<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABwAAAAcCAYAAAByDd+UAAAAAXNSR0IArs4c6QAAAgtJREFUSA3tVrtOAkEUdQnKkvADFGtpIR01DYXyMLGwVisLjFEbE42FhYWJiY0YEwsqtLYwkZcFf2C3FJZuwQdIAvgAz8EdGHZZwpJIInGS3blzzzn3zty5m6wyM8Iol8tqs9lca7Vaq6CHFUUJUtZut6uYnj0ez4PP57uPRqMN+ocNZRhILJ/Pr2M6Q3BtGBebMIAfJxKJu6E8JxCn8tbr9SvgKXIQsIIpg7kUCARe6avVavPYyDLMLcyL9GHc+P3+XZz282fZ//b2L3srkQwJPuA9iMfj17C/eoyOpeOtI1m6UCjswL6AnYKW4DZf1jGwpCwjhLdMhvtZicViT1bhoHWxWFzCPT9COwvtxqDy2hKyQRqNxgtEGkT7EKVFcF3X5wzDOAW2SR/wrKZpJ6FQ6F1wsNk94JfADFVVF6yN5BFEMbMbzWQVllH4OTMZTnAIPMiHNn0yxyx9hTEYS8Zo2xKarU+MDdJ3ZwjSORlBMaw+U5MhLsUSdHtCIGGiEJa6LJeGpO3EkuW2E4Lc+ahF68tkYFl5TXuQT2hFLFljS4gSBUiIRCJvMpE2GwRde45AVT606bPyhFbEknHH71AmCdvsxiOs+Yw1bCccK4oL0X9CF8UajTr9JXX8LHK5XHu0IrljTbyk7rb3F9nKb92VUzEmfofdLk0mk7bfDaddjuMXlZz4Caf/Dr8BRaXTUmgtW58AAAAASUVORK5CYII=" width="14" height="14" alt="신고하기 아이콘">
+					<span style="color:rgb(136, 136, 136);">신고하기</span>
+					</a>
+				</div> 
+			</c:if>
 			
 		</div>
 	</div><!-- //storeTop -->
@@ -105,10 +115,13 @@
 	<div id="storeBottom">
 		<div class="menuBar"> 
 			<a href="#" id="productPg" class="now">상품</a>
-			<a href="#" id="reviews" class="default">상품후기</a><!-- reviews -->
-			<a href="#" id="favorites" class="default">찜</a><!-- favorites  -->
-			<a href="#" id="purchases" class="default">구매내역</a><!-- purchases -->
-			<a href="#" id="productManage" class="default">내 상품관리</a><!-- productManage -->
+			<a href="#" id="reviews" class="default">상품후기</a>
+			<!-- 내상점, 남의 상점 구분 -->
+			<c:if test="${member.username == param.id || empty param.id}"> <!-- null일때 -> main에서 넘어올 때 -->
+				<a href="#" id="favorites" class="default">찜</a>
+				<a href="#" id="purchases" class="default">구매내역</a>
+				<a href="#" id="productManage" class="default">내 상품관리</a>
+			</c:if>
 		</div><!-- // menuBar-->
 		<div class="storeContent">
 			<!-- [상품]/[상품후기]/[찜]/[구매내역]/[내상품관리] -->

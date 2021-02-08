@@ -7,8 +7,26 @@ STORE_INTRO VARCHAR2(4000), -- 상점 소개글
 STORE_ECHO NUMBER DEFAULT 0, -- 에코지수 - MAX 100
 STORE_SCOREAVG NUMBER DEFAULT 0 -- 상점 평점(별) - MAX 5
 );
+CREATE SEQUENCE seq_store NOCYCLE NOCACHE; -- 0206추가
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+-- 아래데이터는 전에 쓰던 거..
 -- 상점 데이터 삽입  ( store_img:null -> 상점 기본 이미지 )
 INSERT INTO store(MEM_ID, STORE_NICKNAME, STORE_INTRO, STORE_ECHO, STORE_SCOREAVG) 
 VALUES('test1', '김테스트의 상점', '안사요', 10, 4);

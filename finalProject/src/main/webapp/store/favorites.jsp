@@ -1,5 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec" %>
+<sec:authentication property="principal" var="member"/> <!-- 사용자 정보 가져오기 -->
+<input type="hidden" class="loginId" value="${member.username}">
+
+
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.min.js"></script>  
 <script defer src="${pageContext.request.contextPath}/js/store/favorites.js"></script>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/store/favorites.css">    

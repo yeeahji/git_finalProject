@@ -1,10 +1,9 @@
 // 1. 기본
 $(document).ready(function(){
-	
 	$.ajax({
 		type: 'GET',
 		url: '/market/store/productManageList',
-		data: {'mem_id' : 'test1', // 상점 주인의 아이디
+		data: {'mem_id' : $('.loginId').val(), // 상점 주인의 아이디
 			   'pg' : $('#pg').val(),
 			   'product_manage': $('.hiddenProdMange').val()}, 
 		dataType: 'json',
@@ -83,7 +82,7 @@ $(document).ready(function(){
 							type: 'get',
 							url: '/market/store/productUp',
 							dataType: 'json',
-							data: { 'mem_id': 'test1', // 상점 주인의 아이디 
+							data: { 'mem_id': userId, // 상점 주인의 아이디 
 							        'product_seq': items.product_seq}, // UP할 상품의 번호items.product_seq
 							success : function(data){ 
 								if(data.cookieNum == '0'){
@@ -118,7 +117,7 @@ $(document).ready(function(){
 						type: 'get',
 						url: '/market/store/existProd',
 						dataType: 'json',
-						data: { 'mem_id': 'test1', // 상점 주인의 아이디 
+						data: { 'mem_id': userId, // 상점 주인의 아이디 
 						        'product_seq': items.product_seq},
 						success : function(data){
 							if(data.productDTO == null){
@@ -139,7 +138,7 @@ $(document).ready(function(){
 												type: 'get',
 												url: '/market/store/productDlt',
 												dataType: 'json',
-												data: { 'mem_id': 'test1', // 상점 주인의 아이디 
+												data: { 'mem_id': userId, // 상점 주인의 아이디 
 												        'product_seq': items.product_seq},
 												success : function(data){
 													console.log(data);
@@ -171,7 +170,7 @@ $(document).ready(function(){
 				$.ajax({
 					type: 'post',
 					url: '/market/store/favoritesOfProd',
-					data: { 'mem_id': 'test1', // 상점 주인의 아이디 
+					data: { 'mem_id': userId, // 상점 주인의 아이디 
 						    'product_seq': items.product_seq}, // 찜 수 구할 상품의 번호
 					success : function(data){
 						$('.favorites'+index).text(data);
@@ -293,7 +292,7 @@ $(document).ready(function(){
 								$.ajax({
 									type: 'get',
 									url: '/market/store/prodManageUpdate',
-									data: { 'mem_id': 'test1', // 상점 주인의 아이디 
+									data: { 'mem_id': userId, // 상점 주인의 아이디 
 										    'product_seq': items.product_seq, // 해당 상품
 										    'product_manage' : submit_product_manage}, // 해당 상품의 변경 상태
 									success : function(data){
@@ -390,7 +389,7 @@ $('#productSearchBtn').click(function(event, str){
 	$.ajax({
 		type: 'get',
 		url: '/market/store/productManageSearch',
-		data: { 'mem_id' : 'test1' ,// 상점 주인의 아이디
+		data: { 'mem_id' : userId,// 상점 주인의 아이디
 				'searchKeyword' : $('.prodSearchInput').val(),// 검색어
 				'pg' : $('input[name=pg]').val(), //	'pg' : $('#pg').val()}, // 페이지
 				'product_manage' : $('.hiddenProdMange').val()},
@@ -483,7 +482,7 @@ $('#productSearchBtn').click(function(event, str){
 								type: 'get',
 								url: '/market/store/productUp',
 								dataType: 'json',
-								data: { 'mem_id': 'test1', // 상점 주인의 아이디 
+								data: { 'mem_id': userId, // 상점 주인의 아이디 
 								        'product_seq': items.product_seq}, // UP할 상품의 번호items.product_seq
 								success : function(data){ 
 									if(data.cookieNum == '0' || data.cookieNum == ''){
@@ -518,7 +517,7 @@ $('#productSearchBtn').click(function(event, str){
 							type: 'get',
 							url: '/market/store/existProd',
 							dataType: 'json',
-							data: { 'mem_id': 'test1', // 상점 주인의 아이디 
+							data: { 'mem_id': userId, // 상점 주인의 아이디 
 							        'product_seq': items.product_seq},
 							success : function(data){
 								if(data.productDTO == null){
@@ -539,7 +538,7 @@ $('#productSearchBtn').click(function(event, str){
 													type: 'get',
 													url: '/market/store/productDlt',
 													dataType: 'json',
-													data: { 'mem_id': 'test1', // 상점 주인의 아이디 
+													data: { 'mem_id': userId, // 상점 주인의 아이디 
 													        'product_seq': items.product_seq},
 													success : function(data){
 														console.log(data);
@@ -571,7 +570,7 @@ $('#productSearchBtn').click(function(event, str){
 					$.ajax({
 						type: 'post',
 						url: '/market/store/favoritesOfProd',
-						data: { 'mem_id': 'test1', // 상점 주인의 아이디 
+						data: { 'mem_id': userId, // 상점 주인의 아이디 
 							    'product_seq': items.product_seq}, // 찜 수 구할 상품의 번호
 						success : function(data){
 							$('.favorites'+index).text(data);
@@ -694,7 +693,7 @@ $('#productSearchBtn').click(function(event, str){
 									$.ajax({
 										type: 'get',
 										url: '/market/store/prodManageUpdate',
-										data: { 'mem_id': 'test1', // 상점 주인의 아이디 
+										data: { 'mem_id': userId, // 상점 주인의 아이디 
 											    'product_seq': items.product_seq, // 해당 상품
 											    'product_manage' : submit_product_manage}, // 해당 상품의 변경 상태
 										success : function(data){
@@ -785,7 +784,7 @@ function storePaging(pg){
 		$.ajax({
 			type: 'get',
 			url: '/market/store/productManageList',
-			data: {'mem_id' : 'test1', // 상점 주인의 아이디
+			data: {'mem_id' : userId, // 상점 주인의 아이디
 				   'pg' : pg,// 페이지
 				   'product_manage': $('.hiddenProdMange').val()}, // 상품 판매 상태
 			dataType: 'json',
@@ -868,7 +867,7 @@ function storePaging(pg){
 								type: 'get',
 								url: '/market/store/productUp',
 								dataType: 'json',
-								data: { 'mem_id': 'test1', // 상점 주인의 아이디 
+								data: { 'mem_id': userId, // 상점 주인의 아이디 
 								        'product_seq': items.product_seq}, // UP할 상품의 번호items.product_seq
 								success : function(data){ 
 									if(data.cookieNum == '0' || data.cookieNum == ''){
@@ -903,7 +902,7 @@ function storePaging(pg){
 							type: 'get',
 							url: '/market/store/existProd',
 							dataType: 'json',
-							data: { 'mem_id': 'test1', // 상점 주인의 아이디 
+							data: { 'mem_id': userId, // 상점 주인의 아이디 
 							        'product_seq': items.product_seq},
 							success : function(data){
 								console.log(data.productDTO);
@@ -927,7 +926,7 @@ function storePaging(pg){
 													type: 'get',
 													url: '/market/store/productDlt',
 													dataType: 'json',
-													data: { 'mem_id': 'test1', // 상점 주인의 아이디 
+													data: { 'mem_id': userId, // 상점 주인의 아이디 
 													        'product_seq': items.product_seq},
 													success : function(data){
 														console.log(data);
@@ -959,7 +958,7 @@ function storePaging(pg){
 					$.ajax({
 						type: 'post',
 						url: '/market/store/favoritesOfProd',
-						data: { 'mem_id': 'test1', // 상점 주인의 아이디 
+						data: { 'mem_id': userId, // 상점 주인의 아이디 
 							    'product_seq': items.product_seq}, // 찜 수 구할 상품의 번호
 						success : function(data){
 							$('.favorites'+index).text(data);
@@ -1082,7 +1081,7 @@ function storePaging(pg){
 									$.ajax({
 										type: 'get',
 										url: '/market/store/prodManageUpdate',
-										data: { 'mem_id': 'test1', // 상점 주인의 아이디 
+										data: { 'mem_id': userId, // 상점 주인의 아이디 
 											    'product_seq': items.product_seq, // 해당 상품
 											    'product_manage' : submit_product_manage}, // 해당 상품의 변경 상태
 										success : function(data){

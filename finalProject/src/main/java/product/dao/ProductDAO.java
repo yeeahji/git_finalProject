@@ -5,6 +5,7 @@ import java.util.Map;
 
 import product.bean.CategoryDTO;
 import product.bean.ProductDTO;
+import store.bean.StoreDTO;
 
 public interface ProductDAO {
 
@@ -17,5 +18,19 @@ public interface ProductDAO {
 	public String getMyRecentLocation(String mem_id);
 
 	public ProductDTO productDetail(String seq); //상품 상세페이지
+
+	public List<ProductDTO> getRelatedProducts(Map<String, String> map);
+
+	public String getProdCateName(String seq);
+
+	public StoreDTO getStoreInfo(String seq);
+
+	public int getStoreProdNum(String seq);
+
+	public List<ProductDTO> getStoreProduct(String seq);
+
+	public int getZzimNum(String seq);
+
+	public void zzimInsert(Map<String, String> map);
 
 }
