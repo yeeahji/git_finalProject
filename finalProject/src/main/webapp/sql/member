@@ -5,15 +5,15 @@ members, category -> product, store, boards -> review, purchase, wish, comments 
 CREATE TABLE members(
 	mem_id varchar2(50) PRIMARY KEY,
 	mem_pwd char(60),
-	mem_name varchar2(50) NOT NULL,
+	mem_name varchar2(50),
 	mem_email varchar2(70) UNIQUE NOT NULL,
-	mem_add1 varchar2(100) NOT NULL,
-    mem_add2 varchar2(100) NOT NULL,
+	mem_add1 varchar2(100),
+    mem_add2 varchar2(100),
 	mem_postcode number,
 	mem_recentAdd1 varchar2(100),
     mem_recentAdd2 varchar2(100),
 	mem_recentPostcode number,
-	mem_tel varchar2(20) NOT NULL,
+	mem_tel varchar2(20),
 	mem_location varchar2(50),
 	mem_recentLocation varchar2(50),
 	mem_logtime DATE DEFAULT SYSDATE NOT NULL,
@@ -27,3 +27,15 @@ alter table members add mem_kakao number;
 alter table members add mem_agree varchar(20);--'on'/null
 
 alter table members add mem_complain number;
+
+
+
+
+
+
+
+
+
+--------아래껀 실행 안해도 됨!!!! 편하려고 임시로 만들어놓은것
+alter table members
+modify (mem_tel varchar2(20) null);

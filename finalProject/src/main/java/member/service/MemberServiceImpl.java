@@ -93,18 +93,6 @@ public class MemberServiceImpl implements MemberService, UserDetailsService {
 		System.out.println("세션 정보 : "+session.getAttribute("memId"));
 		
 	}
-//	@Override
-//	public String kakao(MemberDTO memberDTO) {
-//		//카카오로 최초 로그인 시 회원가입 시키기
-//		if(memberDAO.getData(memberDTO.getMem_id()) == null) {
-//			memberDAO.join(memberDTO); 
-//		}
-//		
-//		loadUserByUsername(memberDTO.getMem_id());
-//
-//		
-//		return "success";
-//	}
 	
 	@Override
 	public String kakao(Map<String, String> map) {

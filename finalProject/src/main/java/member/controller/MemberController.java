@@ -158,32 +158,6 @@ public class MemberController {
 		session.setAttribute("sessionEmail", memberDTO.getMem_email());
 		session.setAttribute("sessionKakao", memberDTO.getMem_kakao());
 	}
-//	- 카카오
-//	@RequestMapping(value="/kakao", method=RequestMethod.POST)
-//	@ResponseBody
-//	public String kakao(@RequestParam Map<String, String> map, HttpSession session, HttpServletRequest request) {
-//		//memberDTO에 정보 저장
-//		MemberDTO memberDTO = new MemberDTO();
-//		memberDTO.setMem_id(map.get("mem_id"));
-//		memberDTO.setMem_name(map.get("mem_name"));
-//		memberDTO.setMem_email(map.get("mem_id"));
-//		memberDTO.setEnabled(true);
-//		memberDTO.setAuthorities(Arrays.asList(new String[]{"ROLE_USER"}));
-//		
-//		//인증 객체 얻기
-//		SecurityContext securityContext = SecurityContextHolder.getContext(); 
-//		//권한 부여하기
-//		Authentication authentication = new UsernamePasswordAuthenticationToken(memberDTO.getMem_id(), memberDTO.getMem_pwd(), memberDTO.getAuthority());
-//		//로그인한 사용자 정보를 가진 객체 얻기
-//		securityContext.setAuthentication(authentication);
-//		
-//		Principal principal = request.getUserPrincipal();
-//		
-//		System.out.println("사용자 정보 : " + principal);
-//		System.out.println("권한 : " + memberDTO.getAuthority());
-//		
-//		return memberService.kakao(memberDTO);
-//	}
 //	- 카카오	
 	@RequestMapping(value="/kakao", method=RequestMethod.POST)
 	@ResponseBody
