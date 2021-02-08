@@ -70,6 +70,10 @@ textarea {
     font-weight: bold;
     float:left;
 }
+button{
+	background-color: transparent;
+	border: transparent;
+}
 
 /* 신고하기 모달창 -----------------------------------------------------------------*/
 #modalHidden { /* .gDUZll */
@@ -206,14 +210,14 @@ textarea {
     color: rgb(136, 136, 136);
 }
 /* 기타사유_textarea div 부분 */
-.contetnListTextarea {
+.contentListTextarea {
    width: 100%;
     padding: 10px 0px;
     display: flex;
     flex-direction: column;
     align-items: flex-end;   
 }
-.contetnListTextarea textarea {
+.contentListTextarea textarea {
    width: 100%;
     height: 80px;
     resize: none;
@@ -221,7 +225,7 @@ textarea {
     margin-bottom: 10px;
     border: 1px solid rgb(238, 238, 238);   
 }
-.contetnListTextarea button {
+.contentListTextarea button {
    border: 1px solid rgb(238, 238, 238);
     height: 28px;
     display: flex;
@@ -265,7 +269,7 @@ textarea {
     padding: 0px 20px;
     overflow: hidden;
     transition: height 0.3s ease-out 0s;
-    height: 150px;
+    height: 180px;
 }
 .singoContentOtherOpen {
    background: rgb(249, 249, 249);

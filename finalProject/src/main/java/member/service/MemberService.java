@@ -39,6 +39,8 @@ public interface MemberService {
 
 	public int distinguishKakao(String mem_id);
 
+	public void complain(Map<String, String> map);
+
 	
 
 }

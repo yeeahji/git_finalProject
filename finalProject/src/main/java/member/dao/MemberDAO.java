@@ -38,4 +38,6 @@ public interface MemberDAO {
 
 	public MemberDTO sessionLogin(Map<String, String> map);
 
+	public void complain(Map<String, String> map);
+
 }

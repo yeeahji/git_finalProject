@@ -97,6 +97,7 @@ $(document).ready(function(){
 	});//트리거!!!!!!
 	$('#triggerList').trigger('change');//댓글 출력
 	
+
 	
 	//더보기 버튼 이후
 	$.ajax({
@@ -247,7 +248,7 @@ $(document).ready(function(){
 				console.log(err);
 			}
 	});//end더보기버
-	
+		
 	//댓글쓰기
 	$('.textarea_input').on('click', '#commentBtn', function(){
 //	$('#commentBtn').click(function(){
@@ -309,39 +310,61 @@ $(document).ready(function(){
 		});//--end 답글쓰기
 	
 		//글 신고하기
-		
+		var check=false;
 		$('.section2-5-1').on('click', '.singoBtn', function(){
-			 $("#modalHidden").attr('id','modalDisplay'); 
-			   $('.contentList>button').mouseenter(function(){
-			      $(this).css('text-decoration', 'underline');
+			check=false;
+			$("#modalHidden").attr('id','modalDisplay'); //신고 모달창이 뜬다.
+			
+			 $('.contentList>button').mouseenter(function(){
+				 $(this).css('text-decoration', 'underline');
+				 $(this).mouseleave(function(){
+			        $(this).css('text-decoration', 'none');
+				 });
+				 //신고 접수
+				 $(this).click(function(){
+					if(check) return;
+					check = true;
+					
+			        console.log($(this).text()); //Q. 왜 여러번 뜨는?ㅋ''
+			        $.ajax({
+						type : 'post',
+						url : '/market/member/complain',
+						data: {reporter_id: $('#sessionId'),
+								complain_content : $(this).text(),
+								board_seq : $('#board_seq'),
+								mem_id: $('#mem_id')
+							},
+						success: function(){
+							
+						},error: function(err){
+							console.log(err)
+						}
+			        
+			        });
+			        
+			     });
+				 check=false;
+			     
+		      
+			 });//mouseenter
+		   
+		   // 신고 카테고리 펼치기
+			 $('#singoModalBottom').on("click", '.singoTitle > .titleBtn', function(){
+			     $(this).parent().attr('class','singoTitleOpen'); //$(this).parent() == $(".singoTitle")
 			      
-			      $(this).click(function(){
-			         alert("신고가 접수되었습니다.(test)"); //Q. 왜 여러번 뜨는?ㅋ
-			      });
-			      
-			      $(this).mouseleave(function(){
-			         $(this).css('text-decoration', 'none');
-			      });
-			      
-			   });
-			   
-			   // 신고 카테고리 펼치기
-			   $('#singoModalBottom').on("click", '.singoTitle > .titleBtn', function(){
-			      $(this).parent().attr('class','singoTitleOpen'); //$(this).parent() == $(".singoTitle")
-			      
-			      var className = $(this).parent().next().attr('class');
-			      // height=180;인 애만 따로 처리
-			      if(className == 'singoContentOther'){
-			         $(this).parent().next().attr('class','singoContentOtherOpen');
-			      }else if(className == 'singoContent') {
-			         $(this).parent().next().attr('class','singoContentOpen'); 
-			      }
+			     var className = $(this).parent().next().attr('class');
+			     // height=180;인 애만 따로 처리
+			     if(className == 'singoContentOther'){
+			    	 $(this).parent().next().attr('class','singoContentOtherOpen');
+			     }else if(className == 'singoContent') {
+			    	 $(this).parent().next().attr('class','singoContentOpen'); 
+			     }
 			      
 			      // 닫히는 방법 2가지
 			      // (1) 펼친 상태에서 다른 카테고리 버튼 눌리면 알아서 접히기
 			      
 			      // (2) 닫기 (다시 클릭)
-			      $('#singoModalBottom').on("click", '.singoTitleOpen > .titleBtn', function(){
+			     $('#singoModalBottom').on("click", '.singoTitleOpen > .titleBtn', function(){
 			         $(this).parent().attr('class','singoTitle');
 			         
 			         if(className == 'singoContentOtherOpen' || className =='singoContentOther'){
@@ -349,8 +372,8 @@ $(document).ready(function(){
 			         }else if(className == 'singoContentOpen' || className=='singoContent'){
 			            $(this).parent().next().attr('class', 'singoContent');            
 			         }
-			      });//(2)닫기
-			   });//신고 카테고리 펼치기
+			     });//(2)닫기
+			 });//신고 카테고리 펼치기
 			   
 			   // 모달 창 닫기 modalCloseBtn
 			   $('.singoModalWrap').on("click", '.modalCloseBtn', function(){
@@ -366,8 +389,19 @@ $(document).ready(function(){
 			      }
 			      $("#modalDisplay").attr('id','modalHidden'); 
 			   });
-			
+			   
+			   
+			 //글자수 카운팅
+				$('#complainReason').keyup(function(){
+					let content = $(this).val();
+					$('#counter').html(content.length);
+					
+					if(content.length>200){
+						$('#textCounterDiv').text("입력 가능한 글자 수를 초과했습니다.");
+						$(this).val(content.substring(0, 200)); //글자수 초과하면 안써지게
+					}
+				});
 		});//--end 글 신고하기
 			
-		
 });
+
