@@ -1,6 +1,8 @@
 @charset "UTF-8";
 
 .dropmenu {
+	height : 100%;
+	width : 100%;
 	display : none;
 	position: relative;
 	top: 5px;
@@ -21,6 +23,7 @@
 	padding: 0px;
 }
 
+
 .dropmenu li a {
 	font-size: 20px;
 	display: block;
@@ -39,7 +42,9 @@
 	background: white;
 	position: relative;
 	width: 250px;
+	overflow-y : auto;
 	background: white;
+	height: 430px;
 }
 
 .dropmenu li:hover ul {
@@ -58,7 +63,9 @@
 	background: none;
 }
 
-.dropmenu li ul  p {
+.dropmenu li p {
+	border: 1px solid #eee;
+	background : white;
 	padding: 12px 30px 12px 30px;
 	display: block;
 	font-size: 14px;
@@ -76,12 +83,22 @@
 	text-align: left;
 }
 
-.dropmenu li ul a:hover, .dropmenu li ul li:hover a {
+.dropmenu ul li:first-child a.active
+{
 	border: 0px;
 	color: #ffffff;
-	background: skyblue;
+	background: #0d47a1;
 	text-decoration: none;
 }
+
+
+.dropmenu ul li:nth-child(2) a:hover
+{
+	color: #0d47a1;
+	text-decoration: underline;
+}
+
+
 
 .dropmenu p {
 	clear: left;

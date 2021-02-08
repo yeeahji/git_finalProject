@@ -45,25 +45,25 @@
 		<div class="dropmenu">
 			<ul>
 				<li id="category_1st">
+					<p>전체 카테고리</p>
 					<ul>
-						<p>전체 카테고리</p>
-						<a href="/market/index/cateDisplay?cate_code=100" id="100">여성의류</a>
-						<a href="/market/index/cateDisplay?cate_code=200" id="200">남성의류</a>
-						<a href="/market/index/cateDisplay?cate_code=300" id="300">패션잡화</a>
-						<a href="/market/index/cateDisplay?cate_code=400" id="400">생활/가구/식품</a>
-						<a href="/market/index/cateDisplay?cate_code=500" id="500">디지털/가전</a>
-						<a href="/market/index/cateDisplay?cate_code=600" id="600">유아동/출산</a>
-						<a href="/market/index/cateDisplay?cate_code=700" id="700">도서/취미/애완</a>
-						<a href="/market/index/cateDisplay?cate_code=800" id="800">스포츠/레저</a>
-						<a href="/market/index/cateDisplay?cate_code=900" id="900">스타굿즈</a>
-						<a href="/market/index/cateDisplay?cate_code=1000" id="1000">뷰티/미용</a>
-						<a href="/market/index/cateDisplay?cate_code=1100" id="1100">차량/오토바이</a>
-						<a href="/market/index/cateDisplay?cate_code=1200" id="1200">기타</a>
+						<a href="/market/index/cateDisplay?cate_code=100" data-category="100">여성의류</a>
+						<a href="/market/index/cateDisplay?cate_code=200" data-category="200">남성의류</a>
+						<a href="/market/index/cateDisplay?cate_code=300" data-category="300">패션잡화</a>
+						<a href="/market/index/cateDisplay?cate_code=400" data-category="400">생활/가구/식품</a>
+						<a href="/market/index/cateDisplay?cate_code=500" data-category="500">디지털/가전</a>
+						<a href="/market/index/cateDisplay?cate_code=600" data-category="600">유아동/출산</a>
+						<a href="/market/index/cateDisplay?cate_code=700" data-category="700">도서/취미/애완</a>
+						<a href="/market/index/cateDisplay?cate_code=800" data-category="800">스포츠/레저</a>
+						<a href="/market/index/cateDisplay?cate_code=900" data-category="900">스타굿즈</a>
+						<a href="/market/index/cateDisplay?cate_code=1000" data-category="1000">뷰티/미용</a>
+						<a href="/market/index/cateDisplay?cate_code=1100" data-category="1100">차량/오토바이</a>
+						<a href="/market/index/cateDisplay?cate_code=1200" data-category="1200">기타</a>
 					</ul>
 				</li>
 				<li id="category_2st">
+					<p>세부 카테고리</p>
 					<ul>
-						<p>세부 카테고리</p>
 						<a href="/market/index/cateDisplay?cate_code=101">패딩/점퍼</a>
 						<a href="/market/index/cateDisplay?cate_code=102">코트</a>
 						<a href="/market/index/cateDisplay?cate_code=103">자켓/야상</a>
@@ -83,9 +83,9 @@
 						<a href="/market/index/cateDisplay?cate_code=117">언더웨어/속옷</a>
 						<a href="/market/index/cateDisplay?cate_code=118">비즈니스 정장</a>
 						<a href="/market/index/cateDisplay?cate_code=119">빅사이즈</a>
-					</ul>	
+					</ul>
 				</li>
-				
+
 			</ul>
 			</ul>
 		</div>

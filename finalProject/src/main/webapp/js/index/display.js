@@ -22,7 +22,7 @@ var page = 0;
 // list 출력
 $(document).ready(function() {
 
-	console.log(" ready ! ")
+	//console.log(" ready ! ")
 	getList(page);
 });
 
@@ -33,8 +33,8 @@ function addPage() {
 
 function getList(page) {
 
-	console.log('getList ')
-	console.log('page :' + page)
+	//console.log('getList ')
+	//console.log('page :' + page)
 
 	$.ajax({
 		type : 'post',

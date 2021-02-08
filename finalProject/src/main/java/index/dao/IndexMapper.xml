@@ -188,5 +188,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		WHERE 
 		p.cate_code=#{cate_code}
 	</select>
+	
+	<select id="categoryList" resultType="category">
+		SELECT 
+			cate_code,
+			cate_name, 
+			cate_parent
+		 FROM category 
+	</select>
 
 </mapper>

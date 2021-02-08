@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 
 import index.dao.IndexDAO;
+import product.bean.CategoryDTO;
 import product.bean.ProductDTO;
 
 @Service
@@ -124,5 +125,10 @@ public class IndexServiceImpl implements IndexService {
 		model.addAttribute("cate_code", cate_code);
 		model.addAttribute("order", order);
 		
+	}
+
+	@Override
+	public List<CategoryDTO> categoryList() {
+		return indexDAO.categoryList();	
 	}
 }
