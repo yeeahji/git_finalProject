@@ -47,37 +47,46 @@
 				<li id="category_1st">
 					<ul>
 						<p>전체 카테고리</p>
-						<a href="/market/index/cateDisplay?cate_code=100">여성의류</a>
-						<a href="/market/index/cateDisplay?cate_code=200">남성의류</a>
-						<a href="/market/index/cateDisplay?cate_code=300">패션잡화</a>
-						<a href="/market/index/cateDisplay?cate_code=400">생활/가구/식품</a>
-						<a href="/market/index/cateDisplay?cate_code=500">디지털/가전</a>
-						<a href="/market/index/cateDisplay?cate_code=600">유아동/출산</a>
-						<a href="/market/index/cateDisplay?cate_code=700">도서/취미/애완</a>
-						<a href="/market/index/cateDisplay?cate_code=800">스포츠/레저</a>
-						<a href="/market/index/cateDisplay?cate_code=900">스타굿즈</a>
-						<a href="/market/index/cateDisplay?cate_code=1000">뷰티/미용</a>
-						<a href="/market/index/cateDisplay?cate_code=1100">차량/오토바이</a>
-						<a href="/market/index/cateDisplay?cate_code=1200">기타</a>
+						<a href="/market/index/cateDisplay?cate_code=100" id="100">여성의류</a>
+						<a href="/market/index/cateDisplay?cate_code=200" id="200">남성의류</a>
+						<a href="/market/index/cateDisplay?cate_code=300" id="300">패션잡화</a>
+						<a href="/market/index/cateDisplay?cate_code=400" id="400">생활/가구/식품</a>
+						<a href="/market/index/cateDisplay?cate_code=500" id="500">디지털/가전</a>
+						<a href="/market/index/cateDisplay?cate_code=600" id="600">유아동/출산</a>
+						<a href="/market/index/cateDisplay?cate_code=700" id="700">도서/취미/애완</a>
+						<a href="/market/index/cateDisplay?cate_code=800" id="800">스포츠/레저</a>
+						<a href="/market/index/cateDisplay?cate_code=900" id="900">스타굿즈</a>
+						<a href="/market/index/cateDisplay?cate_code=1000" id="1000">뷰티/미용</a>
+						<a href="/market/index/cateDisplay?cate_code=1100" id="1100">차량/오토바이</a>
+						<a href="/market/index/cateDisplay?cate_code=1200" id="1200">기타</a>
 					</ul>
 				</li>
 				<li id="category_2st">
 					<ul>
-						<p>여성의류</p>
-						<a href="/market/index/cateDisplay?cate_code=100">원피스</a>
-						<a href="/market/index/cateDisplay?cate_code=200">치마</a>
-						<a href="/market/index/cateDisplay?cate_code=300">자켓</a>
-						<a href="/market/index/cateDisplay?cate_code=400">생활/가구/식품</a>
-						<a href="/market/index/cateDisplay?cate_code=500">디지털/가전</a>
-						<a href="/market/index/cateDisplay?cate_code=600">유아동/출산</a>
-						<a href="/market/index/cateDisplay?cate_code=700">도서/취미/애완</a>
-						<a href="/market/index/cateDisplay?cate_code=800">스포츠/레저</a>
-						<a href="/market/index/cateDisplay?cate_code=900">스타굿즈</a>
-						<a href="/market/index/cateDisplay?cate_code=1000">뷰티/미용</a>
-						<a href="/market/index/cateDisplay?cate_code=1100">차량/오토바이</a>
-						<a href="/market/index/cateDisplay?cate_code=1200">기타</a>
-					</ul>
+						<p>세부 카테고리</p>
+						<a href="/market/index/cateDisplay?cate_code=101">패딩/점퍼</a>
+						<a href="/market/index/cateDisplay?cate_code=102">코트</a>
+						<a href="/market/index/cateDisplay?cate_code=103">자켓/야상</a>
+						<a href="/market/index/cateDisplay?cate_code=104">조끼/베스트</a>
+						<a href="/market/index/cateDisplay?cate_code=105">니트/스웨터</a>
+						<a href="/market/index/cateDisplay?cate_code=106">맨투맨/후드티</a>
+						<a href="/market/index/cateDisplay?cate_code=107">가디건</a>
+						<a href="/market/index/cateDisplay?cate_code=108">원피스</a>
+						<a href="/market/index/cateDisplay?cate_code=109">블라우스</a>
+						<a href="/market/index/cateDisplay?cate_code=110">셔츠/남방</a>
+						<a href="/market/index/cateDisplay?cate_code=111">긴팔 티셔츠</a>
+						<a href="/market/index/cateDisplay?cate_code=112">반팔 티셔츠</a>
+						<a href="/market/index/cateDisplay?cate_code=113">면/캐주얼 바지</a>
+						<a href="/market/index/cateDisplay?cate_code=114">청바지</a>
+						<a href="/market/index/cateDisplay?cate_code=115">반바지</a>
+						<a href="/market/index/cateDisplay?cate_code=116">트레이닝/운동복</a>
+						<a href="/market/index/cateDisplay?cate_code=117">언더웨어/속옷</a>
+						<a href="/market/index/cateDisplay?cate_code=118">비즈니스 정장</a>
+						<a href="/market/index/cateDisplay?cate_code=119">빅사이즈</a>
+					</ul>	
 				</li>
+				
+			</ul>
 			</ul>
 		</div>
 

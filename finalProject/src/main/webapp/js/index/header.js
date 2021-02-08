@@ -25,7 +25,7 @@ $(".dropmenu li").first().hover(function() {
 
 // 첫번째 카테고리 항목 마우스 오버 이벤트
 $(".dropmenu ul > li > ul >a").hover(function() {
-	console.log(this)
+	console.log(this.id)
 	// 카테고리 항목을 가져와서
 	// 두번째 카테고리 항목 모두 제거 후
 	// 다시 생성 해준다.
