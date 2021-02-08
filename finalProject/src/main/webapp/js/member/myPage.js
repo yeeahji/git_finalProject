@@ -1,32 +1,14 @@
 
 $(document).ready(function(){
-	//삭제
-//	$('#withdrawBtn').click(function(){
-//		if(confirm("회원정보를 탈퇴하면, 모든 기록이 사라집니다. 정말 탈퇴하시겠습니까?")){
-//			$.ajax({
-//				type : 'post',
-//				url : '/market/member/withdrawForm',
-////	 			data :, //???,
-//				success : function(){
-//					alert("회원정보를 성공적으로 삭제했습니다.");
-//					location.href="/market/index.jsp";
-//				}, error :  function(request, err){
-//					console.log(request.status + "\n message : " +request.responseText +"\n err:");
-//					alert(err);
-//				}
-//			});
-//		}else
-//			return;
-//	});
-	
 	//내 게시글 확인
-	$('#myboardBtn').click(function(){
-		location.href="/market/board/list" //위치 이동만 하고 아래 getBoardSearch ajax 작업 x. alert이 뜨는데... alert이 먼저 뜨고 위치 이동으한다.
+	
 //		$.ajax({
 //			type : 'get',
 //			url : '/market/board/list',
 //			dataType: 'html',
 //			success: function(){
+//				
+//			alert("xxxx");
 				$.ajax({
 					type : 'post',
 					url : '/market/board/getBoardSearch',
@@ -84,9 +66,9 @@ $(document).ready(function(){
 //				console.log("err"+err);
 //			}
 //			
-//		});
+//		});//ajax
 		
 
-	});
+//	});
 	
 });

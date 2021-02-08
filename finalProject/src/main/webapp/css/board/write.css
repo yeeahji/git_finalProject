@@ -36,7 +36,6 @@ element.style {
     padding: 11px 12px 10px;
     border: 1px solid #ebecef;
     box-sizing: border-box;
-    overflow: hidden;
     resize: none;
     word-break: break-all;
     font-size: 15px;
@@ -89,4 +88,22 @@ textarea {
     font-size: 10pt;
     font-weight: bold;
     float:left;
+}
+
+
+input[type=file]{
+	
+}
+input[type=button]{
+	background-color: #0a58ca;
+        border : 0px;
+        width : 365px;
+        height: 60px;
+        color: white;
+        font-weight: bold;
+        font-size: 14pt;
+}
+input[type=button]:hover{
+	background: #0d47a1;
+	
 }

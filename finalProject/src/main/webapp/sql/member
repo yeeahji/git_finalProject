@@ -1,5 +1,5 @@
 //테이블 생성 순서
-members, category -> product, store -> review, purchase, wish -> complain
+members, category -> product, store, boards -> review, purchase, wish, comments -> complain
 
 //테이블 생성
 CREATE TABLE members(
@@ -23,4 +23,6 @@ CREATE TABLE members(
 
 alter table members add mem_kakao number;
 
-alter table members add mem_agree varchar(20);
+alter table members add mem_agree varchar(20);--'on'/null
+
+alter table members add mem_complain number;

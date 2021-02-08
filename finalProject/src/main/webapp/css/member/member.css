@@ -1,74 +1,82 @@
 @charset "UTF-8";
 
 input[type=text], input[type=password], input[type=tel]{
-        border : 0px;
-        height : 30px;
-        margin : 5px;
-        border-bottom: rgba(136, 136, 136, 0.5) 1px solid;
-        font-size: 12pt;
-    }
-    .caution{
-        color : rgba(153, 0, 33, 0.781);
-        border : 1px;
-        font-size: 10pt;
-        font-weight: bold;
-    }
-    #title{
-        font-size : 25pt;
-        color : #0a58ca;
-    }
-    input[type=button]{
-        height: 30px;
-        background-color: #0a58ca;
-        border : 0px;
-        width : 120px;
-        color: white;
-        font-weight: bold;
-    }
-    fieldset{
-        font-size:10pt;
-    }
-    
-   
-    #agreement{
-        color: black;
-        font-weight: bold;
-        font-size: 12pt;
-    }  
-    
-/*     ========================   */
-    #joinBtn, #loginBtn, #updateBtn{
-        background-color: #0a58ca;
-        border : 0px;
-        width : 365px;
-        height: 60px;
-        color: white;
-        font-weight: bold;
-        font-size: 14pt;
-    }
-    #chooseIdBtn, #choosePwdBtn{
-        background-color: #0a58ca;
-        border : 0px;
-        width : 400px;
-        height: 70px;
-        color: white;
-        font-weight: bold;
-        font-size: 14pt;
-    }
-    span{
-        font-size: 10pt;
-    }
-    a{
-        font-size: 10pt;
-        text-decoration: none;
-        color:black;
-    }
+    border : 0px;
+    height : 30px;
+    margin : 5px;
+    border-bottom: rgba(136, 136, 136, 0.5) 1px solid;
+    font-size: 12pt;
+}
+input[type=button]:hover{
+	background: #0d47a1;
+	
+}input[type=submit]:hover{
+	background: #0d47a1;
+	
+}
 
-    #tel1, #sido{
-    	height: 50px;
-    	font-size: 14pt;
-    	border: none;
-    }
+.caution{
+    color : rgba(153, 0, 33, 0.781);
+    border : 1px;
+    font-size: 10pt;
+    font-weight: bold;
+}
+#title{
+    font-size : 25pt;
+    color : #0a58ca;
+}
+input[type=button]{
+    height: 30px;
+    background-color: #0a58ca;
+    border : 0px;
+    width : 120px;
+    color: white;
+    font-weight: bold;
+}
+fieldset{
+    font-size:10pt;
+}
+
+
+#agreement{
+    color: black;
+    font-weight: bold;
+    font-size: 12pt;
+}  
+
+/*     ========================   */
+#joinBtn, #loginBtn, #updateBtn{
+    background-color: #0a58ca;
+    border : 0px;
+    width : 365px;
+    height: 60px;
+    color: white;
+    font-weight: bold;
+    font-size: 14pt;
+}
+#chooseIdBtn, #choosePwdBtn{
+    background-color: #0a58ca;
+    border : 0px;
+    width : 400px;
+    height: 70px;
+    color: white;
+    font-weight: bold;
+    font-size: 14pt;
+}
+span{
+    font-size: 10pt;
+}
+a{
+    font-size: 10pt;
+    text-decoration: none;
+    color:black;
+}
+
+#tel1, #sido{
+	height: 50px;
+	font-size: 14pt;
+	border: none;
+}
 /* 로고 이미지 */
 .logo_full{
 	width: 350px;

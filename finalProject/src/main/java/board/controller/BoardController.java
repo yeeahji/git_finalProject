@@ -35,15 +35,20 @@ public class BoardController {
 	
 	public String sessionId(HttpSession session) {
 		String sessionId = null;
-		int sessionKakao=Integer.parseInt(session.getAttribute("sessionKakao").toString());
-		System.out.println("sessionKakao:"+sessionKakao);
-//
-		if(sessionKakao==1) {//카카오 로그인 시
-			sessionId = (String) session.getAttribute("sessionEmail");
-		}else if(sessionKakao==0){
-			sessionId = (String) session.getAttribute("sessionId");
+			
+		//로그인 안했을때
+		if(session.getAttribute("sessionKakao")==null) {
+			sessionId="none";
+		}else {//로그인했을때
+			int sessionKakao=Integer.parseInt(session.getAttribute("sessionKakao").toString());
+			System.out.println("sessionKakao:"+sessionKakao);
+			if(sessionKakao==1) {//카카오 로그인 시
+				sessionId = (String) session.getAttribute("sessionEmail");
+			}else if(sessionKakao==0){
+				sessionId = (String) session.getAttribute("sessionId");
+			}
 		}
-
+		
 		return sessionId;
 	}
 	
@@ -115,6 +120,12 @@ public class BoardController {
 	public void write(@RequestParam Map<String, String> map, HttpSession session) {
 		boardService.write(map);//subject, content 담겨있음
 	}
+	
+	
+	
+	
+	
+	
 //	[글 보기]===================================================================================
 //	- 글보기 폼으로 이동
 	@RequestMapping(value="/articleForm", method=RequestMethod.GET)

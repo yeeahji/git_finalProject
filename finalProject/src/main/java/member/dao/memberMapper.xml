@@ -20,7 +20,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  									#{mem_tel}, 
  									'', '',	
  									sysdate,
- 									1, 'ROLE_USER', 0, #{mem_agree})
+ 									1, 'ROLE_USER', 0, #{mem_agree}, 0)
  	</insert> 
 <!-- ▶ 아이디 중복 체크 / 회원정보수정용 회원 데이터 전체 출력  -->
  	<select id="getData" parameterType="String" resultType="member">

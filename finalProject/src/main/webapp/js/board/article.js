@@ -255,8 +255,8 @@ $(document).ready(function(){
 			$('#commentAreaDiv').text("댓글을 입력하세요");
 		}
 		//세션만료로 인해 로그아웃되었을때
-		else if ($('#memId').val()==''){
-			$('#loginModalHidden').css('display','flex');
+		else if ($('#sessionId').val()=='' || $('#sessionId').val()=='none'){
+			location.href='/market/member/loginForm';
 		}else{
 			$.ajax({
 				type : 'post',

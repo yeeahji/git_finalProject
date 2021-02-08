@@ -28,8 +28,13 @@
   			<div id="subjectAreaDiv" class="caution"></div>
   			<br>
   			<textarea placeholder="내용을 입력해주세요." class="textarea_input" id="contentArea" style="height: 300px;"></textarea>
+  			
+  			
+  			<input type = "file" name = "image[]" id = "img3" accept ="image/*" multiple>
+  			<br>
   			<div id="contentAreaDiv" class="caution"></div>
-  			</div></div>
+  			<br><br>
+  	</div></div>
   			<div align="center">
   			<sec:authentication property="principal" var="member"/> <!-- 사용자 정보 가져오기 -->
   			<!-- 비회원 (세션 시간 만료)-->
@@ -40,6 +45,7 @@
 			<sec:authorize access="isAuthenticated()"> 
 			<input value="등록" type="button" id="writeBtn">
 			</sec:authorize>
+			<br><br><br>
   			</div>
   			
 		</div><!-- section2-5-1 -->

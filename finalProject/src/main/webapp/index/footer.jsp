@@ -29,7 +29,7 @@
 	<div class="footer-logo">
 		<img src="/market/image/index/fleamarket.png" style="height: 25px;"
 			alt="로고들어갈 곳">
-		<div class="intro">누구나, 무엇이든 쉽고 편하고 안전하게 거래하는 세상을 꿈꾸고 있습니다.</div>
+		<div class="intro">환경과 나눔이 공존하는 곳, 아나바다 마켓</div>
 		<div class="foot-content">
 			<div class="">
 				대표이사: 이예지 &nbsp;|&nbsp; 개인정보보호담당자: 김이슬 &nbsp;|&nbsp; 사업자등록정보:
@@ -43,17 +43,17 @@
 						12~13시
 					</p>
 				</div>
-				고객센터 문의 help@bunjang.co.kr &nbsp;|&nbsp; 제휴문의 partner@bunjang.co.kr<br>호스팅서비스
+				고객센터 문의 help@anabada.co.kr &nbsp;|&nbsp; 제휴문의 partner@anabada.co.kr<br>호스팅서비스
 				제공자: Amazon Web Services (AWS)<br> <br>“아나바다_컨시어지” 상점의
 				판매상품을 제외한 모든 상품들에 대하여, 아나바다㈜는 통신판매중개자로서 중고거래마켓 아나바다의 거래 당사자가 아니며,
 				입점판매자가 등록한 상품정보 및 거래에 대해 책임을 지지 않습니다.<br> <br> <b>우리은행
 					채무지급보증 안내</b><br>아나바다(주)는 “아나바다_컨시어지” 상점이 판매한 상품에 한해, 고객님이 현금 결제한
 				금액에 대해 우리은행과 채무지급보증 계약을 체결하여 안전거래를 보장하고 있습니다.<br> <a
-					href="https://terms.bunjang.co.kr/terms/wooriguarantee.html"
+					href="https://terms.anabada.co.kr/terms/wooriguarantee.html"
 					target="_blank">서비스 가입사실 확인</a>
 			</div>
 			<div class="foot-copy">
-				<div class="">Copyright ⓒ Bungaejangter Inc. All rights
+				<div class="">Copyright ⓒ AnabadaMarket Inc. All rights
 					reserved.</div>
 			</div>
 		</div>

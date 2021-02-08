@@ -6,7 +6,6 @@
 <form name ="loginForm" action="${pageContext.request.contextPath}/member/login" method="post">
 <!-- <form name ="loginForm"> -->
     <p id ="title" name = "title" align ="center"><strong>로그인</strong></p>
-    <hr>
     <table align= "center">
         <tr>
             <td>
@@ -25,9 +24,10 @@
     </tr>
     <tr>
         <td align= 'center'>
-            <input type="submit" name="loginBtn" id="loginBtn" value="로그인">
+            <input type="submit" name="loginBtn" id="loginBtn" value="로그인"><br>
         </td>
     </tr>
+    <tr></tr>
     <tr>
         <td align= 'center'>
 	        <a id="kakao-login-btn" href="javascript:kakaoLogin();">
