@@ -114,6 +114,22 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  	</select>
  	
  	
+<!--  	신고하기  -->
+	<insert id="complain" parameterType="java.util.Map">
+		begin
+			insert into complain values(#{MEM_ID}, #{REPORTER_ID}
+										,complain_seq.nextval
+										, #{product_seq}
+										, #{board_seq}
+										, #{review_seq}
+										, #{comment_seq}
+										, #{complain_content}
+										, sysdate
+ 									);
+			update SET members mem_complain = (mem_complain+1);
+		end;
+	</insert>
+ 	
 </mapper>
 
 

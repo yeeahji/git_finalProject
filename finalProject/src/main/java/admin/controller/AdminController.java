@@ -73,6 +73,11 @@ public class AdminController {
 	public String memberQna() {
 		return "/admin/adminPage/memberQna";
 	}
+	//고객상담관리
+	@RequestMapping(value="/complainList", method=RequestMethod.GET)
+	public String complainList() {
+		return "/admin/adminPage/complainList";
+	}
 	
 	
 	
@@ -174,11 +179,25 @@ public class AdminController {
 	mav.addObject("adminStoreBP", adminStoreBP);
 	mav.setViewName("jsonView");
 	return mav;
-}
+	}
 		
 
-	
-	
+	//신고 내역 출력
+//	@RequestMapping(value="/getComplainList", method=RequestMethod.POST)
+//	public ModelAndView getComplainList(@RequestParam(required=false, defaultValue="1") String pg,
+//				  						 @RequestParam(required=false, defaultValue="20") String viewNum) {
+//		List<StoreDTO> complainList = adminService.getComplainList(pg,viewNum);
+//		//페이징처리
+//		AdminBoardPaging adminStoreBP = adminService.StoreBP(pg,viewNum);
+//				
+//		ModelAndView mav = new ModelAndView();
+//		mav.addObject("complainList", complainList);
+//		mav.addObject("pg", pg);
+//		mav.addObject("viewNum", viewNum);
+//		mav.addObject("adminStoreBP", adminStoreBP);
+//		mav.setViewName("jsonView");
+//		return mav;
+//	}
 	
 	
 }

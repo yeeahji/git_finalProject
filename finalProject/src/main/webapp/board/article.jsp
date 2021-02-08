@@ -47,9 +47,9 @@
 			<input name="board_seq" id="board_seq" type="hidden" value="${seq}">
 			<textarea id="comment_content" name="comment_content" placeholder="댓글을 남겨보세요" class="textarea_input" ></textarea>
 			<input value="등록" type="button" id="commentBtn">
-			
+			<div id="commentAreaDiv" class="caution"></div><br>
 		</div>
-		<div id="commentAreaDiv" class="caution"></div><br>
+		
 		</form>
 		
 <hr><!-- 하단 버튼 -->
@@ -75,7 +75,7 @@
 </div>
 
 <!-- ************************ 신고하기 모달창 ************************ -->
-   <div id="modalHidden">
+<div id="modalHidden">
       <div class="singoModalWrap">
          <div id="singoModalTop">
             <div class="title">신고하기</div>
@@ -89,7 +89,7 @@
             <!-- 카테고리 (1) -->
             <div class="singoCategory">
                <div class="singoTitle">
-                  <span>광고</span>
+                  <span>광고(교신 및 상점홍보)</span>
                   <button type="button" class="titleBtn"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABoAAAAQCAYAAAAI0W+oAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAXNJREFUeNqslK1Pw1AUxV9fmoq5Ldl/MCSaBLkEAQkIPgxzTUABjoRMsAJmCQ4HJGAAw8yCwGFQaCyOKSpgZmIGzk1OyU1Zu7fRm/yWvtvec1777p0XRVFgjLkGZ+DFFBtzYBeEPn5uwAZYAPPgrSCTGngAVRBY/HTBNxOPoFKASYVaVWp3xegWRGoX97KDf5gE1KhxfSwelosTGkrUwRXwpjDxWFvnWjSP5CIxktcLwRPXDdCawqjFWkOtkNq/RhJDsKaa4VAVuUSDNYYa69Q0aSOJL7AI4hGfIS/0546p8akfsCOKZDfLYMCD7aiDzWrjDp8dsPbPiNiMYhncLX7fsmrVdCQjUeaz21lDb3N2egeaqeErqfsl5pK3barOnchIog3O1d/JBc9BuGTO8LqdJ+Q7HPQemOGBS2e9M7+p2nhnnIiLkbToKngGs+BA3XvlveE4Ees4I32wBD5ULmau7yLgTzCQPbAC9rk+Zc4pfgQYAOZsSsrHKCoBAAAAAElFTkSuQmCC" width="13" height="8" alt="화살표 아이콘"></button>
                </div>
                <div class="singoContent">
@@ -101,10 +101,6 @@
                   </div>
                   <div class="contentList">
                      <button type="button">타사이트,어플광고</button>
-                  </div>
-                  <div class="contentListInput">
-                     <input type="text" placeholder="기타(사유)">
-                     <button type="button">등록</button>
                   </div>
                </div>
             </div> <!-- //광고(교신 및 상점홍보) -->
@@ -119,7 +115,7 @@
                      <button type="button">명예훼손/사생활침해</button>
                   </div>
                   <div class="contentList">
-                     <button type="button">불법촬영물/음란성/성희롱</button>
+                     <button type="button">불법촬영물/음란성</button>
                   </div>
                   <div class="contentList">
                      <button type="button">언어폭력(비방, 욕설, 성희롱)</button>
@@ -127,19 +123,27 @@
                   <div class="contentList">
                      <button type="button">게시글 도배</button>
                   </div>
-                  <div class="contentListInput">
-                     <input type="text" placeholder="기타(사유)">
-                     <button type="button">등록</button>
-                  </div>
                </div>
             </div> <!-- //거래비매너(거래파기, 늦은배송) -->
            
- 
             <div class="singoCategory">
                <div class="singoTitle">
-                  <span>1:1문의하기</span>
-                  <button class="directAsk" onclick="location.href='/market/notice/qna'">1:1문의하기</button>
-                  <!-- 문의하기 링크와 연결!!!!!!!!!!!!!! -->
+                  <span>기타사유(직접입력)</span>
+                  <button type="button" class="titleBtn"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABoAAAAQCAYAAAAI0W+oAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAXNJREFUeNqslK1Pw1AUxV9fmoq5Ldl/MCSaBLkEAQkIPgxzTUABjoRMsAJmCQ4HJGAAw8yCwGFQaCyOKSpgZmIGzk1OyU1Zu7fRm/yWvtvec1777p0XRVFgjLkGZ+DFFBtzYBeEPn5uwAZYAPPgrSCTGngAVRBY/HTBNxOPoFKASYVaVWp3xegWRGoX97KDf5gE1KhxfSwelosTGkrUwRXwpjDxWFvnWjSP5CIxktcLwRPXDdCawqjFWkOtkNq/RhJDsKaa4VAVuUSDNYYa69Q0aSOJL7AI4hGfIS/0546p8akfsCOKZDfLYMCD7aiDzWrjDp8dsPbPiNiMYhncLX7fsmrVdCQjUeaz21lDb3N2egeaqeErqfsl5pK3barOnchIog3O1d/JBc9BuGTO8LqdJ+Q7HPQemOGBS2e9M7+p2nhnnIiLkbToKngGs+BA3XvlveE4Ees4I32wBD5ULmau7yLgTzCQPbAC9rk+Zc4pfgQYAOZsSsrHKCoBAAAAAElFTkSuQmCC" width="13" height="8" alt="화살표 아이콘"></button>
+               </div>
+               <div class="singoContent">
+                  <div class="contentListTextarea">
+                     <textarea id="complainReason"></textarea>
+                     <div id="textareaDiv"><span id="counter">0</span>자/200자</div>
+                     <div id="textCounterDiv" class="caution"></div>
+                     <button type="button">등록</button>
+                  </div>
+               </div>
+            </div>
+            <div class="singoCategory">
+               <div class="singoTitle" >
+                  <button style="float:right" class="directAsk"
+                  			onclick="location.href='/market/notice/qna'">1:1문의하기</button>
                </div>
                <div class="singoContent"></div>
             </div>
@@ -147,11 +151,20 @@
       </div><!-- singoModalWrap -->
    </div><!-- //modalHidden -->
 
-
-
  </body>
-  
-
-
-
 </html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

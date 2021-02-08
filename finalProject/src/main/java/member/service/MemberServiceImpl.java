@@ -183,6 +183,12 @@ public class MemberServiceImpl implements MemberService, UserDetailsService {
 		return memberDAO.distinguishKakao(mem_id);
 	}
 
+	@Override
+	public void complain(Map<String, String> map) {
+		memberDAO.complain(map);
+		
+	}
+
 	
 
 	

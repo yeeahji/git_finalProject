@@ -101,6 +101,11 @@ public class MemberDAOMybatis implements MemberDAO {
 		
 	}
 
+	@Override
+	public void complain(Map<String, String> map) {
+		sqlSession.insert("memberSQL.complain", map);
+	}
+
 	
 
 	

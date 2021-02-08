@@ -424,7 +424,15 @@ public class MemberController {
 		session.invalidate(); 
 		return new ModelAndView("redirect:/");
 	}
-//	- 
+	
+//	===========================================================================
+//	- 신고하기
+	@RequestMapping(value ="/complain", method=RequestMethod.GET)
+	public void complain(@RequestParam Map<String, String> map) {
+//		map : reporter_id(신고자), mem_id(신고당한 사람), complain_content(신고내용), ~_seq(신고항목)
+		
+		memberService.complain(map);
+	}
 	
 }
 
