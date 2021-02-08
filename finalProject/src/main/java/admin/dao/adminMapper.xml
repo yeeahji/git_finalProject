@@ -13,7 +13,7 @@
 	<select id="getTotalA" resultType="Integer">
 		select count(*) from members
 	</select>
-<!-- 조건검색 -->
+<!-- 회원조건검색 -->
 	<select id="getSearchMember" parameterType="java.util.Map" resultType="member.bean.MemberDTO">
 		<![CDATA[
 		select * from
@@ -30,11 +30,16 @@
 	<select id="getMemberView" parameterType="String" resultType="admin.bean.AdminMembersDTO">
 		select * from members join store using(mem_id) where mem_id like #{id}
 	</select>
+<!-- 판매중인물건 총개수 -->
+	<select id="totalSellProduct" parameterType="String" resultType="Integer"> 
+		select count(*) from members join product using(mem_id) where mem_id like #{id}
+	</select>
+
 
 <!-- 상점리스트출력 -->
 	<select id="getStoreList" parameterType="java.util.Map" resultType="store.bean.StoreDTO">
 		select * from(select rownum rn, tt.* from(
-		select * from store join members using(mem_id))
+		select * from store)
 		tt)where rn between #{startNum} and #{endNum}
 	</select>
 <!-- 상점리스트 총개수 -->
@@ -42,10 +47,27 @@
 		select count(*) from store join members using(mem_id)
 	</select>
 <!-- 상점 상세보기 -->	
-	<select id="getStoreView" parameterType="String" resultType="store.bean.StoreDTO">
+	<select id="getStoreView" parameterType="String" resultType="admin.bean.AdminMembersDTO">
 		select * from store join members using(mem_id) where mem_id like #{id}
 	</select>
+<!-- 상점조건검색 -->
+	<select id="getSearchStoreList" parameterType="java.util.Map" resultType="store.bean.StoreDTO">
+		<![CDATA[
+		select * from
+		(select rownum rn, tt.* from
+		(select * from store where ${searchType} like '%'||#{storeKeyword}||'%')tt
+		)where rn>=#{startNum} and rn<=#{endNum}
+		]]>
+	</select>
+<!-- 상점 조건검색 후 총개수 -->
+	<select id="getTotalD" parameterType="java.util.Map" resultType="Integer">
+		select count(*) from store where ${searchType} like '%'||#{storeKeyword}||'%'
+	</select>
 	
+	<!-- 상점상세보기_물건출력 -->	
+	<select id="getProductList" parameterType="String" resultType="product.bean.ProductDTO">
+		select * from product where mem_id like #{id}
+	</select>
 	
 	
 </mapper>

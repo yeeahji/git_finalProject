@@ -26,7 +26,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  		select * from members where mem_id = #{mem_id}
  	</select>
  	
-
 <!-- ========================================================================= -->
 <!-- ▶  로그인 / 본인 재확인-->
  	<select id="login" parameterType="java.util.Map" resultType="member">

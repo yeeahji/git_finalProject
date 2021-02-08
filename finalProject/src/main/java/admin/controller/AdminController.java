@@ -15,6 +15,7 @@ import admin.bean.AdminBoardPaging;
 import admin.bean.AdminMembersDTO;
 import admin.service.AdminService;
 import member.bean.MemberDTO;
+import product.bean.ProductDTO;
 import store.bean.StoreDTO;
 
 
@@ -39,31 +40,22 @@ public class AdminController {
 	public String memberList(@RequestParam(required=false, defaultValue="1") String pg,
 							 @RequestParam(required=false, defaultValue="20") String viewNum,
 							 Model model) {
-		System.out.println("컨트롤러= "+ pg+","+viewNum);
 		model.addAttribute("pg", pg);
 		model.addAttribute("viewNum", viewNum);
 		return "/admin/adminPage/memberList";
-	}
-	//신고된회원리스트
-	@RequestMapping(value="/reportedMemberList", method=RequestMethod.GET)
-	public String reportedMemberList() {
-		return "/admin/adminPage/reportedMemberList";
 	}
 	//전체상품리스트
 	@RequestMapping(value="/productList", method=RequestMethod.GET)
 	public String productList() {
 		return "/admin/adminPage/productList";
 	}
-	//신고된상품리스트
-	@RequestMapping(value="/reportedProductList", method=RequestMethod.GET)
-	public String reportedProductList() {
-		return "/admin/adminPage/reportedProductList";
-	}
-	//전체상품리스트
+	//전체상점리스트
 	@RequestMapping(value="/storeList", method=RequestMethod.GET)
 	public String storeList(@RequestParam(required=false, defaultValue="1") String pg,
+						    @RequestParam(required=false, defaultValue="20") String viewNum,
 							Model model) {
 		model.addAttribute("pg", pg);
+		model.addAttribute("viewNum", viewNum);
 		return "/admin/adminPage/storeList";
 	}
 	//게시글리스트
@@ -71,15 +63,10 @@ public class AdminController {
 	public String boardList() {
 		return "/admin/adminPage/boardList";
 	}
-	//일대일문의리스트
-	@RequestMapping(value="/memberQnaList", method=RequestMethod.GET)
-	public String memberQnaList() {
-		return "/admin/adminPage/memberQnaList";
-	}
 	//공지사항등록
-	@RequestMapping(value="/noticeWrite", method=RequestMethod.GET)
+	@RequestMapping(value="/noticeMG", method=RequestMethod.GET)
 	public String noticeWrite() {
-		return "/admin/adminPage/noticeWrite";
+		return "/admin/adminPage/noticeMG";
 	}
 	
 	
@@ -88,21 +75,23 @@ public class AdminController {
 	@RequestMapping(value="/getMemberList", method=RequestMethod.GET)
 	public ModelAndView getMemberList(@RequestParam(required=false, defaultValue="1") String pg,
 									  @RequestParam(required=false, defaultValue="20") String viewNum) {
-		System.out.println("컨트롤러, list로 들어가는 viewNum = "+viewNum);
 		List<MemberDTO> list = adminService.getMemberList(pg,viewNum);
 		//페이징처리
-		System.out.println("컨트롤러, 페이징으로 들어가는 viewNum = "+viewNum);
 		AdminBoardPaging adminBoardPaging = adminService.boardPaging(pg,viewNum);
-				
+		//전체회원수
+		int totalMember = adminService.totalMember();
+
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("list", list);
 		mav.addObject("pg", pg);
 		mav.addObject("viewNum", viewNum);
 		mav.addObject("adminBoardPaging", adminBoardPaging);
+		mav.addObject("totalMember", totalMember);
 		mav.setViewName("jsonView");
 		return mav;
 	}
-	//회원검색
+	
+	//회원조건검색
 	@RequestMapping(value="/getSearchMember", method=RequestMethod.POST)
 		public ModelAndView getSearchMember(@RequestParam Map<String,String> map) {
 		List<MemberDTO> list = adminService.getSearchMember(map); //pg, keyword, searchType, viewNum
@@ -120,43 +109,67 @@ public class AdminController {
 	//회원정보
 	@RequestMapping(value="/memberView", method=RequestMethod.POST)
 	public ModelAndView memberView(@RequestParam String id) {	
-		
 		AdminMembersDTO adminMembersDTO= adminService.getMemberView(id);
+		//판매중인물건 총갯수
+		int totalSellProduct = adminService.totalSellProduct(id);
 		
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("adminMembersDTO", adminMembersDTO);
+		mav.addObject("totalSellProduct", totalSellProduct);
 		mav.setViewName("jsonView");
 	
 		return mav;
 	}
+	
 	
 	
 	//상점전체 출력
 	@RequestMapping(value="/getStoreList", method=RequestMethod.GET)
-	public ModelAndView getStoreList(@RequestParam(required=false, defaultValue="1") String pg) {
-		List<StoreDTO> storeList = adminService.getStoreList(pg);
+	public ModelAndView getStoreList(@RequestParam(required=false, defaultValue="1") String pg,
+			  						 @RequestParam(required=false, defaultValue="20") String viewNum) {
+		List<StoreDTO> storeList = adminService.getStoreList(pg,viewNum);
 		//페이징처리
-		AdminBoardPaging adminStoreBP = adminService.StoreBP(pg);
+		AdminBoardPaging adminStoreBP = adminService.StoreBP(pg,viewNum);
 				
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("storeList", storeList);
 		mav.addObject("pg", pg);
+		mav.addObject("viewNum", viewNum);
 		mav.addObject("adminStoreBP", adminStoreBP);
 		mav.setViewName("jsonView");
 		return mav;
 	}
-	//상점정보
-	@RequestMapping(value="/storeView", method=RequestMethod.POST)
+	//상점정보 출력
+	@RequestMapping(value="/getStoreView", method=RequestMethod.POST)
 	public ModelAndView getstoreView(@RequestParam String id) {	
-		
-		StoreDTO storeDTO= adminService.getStoreView(id);
+		AdminMembersDTO adminMembersDTO= adminService.getStoreView(id);
+		//판매중인물건 총갯수
+		int totalSellProduct = adminService.totalSellProduct(id);
+		List<ProductDTO> productList = adminService.getProductList(id);
 		
 		ModelAndView mav = new ModelAndView();
-		mav.addObject("storeDTO", storeDTO);
+		mav.addObject("adminMembersDTO",adminMembersDTO);
+		mav.addObject("productList",productList);
+		mav.addObject("totalSellProduct",totalSellProduct);
 		mav.setViewName("jsonView");
 	
 		return mav;
 	}
+	//상점조건검색
+	@RequestMapping(value="/getSearchStoreList", method=RequestMethod.POST)
+	public ModelAndView getSearchStoreList(@RequestParam Map<String,String> map) {
+	List<StoreDTO> storeList = adminService.getSearchStoreList(map); //pg, keyword, searchType, viewNum
+	
+	//페이징 처리
+	AdminBoardPaging adminStoreBP = adminService.getSearchStoreBP(map);
+	
+	ModelAndView mav = new ModelAndView();
+	mav.addObject("pg", map.get("pg"));
+	mav.addObject("storeList", storeList);
+	mav.addObject("adminStoreBP", adminStoreBP);
+	mav.setViewName("jsonView");
+	return mav;
+}
 		
 
 	

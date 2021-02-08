@@ -77,7 +77,7 @@
        <div id="layoutSidenav_content">
            <main>
                <div class="container-fluid">
-                   <h3 class="mt-4">전체 회원리스트</h3>
+                   <h3 class="mt-4">전체 회원리스트</h3> 총회원수 <span id="totalMember"></span>명
                    <hr>                  		
 <div class="row">
 	<div class="col-xl-8">
@@ -98,11 +98,11 @@
 				    </tr>
 				    <tr>
 				      <th>생년월일</th><th><span id="birthSpan"></span></th> 
-				      <th>상점이름</th><th><span id="storeSpan"></span></th>
+				      <th>상점이름</th><th><span id="store1NameSpan"></span></th>
 				    </tr>
 				    <tr>
 				      <th>e-Mail</th><th><span id="emailSpan"></span></th> 
-				      <th>등급</th><th><span id="echoSpan"></span></th>
+				      <th>등급</th><th><span id="echo1Span"></span></th>
 				    </tr>
 				    <tr>
 				    	<th rowspan="2">주소</th><th colspan="3"><span id="add1Span"></span></th>
@@ -120,7 +120,7 @@
 	    <div class="card mb-4">
 	        <div class="card-header">
 	            <i class="fas fa-chart-bar mr-1"></i>
-	           상점이름 : <span id="storeSpan"></span>
+	           상점이름 : <span id="store2NameSpan"></span>
 	        </div>
 	        <div class="card-body">
 	        	<table class="table table-bordered border-primary table-sm">
@@ -129,7 +129,7 @@
 				      <th width="30%">가입일자</th><th width="70%"><span id="logSpan"></span></th> 
 				    </tr>
 				    <tr>
-				      <th>등급</th><th width=""><span id="echoSpan"></span></th> 
+				      <th>등급</th><th><span id="echo2Span"></span></th> 
 				    </tr>
 				    <tr>
 				      <th>판매중인 물건</th><th><span id="productSellSpan"></span>개</th> 
@@ -217,9 +217,7 @@
 	<nav aria-label="Page navigation example">
 	  <ul class="pagination justify-content-center">
 	    
-		<div id="boardPagingDiv" class="paging" align="center">
-		
-		</div>
+		<div id="boardPagingDiv" class="paging" align="center"></div>
 	  
 	  </ul>
 	</nav>
