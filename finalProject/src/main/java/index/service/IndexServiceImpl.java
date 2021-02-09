@@ -105,7 +105,15 @@ public class IndexServiceImpl implements IndexService {
 		int start = (page - 1) * pageSize;
 		int end = (page) * pageSize;
 
+		String cateState="";
+		// 검색어
+		if (cate_code.substring(cate_code.length()-1, cate_code.length()).equals("0")) {
+			cateState = "p.cate_parent";
+		} else {
+			cateState = "p.cate_code";
+		}
 		
+		map.put("cateState", cateState);
 		map.put("start", start);
 		map.put("end", end);
 		map.put("order", order);

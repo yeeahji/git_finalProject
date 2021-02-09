@@ -203,7 +203,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 
 	<select id="cateCodeName" resultType="String">
-		select cate_name from category where cate_code=#{cate_code}
+		select cate_name from category where cate_parent=#{cate_code}
 	</select>
 
 </mapper>
