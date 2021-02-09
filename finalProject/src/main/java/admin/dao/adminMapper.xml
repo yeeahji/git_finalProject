@@ -64,10 +64,18 @@
 		select count(*) from store where ${searchType} like '%'||#{storeKeyword}||'%'
 	</select>
 	
-	<!-- 상점상세보기_물건출력 -->	
+<!-- 상점상세보기_물건출력 -->	
 	<select id="getProductList" parameterType="String" resultType="product.bean.ProductDTO">
-		select * from product where mem_id like #{id}
+		select * from product where mem_id like #{id} order by product_seq desc
 	</select>
+<!-- 상점목록_물품리스트에서 삭제 -->
+	<delete id="store_productDelete" parameterType="java.util.Map">
+		delete product where product_seq in
+		<foreach collection="array" item="data" index="i" open="(" close=")" separator=",">
+			<!-- ${array[i]} -->
+			#{data}
+		</foreach>
+	</delete>
 	
 	
 </mapper>

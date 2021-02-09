@@ -168,7 +168,7 @@
 				      <th width="20%">상점이름</th><th width="30%"><span id="storeNameSpan"></span></th>
 				    </tr>
 				    <tr>
-				      <th>판매등록상품수</th><th><span id="totalSellProduct1Span"></span></th> 
+				      <th>판매등록상품수</th><th><span id="total_Product1Span"></span></th> 
 				      <th>후기수</th><th><span id="repleSpan"></span></th>
 				    </tr>
 				    <tr>
@@ -188,27 +188,34 @@
 	        <div class="card-header">
 	            <i class="fas fa-chart-bar mr-1"></i>
 	           	상품정보
-	           	<button type="button" class="btn btn-secondary btn-sm" id="sale">판매중</button>
-	           	<button type="button" class="btn btn-secondary btn-sm" id="sold">판매완료</button>
+	           	<button type="button" class="btn btn-secondary btn-sm" id="all_product">전체</button>
+	           	<button type="button" class="btn btn-secondary btn-sm" id="sale_product">판매중</button>
+	           	<button type="button" class="btn btn-secondary btn-sm" id="sold_product">판매완료</button>
+	           	<button type="button" class="btn btn-danger btn-sm" id="choiceDeleteBtn">삭제</button>
 	        </div>
 	        <div class="card-body">
 	        	<table class="table table-bordered border-primary table-sm">
 				  <tbody>
 				    <tr>
-				      <th width="30%">판매중인 물건개수</th><th width="20%"><span id="totalSellProduct2Span"></span></th>
-				      <th width="30%">???</th><th width="20%"><span id="Span"></span></th>  
+				      <th width="11%">총개수</th><th width="13%"><span id="total_Product2Span"></span></th>
+				      <th width="11%">판매중</th><th width="13%"><span id="sale_productSpan"></span></th>  
+				      <th width="11%">예약중</th><th width="13%"><span id="reservation_productSpan"></span></th>  
+				      <th width="11%">판매완료</th><th width="13%"><span id="sold_productSpan"></span></th>  
 				    </tr>
 				  </tbody>
 				</table>
 				
-				<div class="table-responsive-xxl">
+		<form id="store_productListForm" method="get" action="store_productDelete">
+			<div class="table-responsive-xxl">
 				<table id="store_product_Table" class="table table-bordered table-striped table table-sm">
 			        <thead class="table-dark">
 			            <tr>
+			            	<th width="5%"><input type="checkbox" id="all"></th>
 			                <th width="10%">번호</th>
-			                <th width="50%">이름</th>
+			                <th width="40%">이름</th>
 			                <th width="10%">수량</th>
-			                <th width="30%">가격</th>
+			                <th width="15%">가격</th>
+			                <th width="20%">판매상태</th>
 			            </tr>
 			        </thead>
 			        <tbody id="store_product_tbody">
@@ -217,14 +224,17 @@
 			        </tbody>
 				   	<tfoot class="table-secondary">
 			            <tr>
-			              	<th width="10%">번호</th>
-			                <th width="50%">이름</th>
+			              	<th width="5%"></th>
+			                <th width="10%">번호</th>
+			                <th width="40%">이름</th>
 			                <th width="10%">수량</th>
-			                <th width="30%">가격</th>
+			                <th width="15%">가격</th>
+			                <th width="20%">판매상태</th>
 			            </tr>
 			        </tfoot>
 				</table>
-		</div>
+			</div>
+		</form>
 	        </div>
 	    </div>
 	    

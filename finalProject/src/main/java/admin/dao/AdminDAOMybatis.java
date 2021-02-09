@@ -80,6 +80,11 @@ public class AdminDAOMybatis implements AdminDAO {
 	public List<ProductDTO> getProductList(String id) {
 		return sqlSession.selectList("adminSQL.getProductList", id);
 	}
+	//상점목록_물품리스트에서 삭제
+	@Override
+	public void store_productDelete(Map<String, String[]> map) {
+		sqlSession.delete("adminSQL.store_productDelete", map);
+	}
 
 
 	

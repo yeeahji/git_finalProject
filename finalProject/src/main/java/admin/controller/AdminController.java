@@ -73,6 +73,12 @@ public class AdminController {
 	public String memberQna() {
 		return "/admin/adminPage/memberQna";
 	}
+	//고객상담관리
+	@RequestMapping(value="/productView", method=RequestMethod.GET)
+	public String productView(@RequestParam String id, Model model) {
+		model.addAttribute(id);
+		return "/admin/adminPage/productView";
+	}
 	
 	
 	
@@ -150,7 +156,9 @@ public class AdminController {
 		AdminMembersDTO adminMembersDTO= adminService.getStoreView(id);
 		//판매중인물건 총갯수
 		int totalSellProduct = adminService.totalSellProduct(id);
+		//상품정보
 		List<ProductDTO> productList = adminService.getProductList(id);
+		//
 		
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("adminMembersDTO",adminMembersDTO);
@@ -174,7 +182,16 @@ public class AdminController {
 	mav.addObject("adminStoreBP", adminStoreBP);
 	mav.setViewName("jsonView");
 	return mav;
-}
+	}
+	
+	//상점_물품삭제
+	@RequestMapping(value="/store_productDelete", method=RequestMethod.GET)
+	public ModelAndView store_productDelete(String[] check) {
+		System.out.println("check값 = "+check);
+		
+		adminService.store_productDelete(check);
+		return new ModelAndView("redirect:/admin/storeList");
+	}
 		
 
 	

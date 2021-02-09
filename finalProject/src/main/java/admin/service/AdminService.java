@@ -37,6 +37,8 @@ public interface AdminService {
 	public List<StoreDTO> getSearchStoreList(Map<String, String> map);
 	//상점조건검색 페이징
 	public AdminBoardPaging getSearchStoreBP(Map<String, String> map);
+	//상점목록_물품리스트에서 삭제
+	public void store_productDelete(String[] check);
 	
 
 
