@@ -20,6 +20,7 @@
 	border-radius: 8px;
 }
 
+/* 메세지 출력창 크기 */
 #chatContent {
 	margin: 0 auto;
 	border: 1px solid #01D1FE;
@@ -34,11 +35,12 @@
 	padding: 10px;
 }
 
+/* 메세지 입력창 크기 */
 #message {
 	border: 1px solid #59a9ff;
 	height: 35px;
 	float: left;
-	width: 370px;
+	width: 250px;
 	margin-right: 20px;
 }
 

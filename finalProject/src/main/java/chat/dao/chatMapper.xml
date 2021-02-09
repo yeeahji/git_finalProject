@@ -3,35 +3,44 @@
 
 <mapper namespace="chatSQL">
 	<select id="getChatList" parameterType="String" resultType="chatList">
-		SELECT * FROM chatList WHERE mem_id=${mem_id}
+		SELECT * FROM chatList WHERE mem_id=#{mem_id}
 	</select>
 
 	<insert id="insertRoomInfo" parameterType="Map">
-		INSERT INTO chatRoom VALUES(#{room_id},
-									1,
-									#{ONE_mem_id},
-									#{TWO_mem_id},
-									#{ONE_store_nickname},
-									#{TWO_store_nickname},
-									#{ONE_store_img},
-									#{TWO_store_img},
-									#{message_content},
-									SYSDATE)
-									
-<!-- 		INSERT INTO chatList VALUES(#{ONE_mem_id},
-									#{room_id},
-									#{TWO_store_nickname},
-									#{TWO_store_img},
-									#{last_message},
-									SYSDATE)
-									
-		INSERT INTO chatList VALUES(#{TWO_mem_id},
-									#{room_id},
-									#{ONE_store_nickname},
-									#{ONE_store_img},
-									#{last_message},
-									SYSDATE) -->
+		BEGIN
+			 INSERT INTO chatRoom VALUES(#{chat_seq},
+										 1,
+										 #{one_mem_id},
+										 #{two_mem_id},
+										 #{one_store_nickname},
+										 #{two_store_nickname},
+										 #{one_store_img},
+										 #{two_store_img},
+										 #{message_content},
+										 SYSDATE);
+										
+	 		 INSERT INTO chatList VALUES(#{one_mem_id},
+										 #{chat_seq},
+										 #{two_store_nickname},
+										 #{two_store_img},
+										 #{last_message},
+										 SYSDATE);
+										
+			 INSERT INTO chatList VALUES(#{two_mem_id},
+										 #{chat_seq},
+										 #{one_store_nickname},
+										 #{one_store_img},
+										 #{last_message},
+										 SYSDATE);
+		END;
 	</insert>
+	
+	<!-- 채팅방 생성 여부 -->
+ 	<select id="checkChatId" parameterType="Map" resultType="chatRoom">
+		SELECT * from chatRoom
+		WHERE one_mem_id IN( #{one_mem_id}, #{two_mem_id} )
+		AND two_mem_id IN( #{two_mem_id}, #{one_mem_id} )
+	</select> 
 
 
 <!-- ********************************************************** -->

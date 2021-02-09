@@ -18,11 +18,11 @@
 			this._initSocket();
 		},
 		sendChat: function() {
-			this._sendMessage('${param.chatroom_id}', 'CMD_MSG_SEND', $('#message').val());
+			this._sendMessage('${chat_seq}', 'CMD_MSG_SEND', $('#message').val());
 			$('#message').val('');
 		},
 		sendEnter: function() {
-			this._sendMessage('${param.chatroom_id}', 'CMD_ENTER', $('#message').val());
+			this._sendMessage('${chat_seq}', 'CMD_ENTER', $('#message').val());
 			$('#message').val('');
 		},
 		receiveMessage: function(msgData) {
@@ -58,9 +58,9 @@
 				webSocket.closeMessage(JSON.parse(evt.data));
 			}
 		},
-		_sendMessage: function(chatroom_id, cmd, msg) {
+		_sendMessage: function(chat_seq, cmd, msg) {
 			var msgData = {
-					chatroom_id : chatroom_id,
+					chat_seq : chat_seq,
 					cmd : cmd,
 					msg : msg
 			};
@@ -75,11 +75,12 @@
 	});
 </script>
 </head>
+
 <body>
 	<input type="button" value="목록" id="chatListBtn">
 	<div class="col-12" style="clear: both;">
 		<div class="col-10" id="chatRoomSubject">
-			${member.username} 님과 대화
+			${other_store_nickname}님과 대화
 		</div>
 	</div>
 

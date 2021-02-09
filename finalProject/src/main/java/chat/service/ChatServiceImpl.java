@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import chat.bean.ChatListDTO;
+import chat.bean.ChatRoomDTO;
 import chat.dao.ChatDAO;
 import index.dao.IndexDAO;
 
@@ -25,6 +26,11 @@ public class ChatServiceImpl implements ChatService {
 	@Override
 	public void insertRoomInfo(Map<String, String> map) {
 		chatDAO.insertRoomInfo(map);
+	}
+
+	@Override
+	public ChatRoomDTO checkChatId(Map<String, String> chatId) {
+		return chatDAO.checkChatId(chatId);
 	}
 
 }

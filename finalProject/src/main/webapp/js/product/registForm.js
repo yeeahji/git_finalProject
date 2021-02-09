@@ -121,6 +121,8 @@ $('.contentArea').on("click", '.category >.btn', function(){
 				$('#small_categories li:eq(0)').remove();
 	
 				$.each(data.list, function(index, items){
+					console.log(items.cate_code);
+					
 					$('<li/>', {
 						class: 'category'
 							

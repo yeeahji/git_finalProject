@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import chat.bean.ChatListDTO;
+import chat.bean.ChatRoomDTO;
 
 @Repository
 @Transactional
@@ -24,6 +25,11 @@ public class ChatDAOMybatis implements ChatDAO {
 	@Override
 	public void insertRoomInfo(Map<String, String> map) {
 		sqlSession.insert("chatSQL.insertRoomInfo", map);
+	}
+	
+	@Override
+	public ChatRoomDTO checkChatId(Map<String, String> chatId) {
+		return sqlSession.selectOne("chatSQL.checkChatId", chatId);
 	}
 
 

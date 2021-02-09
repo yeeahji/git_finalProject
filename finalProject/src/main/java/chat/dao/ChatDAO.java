@@ -11,5 +11,7 @@ public interface ChatDAO {
 	public List<ChatListDTO> getChatList(String mem_id);
 	
 	public void insertRoomInfo(Map<String, String> map);
+
+	public ChatRoomDTO checkChatId(Map<String, String> chatId);
 	
 }
