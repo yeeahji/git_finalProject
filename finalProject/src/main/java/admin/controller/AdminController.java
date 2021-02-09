@@ -11,14 +11,19 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.fasterxml.jackson.annotation.JsonAutoDetect;
+
 import admin.bean.AdminBoardPaging;
 import admin.bean.AdminMembersDTO;
 import admin.service.AdminService;
+import board.bean.BoardDTO;
+import board.bean.BoardPaging;
 import member.bean.MemberDTO;
 import product.bean.ProductDTO;
 import store.bean.StoreDTO;
 
 
+@JsonAutoDetect(fieldVisibility=JsonAutoDetect.Visibility.ANY)
 @Controller
 @RequestMapping(value="admin")
 public class AdminController {
@@ -168,36 +173,55 @@ public class AdminController {
 	//상점조건검색
 	@RequestMapping(value="/getSearchStoreList", method=RequestMethod.POST)
 	public ModelAndView getSearchStoreList(@RequestParam Map<String,String> map) {
-	List<StoreDTO> storeList = adminService.getSearchStoreList(map); //pg, keyword, searchType, viewNum
-	
-	//페이징 처리
-	AdminBoardPaging adminStoreBP = adminService.getSearchStoreBP(map);
-	
-	ModelAndView mav = new ModelAndView();
-	mav.addObject("pg", map.get("pg"));
-	mav.addObject("storeList", storeList);
-	mav.addObject("adminStoreBP", adminStoreBP);
-	mav.setViewName("jsonView");
-	return mav;
+		List<StoreDTO> storeList = adminService.getSearchStoreList(map); //pg, keyword, searchType, viewNum
+		
+		//페이징 처리
+		AdminBoardPaging adminStoreBP = adminService.getSearchStoreBP(map);
+		
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("pg", map.get("pg"));
+		mav.addObject("storeList", storeList);
+		mav.addObject("adminStoreBP", adminStoreBP);
+		mav.setViewName("jsonView");
+		return mav;
 	}
 		
 
 	//신고 내역 출력
-//	@RequestMapping(value="/getComplainList", method=RequestMethod.POST)
-//	public ModelAndView getComplainList(@RequestParam(required=false, defaultValue="1") String pg,
-//				  						 @RequestParam(required=false, defaultValue="20") String viewNum) {
-//		List<StoreDTO> complainList = adminService.getComplainList(pg,viewNum);
-//		//페이징처리
+	@RequestMapping(value="/getComplainList", method=RequestMethod.POST)
+	public ModelAndView getComplainList(@RequestParam(required=false, defaultValue="1") String pg,
+				  						 @RequestParam(required=false, defaultValue="20") String viewNum) {
+		List<StoreDTO> complainList = adminService.getComplainList(pg,viewNum);
+		System.out.println("신고리스트:"+complainList);
+		//페이징처리
 //		AdminBoardPaging adminStoreBP = adminService.StoreBP(pg,viewNum);
-//				
-//		ModelAndView mav = new ModelAndView();
-//		mav.addObject("complainList", complainList);
-//		mav.addObject("pg", pg);
-//		mav.addObject("viewNum", viewNum);
+				
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("complainList", complainList);
+		mav.addObject("pg", pg);
+		mav.addObject("viewNum", viewNum);
 //		mav.addObject("adminStoreBP", adminStoreBP);
-//		mav.setViewName("jsonView");
-//		return mav;
-//	}
+		mav.setViewName("jsonView");
+		return mav;
+	}
 	
+//	신고자 검색 내역 출력
+	@RequestMapping(value="searchReportedMember", method=RequestMethod.POST)
+	public ModelAndView searchReportedMember(@RequestParam Map<String,String> map) {
+//		map: keyword, searchType, pg,viewNum
+		System.out.println(map);
+		List<BoardDTO> list = adminService.searchReportedMember(map);
+		
+		AdminBoardPaging adminComplainBP = adminService.getSearchReportedBP(map);
+		
+		System.out.println("list"+list);
+		
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("pg", map.get("pg"));
+		mav.addObject("list", list);
+		mav.addObject("adminComplainBP",adminComplainBP);
+		mav.setViewName("jsonView");
+		return mav;
+	}	
 	
 }

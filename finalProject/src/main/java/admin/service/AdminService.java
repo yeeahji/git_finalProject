@@ -5,6 +5,7 @@ import java.util.Map;
 
 import admin.bean.AdminBoardPaging;
 import admin.bean.AdminMembersDTO;
+import board.bean.BoardDTO;
 import member.bean.MemberDTO;
 import product.bean.ProductDTO;
 import store.bean.StoreDTO;
@@ -37,6 +38,13 @@ public interface AdminService {
 	public List<StoreDTO> getSearchStoreList(Map<String, String> map);
 	//상점조건검색 페이징
 	public AdminBoardPaging getSearchStoreBP(Map<String, String> map);
+	
+	//신고내역 출력
+	public List<StoreDTO> getComplainList(String pg, String viewNum);
+
+	public List<BoardDTO> searchReportedMember(Map<String, String> map);
+
+	public AdminBoardPaging getSearchReportedBP(Map<String, String> map);
 	
 
 

@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import admin.bean.AdminMembersDTO;
+import board.bean.BoardDTO;
 import member.bean.MemberDTO;
 import product.bean.ProductDTO;
 import store.bean.StoreDTO;
@@ -81,6 +82,21 @@ public class AdminDAOMybatis implements AdminDAO {
 		return sqlSession.selectList("adminSQL.getProductList", id);
 	}
 
+	@Override
+	public List<StoreDTO> getComplainList(Map<String, Integer> map) {
+		return sqlSession.selectList("adminSQL.getComplainList", map);
+	}
+	//신고 검색 결과 출력
+	@Override
+	public List<BoardDTO> searchReportedMember(Map<String, String> map) {
+		return sqlSession.selectList("adminSQL.searchReportedMember", map);
+	}
+	@Override  
+	public int getTotalReportedMember(Map<String, String> map) {
+		return sqlSession.selectOne("adminSQL.getTotalReportedMember", map);
+	}
+
+	
 
 	
 	

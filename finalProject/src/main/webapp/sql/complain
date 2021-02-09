@@ -1,10 +1,13 @@
 CREATE TABLE COMPLAIN (-- TALK 테이블 아직 안만들어져서 추가해야함
-    MEM_ID REFERENCES MEMBERS(MEM_ID), --신고한 사람
+    MEM_ID REFERENCES MEMBERS(MEM_ID) NOT NULL, --신고당한 사람
+    REPORTER_ID REFERENCES MEMBERS(MEM_ID) NOT NULL, --신고한 사람
+    COMPLAIN_SEQ NUMBER PRIMARY KEY, -- SEQ
+    COMPLAIN_NUMBER NUMBER NOT NULL, -- 항목 구분(1: 상품신고/2:리뷰 신고/3. 게시글 신고/4: 댓글 신고)
     PRODUCT_SEQ REFERENCES PRODUCT(PRODUCT_SEQ), --상품 신고(product 기본키)
     board_seq REFERENCES BOARDS(board_seq), --게시글 신고(boards 기본키)
     review_seq REFERENCES review(review_seq), --상품 후기 신고 . (review 고유키)
     comment_seq REFERENCES COMMENTS(comment_seq), --댓글 신고(comments 기본키)
     complain_content VARCHAR2(600) NOT NULL, -- 신고글 내용
-    COMPLAIN_SEQ NUMBER PRIMARY KEY -- SEQ
+    COMPLAIN_LOGTIME DATE DEFAULT SYSDATE NOT NULL
 );
 CREATE SEQUENCE COMPLAIN_SEQ NOCYCLE NOCACHE;

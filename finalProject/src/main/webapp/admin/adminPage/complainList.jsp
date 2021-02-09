@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta name="viewport" content="width=device-width, initial-  scale=1, shrink-to-fit=no" />
         <meta name="description" content="" />
         <meta name="author" content="" />
         <title>신고 관리</title>
@@ -110,15 +110,14 @@
 	</nav>
 	
 <div class="table-responsive-xxl">
-	<table id="memberTable" class="table table-bordered table-striped table table-sm">
+	<table id="compTable" class="table table-bordered table-striped table table-sm">
         <thead class="table-dark">
             <tr>
-                <th>번호</th>
-                <th>신고당한 회원</th>
-                <th>
+                <th>번호</th><!-- complain_seq -->
+                <th><!-- category -->
                 	<input type="hidden" id="viewNumHidden" name="viewNumHidden" value="20">
 					<select class="form-select form-select-sm" id="selectPrint" aria-label=".form-select-sm example" >
-						<option selected>선택</option>
+						<option selected>구분</option>
 						<option value="product_seq">상품 신고</option>
 						<option value="review_seq">후기 신고</option>
 						<option value="board_seq">게시글 신고</option>
@@ -126,11 +125,13 @@
 						<option value="talk_seq">번개톡 신고</option>
 					</select>
 			</th>
-                <th>분류</th>
-                <th>신고자</th>
+				<th>항목 번호</th><!-- eachPart_seq -->
+				<th>내용</th><!-- complain_content -->
+                <th>신고당한 사람</th><!-- mem_id -->
+                <th>신고자</th><!--reporter_id -->
             </tr>
         </thead>
-        <tbody id="tbody">
+        <tbody id="complainTbody">
         	<tr>
         	
         	</tr>
@@ -139,9 +140,10 @@
 	   	<tfoot class="table-secondary">
             <tr>
               	<th>comment_seq</th>
-                <th>mem_id</th>
                 <th>categorize</th>
+                <th>eachPart_seq</th>
                 <th>complain_content</th>
+                <th>mem_id</th>
                 <th>reporter_id</th>
             </tr>
         </tfoot>
@@ -193,7 +195,8 @@
         </footer>
     </div><!--layoutSidenav_content  -->
 </div>
-<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.4.1.js" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
 <script src="/market/admin/dist/js/scripts.js"></script>
+<script src="/market/admin/js/complain.js"></script>
 </body>
