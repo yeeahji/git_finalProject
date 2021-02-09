@@ -22,7 +22,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	 									'', '',	
 	 									sysdate,
 	 									1, 'ROLE_USER', 0, #{mem_agree}, 0);
- 			
+
  			insert into store(mem_id, store_nickname, store_img) 
 			values(#{mem_id}, '상점'||seq_store.NEXTVAL||'호', 'logo_black.png');
  		end;

@@ -12,6 +12,7 @@ if(loginId == paramId){ // 내 상점
 // 상점 기본 정보
 var isStore = false; // ajax 중복 호출 방지
 $(document).ready(function(){
+	console.log("상점; 로그인중인아이디는?"+$('.loginId').val());
 	if(paramId==''){
 		userId = loginId;
 	}
