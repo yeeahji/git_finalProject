@@ -173,6 +173,7 @@ public class MemberServiceImpl implements MemberService, UserDetailsService {
 
 	@Override
 	public void complain(Map<String, String> map) {
+		System.out.println("2:" +map);
 		memberDAO.complain(map);
 		
 	}

@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import admin.bean.AdminMembersDTO;
+import board.bean.BoardDTO;
 import member.bean.MemberDTO;
 import product.bean.ProductDTO;
 import store.bean.StoreDTO;
@@ -37,7 +38,11 @@ public interface AdminDAO {
 	//상점목록_물품리스트에서 삭제
 	public void store_productDelete(Map<String, String[]> map);
 
+	public List<StoreDTO> getComplainList(Map<String, Integer> map);
 
+	public List<BoardDTO> searchReportedMember(Map<String, String> map);
+
+	public int getTotalReportedMember(Map<String, String> map);
 
 
 }

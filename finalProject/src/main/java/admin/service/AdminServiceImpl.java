@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import admin.bean.AdminBoardPaging;
 import admin.bean.AdminMembersDTO;
 import admin.dao.AdminDAO;
+import board.bean.BoardDTO;
 import member.bean.MemberDTO;
 import product.bean.ProductDTO;
 import store.bean.StoreDTO;
@@ -148,7 +149,7 @@ public class AdminServiceImpl implements AdminService {
 	@Override
 	public AdminBoardPaging getSearchStoreBP(Map<String, String> map) {
 		int viewNum = Integer.parseInt(map.get("viewNum"));
-		
+		System.out.println("view:" +viewNum);
 		int totalD = adminDAO.getTotalD(map);
 		
 		adminBoardPaging.setCurrentPage(Integer.parseInt(map.get("pg")));
@@ -167,6 +168,7 @@ public class AdminServiceImpl implements AdminService {
 		return productList;
 	}
 
+
 	//상점목록_물품리스트에서 삭제
 	@Override
 	public void store_productDelete(String[] check) {
@@ -174,6 +176,52 @@ public class AdminServiceImpl implements AdminService {
 		map.put("array", check);
 		adminDAO.store_productDelete(map);
 	}
+
+	@Override
+	public List<StoreDTO> getComplainList(String pg, String viewNum) {
+		int endNum = Integer.parseInt(pg)*Integer.parseInt(viewNum);
+		int startNum = endNum-(Integer.parseInt(viewNum)-1);
+		
+		Map <String, Integer> map = new HashMap<String, Integer>();
+		map.put("startNum", startNum);
+		map.put("endNum", endNum); 
+		List<StoreDTO> complainList= adminDAO.getComplainList(map );
+		System.out.println("complainList:"+complainList);
+		return complainList;
+	}
+
+	@Override
+	public List<BoardDTO> searchReportedMember(Map<String, String> map) {
+		System.out.println("2"+map);
+		int viewNum = Integer.parseInt(map.get("viewNum"));
+		
+		int endNum = Integer.parseInt(map.get("pg"))*viewNum;
+		int startNum = endNum-(viewNum-1);
+		
+		
+		map.put("startNum", startNum+"");
+		map.put("endNum", endNum+"");
+		return adminDAO.searchReportedMember(map);
+	}
+
+	@Override
+	public AdminBoardPaging getSearchReportedBP(Map<String, String> map) {
+		
+		int viewNum = Integer.parseInt(map.get("viewNum"));
+		System.out.println("view:" +viewNum);
+		int total = adminDAO.getTotalReportedMember(map);
+		
+		adminBoardPaging.setCurrentPage(Integer.parseInt(map.get("pg")));
+		adminBoardPaging.setPageBlock(10);
+		adminBoardPaging.setPageSize(viewNum);
+		adminBoardPaging.setTotalA(total);
+		
+		adminBoardPaging.makePagingHTML();
+		
+		
+		return adminBoardPaging;
+	}
+	
 
 	
 

@@ -78,4 +78,31 @@
 	</delete>
 	
 	
+<!-- A.신고 리스트 전체 출력 -->
+	<select id="getComplainList" parameterType="java.util.Map" resultType="member.bean.ComplainDTO">
+		select * from(
+			select rownum rn, tt.* from(select * from complain)tt)
+					where rn between #{startNum} and #{endNum}
+	</select>
+
+<!-- A.신고 리스트 개수 -->
+	<select id="getTotalComplain" resultType="Integer">
+		select count(*) from complain
+	</select>
+	
+<!-- B.신고 검색 리스트 전체 출력 -->
+	<select id="searchReportedMember" parameterType="java.util.Map" resultType="member.bean.ComplainDTO">
+		<![CDATA[
+		select * from
+			(select rownum rn, tt.* from
+			(select * from complain where ${searchType} like '%'||#{keyword}||'%')tt
+			)where rn>=#{startNum} and rn<=#{endNum}
+		]]>
+	</select>
+<!-- B.신고 검색 리스트 개수 -->
+	<select id="getTotalReportedMember" parameterType="java.util.Map" resultType="Integer">
+		select count(*) from complain where ${searchType} like '%'||#{keyword}||'%'
+	</select>
+	
+	
 </mapper>

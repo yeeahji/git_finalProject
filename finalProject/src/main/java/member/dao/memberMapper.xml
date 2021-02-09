@@ -127,8 +127,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <!--  	신고하기  -->
 	<insert id="complain" parameterType="java.util.Map">
 		begin
-			insert into complain values(#{MEM_ID}, #{REPORTER_ID}
+			insert into complain values(#{mem_id}, #{reporter_id}
 										,complain_seq.nextval
+										, #{complain_category}
 										, #{product_seq}
 										, #{board_seq}
 										, #{review_seq}
@@ -136,7 +137,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 										, #{complain_content}
 										, sysdate
  									);
-			update SET members mem_complain = (mem_complain+1);
+			update members SET mem_complain = (mem_complain+1) where mem_id = #{mem_id};
 		end;
 	</insert>
  	

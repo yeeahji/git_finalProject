@@ -5,6 +5,7 @@ import java.util.Map;
 
 import admin.bean.AdminBoardPaging;
 import admin.bean.AdminMembersDTO;
+import board.bean.BoardDTO;
 import member.bean.MemberDTO;
 import product.bean.ProductDTO;
 import store.bean.StoreDTO;
@@ -39,6 +40,13 @@ public interface AdminService {
 	public AdminBoardPaging getSearchStoreBP(Map<String, String> map);
 	//상점목록_물품리스트에서 삭제
 	public void store_productDelete(String[] check);
+	
+	//신고내역 출력
+	public List<StoreDTO> getComplainList(String pg, String viewNum);
+
+	public List<BoardDTO> searchReportedMember(Map<String, String> map);
+
+	public AdminBoardPaging getSearchReportedBP(Map<String, String> map);
 	
 
 

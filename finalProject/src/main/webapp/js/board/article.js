@@ -1,3 +1,5 @@
+let writer;
+
 $(document).ready(function(){
 	var comment_writer; //댓글 쓴 사람
 	$('#commentListTable tr:eq(0)').remove();
@@ -16,7 +18,9 @@ $(document).ready(function(){
 			$('#board_logtime').text(data.boardDTO.board_logtime);
 			$('#board_hit').text(data.boardDTO.board_hit);
 			$('#board_content').text(data.boardDTO.board_content);
-	
+			writer=data.boardDTO.mem_id;
+			
+			
 			//작성자 본인일 경우 : 신고버튼X. OWNER쪽 O
 			if(data.sessionId == data.boardDTO.mem_id){
 				$('#owner').show();	
@@ -95,6 +99,7 @@ $(document).ready(function(){
 			}
 		});	
 	});//트리거!!!!!!
+	
 	$('#triggerList').trigger('change');//댓글 출력
 	
 
@@ -183,37 +188,53 @@ $(document).ready(function(){
 						
 						//댓글 신고
 						$('#commentListTable').on('click', '#singoBtn'+items.comment_seq, function(){
-							 $("#modalHidden").attr('id','modalDisplay'); 
-							   $('.contentList>button').mouseenter(function(){
-							      $(this).css('text-decoration', 'underline');
+							 
+							//★여기서부터 trigger되어야★★★★★
+							$("#modalHidden").attr('id','modalDisplay'); //신고 모달창이 뜬다.
+							
+							$('.contentList>button').mouseenter(function(){
+								 $(this).css('text-decoration', 'underline');
+								 $(this).mouseleave(function(){
+							        $(this).css('text-decoration', 'none');
+								 });
+//								 신고접수
+								 $(this).off('click').on('click',function(){
+									if($('#sessionId').val()==null){ //세션 만료로 인해 로그인 풀렸을때
+										location.href="/market/member/loginForm";
+									}else{
+										$.ajax({
+											type : 'post',
+											url : '/market/member/complain',
+											data: {reporter_id: $('#sessionId').val(),
+													complain_content : $(this).text(),
+													comment_seq : $('#comment_seq').val(),
+													complain_category : '댓글 신고',
+													mem_id: writer
+											},success: function(){
+												alert("신고가 성공적으로 접수되었습니다.")
+											},error: function(err){
+												console.log(err)
+											}
+										});//ajax
+									}
+									
+								 });//click
+							});//mouseenter
+							
+						   // 신고 카테고리 펼치기
+							 $('#singoModalBottom').on("click", '.singoTitle > .titleBtn', function(){
+							     $(this).parent().attr('class','singoTitleOpen'); //$(this).parent() == $(".singoTitle")
 							      
-							      $(this).click(function(){
-							         alert("신고가 접수되었습니다.(test)"); //Q. 왜 여러번 뜨는?ㅋ
-							      });
+							     var className = $(this).parent().next().attr('class');
+							     // height=180;인 애만 따로 처리
+							     if(className == 'singoContentOther'){
+							    	 $(this).parent().next().attr('class','singoContentOtherOpen');
+							     }else if(className == 'singoContent') {
+							    	 $(this).parent().next().attr('class','singoContentOpen'); 
+							     }
 							      
-							      $(this).mouseleave(function(){
-							         $(this).css('text-decoration', 'none');
-							      });
-							      
-							   });
-							   
-							   // 신고 카테고리 펼치기
-							   $('#singoModalBottom').on("click", '.singoTitle > .titleBtn', function(){
-							      $(this).parent().attr('class','singoTitleOpen'); //$(this).parent() == $(".singoTitle")
-							      
-							      var className = $(this).parent().next().attr('class');
-							      // height=180;인 애만 따로 처리
-							      if(className == 'singoContentOther'){
-							         $(this).parent().next().attr('class','singoContentOtherOpen');
-							      }else if(className == 'singoContent') {
-							         $(this).parent().next().attr('class','singoContentOpen'); 
-							      }
-							      
-							      // 닫히는 방법 2가지
-							      // (1) 펼친 상태에서 다른 카테고리 버튼 눌리면 알아서 접히기
-							      
-							      // (2) 닫기 (다시 클릭)
-							      $('#singoModalBottom').on("click", '.singoTitleOpen > .titleBtn', function(){
+							      // 닫기 
+							     $('#singoModalBottom').on("click", '.singoTitleOpen > .titleBtn', function(){
 							         $(this).parent().attr('class','singoTitle');
 							         
 							         if(className == 'singoContentOtherOpen' || className =='singoContentOther'){
@@ -221,8 +242,8 @@ $(document).ready(function(){
 							         }else if(className == 'singoContentOpen' || className=='singoContent'){
 							            $(this).parent().next().attr('class', 'singoContent');            
 							         }
-							      });//(2)닫기
-							   });//신고 카테고리 펼치기
+							     });//(2)닫기
+							 });//신고 카테고리 펼치기
 							   
 							   // 모달 창 닫기 modalCloseBtn
 							   $('.singoModalWrap').on("click", '.modalCloseBtn', function(){
@@ -238,7 +259,20 @@ $(document).ready(function(){
 							      }
 							      $("#modalDisplay").attr('id','modalHidden'); 
 							   });
-							});//댓글신고
+							   
+							   
+							 //글자수 카운팅
+								$('#complainReason').keyup(function(){
+									let content = $(this).val();
+									$('#counter').html(content.length);
+									
+									if(content.length>200){
+										$('#textCounterDiv').text("입력 가능한 글자 수를 초과했습니다.");
+										$(this).val(content.substring(0, 200)); //글자수 초과하면 안써지게
+									}
+								});
+								//★여기서까지 trigger끝★★★★★
+							});//신고끝
 						}//else
 					});
 				});
@@ -310,44 +344,41 @@ $(document).ready(function(){
 		});//--end 답글쓰기
 	
 		//글 신고하기
-		var check=false;
 		$('.section2-5-1').on('click', '.singoBtn', function(){
-			check=false;
 			$("#modalHidden").attr('id','modalDisplay'); //신고 모달창이 뜬다.
 			
-			 $('.contentList>button').mouseenter(function(){
+			$('.contentList>button').mouseenter(function(){
 				 $(this).css('text-decoration', 'underline');
 				 $(this).mouseleave(function(){
 			        $(this).css('text-decoration', 'none');
 				 });
-				 //신고 접수
-				 $(this).click(function(){
-					if(check) return;
-					check = true;
+				 
+				 $(this).off('click').on('click',function(){
+					if($('#sessionId').val()==null){ //세션 만료로 인해 로그인 풀렸을때
+						location.href="/market/member/loginForm";
+					}else{
+						$.ajax({
+							type : 'post',
+							url : '/market/member/complain',
+							data: {reporter_id: $('#sessionId').val(),
+									complain_content : $(this).text(),
+									board_seq : $('#board_seq').val(),
+									mem_id: writer,
+									complain_category : '게시글 신고'
+							},success: function(){
+								alert("신고가 성공적으로 접수되었습니다.")
+							},error: function(err){
+								console.log(err)
+							}
+						});//ajax
+					}
 					
-			        console.log($(this).text()); //Q. 왜 여러번 뜨는?ㅋ''
-			        $.ajax({
-						type : 'post',
-						url : '/market/member/complain',
-						data: {reporter_id: $('#sessionId'),
-								complain_content : $(this).text(),
-								board_seq : $('#board_seq'),
-								mem_id: $('#mem_id')
-							},
-						success: function(){
-							
-						},error: function(err){
-							console.log(err)
-						}
-			        
-			        });
-			        
-			     });
-				 check=false;
-			     
-		      
-			 });//mouseenter
-		   
+				 });//click
+			});//mouseenter
+			
+			 //신고 접수
+			 
+			
 		   // 신고 카테고리 펼치기
 			 $('#singoModalBottom').on("click", '.singoTitle > .titleBtn', function(){
 			     $(this).parent().attr('class','singoTitleOpen'); //$(this).parent() == $(".singoTitle")
@@ -401,6 +432,7 @@ $(document).ready(function(){
 						$(this).val(content.substring(0, 200)); //글자수 초과하면 안써지게
 					}
 				});
+			
 		});//--end 글 신고하기
 			
 });
