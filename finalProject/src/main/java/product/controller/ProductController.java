@@ -169,10 +169,9 @@ public class ProductController {
 	@RequestMapping(value="getProdCateName", method=RequestMethod.GET)
 	@ResponseBody
 	public ModelAndView getProdCateName(@RequestParam String seq) {
-		String cateName = productService.getProdCateName(seq);
-		
+		CategoryDTO categoryDTO = productService.getProdCateName(seq);
 		ModelAndView mav = new ModelAndView();
-		mav.addObject("cateName", cateName);
+		mav.addObject("categoryDTO", categoryDTO);
 		mav.setViewName("jsonView");
 		return mav;
 	}
@@ -226,6 +225,20 @@ public class ProductController {
 		mav.setViewName("jsonView");
 		return mav;
 	}
+	
+	// 대분류 이름 
+	@RequestMapping(value="getProdBigCate", method=RequestMethod.GET)
+	@ResponseBody
+	public ModelAndView getProdBigCate(@RequestParam String cate_code) {
+		String bigCateName = productService.getProdBigCate(cate_code);
+		
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("bigCateName", bigCateName);
+		mav.setViewName("jsonView");
+		return mav;
+	}
+	
+
 }
 
 

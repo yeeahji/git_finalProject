@@ -1,4 +1,25 @@
 @charset "UTF-8";
+/************* common - 모달 *************/
+a {
+    color: rgb(33, 33, 33);
+    text-decoration: none;
+    cursor: pointer;
+    background-color: transparent;
+}
+button {
+    background-color: transparent;
+    cursor: pointer;
+    outline: none;
+    border-color: transparent;
+}
+div {
+    display: block;
+    margin: 0px;
+    padding: 0px;
+    border: 0px;
+    font: inherit;
+    vertical-align: baseline;
+}
 /* common */
 body, input, textarea, select, button {
     -webkit-font-smoothing: antialiased;
@@ -9,7 +30,6 @@ body, input, textarea, select, button {
     outline: 0px;
     border: 0px;
 }
-
 .reviewsTop {
 	font-size: 18px;
     padding: 50px 0px 20px;
@@ -188,4 +208,198 @@ body, input, textarea, select, button {
 	cursor: pointer;
 	margin-right: 7px;
 }
-
+/* ************** 신고하기 모달창 ************** */
+#reviewModal { 
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    background: rgba(0, 0, 0, 0.6);
+    z-index: 10000; 
+    display: none;
+    -webkit-box-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    justify-content: center;
+}
+.singoModalWrapR {
+   padding: 60px;
+    background: rgb(255, 255, 255);
+    width: 600px;
+}
+#singoModalTopR {
+   display: flex;
+    -webkit-box-pack: justify;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+#singoModalTopR > .title {
+    letter-spacing: 5.2px;
+    font-size: 26px;
+    padding-bottom: 30px;
+    border-bottom: 1px solid rgb(33, 33, 33);
+    margin-bottom: 45px;
+}
+.singoCategoryR {
+   border-top: 1px solid rgb(238, 238, 238);
+}
+.singoCategoryR:last-child {
+   border-color: rgb(204, 204, 204);
+}
+.singoTitleR {
+   width: 100%;
+    display: flex;
+    -webkit-box-align: center;
+    align-items: center;
+    -webkit-box-pack: justify;
+    justify-content: space-between;
+    color: rgb(102, 102, 102);
+    height: 60px;
+    font-size: 16px;
+    padding-left: 20px;
+}
+.singoTitleR > button {
+   display: flex;
+    -webkit-box-align: center;
+    align-items: center;
+    height: 100%;
+    padding: 0px 20px;   
+}
+.singoTitleR img {
+   transition: transform 0.4s ease-out 0s;
+}
+.singoContentR {
+    background: rgb(249, 249, 249);
+    padding: 0px 20px;
+    height: 0px;
+    overflow: hidden;
+    transition: height 0.3s ease-out 0s;   
+}
+.singoContentOtherR {
+    background: rgb(249, 249, 249);
+    padding: 0px 20px;
+    height: 0px;
+    overflow: hidden;
+    transition: height 0.3s ease-out 0s;   
+}
+.contentListR {
+   height: 30px;
+    display: flex;
+    -webkit-box-align: center;
+    align-items: center;
+    font-size: 14px;
+}
+.contentListR button, .contentListR a {
+    /* color: rgb(247, 47, 51); */   
+    color: #0a58ca;   
+}
+/* 마지막 리스트(인풋박스있는) */
+.contentListInputR {
+   display: flex;
+    margin-top: 10px;
+    -webkit-box-align: center;
+    align-items: center;
+    border: 1px solid rgb(238, 238, 238);
+    width: 100%;
+    background: rgb(255, 255, 255);
+    font-size: 13px;
+}
+.contentListInputR input {
+   flex: 1 1 0%;
+    height: 36px;
+    padding: 0px 20px;   
+}
+.contentListInputR button {
+   border: 1px solid rgb(238, 238, 238);
+    height: 28px;
+    display: flex;
+    -webkit-box-align: center;
+    align-items: center;
+    width: 56px;
+    -webkit-box-pack: center;
+    justify-content: center;
+    margin-right: 10px;
+    color: rgb(136, 136, 136);
+}
+/* 기타사유_textarea div 부분 */
+.contetnListTextareaR {
+   width: 100%;
+    padding: 10px 0px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;   
+}
+.contetnListTextareaR textarea {
+   width: 100%;
+    height: 80px;
+    resize: none;
+    padding: 10px 20px;
+    margin-bottom: 10px;
+    border: 1px solid rgb(238, 238, 238);   
+}
+.contetnListTextareaR button {
+   border: 1px solid rgb(238, 238, 238);
+    height: 28px;
+    display: flex;
+    -webkit-box-align: center;
+    align-items: center;
+    width: 56px;
+    -webkit-box-pack: center;
+    justify-content: center;
+    color: rgb(136, 136, 136);
+    font-size: 13px;
+    background: rgb(255, 255, 255);
+}
+/* 신고 카테고리 클릭 */
+.singoTitleOpenR {
+   width: 100%;
+    display: flex;
+    -webkit-box-align: center;
+    align-items: center;
+    -webkit-box-pack: justify;
+    justify-content: space-between;
+    color: rgb(102, 102, 102);
+    height: 60px;
+    font-size: 16px;
+    padding-left: 20px;
+    background: rgb(249, 249, 249); /* 기존 신고 타이틀에서 추가된 */
+}
+.singoTitleOpenR img {
+   transform: rotate(180deg);
+   transition: transform 0.4s ease-out 0s;
+}
+.singoTitleOpenR button {
+   display: flex;
+    -webkit-box-align: center;
+    align-items: center;
+    height: 100%;
+    padding: 0px 20px;
+}
+.singoContentOpenR {
+   background: rgb(249, 249, 249);
+    padding: 0px 20px;
+    overflow: hidden;
+    transition: height 0.3s ease-out 0s;
+    height: 150px;
+}
+.singoContentOtherOpenR {
+   background: rgb(249, 249, 249);
+    padding: 0px 20px;
+    overflow: hidden;
+    transition: height 0.3s ease-out 0s;
+    height: 120px;
+}
+.directAskR {
+    border: 1px solid rgb(238, 238, 238);
+    color: rgb(136, 136, 136);
+    font-size: 13px;
+    height: 32px !important;
+} 
+.singoContentR {
+    background: rgb(249, 249, 249);
+    padding: 0px 20px;
+    height: 0px;
+    overflow: hidden;
+    transition: height 0.3s ease-out 0s;
+}

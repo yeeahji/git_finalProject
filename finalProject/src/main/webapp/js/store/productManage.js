@@ -8,10 +8,11 @@ $(document).ready(function(){
 			   'product_manage': $('.hiddenProdMange').val()}, 
 		dataType: 'json',
 		success : function(data){ 
+			
 			$('#prodMangeTbody > tr').remove();
 			// # 상품 리스트 
 			$.each(data.productManageList, function(index, items){
-					$('<tr/>').append($('<td/>'
+				   $('<tr/>').append($('<td/>'
 					).append($('<a/>', {
 						href: '#'
 				   }).append($('<img/>',{
