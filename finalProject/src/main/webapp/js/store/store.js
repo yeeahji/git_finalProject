@@ -1,4 +1,4 @@
-// 내상점-남의상점 구분
+// 내상점-남의상점 구분 
 var loginId = $('.loginId').val();
 var paramId = $('.hiddenId').val();
 
@@ -9,13 +9,11 @@ if(loginId == paramId){ // 내 상점
 }else if(loginId != paramId){ // 남의 상점
 	userId = paramId;
 }
-// 상점 기본 정보
+// 상점 기본 정보 -----------------------------------------------------------------
 var isStore = false; // ajax 중복 호출 방지
 $(document).ready(function(){
-	console.log("상점; 로그인중인아이디는?"+$('.loginId').val());
-	if(paramId==''){
-		userId = loginId;
-	}
+	console.log("[상점] 로그인중인아이디는?"+$('.loginId').val());
+	if(paramId=='') userId = loginId;
 	
 	if(isStore) return;
 	isStore = true;
@@ -23,29 +21,19 @@ $(document).ready(function(){
 	$.ajax({
 		type: 'GET',
 		url: '/market/store/storeInfo',
-		data: {'mem_id' : userId}, // 상점 주인의 아이디
+		data: {'mem_id' : userId},
 		dataType: 'json',
 		success : function(data){
+			console.log("상점데이타"+data.storeDTO);
 			$.each(data, function(key, value){
 				// [프로필] 
-				// 프로필 상점명
-				$('.profileNickname').text(value.store_nickname);
+				$('.profileNickname').text(value.store_nickname); // 프로필 상점명
 				
-				//console.log('디스프레이넘은 -->'+$('.hiddenDisNum').val());
-				//if($('.hiddenDisNum').val() == 2){
-				console.log('트루값넣은애'+$('.goProductManage').val() );
 				if($('.goProductManage').val() == 'true'){
 					$('#productManage').trigger('click', 'str');
 				}
 				
-				
-				// 프로필 사진
-				if(value.store_img != null){
-					$('.profileImage').attr('src', '/market/storage/'+value.store_img);
-				}else if(value.store_img == null){ 
-					// 기본이미지
-					$('.profileImage').attr('src', 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAbQAAAG0CAYAAABaNNJGAAAAAXNSR0IArs4c6QAAHX1JREFUeAHt3Q1T28YWBmBD8wnT//87Ow2hJbS9OeTaCWCzli3Je84+mmFCkC3vPmfDG0nr9dXDw8N/GxsBAgQIEEgucJ28/ZpPgAABAgSeBASagUCAAAECJQQEWoky6gQBAgQICDRjgAABAgRKCAi0EmXUCQIECBAQaMYAAQIECJQQEGglyqgTBAgQICDQjAECBAgQKCEg0EqUUScIECBAQKAZAwQIECBQQkCglSijThAgQICAQDMGCBAgQKCEgEArUUadIECAAAGBZgwQIECAQAkBgVaijDpBgAABAgLNGCBAgACBEgICrUQZdYIAAQIEBJoxQIAAAQIlBARaiTLqBAECBAgINGOAAAECBEoICLQSZdQJAgQIEBBoxgABAgQIlBAQaCXKqBMECBAgINCMAQIECBAoISDQSpRRJwgQIEBAoBkDBAgQIFBCQKCVKKNOECBAgIBAMwYIECBAoISAQCtRRp0gQIAAAYFmDBAgQIBACQGBVqKMOkGAAAECAs0YIECAAIESAgKtRBl1ggABAgQEmjFAgAABAiUEBFqJMuoEAQIECAg0Y4AAAQIESggItBJl1AkCBAgQEGjGAAECBAiUEBBoJcqoEwQIECAg0IwBAgQIECghINBKlFEnCBAgQECgGQMECBAgUEJAoJUoo04QIECAgEAzBggQIECghIBAK1FGnSBAgAABgWYMECBAgEAJAYFWoow6QYAAAQICzRggQIAAgRICAq1EGXWCAAECBASaMUCAAAECJQQEWoky6gQBAgQICDRjgAABAgRKCAi0EmXUCQIECBAQaMYAAQIECJQQEGglyqgTBAgQICDQjAECBAgQKCEg0EqUUScIECBAQKAZAwQIECBQQkCglSijThAgQICAQDMGCBAgQKCEgEArUUadIECAAAGBZgwQIECAQAkBgVaijDpBgAABAgLNGCBAgACBEgICrUQZdYIAAQIEBJoxQIAAAQIlBARaiTLqBAECBAgINGOAAAECBEoICLQSZdQJAgQIEBBoxgABAgQIlBAQaCXKqBMECBAgINCMAQIECBAoISDQSpRRJwgQIEBAoBkDBAgQIFBCQKCVKKNOECBAgIBAMwYIECBAoISAQCtRRp0gQIAAAYFmDBAg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');
-				}
+				$('.profileImage').attr('src', '/market/storage/'+value.store_img); // 프로필 사진
 				
 				// 프로필 사진 변경
 				var isProfile = false; // ajax 중복호출방지
@@ -86,7 +74,6 @@ $(document).ready(function(){
 					    });//file change
 					
 					function checkExtension(fileName,fileSize){
-						  //console.log("2. 체크익스텐션 - 파일확장자와 크기 확인");//test
 						  var regex = new RegExp("(.*?)\.(jpg|gif|bmp|tif|png)$"); // 가능한 이미지 파일
 					      var maxSize = 5000000; //5MB였나?  파일 크기는 다시 정해야 할 듯
 					      
@@ -97,7 +84,6 @@ $(document).ready(function(){
 					      }
 					      
 					      if(regex.test(fileName)){
-					          //console.log("3. 파일이 등록되었습니다(test)"); //test
 					      }else {
 					    	  alert('jpg, gif, bmp, tif, png 형식의 파일만 첨부하실 수 있습니다.');
 						      $("input[type='file']").val("");  //파일 초기화
@@ -124,7 +110,7 @@ $(document).ready(function(){
 					 }
 				}); //프로필 사진 변경
 				
-				// 상점평점(★★★★★) 0~5
+				// 상점평점
 				var scoreAvg = value.store_scoreavg;
 				switch(scoreAvg){
 					case 0:
@@ -152,11 +138,10 @@ $(document).ready(function(){
 				}
 				
 				//[profileRight] --------------------------------------------------------------
-				// # 소개글 
-				$('.introduce').text(value.store_intro);
-				// # 소개글 수정
+				$('.introduce').text(value.store_intro); // 소개글 
+				
+				// 소개글 수정
 				$('#profileRight').on("click", '.introduceEditBtn', function(){
-					// 수정 창으로 변경
 					$('div .introduce').attr('class','introduceWrap');
 					$('.introduceWrap').html("<textarea></textarea><button type='button'>확인</button>");
 					$('div .introduceEdit').remove();
@@ -182,8 +167,7 @@ $(document).ready(function(){
 					});
 				}); // 소개글 수정
 				
-
-				// # 에코지수 store_ECHO
+				// 에코지수 
 				var echoIndi = value.store_echo; // data에서 불러온 에코지수 
 				$('.echoIndication > img').attr('src','/market/image/store/echo'+echoIndi+'.svg'); // 0이면 알아서 아래서 업뎃
 				
@@ -197,8 +181,6 @@ $(document).ready(function(){
 				    	actSum = data.actSum; // actSum = purchaseNum + salesNum;
 				    	
 				    	if(value.store_echo != actSum){
-				    		//console.log("현재 에코지수와 달름");
-				    		
 				    		//에코지수 업데이트
 				    		$.ajax({
 								type:'post',
@@ -227,7 +209,7 @@ $(document).ready(function(){
 				});// 에코지수 업데이트
 				
 				
-				// # 닉네임 (유효성 검사 + 수정)
+				// 닉네임 (유효성 검사 + 수정)
 				// 타이틀 상점명
 				$('.nickNameText').text(value.store_nickname);
 				$('.hiddenNick').val(value.store_nickname);
@@ -307,12 +289,11 @@ $(document).ready(function(){
 			});//each
 			
 			
-			
 			isStore = false;
 		},error: function(err){
 			console.log(err);
 		}
-	});// ajax 
+	});// ajax 상점정보
 	
 	// 에코지수 마우스오버 - 설명 
 	$('a[rel=tooltip]').mouseover(function(e){
@@ -328,101 +309,89 @@ $(document).ready(function(){
         $(this).append('<div id="tooltip"><div class="tipBody">'+ tip + '</div></div>');               
      
 	}).mousemove(function(e){
-		console.log("마우스따라다님");
-		
-		
         //마우스가 움직일 때 툴 팁이 따라 다니도록 위치값 업데이트
         $('#tooltip').css('top', e.pageY + 10 );
         $('#tooltip').css('left', e.pageX + 10 );
           
     }).mouseout(function(){
-    	
-    	
-    	console.log("마우스뗌");
         //위에서 껐던 브라우져에서 제공하는 기본 툴 팁을 복원
         $(this).attr('title',$('.tipBody').html());
         $(this).children('div#tooltip').remove();
-        
-       
     });
 	
+	
+	
+	
+
 }); // ready
 
 
+//신고하기 모달 -------------------------------------------------------------------
+var className;
+$('#profileRight').on("click", '.singoBtn', function(e){ 
+	 e.stopImmediatePropagation();
+	 
+     $("#modalHidden").attr('id','modalDisplay'); 
+          
+     $('.contentList>button').mouseenter(function(){
+         $(this).css('text-decoration', 'underline');
+       
+         $(this).off('click').click(function(){ //클릭 이벤트 중복호출 방지
+            alert("신고가 접수되었습니다.(test)"); 
+         });
+        
+         $(this).mouseleave(function(){
+            $(this).css('text-decoration', 'none');
+         });
+     });
 
+     $('#singoModalBottom').on('click', '.singoTitle .titleBtn', function(e){
+    	    e.stopImmediatePropagation();
+    	    
+    	    $(this).parent().attr('class','singoTitleOpen'); //$(this).parent() == $(".singoTitle")
+    	     className = $(this).parent().next().attr('class');
 
+    	    if(className == 'singoContentOther'){ // height=180;
+    	       $(this).parent().next().attr('class','singoContentOtherOpen');
+    	    }else if(className == 'singoContent') {
+    	       $(this).parent().next().attr('class','singoContentOpen'); 
+    	    }
+    	    
+    });
 
+     // 닫기 (다시 클릭)
+  	$('#singoModalBottom').on('click', '.singoTitleOpen .titleBtn', function(e){
+  		e.stopImmediatePropagation();
+  		 
+  	    $(this).parent().attr('class','singoTitle');
+  	    if(className == 'singoContentOtherOpen' || className =='singoContentOther'){
+  	       $(this).parent().next().attr('class', 'singoContentOther');
+  	    }else if(className == 'singoContentOpen' || className=='singoContent'){
+  	       $(this).parent().next().attr('class', 'singoContent');            
+  	    }
 
-// #신고하기 버튼 - 남의 상점(모달) -----------------------------------------------------
-$('#profileRight').on("click", '.singoBtn', function(){
-	//alert("모달 창 오픈");
-	// 클래스명 찾아서 display:none ---> display:flex 으로
-	$("#modalHidden").attr('id','modalDisplay'); 
-	
-	// 마우스오버 - 빨강 밑줄, 클릭 시 DB연동? -> alert창("접수완료")
-	$('.contentList>button').mouseenter(function(){
-		$(this).css('text-decoration', 'underline');
-		
-		$(this).click(function(){
-			alert("신고가 접수되었습니다.(test)"); //Q. 왜 여러번 뜨는?ㅋ
-		});
-		
-		$(this).mouseleave(function(){
-			$(this).css('text-decoration', 'none');
-		});
-		
-	});
-	
-	// 신고 카테고리 펼치기
-	$('#singoModalBottom').on("click", '.singoTitle > .titleBtn', function(){
-		
-		$(this).parent().attr('class','singoTitleOpen'); //$(this).parent() == $(".singoTitle")
-		
-		var className = $(this).parent().next().attr('class');
-		// height=180;인 애만 따로 처리
-		if(className == 'singoContentOther'){
-			$(this).parent().next().attr('class','singoContentOtherOpen');
-		}else if(className == 'singoContent') {
-			$(this).parent().next().attr('class','singoContentOpen'); 
-		}
-		
-		// 닫히는 방법 2가지
-		// (1) 펼친 상태에서 다른 카테고리 버튼 눌리면 알아서 접히기
-		
-		// (2) 닫기 (다시 클릭)
-		$('#singoModalBottom').on("click", '.singoTitleOpen > .titleBtn', function(){
-			$(this).parent().attr('class','singoTitle');
-			
-			if(className == 'singoContentOtherOpen' || className =='singoContentOther'){
-				$(this).parent().next().attr('class', 'singoContentOther');
-			}else if(className == 'singoContentOpen' || className=='singoContent'){
-				$(this).parent().next().attr('class', 'singoContent');				
-			}
-		});//(2)닫기
-		
-	});//신고 카테고리 펼치기
-	
-	// 모달 창 닫기 modalCloseBtn
-	$('.singoModalWrap').on("click", '.modalCloseBtn', function(){
+  	});	
+	  	
+	  	
+  // 모달 창 닫기 modalCloseBtn
+    $('.singoModalWrap').on("click", '.modalCloseBtn', function(){
 		var openInBtn = $('.singoTitleOpen>button');
 		var className = openInBtn.parent().next().attr('class'); //위의 className과 관련없음
-		
+		 
 		$(openInBtn).parent().attr('class','singoTitle');
-		
+		 
 		if(className == 'singoContentOtherOpen' || className =='singoContentOther'){
 			$(openInBtn).parent().next().attr('class', 'singoContentOther');
 		}else if(className == 'singoContentOpen' || className=='singoContent'){
-			$(openInBtn).parent().next().attr('class', 'singoContent');				
+			$(openInBtn).parent().next().attr('class', 'singoContent');            
 		}
-		//alert("모달 창 닫기");
-		// display:flex ---> display:none 으로
+		
 		$("#modalDisplay").attr('id','modalHidden'); 
-		});
-});//
+    });
+}); // 신고모달
 
 
-
-// *********************** storeBottom ***********************
+// ---------------------------- storeBottom ----------------------------
 // 메뉴바 클릭
 $('#storeBottom').on('click', '.default, .before', function(){
 	var nowMenu = $(this).attr('class','now');
@@ -434,10 +403,7 @@ $('#storeBottom').on('click', '.default, .before', function(){
 
 
 
-//******** 내부 페이지 이동 ([상품]/[상품후기]/[구매내역]/[찜]/[내상품관리]) ******** 
-//컨트롤러 이동안하고 jsp 파일 불러옴
-//var paramId = $('.hiddenId').val();
-
+//----------- 내부 페이지 이동 ([상품]/[상품후기]/[구매내역]/[찜]/[내상품관리]) -----------
 var isProd = false; //중복호출방지
 $('#productPg').click(function(){
 	if(isProd) return;
@@ -525,16 +491,3 @@ $('#productManage').click(function(){
 	        }
 	 });
 });    
-
-
-
-
-
-
-
-
-
-
-
-
-

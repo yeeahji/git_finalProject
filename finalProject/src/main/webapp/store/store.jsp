@@ -261,6 +261,7 @@
 			</div><!-- //singoModalBottom -->
 		</div><!-- singoModalWrap -->
 	</div><!-- //modalHidden -->
+	
 </div><!-- //storeWrap -->
 </div><!-- //storeBody -->
 

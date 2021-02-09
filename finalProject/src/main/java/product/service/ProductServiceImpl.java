@@ -72,7 +72,7 @@ public class ProductServiceImpl implements ProductService {
 	}
 	// 카테고리이름
 	@Override
-	public String getProdCateName(String seq) {
+	public CategoryDTO getProdCateName(String seq) {
 		return productDAO.getProdCateName(seq);
 	}
 
@@ -100,6 +100,11 @@ public class ProductServiceImpl implements ProductService {
 	public void zzimInsert(Map<String, String> map) {
 		productDAO.zzimInsert(map);
 		
+	}
+
+	@Override
+	public String getProdBigCate(String cate_code) {
+		return productDAO.getProdBigCate(cate_code);
 	}
 
 }

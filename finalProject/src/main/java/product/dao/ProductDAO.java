@@ -21,7 +21,7 @@ public interface ProductDAO {
 
 	public List<ProductDTO> getRelatedProducts(Map<String, String> map);
 
-	public String getProdCateName(String seq);
+	public CategoryDTO getProdCateName(String seq);
 
 	public StoreDTO getStoreInfo(String seq);
 
@@ -32,5 +32,7 @@ public interface ProductDAO {
 	public int getZzimNum(String seq);
 
 	public void zzimInsert(Map<String, String> map);
+
+	public String getProdBigCate(String cate_code);
 
 }

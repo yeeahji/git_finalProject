@@ -5,90 +5,23 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec" %>
 <!-- 사용자 정보 가져오기 -->
-<sec:authentication property="principal" var="member"/> 
-<c:choose>
-	<c:when test="${member=='anonymousUser'}">
-		<input type="hidden" class="loginId" value="비로그인">
-	</c:when>
-	<c:when test="${member ne 'anonymousUser'}">
-		<input type="hidden" class="loginId" value="${member.username}">
-	</c:when>
-</c:choose>
-	
+<sec:authentication property="principal" var="member"/>
+<!-- 회원/비회원 구분 -->
+<sec:authorize access="isAnonymous()">
+	<input type="hidden" class="loginId" value="비회원">
+</sec:authorize>
+<sec:authorize access="hasRole('ROLE_USER')">
+	<input type="hidden" class="loginId" value="${member.username}">
+</sec:authorize>
+
 <link rel="stylesheet" href="../css/product/productDetail.css">
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.min.js"></script> 
 <script src="../js/product/productDetail.js"></script>
 
-<meta name="viewport" content="width=device-width, initial-scale=1">
-
 <script src="https://unpkg.com/swiper/swiper-bundle.js"></script>
 <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
 
-<body>
-<script type="text/javascript">
-	var imgCommonPreview = new Image();
-	function viewPic(filepath) {
-		if (filepath == "") {
-			alert('등록된 이미지가 없습니다.');
-			return;
-		}
-		imgCommonPreview.src = filepath;
-		setTimeout("createPreviewWin(imgCommonPreview)", 100);
-	}
-	function createPreviewWin(imgCommonPreview) {
-		if (!imgCommonPreview.complete) {
-			setTimeout("createPreviewWin(imgCommonPreview)", 100);
-			return;
-		}
-		var scrollsize = 17;
-		var swidth = screen.width - 10;
-		var sheight = screen.height - 90;
-		var wsize = imgCommonPreview.width;
-		var hsize = imgCommonPreview.height;
-		if (wsize < 50)
-			wsize = 50; // 가로 최소 크기
-		if (hsize < 50)
-			hsize = 50; // 세로 최소 크기
-		if (wsize > swidth)
-			wsize = swidth; // 가로 최대 크기
-		if (hsize > sheight)
-			hsize = sheight; // 세로 최대 크기
-		// 세로가 최대크기를 초과한경우 세로스크롤바 자리 확보
-		if ((wsize < swidth - scrollsize) && hsize >= sheight)
-			wsize += scrollsize;
-		// 가로가 최대크기를 초과한경우 가로스크롤바 자리 확보
-		if ((hsize < sheight - scrollsize) && wsize >= swidth)
-			hsize += scrollsize;
-		// IE 6,7 전용 : 가로세로 크기가 보통일때 세로 스크롤바 자리 확보
-		if ((wsize < swidth - scrollsize)
-				&& hsize < sheight
-				&& (navigator.userAgent.indexOf("MSIE 6.0") > -1 || navigator.userAgent
-						.indexOf("MSIE 7.0") > -1))
-			wsize += scrollsize;
-		// 듀얼 모니터에서 팝업 가운데 정렬하기 
-		var mtWidth = document.body.clientWidth;
-		// 현재 브라우저가 있는 모니터의 화면 폭 사이즈 
-		var mtHeight = document.body.clientHeight;
-		// 현재 브라우저가 있는 모니터의 화면 높이 사이즈 
-		var scX = window.screenLeft;
-		// 현재 브라우저의 x 좌표(모니터 두 대를 합한 총 위치 기준) 
-		var scY = window.screenTop;
-		// 현재 브라우저의 y 좌표(모니터 두 대를 합한 총 위치 기준) 
-		var popX = scX + (mtWidth - wsize) / 2 - 50;
-		// 팝업 창을 띄울 x 위치 지정(모니터 두 대를 합한 총 위치 기준) 
-		var popY = scY + (mtHeight - hsize) / 2 - 50;
-		// 팝업 창을 띄울 y 위치 지정(모니터 두 대를 합한 총 위치 기준) 
-		// window.open('주소', '이름(공란가능)', '속성');
-		imageWin = window.open("", "", "top=" + popY + ",left=" + popX
-				+ ",width=" + wsize + ",height=" + hsize
-				+ ",scrollbars=yes,resizable=yes,status=no");
-		imageWin.document
-				.write("<html><title>Preview</title><body style='margin:0;cursor:pointer;' title='Close' onclick='window.close()'>");
-		imageWin.document.write("<img src='" + imgCommonPreview.src + "'>");
-		imageWin.document.write("</body></html>");
-	}
-</script>
 <!-- product_seq 받아옴  -->
 <input type="hidden" class="hiddenProdSeq" value="${seq}">
 
@@ -104,10 +37,23 @@
              <div class="cateBigSelectWrap">
                 <div class="cateBigSelect">
                    <div class="cateBigSelectText">
-                     		 패션잡화
+						<!-- productDetail.js -->
                       <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAOCAYAAAAvxDzwAAAAAXNSR0IArs4c6QAAASVJREFUOBGlks9qwkAQxrMLihRKQXyUHjx58dBLEXqxUPCavIKvkpCQgxcTD0LpSQQfoBfpRXwHj16av37fYWWrJhvqwDCbb2d+O5NdYcFc120hzIQQkW3bS2pNzPf9blEUC+ROUffNGkEYQWVZvuE7xfq9CRR1T8hfw5/hR/jIcZyN8DyPsDEEZUZoEASPeZ6vUNdXRYi/aOZVYjGHp9pGC4kRDmLHV4bOHrIs+7qAWYDtoW0lx+OYqDRCwzDsIO8TPtBPQv0PYEOMfGCHVhNoHMftJEl4YcMqGHWhb3JMjguNt64slVJOoH/AR0pk1DtT+h8gxQqoyj/HWzBuXgEpmqBVsEpgHbQOVgu8BTXBjEAdCthOPQ3qdxn+6QsedO8uyH+LT8nvvwPGjeHzAAAAAElFTkSuQmCC" width="10" height="6" alt="카테고리 화살표 아이콘">
-                   </div><!-- //text -->
-                   <div class="cateBigOpen"></div><!-- 펼치면 나오는애들  -->
+                   </div>
+                   <div class="cateBigOpen">
+                   		<a class="bigcate_open">여성의류</a>
+                   		<a class="bigcate_open">남성의류</a>
+                   		<a class="bigcate_open">패션잡화</a>
+                   		<a class="bigcate_open">생활/가구/식품</a>
+                   		<a class="bigcate_open">디지털/가전</a>
+                   		<a class="bigcate_open">유아동/출산</a>
+                   		<a class="bigcate_open">도서/취미/애완</a>
+                   		<a class="bigcate_open">스포츠/레저</a>
+                   		<a class="bigcate_open">스타굿즈</a>
+                   		<a class="bigcate_open">뷰티/미용</a>
+                   		<a class="bigcate_open">차량/오토바이</a>
+                   		<a class="bigcate_open">기타</a>
+                   </div>
                 </div>
              </div>
           </div><!-- //cateBigWrap  -->
@@ -117,17 +63,17 @@
              <div class="cateSmallSelectWrap">
                 <div class="cateSmallSelect">
                    <div class="cateSmallText">
-                      	남성화
+                       <!-- productDetail.js -->
                       <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAOCAYAAAAvxDzwAAAAAXNSR0IArs4c6QAAASVJREFUOBGlks9qwkAQxrMLihRKQXyUHjx58dBLEXqxUPCavIKvkpCQgxcTD0LpSQQfoBfpRXwHj16av37fYWWrJhvqwDCbb2d+O5NdYcFc120hzIQQkW3bS2pNzPf9blEUC+ROUffNGkEYQWVZvuE7xfq9CRR1T8hfw5/hR/jIcZyN8DyPsDEEZUZoEASPeZ6vUNdXRYi/aOZVYjGHp9pGC4kRDmLHV4bOHrIs+7qAWYDtoW0lx+OYqDRCwzDsIO8TPtBPQv0PYEOMfGCHVhNoHMftJEl4YcMqGHWhb3JMjguNt64slVJOoH/AR0pk1DtT+h8gxQqoyj/HWzBuXgEpmqBVsEpgHbQOVgu8BTXBjEAdCthOPQ3qdxn+6QsedO8uyH+LT8nvvwPGjeHzAAAAAElFTkSuQmCC" width="10" height="6" alt="카테고리 화살표 아이콘">
                    </div>
-                   <div class="cateSmallOpen"></div><!-- 소분류 펼ㅊㅣ면 -->
-                </div><!-- //cateSmallSelectWrapcateSmallSelect -->
-             </div><!-- //cateSmallSelectWrap -->
-          </div><!-- //cateSmallWrap -->
-       </div><!-- //prodDetailCateWrap2 -->
-    </div><!-- //prodDetailCateWrap1 -->
-
-		
+                   <div class="cateSmallOpen">
+                   </div>
+                </div>
+             </div>
+          </div><!-- //smallWrap -->
+       </div><!-- //wrap2 -->
+    </div><!-- //wrap1 -->
+	
 	<!-- 상품 정보 -->
 	<div class="detail-info__area">
 		<div class="detail-info__div">
@@ -135,11 +81,9 @@
 				<input id="prodno" type="hidden" data-no="78">
 				<!-- 이미지 리스트 -->
 				<div class="swiper-container detail-info__image__list">
-					
 					<div class="swiper-wrapper">
 						<!-- productDetail.js -->
-					</div><!-- //swiper-wrapper -->
-					
+					</div>
 					<!-- 워터마크 -->
 					<div class="detail-info__image__watermark"></div>
 					<!-- 확대 버튼-->
@@ -148,7 +92,6 @@
 					</button>
 					<div class="detail-info__image--prev swiper-button-next swiper-button-white" onclick="moveSlides(-1)">&#10094;</div>
 					<div class="detail-info__image--next swiper-button-prev swiper-button-white" onclick="moveSlides(1)">&#10095;</div>
-					
 					<!-- 슬라이더 버튼 수 -->
 					<div class="swiper-pagination">
 						<div class="paginationBtn" style="text-align: center">
@@ -158,7 +101,6 @@
 					
 				</div>
 			</div><!-- //detail-info__image__div -->
-			
 			
 			<div class="detail-info__text__div">
 				<div class="detail-info__text__div2">
@@ -187,7 +129,6 @@
 										<div id="view"></div>
 									</div>
 									<div class="detail-info--topL-item">
-										<!-- 다시!!!!!!!!!!!!!!!!! 값 넘어오는 방법!!!!!!!!!!!!!! -->
 										<img class="timeIcon" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAuRJREFUWAnFV01rE1EUzUwSMWATENpFRNyIi0YI+eiui4LoogWFgkvBH6Dgpip+dONKgivdC3XlpkWELkTQRVw1H4QwWQmhLrKwq1IwxHyM54zvDck4mc6bTO3AY97MO/eeM/e9d+c+LeLzqlQq8Wg0ujIajW6ZprkIs7SmaRfQN9HvsOG5pev6h+Fw+LVYLPb9uNaOAzUajYXBYPAcPHeATR2HF+OHEPMuFou9yGazP71spgowDONMt9t9BOMNtDkvJx5jRxgrJRKJl5lM5rcbzlVArVabR6i3YbDsZhTgXRlTs57P5w+ctv8IAPkiwr2LdskJnuUZU7KPtgoRrXE/EwL45SDeC5tcEgoRS+OR0OUg55xhPyly8tA3OcgleW0BYsEpzTnm9THaknTm874suCy4JYBbDU9c7UoXvugzwllRMvoL3hCcEUsA9zneB91qAfgjc4IzojPD4UuYZP7rRU5y60yvYPab4cIUmSK3ztweplcVX+TWEYqMilGYWHJzEabDdKroK60jO52aAHLbiUhReShwTIHJNcBiYqYLX/IxoIMOIxBYANLweRIXCoWb2FJrEPJdUUiHa8BQNLLh2EY7+IM+a7fbZ3O53G4ymbwKf08B+GWDPDrAtrR6vX4dNdwnD5yfoR9w9hCReE9ws9m82Ov1XqF728sYUbuhMR0CxEoljGz4DdPyQP6gqtXqXayxt1NEHOL9vFWQAPgawHtTgEqvEQm4Mrcg5An6VxDdL24OMPYGEbtvCeCvsd/vcwGF+UdkZRyFmHMuAo7i8fhlVsxWHhClc8kFOMur1BRy+izJct1ORCydMVCehdGnbVlwWXBbAOt2zNs6wrbv05EyjL7JMX5GsAXQG6tVgFZPQgR90vd4RUzOCQFCRAtAFpphTkeZPkE+cSZwFSBEHGCerqG/icbjVdCLtpv05fxy6dDahvLB7X5qh1OnGMfxnFUUj+dWLYHtJo/nBhaZ0vH8D6NELRJSWvu9AAAAAElFTkSuQmCC" width="16" height="16" alt="상품 상태 아이콘">
 										<!-- 시간 -->
 										<c:set var="b_time" value="${product_logtime}" />
@@ -206,10 +147,6 @@
 										<div id="product_logtime"> ${time}${unit}</div> 
 									</div>
 								</div>
-								<button class="detail-info__text-body-topR">
-									<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAYAAAA7MK6iAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAbBJREFUeNrsls9LAkEcxb+au+JSGIEQyGbBdg881CmConsE9Qd07S/p0qG69RcUdOzSoUt0UujS3c0kEQULU7R17c2wyhazNbvaesgHH9xZh3kzb35tpNfrUV/5fJ7+Stls9ks5FqCNKTDv/L6AjyAdiUrWi4AdcAXewDMwwTu4AQdAHbXxCrh3TJm55vpPAVvgHDyC7VEZM6M7sCbRlgGuwaGM8U9zvAkunbn0M/8nzvNpkBHr4MKnqVvHYDWI8RGY84wpFiNFUX5L8sxZlNJRL4E9UeVkMknpdJoSiQQvt9ttKpfLVK1WhVsXbIBb2RHvi96nUikyDGNgyhSPxymTyZCu614D2/UT9bqooqZpnrm6OyNYoNLGy6KKxWKRR/td3W6XCoWCV/sLfoyFJ5Bt29zAfbb3O9TpdLzaZzFND3NkcjUaDapUKoNyvV6nWq0ms7eHM2YqlUrUarXIsiwyTTPwbeX7dmJRs8hVVeXmoRkzNZtNzjCK0pg0MQ5NosX1BKwRetjCb6lcLje2ES+GHDk72G1m/MCu2hCNZ8HrZDv9j33MVtlMiJ58X38KMADfFnDPWur9bAAAAABJRU5ErkJggg==" width="15" height="15" alt="신고 아이콘">
-									신고하기
-								</button>
 							</div>
 							<div class="detail-info__text-body-bottom">
 								<!-- 아이템 한개 -->
@@ -331,93 +268,207 @@
 						</div>
 					</div>
 				</div>
-			
 			</div><!-- //prodInfo_wrap1 -->
+		</div><!-- //btmProdInfo_Wrap2 -->
 			
-			</div><!-- //btmProdInfo_Wrap2 -->
-			
-			<div class="prodInfo_RightWrap">
-				<!-- 공유링크 -->
-				<div class="prodInfo_shareLink">
-					<button type="button" class="prodInfo_shareLinkBtn">
-						<img src="data:image/png;base64,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" width="25" height="25" alt="url 공유 아이콘">
-						<span class="prodInfo_shareLinkClick">클릭하여 복사하기</span>
-					</button>
-				</div>
-				<!-- 상점정보 -->
-				<div class="prodInfo_storeWrap1">
-					<div class="prodInfo_storeWrap2">
-						<div class="storeInfo_Title">상점정보</div>
-					</div><!-- //storeWrap2 -->
-					<div class="prodInfo_storeDetailWrap">
-						<!-- 상점사진 & 상점이름 & 상품 개수 -->
-						<div class="storeDetailTop">
-							<a class="storeProfileImg_Link" href="#">
-								<!-- productDetail.js -->
-							</a>
-							<div class="storeInfoWrap">
-								<a class="storeInfo_name" href="#" style="font-size:12pt;"><!-- productDetail.js --></a>
-								<div class="storeInfo_productNum">
-									<a class="productNumLink" href="#"><!-- productDetail.js --></a>
-								</div>
+		<div class="prodInfo_RightWrap">
+			<!-- 공유링크 -->
+			<div class="prodInfo_shareLink">
+				<button type="button" class="prodInfo_shareLinkBtn">
+					<img src="data:image/png;base64,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" width="25" height="25" alt="url 공유 아이콘">
+					<span class="prodInfo_shareLinkClick">클릭하여 복사하기</span>
+				</button>
+			</div>
+			<!-- 상점정보 -->
+			<div class="prodInfo_storeWrap1">
+				<div class="prodInfo_storeWrap2">
+					<div class="storeInfo_Title">상점정보</div>
+				</div><!-- //storeWrap2 -->
+				<div class="prodInfo_storeDetailWrap">
+					<!-- 상점사진 & 상점이름 & 상품 개수 -->
+					<div class="storeDetailTop">
+						<a class="storeProfileImg_Link" href="#">
+							<!-- productDetail.js -->
+						</a>
+						<div class="storeInfoWrap">
+							<a class="storeInfo_name" href="#" style="font-size:12pt;"><!-- productDetail.js --></a>
+							<div class="storeInfo_productNum">
+								<a class="productNumLink" href="#"><!-- productDetail.js --></a>
 							</div>
-						</div><!-- //storeDetailTop -->
-						<!-- 상점주인이 올린 최신 상품 2개  -->
-						<div class="storeInfo_productWrap">
+						</div>
+					</div><!-- //storeDetailTop -->
+					<!-- 상점주인이 올린 최신 상품 2개  -->
+					<div class="storeInfo_productWrap">
+						<!-- productDetail.js -->
+					</div>
+					<div class="storeInfo_moreProd">
+						<a class="moreProdLink" href="#">
+							<span class="moreProdLink_Num"></span>
+							상품 더보기
+						</a>
+					</div>
+					<!-- 에코지수 & 상점평점 -->
+					<div class="storeInfo_IndiWrap">
+						<!-- 에코지수 -->
+						<div class="echoIndi_title">
 							<!-- productDetail.js -->
 						</div>
-						<div class="storeInfo_moreProd">
-							<a class="moreProdLink" href="#">
-								<span class="moreProdLink_Num"></span>
-								상품 더보기
-							</a>
-						</div>
-						<!-- 에코지수 & 상점평점 -->
-						<div class="storeInfo_IndiWrap">
-							<!-- 에코지수 -->
-							<div class="echoIndi_title">
-								<!-- productDetail.js -->
+						<!-- 상점평점 -->
+						<div class="storeScore_title">
+							<div style="margin-bottom:1px;">상점평점</div>
+							<div class="storeStar"> 
+								<img width="25" height="24" class="star1" alt="별 " src="" >
+								<img width="25" height="24" class="star2" alt="별" src="" >
+								<img width="25" height="24" class="star3" alt="별" src="" >
+								<img width="25" height="24" class="star4" alt="별" src="" >
+								<img width="25" height="24" class="star5" alt="별" src="" >
 							</div>
-							<!-- 상점평점 -->
-							<div class="storeScore_title">
-								<div style="margin-bottom:1px;">상점평점</div>
-								<div class="storeStar"> 
-									<img width="25" height="24" class="star1" alt="별 " src="" >
-									<img width="25" height="24" class="star2" alt="별" src="" >
-									<img width="25" height="24" class="star3" alt="별" src="" >
-									<img width="25" height="24" class="star4" alt="별" src="" >
-									<img width="25" height="24" class="star5" alt="별" src="" >
-								</div>
-							</div>
-						
 						</div>
-						<!-- 연락하기 버튼 -->
-						<div class="storeInfo_callBtn">
-							<button class="callBtn">연락하기</button>
-						</div>
-						
-					</div><!-- //storeDetailWrap -->
-				</div><!-- //prodInfo_storeWrap1 -->
-			</div><!-- //RightWrap -->
-			
-			
-			
-		
-		
-		
-		
-		
-		
+					
+					</div>
+					<!-- 연락하기 버튼 -->
+					<div class="storeInfo_callBtn">
+						<button class="callBtn">연락하기</button>
+					</div>
+				</div><!-- //storeDetailWrap -->
+			</div><!-- //prodInfo_storeWrap1 -->
+		</div><!-- //RightWrap -->
 	</div><!-- //btmProdInfo_Wrap1 -->
-		
-
 	
-
-
+	<!-- ************************ 신고하기 모달창 ************************ -->
+   <div id="modalHidden">
+      <div class="singoModalWrap">
+         <div id="singoModalTop">
+            <div class="title">신고하기</div>
+            <button class="modalCloseBtn">
+               <!-- 닫기 버튼 아이콘 -->
+               <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAAAXNSR0IArs4c6QAAAiBJREFUaAXtmM1xwjAQRrFvcE+aSJoIPaSI5MCNHmC4caCK1ECaCE0kBTBccPxl0MyO0C6r1drkIF/Q6Gf3vbU9kplM6lUrUCtQK/BvK7Bard622+3DvQCRGwxS/pYbvCzcHY/H/T0kkBO5e76dJMEKzGazj6Zpvrquex5bIsAjNxjAwhW64QbQHweaTqfzxWLxI60pHcvNKQqMLZELD76bAmNJWODVAkNLWOGzBIaSKIHPFvCWKIU3CXhJeMCbBUolvOCLBKwSnvDFAgmJQ7/ZvXCb3QX+s99hn7DDemyMqn0AoNIVgSUlNHOkHNyYiwCCS4DSGAem7XcT4CTQ3x8Gw2OTvDta2NQ8VwEkiKuNvssz7w6P2O4CCEol/pI0zSDwiM1+D2DQep1Op6vCpPqs8em6q0R00NLebDaP5/N5Hx4bxAjttm3ny+Xy2xKXW+MqEMMDGImpkLeEm0AKPlRbGuMqq+13EdAAauZooem8YoEcsJy5FFJqFwlYgCxrBhEoASlZG8uY7oAHgEcMyGQLeCVGco9YWQIeCQFOr9KY6qNEaSIKTdvYK7C59R84B+zY2PRwlqJzpLZKAAGH3E1jCRy/tRI3HyF6skSVvI8CtLrxXZY+T8M6USCG1wQMga2/uTlZgdxAVuDUupzc7DvQP4ev4Rg8RuWpCP7VQM7wYoOFjqvb6/X6HdVQL3CeiHcCDM5ha7hagVqBWgHHCvwCWAH5e5bAf84AAAAASUVORK5CYII=" width="24" height="24" alt="닫기 버튼 아이콘">
+            </button>
+         </div>
+         
+         <div id="singoModalBottom"> 
+            <!-- 카테고리 (1) -->
+            <div class="singoCategory">
+               <div class="singoTitle">
+                  <span>광고(상점홍보,낚시글,도배글)</span>
+                  <button type="button" class="titleBtn"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABoAAAAQCAYAAAAI0W+oAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAXNJREFUeNqslK1Pw1AUxV9fmoq5Ldl/MCSaBLkEAQkIPgxzTUABjoRMsAJmCQ4HJGAAw8yCwGFQaCyOKSpgZmIGzk1OyU1Zu7fRm/yWvtvec1777p0XRVFgjLkGZ+DFFBtzYBeEPn5uwAZYAPPgrSCTGngAVRBY/HTBNxOPoFKASYVaVWp3xegWRGoX97KDf5gE1KhxfSwelosTGkrUwRXwpjDxWFvnWjSP5CIxktcLwRPXDdCawqjFWkOtkNq/RhJDsKaa4VAVuUSDNYYa69Q0aSOJL7AI4hGfIS/0546p8akfsCOKZDfLYMCD7aiDzWrjDp8dsPbPiNiMYhncLX7fsmrVdCQjUeaz21lDb3N2egeaqeErqfsl5pK3barOnchIog3O1d/JBc9BuGTO8LqdJ+Q7HPQemOGBS2e9M7+p2nhnnIiLkbToKngGs+BA3XvlveE4Ees4I32wBD5ULmau7yLgTzCQPbAC9rk+Zc4pfgQYAOZsSsrHKCoBAAAAAElFTkSuQmCC" width="13" height="8" alt="화살표 아이콘"></button>
+               </div>
+               <div class="singoContentOther">
+                  <div class="contentList">
+                     <button type="button">상점홍보</button>
+                  </div>
+                  <div class="contentList">
+                     <button type="button">낚시글</button>
+                  </div>
+                  <div class="contentList">
+                     <button type="button">도배글</button>
+                  </div>
+                  <div class="contentList">
+                     <button type="button">타사이트, 어플 광고</button>
+                  </div>
+                  <div class="contentListInput">
+                     <input type="text" placeholder="기타(사유)">
+                     <button type="button">등록</button>
+                  </div>
+               </div>
+            </div>
+            <!-- 카테고리 (2) -->
+            <div class="singoCategory">
+               <div class="singoTitle">
+                  <span>물품정보 부정확(카테고리,가격,사진)</span>
+                  <button type="button" class="titleBtn"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABoAAAAQCAYAAAAI0W+oAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAXNJREFUeNqslK1Pw1AUxV9fmoq5Ldl/MCSaBLkEAQkIPgxzTUABjoRMsAJmCQ4HJGAAw8yCwGFQaCyOKSpgZmIGzk1OyU1Zu7fRm/yWvtvec1777p0XRVFgjLkGZ+DFFBtzYBeEPn5uwAZYAPPgrSCTGngAVRBY/HTBNxOPoFKASYVaVWp3xegWRGoX97KDf5gE1KhxfSwelosTGkrUwRXwpjDxWFvnWjSP5CIxktcLwRPXDdCawqjFWkOtkNq/RhJDsKaa4VAVuUSDNYYa69Q0aSOJL7AI4hGfIS/0546p8akfsCOKZDfLYMCD7aiDzWrjDp8dsPbPiNiMYhncLX7fsmrVdCQjUeaz21lDb3N2egeaqeErqfsl5pK3barOnchIog3O1d/JBc9BuGTO8LqdJ+Q7HPQemOGBS2e9M7+p2nhnnIiLkbToKngGs+BA3XvlveE4Ees4I32wBD5ULmau7yLgTzCQPbAC9rk+Zc4pfgQYAOZsSsrHKCoBAAAAAElFTkSuQmCC" width="13" height="8" alt="화살표 아이콘"></button>
+               </div>
+               <div class="singoContentOther">
+                  <div class="contentList">
+                     <button type="button">카테고리가 잘못됨</button>
+                  </div>
+                  <div class="contentList">
+                     <button type="button">가격이 잘못됨</button>
+                  </div>
+                  <div class="contentList">
+                     <button type="button">사진이 잘못됨</button>
+                  </div>
+                  <div class="contentList">
+                     <button type="button">상품명이 잘못됨</button>
+                  </div>
+                  <div class="contentListInput">
+                     <input type="text" placeholder="기타(사유)">
+                     <button type="button">등록</button>
+                  </div>
+               </div>
+            </div>
+            <!-- 카테고리 (3) -->
+            <div class="singoCategory">
+               <div class="singoTitle">
+                  <span>거래 금지 품목(담배,주류,장물)</span>
+                  <button type="button" class="titleBtn"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABoAAAAQCAYAAAAI0W+oAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAXNJREFUeNqslK1Pw1AUxV9fmoq5Ldl/MCSaBLkEAQkIPgxzTUABjoRMsAJmCQ4HJGAAw8yCwGFQaCyOKSpgZmIGzk1OyU1Zu7fRm/yWvtvec1777p0XRVFgjLkGZ+DFFBtzYBeEPn5uwAZYAPPgrSCTGngAVRBY/HTBNxOPoFKASYVaVWp3xegWRGoX97KDf5gE1KhxfSwelosTGkrUwRXwpjDxWFvnWjSP5CIxktcLwRPXDdCawqjFWkOtkNq/RhJDsKaa4VAVuUSDNYYa69Q0aSOJL7AI4hGfIS/0546p8akfsCOKZDfLYMCD7aiDzWrjDp8dsPbPiNiMYhncLX7fsmrVdCQjUeaz21lDb3N2egeaqeErqfsl5pK3barOnchIog3O1d/JBc9BuGTO8LqdJ+Q7HPQemOGBS2e9M7+p2nhnnIiLkbToKngGs+BA3XvlveE4Ees4I32wBD5ULmau7yLgTzCQPbAC9rk+Zc4pfgQYAOZsSsrHKCoBAAAAAElFTkSuQmCC" width="13" height="8" alt="화살표 아이콘"></button>
+               </div>
+               <div class="singoContentOther">
+                  <div class="contentList">
+                     <button type="button">담배/주류</button>
+                  </div>
+                  <div class="contentList">
+                     <button type="button">장물(분실폰,분실노트북,..)</button>
+                  </div>
+                  <div class="contentList">
+                     <button type="button">의약품류</button>
+                  </div>
+                  <div class="contentList">
+                     <button type="button">콘택트 렌즈</button>
+                  </div>
+                  <div class="contentListInput">
+                     <input type="text" placeholder="기타(사유)">
+                     <button type="button">등록</button>
+                  </div>
+               </div>
+            </div>
+            <!-- 카테고리 (4) -->
+            <div class="singoCategory">
+               <div class="singoTitle">
+                  <span>언어폭력(비방,욕설,성희롱)</span>
+                  <button type="button" class="titleBtn"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABoAAAAQCAYAAAAI0W+oAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAXNJREFUeNqslK1Pw1AUxV9fmoq5Ldl/MCSaBLkEAQkIPgxzTUABjoRMsAJmCQ4HJGAAw8yCwGFQaCyOKSpgZmIGzk1OyU1Zu7fRm/yWvtvec1777p0XRVFgjLkGZ+DFFBtzYBeEPn5uwAZYAPPgrSCTGngAVRBY/HTBNxOPoFKASYVaVWp3xegWRGoX97KDf5gE1KhxfSwelosTGkrUwRXwpjDxWFvnWjSP5CIxktcLwRPXDdCawqjFWkOtkNq/RhJDsKaa4VAVuUSDNYYa69Q0aSOJL7AI4hGfIS/0546p8akfsCOKZDfLYMCD7aiDzWrjDp8dsPbPiNiMYhncLX7fsmrVdCQjUeaz21lDb3N2egeaqeErqfsl5pK3barOnchIog3O1d/JBc9BuGTO8LqdJ+Q7HPQemOGBS2e9M7+p2nhnnIiLkbToKngGs+BA3XvlveE4Ees4I32wBD5ULmau7yLgTzCQPbAC9rk+Zc4pfgQYAOZsSsrHKCoBAAAAAElFTkSuQmCC" width="13" height="8" alt="화살표 아이콘"></button>
+               </div>
+               <div class="singoContent">
+                  <div class="contentList">
+                     <button type="button">비방/욕설</button>
+                  </div>
+                  <div class="contentList">
+                     <button type="button">성희롱</button>
+                  </div>
+                  <div class="contentListInput">
+                     <input type="text" placeholder="기타(사유)">
+                     <button type="button">등록</button>
+                  </div>
+               </div>
+            </div>
+            <div class="singoCategory">
+               <div class="singoTitle">
+                  <span>기타사유(직접입력)</span>
+                  <button type="button" class="titleBtn"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABoAAAAQCAYAAAAI0W+oAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAXNJREFUeNqslK1Pw1AUxV9fmoq5Ldl/MCSaBLkEAQkIPgxzTUABjoRMsAJmCQ4HJGAAw8yCwGFQaCyOKSpgZmIGzk1OyU1Zu7fRm/yWvtvec1777p0XRVFgjLkGZ+DFFBtzYBeEPn5uwAZYAPPgrSCTGngAVRBY/HTBNxOPoFKASYVaVWp3xegWRGoX97KDf5gE1KhxfSwelosTGkrUwRXwpjDxWFvnWjSP5CIxktcLwRPXDdCawqjFWkOtkNq/RhJDsKaa4VAVuUSDNYYa69Q0aSOJL7AI4hGfIS/0546p8akfsCOKZDfLYMCD7aiDzWrjDp8dsPbPiNiMYhncLX7fsmrVdCQjUeaz21lDb3N2egeaqeErqfsl5pK3barOnchIog3O1d/JBc9BuGTO8LqdJ+Q7HPQemOGBS2e9M7+p2nhnnIiLkbToKngGs+BA3XvlveE4Ees4I32wBD5ULmau7yLgTzCQPbAC9rk+Zc4pfgQYAOZsSsrHKCoBAAAAAElFTkSuQmCC" width="13" height="8" alt="화살표 아이콘"></button>
+               </div>
+               <div class="singoContent">
+                  <div class="contetnListTextarea">
+                     <textarea></textarea>
+                     <button type="button">등록</button>
+                  </div>
+               </div>
+            </div>
+            <div class="singoCategory">
+               <div class="singoTitle">
+                  <span>거래사기(1:1문의하기)</span>
+                  <button class="directAsk">1:1문의하기</button>
+                  <!-- 문의하기 링크와 연결!!!!!!!!!!!!!! -->
+               </div>
+               <div class="singoContent"></div>
+            </div>
+         </div><!-- //singoModalBottom -->
+      </div><!-- singoModalWrap -->
+   </div><!-- //modalHidden -->
+	
 </div>
 </div>
 
-</body>
+
 
 
 

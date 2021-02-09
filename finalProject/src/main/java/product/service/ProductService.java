@@ -24,7 +24,7 @@ public interface ProductService {
 
 	public RelProdPaging relProdPaging(String rel_pg);
 
-	public String getProdCateName(String seq);
+	public CategoryDTO getProdCateName(String seq);
 
 	public StoreDTO getStoreInfo(String seq);
 
@@ -35,5 +35,7 @@ public interface ProductService {
 	public int getZzimNum(String seq);
 
 	public void zzimInsert(Map<String, String> map);
+
+	public String getProdBigCate(String cate_code);
 
 }

@@ -258,7 +258,6 @@ public class StoreController {
 										  @RequestParam String mem_id,
 										  @RequestParam String product_manage) {
 		List<ProductDTO> productManageList = storeService.productManageList(pg, mem_id, product_manage);
-		
 		StorePaging storePaging = storeService.storePaging(pg, mem_id, product_manage);
 		
 		ModelAndView mav = new ModelAndView();
