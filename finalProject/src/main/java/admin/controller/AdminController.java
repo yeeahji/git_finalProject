@@ -77,6 +77,7 @@ public class AdminController {
 	@RequestMapping(value="/complainList", method=RequestMethod.GET)
 	public String complainList() {
 		return "/admin/adminPage/complainList";
+
 	}
 	
 	
@@ -155,7 +156,9 @@ public class AdminController {
 		AdminMembersDTO adminMembersDTO= adminService.getStoreView(id);
 		//판매중인물건 총갯수
 		int totalSellProduct = adminService.totalSellProduct(id);
+		//상품정보
 		List<ProductDTO> productList = adminService.getProductList(id);
+		//
 		
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("adminMembersDTO",adminMembersDTO);
@@ -180,7 +183,16 @@ public class AdminController {
 	mav.setViewName("jsonView");
 	return mav;
 	}
+
+	//상점_물품삭제
+	@RequestMapping(value="/store_productDelete", method=RequestMethod.GET)
+	public ModelAndView store_productDelete(String[] check) {
+		System.out.println("check값 = "+check);
 		
+		adminService.store_productDelete(check);
+		return new ModelAndView("redirect:/admin/storeList");
+	}
+
 
 	//신고 내역 출력
 //	@RequestMapping(value="/getComplainList", method=RequestMethod.POST)

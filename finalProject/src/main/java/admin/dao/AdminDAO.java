@@ -34,6 +34,8 @@ public interface AdminDAO {
 	public List<StoreDTO> getSearchStoreList(Map<String, String> map);
 	//상점조건 건색 페이징
 	public int getTotalD(Map<String, String> map);
+	//상점목록_물품리스트에서 삭제
+	public void store_productDelete(Map<String, String[]> map);
 
 
 

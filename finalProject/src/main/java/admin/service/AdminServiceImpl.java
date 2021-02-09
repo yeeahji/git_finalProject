@@ -1,5 +1,6 @@
 package admin.service;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -164,6 +165,14 @@ public class AdminServiceImpl implements AdminService {
 	public List<ProductDTO> getProductList(String id) {
 		List<ProductDTO> productList = adminDAO.getProductList(id);
 		return productList;
+	}
+
+	//상점목록_물품리스트에서 삭제
+	@Override
+	public void store_productDelete(String[] check) {
+		Map<String, String[]> map = new HashMap<String, String[]>();
+		map.put("array", check);
+		adminDAO.store_productDelete(map);
 	}
 
 	
