@@ -106,11 +106,16 @@ public class IndexServiceImpl implements IndexService {
 		int end = (page) * pageSize;
 
 		String cateState="";
+		// 자식 카테고리 조회
+		String cate_name = indexDAO.cateCodeName(cate_code);
+		//System.out.println("cate_code : " +cate_code); 
 		// 검색어
 		if (cate_code.substring(cate_code.length()-1, cate_code.length()).equals("0")) {
-			cateState = "p.cate_parent";
+			cateState = "cate_parent";
+			
+			cate_name="";
 		} else {
-			cateState = "p.cate_code";
+			cateState = "cate_code";	
 		}
 		
 		map.put("cateState", cateState);
@@ -119,17 +124,17 @@ public class IndexServiceImpl implements IndexService {
 		map.put("order", order);
 		map.put("cate_code", Integer.parseInt(cate_code));
 
+		System.out.println("cate"+cate_code.substring(0, cate_code.length()-1)+"0");
 		// 목록 조회
 		List<ProductDTO> list = indexDAO.cateProductList(map);
 		// 개수 조회
 		int count = indexDAO.cateProductCount(map);
 		// 부모 카테고리 조회
-		String cate_parent = indexDAO.cateParentName(cate_code);
-		// 자식 카테고리 조회
-		String cate_name = indexDAO.cateCodeName(cate_code);
+		String cate_parent = indexDAO.cateParentName(cate_code.substring(0, cate_code.length()-1)+"0");
 		
-		System.out.println("list	: " + list);
-		System.out.println("count	: " + count);
+		
+//		System.out.println("list	: " + list);
+//		System.out.println("count	: " + count);
 
 		model.addAttribute("cate_name", cate_name);
 		model.addAttribute("cate_parent", cate_parent);

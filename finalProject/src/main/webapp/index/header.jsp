@@ -8,7 +8,7 @@
 	<div class="main-logo">
 		<img src="/market/image/index/fleamarket.png"
 			style="height: 70%; cursor: pointer;" alt="로고들어갈 곳"
-			onclick="location.href='/market/index.jsp'">
+			onclick="location.href='/market/index'">
 		<!-- <h5>플리마켓</h5> -->
 	</div>
 
@@ -17,10 +17,26 @@
 		<!-- 검색 입력 -->
 		<div class="input-group">
 			<input id="searchProduct" name="searchProduct" type="text"
-				placeholder="상품명, @상점명 입력"> <i id="searchBtn"
-				style="cursor: pointer;" onclick="search()" class="fas fa-search"></i>
+				autocomplete="off" placeholder="상품명, @상점명 입력"> <i
+				id="searchBtn" style="cursor: pointer;" onclick="search()"
+				class="fas fa-search"></i>
+
+		</div>
+		<div class="dropSearch">
+			<ul>
+				<li id="recentlySearch">
+					<p>최근 검색어</p>
+					<ul id="recentlySearchList">
+					</ul>
+				</li>
+			</ul>
+			<div class="close">
+				<a onclick="recentlySearch_deleteAll()"><i class="far fa-trash-alt"></i> &nbsp;검색어 전체삭제</a>
+				<a onclick="recentlySearch_close()">닫기</a>
+			</div>
 		</div>
 	</div>
+
 
 	<!-- 우측메뉴 -->
 	<div class="header-btn">
@@ -47,18 +63,30 @@
 				<li id="category_1st">
 					<p>전체 카테고리</p>
 					<ul>
-						<a href="/market/index/cateDisplay?cate_code=100" data-category="100">여성의류</a>
-						<a href="/market/index/cateDisplay?cate_code=200" data-category="200">남성의류</a>
-						<a href="/market/index/cateDisplay?cate_code=300" data-category="300">패션잡화</a>
-						<a href="/market/index/cateDisplay?cate_code=400" data-category="400">생활/가구/식품</a>
-						<a href="/market/index/cateDisplay?cate_code=500" data-category="500">디지털/가전</a>
-						<a href="/market/index/cateDisplay?cate_code=600" data-category="600">유아동/출산</a>
-						<a href="/market/index/cateDisplay?cate_code=700" data-category="700">도서/취미/애완</a>
-						<a href="/market/index/cateDisplay?cate_code=800" data-category="800">스포츠/레저</a>
-						<a href="/market/index/cateDisplay?cate_code=900" data-category="900">스타굿즈</a>
-						<a href="/market/index/cateDisplay?cate_code=1000" data-category="1000">뷰티/미용</a>
-						<a href="/market/index/cateDisplay?cate_code=1100" data-category="1100">차량/오토바이</a>
-						<a href="/market/index/cateDisplay?cate_code=1200" data-category="1200">기타</a>
+						<a href="/market/index/cateDisplay?cate_code=100"
+							data-category="100">여성의류</a>
+						<a href="/market/index/cateDisplay?cate_code=200"
+							data-category="200">남성의류</a>
+						<a href="/market/index/cateDisplay?cate_code=300"
+							data-category="300">패션잡화</a>
+						<a href="/market/index/cateDisplay?cate_code=400"
+							data-category="400">생활/가구/식품</a>
+						<a href="/market/index/cateDisplay?cate_code=500"
+							data-category="500">디지털/가전</a>
+						<a href="/market/index/cateDisplay?cate_code=600"
+							data-category="600">유아동/출산</a>
+						<a href="/market/index/cateDisplay?cate_code=700"
+							data-category="700">도서/취미/애완</a>
+						<a href="/market/index/cateDisplay?cate_code=800"
+							data-category="800">스포츠/레저</a>
+						<a href="/market/index/cateDisplay?cate_code=900"
+							data-category="900">스타굿즈</a>
+						<a href="/market/index/cateDisplay?cate_code=1000"
+							data-category="1000">뷰티/미용</a>
+						<a href="/market/index/cateDisplay?cate_code=1100"
+							data-category="1100">차량/오토바이</a>
+						<a href="/market/index/cateDisplay?cate_code=1200"
+							data-category="1200">기타</a>
 					</ul>
 				</li>
 				<li id="category_2st">
@@ -86,7 +114,6 @@
 					</ul>
 				</li>
 
-			</ul>
 			</ul>
 		</div>
 

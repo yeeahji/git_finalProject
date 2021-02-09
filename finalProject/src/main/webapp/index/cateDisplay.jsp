@@ -3,19 +3,20 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
-<link rel="stylesheet" href="/market/css/index/searchDisplay.css">
+<link rel="stylesheet" href="/market/css/index/cateDisplay.css">
 
-<input type="hidden" id="keyword" name="keyword" value="${keyword}">
+<input type="hidden" id="cateCode" name="cateCode" value="${cate_code}">
 <input type="hidden" id="order" name="order" value="${order}">
 <input type="hidden" id="page" name="page" value="${page}">
-<input type="hidden" id="productState" name="productState" value="${productState}">
-
+<input type="hidden" id="cate_parent" name="cate_parent" value="${cate_parent}">
+<input type="hidden" id="cate_name" name="cate_name" value="${cate_name}">
 
 <!-- 컨트롤러붙터 넘어온 pg값 -->
 <div id="productTop">
 	<!-- 상품+개수 -->
 	<div>
-		<span id="productName">${keyword}</span><span>${productState}</span>&nbsp;<span
+		<span id="productName">${cate_parent}</span><span><img src="/market/image/index/cate.png"
+			style="height: 20px;; cursor: pointer; margin:10px; margin-bottom:20px;" alt="화살표 "></span><span id="productName">${cate_name}</span>&nbsp;<span
 			class="productNum">${count}개</span>
 	</div>
 </div>
@@ -85,8 +86,8 @@
 <script type="text/javascript">
 
 function order(order){
-	location.href='/market/index/cateDisplay?cate_code=' 
-			+ $("#keyword").val() 
+	location.href='/market/index/cateDisplay' 
+			+'?cate_code=' + $("#cateCode").val() 
 			+ "&page=" + $("#page").val()
 			+ "&order=" + order
 }

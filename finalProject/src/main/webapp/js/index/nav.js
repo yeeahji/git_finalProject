@@ -43,10 +43,13 @@ $(document).ready(function(){
 				recentyleTotalPage = Math.floor(recentyleCount / recentylePageSize);
 				recentyleTotalPage = recentyleCount % recentylePageSize == 0 ? recentyleTotalPage : recentyleTotalPage + 1
 				recentlyContent( recentylePage, recentyleList)
+				
+				
 				if ( recentyleTotalPage >= 2){
 					$('#recentlySubPage').html('<i class="fas fa-chevron-left"></i>');
 					$('#recentlyAddPage').html('<i class="fas fa-chevron-right"></i>');
 				}
+				
 				$("#recentlyPaging").show();
 			} else {
 				$("#recentlyPaging").hide();
@@ -81,8 +84,13 @@ function recentlyContent(page, list){
 		if ( index < start )
 			return true;
 		var html ="";
-		html += "<img style='height: 60px; width: 60px; cursor: pointer; float: left; margin-bottom:5px;' onclick='recentlyProductDetail("+this.product_seq+");' src=/market/storage/"+ this.product_img1 + ">" + '</img><br>';
+		html += "<img id='recentlyImage' style='height: 60px; width: 60px; cursor: pointer; float: left; margin-bottom:5px;' onclick='recentlyProductDetail("+this.product_seq+");' src=/market/storage/"+ this.product_img1 + ">" + '</img><br>';
 		view.append(html)
+		
+		$("#recentlyImage").hover(
+				
+		
+		);
 	})
 	
 }

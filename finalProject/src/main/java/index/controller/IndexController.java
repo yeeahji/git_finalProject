@@ -108,7 +108,7 @@ public class IndexController {
 	public ModelAndView categoryList() {
 		List<CategoryDTO> list = indexService.categoryList();
 
-		System.out.println(" /categoryList ");
+		//System.out.println(" /categoryList ");
 
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("list", list);
