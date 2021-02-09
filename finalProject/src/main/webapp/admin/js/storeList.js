@@ -3,7 +3,7 @@ $(document).ready(function(){
 		type: 'get',
 		url: '/market/admin/getStoreList',
 		data: {'pg': $('#pg').val(),
-			'viewNum': $('#viewNum').val()},
+			   'viewNum': $('#viewNum').val()},
 		dataType: 'json',
 		success: function(data){
 			$("#tbody tr:gt(0)").remove();
@@ -116,13 +116,24 @@ function storeListPrint(data){
     		 dataType: 'json',
     		 success: function(data){
     			 clickEvent(data);
+    			 
     		 }
     	 });
+    	 
+//    	 $('#all_product').click(function(){
+//
+//    	 });
+//    	 $('#sale_product').click(function(){
+//    	 		 
+//    	 });
+//    	 $('#sold_product').click(function(){
+//    	 	 
+//    	 }); 	 
+    	 
      });
 }
 //클릭시 상세보기
 function clickEvent(data){
-	//alert(JSON.stringify(data));
 	 $('#nameSpan').text(data.adminMembersDTO.mem_name)
 	 $('#storeNameSpan').text(data.adminMembersDTO.store_nickname)
 	 $('#pictureSpan').text(data.adminMembersDTO.store_img)
@@ -194,6 +205,8 @@ function clickEvent(data){
 		 let seq = $(this).parent().prev().text();
 		window.open("/market/product/productDetail?seq="+seq,"PopupWin","width=800,height=800");
 	});
+	 
+
 	 
 }
 

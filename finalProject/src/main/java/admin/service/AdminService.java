@@ -32,13 +32,18 @@ public interface AdminService {
 	//상점상세보기
 	public AdminMembersDTO getStoreView(String id);
 	//상점상세보기_물건출력
-	public List<ProductDTO> getProductList(String id);
+	public List<ProductDTO> getStore_ProductList(String id);
 	//상점조건검색
 	public List<StoreDTO> getSearchStoreList(Map<String, String> map);
 	//상점조건검색 페이징
 	public AdminBoardPaging getSearchStoreBP(Map<String, String> map);
 	//상점목록_물품리스트에서 삭제
 	public void store_productDelete(String[] check);
+	//물품리스트출력
+	public List<ProductDTO> getProductAllList(String pg, String viewNum);
+	//물품리스트 페이징
+	public AdminBoardPaging ProductBP(String pg, String viewNum);
+	
 	
 
 

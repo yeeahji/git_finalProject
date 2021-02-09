@@ -46,7 +46,11 @@ public class AdminController {
 	}
 	//전체상품리스트
 	@RequestMapping(value="/productList", method=RequestMethod.GET)
-	public String productList() {
+	public String productList(@RequestParam(required=false, defaultValue="1") String pg,
+							  @RequestParam(required=false, defaultValue="20") String viewNum,
+							  Model model) {
+		model.addAttribute("pg", pg);
+		model.addAttribute("viewNum", viewNum);
 		return "/admin/adminPage/productList";
 	}
 	//전체상점리스트
@@ -157,7 +161,7 @@ public class AdminController {
 		//판매중인물건 총갯수
 		int totalSellProduct = adminService.totalSellProduct(id);
 		//상품정보
-		List<ProductDTO> productList = adminService.getProductList(id);
+		List<ProductDTO> productList = adminService.getStore_ProductList(id);
 		//
 		
 		ModelAndView mav = new ModelAndView();
@@ -193,7 +197,6 @@ public class AdminController {
 		return new ModelAndView("redirect:/admin/storeList");
 	}
 
-
 	//신고 내역 출력
 //	@RequestMapping(value="/getComplainList", method=RequestMethod.POST)
 //	public ModelAndView getComplainList(@RequestParam(required=false, defaultValue="1") String pg,
@@ -210,6 +213,22 @@ public class AdminController {
 //		mav.setViewName("jsonView");
 //		return mav;
 //	}
+	
+	//물품리스트 출력
+	@RequestMapping(value="/getProductAllList", method=RequestMethod.GET)
+	public ModelAndView getProductAllList(@RequestParam(required=false, defaultValue="1") String pg,
+			  						      @RequestParam(required=false, defaultValue="20") String viewNum) {
+		List<ProductDTO> productList = adminService.getProductAllList(pg,viewNum);
+		//페이징처리
+		AdminBoardPaging adminProductBP = adminService.ProductBP(pg,viewNum);
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("productList", productList);
+		mav.addObject("pg", pg);
+		mav.addObject("viewNum", viewNum);
+		mav.addObject("adminProductBP", adminProductBP);
+		mav.setViewName("jsonView");
+		return mav;
+	}
 	
 	
 }

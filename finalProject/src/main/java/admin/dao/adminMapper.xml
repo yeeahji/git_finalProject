@@ -65,7 +65,7 @@
 	</select>
 	
 <!-- 상점상세보기_물건출력 -->	
-	<select id="getProductList" parameterType="String" resultType="product.bean.ProductDTO">
+	<select id="getStore_ProductList" parameterType="String" resultType="product.bean.ProductDTO">
 		select * from product where mem_id like #{id} order by product_seq desc
 	</select>
 <!-- 상점목록_물품리스트에서 삭제 -->
@@ -77,5 +77,15 @@
 		</foreach>
 	</delete>
 	
+<!-- 물품전체 출력 --> 
+	<select id="getProductAllList" parameterType="java.util.Map" resultType="product.bean.ProducyDTO">
+		select * from(select rownum rn, tt.* from(
+					select * from product)tt)
+					where rn between #{startNum} and #{endNum}
+	</select>
+<!-- 전체상품수 -->
+	<select id="getTotalE" resultType="Integer">
+		select count(*) from product
+	</select>
 	
 </mapper>

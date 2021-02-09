@@ -54,7 +54,9 @@
 		                            <a class="nav-link" href="/market/admin/memberQna">고객 상담관리</a>
 		                            <a class="nav-link" href="/market/admin/noticeMG">공지사항 관리</a>
 		                            <a class="nav-link" href="/market/admin/noticeWrite">공지사항 등록</a>
-	                    		</ul>                            <div class="sb-sidenav-menu-heading">Addons</div>
+	                    		</ul>                            
+	                    		
+	                    	<div class="sb-sidenav-menu-heading">Addons</div>
                             <a class="nav-link" href="charts.jsp">
                                 <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
                                 Charts

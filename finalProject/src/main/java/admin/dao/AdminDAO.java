@@ -29,13 +29,21 @@ public interface AdminDAO {
 	//상점상세보기
 	public AdminMembersDTO getStoreView(String id);
 	//상점상세보기_물건출력
-	public List<ProductDTO> getProductList(String id);
+	public List<ProductDTO> getStore_ProductList(String id);
 	//상점조건 검색
 	public List<StoreDTO> getSearchStoreList(Map<String, String> map);
 	//상점조건 건색 페이징
 	public int getTotalD(Map<String, String> map);
 	//상점목록_물품리스트에서 삭제
 	public void store_productDelete(Map<String, String[]> map);
+
+	//물품전체 출력
+	public List<ProductDTO> getProductAllList(Map<String, Integer> map);
+	//물품리스트 페이징
+	public int getTotalE();
+	
+	
+	
 
 
 

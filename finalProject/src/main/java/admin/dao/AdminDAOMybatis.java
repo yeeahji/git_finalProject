@@ -77,15 +77,26 @@ public class AdminDAOMybatis implements AdminDAO {
 	}
 	//상점상세보기_물건출력
 	@Override
-	public List<ProductDTO> getProductList(String id) {
-		return sqlSession.selectList("adminSQL.getProductList", id);
+	public List<ProductDTO> getStore_ProductList(String id) {
+		return sqlSession.selectList("adminSQL.getStore_ProductList", id);
 	}
 	//상점목록_물품리스트에서 삭제
 	@Override
 	public void store_productDelete(Map<String, String[]> map) {
 		sqlSession.delete("adminSQL.store_productDelete", map);
 	}
-
+	
+	//물품전체 출력
+	@Override
+	public List<ProductDTO> getProductAllList(Map<String, Integer> map) {
+		return sqlSession.selectList("adminSQL.getProductAllList", map);
+	}
+	//물품리스트 페이징
+	@Override
+	public int getTotalE() {
+		return sqlSession.selectOne("adminSQL.getTotalE");
+	}
+	
 
 	
 	

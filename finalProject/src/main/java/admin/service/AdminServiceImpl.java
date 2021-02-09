@@ -162,8 +162,8 @@ public class AdminServiceImpl implements AdminService {
 	}
 	//상점상세보기_물건출력
 	@Override
-	public List<ProductDTO> getProductList(String id) {
-		List<ProductDTO> productList = adminDAO.getProductList(id);
+	public List<ProductDTO> getStore_ProductList(String id) {
+		List<ProductDTO> productList = adminDAO.getStore_ProductList(id);
 		return productList;
 	}
 
@@ -174,6 +174,34 @@ public class AdminServiceImpl implements AdminService {
 		map.put("array", check);
 		adminDAO.store_productDelete(map);
 	}
+
+	@Override
+	public List<ProductDTO> getProductAllList(String pg, String viewNum) {
+		int endNum = Integer.parseInt(pg)*Integer.parseInt(viewNum);
+		int startNum = endNum-(Integer.parseInt(viewNum)-1);
+		
+		Map <String, Integer> map = new HashedMap<String, Integer>();
+		map.put("startNum", startNum);
+		map.put("endNum", endNum);
+		List<ProductDTO> productList = adminDAO.getProductAllList(map);
+		return productList;
+	}
+
+	@Override
+	public AdminBoardPaging ProductBP(String pg, String viewNum) {
+		int totalE = adminDAO.getTotalE();
+		
+		adminBoardPaging.setCurrentPage(Integer.parseInt(pg));
+		adminBoardPaging.setPageBlock(10);
+		adminBoardPaging.setPageSize(Integer.parseInt(viewNum));//위에endNum,startNum과 맞아야함
+		adminBoardPaging.setTotalA(totalE);
+		
+		adminBoardPaging.makePagingHTML();
+		
+		return adminBoardPaging;
+	}
+	
+	
 
 	
 
