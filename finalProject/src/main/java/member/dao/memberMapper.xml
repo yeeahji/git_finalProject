@@ -14,22 +14,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <!-- ========================================================================= --> 		
 <!-- ▶  회원가입 -->
  	<insert id="join" parameterType="member">
- 		insert into members values(#{mem_id}, #{mem_pwd}, #{mem_name}, #{mem_email}, 
+ 		begin
+	 		insert into members values(#{mem_id}, #{mem_pwd}, #{mem_name}, #{mem_email}, 
  									#{mem_add1},#{mem_add2}, #{mem_postcode},
  									'','', '',	
  									#{mem_tel}, 
  									'', '',	
  									sysdate,
- 									1, 'ROLE_USER', 0, #{mem_agree}, 0)
-
- 		begin
-	 		insert into members values(#{mem_id}, #{mem_pwd}, #{mem_name}, #{mem_email}, 
-	 									#{mem_add1},#{mem_add2}, #{mem_postcode},
-	 									'','', '',	
-	 									#{mem_tel}, 
-	 									'', '',	
-	 									sysdate,
-	 									1, 'ROLE_USER', 0);
+ 									1, 'ROLE_USER', 0, #{mem_agree}, 0);
  			
  			INSERT INTO store(MEM_ID,  store_nickname) 
 			VALUES(#{mem_id}, '상점'||seq_store.NEXTVAL||'호');

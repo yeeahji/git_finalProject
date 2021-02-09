@@ -3,6 +3,7 @@ package product.controller;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.security.Principal;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -112,9 +113,10 @@ public class ProductController {
 		return productService.getMyRecentLocation(mem_id);
 	}
 	
+	// 상품 리스트 - > 상세페이지
 	@RequestMapping(value="productDetail", method=RequestMethod.GET)
 	public String registDetail(@RequestParam String seq, Model model, HttpSession session) {
-		
+		 // 최근 본 상품 목록들
 		 ArrayList<String> list = (ArrayList)session.getAttribute("recentlyProduct");
 		 
 		 if(list==null)
@@ -124,9 +126,9 @@ public class ProductController {
 		 }
 		 list.add(seq);
 		 
+		 
 		// 상품 정보 받아옴
 		ProductDTO productDTO = productService.productDetail(seq);
-		//model.addAttribute("productDTO", productDTO);
 		model.addAttribute("product_logtime", productDTO.getProduct_logtime());
 		model.addAttribute("seq", seq);
 		model.addAttribute("display", "/product/productDetail.jsp");

@@ -4,12 +4,16 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec" %>
-<sec:authentication property="principal" var="member"/> <!-- 사용자 정보 가져오기 -->
-<!-- 리뷰; 시큐리티 로그인 중인 아이디 -->
-<input type="hidden" class="loginId" value="${member.username}">
-<!-- 리뷰; 주소로넘어온 -->
-<%-- <input type="hidden" class="hiddenId" value="${param.id}"> --%>
-
+<!-- 사용자 정보 가져오기 -->
+<sec:authentication property="principal" var="member"/> 
+<c:choose>
+	<c:when test="${member=='anonymousUser'}">
+		<input type="hidden" class="loginId" value="비로그인">
+	</c:when>
+	<c:when test="${member ne 'anonymousUser'}">
+		<input type="hidden" class="loginId" value="${member.username}">
+	</c:when>
+</c:choose>
 	
 <link rel="stylesheet" href="../css/product/productDetail.css">
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
@@ -23,8 +27,6 @@
 
 <body>
 <script type="text/javascript">
-
-
 	var imgCommonPreview = new Image();
 	function viewPic(filepath) {
 		if (filepath == "") {

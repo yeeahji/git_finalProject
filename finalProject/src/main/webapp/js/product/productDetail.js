@@ -1,5 +1,6 @@
 var zzimNum;
 $(document).ready(function(){
+	
 	//productDTO 불러오기
 	$.ajax({
 		type: 'GET',
@@ -7,6 +8,8 @@ $(document).ready(function(){
 		data: {'seq':$('.hiddenProdSeq').val()}, 
 		dataType: 'json',
 		success : function(data){ 
+			console.log("[상세페이지]로그인중인아디는?"+$('.loginId').val()); //test
+
 			var dto = data.productDTO;
 			// 상품명
 			$('.detail-info__text-title').text(dto.product_subject);
@@ -154,7 +157,7 @@ $(document).ready(function(){
 				data: {'seq':$('.hiddenProdSeq').val()}, 
 				dataType: 'json',
 				success : function(data){
-					console.log(data.storeDTO.mem_id);
+					console.log('상품올린사람아이디'+data.storeDTO.mem_id);
 					
 					// 클릭하면 해당
 					$('.storeInfo_name, .storeProfileImg_Link, .moreProdLink, .productNumLink').click(function(){
