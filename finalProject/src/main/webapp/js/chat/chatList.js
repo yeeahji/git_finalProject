@@ -8,12 +8,7 @@ $.ajax({
 			$('<button/>', { //1단계
 				class: 'chatRoomBox'
 			
-			}).append($('<input/>', { //2단계 --- hidden
-				type: 'hidden',
-				name: 'chat_seq',
-				value: items.chat_seq
-
-			})).append($('<div/>', { //2단계 --- profile
+			}).append($('<div/>', { //2단계 --- profile
 				class: 'chatRoom_profile'
 					
 				}).append($('<img/>', { //3단계
@@ -49,7 +44,17 @@ $.ajax({
 					text: '나가기'
 				})
 	
-			)).appendTo($('.chatRoomWrap'));
+			)).append($('<input/>', { //2단계 --- hidden
+				type: 'hidden',
+				name: 'chat_seq',
+				value: items.chat_seq
+
+			})).append($('<input/>', { //2단계 --- hidden
+				type: 'hidden',
+				name: 'other_store_nickname',
+				value: items.other_store_nickname
+
+			})).appendTo($('.chatRoomWrap'));
 			
 			//채팅방 연결(post방식으로 팝업창)
 			$('.chatRoomBox').click(function() {

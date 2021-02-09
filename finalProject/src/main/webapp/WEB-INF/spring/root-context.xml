@@ -49,10 +49,13 @@
 	<context:component-scan base-package="admin.dao"/>
 	<context:component-scan base-package="admin.service"/>
 	
-	<!-- WebScoket -->
+	<!-- WebSocket -->
 	<websocket:handlers allowed-origins="*" >
-        <websocket:mapping handler="handlerChat" path="/chat" />
-        <websocket:sockjs websocket-enabled="true" />
+        <websocket:mapping handler="handlerChat" path="/chat"/>
+		<websocket:handshake-interceptors> <!-- HttpSession의 파라미터를 WebSocketSession에 전달 및 1:1채팅, 알림 구현 -->
+			<bean class="org.springframework.web.socket.server.support.HttpSessionHandshakeInterceptor"/>
+		</websocket:handshake-interceptors>
+        <websocket:sockjs websocket-enabled="true"/>
     </websocket:handlers>
     
     <bean id="handlerChat" class="chat.service.HandlerChat" />

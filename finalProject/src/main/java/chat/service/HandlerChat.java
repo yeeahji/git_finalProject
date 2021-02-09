@@ -34,6 +34,22 @@ public class HandlerChat extends TextWebSocketHandler {
 		
 		//클라이언트 입장
 		case "CMD_ENTER":
+			//HandShaker
+			/* 값을 못가져온다.. other_store_nickname 표시해야되는데..
+			Map<String,Object> testMap = session.getAttributes();
+			String str = (String)testMap.get("Principal");
+			System.out.println("맵의 값은 : " + str);
+			String str2 = (String)testMap.get("Details");
+			System.out.println("맵의 값은 : " + str2);
+			String str3 = (String)testMap.get("chat_seq");
+			System.out.println("맵의 값은 : " + str3);
+			String str4 = (String)testMap.get("Authentication");
+			System.out.println("맵의 값은 : " + str4);
+			String str5 = (String)testMap.get("other_store_nickname");
+			System.out.println("맵의 값은 : " + str5);
+			System.out.println("맵의 값은 : " + testMap);
+			*/
+			
 			//세션 리스트에 저장
 			Map<String, Object> map = new HashMap<String, Object>();
 			map.put("chat_seq", mapReceive.get("chat_seq"));
