@@ -1,9 +1,6 @@
 package index.controller;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +13,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import org.springframework.web.servlet.ModelAndView;
 
+import product.bean.CategoryDTO;
 import product.bean.ProductDTO;
 import index.service.IndexService;
 
@@ -34,9 +32,6 @@ public class IndexController {
 	@ResponseBody
 	public ModelAndView getProductList(@RequestParam(name = "page") int page) {
 		List<ProductDTO> list = indexService.getProductList(page);
-
-		System.out.println(" /getProductList ");
-		System.out.println(" page " + page);
 
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("list", list);
@@ -105,6 +100,20 @@ public class IndexController {
 		model.addAttribute("display", "/index/cateDisplay.jsp");
 
 		return "/index";
+	}
+	
+	//카테고리 세부 값 가져오기
+	@RequestMapping(value = "/categoryList", method = RequestMethod.POST)
+	@ResponseBody
+	public ModelAndView categoryList() {
+		List<CategoryDTO> list = indexService.categoryList();
+
+		System.out.println(" /categoryList ");
+
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("list", list);
+		mav.setViewName("jsonView");
+		return mav;
 	}
 
 }

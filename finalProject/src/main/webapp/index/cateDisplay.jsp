@@ -26,13 +26,13 @@
 	<div class="listTopInner">
 		<div class="group" style="float: right;">
 			<!-- DB-카테고리 정렬 -->
-			<a class="groupChecked ${order eq null ? 'actvie' : ''} ${order eq 'A' ? 'actvie' : ''}"
+			<a class="groupChecked ${order eq null ? 'active' : ''} ${order eq 'A' ? 'active' : ''}"
 				onclick="order('A')">최신순</a> <a
-				class="groupOther ${order eq 'B' ? 'actvie' : ''}"
+				class="groupOther ${order eq 'B' ? 'active' : ''}"
 				onclick="order('B')">인기순</a> <a
-				class="groupOther ${order eq 'C' ? 'actvie' : ''}"
+				class="groupOther ${order eq 'C' ? 'active' : ''}"
 				onclick="order('C')">저가순</a> <a
-				class="groupOther ${order eq 'D' ? 'actvie' : ''}"
+				class="groupOther ${order eq 'D' ? 'active' : ''}"
 				onclick="order('D')">고가순</a>
 		</div>
 	</div>
@@ -85,7 +85,7 @@
 <script type="text/javascript">
 
 function order(order){
-	location.href='/market/index/searchDisplay?keyword=' 
+	location.href='/market/index/cateDisplay?cate_code=' 
 			+ $("#keyword").val() 
 			+ "&page=" + $("#page").val()
 			+ "&order=" + order
@@ -94,24 +94,7 @@ function order(order){
 function test(seq) {
 	location.href = "/market/product/productDetail?seq=" + seq
 }
-/* 
-//검색
-$(document).ready(function() {
-	$.ajax({
-		type: 'post',
-		url: '/market/index/searchProductList', 
-		data: $('#searchProduct').val(),
-		dataType: 'json',
-		success: function(data){
-			alert(JSON.stringify(data));
-			
-			
-			
-		},
-		error: function(err){
-			console.log(err);
-		}
-	});
-}); */
+
+
 </script>
 

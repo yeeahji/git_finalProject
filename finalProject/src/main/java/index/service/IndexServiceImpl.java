@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 
 import index.dao.IndexDAO;
+import product.bean.CategoryDTO;
 import product.bean.ProductDTO;
 
 @Service
@@ -104,7 +105,15 @@ public class IndexServiceImpl implements IndexService {
 		int start = (page - 1) * pageSize;
 		int end = (page) * pageSize;
 
+		String cateState="";
+		// 검색어
+		if (cate_code.substring(cate_code.length()-1, cate_code.length()).equals("0")) {
+			cateState = "p.cate_parent";
+		} else {
+			cateState = "p.cate_code";
+		}
 		
+		map.put("cateState", cateState);
 		map.put("start", start);
 		map.put("end", end);
 		map.put("order", order);
@@ -114,15 +123,26 @@ public class IndexServiceImpl implements IndexService {
 		List<ProductDTO> list = indexDAO.cateProductList(map);
 		// 개수 조회
 		int count = indexDAO.cateProductCount(map);
-
+		// 부모 카테고리 조회
+		String cate_parent = indexDAO.cateParentName(cate_code);
+		// 자식 카테고리 조회
+		String cate_name = indexDAO.cateCodeName(cate_code);
+		
 		System.out.println("list	: " + list);
 		System.out.println("count	: " + count);
 
+		model.addAttribute("cate_name", cate_name);
+		model.addAttribute("cate_parent", cate_parent);
 		model.addAttribute("list", list);
 		model.addAttribute("count", count);
 		model.addAttribute("page", page);
 		model.addAttribute("cate_code", cate_code);
 		model.addAttribute("order", order);
 		
+	}
+
+	@Override
+	public List<CategoryDTO> categoryList() {
+		return indexDAO.categoryList();	
 	}
 }

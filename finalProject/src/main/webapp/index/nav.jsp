@@ -19,19 +19,23 @@
 
 	<!-- 최근 본 상품 시작 -->
 	<div class="recently">
-		<div class="recentlyText" >최근본상품 </div>
+		<div class="recentlyText">최근본상품</div>
 		<div class="recentlyProduct">
 			<span id="recentlyCnt"></span>
-			<div id="recentlyArea" style="margin-left:18px;">
-				<a id="recentlyList" >			
-				</a> <!-- 최근본상품  -->
+			<div id="recentlyArea" style="margin-left: 18px;">
+				<a id="recentlyList" > </a>
+				<!-- 최근본상품  -->
+				<a id="noList"></a>
 			</div>
-			</div>	
-			<div id="recentlyPaging" style="text-align: center;">
-				<button id="recentlySubPage" class="btn subpage" onclick="recentlySubPage()"></button>
-				<a id="currentPage"></a>
-				<button id="recentlyAddPage" class="btn addpage" onclick="recentlyAddPage()"></button>
-			</div>
+		</div>
+		<div id="recentlyPaging" style="text-align: center;">
+			<button id="recentlySubPage" class="btn subpage"
+				onclick="recentlySubPage()"></button>
+			<a id="currentPage"></a>
+
+			<button id="recentlyAddPage" class="btn addpage"
+				onclick="recentlyAddPage()"></button>
+		</div>
 	</div>
 	<!-- 최근 본 상품 끝 -->
 

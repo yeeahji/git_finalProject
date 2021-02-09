@@ -3,6 +3,7 @@ package index.dao;
 import java.util.List;
 import java.util.Map;
 
+import product.bean.CategoryDTO;
 import product.bean.ProductDTO;
 
 public interface IndexDAO {
@@ -20,5 +21,11 @@ public interface IndexDAO {
 	public List<ProductDTO> cateProductList(Map<String, Object> map); //카테고리
 
 	public int cateProductCount(Map<String, Object> param); //카테고리
+
+	public List<CategoryDTO> categoryList(); //새부 카테고리
+
+	public String cateParentName(String cate_code); //부모카테고리이름
+
+	public String cateCodeName(String cate_code); //자식카테고리이름
 
 }

@@ -33,10 +33,13 @@ $(document).ready(function(){
 		url : '/market/index/recentlyProduct',
 		dataType : 'json',
 		success : function(data) {
+					
 			recentyleList = data.recentlyList;
 			if ( data.recentlyList != null){
 				recentyleCount = data.recentlyList.length
+				
 				$("#recentlyCnt").text(recentyleCount).css('color','red');
+				
 				recentyleTotalPage = Math.floor(recentyleCount / recentylePageSize);
 				recentyleTotalPage = recentyleCount % recentylePageSize == 0 ? recentyleTotalPage : recentyleTotalPage + 1
 				recentlyContent( recentylePage, recentyleList)
@@ -47,7 +50,9 @@ $(document).ready(function(){
 				$("#recentlyPaging").show();
 			} else {
 				$("#recentlyPaging").hide();
-				$("#recentlyCnt").text(0).css('color','red');
+				$("#recentlyCnt").text("").css('color','red');
+				$("#recentlyArea").css('margin-left','0px');
+				$("#noList").html('<br><img src="/market/image/index/eyes.png" style="weight:30px; height:30px;"><a style="color:#dbdbdb;"><br>최근 본<br>상품이<br>없습니다.<br><br></a>')
 			}
 			
 		},
@@ -64,9 +69,9 @@ function recentlyContent(page, list){
 	var start = (page -1) * recentylePageSize ;
 	var end = (page) * recentylePageSize;
 
-	console.log("page :" + page);
-	console.log("start :" + start);
-	console.log("end 	:" + end);
+	//console.log("page :" + page);
+	//console.log("start :" + start);
+	//console.log("end 	:" + end);
 	
 	$("#currentPage").text(page + "/" +  recentyleTotalPage)
 	view.empty();

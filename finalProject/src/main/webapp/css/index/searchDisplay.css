@@ -28,7 +28,7 @@
 	cursor: pointer;
 }
 
-.productListTop a.actvie {
+.productListTop a.active {
 	color: blue;
 	font-weight: bold;
 }

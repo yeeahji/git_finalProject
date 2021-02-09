@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import product.bean.CategoryDTO;
 import product.bean.ProductDTO;
 
 @Repository
@@ -50,6 +51,21 @@ public class IndexDAOMybatis implements IndexDAO {
 	@Override
 	public int cateProductCount(Map<String, Object> map) {
 		return sqlSession.selectOne("indexSQL.cateProductCount", map);
+	}
+
+	@Override
+	public List<CategoryDTO> categoryList() {
+		return sqlSession.selectList("indexSQL.categoryList");
+	}
+
+	@Override
+	public String cateParentName(String cate_code) {
+		return sqlSession.selectOne("indexSQL.cateParentName", Integer.parseInt(cate_code));
+	}
+
+	@Override
+	public String cateCodeName(String cate_code) {
+		return sqlSession.selectOne("indexSQL.cateCodeName", Integer.parseInt(cate_code));
 	}
 	
 	
