@@ -1,12 +1,15 @@
 package chat.dao;
 
 import java.util.List;
+import java.util.Map;
 
+import chat.bean.ChatListDTO;
 import chat.bean.ChatRoomDTO;
-import chat.bean.MessageDTO;
 
 public interface ChatDAO {
 
-
+	public List<ChatListDTO> getChatList(String mem_id);
+	
+	public void insertRoomInfo(Map<String, String> map);
 	
 }

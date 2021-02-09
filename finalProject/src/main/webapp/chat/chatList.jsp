@@ -4,50 +4,53 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
-<html>
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/chat/chatList.css">
+
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script> 
+<script>
+//바다톡
+$('#chatRoomBtn').click(function(){
+	window.open("/market/chat/chatRoom?chat_seq="+${chat_seq}, "chat", "width=370 height=670 scrollbars=yes");
+});
+</script>
+
 <body>
 
 <c:set var="profile" value='<%=session.getAttribute("login")%>' />
-	<br>
- 	<div class="" style="text-align:center">
-		<a href=""><img src="/market/image/chat/talk.png"
-			alt="바다톡" width="180px" class="img-fluid" /></a>
-	</div>
-
-	<div class="col-12" style="margin-top: 40px; clear: both;">
-		<div class="col-10"
-			style="margin: 20px auto; text-align: center; color: white; background-color: #59a9ff; border: 1px solid #01D1FE; padding: 10px 10px; border-radius: 8px;">
-			목록
-		</div>
-
-	</div>
-	<!-- 채팅 내용 -->
-	<div class="col-12">
-		<div class="col-11"
-			style="margin: 0 auto; border: 1px solid #01D1FE; height: 400px; border-radius: 10px; overflow:scroll" id = "chatArea">
+<div id="chatListBody">
+ 	<div class="chatTitle"><h2>바다톡</h2></div>
+ 	<hr class="chatTitleUnderline">
+	
+	<!-- 채팅방 목록 -->
+	<div class="chatRoomWrap">
+	
+		<div class="chatRoomBox">
+			<!-- 프사 넣을 공간 -->
+			<div class="chatRoom_profile"> 
+				<img id="OTHER_store_img" src="path"></img>
+			</div> 
 			
-			<div id="chatMessageArea" style = "margin-top : 10px; margin-left:10px;"></div>
-
+			<!-- 닉네임, 메시지, 로그타임 넣을 공간 -->
+			<div class="chatRoom_content"> 
+				<span id="OTHER_store_nickname">상점이름</span>
+				<span id="last_message">마지막 메시지</span>
+				<span id="chat_logtime">로그타임</span>
+			</div>
+			
+			<!-- 버튼(:) 넣을 공간 -->
+			<div class="chatRoom_btns"> 
+				<button id="chatComplainBtn"></button>
+				<button id="chatDeleteBtn"></button>
+			</div>
 		</div>
-	</div>
+		
+	</div>	
 
-	<input type="button" value="1:1" style="height:30px;font-size:15px; border-radius:10px; cursor:pointer;
-			  		  background-color:#59a9ff; color: white;" id="chatFormBtn">
+	<input type="button" value="채팅방 입장" id="chatRoomBtn">
 
-<img id="profileImg" class="img-fluid"
-					src="/displayFile?fileName=${userImage}&directory=profile" style = "display:none">
-<input type="text" id="nickname" value = "${user_name }" style = "display:none">
- <input type="button" id="enterBtn" value="입장" style = "display:none">
- <input type="button" id="exitBtn" value="나가기" style = "display:none">
- 
-<script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.min.js"></script> 
-<script type="text/javascript">
-//바다톡
-$('#chatFormBtn').click(function(){
-	window.open("/market/chat/chatForm", "chat" ,"width=500 height=650 scrollbars=yes");
-});
-</script> 
-
-
+	<img id="profileImg" class="img-fluid" src="/displayFile?fileName=${userImage}&directory=profile" style = "display:none">
+	<input type="text" id="nickname" value = "${user_name}" style = "display:none">
+	<input type="button" id="enterBtn" value="입장" style = "display:none">
+	<input type="button" id="exitBtn" value="나가기" style = "display:none">
+</div>	
 </body>
-</html>

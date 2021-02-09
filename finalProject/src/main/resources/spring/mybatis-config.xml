@@ -14,5 +14,8 @@
 		<typeAlias type="board.bean.CommentDTO" alias="comment"/>
 		<typeAlias type="store.bean.ReviewDTO" alias="review"/>
 		<typeAlias type="store.bean.PurchaseDTO" alias="purchase"/>
+		<typeAlias type="store.bean.ReviewDTO" alias="review"/>
+		<typeAlias type="chat.bean.ChatListDTO" alias="chatList"/>
+		<typeAlias type="chat.bean.ChatRoomDTO" alias="chatRoom"/>
 	</typeAliases>
 </configuration>
