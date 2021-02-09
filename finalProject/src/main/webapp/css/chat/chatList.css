@@ -36,16 +36,6 @@ div {
 	border: solid 1px #0a58ca;
 }
 
-.chatListArea {
-	margin: 20px auto;
-	text-align: center;
-	color: white;
-	background-color: #59a9ff;
-	border: 1px solid #01D1FE;
-	padding: 10px 10px;
-	border-radius: 8px;
-}
-
 
 /* 채팅방 표시 */
 .chatRoomBox {

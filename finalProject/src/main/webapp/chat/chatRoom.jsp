@@ -1,10 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>바다톡</title>
+
+<sec:authentication property="principal" var="member"/>
 
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/chat/chatRoom.css">
 
@@ -13,45 +16,72 @@
 <!-- <script defer src="../js/chat/chatRoom.js"></script> -->
 <script type="text/javascript">
 var webSocket = {
-	init: function(param) { //sockjs 관련 스크립트
+	//sockjs 관련 스크립트
+	init: function(param) { 
 		this._url = param.url;
 		this._initSocket();
 	},
 	
+	//메시지 세팅
 	sendChat: function() {
-		this._sendMessage('${chat_seq}', 'CMD_MSG_SEND', $('#message').val());
-		$('#message').val('');
-	},
-	
+		this._sendMessage('${chat_seq}', 'CMD_MSG_SEND', $('#inputMessage').val()); //메시지 창에 있는 값으로 세팅
+		$('#inputMessage').val(''); //메시지 창 비우기
+	},	
 	sendEnter: function() {
-		this._sendMessage('${chat_seq}', 'CMD_ENTER', $('#message').val());
-		$('#message').val('');
+		this._sendMessage('${chat_seq}', 'CMD_ENTER', $('#inputMessage').val());
+		$('#inputMessage').val('');
 	},
 	
+	//메시지 보낼 때
+	_sendMessage: function(chat_seq, cmd, msg, checkId) {
+		var msgData = {
+				chat_seq : chat_seq,
+				cmd : cmd,
+				msg : msg,
+				checkId : checkId
+		};
+		var jsonData = JSON.stringify(msgData);
+		this._socket.send(jsonData);
+	},	
+	
+	//메시지 받을 때 (정의된 CMD 코드에 따라서 분류함)
 	receiveMessage: function(msgData) {
-		// 정의된 CMD 코드에 따라서 분기 처리
-		if(msgData.cmd == 'CMD_MSG_SEND') {					
-			$('#divChatData').append('<div>' + msgData.msg + '</div>');
+		//메시지
+		if(msgData.cmd == 'CMD_MSG_SEND') {
+			if(msgData.msg.trim() == '') return; //받은 메시지가 공백일 시 벗어나기
+			
+			if(msgData.checkId == '${member.username}') { //내가 보낸 메세지일 때
+				$('#chat-container').append('<div class="my-chat-box"><div class="chat my-chat">' + msgData.msg + '</div>');
+			}
+			else { //상대방이 보낸 메세지일 때
+				$('#chat-container').append('<div class="chat-box"><div class="chat">' + msgData.msg + '</div>');
+			}
+			$('#chat-container').scrollTop($('#chat-container')[0].scrollHeight+20);
 		}
-		// 입장
+		//입장
 		else if(msgData.cmd == 'CMD_ENTER') {
-			$('#divChatData').append('<div>' + msgData.msg + '</div>');
+			$('#chat-container').append('<div class="chat notice">' + msgData.msg + '</div>');
+			$('#chat-container').scrollTop($('#chat-container')[0].scrollHeight+20);
 		}
-		// 퇴장
+		//퇴장
 		else if(msgData.cmd == 'CMD_EXIT') {					
-			$('#divChatData').append('<div>' + msgData.msg + '</div>');
+			$('#chat-container').append('<div class="chat notice">' + msgData.msg + '</div>');
+			$('#chat-container').scrollTop($('#chat-container')[0].scrollHeight+20);
 		}
 	},
 	
+	//연결이 끊겼을 때 메시지 띄우기
 	closeMessage: function(str) {
-		$('#divChatData').append('<div>' + '연결 끊김 : ' + str + '</div>');
+		$('#chat-container').append('<div class="chat notice">' + msgData.msg + '</div>');
 	},
 	
+	//소켓 종료
 	disconnect: function() {
 		this._socket.close();
 	},
 	
-	_initSocket: function() { //sockjs 관련 스크립트
+	//sockjs 관련 스크립트
+	_initSocket: function() { 
 		//소켓 연결
 		this._socket = new SockJS(this._url);
 	
@@ -69,16 +99,6 @@ var webSocket = {
 		this._socket.onclose = function(evt) {
 			webSocket.closeMessage(JSON.parse(evt.data));
 		}
-	},
-	
-	_sendMessage: function(chat_seq, cmd, msg) {
-		var msgData = {
-				chat_seq : chat_seq,
-				cmd : cmd,
-				msg : msg
-		};
-		var jsonData = JSON.stringify(msgData);
-		this._socket.send(jsonData);
 	}	
 };
 </script>	
@@ -98,12 +118,16 @@ $(window).on('load', function () {
 		</div>
 	</div>
 	
-	<div id="chatContent">
-		<div id="divChatData"></div>
-	</div>
-	<div id="chatInputArea">
-		<input type="text" id="message" size="50" onkeypress="if(event.keyCode==13){webSocket.sendChat();}" autofocus/>
-		<input type="button" id="btnSend" value="채팅 전송" onclick="webSocket.sendChat()"/>
+	
+	<div id="main-container">
+		<div id="chat-container">
+			<div id="divChatData"></div>
+		</div>
+		
+		<div id="bottom-container">
+			<input type="text" id="inputMessage" onkeypress="if(event.keyCode==13){webSocket.sendChat();}" autofocus/>
+			<input type="button" id="sendBtn" value="전송" onclick="webSocket.sendChat()"/>
+		</div>
 	</div>
 </body>
 </html>

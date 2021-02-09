@@ -64,13 +64,13 @@ public class ChatController {
 		String one_store_img = one_storeDTO.getStore_img();
 
 			//상대방
-//		String two_mem_id = null;
-//		if(one_mem_id.equals("test1")) {
-//			two_mem_id = "test3";
-//		} else if(one_mem_id.equals("test3")) {
-//			two_mem_id = "test1";	
-//		}
-		String two_mem_id = "test2";
+		String two_mem_id = null;
+		if(one_mem_id.equals("test1")) {
+			two_mem_id = "test2";
+		} else if(one_mem_id.equals("test2")) {
+			two_mem_id = "test1";	
+		}
+		//String two_mem_id = "test2";
 		StoreDTO two_storeDTO = storeService.storeInfo(two_mem_id);
 		String two_store_nickname = two_storeDTO.getStore_nickname();
 		String two_store_img = two_storeDTO.getStore_img(); 

@@ -17,15 +17,18 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 public class HandlerChat extends TextWebSocketHandler {
 	//(<"chat_seq", 방ID>, <"session", 세션>) - (<"chat_seq", 방ID>, <"session", 세션>) - (<"chat_seq", 방ID>, <"session", 세션>) 형태 
 	private List<Map<String, Object>> sessionList = new ArrayList<Map<String, Object>>();
+	private String mem_id;
 	
 	//*********이미지 첨부시 <img src="" width..> 여기에 넣어주기 (크기는 고정)
 	
 	//클라이언트가 서버로 메세지 전송 처리
 	@Override
 	protected void handleTextMessage(WebSocketSession session, TextMessage message) throws Exception {
-
 		super.handleTextMessage(session, message);
-        
+		
+		//사용자 아이디 저장
+		mem_id = session.getPrincipal().getName();
+		
 		//JSON --> Map으로 변환 (GSON 사용 안할 시)
 		ObjectMapper objectMapper = new ObjectMapper();
 		Map<String, String> mapReceive = objectMapper.readValue(message.getPayload(), Map.class);
@@ -66,7 +69,7 @@ public class HandlerChat extends TextWebSocketHandler {
 					Map<String, String> mapToSend = new HashMap<String, String>();
 					mapToSend.put("chat_seq", chat_seq);
 					mapToSend.put("cmd", "CMD_ENTER");
-					mapToSend.put("msg", session.getPrincipal().getName() +  "님이 입장 했습니다.");
+					mapToSend.put("msg", mem_id+"님이 입장 했습니다.");
 					
 					String jsonStr = objectMapper.writeValueAsString(mapToSend);
 					sess.sendMessage(new TextMessage(jsonStr)); //메시지 전송
@@ -86,7 +89,8 @@ public class HandlerChat extends TextWebSocketHandler {
 					Map<String, String> mapToSend = new HashMap<String, String>();
 					mapToSend.put("chat_seq", chat_seq);
 					mapToSend.put("cmd", "CMD_MSG_SEND");
-					mapToSend.put("msg", session.getPrincipal().getName() + " : " + mapReceive.get("msg"));
+					mapToSend.put("msg", mapReceive.get("msg"));
+					mapToSend.put("checkId", mem_id);
 
 					String jsonStr = objectMapper.writeValueAsString(mapToSend);
 					sess.sendMessage(new TextMessage(jsonStr));
@@ -128,7 +132,7 @@ public class HandlerChat extends TextWebSocketHandler {
 				Map<String, String> mapToSend = new HashMap<String, String>();
 				mapToSend.put("chat_seq", chat_seq);
 				mapToSend.put("cmd", "CMD_EXIT");
-				mapToSend.put("msg", session.getPrincipal().getName() + "님이 퇴장 했습니다.");
+				mapToSend.put("msg", mem_id+"님이 퇴장 했습니다.");
 
 				String jsonStr = objectMapper.writeValueAsString(mapToSend);
 				sess.sendMessage(new TextMessage(jsonStr));
