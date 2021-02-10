@@ -9,9 +9,11 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import admin.bean.AdminMembersDTO;
-import board.bean.BoardDTO;
+import board.bean.CommentDTO;
+import member.bean.ComplainDTO;
 import member.bean.MemberDTO;
 import product.bean.ProductDTO;
+import store.bean.ReviewDTO;
 import store.bean.StoreDTO;
 
 @Repository
@@ -86,8 +88,7 @@ public class AdminDAOMybatis implements AdminDAO {
 	public void store_productDelete(Map<String, String[]> map) {
 		sqlSession.delete("adminSQL.store_productDelete", map);
 	}
-<<<<<<< HEAD
-	
+
 	//물품전체 출력
 	@Override
 	public List<ProductDTO> getProductAllList(Map<String, Integer> map) {
@@ -123,23 +124,40 @@ public class AdminDAOMybatis implements AdminDAO {
 	public List<ProductDTO> getStoreViewOrderby(Map<String, String> map) {
 		return sqlSession.selectList("adminSQL.getStoreViewOrderby", map);
 	}
-=======
+//  [신고]=========================================================================
 
-	@Override
-	public List<StoreDTO> getComplainList(Map<String, Integer> map) {
-		return sqlSession.selectList("adminSQL.getComplainList", map);
-	}
-	//신고 검색 결과 출력
-	@Override
-	public List<BoardDTO> searchReportedMember(Map<String, String> map) {
-		return sqlSession.selectList("adminSQL.searchReportedMember", map);
-	}
-	@Override  
-	public int getTotalReportedMember(Map<String, String> map) {
-		return sqlSession.selectOne("adminSQL.getTotalReportedMember", map);
-	}
+  //신고 전체 리스트 출력
+  @Override
+  public List<StoreDTO> getComplainList(Map<String, Integer> map) {
+     return sqlSession.selectList("adminSQL.getComplainList", map);
+  }
+  //신고 전체 개수(for 신고 전체 리스트 페이징)
+  @Override
+  public int getComplainTotal() {
+     return sqlSession.selectOne("adminSQL.getComplainTotal");
+  }
+  //신고 검색 결과 출력
+  @Override
+  public List<ComplainDTO> searchReportedMember(Map<String, String> map) {
+     return sqlSession.selectList("adminSQL.searchReportedMember", map);
+  }
+  //신고 검색 개수(for 신고 검색 리스트 페이징)
+  @Override  
+  public int getTotalReportedMember(Map<String, String> map) {
+     return sqlSession.selectOne("adminSQL.getTotalReportedMember", map);
+  }
 
->>>>>>> 522a0da3237372d44c37f3ff38a1a25026ec19ef
+  @Override
+  public CommentDTO getCommentContent(String comment_seq) {
+     return sqlSession.selectOne("adminSQL.getCommentContent", comment_seq);
+  }
+
+  @Override
+  public ReviewDTO getReviewContent(String review_seq) {
+     
+     return sqlSession.selectOne("adminSQL.getReviewContent", review_seq);
+  }
+
 	
 
 	
