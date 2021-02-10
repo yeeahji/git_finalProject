@@ -28,11 +28,11 @@
 	</select>
 <!-- 상세보기 -->	
 	<select id="getMemberView" parameterType="String" resultType="admin.bean.AdminMembersDTO">
-		select * from members join store using(mem_id) where mem_id like #{id}
+		select * from members join store using(mem_id) where mem_id = #{id}
 	</select>
 <!-- 판매중인물건 총개수 -->
 	<select id="totalSellProduct" parameterType="String" resultType="Integer"> 
-		select count(*) from members join product using(mem_id) where mem_id like #{id}
+		select count(*) from members join product using(mem_id) where mem_id = #{id}
 	</select>
 
 
@@ -48,7 +48,7 @@
 	</select>
 <!-- 상점 상세보기 -->	
 	<select id="getStoreView" parameterType="String" resultType="admin.bean.AdminMembersDTO">
-		select * from store join members using(mem_id) where mem_id like #{id}
+		select * from store join members using(mem_id) where mem_id = #{id}
 	</select>
 <!-- 상점조건검색 -->
 	<select id="getSearchStoreList" parameterType="java.util.Map" resultType="store.bean.StoreDTO">
@@ -66,7 +66,7 @@
 	
 <!-- 상점상세보기_물건출력 -->	
 	<select id="getStore_ProductList" parameterType="String" resultType="product.bean.ProductDTO">
-		select * from product where mem_id like #{id} order by product_seq desc
+		select * from product where mem_id = #{id} order by product_seq desc
 	</select>
 <!-- 상점목록_물품리스트에서 삭제 -->
 	<delete id="store_productDelete" parameterType="java.util.Map">
@@ -78,7 +78,7 @@
 	</delete>
 	
 <!-- 물품전체 출력 --> 
-	<select id="getProductAllList" parameterType="java.util.Map" resultType="product.bean.ProducyDTO">
+	<select id="getProductAllList" parameterType="java.util.Map" resultType="product.bean.ProductDTO">
 		select * from(select rownum rn, tt.* from(
 					select * from product)tt)
 					where rn between #{startNum} and #{endNum}
@@ -87,5 +87,42 @@
 	<select id="getTotalE" resultType="Integer">
 		select count(*) from product
 	</select>
+<!-- 물품관련 상세정보 -->
+	<select id="getProductView" parameterType="String" resultType="admin.bean.AdminMembersDTO">
+		select * from product join members using(mem_id) where product_seq = #{seq}
+	</select>
+<!-- 물품 조건검색 -->
+	<select id="getSearchProductList" parameterType="java.util.Map" resultType="product.bean.ProductDTO">
+		<![CDATA[
+		select * from
+		(select rownum rn, tt.* from
+		(select * from product where ${searchType} like '%'||#{productKeyword}||'%')tt
+		)where rn>=#{startNum} and rn<=#{endNum}
+		]]>
+	</select>
+<!-- 물품 조건검색_페이징 -->
+	<select id="getTotalF" parameterType="java.util.Map" resultType="Integer">
+		select count(*) from product where ${searchType} like '%'||#{productKeyword}||'%'
+	</select>
+<!-- 총 리뷰 개수 -->
+ 	<select id="storeReviewTotalA" parameterType="String" resultType="int">
+   		select count(*)
+		from product
+        join review using(product_seq)
+        where product.mem_id = #{id}
+   	</select>
+   	
+	<select id="getStoreViewOrderby" parameterType="java.util.Map" resultType="product.bean.ProductDTO">
+		select * from product where mem_id=#{id}
+			<choose>
+				<when test="product_manage == 0"><!-- 전체 -->
+					order by product_seq desc
+				</when>
+				<when test="product_manage != 0"><!-- 판매중 -->
+					and product_manage=#{product_manage} order by product_seq desc
+				</when>
+			</choose>
+	</select>
+	
 	
 </mapper>

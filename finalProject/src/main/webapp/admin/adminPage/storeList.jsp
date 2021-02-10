@@ -156,9 +156,6 @@
 	        <div class="card-header">
 	            <i class="fas fa-chart-area mr-1"></i>
 	            	상세정보
-	            &nbsp;&nbsp;&nbsp;&nbsp;
-		        <button type="button" class="btn btn-secondary btn-sm">수정</button>
-		        <button type="button" class="btn btn-danger btn-sm">삭제</button>
 	        </div>
 	        <div class="card-body">
 	        	<table class="table table-bordered border-primary table-sm">
@@ -169,10 +166,10 @@
 				    </tr>
 				    <tr>
 				      <th>판매등록상품수</th><th><span id="total_Product1Span"></span></th> 
-				      <th>후기수</th><th><span id="repleSpan"></span></th>
+				      <th>후기수</th><th><span id="reviewSpan"></span></th>
 				    </tr>
 				    <tr>
-				      <th>사진유무</th><th><span id="pictureSpan"></span></th> 
+				      <th>사진유무</th><th><a href="#"><span id="pictureSpan"></span></a></th> 
 				      <th>등급</th><th><span id="echoSpan"></span></th>
 				    </tr>
 				    <tr>
@@ -188,9 +185,13 @@
 	        <div class="card-header">
 	            <i class="fas fa-chart-bar mr-1"></i>
 	           	상품정보
-	           	<button type="button" class="btn btn-secondary btn-sm" id="all_product">전체</button>
-	           	<button type="button" class="btn btn-secondary btn-sm" id="sale_product">판매중</button>
-	           	<button type="button" class="btn btn-secondary btn-sm" id="sold_product">판매완료</button>
+	           	
+	           	<div class="btn-group" role="group" aria-label="Basic example" id="product_manage" value="">
+				  <button type="button" class="btn btn-secondary btn-sm" value="0">전체</button>
+				  <button type="button" class="btn btn-secondary btn-sm" value="1">판매중</button>
+				  <button type="button" class="btn btn-secondary btn-sm" value="2">예약중</button>
+				  <button type="button" class="btn btn-secondary btn-sm" value="3">판매완료</button>
+				</div>
 	           	<button type="button" class="btn btn-danger btn-sm" id="choiceDeleteBtn">삭제</button>
 	        </div>
 	        <div class="card-body">

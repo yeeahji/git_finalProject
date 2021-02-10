@@ -9,6 +9,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import admin.bean.AdminBoardPaging;
@@ -155,19 +156,21 @@ public class AdminController {
 		return mav;
 	}
 	//상점정보 출력
-	@RequestMapping(value="/getStoreView", method=RequestMethod.POST)
+	@RequestMapping(value="/getStoreView", method=RequestMethod.GET)
 	public ModelAndView getstoreView(@RequestParam String id) {	
 		AdminMembersDTO adminMembersDTO= adminService.getStoreView(id);
 		//판매중인물건 총갯수
 		int totalSellProduct = adminService.totalSellProduct(id);
 		//상품정보
 		List<ProductDTO> productList = adminService.getStore_ProductList(id);
-		//
+		//후기 총 개수
+		int reviewTotalA = adminService.storeReviewTotalA(id);
 		
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("adminMembersDTO",adminMembersDTO);
 		mav.addObject("productList",productList);
 		mav.addObject("totalSellProduct",totalSellProduct);
+		mav.addObject("reviewTotalA",reviewTotalA);
 		mav.setViewName("jsonView");
 	
 		return mav;
@@ -216,19 +219,61 @@ public class AdminController {
 	
 	//물품리스트 출력
 	@RequestMapping(value="/getProductAllList", method=RequestMethod.GET)
+	@ResponseBody
 	public ModelAndView getProductAllList(@RequestParam(required=false, defaultValue="1") String pg,
 			  						      @RequestParam(required=false, defaultValue="20") String viewNum) {
-		List<ProductDTO> productList = adminService.getProductAllList(pg,viewNum);
+		List<ProductDTO> productAllList = adminService.getProductAllList(pg,viewNum);
 		//페이징처리
 		AdminBoardPaging adminProductBP = adminService.ProductBP(pg,viewNum);
 		ModelAndView mav = new ModelAndView();
-		mav.addObject("productList", productList);
+		mav.addObject("productAllList", productAllList);
 		mav.addObject("pg", pg);
 		mav.addObject("viewNum", viewNum);
 		mav.addObject("adminProductBP", adminProductBP);
 		mav.setViewName("jsonView");
 		return mav;
 	}
+	//물품관련 상세정보
+	@RequestMapping(value="/getProductView", method=RequestMethod.GET)
+	public ModelAndView getProductView(@RequestParam String seq) {	
+		AdminMembersDTO adminMembersDTO= adminService.getProductView(seq);
+		
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("adminMembersDTO", adminMembersDTO);
+		mav.setViewName("jsonView");
+	
+		return mav;
+	}
+	//물품 조건검색
+	@RequestMapping(value="/getSearchProductList", method=RequestMethod.POST)
+	public ModelAndView getSearchProductList(@RequestParam Map<String,String> map) {
+	List<ProductDTO> productList = adminService.getSearchProductList(map); //pg, keyword, searchType, viewNum
+	
+	//페이징 처리
+	AdminBoardPaging adminProductBP = adminService.getSearchProductBP(map);
+	
+	ModelAndView mav = new ModelAndView();
+	mav.addObject("pg", map.get("pg"));
+	mav.addObject("productList", productList);
+	mav.addObject("adminProductBP", adminProductBP);
+	mav.setViewName("jsonView");
+	return mav;
+	}
+	
+	//상점_정보출력 후 물품 정렬
+	@RequestMapping(value="/getStoreViewOrderby", method=RequestMethod.GET)
+	public ModelAndView getStoreViewOrderby(@RequestParam Map<String,String> map) {
+		List<ProductDTO> productList = adminService.getStoreViewOrderby(map);
+		
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("pg", map.get("pg"));
+		mav.addObject("productList", productList);
+		mav.setViewName("jsonView");
+		return mav;
+	}
+	
+	
+	
 	
 	
 }

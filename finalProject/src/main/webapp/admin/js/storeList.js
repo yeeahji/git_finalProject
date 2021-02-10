@@ -72,7 +72,7 @@ $('#storeSearchBtn').click(function(event, str){
 		         $('#storeTable').on('click','#subjectA',function(){
 		        	 let id = $(this).parent().prev().text();
 		        	 $.ajax({
-		        		 type: 'post',
+		        		 type: 'get',
 		        		 url: '/market/admin/getStoreView',
 		        		 data: {'id': id},
 		        		 dataType: 'json',
@@ -107,28 +107,36 @@ function storeListPrint(data){
      $('#boardPagingDiv').html(data.adminStoreBP.pagingHTML);
 	
      //클릭_오른쪽에 정보나타나게
+     let id;
      $('#storeTable').on('click','#subjectA',function(){
-    	 let id = $(this).parent().prev().text();
+    	 id = $(this).parent().prev().text();
     	 $.ajax({
-    		 type: 'post',
+    		 type: 'get',
     		 url: '/market/admin/getStoreView',
     		 data: {'id': id},
     		 dataType: 'json',
     		 success: function(data){
     			 clickEvent(data);
-    			 
     		 }
     	 });
-    	 
-//    	 $('#all_product').click(function(){
-//
-//    	 });
-//    	 $('#sale_product').click(function(){
-//    	 		 
-//    	 });
-//    	 $('#sold_product').click(function(){
-//    	 	 
-//    	 }); 	 
+    //판매중, 예약중, 판매완료
+	 $('.btn-group>button').click(function(){
+		 let product_manage= $(this).attr('value');
+		 alert(product_manage);
+		 $.ajax({
+    		 type: 'get',
+    		 url: '/market/admin/getStoreViewOrderby',
+    		 data: {'id': id,
+    			 	'product_manage': product_manage},
+    		 dataType: 'json',
+    		 success: function(data){
+    			 $("#store_product_tbody tr:gt(0)").remove();
+    			 clickEvent_2(data);
+    		 }
+    	 });
+		 
+	 });
+  
     	 
      });
 }
@@ -136,15 +144,23 @@ function storeListPrint(data){
 function clickEvent(data){
 	 $('#nameSpan').text(data.adminMembersDTO.mem_name)
 	 $('#storeNameSpan').text(data.adminMembersDTO.store_nickname)
-	 $('#pictureSpan').text(data.adminMembersDTO.store_img)
+	 if(data.adminMembersDTO.store_img != null){
+		 $('#pictureSpan').text(data.adminMembersDTO.store_img)
+	 }else{
+		 $('#pictureSpan').text('사진없음')
+	 }
 	 $('#echoSpan').text(data.adminMembersDTO.store_echo)
 	 $('#introSpan').text(data.adminMembersDTO.store_intro)
+	 $('#reviewSpan').text(data.reviewTotalA)
 	 $('#total_Product1Span').text(data.totalSellProduct)
 	 $('#total_Product2Span').text(data.totalSellProduct)
 	 
 	 //상점이름 누르면 옆에 나오는 물품 테이블
 	 $("#store_product_tbody tr:gt(0)").remove();
-	 $.each(data.productList, function(index, items){
+	 clickEvent_2(data);
+}
+function clickEvent_2(data){
+	$.each(data.productList, function(index, items){
 		 var product_manage = items.product_manage;
 		 if(product_manage === 1){
 			 product_manage = '판매중'
@@ -163,20 +179,20 @@ function clickEvent(data){
 		 ).append($('<td/>',{
 			text: items.product_seq
 		 })).append($('<td/>',{
-        }).append($('<a/>',{
+       }).append($('<a/>',{
 			href: '#',
 			text: items.product_subject,
 			value: items.product_seq,
 			id: 'subjectA',
 			class: items.seq+""
 		}))
-        ).append($('<td/>',{
-        	text: items.product_delivery_fee
-        })).append($('<td/>',{
-        	text: items.product_price
-        })).append($('<td/>',{
-        	text: product_manage
-        })).appendTo($('#store_product_tbody'));
+       ).append($('<td/>',{
+       	text: items.product_delivery_fee
+       })).append($('<td/>',{
+       	text: items.product_price
+       })).append($('<td/>',{
+       	text: product_manage
+       })).appendTo($('#store_product_tbody'));
 	 });//each
 	 
 	//전체 선택 또는 해제
@@ -205,9 +221,6 @@ function clickEvent(data){
 		 let seq = $(this).parent().prev().text();
 		window.open("/market/product/productDetail?seq="+seq,"PopupWin","width=800,height=800");
 	});
-	 
-
-	 
 }
 
 

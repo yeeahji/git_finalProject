@@ -7,7 +7,7 @@
         <meta name="description" content="" />
         <meta name="author" content="" />
         <title>상품관리</title>
-        <link href="/market/admin/css/styles.css" rel="stylesheet" />
+        <link href="/market/admin/css/productList.css" rel="stylesheet" />
         <link rel="icon" href="data:;base64,=">
     </head>
 <body>
@@ -107,8 +107,8 @@
 						  <option value="product_subject">상품이름</option>
 						  <option value="mem_id">판매자ID</option>
 						</select>
-				        <input class="form-control me-2" type="search" name="storeKeyword" id="storeKeyword" placeholder="Search" aria-label="Search">
-				        <button class="btn btn-outline-success" type="button" id="storeSearchBtn">Search</button>
+				        <input class="form-control input-sm" type="search" name="productKeyword" id="productKeyword" placeholder="Search" aria-label="Search">
+				        <button class="btn btn-outline-success" type="button" id="productSearchBtn">Search</button>
 				      </form>  
 				      
 				    </div>
@@ -156,6 +156,7 @@
 		            	상품 상세정보
 		           &nbsp;&nbsp;
 			        <button type="button" class="btn btn-danger btn-sm">삭제</button>
+			        <button type="button" class="btn btn-secondary btn-sm" id="moveProductPageBtn">페이지로 이동</button>
 		        </div>
 		        <div class="card-body">
 		        	<table class="table table-bordered border-primary table-sm">
@@ -211,7 +212,20 @@
                 </footer>
     </div>
     </div>
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.min.js" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/js/all.min.js" crossorigin="anonymous"></script>
     <script src="/market/admin/js/productList.js"></script>
+    <script type="text/javascript">
+		function boardPaging(pg){
+			var productKeyword = document.getElementById("productKeyword").value;
+			$('#pg').val(pg);
+		
+			 if(productKeyword ==''){
+				location.href='/market/admin/productList?pg='+pg+'&viewNum='+$('#viewNum').val();
+			 }else{
+				$('#productSearchBtn').trigger('click','research');
+			 }
+		}
+	</script>
 </body>

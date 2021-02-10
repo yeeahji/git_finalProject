@@ -96,6 +96,31 @@ public class AdminDAOMybatis implements AdminDAO {
 	public int getTotalE() {
 		return sqlSession.selectOne("adminSQL.getTotalE");
 	}
+	//물품관련 상세정보
+	@Override
+	public AdminMembersDTO getProductView(String seq) {
+		return sqlSession.selectOne("adminSQL.getProductView", seq);
+	}
+	//물품 조건검색
+	@Override
+	public List<ProductDTO> getSearchProductList(Map<String, String> map) {
+		return sqlSession.selectList("adminSQL.getSearchProductList", map);
+	}
+	//물품 조건검색_페이징
+	@Override
+	public int getTotalF(Map<String, String> map) {
+		return sqlSession.selectOne("adminSQL.getTotalF", map);
+	}
+	//상점_클릭후_후기 총 개수
+	@Override
+	public int storeReviewTotalA(String id) {
+		return sqlSession.selectOne("adminSQL.storeReviewTotalA", id);
+	}
+	//상점_정보출력 후 물품 정렬
+	@Override
+	public List<ProductDTO> getStoreViewOrderby(Map<String, String> map) {
+		return sqlSession.selectList("adminSQL.getStoreViewOrderby", map);
+	}
 	
 
 	

@@ -201,6 +201,51 @@ public class AdminServiceImpl implements AdminService {
 		return adminBoardPaging;
 	}
 	
+	//물품관련 상세정보, 위에 getStoreView()랑 겹침
+	@Override
+	public AdminMembersDTO getProductView(String seq) {
+		AdminMembersDTO adminMembersDTO = adminDAO.getProductView(seq);
+		return adminMembersDTO;
+	}
+	//물품 조건검색
+	@Override
+	public List<ProductDTO> getSearchProductList(Map<String, String> map) {
+		int viewNum = Integer.parseInt(map.get("viewNum"));
+		
+		int endNum = Integer.parseInt(map.get("pg"))*viewNum;
+		int startNum = endNum-(viewNum-1);
+		
+		map.put("startNum", startNum+"");
+		map.put("endNum", endNum+"");
+		return adminDAO.getSearchProductList(map);
+	}
+	//물품 조건검색_페이징
+	@Override
+	public AdminBoardPaging getSearchProductBP(Map<String, String> map) {
+		int viewNum = Integer.parseInt(map.get("viewNum"));
+		
+		int totalF = adminDAO.getTotalF(map);
+		
+		adminBoardPaging.setCurrentPage(Integer.parseInt(map.get("pg")));
+		adminBoardPaging.setPageBlock(10);
+		adminBoardPaging.setPageSize(viewNum);
+		adminBoardPaging.setTotalA(totalF);
+		
+		adminBoardPaging.makePagingHTML();
+		
+		return adminBoardPaging;
+	}
+	//상점_클릭후_후기 총 개수
+	@Override
+	public int storeReviewTotalA(String id) {
+		return adminDAO.storeReviewTotalA(id);
+	}
+	//상점_정보출력 후 물품 정렬
+	@Override
+	public List<ProductDTO> getStoreViewOrderby(Map<String, String> map) {
+		return adminDAO.getStoreViewOrderby(map);
+	}
+	
 	
 
 	

@@ -43,6 +43,16 @@ public interface AdminService {
 	public List<ProductDTO> getProductAllList(String pg, String viewNum);
 	//물품리스트 페이징
 	public AdminBoardPaging ProductBP(String pg, String viewNum);
+	//물품관련 상세정보
+	public AdminMembersDTO getProductView(String seq);
+	//물품 조건검색
+	public List<ProductDTO> getSearchProductList(Map<String, String> map);
+	//물품 조건검색_페이징
+	public AdminBoardPaging getSearchProductBP(Map<String, String> map);
+	//상점_클릭후_후기 총 개수
+	public int storeReviewTotalA(String id);
+	//상점_정보출력 후 물품 정렬
+	public List<ProductDTO> getStoreViewOrderby(Map<String, String> map);
 	
 	
 

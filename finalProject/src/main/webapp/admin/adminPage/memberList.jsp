@@ -85,10 +85,9 @@
 	    <div class="card mb-4">
 	        <div class="card-header">
 	            <i class="fas fa-chart-area mr-1"></i>
-	            상세정보
+	           		 상세정보
 	            &nbsp;&nbsp;&nbsp;&nbsp;
-		        <button type="button" class="btn btn-secondary btn-sm">수정</button>
-		        <button type="button" class="btn btn-danger btn-sm">영구정지</button>
+		        <button type="button" class="btn btn-danger btn-sm" id="memberBlockBtn">영구정지</button>
 	        </div>
 	        <div class="card-body">
 	        	<table class="table table-bordered border-primary table-sm">
@@ -121,7 +120,9 @@
 	    <div class="card mb-4">
 	        <div class="card-header">
 	            <i class="fas fa-chart-bar mr-1"></i>
-	           상점이름 : <span id="store2NameSpan"></span>
+	       	    	상점이름 : <span id="store2NameSpan"></span>
+	           <button type="button" class="btn btn-secondary btn-sm" id="moveStorePageBtn">상점페이지로 이동</button>
+	           <button type="button" class="btn btn-secondary btn-sm" id="moveStore_adminBtn">상점정보</button>
 	        </div>
 	        <div class="card-body">
 	        	<table class="table table-bordered border-primary table-sm">
