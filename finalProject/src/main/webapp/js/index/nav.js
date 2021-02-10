@@ -104,10 +104,21 @@ function recentlyContent(page, list){
 		if ( index < start )
 			return true;
 		var html ="";
-		html += "<img class='recentlyImage' onclick='recentlyProductDetail("+this.product_seq+");' src=/market/storage/"+ this.product_img1 + ">" + '</img><i class="fas fa-times" onclick="deleteRecentlyProduct(' + this.product_seq + ')"></i><br>';
+		
+		//<img class='recentlyImage' onclick='recentlyProductDetail("+this.product_seq+");' src=/market/storage/"+ this.product_img1 + ">" + '</img><i class="fas fa-times" onclick="deleteRecentlyProduct(' + this.product_seq + ')"></i><br>'
+		html += "<div class='recentlyProduct'>";
+		html += "<img class='recentlyImage' onclick='recentlyProductDetail("+this.product_seq+");'";
+		html += "src='/market/storage/"+ this.product_img1 + "'>";
+		html += "<div class='recentlyInfo'>";
+		html += "<p>"+ this.product_subject + "</p>";
+		html += "<span>"+ this.product_price + "</span>";
+		html += "<button class='close' onclick='recentlyProductDelete("+this.product_seq+")'>X</button>";
+		html += "</div>";
+		html += "</div>";
+			
 		view.append(html)
 		
-		$("#recentlyImage").hover(
+		$(".recentlyImage").hover(
 				
 		
 		);
