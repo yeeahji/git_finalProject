@@ -49,7 +49,7 @@ public class ProductDAOMybatis implements ProductDAO {
 	}
 
 	@Override
-	public String getProdCateName(String seq) {
+	public CategoryDTO getProdCateName(String seq) {
 		return sqlSession.selectOne("productSQL.getProdCateName", seq);
 	}
 
@@ -77,6 +77,11 @@ public class ProductDAOMybatis implements ProductDAO {
 	public void zzimInsert(Map<String, String> map) {
 		sqlSession.insert("productSQL.zzimInsert", map);
 		
+	}
+
+	@Override
+	public String getProdBigCate(String cate_code) {
+		return sqlSession.selectOne("productSQL.getProdBigCate", cate_code);
 	}
 	
 }

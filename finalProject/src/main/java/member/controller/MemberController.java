@@ -401,10 +401,10 @@ public class MemberController {
 	
 //	===========================================================================
 //	- 신고하기
-	@RequestMapping(value ="/complain", method=RequestMethod.GET)
+	@ResponseBody
+	@RequestMapping(value ="/complain", method=RequestMethod.POST)
 	public void complain(@RequestParam Map<String, String> map) {
-//		map : reporter_id(신고자), mem_id(신고당한 사람), complain_content(신고내용), ~_seq(신고항목)
-		
+//		map : reporter_id(신고자), mem_id(신고당한 사람), complain_content(신고내용), ~_seq(신고항목),구분번호(complain_number)
 		memberService.complain(map);
 	}
 	

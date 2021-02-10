@@ -5,8 +5,11 @@ import java.util.Map;
 
 import admin.bean.AdminBoardPaging;
 import admin.bean.AdminMembersDTO;
+import board.bean.CommentDTO;
+import member.bean.ComplainDTO;
 import member.bean.MemberDTO;
 import product.bean.ProductDTO;
+import store.bean.ReviewDTO;
 import store.bean.StoreDTO;
 
 public interface AdminService {
@@ -53,7 +56,21 @@ public interface AdminService {
 	public int storeReviewTotalA(String id);
 	//상점_정보출력 후 물품 정렬
 	public List<ProductDTO> getStoreViewOrderby(Map<String, String> map);
-	
+
+
+	 //신고내역 출력
+	public List<StoreDTO> getComplainList(String pg, String viewNum);
+	public AdminBoardPaging adminComplainBP(String pg, String viewNum);
+
+	public List<ComplainDTO> searchReportedMember(Map<String, String> map);
+	public AdminBoardPaging getSearchReportedBP(Map<String, String> map);
+
+	public CommentDTO getCommentContent(String comment_content);
+
+	public ReviewDTO getReviewContent(String review_seq);
+   
+   
+
 	
 
 

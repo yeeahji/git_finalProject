@@ -83,9 +83,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		where rn between #{startNum} and #{endNum}
 	</select>
 	
-	<!-- 상품정보 - 카테고리 이름 getProdCateName  -->
-	<select id="getProdCateName" parameterType="String" resultType="String">
-		select cate_name
+	<!-- 상품정보 - 해당 카테고리 DTO  -->
+	<select id="getProdCateName" parameterType="String" resultType="category">
+		select cate_code, cate_name, cate_parent
 		from product
 		join category using(cate_code)
 		where product_seq = #{seq}
@@ -134,10 +134,19 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		insert into wish values(#{mem_id}, #{seq}, sysdate)
 	</insert>
 	
+	<!-- 해당 상품의 대분류 이름 -->
+	<select id="getProdBigCate" parameterType="String" resultType="String"> 
+		select cate_name
+		from category
+		where cate_code = #{cate_code}
+	</select>
 	
-	
-	
-	
+	<!-- 모든 대분류 이름 -->
+
+
+
+
+
 </mapper>
 
 

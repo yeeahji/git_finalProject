@@ -1,21 +1,23 @@
-var zzimNum;
+var zzimNum; //test중
+
 $(document).ready(function(){
-	//productDTO 불러오기
+	// 상품 정보
 	$.ajax({
 		type: 'GET',
 		url: '/market/product/getProductDetail',
 		data: {'seq':$('.hiddenProdSeq').val()}, 
 		dataType: 'json',
-		success : function(data){ 
+		success : function(data){ // productDTO
+			console.log("[상세페이지]로그인 아이디 ->"+$('.loginId').val()); //test
+
 			var dto = data.productDTO;
-			// 상품명
-			$('.detail-info__text-title').text(dto.product_subject);
 			
-			// 상품가격
-			$('.detail-info__price').text(dto.product_price+'원');
-			
-			// 상품 조회수
-			$('#view').text(dto.product_view);
+			$('.detail-info__text-title').text(dto.product_subject); // 상품명
+			$('.detail-info__price').text(dto.product_price+'원'); // 상품가격
+			$('#view').text(dto.product_view); // 상품 조회수
+			$('#product_location').text(dto.product_location); // 거래지역
+			$('.prodInfo_contentText').text(dto.product_content); // 하단 상품 정보 - 상품 내용
+			$('.detailContent_location').text(dto.product_location); // 하단 상품 정보 - 거래 지역
 			
 			// 상품 상태 (0:중고상품 1:새상품)
 			if(dto.product_condition == 0){
@@ -30,9 +32,6 @@ $(document).ready(function(){
 			}else if(dto.product_delivery_fee == 1){
 				$('#product_delivery_fee').text('배송비 포함');
 			}
-			
-			// 거래지역
-			$('#product_location').text(dto.product_location);
 			
 			// 상품 이미지 - 스와이퍼
 			var product_img = [{product_img : dto.product_img1}, 
@@ -62,7 +61,7 @@ $(document).ready(function(){
 				}
 			});// each
 			
-			// # 연관상품 - 같은 카테고리 상품들, 페이징처리
+			// 연관상품 - 같은 카테고리 상품들, 페이징처리
 			$.ajax({
 				type: 'GET',
 				url: '/market/product/getRelatedProducts',
@@ -94,10 +93,8 @@ $(document).ready(function(){
 								text: items.product_subject
 							}))))
 						
-					if(data.relProdList.length>=6){
-						$('#relProdPagingDiv').html(data.relProdPaging.pagingHTML);	
-					}
-							
+					if(data.relProdList.length>=6) $('#relProdPagingDiv').html(data.relProdPaging.pagingHTML);	
+					
 					});//each
 					
 				},error: function(err){
@@ -105,27 +102,7 @@ $(document).ready(function(){
 				}
 			});// 연관상품 ajax
 			
-			
-			// # 상품 내용
-			$('.prodInfo_contentText').text(dto.product_content);
-			
-			// 거래 지역
-			$('.detailContent_location').text(dto.product_location);
-			
-			// 카테고리 이름 
-			$.ajax({
-				type: 'GET',
-				url: '/market/product/getProdCateName',
-				data: {'seq':$('.hiddenProdSeq').val()}, 
-				dataType: 'json',
-				success : function(data){ // 카테 네임s
-					$('.detailContent_cate').text(data.cateName);
-				},error: function(err){
-					console.log(err);
-				}
-			});// 카테고리 ajax
-			
-			// # 해쉬 태그
+			// 해쉬 태그
 			var product_hashtag = [{product_hashtag : dto.product_hashtag1}, 
 								   {product_hashtag : dto.product_hashtag2}, 
 								   {product_hashtag : dto.product_hashtag3},  
@@ -141,22 +118,18 @@ $(document).ready(function(){
 							class: 'detailContent_hashtag',
 							text: '#'+items.product_hashtag
 						}))
-						
 					}//else 
 				}
 			});// each 해쉬태그
 			
-			// 상점 정보 -----------------------------------------------
-			// seq로 상점 조회
+			// 상점 정보 (seq로 상점 조회)
 			$.ajax({
 				type: 'GET',
 				url: '/market/product/getStoreInfo',
 				data: {'seq':$('.hiddenProdSeq').val()}, 
 				dataType: 'json',
 				success : function(data){
-					console.log(data.storeDTO.mem_id);
-					
-					// 클릭하면 해당
+					// 클릭하면 해당 상점으로 이동
 					$('.storeInfo_name, .storeProfileImg_Link, .moreProdLink, .productNumLink').click(function(){
 						location.href="/market/store/store?id="+data.storeDTO.mem_id;
 					});
@@ -227,7 +200,7 @@ $(document).ready(function(){
 				}
 			 });// ajax 상점정보
 			
-			// 상점정보 - 최근 올린 상품 2개 상품 이미지+제목
+			// 상점정보 (최근 올린 상품 2개 상품 이미지+제목)
 			$.ajax({
 				type: 'GET',
 				url: '/market/product/getStoreProduct',
@@ -269,7 +242,8 @@ $(document).ready(function(){
 				}
 			}); //ajax 최근 올린 상품 2개
 			
-			// # 내 상점(내상품관리) - 남의 상점(찜/연락버튼) 
+			// 내상점/남의 상점 구분
+			// 내(내상품관리) - 남(찜/연락버튼) 
 			if($('.loginId').val() == dto.mem_id){
 				$('.detail-info__btn-list').append($('<a/>', {
 					class:'myProdManageBtn',
@@ -278,7 +252,7 @@ $(document).ready(function(){
 				}))
 				
 				$('.myProdManageBtn').click(function(){
-					// 내 상점 관리로 가게
+					// 내 상점 관리로 가게 고치기!!!!!!!!!!!!
 					location.href='/market/store/store';
 				});
 			}else if($('.loginId').val() != dto.mem_id){
@@ -306,12 +280,21 @@ $(document).ready(function(){
 				}))
 				
 				//찜 버튼 css
-				$('.zzimSpan').css({'font-weight':'600',
-									'font-size':'18px'});
-			}//if-else 남의 상점 / 내 상점 버튼 구분ㄴ
+				$('.zzimSpan').css({'font-weight':'600', 'font-size':'18px'});
+				
+				//신고하기 버튼
+				$('.detail-info__text-body-top').append($('<button/>',{
+					class: 'detail_SingoBtn',
+				}).append($('<img/>', {
+					src: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAYAAAA7MK6iAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAbBJREFUeNrsls9LAkEcxb+au+JSGIEQyGbBdg881CmConsE9Qd07S/p0qG69RcUdOzSoUt0UujS3c0kEQULU7R17c2wyhazNbvaesgHH9xZh3kzb35tpNfrUV/5fJ7+Stls9ks5FqCNKTDv/L6AjyAdiUrWi4AdcAXewDMwwTu4AQdAHbXxCrh3TJm55vpPAVvgHDyC7VEZM6M7sCbRlgGuwaGM8U9zvAkunbn0M/8nzvNpkBHr4MKnqVvHYDWI8RGY84wpFiNFUX5L8sxZlNJRL4E9UeVkMknpdJoSiQQvt9ttKpfLVK1WhVsXbIBb2RHvi96nUikyDGNgyhSPxymTyZCu614D2/UT9bqooqZpnrm6OyNYoNLGy6KKxWKRR/td3W6XCoWCV/sLfoyFJ5Bt29zAfbb3O9TpdLzaZzFND3NkcjUaDapUKoNyvV6nWq0ms7eHM2YqlUrUarXIsiwyTTPwbeX7dmJRs8hVVeXmoRkzNZtNzjCK0pg0MQ5NosX1BKwRetjCb6lcLje2ES+GHDk72G1m/MCu2hCNZ8HrZDv9j33MVtlMiJ58X38KMADfFnDPWur9bAAAAABJRU5ErkJggg==',
+					width: '15',
+					height: '15',
+					alt: '신고 아이콘'
+				})).append('신고하기'))
+				
+			}//if-else
 			
-			
-			// # 해당 상품이 찜 받은 수
+			// 해당 상품이 찜 받은 수
 			$.ajax({
 				type: 'GET',
 				url: '/market/product/getZzimNum',
@@ -326,7 +309,7 @@ $(document).ready(function(){
 				}
 			});// ajax 해당 상품 찜 받은 수
 		
-			// # 찜 눌름 ---------------------------------------------------------------------
+			// 찜 눌름 ---------------------------------------------------------------------
 			$('.detail-info__btn-list').on("click", '.detail-info__btn-zzim', function(){
 				$('.detail-info__btn-zzim').attr('class', 'detail-info__btn-zzim_click');
 				$('.detail-info__btn-zzim_click img').attr('src', 'data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNiIgaGVpZ2h0PSIxNiIgdmlld0JveD0iMCAwIDE2IDE2Ij4KICAgIDxwYXRoIGZpbGw9IiNGNzJGMzMiIGZpbGwtcnVsZT0ibm9uemVybyIgZD0iTTcuMDA1IDEuMDQ1aC4yMzNjLjI4LjIyOC41MzcuNDkuNzYyLjc3Ny4yMjUtLjI4OC40ODEtLjU0OS43NjItLjc3N2guMjMzYTYuMTYgNi4xNiAwIDAgMC0uMDktLjExM0M5LjY4NC4zNDQgMTAuNjI4IDAgMTEuNiAwIDE0LjA2NCAwIDE2IDIuMTEgMTYgNC43OTZjMCAzLjI5Ni0yLjcyIDUuOTgxLTYuODQgMTAuMDYyTDggMTZsLTEuMTYtMS4xNTFDMi43MiAxMC43NzcgMCA4LjA5MiAwIDQuNzk2IDAgMi4xMSAxLjkzNiAwIDQuNCAwYy45NzIgMCAxLjkxNi4zNDQgMi42OTUuOTMyYTYuMTYgNi4xNiAwIDAgMC0uMDkuMTEzeiIvPgo8L3N2Zz4K');
@@ -365,7 +348,7 @@ $(document).ready(function(){
 			});// 찜 눌름
 			
 			
-			// # 찜 해제 --------------------------------------------------------------------------
+			// 찜 해제 --------------------------------------------------------------------------
 			$('.detail-info__btn-list').on("click", '.detail-info__btn-zzim_click', function(){
 				$('.detail-info__btn-zzim_click').attr('class', 'detail-info__btn-zzim');
 				$('.detail-info__btn-zzim img').attr('src','data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNiIgaGVpZ2h0PSIxNiIgdmlld0JveD0iMCAwIDE2IDE2Ij4KICAgIDxwYXRoIGZpbGw9IiNGRkYiIGZpbGwtcnVsZT0ibm9uemVybyIgZD0iTTcuMDA1IDEuMDQ1aC4yMzNjLjI4LjIyOC41MzcuNDkuNzYyLjc3Ny4yMjUtLjI4OC40ODEtLjU0OS43NjItLjc3N2guMjMzYTYuMTYgNi4xNiAwIDAgMC0uMDktLjExM0M5LjY4NC4zNDQgMTAuNjI4IDAgMTEuNiAwIDE0LjA2NCAwIDE2IDIuMTEgMTYgNC43OTZjMCAzLjI5Ni0yLjcyIDUuOTgxLTYuODQgMTAuMDYyTDggMTZsLTEuMTYtMS4xNTFDMi43MiAxMC43NzcgMCA4LjA5MiAwIDQuNzk2IDAgMi4xMSAxLjkzNiAwIDQuNCAwYy45NzIgMCAxLjkxNi4zNDQgMi42OTUuOTMyYTYuMTYgNi4xNiAwIDAgMC0uMDkuMTEzeiIvPgo8L3N2Zz4K');
@@ -397,26 +380,148 @@ $(document).ready(function(){
 		
 	}); // ajax getProductDetail
 	
+	// 카테고리 (대분류/소분류)
+	$.ajax({
+		type: 'GET',
+		url: '/market/product/getProdCateName',
+		data: {'seq':$('.hiddenProdSeq').val()}, 
+		dataType: 'json',
+		success : function(data){ // categoryDTO
+			var cateDTO = data.categoryDTO;
+			
+			$('.cateSmallText').append(cateDTO.cate_name);
+			
+			// 소분류 - 대분류 이름으로 소분류 카테 조회
+			$('.cateSmallSelect').on({
+			    mouseenter : function (){
+			    	$('.cateSmallOpen').css('display', 'block'); //리스트 펼치기
+			    	
+			    	$.ajax({
+			    		type: 'POST',
+			    		url: '/market/product/getSmallCategoryList',
+			    		data: {'cate_parent':cateDTO.cate_parent}, 
+			    		dataType: 'json',
+			    		success : function(data){
+			    			$('.cateSmallOpen > a').remove();
+			    			
+			    			$.each(data.list, function(index, items){
+			    				$('.cateSmallOpen').append($('<a/>', {
+			    					class: 'smallcate_open',
+			    					text: items.cate_name
+			    				}))
+			    			});
+			    			
+			    			var smallcate = $('.cateSmallOpen').children('a');
+							
+							for(var i=0; i < $('.cateSmallOpen').children().length; i++){
+								if(smallcate.eq(i).text() == cateDTO.cate_name) smallcate.eq(i).css('color', 'rgb(10, 88, 202)');
+							}//for
+			    		},error: function(err){
+							console.log(err);
+						}
+					});
+				},mouseleave : function (){
+					$('.cateSmallOpen').css('display', 'none');
+				}
+			});	// 소분류 
+			
+			// 지금 보고있는 상품의 대분류 이름 
+			$.ajax({
+				type: 'GET',
+				url: '/market/product/getProdBigCate',
+				data: {'cate_code': cateDTO.cate_parent}, 
+				dataType: 'json',
+				success : function(data){
+					$('.cateBigSelectText').append(data.bigCateName);
+
+					// 대분류
+					$('.cateBigSelect').on({
+					    mouseenter : function (){
+					    	$('.cateBigOpen').css('display', 'block'); //리스트 펼치기
+					    	
+					    	var cateList = $('.cateBigOpen').children('a');
+						
+							for(var i=0; i<12;i++){
+								if(cateList.eq(i).text() == data.bigCateName) cateList.eq(i).css('color', 'rgb(10, 88, 202)');
+							}//for
+						},mouseleave : function (){
+							$('.cateBigOpen').css('display', 'none');
+						}
+					});	// 대분류 
+					
+				},error: function(err){
+					console.log(err);
+				}
+			});
+			
+			$('.detailContent_cate').text(cateDTO.cate_name); // 하단 상품정보 - 카테고리 이름
+			
+		},error: function(err){
+			console.log(err);
+		}
+	});// 카테고리 ajax
 	
+	// 신고하기  모달 
+	$('.detail-info__text-body').on("click", '.detail_SingoBtn', function(){		   
+		   $("#modalHidden").attr('id','modalDisplay'); 
+		  	   
+		   $('.contentList>button').mouseenter(function(){
+		      $(this).css('text-decoration', 'underline');
+		     
+		      $(this).off("click").click(function(){ //클릭 이벤트 중복호출 방지
+		         alert("신고가 접수되었습니다.(test)"); 
+		      });
+		      
+		      $(this).mouseleave(function(){
+		         $(this).css('text-decoration', 'none');
+		      });
+		   });
+		   
+	   // 신고 카테고리 펼치기
+	   $('#singoModalBottom').on("click", '.singoTitle > .titleBtn', function(){
+	      $(this).parent().attr('class','singoTitleOpen'); //$(this).parent() == $(".singoTitle")
+	      
+	      var className = $(this).parent().next().attr('class');
+	     
+	      if(className == 'singoContentOther'){ // height=180;인 애만 따로 처리
+	         $(this).parent().next().attr('class','singoContentOtherOpen');
+	      }else if(className == 'singoContent') {
+	         $(this).parent().next().attr('class','singoContentOpen'); 
+	      }
+	      
+	      // 닫기 (다시 클릭)
+	      $('#singoModalBottom').on("click", '.singoTitleOpen > .titleBtn', function(){
+	         $(this).parent().attr('class','singoTitle');
+	         
+	         if(className == 'singoContentOtherOpen' || className =='singoContentOther'){
+	            $(this).parent().next().attr('class', 'singoContentOther');
+	         }else if(className == 'singoContentOpen' || className=='singoContent'){
+	            $(this).parent().next().attr('class', 'singoContent');            
+	         }
+	      });
+	   });//신고 카테고리 펼치기
+	   
+	   // 모달 창 닫기 modalCloseBtn
+	   $('.singoModalWrap').on("click", '.modalCloseBtn', function(){
+	      var openInBtn = $('.singoTitleOpen>button');
+	      var className = openInBtn.parent().next().attr('class'); //위의 className과 관련없음
+	      
+	      $(openInBtn).parent().attr('class','singoTitle');
+	      
+	      if(className == 'singoContentOtherOpen' || className =='singoContentOther'){
+	         $(openInBtn).parent().next().attr('class', 'singoContentOther');
+	      }else if(className == 'singoContentOpen' || className=='singoContent'){
+	         $(openInBtn).parent().next().attr('class', 'singoContent');            
+	      }
+	      
+	      $("#modalDisplay").attr('id','modalHidden'); 
+	      });
+	  
+	   
+	}); // 신고모달
 	
 	
 }) ;// $(document).ready
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -480,23 +585,7 @@ function relProdPaging(pg){
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// ----------------- 슬라이더 & URL 공유 ---------------------
+// ----------------- 슬라이더 & URL 공유 ??---------------------
 
 var slideIndex = 0; // slide index
 
@@ -617,3 +706,7 @@ function initShareBtn() {
 		msgArea.innerText = '복사 완료!';
 	}
 }
+
+
+
+

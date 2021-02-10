@@ -15,8 +15,11 @@ import org.springframework.web.servlet.ModelAndView;
 import admin.bean.AdminBoardPaging;
 import admin.bean.AdminMembersDTO;
 import admin.service.AdminService;
+import board.bean.CommentDTO;
+import member.bean.ComplainDTO;
 import member.bean.MemberDTO;
 import product.bean.ProductDTO;
+import store.bean.ReviewDTO;
 import store.bean.StoreDTO;
 
 
@@ -271,9 +274,66 @@ public class AdminController {
 		mav.setViewName("jsonView");
 		return mav;
 	}
-	
-	
-	
-	
-	
+
+//   [신고]=========================================================================
+
+   //신고 내역 출력
+   @RequestMapping(value="/getComplainList", method=RequestMethod.POST)
+   public ModelAndView getComplainList(@RequestParam(required=false, defaultValue="1") String pg,
+                                 @RequestParam(required=false, defaultValue="20") String viewNum) {
+      List<StoreDTO> list = adminService.getComplainList(pg,viewNum);
+      //페이징처리
+      AdminBoardPaging adminComplainBP = adminService.adminComplainBP(pg,viewNum);
+      System.out.println("list:"+list);      
+      ModelAndView mav = new ModelAndView();
+      mav.addObject("list", list);
+      mav.addObject("pg", pg);
+      mav.addObject("viewNum", viewNum);
+      mav.addObject("adminComplainBP", adminComplainBP);
+      mav.setViewName("jsonView");
+      return mav;
+   }
+   
+//   신고자 검색 내역 출력
+   @RequestMapping(value="searchReportedMember", method=RequestMethod.POST)
+   public ModelAndView searchReportedMember(@RequestParam Map<String,String> map) {
+//      map: keyword, searchType, pg,viewNum
+      List<ComplainDTO> list = adminService.searchReportedMember(map);
+      
+      AdminBoardPaging adminComplainBP = adminService.getSearchReportedBP(map);
+      
+      ModelAndView mav = new ModelAndView();
+      mav.addObject("pg", map.get("pg"));
+      mav.addObject("list", list);
+      mav.addObject("adminComplainBP",adminComplainBP);
+      mav.setViewName("jsonView");
+      return mav;
+   }   
+   @RequestMapping(value="getCommentContent", method=RequestMethod.POST)
+   public ModelAndView getCommentContent(@RequestParam String comment_seq) {
+      
+      CommentDTO commentDTO = adminService.getCommentContent(comment_seq);
+      ModelAndView mav = new ModelAndView();
+      
+      mav.addObject("commentDTO", commentDTO);
+      mav.setViewName("jsonView");
+      return mav;
+   }   
+   @RequestMapping(value="getReviewContent", method=RequestMethod.POST)
+   public ModelAndView getReviewContent(@RequestParam String review_seq) {
+      
+      ReviewDTO reviewDTO = adminService.getReviewContent(review_seq);
+      ModelAndView mav = new ModelAndView();
+      
+      mav.addObject("reviewDTO", reviewDTO);
+      mav.setViewName("jsonView");
+      return mav;
+   }  
+   
 }
+	
+	
+	
+	
+
+
