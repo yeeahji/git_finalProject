@@ -77,10 +77,6 @@
                   <div class="contentListR">
                      <button type="button">타사이트, 어플 광고</button>
                   </div>
-                  <div class="contentListInputR">
-                     <input type="text" placeholder="기타(사유)">
-                     <button type="button">등록</button>
-                  </div>
                </div>
             </div>
             <!-- 카테고리 (2) -->
@@ -96,10 +92,6 @@
                   <div class="contentListR">
                      <button type="button">성희롱</button>
                   </div>
-                  <div class="contentListInputR">
-                     <input type="text" placeholder="기타(사유)">
-                     <button type="button">등록</button>
-                  </div>
                </div>
             </div>
             <div class="singoCategoryR">
@@ -109,16 +101,17 @@
                </div>
                <div class="singoContentR">
                   <div class="contetnListTextareaR">
-                     <textarea></textarea>
-                     <button type="button">등록</button>
+                     <textarea id="complainReason"></textarea>
+                     <div id="textareaDiv"><span id="counter">0</span>자/200자</div>
+                     <div id="textCounterDiv" class="caution"></div>
+                     <button type="button" id="complainReasonBtn">등록</button>
                   </div>
                </div>
             </div>
             <div class="singoCategoryR">
                <div class="singoTitleR">
-                  <span>거래사기(1:1문의하기)</span>
-                  <button class="directAskR">1:1문의하기</button>
-                  <!-- 문의하기 링크와 연결!!!!!!!!!!!!!! -->
+                   <button style="float:right" class="directAsk"
+                  			onclick="location.href='/market/notice/qna'">1:1문의하기</button>
                </div>
                <div class="singoContentR"></div>
             </div>

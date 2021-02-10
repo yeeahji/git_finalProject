@@ -37,7 +37,7 @@ public class MemberDTO implements UserDetails {
 	private int mem_kakao;
 	private String mem_agree;
 
-	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern = "yyyy.mm.dd")
+	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern = "yyyy.MM.dd")
 	private Date mem_logtime;
 	
 	private boolean enabled;

@@ -136,7 +136,7 @@
                      <textarea id="complainReason"></textarea>
                      <div id="textareaDiv"><span id="counter">0</span>자/200자</div>
                      <div id="textCounterDiv" class="caution"></div>
-                     <button type="button">등록</button>
+                     <button type="button" id="complainReasonBtn">등록</button>
                   </div>
                </div>
             </div>

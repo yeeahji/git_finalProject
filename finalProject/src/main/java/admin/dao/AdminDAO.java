@@ -1,5 +1,4 @@
 package admin.dao;
-
 import java.util.List;
 import java.util.Map;
 
@@ -12,11 +11,8 @@ import store.bean.ReviewDTO;
 import store.bean.StoreDTO;
 
 public interface AdminDAO {
-
 	public List<MemberDTO> getMemberList(Map<String, Integer> map);
-
 	public int getTotalA();
-
 	public List<MemberDTO> getSearchMember(Map<String, String> map);
 	//검색한 후 총글
 	public int getTotalB(Map<String, String> map);
@@ -39,7 +35,6 @@ public interface AdminDAO {
 	public int getTotalD(Map<String, String> map);
 	//상점목록_물품리스트에서 삭제
 	public void store_productDelete(Map<String, String[]> map);
-
 	//물품전체 출력
 	public List<ProductDTO> getProductAllList(Map<String, Integer> map);
 	//물품리스트 페이징
@@ -54,6 +49,9 @@ public interface AdminDAO {
 	public int storeReviewTotalA(String id);
 	//상점_정보출력 후 물품 정렬
 	public List<ProductDTO> getStoreViewOrderby(Map<String, String> map);
+
+
+
 	public List<StoreDTO> getComplainList(Map<String, Integer> map);
 
 	public List<ComplainDTO> searchReportedMember(Map<String, String> map);
@@ -63,14 +61,9 @@ public interface AdminDAO {
 
 	public int getComplainTotal();
 
-  	public CommentDTO getCommentContent(String comment_content);
+	public CommentDTO getCommentContent(String comment_content);
 
-  	public ReviewDTO getReviewContent(String review_seq);
-
-	
-	
-
-
+	public ReviewDTO getReviewContent(String review_seq);
 
 
 }

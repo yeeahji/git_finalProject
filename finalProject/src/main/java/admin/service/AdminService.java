@@ -1,5 +1,4 @@
 package admin.service;
-
 import java.util.List;
 import java.util.Map;
 
@@ -21,7 +20,6 @@ public interface AdminService {
 	public int totalMember();
 	
 	public List<MemberDTO> getSearchMember(Map<String, String> map);
-
 	public AdminBoardPaging searchBoardPaging(Map<String, String> map);
 	//회원상세보기
 	public AdminMembersDTO getMemberView(String id);
@@ -58,7 +56,8 @@ public interface AdminService {
 	public List<ProductDTO> getStoreViewOrderby(Map<String, String> map);
 
 
-	 //신고내역 출력
+
+	//신고내역 출력
 	public List<StoreDTO> getComplainList(String pg, String viewNum);
 	public AdminBoardPaging adminComplainBP(String pg, String viewNum);
 
@@ -68,10 +67,7 @@ public interface AdminService {
 	public CommentDTO getCommentContent(String comment_content);
 
 	public ReviewDTO getReviewContent(String review_seq);
-   
-   
 
 	
-
-
+	
 }

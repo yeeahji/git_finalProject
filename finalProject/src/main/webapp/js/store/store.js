@@ -337,7 +337,20 @@ $('#profileRight').on("click", '.singoBtn', function(e){
          $(this).css('text-decoration', 'underline');
        
          $(this).off('click').click(function(){ //클릭 이벤트 중복호출 방지
-            alert("신고가 접수되었습니다.(test)"); 
+        	 $.ajax({
+				type : 'post',
+				url : '/market/member/complain',
+				data: {reporter_id: $('.loginId').val(),
+						complain_content : $(this).text(),
+						store_seq : $('.hiddenId').val(),//상점 고유 번호==상점 주인 아이디
+						complain_category : '상점 신고',
+						mem_id: $('.hiddenId').val(),
+				},success: function(){
+					alert("신고가 성공적으로 접수되었습니다.")
+				},error: function(err){
+					console.log(err)
+				}
+			});//ajax
          });
         
          $(this).mouseleave(function(){

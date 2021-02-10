@@ -85,7 +85,6 @@ public class AdminController {
 	@RequestMapping(value="/complainList", method=RequestMethod.GET)
 	public String complainList() {
 		return "/admin/adminPage/complainList";
-
 	}
 	
 	
@@ -99,7 +98,6 @@ public class AdminController {
 		AdminBoardPaging adminBoardPaging = adminService.boardPaging(pg,viewNum);
 		//전체회원수
 		int totalMember = adminService.totalMember();
-
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("list", list);
 		mav.addObject("pg", pg);
@@ -193,7 +191,6 @@ public class AdminController {
 	mav.setViewName("jsonView");
 	return mav;
 	}
-
 	//상점_물품삭제
 	@RequestMapping(value="/store_productDelete", method=RequestMethod.GET)
 	public ModelAndView store_productDelete(String[] check) {
@@ -202,7 +199,6 @@ public class AdminController {
 		adminService.store_productDelete(check);
 		return new ModelAndView("redirect:/admin/storeList");
 	}
-
 	//신고 내역 출력
 //	@RequestMapping(value="/getComplainList", method=RequestMethod.POST)
 //	public ModelAndView getComplainList(@RequestParam(required=false, defaultValue="1") String pg,
@@ -275,62 +271,68 @@ public class AdminController {
 		return mav;
 	}
 
-//   [신고]=========================================================================
+//	[신고]=========================================================================
 
-   //신고 내역 출력
-   @RequestMapping(value="/getComplainList", method=RequestMethod.POST)
-   public ModelAndView getComplainList(@RequestParam(required=false, defaultValue="1") String pg,
-                                 @RequestParam(required=false, defaultValue="20") String viewNum) {
-      List<StoreDTO> list = adminService.getComplainList(pg,viewNum);
-      //페이징처리
-      AdminBoardPaging adminComplainBP = adminService.adminComplainBP(pg,viewNum);
-      System.out.println("list:"+list);      
-      ModelAndView mav = new ModelAndView();
-      mav.addObject("list", list);
-      mav.addObject("pg", pg);
-      mav.addObject("viewNum", viewNum);
-      mav.addObject("adminComplainBP", adminComplainBP);
-      mav.setViewName("jsonView");
-      return mav;
-   }
-   
-//   신고자 검색 내역 출력
-   @RequestMapping(value="searchReportedMember", method=RequestMethod.POST)
-   public ModelAndView searchReportedMember(@RequestParam Map<String,String> map) {
-//      map: keyword, searchType, pg,viewNum
-      List<ComplainDTO> list = adminService.searchReportedMember(map);
-      
-      AdminBoardPaging adminComplainBP = adminService.getSearchReportedBP(map);
-      
-      ModelAndView mav = new ModelAndView();
-      mav.addObject("pg", map.get("pg"));
-      mav.addObject("list", list);
-      mav.addObject("adminComplainBP",adminComplainBP);
-      mav.setViewName("jsonView");
-      return mav;
-   }   
-   @RequestMapping(value="getCommentContent", method=RequestMethod.POST)
-   public ModelAndView getCommentContent(@RequestParam String comment_seq) {
-      
-      CommentDTO commentDTO = adminService.getCommentContent(comment_seq);
-      ModelAndView mav = new ModelAndView();
-      
-      mav.addObject("commentDTO", commentDTO);
-      mav.setViewName("jsonView");
-      return mav;
-   }   
-   @RequestMapping(value="getReviewContent", method=RequestMethod.POST)
-   public ModelAndView getReviewContent(@RequestParam String review_seq) {
-      
-      ReviewDTO reviewDTO = adminService.getReviewContent(review_seq);
-      ModelAndView mav = new ModelAndView();
-      
-      mav.addObject("reviewDTO", reviewDTO);
-      mav.setViewName("jsonView");
-      return mav;
-   }  
-   
+	//신고 내역 출력
+	@RequestMapping(value="/getComplainList", method=RequestMethod.POST)
+	public ModelAndView getComplainList(@RequestParam(required=false, defaultValue="1") String pg,
+				  						 @RequestParam(required=false, defaultValue="20") String viewNum) {
+		List<StoreDTO> list = adminService.getComplainList(pg,viewNum);
+		//페이징처리
+		AdminBoardPaging adminComplainBP = adminService.adminComplainBP(pg,viewNum);
+		System.out.println("list:"+list);		
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("list", list);
+		mav.addObject("pg", pg);
+		mav.addObject("viewNum", viewNum);
+		mav.addObject("adminComplainBP", adminComplainBP);
+		mav.setViewName("jsonView");
+		return mav;
+	}
+	
+//	신고자 검색 내역 출력
+	@RequestMapping(value="searchReportedMember", method=RequestMethod.POST)
+	public ModelAndView searchReportedMember(@RequestParam Map<String,String> map) {
+//		map: keyword, searchType, pg,viewNum
+		List<ComplainDTO> list = adminService.searchReportedMember(map);
+		
+		AdminBoardPaging adminComplainBP = adminService.getSearchReportedBP(map);
+		
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("pg", map.get("pg"));
+		mav.addObject("list", list);
+		mav.addObject("adminComplainBP",adminComplainBP);
+		mav.setViewName("jsonView");
+		return mav;
+	}	
+	//원하는 댓글 내용 가져오기
+	@RequestMapping(value="getCommentContent", method=RequestMethod.POST)
+	public ModelAndView getCommentContent(@RequestParam String comment_seq) {
+		
+		CommentDTO commentDTO = adminService.getCommentContent(comment_seq);
+		ModelAndView mav = new ModelAndView();
+		
+		mav.addObject("commentDTO", commentDTO);
+		mav.setViewName("jsonView");
+		return mav;
+	}	
+	//원하는 리뷰 내용 가져오기
+	@RequestMapping(value="getReviewContent", method=RequestMethod.POST)
+	public ModelAndView getReviewContent(@RequestParam String review_seq) {
+		
+		ReviewDTO reviewDTO = adminService.getReviewContent(review_seq);
+		ModelAndView mav = new ModelAndView();
+		
+		mav.addObject("reviewDTO", reviewDTO);
+		mav.setViewName("jsonView");
+		return mav;
+	}	
+
 }
+
+
+
+
 	
 	
 	

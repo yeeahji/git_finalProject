@@ -3,7 +3,6 @@
  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="adminSQL">
-
 	<select id="getMemberList" parameterType="java.util.Map" resultType="member.bean.MemberDTO">
 		select * from(select rownum rn, tt.* from(
 		select * from members)tt)
@@ -34,8 +33,6 @@
 	<select id="totalSellProduct" parameterType="String" resultType="Integer"> 
 		select count(*) from members join product using(mem_id) where mem_id = #{id}
 	</select>
-
-
 <!-- 상점리스트출력 -->
 	<select id="getStoreList" parameterType="java.util.Map" resultType="store.bean.StoreDTO">
 		select * from(select rownum rn, tt.* from(
@@ -123,7 +120,8 @@
 				</when>
 			</choose>
 	</select>
-	
+
+
 	<!-- A.신고 리스트 전체 출력 -->
    <select id="getComplainList" parameterType="java.util.Map" resultType="member.bean.ComplainDTO">
       select * from(
@@ -135,7 +133,7 @@
    <select id="getComplainTotal" resultType="Integer">
       select count(*) from complain
    </select>
-   
+
 <!-- B.신고 검색 리스트 전체 출력 -->
    <select id="searchReportedMember" parameterType="java.util.Map" resultType="member.bean.ComplainDTO">
       <![CDATA[
@@ -149,7 +147,7 @@
    <select id="getTotalReportedMember" parameterType="java.util.Map" resultType="Integer">
       select count(*) from complain where ${searchType} like '%'||#{keyword}||'%'
    </select>
-   
+
 <!-- 신고 댓글 보이기 -->
    <select id="getCommentContent" parameterType="String" resultType="board.bean.CommentDTO">
       select mem_id, comment_content, comment_logtime from comments where comment_seq=#{comment_seq} 
@@ -158,6 +156,6 @@
    <select id="getReviewContent" parameterType="String" resultType="store.bean.ReviewDTO">
       select mem_id, review_content, review_date from comments where review_seq=#{review_seq}
    </select>
-   
 
-</mapper>
+
+</mapper> 
