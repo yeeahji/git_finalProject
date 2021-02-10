@@ -35,9 +35,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			ORDER BY product_logtime asc
 		)
 		WHERE rn BETWEEN nvl(#{start},0) AND nvl(#{end},20) ORDER BY product_logtime asc
-			
-		<!-- SELECT * FROM (SELECT rownum rn, tt.* FROM (select * FROM product 
-			WHERE 1=1 ORDER BY seq desc) tt) WHERE rn BETWEEN #{startNum} and #{endNum} -->
 	</select>
 
 

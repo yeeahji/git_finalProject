@@ -1,8 +1,47 @@
 
 --테스트용
 INSERT INTO product VALUES 
-(seq_product.NEXTVAL, 'test1', 101, '입던 옷 야상', '입던옷입니다', 'ex2.PNG', 'ex2.PNG', 'ex2.PNG', '', '', 25000, '서울', 0, 0, '원피스', '옷', '투피스', '쓰리피스', '포피스'
+(seq_product.NEXTVAL, 'test1', 101, '입던 옷 야상', '입던옷입니다 싸게 팝니다. 직거래 가능', 'ex2.PNG', 'ex2.PNG', 'ex2.PNG', '', '', 25000, '서울', 0, 0, 
+'야상', '옷', '헌옷', '아나바다', '야상'
+,0, 1, '2021-01-25');
+INSERT INTO product VALUES 
+(seq_product.NEXTVAL, 'test2', 101, '가볍다 코트 패딩', '미개봉입니다. 직거래 가능', '101_1.JPG', '101_2.JPG', '101_3.JPG', '', '', 105000, '경기', 0, 0, 
+'야상', '옷', '헌옷', '아나바다', '야상'
+,0, 1, '2021-02-04');
+INSERT INTO product VALUES 
+(seq_product.NEXTVAL, 'test1', 101, '노스페이스 패딩', '미개봉. 택배거래만 가능', '101_4.JPG', '101_5.JPG', '101_4.JPG', '', '', 205000, '경기', 0, 0, 
+'야상', '옷', '헌옷', '아나바다', '야상'
 ,0, 1, sysdate);
+INSERT INTO product VALUES 
+(seq_product.NEXTVAL, 'test1', 101, '솔드 패딩 점퍼', '온라인 쇼핑했는데, 사이즈 미스로 내놔요', '101_6.JPG', '101_7.JPG', '101_8.JPG', '101_9.JPG', '101_10.JPG', 75000, '경기', 0, 0, 
+'야상', '옷', '여성', '아나바다', '패딩'
+,0, 1, sysdate);
+INSERT INTO product VALUES 
+(seq_product.NEXTVAL, 'test1', 101, '경량 하이브리드 패딩 자켓', '진짜 가벼워요', '101_11.JPG', '101_12.JPG', '101_13.JPG', '', '', 75000, '의정부', 0, 0, 
+'야상', '옷', '여성', '아나바다', '패딩'
+,0, 1, sysdate);
+INSERT INTO product VALUES 
+(seq_product.NEXTVAL, 'test1', 101, '고급스러운 롱패딩 내놔요', '고급스러워요 실제로 보시면 알아요 진짜 따뜻해요 .. 직거래 희망 네고 불가능', 
+'101_14.JPG', '101_15.JPG', '101_16.JPG', '', '', 139000, '일산', 0, 0, 
+'야상', '옷', '여성', '아나바다', '패딩'
+,0, 1, sysdate);
+INSERT INTO product VALUES 
+(seq_product.NEXTVAL, 'test1', 101, '가성비 롱패딩 데려가세요', '소재도 괜찮고 따뜻하고 이 가격에 이 따뜻함 최고입니다.', 
+'101_17.JPG', '', '', '', '', 29000, '서울', 0, 0, 
+'야상', '옷', '여성', '아나바다', '패딩'
+,0, 1, sysdate);
+INSERT INTO product VALUES 
+(seq_product.NEXTVAL, 'test1', 101, '몽클레어 여성 패딩', '선물용으로 샀었습니다. 개봉은 했으나 안입었어요', 
+'101_18.JPG', '101_19.JPG', '101_20.JPG', '', '', 2000000, '서울', 0, 0, 
+'야상', '옷', '여성', '아나바다', '패딩'
+,0, 1, sysdate);
+INSERT INTO product VALUES 
+(seq_product.NEXTVAL, 'test2', 101, '구스 다운 패션 패딩', '실제로 입으면 진짜 귀여워요', 
+'101_21.JPG', '101_22.JPG', '', '', '', 210000, '서울', 0, 0, 
+'야상', '옷', '여성', '아나바다', '패딩'
+,0, 1, sysdate);
+
+
 INSERT INTO product VALUES 
 (seq_product.NEXTVAL, 'test1', 102, '입던 옷 구찌', '입던옷입니다', 'ex3.JPG', 'ex3.JPG', 'ex3.JPG', '', '', 600000, '서울', 0, 0, '원피스', '옷', '투피스', '쓰리피스', '포피스'
 ,0, 1, sysdate);
