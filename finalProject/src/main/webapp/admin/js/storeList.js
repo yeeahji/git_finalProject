@@ -50,7 +50,6 @@ $('#storeSearchBtn').click(function(event, str){
 			dataType: 'json',
 			success: function(data){
 				$("#tbody tr:gt(0)").remove();
-				//alert(JSON.stringify(data));
 				$.each(data.storeList, function(index, items){
 					$('<tr/>').append($('<td/>',{
 							text: items.mem_id,

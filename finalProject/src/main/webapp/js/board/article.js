@@ -221,6 +221,24 @@ $(document).ready(function(){
 								 });//click
 							});//mouseenter
 							
+							//기타 사유 서술했을 때
+						   $('#complainReasonBtn').click(function(){
+							   $.ajax({
+									type : 'post',
+									url : '/market/member/complain',
+									data: {reporter_id: $('.loginId').val(),
+											complain_content : $('#complainReason').val(),
+											product_seq : $('.hiddenProdSeq').val(),
+											complain_category : '상품 신고',
+											mem_id: $('.storeOwner').val(),
+									},success: function(){
+										alert("신고가 성공적으로 접수되었습니다.")
+									},error: function(err){
+										console.log(err)
+									}
+								});//ajax
+						   });
+							
 						   // 신고 카테고리 펼치기
 							 $('#singoModalBottom').on("click", '.singoTitle > .titleBtn', function(){
 							     $(this).parent().attr('class','singoTitleOpen'); //$(this).parent() == $(".singoTitle")
@@ -376,7 +394,23 @@ $(document).ready(function(){
 				 });//click
 			});//mouseenter
 			
-			 //신고 접수
+			//기타 사유 서술했을 때
+			$('#complainReasonBtn').click(function(){
+			   $.ajax({
+					type : 'post',
+					url : '/market/member/complain',
+					data: {reporter_id: $('.loginId').val(),
+							complain_content : $('#complainReason').val(),
+							product_seq : $('.hiddenProdSeq').val(),
+							complain_category : '상품 신고',
+							mem_id: $('.storeOwner').val(),
+					},success: function(){
+						alert("신고가 성공적으로 접수되었습니다.")
+					},error: function(err){
+						console.log(err)
+					}
+				});//ajax
+			});
 			 
 			
 		   // 신고 카테고리 펼치기
@@ -391,10 +425,7 @@ $(document).ready(function(){
 			    	 $(this).parent().next().attr('class','singoContentOpen'); 
 			     }
 			      
-			      // 닫히는 방법 2가지
-			      // (1) 펼친 상태에서 다른 카테고리 버튼 눌리면 알아서 접히기
-			      
-			      // (2) 닫기 (다시 클릭)
+			      // 닫기 (다시 클릭)
 			     $('#singoModalBottom').on("click", '.singoTitleOpen > .titleBtn', function(){
 			         $(this).parent().attr('class','singoTitle');
 			         

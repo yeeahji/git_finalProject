@@ -118,6 +118,7 @@
                 	<input type="hidden" id="viewNumHidden" name="viewNumHidden" value="20">
 					<select class="form-select form-select-sm" id="selectPrint" aria-label=".form-select-sm example" >
 						<option selected>구분</option>
+						<option value="product_seq">상점 신고</option>
 						<option value="product_seq">상품 신고</option>
 						<option value="review_seq">후기 신고</option>
 						<option value="board_seq">게시글 신고</option>
@@ -129,13 +130,13 @@
 				<th>내용</th><!-- complain_content -->
                 <th>신고당한 사람</th><!-- mem_id -->
                 <th>신고자</th><!--reporter_id -->
+                <th>신고 날짜</th>
             </tr>
         </thead>
         <tbody id="complainTbody">
         	<tr>
         	
         	</tr>
-        	
         </tbody>
 	   	<tfoot class="table-secondary">
             <tr>
@@ -145,6 +146,7 @@
                 <th>complain_content</th>
                 <th>mem_id</th>
                 <th>reporter_id</th>
+                <th>complain_logtime</th>
             </tr>
         </tfoot>
 	</table>
@@ -159,20 +161,29 @@
 			<div id="boardPagingDiv" class="paging" align="center"></div>
 		</ul>
 	</nav>
-    </div>
-    <div class="col">
-		<div class="card">
-			  <h5 class="card-header">Featured</h5>
-			  <div class="card-body">
-				    <h5 class="card-title">Special title treatment</h5>
-				    <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-				    <a href="#" class="btn btn-primary">Go somewhere</a>
-			  </div>
+</div><!-- 좌측 끝 -->
+<!-- ========================================= -->
+<div class="col"><!-- 우측 -->
+<div class="card">
+  <h5 class="card-header">신고 내용 확인</h5>
+  <div class="card-body">
+  		<div class="container">
+		<div class="row">
+		<h3>작성자</h3> 
+		<div class="col" id="reported_id"></div>
+		<h3>작성일</h3>
+		<div class="col" id="reported_logtime"></div>
 		</div>
-    </div>
+		</div><!-- end.container -->
+		<h3>내용</h3>
+		<div id="reported_content"></div>
+	    
+	    
+	    <a class="btn btn-primary" id="goComplainPage">신고 내용 페이지</a>
   </div>
-
-
+</div>
+</div><!-- 우측 끝 -->
+</div>
 </div>               
 </div>
 </main>
@@ -197,6 +208,17 @@
 </div>
 <script src="https://code.jquery.com/jquery-3.4.1.js" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
-<script src="/market/admin/dist/js/scripts.js"></script>
 <script src="/market/admin/js/complain.js"></script>
+<script type="text/javascript">
+	function boardPaging(pg){
+		var keyword = document.getElementById("keyword").value;
+		$('#pg').val(pg);
+	
+		 if(keyword ==''){
+			location.href='/market/admin/complainList?pg='+pg+'&viewNum='+$('#viewNum').val();
+		 }else{
+			$('#memberSearchBtn').trigger('click','research');
+		 }
+	}
+	</script>
 </body>

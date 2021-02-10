@@ -12,8 +12,11 @@ import admin.bean.AdminBoardPaging;
 import admin.bean.AdminMembersDTO;
 import admin.dao.AdminDAO;
 import board.bean.BoardDTO;
+import board.bean.CommentDTO;
+import member.bean.ComplainDTO;
 import member.bean.MemberDTO;
 import product.bean.ProductDTO;
+import store.bean.ReviewDTO;
 import store.bean.StoreDTO;
 
 @Service
@@ -97,10 +100,6 @@ public class AdminServiceImpl implements AdminService {
 		AdminMembersDTO adminMembersDTO = adminDAO.getMemberView(id);
 		return adminMembersDTO;
 	}
-	
-	
-	
-	
 	//상점리스트출력
 	@Override
 	public List<StoreDTO> getStoreList(String pg, String viewNum) {
@@ -176,7 +175,8 @@ public class AdminServiceImpl implements AdminService {
 		map.put("array", check);
 		adminDAO.store_productDelete(map);
 	}
-
+//	[신고]=========================================================================
+	//A.신고 전체 리스트 출력
 	@Override
 	public List<StoreDTO> getComplainList(String pg, String viewNum) {
 		int endNum = Integer.parseInt(pg)*Integer.parseInt(viewNum);
@@ -189,9 +189,22 @@ public class AdminServiceImpl implements AdminService {
 		System.out.println("complainList:"+complainList);
 		return complainList;
 	}
-
+	//A.신고 전체 리스트 페이징
 	@Override
-	public List<BoardDTO> searchReportedMember(Map<String, String> map) {
+	public AdminBoardPaging adminComplainBP(String pg, String viewNum) {
+		int complainTotal = adminDAO.getComplainTotal();
+		
+		adminBoardPaging.setCurrentPage(Integer.parseInt(pg));
+		adminBoardPaging.setPageBlock(10);
+		adminBoardPaging.setPageSize(Integer.parseInt(viewNum));//위에endNum,startNum과 맞아야함
+		adminBoardPaging.setTotalA(complainTotal);
+		
+		adminBoardPaging.makePagingHTML();
+		return adminBoardPaging;
+	}
+	//B.신고 검색 리스트 출력
+	@Override
+	public List<ComplainDTO> searchReportedMember(Map<String, String> map) {
 		System.out.println("2"+map);
 		int viewNum = Integer.parseInt(map.get("viewNum"));
 		
@@ -203,7 +216,7 @@ public class AdminServiceImpl implements AdminService {
 		map.put("endNum", endNum+"");
 		return adminDAO.searchReportedMember(map);
 	}
-
+	//B.신고 검색 리스트 페이징
 	@Override
 	public AdminBoardPaging getSearchReportedBP(Map<String, String> map) {
 		
@@ -221,6 +234,19 @@ public class AdminServiceImpl implements AdminService {
 		
 		return adminBoardPaging;
 	}
+
+	@Override
+	public CommentDTO getCommentContent(String comment_seq) {
+		return adminDAO.getCommentContent(comment_seq) ;
+		
+	}
+
+	@Override
+	public ReviewDTO getReviewContent(String review_seq) {
+		
+		return adminDAO.getReviewContent(review_seq);
+	}
+
 	
 
 	

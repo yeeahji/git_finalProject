@@ -5,8 +5,11 @@ import java.util.Map;
 
 import admin.bean.AdminMembersDTO;
 import board.bean.BoardDTO;
+import board.bean.CommentDTO;
+import member.bean.ComplainDTO;
 import member.bean.MemberDTO;
 import product.bean.ProductDTO;
+import store.bean.ReviewDTO;
 import store.bean.StoreDTO;
 
 public interface AdminDAO {
@@ -40,9 +43,16 @@ public interface AdminDAO {
 
 	public List<StoreDTO> getComplainList(Map<String, Integer> map);
 
-	public List<BoardDTO> searchReportedMember(Map<String, String> map);
+	public List<ComplainDTO> searchReportedMember(Map<String, String> map);
 
 	public int getTotalReportedMember(Map<String, String> map);
+
+
+	public int getComplainTotal();
+
+	public CommentDTO getCommentContent(String comment_content);
+
+	public ReviewDTO getReviewContent(String review_seq);
 
 
 }

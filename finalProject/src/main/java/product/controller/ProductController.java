@@ -125,7 +125,7 @@ public class ProductController {
 		  session.setAttribute("recentlyProduct", list);
 		 }
 		 list.add(seq);
-		 
+		 System.out.println("seq"+seq);
 		 
 		// 상품 정보 받아옴
 		ProductDTO productDTO = productService.productDetail(seq);

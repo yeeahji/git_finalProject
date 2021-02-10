@@ -133,7 +133,7 @@ $(document).ready(function(){
 					$('.storeInfo_name, .storeProfileImg_Link, .moreProdLink, .productNumLink').click(function(){
 						location.href="/market/store/store?id="+data.storeDTO.mem_id;
 					});
-					
+					$('.storeOwner').val(data.storeDTO.mem_id);
 					// 상점 사진
 					if(data.storeDTO.store_img==null){
 						$('.storeProfileImg_Link').append($('<img/>', {
@@ -461,7 +461,7 @@ $(document).ready(function(){
 		}
 	});// 카테고리 ajax
 	
-	// 신고하기  모달 
+	// 신고하기  모달 -------------------------------------------------------------------
 	$('.detail-info__text-body').on("click", '.detail_SingoBtn', function(){		   
 		   $("#modalHidden").attr('id','modalDisplay'); 
 		  	   
@@ -469,18 +469,50 @@ $(document).ready(function(){
 		      $(this).css('text-decoration', 'underline');
 		     
 		      $(this).off("click").click(function(){ //클릭 이벤트 중복호출 방지
-		         alert("신고가 접수되었습니다.(test)"); 
-		      });
-		      
+		    	  $.ajax({
+						type : 'post',
+						url : '/market/member/complain',
+						data: {reporter_id: $('.loginId').val(),
+								complain_content : $(this).text(),
+								product_seq : $('.hiddenProdSeq').val(),
+								complain_category : '상품 신고',
+								mem_id: $('.storeOwner').val(),
+						},success: function(){
+							alert("신고가 성공적으로 접수되었습니다.")
+						},error: function(err){
+							console.log(err)
+						}
+					});//ajax
+		      });//this click
+		   
 		      $(this).mouseleave(function(){
 		         $(this).css('text-decoration', 'none');
 		      });
+		   });//mouseenter
+		   
+		   //기타 사유 서술했을 때
+		   $('#complainReasonBtn').click(function(){
+			   $.ajax({
+					type : 'post',
+					url : '/market/member/complain',
+					data: {reporter_id: $('.loginId').val(),
+							complain_content : $('#complainReason').val(),
+							product_seq : $('.hiddenProdSeq').val(),
+							complain_category : '상품 신고',
+							mem_id: $('.storeOwner').val(),
+					},success: function(){
+						alert("신고가 성공적으로 접수되었습니다.")
+					},error: function(err){
+						console.log(err)
+					}
+				});//ajax
 		   });
+		   
+		   
 		   
 	   // 신고 카테고리 펼치기
 	   $('#singoModalBottom').on("click", '.singoTitle > .titleBtn', function(){
 	      $(this).parent().attr('class','singoTitleOpen'); //$(this).parent() == $(".singoTitle")
-	      
 	      var className = $(this).parent().next().attr('class');
 	     
 	      if(className == 'singoContentOther'){ // height=180;인 애만 따로 처리
@@ -516,20 +548,19 @@ $(document).ready(function(){
 	      
 	      $("#modalDisplay").attr('id','modalHidden'); 
 	      });
-	  
 	   
+	   //글자수 카운팅
+		$('#complainReason').keyup(function(){
+			let content = $(this).val();
+			$('#counter').html(content.length);
+			
+			if(content.length>200){
+				$('#textCounterDiv').text("입력 가능한 글자 수를 초과했습니다.");
+				$(this).val(content.substring(0, 200)); //글자수 초과하면 안써지게
+			}
+		});
 	}); // 신고모달
-	
-	
 }) ;// $(document).ready
-
-
-
-
-
-
-
-
 
 // 연관상품 - 페이징 처리
 function relProdPaging(pg){

@@ -163,10 +163,7 @@
 						<div class="contentList">
 							<button type="button">타사이트,어플광고</button>
 						</div>
-						<div class="contentListInput">
-							<input type="text" placeholder="기타(사유)">
-							<button type="button">등록</button>
-						</div>
+						
 					</div>
 				</div> <!-- //광고(교신 및 상점홍보) -->
 				<!-- 카테고리 (2) -->
@@ -184,10 +181,6 @@
 						</div>
 						<div class="contentList">
 							<button type="button">불친절한 응대</button>
-						</div>
-						<div class="contentListInput">
-							<input type="text" placeholder="기타(사유)">
-							<button type="button">등록</button>
 						</div>
 					</div>
 				</div> <!-- //거래비매너(거래파기, 늦은배송) -->
@@ -207,10 +200,6 @@
 						<div class="contentList">
 							<button type="button">리뷰(별점평가)요구 및 테러</button>
 						</div>
-						<div class="contentListInput">
-							<input type="text" placeholder="기타(사유)">
-							<button type="button">등록</button>
-						</div>
 					</div>
 				</div><!-- //언어폭력(비방, 욕설, 성희롱) -->
 				<!-- 카테고리 (4) 얘만 height:180;으로 -->
@@ -227,15 +216,12 @@
 							<button type="button">장물(분실폰,분실노트북,...)</button>
 						</div>
 						<div class="contentList">
-							<button type="button">의약품류</button>
+							<button type="button">의약품류/콘택트 렌즈</button>
 						</div>
 						<div class="contentList">
-							<button type="button">콘택트 렌즈</button>
+							<button type="button">마약/불법성</button>
 						</div>
-						<div class="contentListInput">
-							<input type="text" placeholder="기타(사유)">
-							<button type="button">등록</button>
-						</div>
+						
 					</div>
 				</div><!-- //거래 금지 품목 -->
 				<div class="singoCategory">
@@ -245,17 +231,18 @@
 					</div>
 					<div class="singoContent">
 						<div class="contetnListTextarea">
-							<textarea></textarea>
-							<button type="button">등록</button>
+							<textarea id="complainReason"></textarea>
+		                     <div id="textareaDiv"><span id="counter">0</span>자/200자</div>
+		                     <div id="textCounterDiv" class="caution"></div>
+		                     <button type="button" id="complainReasonBtn">등록</button>
 						</div>
 					</div>
 				</div>
 				<div class="singoCategory">
 					<div class="singoTitle">
-						<span>거래사기(1:1문의하기)</span>
-						<button class="directAsk">1:1문의하기</button>
-						<!-- 문의하기 링크와 연결!!!!!!!!!!!!!! -->
-					</div>
+						<button style="float:right" class="directAsk"
+                  			onclick="location.href='/market/notice/qna'">1:1문의하기</button>
+               		</div>
 					<div class="singoContent"></div>
 				</div>
 			</div><!-- //singoModalBottom -->

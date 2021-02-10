@@ -22,9 +22,9 @@
 <script src="https://unpkg.com/swiper/swiper-bundle.js"></script>
 <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
 
-<!-- product_seq 받아옴  -->
-<input type="hidden" class="hiddenProdSeq" value="${seq}">
 
+<input type="hidden" class="hiddenProdSeq" value="${seq}"><!-- product_seq 받아옴  -->
+<input type="hidden" class="storeOwner" value=""><!--상품 올린 상점 주인 mem_id -->
 <div class="detail__area">
 <div class="detail__div">
 	<!-- 상단 카테고리  -->
@@ -355,7 +355,13 @@
                </div>
                <div class="singoContentOther">
                   <div class="contentList">
-                     <button type="button">상점홍보</button>
+                     <button type="button">상업성 광고</button>
+                  </div>
+                  <div class="contentList">
+                     <button type="button">상점 홍보</button>
+                  </div>
+                  <div class="contentList">
+                     <button type="button">타사이트, 어플 광고</button>
                   </div>
                   <div class="contentList">
                      <button type="button">낚시글</button>
@@ -363,15 +369,9 @@
                   <div class="contentList">
                      <button type="button">도배글</button>
                   </div>
-                  <div class="contentList">
-                     <button type="button">타사이트, 어플 광고</button>
-                  </div>
-                  <div class="contentListInput">
-                     <input type="text" placeholder="기타(사유)">
-                     <button type="button">등록</button>
                   </div>
                </div>
-            </div>
+            
             <!-- 카테고리 (2) -->
             <div class="singoCategory">
                <div class="singoTitle">
@@ -391,10 +391,6 @@
                   <div class="contentList">
                      <button type="button">상품명이 잘못됨</button>
                   </div>
-                  <div class="contentListInput">
-                     <input type="text" placeholder="기타(사유)">
-                     <button type="button">등록</button>
-                  </div>
                </div>
             </div>
             <!-- 카테고리 (3) -->
@@ -411,14 +407,10 @@
                      <button type="button">장물(분실폰,분실노트북,..)</button>
                   </div>
                   <div class="contentList">
-                     <button type="button">의약품류</button>
+                     <button type="button">의약품류/콘택트 렌즈</button>
                   </div>
                   <div class="contentList">
-                     <button type="button">콘택트 렌즈</button>
-                  </div>
-                  <div class="contentListInput">
-                     <input type="text" placeholder="기타(사유)">
-                     <button type="button">등록</button>
+                     <button type="button">마약/불법성</button>
                   </div>
                </div>
             </div>
@@ -435,10 +427,6 @@
                   <div class="contentList">
                      <button type="button">성희롱</button>
                   </div>
-                  <div class="contentListInput">
-                     <input type="text" placeholder="기타(사유)">
-                     <button type="button">등록</button>
-                  </div>
                </div>
             </div>
             <div class="singoCategory">
@@ -448,19 +436,21 @@
                </div>
                <div class="singoContent">
                   <div class="contetnListTextarea">
-                     <textarea></textarea>
-                     <button type="button">등록</button>
+                     <textarea id="complainReason"></textarea>
+                     <div id="textareaDiv"><span id="counter">0</span>자/200자</div>
+                     <div id="textCounterDiv" class="caution"></div>
+                     <button type="button" id="complainReasonBtn">등록</button>
                   </div>
                </div>
             </div>
             <div class="singoCategory">
                <div class="singoTitle">
-                  <span>거래사기(1:1문의하기)</span>
-                  <button class="directAsk">1:1문의하기</button>
-                  <!-- 문의하기 링크와 연결!!!!!!!!!!!!!! -->
+                  <button class="directAsk" 
+                  		onclick="location.href='/market/notice/qna'">1:1문의하기</button>
                </div>
                <div class="singoContent"></div>
             </div>
+            </div> <!-- //modalBottom -->
          </div><!-- //singoModalBottom -->
       </div><!-- singoModalWrap -->
    </div><!-- //modalHidden -->
