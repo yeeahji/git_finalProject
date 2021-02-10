@@ -53,10 +53,12 @@ public class IndexServiceImpl implements IndexService {
 		// 검색어
 		if (keyword.substring(0, 1).equals("@")) {
 			// 상점명
+			System.out.println("상점명 :" + keyword);
 			keyword = keyword.substring(1, keyword.length());
 			param.put("storeName", keyword);
 		} else {
 			// 상품명
+			System.out.println("상품명 :" + keyword);
 			param.put("productSubject", keyword);
 		}
 

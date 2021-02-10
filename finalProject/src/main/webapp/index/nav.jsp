@@ -22,26 +22,37 @@
 		<div class="recentlyText">최근본상품</div>
 		<div class="recentlyProduct">
 			<span id="recentlyCnt"></span>
-			<div id="recentlyArea" style="margin-left: 18px;">
-				<a id="recentlyList" > </a>
-				<!-- 최근본상품  -->
-				<a id="noList"></a>
+			<div id="recentlyArea">
+				<div id="recentlyList">
+					<div class="recentlyProduct">
+						<img class="recentlyImage" onclick="recentlyProductDetail(1);"
+							src="/market/storage/ex2.PNG">
+						<div class="recentlyInfo">
+							<p>흰털옷</p>
+							<span>34,000원</span>
+							<button class="close" onclick="recentlyProductDelete(1)">X</button>
+						</div>
+					</div>
+				</div>
 			</div>
-		</div>
-		<div id="recentlyPaging" style="text-align: center;">
-			<button id="recentlySubPage" class="btn subpage"
-				onclick="recentlySubPage()"></button>
-			<a id="currentPage"></a>
-
-			<button id="recentlyAddPage" class="btn addpage"
-				onclick="recentlyAddPage()"></button>
+			<!-- 최근본상품  -->
+			<a id="noList"></a>
 		</div>
 	</div>
-	<!-- 최근 본 상품 끝 -->
+	<div id="recentlyPaging" style="text-align: center;">
+		<button id="recentlySubPage" class="btn subpage"
+			onclick="recentlySubPage()"></button>
+		<a id="currentPage"></a>
 
-	<div class="totheTop">
-		<a href="#" class="topText">TOP</a>
+		<button id="recentlyAddPage" class="btn addpage"
+			onclick="recentlyAddPage()"></button>
 	</div>
+</div>
+<!-- 최근 본 상품 끝 -->
+
+<div class="totheTop">
+	<a href="#" class="topText">TOP</a>
+</div>
 </div>
 <!--사이드 배너 끝 -->
 
