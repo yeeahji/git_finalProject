@@ -22,7 +22,7 @@
 				class="fas fa-search"></i>
 
 		</div>
-		<div class="dropSearch">
+		<div class="dropSearch" style="display: none;">
 			<ul>
 				<li id="recentlySearch">
 					<p>최근 검색어</p>

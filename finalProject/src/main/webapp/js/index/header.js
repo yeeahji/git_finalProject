@@ -4,7 +4,7 @@
 var categoray_list
 
 $(document).ready(function() {
-
+	
 	// 카테고리 목록 조회
 	$.ajax({
 		type : 'post',
@@ -18,7 +18,7 @@ $(document).ready(function() {
 		}
 	});// 세부카테고리 리스트
 
-	$(".dropSearch").hide();
+	
 
 })
 

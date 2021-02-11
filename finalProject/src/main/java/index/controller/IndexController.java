@@ -1,5 +1,6 @@
 package index.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 import javax.servlet.http.HttpSession;
 
@@ -56,7 +57,39 @@ public class IndexController {
 	public ModelAndView recentlyProduct(HttpSession session,
 			@RequestParam(value = "page", required = false, defaultValue = "0") String page) {
 		
+		//System.out.println("/recentlyProduct ");
+		
 		List<String> list = (List) session.getAttribute("recentlyProduct");
+		
+		//System.out.println("list(0) :" + list.get(list.size()-1));
+		
+		List<ProductDTO> recentlyList = null;
+		if (  list != null && list.size() != 0) {
+			recentlyList = indexService.recentlyList(list);
+		}
+			
+		//System.out.println("last seq :: " +recentlyList.get(0).getProduct_seq());
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("recentlyList", recentlyList);
+		mav.setViewName("jsonView");
+		return mav;
+	}
+	
+
+	@RequestMapping(value = "recentlyProductDelete", method = RequestMethod.POST)
+	@ResponseBody
+	public ModelAndView recentlyProductDelete(@RequestParam String seq, Model model, HttpSession session) {
+
+		List<String> list = (List) session.getAttribute("recentlyProduct");
+		
+		for ( int i=0; i < list.size(); i++) {
+			if ( list.get(i).equals(seq) )
+				list.remove(i);
+		}
+		
+		//System.out.println("list :" + list.size());
+		session.setAttribute("recentlyProduct", list);
+		
 		List<ProductDTO> recentlyList = null;
 		if (  list != null && list.size() != 0) {
 			recentlyList = indexService.recentlyList(list);
@@ -68,6 +101,9 @@ public class IndexController {
 		mav.setViewName("jsonView");
 		return mav;
 	}
+	
+	
+	
 	
 	@RequestMapping(value = "/searchDisplay", method = RequestMethod.GET)
 	public String searchProduct(Model model, @RequestParam(value = "keyword") String keyword,

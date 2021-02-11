@@ -24,22 +24,13 @@
 			<span id="recentlyCnt"></span>
 			<div id="recentlyArea">
 				<div id="recentlyList">
-					<div class="recentlyProduct">
-						<img class="recentlyImage" onclick="recentlyProductDetail(1);"
-							src="/market/storage/ex2.PNG">
-						<div class="recentlyInfo">
-							<p>흰털옷</p>
-							<span>34,000원</span>
-							<button class="close" onclick="recentlyProductDelete(1)">X</button>
-						</div>
-					</div>
+
 				</div>
 			</div>
 			<!-- 최근본상품  -->
 			<a id="noList"></a>
 		</div>
-	</div>
-	<div id="recentlyPaging" style="text-align: center;">
+		<div id="recentlyPaging" style="text-align: center;">
 		<button id="recentlySubPage" class="btn subpage"
 			onclick="recentlySubPage()"></button>
 		<a id="currentPage"></a>
@@ -47,6 +38,8 @@
 		<button id="recentlyAddPage" class="btn addpage"
 			onclick="recentlyAddPage()"></button>
 	</div>
+	</div>
+	
 </div>
 <!-- 최근 본 상품 끝 -->
 

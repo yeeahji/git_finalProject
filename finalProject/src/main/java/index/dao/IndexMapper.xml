@@ -131,6 +131,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<foreach collection="list" item="item" separator="," open="AND p.product_seq IN (" close=")">
 			#{item}
 		</foreach>
+		<foreach collection="list" item="item" separator="," index="index" open="ORDER BY" close="">
+			CASE WHEN p.product_seq = to_number(#{item}) THEN #{index} ELSE -1 END
+		</foreach>
+		
 	</select>
 
 
