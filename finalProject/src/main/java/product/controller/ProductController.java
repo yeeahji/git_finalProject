@@ -3,6 +3,7 @@ package product.controller;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.security.Principal;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -46,9 +47,10 @@ public class ProductController {
 	
 	@RequestMapping(value="productRegist", method=RequestMethod.POST) //상품 등록
 	@ResponseBody
-	public void productRegist(@ModelAttribute ProductDTO productDTO,
-							  @RequestParam MultipartFile[] img,
-							  @RequestParam(required=false, defaultValue="") String[] hashtag) {
+	public ModelAndView productRegist(@ModelAttribute ProductDTO productDTO,
+									  @RequestParam MultipartFile[] img,
+									  @RequestParam(required=false, defaultValue="") String[] hashtag,
+									  Principal principal) {
 		//이미지 파일 복사
 		String filePath = "D:/git_home/git_final/finalProject/src/main/webapp/storage";
 		File file;
@@ -82,8 +84,17 @@ public class ProductController {
 			}
 		}
 		
+		//아이디
+		productDTO.setMem_id(principal.getName());
+		
 		//DB 연결
 		productService.productRegist(productDTO);
+		
+		//데이터 전달
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("seq", productDTO.getProduct_seq());
+		mav.setViewName("jsonView");
+		return mav;
 	}
 	
 	@RequestMapping(value="getSmallCategoryList", method=RequestMethod.POST) //소분류 카테고리 불러오기
@@ -98,18 +109,21 @@ public class ProductController {
 		return mav;
 	}
 	
-	@RequestMapping(value="getMyLocation", method=RequestMethod.POST) //내 위치 불러오기
-	@ResponseBody
-	public String getMyLocation(HttpSession session) {
-		String mem_id = (String)session.getAttribute("memId");
-		return productService.getMyLocation(mem_id);
-	}
+//	@RequestMapping(value="getMyLocation", method=RequestMethod.POST) //내 위치 불러오기
+//	@ResponseBody
+//	public String getMyLocation(Principal principal) {
+//		return productService.getMyLocation(principal.getName());
+//	}
 	
-	@RequestMapping(value="getMyRecentLocation", method=RequestMethod.POST) //최근 위치 불러오기
+	@RequestMapping(value="getMyLocation", method=RequestMethod.POST) //최근 위치 불러오기
 	@ResponseBody
-	public String getMyRecentLocation(HttpSession session) {
-		String mem_id = (String)session.getAttribute("memId");
-		return productService.getMyRecentLocation(mem_id);
+	public ModelAndView getMyLocation(Principal principal) {
+		String myLocation = productService.getMyLocation(principal.getName());
+		
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("myRecentLocation", myLocation);
+		mav.setViewName("jsonView");
+		return mav;
 	}
 	
 	@RequestMapping(value="productDetail", method=RequestMethod.GET)

@@ -9,7 +9,6 @@ import lombok.Setter;
 @Setter
 public class ChatRoomDTO {
 	private int chat_seq;
-	private int chat_create;
 	private String one_mem_id;
 	private String two_mem_id;
 	private String one_store_nickname;

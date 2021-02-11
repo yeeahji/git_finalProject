@@ -155,31 +155,29 @@ $('.contentArea').on("click", '.category >.btn', function(){
 
 
 /* 거래지역 */
-//내 지역
-$('#myLocation').click(function(){
-	$.ajax({
-		type: 'post',
-		url: '/market/product/getMyLocation',
-		data: { 'mem_id': data.mem_id },
-		dataType: 'text',
-		success: function(data){
-			$('#product_location').value(data);
-		},
-		error: function(err){
-			console.log(err);
-		}
-	});
-});
+//내 지역 ---> 여유되면 진짜 내 위치 가져오는걸로 수정
+//$('#myLocation').click(function(){
+//	$.ajax({
+//		type: 'post',
+//		url: '/market/product/getMyLocation',
+//		dataType: 'text',
+//		success: function(data){
+//			data = 컨트롤러에서 보내온 값
+//		},
+//		error: function(err){
+//			console.log(err);
+//		}
+//	});
+//});
 
 //최근 지역
 $('#myRecentLocation').click(function(){
 	$.ajax({
 		type: 'post',
-		url: '/market/product/getMyRecentLocation',
-		data: { 'mem_id': data.mem_id },
-		dataType: 'text',
+		url: '/market/product/getMyLocation',
+		dataType: 'json',
 		success: function(data){
-			$('#product_location').value(data);
+			$('#product_location').val(data.myRecentLocation);
 		},
 		error: function(err){
 			console.log(err);
@@ -379,10 +377,11 @@ $('#registBtn').click(function(){
 				});
 			},
 			success: function(data) {
-				alert('상품이 등록되었습니다. ')
+				alert('상품이 등록되었습니다.');
+				location.href='/market/product/productDetail?seq='+data.seq;
 			},
 			error: function(error) {
-				alert('error : ', error)
+				alert('error : ', error);
 			}
 		});
 	}

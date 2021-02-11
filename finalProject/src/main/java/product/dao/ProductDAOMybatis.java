@@ -34,11 +34,6 @@ public class ProductDAOMybatis implements ProductDAO {
 	}
 
 	@Override
-	public String getMyRecentLocation(String mem_id) {
-		return sqlSession.selectOne("productSQL.getMyRecentLocation", mem_id);
-	}
-
-	@Override
 	public ProductDTO productDetail(String seq) {
 		return sqlSession.selectOne("productSQL.productDetail", Integer.parseInt(seq));
 	}

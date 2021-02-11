@@ -6,12 +6,11 @@ import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
-import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -43,7 +42,7 @@ public class ChatController {
 	@ResponseBody
 	public ModelAndView getChatList(Principal principal) {	
 		List<ChatListDTO> chatList = chatService.getChatList(principal.getName());
-
+		
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("chatList", chatList);
 		mav.setViewName("jsonView");
@@ -52,7 +51,7 @@ public class ChatController {
 	
 	//채팅방 (연락하기 눌렀을 때 바로 여기로 연결)
 	@RequestMapping(value="/chatRoom", method=RequestMethod.POST)
-	public String chatRoom(@AuthenticationPrincipal MemberDTO memberDTO, HttpServletRequest request) throws Exception {
+	public String chatRoom(@AuthenticationPrincipal MemberDTO memberDTO, HttpSession session) throws Exception {
 		//연락하기 누르면 건너오는 데이터 : 판매자의 mem_id, product_seq, 구매자의 mem_id (나중에 authent~ 지워도될듯)
 		//만약 노 데이터면(연락하기 정식 절차 말고 다른데서 주소 직접 입력 시) 튕기게 하기
 		
@@ -110,8 +109,9 @@ public class ChatController {
 		}
 		
 		//데이터 전달
-		request.setAttribute("chat_seq", chat_seq);
-		request.setAttribute("other_store_nickname", two_store_nickname);
+		//request.setAttribute("chat_seq", chat_seq);
+		session.setAttribute("my_store_nickname", one_store_nickname);
+		session.setAttribute("other_store_nickname", two_store_nickname);
 
 		return "/chat/chatRoom";
 			

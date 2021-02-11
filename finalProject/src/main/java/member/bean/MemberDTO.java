@@ -29,11 +29,7 @@ public class MemberDTO implements UserDetails {
 	private String mem_add1;
 	private String mem_add2;
 	private int mem_postcode;
-	private int mem_recentPostcode;
-	private String mem_recentAdd1;
-	private String mem_recentAdd2;
 	private String mem_location;
-	private String mem_recentLocation;
 	private int mem_kakao;
 	private String mem_agree;
 

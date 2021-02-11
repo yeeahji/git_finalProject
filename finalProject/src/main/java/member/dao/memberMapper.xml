@@ -17,11 +17,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  		begin
 	 		insert into members values(#{mem_id}, #{mem_pwd}, #{mem_name}, #{mem_email}, 
 	 									#{mem_add1},#{mem_add2}, #{mem_postcode},
-	 									'','', '',	
-	 									#{mem_tel}, 
-	 									'', '',	
-	 									sysdate,
-	 									1, 'ROLE_USER', 0, #{mem_agree}, 0);
+	 									#{mem_tel}, '최근 거래지역이 없습니다', sysdate,
+	 									1, 'ROLE_USER',
+	 									0, #{mem_agree}, 0);
  			
  			insert into store(mem_id, store_nickname, store_img) 
 			values(#{mem_id}, '상점'||seq_store.NEXTVAL||'호', 'logo_black.png');
@@ -59,13 +57,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <!-- ▶ 처음 로그인한 카카오 데이터 회원가입 -->
  	<insert id="joinKakao" parameterType="member">
  		begin
- 			insert into members values(#{mem_id}, #{mem_pwd}, #{mem_name}, #{mem_email}, 
+	 		insert into members values(#{mem_id}, #{mem_pwd}, #{mem_name}, #{mem_email}, 
 	 									#{mem_add1},#{mem_add2}, #{mem_postcode},
-	 									'','', '',	
-	 									#{mem_tel}, 
-	 									'', '',	
-	 									sysdate,
-	 									1, 'ROLE_USER', 1, #{mem_agree}, 0);
+	 									#{mem_tel}, '최근 거래지역이 없습니다', sysdate,
+	 									1, 'ROLE_USER',
+	 									1, #{mem_agree}, 0);
  			
  			insert into store(mem_id, store_nickname, store_img) 
 			values(#{mem_id}, '상점'||seq_store.NEXTVAL||'호', 'logo_black.png');
@@ -102,17 +98,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <!--  		2. members에 아이디 제외 데이터 삭제 -->
 			UPDATE members SET 
 						mem_postcode = 0
-						,mem_recentPostcode = 0
 						, mem_name='out' 
 						, mem_pwd=#{mem_pwd}
 						, mem_email=#{mem_email}
 						, mem_add1='out' 
-						, mem_add2='out' 
-						, mem_recentAdd1='out' 
-						, mem_recentAdd2='out' 
+						, mem_add2='out'
 						, mem_tel='out' 
 						, mem_location='out' 
-						, mem_recentLocation='out' 
 						, mem_agree ='out' 
 				WHERE mem_id = #{mem_id};
  		end;
@@ -141,27 +133,3 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</insert>
  	
 </mapper>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

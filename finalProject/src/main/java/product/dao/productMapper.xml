@@ -7,7 +7,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 	<insert id="productRegist" parameterType="product">
 		INSERT INTO product VALUES(seq_product.NEXTVAL,
-								   'test1',
+								   #{mem_id},
 								   #{cate_code},
 								   #{product_subject},
 								   #{product_content},
@@ -34,12 +34,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		SELECT * FROM category WHERE cate_parent=#{cate_parent} ORDER BY cate_code
 	</select>
 
-	<select id="getMyLocation" parameterType="String" resultType="member">
+	<select id="getMyLocation" parameterType="String" resultType="String">
 		SELECT mem_location FROM members WHERE mem_id=#{mem_id}
-	</select>
-
-	<select id="getMyRecentLocation" parameterType="String" resultType="member">
-		SELECT mem_recentLocation FROM members WHERE mem_id=#{mem_id}
 	</select>
 
 	<select id="productDetail" parameterType="int" resultType="product">

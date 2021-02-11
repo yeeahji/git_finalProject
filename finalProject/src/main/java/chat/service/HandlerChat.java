@@ -17,7 +17,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 public class HandlerChat extends TextWebSocketHandler {
 	//(<"chat_seq", 방ID>, <"session", 세션>) - (<"chat_seq", 방ID>, <"session", 세션>) - (<"chat_seq", 방ID>, <"session", 세션>) 형태 
 	private List<Map<String, Object>> sessionList = new ArrayList<Map<String, Object>>();
-	private String mem_id;
+	String my_store_nickname;
 	
 	//*********이미지 첨부시 <img src="" width..> 여기에 넣어주기 (크기는 고정)
 	
@@ -26,8 +26,9 @@ public class HandlerChat extends TextWebSocketHandler {
 	protected void handleTextMessage(WebSocketSession session, TextMessage message) throws Exception {
 		super.handleTextMessage(session, message);
 		
-		//사용자 아이디 저장
-		mem_id = session.getPrincipal().getName();
+		//세션 데이터 저장 - handShaker
+		Map<String,Object> sessionMap = session.getAttributes();
+		my_store_nickname = (String)sessionMap.get("my_store_nickname");
 		
 		//JSON --> Map으로 변환 (GSON 사용 안할 시)
 		ObjectMapper objectMapper = new ObjectMapper();
@@ -37,22 +38,6 @@ public class HandlerChat extends TextWebSocketHandler {
 		
 		//클라이언트 입장
 		case "CMD_ENTER":
-			//HandShaker
-			/* 값을 못가져온다.. other_store_nickname 표시해야되는데..
-			Map<String,Object> testMap = session.getAttributes();
-			String str = (String)testMap.get("Principal");
-			System.out.println("맵의 값은 : " + str);
-			String str2 = (String)testMap.get("Details");
-			System.out.println("맵의 값은 : " + str2);
-			String str3 = (String)testMap.get("chat_seq");
-			System.out.println("맵의 값은 : " + str3);
-			String str4 = (String)testMap.get("Authentication");
-			System.out.println("맵의 값은 : " + str4);
-			String str5 = (String)testMap.get("other_store_nickname");
-			System.out.println("맵의 값은 : " + str5);
-			System.out.println("맵의 값은 : " + testMap);
-			*/
-			
 			//세션 리스트에 저장
 			Map<String, Object> map = new HashMap<String, Object>();
 			map.put("chat_seq", mapReceive.get("chat_seq"));
@@ -69,7 +54,7 @@ public class HandlerChat extends TextWebSocketHandler {
 					Map<String, String> mapToSend = new HashMap<String, String>();
 					mapToSend.put("chat_seq", chat_seq);
 					mapToSend.put("cmd", "CMD_ENTER");
-					mapToSend.put("msg", mem_id+"님이 입장 했습니다.");
+					mapToSend.put("msg", my_store_nickname+"님이 입장 했습니다.");
 					
 					String jsonStr = objectMapper.writeValueAsString(mapToSend);
 					sess.sendMessage(new TextMessage(jsonStr)); //메시지 전송
@@ -90,7 +75,7 @@ public class HandlerChat extends TextWebSocketHandler {
 					mapToSend.put("chat_seq", chat_seq);
 					mapToSend.put("cmd", "CMD_MSG_SEND");
 					mapToSend.put("msg", mapReceive.get("msg"));
-					mapToSend.put("checkId", mem_id);
+					mapToSend.put("checkId", session.getPrincipal().getName());
 
 					String jsonStr = objectMapper.writeValueAsString(mapToSend);
 					sess.sendMessage(new TextMessage(jsonStr));
@@ -132,7 +117,7 @@ public class HandlerChat extends TextWebSocketHandler {
 				Map<String, String> mapToSend = new HashMap<String, String>();
 				mapToSend.put("chat_seq", chat_seq);
 				mapToSend.put("cmd", "CMD_EXIT");
-				mapToSend.put("msg", mem_id+"님이 퇴장 했습니다.");
+				mapToSend.put("msg", my_store_nickname+"님이 퇴장 했습니다.");
 
 				String jsonStr = objectMapper.writeValueAsString(mapToSend);
 				sess.sendMessage(new TextMessage(jsonStr));

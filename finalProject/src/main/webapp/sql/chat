@@ -23,7 +23,6 @@ CREATE TABLE message_id(
 
 CREATE TABLE chatRoom (
     chat_seq NUMBER UNIQUE, --채팅방 번호(난수 부여)
-    chat_create NUMBER, --채팅방 생성여부(한명이라도 연락을 하면 1, 한명이라도 나가면 바로 0)
     one_mem_id VARCHAR2(50), --사용자 ID
     two_mem_id VARCHAR2(50),
     one_store_nickname VARCHAR2(50), --상점 닉네임(채팅명)

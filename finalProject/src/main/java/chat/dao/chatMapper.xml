@@ -9,7 +9,6 @@
 	<insert id="insertRoomInfo" parameterType="Map">
 		BEGIN
 			 INSERT INTO chatRoom VALUES(#{chat_seq},
-										 1,
 										 #{one_mem_id},
 										 #{two_mem_id},
 										 #{one_store_nickname},

@@ -15,8 +15,6 @@ public interface ProductDAO {
 
 	public String getMyLocation(String mem_id);
 
-	public String getMyRecentLocation(String mem_id);
-
 	public ProductDTO productDetail(String seq); //상품 상세페이지
 
 	public List<ProductDTO> getRelatedProducts(Map<String, String> map);
