@@ -90,9 +90,12 @@ public class ProductController {
 		//DB 연결
 		productService.productRegist(productDTO);
 		
+		//현재 상품의 seq 가져오기
+		int seq = productService.getCurrentProductSeq() - 1;
+		
 		//데이터 전달
 		ModelAndView mav = new ModelAndView();
-		mav.addObject("seq", productDTO.getProduct_seq());
+		mav.addObject("seq", seq);
 		mav.setViewName("jsonView");
 		return mav;
 	}
@@ -141,6 +144,8 @@ public class ProductController {
 		// 상품 정보 받아옴
 		ProductDTO productDTO = productService.productDetail(seq);
 		//model.addAttribute("productDTO", productDTO);
+		System.out.println("seq : " + seq);
+		System.out.println("product : " + productDTO);
 		model.addAttribute("product_logtime", productDTO.getProduct_logtime());
 		model.addAttribute("seq", seq);
 		model.addAttribute("display", "/product/productDetail.jsp");

@@ -4,7 +4,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="productSQL">
-
+	<!-- 상품 번호 가져오기 -->
+	<select id="getCurrentProductSeq" resultType="Integer">
+		SELECT last_number
+		FROM user_sequences
+		WHERE sequence_name='SEQ_PRODUCT'
+	</select>
+	
+	<!-- 상품 등록하기 -->
 	<insert id="productRegist" parameterType="product">
 		INSERT INTO product VALUES(seq_product.NEXTVAL,
 								   #{mem_id},
@@ -29,11 +36,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 								   1,
 								   SYSDATE)
 	</insert>
-
+	
+	<!-- 소분류 카테고리 가져오기 -->
 	<select id="getSmallCategoryList" parameterType="String" resultType="category">
 		SELECT * FROM category WHERE cate_parent=#{cate_parent} ORDER BY cate_code
 	</select>
-
+	
+	<!-- 내 위치 가져오기 -->
 	<select id="getMyLocation" parameterType="String" resultType="String">
 		SELECT mem_location FROM members WHERE mem_id=#{mem_id}
 	</select>
@@ -50,17 +59,17 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			product_img3,
 			product_img4,
 			product_img5,
-			to_char(product_price, 'FM99,999,999') as product_price ,
+			to_char(product_price, 'FM99,999,999') as product_price,
 			product_location, 
-			product_condition , 
-			product_delivery_fee ,
+			product_condition, 
+			product_delivery_fee,
 			product_hashtag1,
 			product_hashtag2,
 			product_hashtag3,
 			product_hashtag4,
 			product_hashtag5,
 			product_view,
-			product_manage ,
+			product_manage,
 			ROUND((sysdate-product_logtime)*24*60) as product_logtime
 		FROM product WHERE product_seq=#{seq}
 	</select>

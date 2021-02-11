@@ -23,6 +23,11 @@ public class ProductServiceImpl implements ProductService {
 	private RelProdPaging relProdPaging;
 
 	@Override
+	public int getCurrentProductSeq() {
+		return productDAO.getCurrentProductSeq();
+	}
+	
+	@Override
 	public void productRegist(ProductDTO productDTO) {
 		productDAO.productRegist(productDTO);
 	}

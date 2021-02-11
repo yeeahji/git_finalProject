@@ -8,7 +8,9 @@ import product.bean.ProductDTO;
 import store.bean.StoreDTO;
 
 public interface ProductDAO {
-
+	
+	public int getCurrentProductSeq();
+	
 	public void productRegist(ProductDTO productDTO);
 	
 	public List<CategoryDTO> getSmallCategoryList(String cate_parent);
@@ -30,5 +32,6 @@ public interface ProductDAO {
 	public int getZzimNum(String seq);
 
 	public void zzimInsert(Map<String, String> map);
+	
 
 }

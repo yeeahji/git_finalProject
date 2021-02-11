@@ -19,6 +19,11 @@ public class ProductDAOMybatis implements ProductDAO {
 	private SqlSession sqlSession;
 
 	@Override
+	public int getCurrentProductSeq() {
+		return sqlSession.selectOne("productSQL.getCurrentProductSeq");
+	}
+	
+	@Override
 	public void productRegist(ProductDTO productDTO) {
 		sqlSession.insert("productSQL.productRegist", productDTO);
 	}
