@@ -4,6 +4,8 @@ import java.util.Map;
 
 import admin.bean.AdminBoardPaging;
 import admin.bean.AdminMembersDTO;
+import admin.bean.QnaDTO;
+import admin.bean.WithdrawDTO;
 import board.bean.CommentDTO;
 import member.bean.ComplainDTO;
 import member.bean.MemberDTO;
@@ -67,6 +69,22 @@ public interface AdminService {
 	public CommentDTO getCommentContent(String comment_content);
 
 	public ReviewDTO getReviewContent(String review_seq);
+
+	public void solveComplain(Map<String, Integer> map);
+
+	
+	//1:1 문의내역 출력
+	public List<QnaDTO> getQnaList(String pg, String viewNum);
+	public AdminBoardPaging qnaBP(String pg, String viewNum);
+	public QnaDTO getQnaContent(int qna_seq);
+	public void writeAnswer(Map<String, Object> map);
+
+	
+	//탈퇴회원관리
+	public List<WithdrawDTO> getWithdrawList(String pg, String viewNum);
+	public AdminBoardPaging withdrawBP(String pg, String viewNum);
+
+	public Map <String, Integer> getWithdrawTotal();
 
 	
 	

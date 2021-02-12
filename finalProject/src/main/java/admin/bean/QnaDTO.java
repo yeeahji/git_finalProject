@@ -1,4 +1,4 @@
-package notice.bean;
+package admin.bean;
 
 import java.util.Date;
 
@@ -21,6 +21,7 @@ public class QnaDTO {
 	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern = "yyyy.MM.dd")
 	private String qna_answerLogtime;
 	
-	
 	private int qna_seq;
+	
+	private String qnaCate_mainName;//main카테고리의 명칭을 별도로 hidden에 담아 사용하기 위해 
 }

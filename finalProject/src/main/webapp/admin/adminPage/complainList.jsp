@@ -2,14 +2,21 @@
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta name="viewport" content="width=device-width, initial-  scale=1, shrink-to-fit=no" />
-        <meta name="description" content="" />
-        <meta name="author" content="" />
-        <title>신고 관리</title>
-        <link href="/market/admin/css/styles.css" rel="stylesheet" />
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/js/all.min.js" crossorigin="anonymous"></script>
-    </head>
+<head>
+    <meta name="viewport" content="width=device-width, initial-  scale=1, shrink-to-fit=no" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <title>신고 관리</title>
+    
+    <link rel="stylesheet" href="//unpkg.com/bootstrap@4/dist/css/bootstrap.min.css">
+
+    
+	<link href="/market/admin/css/styles.css" rel="stylesheet" />
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/js/all.min.js" crossorigin="anonymous"></script>
+	<script src="https://code.jquery.com/jquery-3.4.1.js" crossorigin="anonymous"></script>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+	<script src="/market/admin/js/complain.js"></script>
+</head>
 <body>
     <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
             <a class="navbar-brand" href="/market/admin/adminIndex">아나바다</a>
@@ -49,7 +56,7 @@
 		                            <a class="nav-link" href="/market/admin/memberList">전체 회원 목록</a>
 		                            <a class="nav-link" href="/market/admin/productList">전체 상품 목록</a>
 		                            <a class="nav-link" href="/market/admin/storeList">전체 상점 목록</a>
-		                            <a class="nav-link" href="/market/admin/boardList">게시글목록</a>
+		                            <a class="nav-link" href="/market/admin/withdrawList">탈퇴 사유 분석</a>
 		                            <a class="nav-link" href="/market/admin/complainList">신고관리</a>
 		                            <a class="nav-link" href="/market/admin/memberQna">고객 상담관리</a>
 		                            <a class="nav-link" href="/market/admin/noticeMG">공지사항 관리</a>
@@ -74,13 +81,13 @@
 <%-- ======================================================= --%>
 <%-- ======================================================= --%>
 <div id="layoutSidenav_content">
-           <main>
-               <div class="container-fluid">
-                   <h3 class="mt-4">전체 상품목록</h3>
-                   <hr>                  		
-<div class="container-fluid">
+   <main>
+       <div class="container-fluid">
+           <h3 class="mt-4">신고 내역 관리</h3>
+           <hr>                  		
+<!-- <div class="container-fluid"> -->
   <div class="row">
-    <div class="col">
+    <div class="col-xl-7">
       <nav class="navbar navbar-expand-lg navbar-light bg-light">
 	  <div class="container-fluid">
 	  
@@ -132,7 +139,8 @@
 				<th>내용</th><!-- complain_content -->
                 <th>신고당한 사람</th><!-- mem_id -->
                 <th>신고자</th><!--reporter_id -->
-                <th>신고 날짜</th>
+                <th>신고 날짜</th><!-- complain_logtime -->
+                <th>처리</th><!-- complain_status -->
             </tr>
         </thead>
         <tbody id="complainTbody">
@@ -142,13 +150,14 @@
         </tbody>
 	   	<tfoot class="table-secondary">
             <tr>
-              	<th>comment_seq</th>
-                <th>categorize</th>
-                <th>eachPart_seq</th>
-                <th>complain_content</th>
-                <th>mem_id</th>
-                <th>reporter_id</th>
-                <th>complain_logtime</th>
+              	<th>번호</th>
+                <th>구분</th>
+                <th>항목 번호</th><!-- eachPart_seq -->
+				<th>내용</th><!-- complain_content -->
+                <th>신고당한 사람</th><!-- mem_id -->
+                <th>신고자</th><!--reporter_id -->
+                <th>신고 날짜</th><!-- complain_logtime -->
+                <th>처리</th><!-- complain_status -->
             </tr>
         </tfoot>
 	</table>
@@ -165,26 +174,38 @@
 	</nav>
 </div><!-- 좌측 끝 -->
 <!-- ========================================= -->
-<div class="col"><!-- 우측 -->
-<div class="card">
+<div class="col-xl-5"><!-- 우측 -->
+<div class="card mb-4">
   <h5 class="card-header">신고 내용 확인</h5>
-  <div class="card-body">
-  		<div class="container">
-		<div class="row">
-		<h3>작성자</h3> 
-		<div class="col" id="reported_id"></div>
-		<h3>작성일</h3>
-		<div class="col" id="reported_logtime"></div>
-		</div>
-		</div><!-- end.container -->
-		<h3>내용</h3>
-		<div id="reported_content"></div>
-	    
-	    
-	    <a class="btn btn-primary" id="goComplainPage">신고 내용 페이지</a>
-  </div>
+<!--   		<div class="container"> -->
+<!-- 		<div class="row"> -->
+<!-- 		<h3>작성자</h3><div class="col" id="reported_id"></div> -->
+<!-- 		<h3>작성일</h3><div class="col" id="reported_logtime"></div> -->
+<!-- 		</div> -->
+<!-- 		</div>end.container  -->
+<!-- 		<h3>내용</h3><div id="reported_content"></div> -->
+	 <div class="card-body">
+       	<table class="table table-bordered border-primary table-sm">
+		  <tbody>
+		    <tr>
+		      <th width="20%">작성자 ID</th><th width="30%"><span class="col" id="reported_id"></span></th> 
+		      <th width="20%">작성일</th><th width="30%"><span class="col" id="reported_logtime"></span></th>
+		    </tr>
+		    <tr>
+		      <th>내용</th><th colspan="3"><span id="reported_content"></span></th>
+		    </tr>
+		   <tr>
+		   </tr>
+		  </tbody>
+		</table>
+		<button type="button" class="btn btn-secondary btn-sm" id="goComplainPage">페이지로 이동</button>
+		<button type="button" class="btn btn-secondary btn-sm" id="deleteComplain">신고글 삭제</button>
+		   
+	 </div>    
 </div>
+  </div>
 </div><!-- 우측 끝 -->
+</div><!-- end.row-->
 </div>
 </div>               
 </div>
@@ -208,19 +229,5 @@
         </footer>
     </div><!--layoutSidenav_content  -->
 </div>
-<script src="https://code.jquery.com/jquery-3.4.1.js" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
-<script src="/market/admin/js/complain.js"></script>
-<script type="text/javascript">
-	function boardPaging(pg){
-		var keyword = document.getElementById("keyword").value;
-		$('#pg').val(pg);
-	
-		 if(keyword ==''){
-			location.href='/market/admin/complainList?pg='+pg+'&viewNum='+$('#viewNum').val();
-		 }else{
-			$('#memberSearchBtn').trigger('click','research');
-		 }
-	}
-	</script>
+
 </body>

@@ -27,7 +27,7 @@ public class AdminMembersDTO {
 				   mem_recentLocation; 
 	private int mem_postcode, mem_recentPostcode;
 	
-	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern = "yyyy.mm.dd")
+	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern = "yyyy.MM.dd")
 	private Date mem_logtime;
 	
 	//product

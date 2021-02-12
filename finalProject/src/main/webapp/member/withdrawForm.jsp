@@ -47,7 +47,7 @@
         </div>
         <div class="check_box">
             <input type="checkbox" name="withdraw_lowContents" id="withdraw_lowContents" value="1" class="reason">
-            <label for="reason_2">콘텐츠/제품정보/상품 부족</label>
+            <label for="reason_2">콘텐츠/상품 부족</label>
         </div><br>
         <div class="check_box">
             <input type="checkbox" name="withdraw_protectInfo" id="withdraw_protectInfo" value="1" class="reason">
@@ -55,7 +55,7 @@
         </div>
         <div class="check_box">
             <input type="checkbox" name="withdraw_lowBenefit" id="withdraw_lowBenefit" value="1" class="reason">
-            <label for="reason_4">회원특혜/쇼핑혜택 부족</label>
+            <label for="reason_4">혜택 부족</label>
         </div>
         <div class="check_box">
             <input type="checkbox" name="withdraw_others" id="withdraw_others" value="1" class="reason">

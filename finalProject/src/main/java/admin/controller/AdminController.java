@@ -1,5 +1,6 @@
 package admin.controller;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -14,6 +15,8 @@ import org.springframework.web.servlet.ModelAndView;
 
 import admin.bean.AdminBoardPaging;
 import admin.bean.AdminMembersDTO;
+import admin.bean.QnaDTO;
+import admin.bean.WithdrawDTO;
 import admin.service.AdminService;
 import board.bean.CommentDTO;
 import member.bean.ComplainDTO;
@@ -66,10 +69,10 @@ public class AdminController {
 		model.addAttribute("viewNum", viewNum);
 		return "/admin/adminPage/storeList";
 	}
-	//게시글리스트
-	@RequestMapping(value="/boardList", method=RequestMethod.GET)
+	//탈퇴 사유 분석
+	@RequestMapping(value="/withdrawList", method=RequestMethod.GET)
 	public String boardList() {
-		return "/admin/adminPage/boardList";
+		return "/admin/adminPage/withdrawList";
 	}
 	//공지사항
 	@RequestMapping(value="/noticeMG", method=RequestMethod.GET)
@@ -81,14 +84,15 @@ public class AdminController {
 	public String memberQna() {
 		return "/admin/adminPage/memberQna";
 	}
-	//고객상담관리
+	//신고 관리
 	@RequestMapping(value="/complainList", method=RequestMethod.GET)
 	public String complainList() {
 		return "/admin/adminPage/complainList";
 	}
 	
 	
-	
+//	=========================================================================
+
 	//회원정보출력
 	@RequestMapping(value="/getMemberList", method=RequestMethod.GET)
 	public ModelAndView getMemberList(@RequestParam(required=false, defaultValue="1") String pg,
@@ -327,7 +331,107 @@ public class AdminController {
 		mav.setViewName("jsonView");
 		return mav;
 	}	
+	//신고 내용 처리상태 변경하기
+	@ResponseBody
+	@RequestMapping(value="solveComplain", method=RequestMethod.POST)
+	public void solveComplain(@RequestParam String complain_seq, @RequestParam String complain_status) {
+		Map <String, Integer> map = new HashMap<String, Integer>();
+		map.put("complain_seq", Integer.parseInt(complain_seq));
+		map.put("complain_status", Integer.parseInt(complain_status));
+		adminService.solveComplain(map);
+	}
+	
+	
+//	[1:1문의]=========================================================================
+	
+	//문의 내역 출력
+	@RequestMapping(value="/getQnaList", method=RequestMethod.POST)
+	public ModelAndView getQnaList(@RequestParam(required=false, defaultValue="1") String pg,
+				  						 @RequestParam(required=false, defaultValue="20") String viewNum) {
+		List<QnaDTO> list = adminService.getQnaList(pg,viewNum);
+		
+		//페이징처리
+		AdminBoardPaging qnaBP = adminService.qnaBP(pg,viewNum);
+		System.out.println("list:"+list);	
+		
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("list", list);
+		mav.addObject("pg", pg);
+		mav.addObject("viewNum", viewNum);
+		mav.addObject("qnaBP", qnaBP);
+		mav.setViewName("jsonView");
+		return mav;
+	}
+	
+//	카테고리별 검색 내역 출력
+//	@RequestMapping(value="selectQnaCount", method=RequestMethod.POST)
+//	public ModelAndView selectQnaCount(@RequestParam Map<String,String> map) {
+////		map: keyword, searchType, pg,viewNum
+//		List<ComplainDTO> list = adminService.selectQnaCount(map);
+//		
+//		AdminBoardPaging qnaCountBP = adminService.getQnaCount(map);
+//		
+//		ModelAndView mav = new ModelAndView();
+//		mav.addObject("pg", map.get("pg"));
+//		mav.addObject("list", list);
+//		mav.addObject("qnaCountBP",qnaCountBP);
+//		mav.setViewName("jsonView");
+//		return mav;
+//	}	
+	
+	//원하는 1:1문의 내용 가져오기
+	@RequestMapping(value="getQnaContent", method=RequestMethod.POST)
+	public ModelAndView getQnaContent(@RequestParam String qna_seq) {
+		
+		QnaDTO qnaDTO = adminService.getQnaContent(Integer.parseInt(qna_seq));
+		
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("qnaDTO", qnaDTO);
+		mav.setViewName("jsonView");
+		return mav;
+	}	
+	
+	//답변 쓰기
+	@ResponseBody
+	@RequestMapping(value="writeAnswer", method=RequestMethod.POST)
+	public void writeAnswer(@RequestParam String qna_seq, @RequestParam String qna_answer) {
+		Map <String, Object> map = new HashMap<String, Object>();
+		map.put("qna_seq", Integer.parseInt(qna_seq));
+		map.put("qna_answer", qna_answer);
+		adminService.writeAnswer(map);
+	}	
+	
+//	[탈퇴회원 관리]=========================================================================
 
+	//탈퇴회원 전체리스트 가져오기
+	@RequestMapping(value="/getWithdrawList", method=RequestMethod.POST)
+	public ModelAndView getWithdrawList(@RequestParam(required=false, defaultValue="1") String pg,
+				  						 @RequestParam(required=false, defaultValue="20") String viewNum) {
+		List<WithdrawDTO> list = adminService.getWithdrawList(pg,viewNum);
+		
+		//페이징처리
+		AdminBoardPaging withdrawBP = adminService.withdrawBP(pg,viewNum);
+		System.out.println("list:"+list);	
+		
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("list", list);
+		mav.addObject("pg", pg);
+		mav.addObject("viewNum", viewNum);
+		mav.addObject("withdrawBP", withdrawBP);
+		mav.setViewName("jsonView");
+		return mav;
+	}
+//	탈퇴회원 전체 수 가져오기(파이차트용)
+	@RequestMapping(value="/getWithdrawTotal", method=RequestMethod.POST)
+	public ModelAndView getWithdrawTotal() {	
+		Map <String, Integer> map= adminService.getWithdrawTotal();
+		System.out.println("map:"+map);
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("map", map);
+		mav.setViewName("jsonView");
+	
+		return mav;
+	}
 }
 
 

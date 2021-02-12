@@ -1,4 +1,12 @@
 @charset "UTF-8";
+.caution{
+    color : rgba(153, 0, 33, 0.781);
+    border : 1px;
+    font-size: 10pt;
+    font-weight: bold;
+}
+
+
 html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, main, menu, nav, output, ruby, section, summary, time, mark, audio, video {
     vertical-align: baseline;
     margin: 0px;
@@ -31,9 +39,9 @@ body {
 *, ::before, ::after {
     box-sizing: border-box;
 }
-/* div { */
-/*     display: block; */
-/* } */
+div {
+    display: block;
+}
 a {
     color: rgb(33, 33, 33);
     cursor: pointer;
@@ -42,9 +50,6 @@ a {
 }
 
 /* ------------------------------ */
-.q_revel2 {
-	min-width: 1236px;
-}
 .q_revel2-1 {
 	width: 100%;
     display: none;
@@ -106,15 +111,14 @@ a {
     background: rgb(255, 255, 255);
 }
 .notice_qna {
-	display: flex;
+	flex: 1 1 0%;
+    display: flex;
     -webkit-box-align: center;
     align-items: center;
     -webkit-box-pack: center;
     justify-content: center;
     font-weight: 600;
     position: relative;
-    color: #0d6efd;
-    flex: 1 1 0%;
 }
 .notice_qna_inner {
 	position: absolute;
@@ -122,7 +126,7 @@ a {
     left: 0px;
     width: 100%;
     height: 2px;
-    background: #0d6efd;
+    background: #0a58ca;
 	
 }
 
@@ -179,8 +183,8 @@ a {
 }
 select {
 	width: 1020px; 
-	height: 40px;
-	font-size: 20px;
+	height: 30px;
+	font-size: 15px;
 }
 .qmd_nav4 {
 	background-size: 1rem 1rem;
@@ -193,12 +197,13 @@ select {
 .qmd_textarea {
 	width: 100%;
     resize: none;
-    font-size: 20px;
-    line-height: 1.4;
+    font-size: 15px;
+    line-height: 1.8;
     border-width: 1px;
     border-style: solid;
     border-color: rgb(238, 238, 238);
     border-image: initial;
+    height:300px;
 }
 .qmd_div {
 	display: flex;
@@ -239,7 +244,7 @@ select {
     font-weight: 500;
     color: rgb(255, 255, 255);
     border-radius: 2px;
-    background: #0d6efd;
+    background: #0a58ca;
 }
 
 /* ================================= */

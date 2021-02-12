@@ -73,7 +73,7 @@ $(document).ready(function(){
 			                id:'writerVersion',//내가 댓글 작성자일때, 
 			                class:'writerVersion'+items.comment_seq,
 			                }).append($('<a/>',{
-			                    text: '수정',
+			                    text: '수정  |  ',
 			                    href: 'javascript:;',
 			                    id:'modifyCommentBtn'+items.comment_seq
 			                })).append($('<a/>',{
@@ -114,6 +114,9 @@ $(document).ready(function(){
 			//더보기 버튼 클릭
 			$.each(data.list, function(index, items){
 				$('#commentListTable').on('click', '#moreBtn'+items.comment_seq, function(){
+					if ($('#sessionId').val()=='' || $('#sessionId').val()=='none'){
+						location.href='/market/member/loginForm';
+					}
 					//댓글쓴이와 세션아이디가 같다면(==내가 댓글 쓴 사람이라면), 수정/삭제버튼
 					if($('#sessionId').val() == items.mem_id){//items.mem_id=댓글쓴이
 						console.log("세션아이디:"+$('#sessionId').val());
@@ -356,9 +359,14 @@ $(document).ready(function(){
 	
 		//답글쓰기
 		$('#replyBtn').click(function(){
-			document.article.method="post";
-			document.article.action="../board/replyForm";//controller
-			document.article.submit();
+			if ($('#sessionId').val()=='' || $('#sessionId').val()=='none'){
+				location.href='/market/member/loginForm';
+			}else{
+				document.article.method="post";
+				document.article.action="../board/replyForm";//controller
+				document.article.submit();
+			}
+			
 		});//--end 답글쓰기
 	
 		//글 신고하기

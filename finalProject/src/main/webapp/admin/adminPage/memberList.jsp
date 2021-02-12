@@ -50,7 +50,7 @@
 		                            <a class="nav-link" href="/market/admin/memberList">전체 회원 목록</a>
 		                            <a class="nav-link" href="/market/admin/productList">전체 상품 목록</a>
 		                            <a class="nav-link" href="/market/admin/storeList">전체 상점 목록</a>
-		                            <a class="nav-link" href="/market/admin/boardList">게시글목록</a>
+		                            <a class="nav-link" href="/market/admin/withdrawList">탈퇴 사유 분석</a>
 		                            <a class="nav-link" href="/market/admin/complainList">신고관리</a>
 		                            <a class="nav-link" href="/market/admin/memberQna">고객 상담관리</a>
 		                            <a class="nav-link" href="/market/admin/noticeMG">공지사항 관리</a>

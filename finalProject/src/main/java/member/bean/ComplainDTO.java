@@ -22,6 +22,7 @@ public class ComplainDTO {
 	private String store_seq;
 	private int talk_seq;
 	private int complain_seq;
-
+	private int complain_status;
+	
 	private String complain_category;
 }
