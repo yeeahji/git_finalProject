@@ -49,15 +49,30 @@ var webSocket = {
 	receiveMessage: function(msgData) {
 		//----------- 메세지 -------------
 		if(msgData.cmd == 'CMD_MSG_SEND') {
-			//만약 이미지를 올려싿면
-			//msgData.msg의 앞에??
+			//만약 이미지를 올렸다면
+			/*
+			$('#uploadImg').on('change', function() {
+	            if(input.files && input.files[0]) {
+		            var reader = new FileReader();
+					
+		            //URL 얻기
+		            alert(reader.readAsDataURL(input.files[0]));
+		            console.log(reader.readAsDataURL(input.files[0]));
+		            //msgData.msg 앞에 이미지 태그 생성해서 위의 url값 넣어주기
+				}
+			});
+			*/
 			
-			if(msgData.msg.trim() == '') return; //받은 메시지가 공백일 시 벗어나기
+			//받은 메시지가 공백일 시 벗어나기
+			if(msgData.msg.trim() == '') return;
 			
-			if(msgData.checkId == '${member.username}') { //내가 보낸 메세지일 때
+			//내가 보낸 메세지일 때
+			if(msgData.checkId == '${member.username}') { 
 				$('#chat-container').append('<div class="my-chat-box"><div class="chat my-chat"><input type="hidden" value="${member.username}">'+msgData.msg+'</div>');
 			}
-			else { //상대방이 보낸 메세지일 때
+			
+			//상대방이 보낸 메세지일 때
+			else { 
 				$('#chat-container').append('<div class="chat-box"><div class="chat"><input type="hidden" value="${two_mem_id}">'+msgData.msg+'</div>');
 			}
 			$('#chat-container').scrollTop($('#chat-container')[0].scrollHeight+20);
@@ -167,10 +182,7 @@ $(window).on('load', function () {
 		<div class="chatRoomSubject" id="chatRoomSubject">
 			<img id="olineCheck" src="../image/chat/houseClose.png"> ${other_store_nickname}
 		</div>
-		<input type="file" id="uploadImg">
-<!-- 		<div class="chatList_btns">
-			<input type="button" value="목록" id="chatListBtn">
-		</div> -->
+		<!-- <input type="file" id="uploadImg"> -->
 	</div>
 	
 	
