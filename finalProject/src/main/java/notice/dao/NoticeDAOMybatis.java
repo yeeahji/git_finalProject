@@ -8,9 +8,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import admin.bean.QnaDTO;
 import notice.bean.NoticeDTO;
 import notice.bean.QnaBoardDTO;
-import notice.bean.QnaDTO;
+import notice.bean.QnaCateDTO;
 
 @Repository
 @Transactional
@@ -29,14 +30,15 @@ public class NoticeDAOMybatis implements NoticeDAO {
 		return sqlSession.selectList("noticeSQL.getFagContent", select2);
 	}
 
-	//qna
+//	[1:1문의]==============================================================================
+
 	@Override
-	public List<QnaDTO> getMain_id() {
-		return sqlSession.selectList("noticeSQL.getMain_id");
+	public List<QnaCateDTO> getMainCate() {
+		return sqlSession.selectList("noticeSQL.getMainCate");
 	}
 	@Override
-	public List<QnaDTO> getSub_id(int qnaCate_main_id) {
-		return sqlSession.selectList("noticeSQL.getSub_id", qnaCate_main_id);
+	public List<QnaCateDTO> getSubCate(int qnaCate_main) {
+		return sqlSession.selectList("noticeSQL.getSubCate", qnaCate_main);
 	}
 	@Override
 	public QnaDTO qnaCate_Content(int qnaCate_sub_id) {
@@ -44,13 +46,13 @@ public class NoticeDAOMybatis implements NoticeDAO {
 	}
 
 	@Override
-	public void qnaWrite(QnaBoardDTO qnaBoardDTO) {
-		sqlSession.insert("noticeSQL.qnaWrite", qnaBoardDTO);
+	public void writeQna(QnaDTO qnaDTO) {
+		sqlSession.insert("noticeSQL.writeQna", qnaDTO);
 	}
 
 	@Override
-	public List<QnaBoardDTO> getQnaList() {
-		return sqlSession.selectList("noticeSQL.getQnaList");
+	public List<QnaBoardDTO> getQnaList(String mem_id) {
+		return sqlSession.selectList("noticeSQL.getQnaList", mem_id);
 	}
 
 	

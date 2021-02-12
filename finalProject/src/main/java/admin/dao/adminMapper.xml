@@ -121,8 +121,8 @@
 			</choose>
 	</select>
 
-
-	<!-- A.신고 리스트 전체 출력 -->
+<!-- [신고]========================================================================= -->
+<!-- A.신고 리스트 전체 출력 -->
    <select id="getComplainList" parameterType="java.util.Map" resultType="member.bean.ComplainDTO">
       select * from(
          select rownum rn, tt.* from(select * from complain)tt)
@@ -156,6 +156,69 @@
    <select id="getReviewContent" parameterType="String" resultType="store.bean.ReviewDTO">
       select mem_id, review_content, review_date from comments where review_seq=#{review_seq}
    </select>
+<!-- 신고내용 처리상태 변경 -->
+	<update id="solveComplain" parameterType="java.util.Map" >
+ 		update complain set complain_status = #{complain_status} where complain_seq = #{complain_seq}
+ 	</update>
+ 	
+<!-- [1:1문의]========================================================================= -->
+<!-- A.1:1문의 리스트 전체 출력 -->
+   <select id="getQnaList" parameterType="java.util.Map" resultType="admin.bean.QnaDTO">
+      select * from(
+         select rownum rn, tt.* from(select * from qna)tt)
+               where rn between #{startNum} and #{endNum} order by qna_seq asc
+   </select>
 
+<!-- A.1:1문의 리스트 개수 -->
+   <select id="getQnaTotal" resultType="Integer">
+      select count(*) from qna
+   </select>
+   
+<!-- C.원하는 1:1문의글 가져오기 -->
+   <select id="getQnaContent" parameterType="Integer" resultType="admin.bean.QnaDTO">
+      select * from qna where qna_seq=#{qna_seq} 
+   </select>
+<!-- C.답글 달기 -->
+ 	<update id="writeAnswer" parameterType="java.util.Map" >
+ 		update qna set qna_answer = #{qna_answer}, qna_answerLogtime = sysdate where qna_seq = #{qna_seq}
+ 	</update>
+ 	
+ 	
+<!-- [탈퇴회원관리]========================================================================= -->
+<!-- A.탈퇴회원 리스트 전체 출력 -->
+   <select id="getWithdrawList" parameterType="java.util.Map" resultType="admin.bean.WithdrawDTO">
+      select * from(
+         select rownum rn, tt.* from(select * from withdraw)tt)
+               where rn between #{startNum} and #{endNum}
+   </select>
 
+<!-- A.탈퇴회원 리스트 개수 -->
+   <select id="getWithdrawTotal" resultType="Integer">
+      select count(*) from withdraw
+   </select>
+<!-- C.탈퇴사유  이용빈도 낮음 개수 -->
+   <select id="getWithdraw_lowFrequencyTotal" resultType="Integer">
+      select count(*) from withdraw where withdraw_lowFrequency is not null
+   </select>
+<!-- C.탈퇴회원 재가입 개수 -->
+   <select id="getWithdraw_rejoinTotal" resultType="Integer">
+      select count(*) from withdraw where withdraw_rejoin is not null
+   </select>
+<!-- C.탈퇴회원 상품 부족 개수 -->
+   <select id="getWithdraw_lowContentsTotal" resultType="Integer">
+      select count(*) from withdraw where withdraw_lowContents is not null
+   </select>
+<!-- C.탈퇴회원 개인정보보호 개수 -->
+   <select id="getWithdraw_protectInfoTotal" resultType="Integer">
+      select count(*) from withdraw where withdraw_protectInfo is not null
+   </select>
+<!-- C.탈퇴회원 혜택 부족 개수 -->
+   <select id="getWithdraw_lowBenefitTotal" resultType="Integer">
+      select count(*) from withdraw where withdraw_lowBenefit is not null
+   </select>
+<!-- C.탈퇴회원 기타사항 개수 -->  
+    <select id="getWithdraw_othersTotal" resultType="Integer">
+      select count(*) from withdraw where withdraw_others is not null
+   </select>
+   
 </mapper> 

@@ -1,14 +1,23 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8"%><%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec" %>
+    
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>아나바다 마켓 1:1 상담 내역</title>
 <link rel="stylesheet" href="../css/notice/qnaList.css">
 </head>
 <body>
-<div id="root">
+<sec:authentication property="principal" var="member"/>
+<sec:authentication property="principal" var="member"/>
+<!-- 회원/비회원 구분 -->
+<sec:authorize access="isAnonymous()">
+	<input type="hidden" id="mem_id" name="mem_id" value="비회원">
+</sec:authorize>
+<sec:authorize access="hasRole('ROLE_USER')">
+	<input type="hidden" id="mem_id" name="mem_id" value="${member.username}">
+</sec:authorize><div id="root">
  <div class="qL_revel1">
   <div class="qL_revel2">
   	<div class="qL_revel2-1"></div>

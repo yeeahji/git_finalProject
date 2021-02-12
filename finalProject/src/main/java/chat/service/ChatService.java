@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import notice.bean.NoticeDTO;
-import notice.bean.QnaDTO;
+import admin.bean.QnaDTO;
 
 public interface ChatService {
 

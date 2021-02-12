@@ -20,7 +20,8 @@ import org.springframework.web.servlet.ModelAndView;
 
 import notice.bean.NoticeDTO;
 import notice.bean.QnaBoardDTO;
-import notice.bean.QnaDTO;
+import notice.bean.QnaCateDTO;
+import admin.bean.QnaDTO;
 import notice.service.NoticeService;
 
 @Controller
@@ -74,51 +75,52 @@ public class NoticeController {
 		mav.setViewName("jsonView");
 		return mav;
 	}
-	
-	//자주묻는 질문
+//	[1:1문의]==============================================================================
 	@RequestMapping(value="/qna", method=RequestMethod.GET)
 	public String qna(Model model) {
 		model.addAttribute("display", "/notice/qna.jsp");
 		return "/index";
 	}
 
-	//qna
-	@RequestMapping(value="/getMain_id", method=RequestMethod.POST)
+	//대분류 가져오기
+	@RequestMapping(value="/getMainCate", method=RequestMethod.POST)
 	@ResponseBody
-	public ModelAndView getMain_id() {
-		List<QnaDTO> list = noticeService.getMain_id();
+	public ModelAndView getMainCate() {
+		List<QnaCateDTO> list = noticeService.getMainCate();
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("list", list);
+		mav.setViewName("jsonView");
+		return mav;
+	}
+	//소분류 가져오기
+	@RequestMapping(value="/getSubCate", method=RequestMethod.POST)
+	@ResponseBody
+	public ModelAndView getSubCate(@RequestParam int qnaCate_mainCode) {
+		List<QnaCateDTO> list = noticeService.getSubCate(qnaCate_mainCode);
 		
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("list", list);
 		mav.setViewName("jsonView");
 		return mav;
 	}
-	@RequestMapping(value="/getSub_id", method=RequestMethod.POST)
+	//
+//	@RequestMapping(value="/qnaCate_Content", method=RequestMethod.POST)
+//	@ResponseBody
+//	public ModelAndView qnaCate_Content(@RequestParam int qnaCate_sub_id) {
+//		QnaDTO qnaDTO = noticeService.qnaCate_Content(qnaCate_sub_id);
+//		
+//		ModelAndView mav = new ModelAndView();
+//		mav.addObject("qnaDTO", qnaDTO);
+//		mav.setViewName("jsonView");
+//		return mav;
+//	}
+	//1:1 문의하기
+	@RequestMapping(value="writeQna", method=RequestMethod.POST)
 	@ResponseBody
-	public ModelAndView getSub_id(@RequestParam int qnaCate_main_id) {
-		List<QnaDTO> list = noticeService.getSub_id(qnaCate_main_id);
-		
-		ModelAndView mav = new ModelAndView();
-		mav.addObject("list", list);
-		mav.setViewName("jsonView");
-		return mav;
-	}
-	@RequestMapping(value="/qnaCate_Content", method=RequestMethod.POST)
-	@ResponseBody
-	public ModelAndView qnaCate_Content(@RequestParam int qnaCate_sub_id) {
-		QnaDTO qnaDTO = noticeService.qnaCate_Content(qnaCate_sub_id);
-		
-		ModelAndView mav = new ModelAndView();
-		mav.addObject("qnaDTO", qnaDTO);
-		mav.setViewName("jsonView");
-		return mav;
-	}
-	
-	@RequestMapping(value="qnaWrite", method=RequestMethod.POST)
-	@ResponseBody
-	public void qnaWrite(@ModelAttribute QnaBoardDTO qnaBoardDTO,
-						 @RequestParam("img[]") List<MultipartFile> list) {
-		String filePath = "D:\\git_home\\git_exam\\finalProject\\src\\main\\webapp\\storage";
+	public void writeQna(@ModelAttribute QnaDTO qnaDTO,
+						 @RequestParam( "img[]") List<MultipartFile> list) {
+		System.out.println("list:"+list);
+		String filePath = "C:\\git_home\\git_final\\finalProject\\src\\main\\webapp\\storage";
 		
 		for(MultipartFile img: list) {
 			System.out.println("사진이름:"+img.getOriginalFilename());
@@ -133,26 +135,27 @@ public class NoticeController {
 				e.printStackTrace();
 			}
 			System.out.println("2 : "+fileName);
-			qnaBoardDTO.setQna_picture1(fileName);
-			qnaBoardDTO.setQna_picture2("");
+			qnaDTO.setQna_img1(fileName);
+			qnaDTO.setQna_img2("");
 			//DB
-			noticeService.qnaWrite(qnaBoardDTO);
+			noticeService.writeQna(qnaDTO);
 			
 		}//for
 	}
 	
-	//qnaList(상담내역)
+	//1:1문의 내역으로 이동
 	@RequestMapping(value="/qnaList", method=RequestMethod.GET)
 	public String qnaList(Model model) {
 		model.addAttribute("display", "/notice/qnaList.jsp");
 		return "/index";
 	}
 		
-	//상담내역불러오기
+	//1:1문의  내역불러오기
 	@RequestMapping(value="/getQnaList", method=RequestMethod.POST)
 	@ResponseBody
-	public ModelAndView getQnaList() {
-		List<QnaBoardDTO> list = noticeService.getQnaList();
+	public ModelAndView getQnaList(@RequestParam String mem_id) {
+		List<QnaBoardDTO> list = noticeService.getQnaList(mem_id);
+		System.out.println("mem_id:"+mem_id);
 		
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("list", list);

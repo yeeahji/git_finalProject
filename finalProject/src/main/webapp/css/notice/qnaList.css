@@ -45,9 +45,7 @@ ol, ul {
 }
 
 /* ------------------------------ */
-.qL_revel2 {
-	min-width: 1236px;
-}
+
 .qL_revel2-1 {
 	width: 100%;
     display: none;
@@ -126,7 +124,7 @@ ol, ul {
     justify-content: center;
     font-weight: 600;
     position: relative;
-    color: #0d6efd;
+    color: #0a58ca;
     flex: 1 1 0%;
 }
 .notice_qnaList_inner {
@@ -135,21 +133,20 @@ ol, ul {
     left: 0px;
     width: 100%;
     height: 2px;
-    background: #0d6efd;
+    background: #0a58ca;
 }
 .main_ul {
 	margin-top: 10px;
 }
-.qnaListA {
+.qnaListClose {
 	position: relative;
     height: 80px;
     will-change: height;
     overflow: hidden;
     transition: height 300ms ease-out 0s;
 }
-.qnaListB { /* 변경된 클래스*/
+.qnaListOpen { /* 변경된 클래스*/
 	position: relative;
-    height: 430px;
     will-change: height;
     overflow: hidden;
     transition: height 300ms ease-out 0s;
@@ -159,9 +156,9 @@ ol, ul {
     flex-direction: column;
     align-items: flex-start;
     font-size: 14px;
-    flex: 1 1 0%;
+    flex: 1 1 10%;
 }
-.qnaListB > h1 {
+.qnaListOpen > h1 {
 	font-weight: 600;
 }
 
@@ -215,7 +212,7 @@ td{
 .article_btn_status {
 	margin-right: 30px;
     height: 40px;
-    color: #0d6efd;
+    color: #0a58ca;
     font-size: 13px;
     text-align: right;
 }
@@ -230,16 +227,16 @@ td{
     transition: transform 300ms ease-out 0s;
 }
 
-.qnaListA_div {
+.qnaListClose_div {
 	padding: 25px 18px;
     border-bottom: 1px solid rgb(238, 238, 238);
 }
-.qnaListA_div_section {
+.qnaListClose_div_section {
 	position: relative;
     padding-bottom: 25px;
     border-bottom: 1px solid rgb(238, 238, 238);
 }
-.qnaListA_div_section.hz:last-child {
+.qnaListClose_div_section.hz:last-child {
     padding-bottom: 0px;
     border-bottom: 0px;
 }
@@ -262,22 +259,30 @@ img {
 }
 
 .div_subject {
-	color: rgb(255, 80, 88);
+	color: black;
 }
-.div_subject_h2 {
+.div_subject_h2, .marketAnswer {
 	margin-bottom: 10px;
     font-weight: 600;
 }
 .div_subject_time {
     font-size: 13px;
 }
-.qnaListA_div_section_content {
+.qnaListClose_div_section_content {
 	line-height: 1.4;
     white-space: pre-wrap;
     padding: 20px 0px;
 }
-
-.qnaListA_div_section_file {
+.qna_anwerContent{
+	line-height: 1.4;
+    white-space: pre-wrap;
+    padding: 20px 0px;
+    color: #0a58ca;
+}
+.qna_answerDiv{
+	color: #0a58ca;
+}
+.qnaListClose_div_section_file {
 	display: flex;
     flex-wrap: wrap;
 }
@@ -291,7 +296,7 @@ button {
     cursor: pointer;
     outline: none;
 }
-.qnaListA_div_section_file img {
+.qnaListClose_div_section_file img {
 	width: 100%;
 }
 img {

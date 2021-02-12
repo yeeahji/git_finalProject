@@ -7,9 +7,8 @@ $(document).ready(function() {
 		dataType: 'json',
 		success: function(data){
 			$("#complainTbody tr:gt(0)").remove();
-			
-			complainList(data);
-			findComplainContent();
+			complainList(data); //전체 출력
+			findComplainContent(); //
 		},error: function(err){
 			console.log(err);
 		}
@@ -39,7 +38,6 @@ $('#selectPrint').change(function(){
 	
 //출력 개수/키워드 넣고 검색	
 $('#memberSearchBtn').click(function(){
-	console.log($('#searchType').val() + "/" +$('#keyword').val() +"/"+$('#selectPrint').val());
 	$.ajax({
 		type: 'post',
 		url: '/market/admin/searchReportedMember',
@@ -74,7 +72,16 @@ function complainList(data){
 			eachPart_seq = items.store_seq
 //		else if(items.talk_seq != 0)
 //			items.eachPart_seq = items.talk_seq
-			
+		
+		//1이면 체크되어 있고, 0이면 체크 x
+		let statusValue = items.complain_status;
+		let checkOX;
+		if(statusValue==1) 
+			checkOX = true;
+		else
+			checkOX = false;
+		
+	
 		$('<tr/>').append($('<td/>',{
 			text: items.complain_seq
 		})).append($('<td/>',{
@@ -90,15 +97,24 @@ function complainList(data){
 		})).append($('<td/>',{
 			text: items.mem_id
 		})).append($('<td/>',{
-			text: items.reporter_id,
+			text: items.reporter_id
 		})).append($('<td/>',{
-			text: items.complain_logtime,
-		})).appendTo($('#complainTbody'));
+			text: items.complain_logtime
+		})).append($('<td/>',{
+			}).append($('<div/>',{
+				class: 'checkboxDiv',
+				}).append($('<input/>',{//해결버튼
+					type: 'checkbox',
+					id: 'statusCheckbox'+items.complain_seq,
+					onchange: 'checkStatus(this,'+items.complain_seq+')',
+					checked:checkOX 
+				}))
+			)).appendTo($('#complainTbody'));
+			
 	});//each
 	//페이징처리
 	$('#boardPagingDiv').html(data.adminComplainBP.pagingHTML);
 }
-
 
 //신고 내용 확인
 function findComplainContent(){
@@ -142,6 +158,42 @@ function findComplainContent(){
 		}
 	});
 }
+//페이징처리
+function boardPaging(pg){
+	var keyword = document.getElementById("keyword").value;
+	$('#pg').val(pg);
 
-
+	 if(keyword ==''){
+		location.href='/market/admin/complainList?pg='+pg+'&viewNum='+$('#viewNum').val();
+	 }else{
+		$('#memberSearchBtn').trigger('click','research');
+	 }
+}
+//상태 처리하기
+function checkStatus(complain_status, complain_seq){
+	let checked = complain_status.checked;
+	if(checked){
+		complain_status.value="1"
+		$.ajax({
+			type: 'post',
+			url: '/market/admin/solveComplain',
+			data: {'complain_seq': complain_seq,
+					'complain_status':1},
+			success: function(){
+				console.log(complain_seq+ "번 해결완료");
+			}
+		});
+	}else{
+		complain_status.value="0"
+		$.ajax({
+			type: 'post',
+			url: '/market/admin/solveComplain',
+			data: {'complain_seq': complain_seq,
+					'complain_status':0},
+			success: function(){
+				console.log(complain_seq+ "번 해결미완");
+			}
+		});
+	}
+}
 

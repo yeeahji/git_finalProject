@@ -12,26 +12,33 @@
 	<select id="getFagContent" parameterType="Integer" resultType="notice.bean.NoticeDTO">
 		select * from noticeBoard where select1=2 and select2=#{select2}
 	</select>
+	
+	
+<!-- [1:1문의]============================================================================== -->
+	
 <!-- qna 대분류 -->
-	<select id="getMain_id" resultType="notice.bean.QnaDTO">
-	 	select DISTINCT qnaCate_main_id, qnaCate_main_name from qnaCategory order by qnaCate_main_id
+	<select id="getMainCate" resultType="notice.bean.QnaCateDTO">
+	 	select qnaCate_name,qnaCate_code from qnaCate where qnaCate_parent is null order by qnaCate_code 
 	</select>
 <!-- qna 소분류 -->
-	<select id="getSub_id" parameterType="Integer" resultType="notice.bean.QnaDTO">
-	 	select qnaCate_sub_id, qnaCate_sub_name from qnaCategory where qnaCate_main_id=#{qnaCate_main_id}
+	<select id="getSubCate" parameterType="Integer" resultType="notice.bean.QnaCateDTO">
+	 	select qnaCate_name,qnaCate_code from qnaCate where qnaCate_parent=#{qnaCate_mainCode}
 	</select>
-<!-- qna 양식 -->
-	<select id="qnaCate_Content" parameterType="Integer" resultType="notice.bean.QnaDTO">
-	 	select qnaCate_Content from qnaCategory where qnaCate_sub_id=#{qnaCate_sub_id}
-	</select>
-<!-- 글등록 -->
-	<insert id="qnaWrite" parameterType="notice.bean.QnaBoardDTO" >
-		insert into qnaboard(qnaCate_main_name,qnaCate_sub_name,qna_content,qna_picture1,qna_picture2)
-		 				values(#{qnaCate_main_name},#{qnaCate_sub_name},#{qna_content},#{qna_picture1},#{qna_picture2})
+
+<!-- 1:1문의 글등록 -->
+	<insert id="writeQna" parameterType="notice.bean.QnaDTO" >
+		insert into qna (qna_seq, qnaCate_main, 
+						qnaCate_sub, mem_id, qna_content,
+						qna_img1,qna_img2,
+						qna_logtime)
+						 values (qna_seq.nextval, #{qnaCate_mainName}, 
+						 		#{qnaCate_sub}, #{mem_id}, #{qna_content},
+								#{qna_img1},#{qna_img2},
+								sysdate)
 	</insert>
-<!-- 상담목록 불러오기 -->
-	<select id="getQnaList" resultType="notice.bean.QnaBoardDTO">
-	 	select * from qnaboard
+<!-- 1:1문의 목록 불러오기 -->
+	<select id="getQnaList" parameterType="String" resultType="notice.bean.QnaDTO">
+	 	select * from qna where mem_id = #{mem_id} order by qna_logtime desc
 	</select>
 
 

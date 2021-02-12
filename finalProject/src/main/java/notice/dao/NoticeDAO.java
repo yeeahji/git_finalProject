@@ -5,7 +5,8 @@ import java.util.Map;
 
 import notice.bean.NoticeDTO;
 import notice.bean.QnaBoardDTO;
-import notice.bean.QnaDTO;
+import notice.bean.QnaCateDTO;
+import admin.bean.QnaDTO;
 
 public interface NoticeDAO {
 
@@ -13,14 +14,18 @@ public interface NoticeDAO {
 
 	public List<NoticeDTO> getFagContent(int select2);
 
-	public List<QnaDTO> getMain_id();
+	public List<QnaCateDTO> getMainCate();
 
-	public List<QnaDTO> getSub_id(int qnaCate_main_id);
+	public List<QnaCateDTO> getSubCate(int qnaCate_main);
 
-	public QnaDTO qnaCate_Content(int qnaCate_sub_id);
+	public QnaDTO qnaCate_Content(int qnaCate_sub);
 
-	public void qnaWrite(QnaBoardDTO qnaBoardDTO);
+	public void writeQna(QnaDTO qnaDTO);
 
-	public List<QnaBoardDTO> getQnaList();
+	public List<QnaBoardDTO> getQnaList(String mem_id);
+
+	
+
+	
 
 }

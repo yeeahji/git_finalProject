@@ -20,54 +20,67 @@ CREATE TABLE noticeBoard(  예전꺼(삭제예정)
 	logtime        DATE DEFAULT SYSDATE,
  );
 
---1대1 문의사항 페이지에 사용
-CREATE TABLE qnaCategory(   다른테이블과 연관 x
-	qnaCate_number	  number generated always as identity primary key, --기본키
-    qnaCate_main_id   VARCHAR2(20)  NOT NULL, --대분류 id
-    qnaCate_main_name VARCHAR2(100) NOT NULL, --대분류 name
-    qnaCate_sub_id    VARCHAR2(20)  NOT NULL, --소분류 id
-    qnaCate_sub_name  VARCHAR2(100) NOT NULL, --소분류 name
-    qnaCate_Content   VARCHAR2(4000)   	   --양식
+--1:1문의 카테고리 생성
+CREATE TABLE qnaCate(  --02.12
+	qnaCate_code NUMBER PRIMARY KEY,--카테고리 코드
+    qnaCate_name VARCHAR2(100) NOT NULL, -- 카테고리 이름
+    qnaCate_parent  VARCHAR2(100)  --소분류 카테고리 부모
  );
 
-소분류를 기준으로 대분류를 불러온다.
+--1:1문의 카테고리 데이터 삽입 --02.12
+INSERT INTO qnaCate (qnaCate_code, qnaCate_name) VALUES (100, '계정문의');
+INSERT INTO qnaCate (qnaCate_code, qnaCate_name) VALUES (200, '거래신고');
+INSERT INTO qnaCate (qnaCate_code, qnaCate_name) VALUES (300, '이용방법');
+INSERT INTO qnaCate (qnaCate_code, qnaCate_name) VALUES (400, '광고');
+INSERT INTO qnaCate (qnaCate_code, qnaCate_name) VALUES (500, '장애신고');
+INSERT INTO qnaCate (qnaCate_code, qnaCate_name) VALUES (600, '건의사항');
+
+INSERT INTO qnaCate (qnaCate_code, qnaCate_name, qnaCate_parent) VALUES (101, '가입/재가입', 100);
+INSERT INTO qnaCate (qnaCate_code, qnaCate_name, qnaCate_parent) VALUES (102, '계정정보변경', 100);
+INSERT INTO qnaCate (qnaCate_code, qnaCate_name, qnaCate_parent) VALUES (103, '탈퇴', 100);
+INSERT INTO qnaCate (qnaCate_code, qnaCate_name, qnaCate_parent) VALUES (104, '계정차단 관련 문의', 100);
+
+INSERT INTO qnaCate (qnaCate_code, qnaCate_name, qnaCate_parent) VALUES (201, '상품 미발송', 200);
+INSERT INTO qnaCate (qnaCate_code, qnaCate_name, qnaCate_parent) VALUES (202, '상품 상태 불량', 200);
+INSERT INTO qnaCate (qnaCate_code, qnaCate_name, qnaCate_parent) VALUES (203, '배송비 분쟁', 200);
+INSERT INTO qnaCate (qnaCate_code, qnaCate_name, qnaCate_parent) VALUES (204, '상품비 미입금', 200);
+INSERT INTO qnaCate (qnaCate_code, qnaCate_name, qnaCate_parent) VALUES (205, '거래 사기', 200);
+
+INSERT INTO qnaCate (qnaCate_code, qnaCate_name, qnaCate_parent) VALUES (301, '상품거래문의', 300);
+INSERT INTO qnaCate (qnaCate_code, qnaCate_name, qnaCate_parent) VALUES (302, '상점후기문의', 300);
+INSERT INTO qnaCate (qnaCate_code, qnaCate_name, qnaCate_parent) VALUES (303, '게시글 UP하기', 300);
+INSERT INTO qnaCate (qnaCate_code, qnaCate_name, qnaCate_parent) VALUES (304, '에코지수문의', 300);
+INSERT INTO qnaCate (qnaCate_code, qnaCate_name, qnaCate_parent) VALUES (305, '기타 문의', 300);
 
 
+INSERT INTO qnaCate (qnaCate_code, qnaCate_name, qnaCate_parent) VALUES (401, '상점 광고 신청', 400);
+INSERT INTO qnaCate (qnaCate_code, qnaCate_name, qnaCate_parent) VALUES (402, '상품 광고 신청', 400);
+INSERT INTO qnaCate (qnaCate_code, qnaCate_name, qnaCate_parent) VALUES (403, '광고 제의', 400);
+INSERT INTO qnaCate (qnaCate_code, qnaCate_name, qnaCate_parent) VALUES (404, '기타 문의', 400);
 
---1대1일 문의 글등록,출력에 사용
-CREATE TABLE qnaboard( 예전꺼(삭제예정)
-     qnaCate_main_name VARCHAR2(50) NOT NULL,   --카테고리 선택1
-     qnaCate_sub_name  VARCHAR2(50) NOT NULL,   --카테고리 선택2
-     mem_Id            VARCHAR2(40),            --작성자
-     qna_content       VARCHAR2(4000) NOT NULL, --내용
-  	 qna_picture1      VARCHAR2(500), 
-     qna_picture2      VARCHAR2(500), 
-     qna_picture3      VARCHAR2(500),
-     qna_picture4      VARCHAR2(500),
-     qna_picture5      VARCHAR2(500),
-     logtime           DATE DEFAULT SYSDATE      --날짜
- );
- 
- CREATE TABLE qnaboard( 수정한거, 사용예정
- 	qnaboard_number	  number generated always as identity primary key, --기본키 seq로 변경
-    qnaCate_main_name VARCHAR2(20)  NOT NULL,  --대분류 id
-    qnaCate_main_id   VARCHAR2(100) NOT NULL,  --대분류 name
-    qnaCate_sub_name  VARCHAR2(20)  NOT NULL,  --소분류 id
-    qnaCate_sub_id    VARCHAR2(100) NOT NULL,  --소분류 name
+INSERT INTO qnaCate (qnaCate_code, qnaCate_name, qnaCate_parent) VALUES (501, '접속 장애', 500);
+INSERT INTO qnaCate (qnaCate_code, qnaCate_name, qnaCate_parent) VALUES (502, '바다톡 장애', 500);
+INSERT INTO qnaCate (qnaCate_code, qnaCate_name, qnaCate_parent) VALUES (503, '이용 장애', 500);
+INSERT INTO qnaCate (qnaCate_code, qnaCate_name, qnaCate_parent) VALUES (504, '기타 문의', 500);
+
+INSERT INTO qnaCate (qnaCate_code, qnaCate_name, qnaCate_parent) VALUES (601, '서비스 제안', 600);
+INSERT INTO qnaCate (qnaCate_code, qnaCate_name, qnaCate_parent) VALUES (602, '개선요청', 600);
+INSERT INTO qnaCate (qnaCate_code, qnaCate_name, qnaCate_parent) VALUES (603, '기타 문의', 600);
+
+
+ CREATE TABLE qna(--최종 02.12
+ 	qna_seq	number primary key, --기본키 seq로 변경(1씩증가)
+    qnaCate_main VARCHAR2(20)  NOT NULL,  --대분류 name
+    qnaCate_sub  VARCHAR2(20)  NOT NULL,  --소분류 name
     mem_id    		  NOT NULL REFERENCES members(mem_id),  --작성자, 외래키
     qna_content VARCHAR2(4000) NOT NULL,       --내용
   	qna_img1 VARCHAR2(500), 
     qna_img2 VARCHAR2(500),
-    logtime DATE DEFAULT SYSDATE      -- 날짜
+    qna_logtime DATE DEFAULT SYSDATE,      -- 날짜
+    qna_answer VARCHAR2(4000),
+    qna_answerLogtime DATE
+    
  );
- 
- generated always as identitym, auto_increment 둘다 자동으로 1씩 증가시켜주는 조건
- 
- insert into qnaboard(qnaCate_main_name,qnaCate_main_id,qnaCate_sub_name,qnaCate_sub_id,mem_id,qna_content)
- values(1,'계정문의',1,'가입/재가입','test31','가나다라 마바사 아자차카 타파하');
- insert into qnaboard(qnaCate_main_name,qnaCate_main_id,qnaCate_sub_name,qnaCate_sub_id,mem_id,qna_content)
- values(1,'계정문의',2,'계정정보 변경','test31','가나다라 마바사 아자차카 타파하하하하핳');
-insert into qnaboard(qnaCate_main_name,qnaCate_main_id,qnaCate_sub_name,qnaCate_sub_id,mem_id,qna_content)
- values(2,'거래신고',3,'상품 미발송','test1','가나다라 마바사 아자하하하핳');
-  insert into qnaboard(qnaCate_main_name,qnaCate_main_id,qnaCate_sub_name,qnaCate_sub_id,mem_id,qna_content)
- values(4,'광고',8,'상점관리','test20','가나다라 마바사 타파하하하하핳');
+ CREATE SEQUENCE qna_seq NOCYCLE NOCACHE;
+insert into qna  (qna_seq, mem_id, qnaCate_main,	qnaCate_sub,	qna_content, qna_logtime) 
+	VALUES (qna_seq.nextval,'test19', '계정문의','탈퇴','탈퇴신청합니다',sysdate);
