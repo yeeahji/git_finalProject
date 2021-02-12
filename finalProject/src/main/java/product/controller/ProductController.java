@@ -50,6 +50,7 @@ public class ProductController {
 	public void productRegist(@ModelAttribute ProductDTO productDTO,
 							  @RequestParam MultipartFile[] img,
 							  @RequestParam(required=false, defaultValue="") String[] hashtag) {
+		System.out.println("productRegist도착");
 		//이미지 파일 복사
 		String filePath = "D:/git_home/git_final/finalProject/src/main/webapp/storage";
 		File file;
@@ -85,6 +86,7 @@ public class ProductController {
 		
 		//DB 연결
 		productService.productRegist(productDTO);
+		System.out.println("상품등록완료");
 	}
 	
 	@RequestMapping(value="getSmallCategoryList", method=RequestMethod.POST) //소분류 카테고리 불러오기

@@ -22,7 +22,7 @@
 </div>
 <div class="reviewsBottom">
 	<!-- 상품후기 추가  -->
-	<c:if test="${member.username!=param.id}">
+	<c:if test="${member.username!=param.id && not empty param.id}">
 		<div class="reviewFormWrap">
 			<div class="reviewForm">
 				<div class="reviewStar">

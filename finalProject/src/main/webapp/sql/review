@@ -9,7 +9,7 @@ review_seq number not null UNIQUE
 
 CREATE SEQUENCE seq_review NOCYCLE NOCACHE;
 
--- 데이터 삽입(test2가 test1 상점이 올린 초록니트에 후기 남김, store.sql에 관련 데이터 있음!)
+-- 데이터 삽입(test2가 test1 상점이 올린 초록니트에 후기 남김)
 insert into review(product_seq, mem_id, review_content, review_score, review_date, review_seq)
 values (3, 'test2', '정말 너무 예뻐요 색도 맘에들어요 감사합니다 너무친절하세요~', 8, sysdate, seq_review.NEXTVAL);
 

@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import product.bean.ProductDTO;
 import store.bean.StorePaging;
 import store.bean.PurchaseDTO;
+import store.bean.PurchaseExistDTO;
 import store.bean.PurchasePaging;
 import store.bean.ReviewDTO;
 import store.bean.StoreDTO;
@@ -213,6 +214,12 @@ public class StoreServiceImpl implements StoreService {
 	@Override
 	public void echoUpdate(Map<String, String> map) {
 		storeDAO.echoUpdate(map);
+	}
+
+	// 구매 내역 존재 여부
+	@Override
+	public List<PurchaseExistDTO> purchaseExist(Map<String, String> map) {
+		return storeDAO.purchaseExist(map);
 	}
 
 	

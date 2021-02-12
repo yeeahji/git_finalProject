@@ -39,7 +39,7 @@
 						<img width="15" height="14" class="star5" alt="별" src="" >
 					</div>
 					
-					<!-- 프로필 사진 변경 -->
+					<!-- 내상점 - 프로필 사진 변경 -->
 					<c:if test="${member.username == param.id || empty param.id}">
 					<form id="profileImgForm">
 						<div class="imageEdit">
@@ -51,6 +51,14 @@
 	
 						</div><!-- //imageEdit -->
 					</form> 
+					</c:if>
+					<!-- 남의 상점 - 바다톡-->
+					<c:if test="${member.username!=param.id && not empty param.id}">
+						<div class="badaTalkWrap">
+			                 <div class="badaTalk_btn">
+								<span class="badaTalk_btn_text">바다톡</span>
+							 </div>
+						</div><!-- //imageEdit -->
 					</c:if>
 					
 				</div><!-- //(2)background2 -->

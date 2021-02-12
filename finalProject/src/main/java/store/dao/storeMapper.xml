@@ -276,6 +276,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
    	
    	
+   	<!-- 구매 내역 존재 여부 purchaseExist -->
+  	<select id="purchaseExist" parameterType="java.util.Map" resultType="store.bean.PurchaseExistDTO">
+		select*
+		from purchase
+		where my_id = #{my_id} and seller_id = #{seller_id}
+		
+	</select>
 </mapper>
 
 

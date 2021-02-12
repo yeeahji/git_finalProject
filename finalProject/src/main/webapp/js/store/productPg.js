@@ -12,17 +12,16 @@ if(loginId == paramId){ // 내 상점
 // 기본 - 상품 리스트 가져오기
 var sortNum = $('.hiddenSortNum').val(); // 기본은 최신순 0 
 
+
 $(document).ready(function(){
 	$.ajax({
 		type: 'post',
 		url: '/market/store/storeProductList',
-		data: {'mem_id' : userId, //test1이 올린 물품들만
+		data: {'mem_id' : userId, 
 			   'sortNum' : sortNum}, //정렬번호
 		dataType: 'json',
 		success : function(data){
-			console.log(data); // test
-			console.log('히든에서가져온 솔트넘-->'+sortNum);
-			
+			//console.log("상품리스트->"+JSON.stringify(data.productList));
 			$('.productOne').remove(); // 창 이동 시 계속 append 되는 거 방지
 			
 			//상품 총 개수
@@ -32,7 +31,7 @@ $(document).ready(function(){
 			
 			$.each(data.productList, function(index, items){
 				$("<div class='productOne'/>").append($('<a/>',{ 
-					class: 'productOneInner',
+					class: 'productOneInner'+index,
 					href: '#'
 				}).append($('<div/>',{
 					class: 'productImg'
@@ -75,14 +74,26 @@ $(document).ready(function(){
 					//번장 위치 아이콘
 					src: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAiCAYAAABIiGl0AAAAAXNSR0IArs4c6QAAA6xJREFUWAm1l01IVFEUx51xNAtxIcEENuQIrqTxO8OEmj5IAncVUS2E2kS0axO4C5KiFi0lXIh9QBC1kKgwclNGjaNOSUEapVRiUSHoTOo4/c743vjem/vGp8xcuHPu+Z//Of9778y9740rz0EbGxsrjsViQait9JpEIuF1uVzbGCfo0/jT2GGwx6WlpQN+vz+Gn7G5MkXD4fAOil6C047dlImrxxCfg9tVUFBwtbq6ekbHrVYpzAoLo9FoJ+QL9AJrkkN/3u12d9bW1l5hMsvWnDTh4eHh8uXl5fvMutFK3qD/jLxTDQ0Nv4z5JuHR0VH/4uLiKwjy/WWtseJPLKTZKO7Wq4dCoa1LS0tP8bMqKvURrcT0TU1NbRZfWkqYWXVrhJVI9j+bZmZmbuplk1s9NDR0GNEnOpgrKz8ydBrZ8rBHRHCur0MsCvc1Pazl1GF301PbqOFpBh3Z4Rv0oIvVBgBG01hqYKCwsPBMIBD4bAxHIpGKhYWFbrB9RtxuzDEr9yB6zI5gwV/U19cfYLvktjI1mQh19rOI5wSCpqDC4bgelaXvUcRMEGJzAO0qUZ2oxdrx53XMzsI9KMJldgQDPsgPYtLgK4fCoeigMmgA2R2fCG83YMohxCFlQAHCDSlgE8Tkytx8yDZmbHCKMxIMQSdcJueWFU8Y8pRDiA3KgAJ0yJ1wJMwqGrlSWxQ6Jkg4wjWBamfCzQzfqmOrqGwNXo/c56uoeaTFejSuOWjxmNx7KXiHwYIlpnIr4I1xVo9TPF8nyFgwiYFV6LidhZfgJaFXv6vvUeCEHVmBy7UZ0fAAds3rUq+BcD8X0SFZcR5XWJcecGhFqEnrjkW12rfEJoV5PRlgJg+1QM4MGqG6uroHKWEZsNXnCfzNmWpe3iL1z9LjJmGuux+AF3MlTO1rrDb1FExutS5GQB5tj3Q/WxbRSElJyWVjPZOwBLxe70mI8sKXrTaZn59/pLKy8p+xYJqwz+eLFhUVtUH6aCRuZMwC/tBba2pqvlnz04SFUFVV9Zsj1krSd2vCOvwYNdo4sx9UOUphIfJ9f8XsRXxclbgGNiuiHNOXdjxbYUlgtuMINzN8Y1dAgU+BtTDxfkUsBWUUFhYFfmKCTKAvlWU/kDfPJo7mO3vKSiR5V69Fkrg8DPj32IHtwE2+FhvzmFivx+M5xz/ENV8sJM+xsC4yMjKyKx6P32YC8rdE2iz9HKu8m/QcfqxbWOry7N2CkRfznZzR0/yIvjBeV/sPFdozA8TD8zUAAAAASUVORK5CYII=',
 					width: '15',
-		               height: '17',
-		               alt: '위치 아이콘'
+		            height: '17',
+		            alt: '위치 아이콘'
 		        })).append($('<div/>', {
 		        	text: items.product_location
 		        }))
 		        )).appendTo($('.listWrap'));
 				
+				// css
 				$('.location > img').next().css('position', 'absolute');
+				
+				$('.productOneInner'+index).css({'border': '1px solid rgb(238, 238, 238)',
+				     'background': 'rgb(255, 255, 255)',
+				     'display': 'block'});	
+				
+				// 클릭 -> 상세페이지 이동
+				$('.productOneInner'+index).click(function(){
+					console.log("클릭 페이지이동 "+items.product_seq);
+					$('.productOneInner'+index).attr('href','/market/product/productDetail?seq=' + items.product_seq);
+				});
+				
 				
 				// 배송비 *배송비 별도는 표시 없음
 				if(items.product_delivery_fee == 1){
@@ -127,7 +138,7 @@ $(document).ready(function(){
 		error: function(err){
 			console.log(err);
 		}
-	});
+	}); // ajax
 });
 
 //최신순, 인기순, 저가순, 고가순 클릭 이벤트
@@ -150,12 +161,11 @@ $('.listTopInner').on('click', '.groupOther', function(){
 	$.ajax({
 		type: 'post',
 		url: '/market/store/storeProductList',
-		data: {'mem_id': userId, //test1이 올린 물품들만
+		data: {'mem_id' : userId, 
 			   'sortNum' : sortNum}, //정렬번호
 		dataType: 'json',
 		success : function(data){
-			console.log(data); // test
-			
+			console.log("상품리스트->"+JSON.stringify(data.productList));
 			$('.productOne').remove(); // 창 이동 시 계속 append 되는 거 방지
 			
 			//상품 총 개수
@@ -165,7 +175,7 @@ $('.listTopInner').on('click', '.groupOther', function(){
 			
 			$.each(data.productList, function(index, items){
 				$("<div class='productOne'/>").append($('<a/>',{ 
-					class: 'productOneInner',
+					class: 'productOneInner'+index,
 					href: '#'
 				}).append($('<div/>',{
 					class: 'productImg'
@@ -208,14 +218,26 @@ $('.listTopInner').on('click', '.groupOther', function(){
 					//번장 위치 아이콘
 					src: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAiCAYAAABIiGl0AAAAAXNSR0IArs4c6QAAA6xJREFUWAm1l01IVFEUx51xNAtxIcEENuQIrqTxO8OEmj5IAncVUS2E2kS0axO4C5KiFi0lXIh9QBC1kKgwclNGjaNOSUEapVRiUSHoTOo4/c743vjem/vGp8xcuHPu+Z//Of9778y9740rz0EbGxsrjsViQait9JpEIuF1uVzbGCfo0/jT2GGwx6WlpQN+vz+Gn7G5MkXD4fAOil6C047dlImrxxCfg9tVUFBwtbq6ekbHrVYpzAoLo9FoJ+QL9AJrkkN/3u12d9bW1l5hMsvWnDTh4eHh8uXl5fvMutFK3qD/jLxTDQ0Nv4z5JuHR0VH/4uLiKwjy/WWtseJPLKTZKO7Wq4dCoa1LS0tP8bMqKvURrcT0TU1NbRZfWkqYWXVrhJVI9j+bZmZmbuplk1s9NDR0GNEnOpgrKz8ydBrZ8rBHRHCur0MsCvc1Pazl1GF301PbqOFpBh3Z4Rv0oIvVBgBG01hqYKCwsPBMIBD4bAxHIpGKhYWFbrB9RtxuzDEr9yB6zI5gwV/U19cfYLvktjI1mQh19rOI5wSCpqDC4bgelaXvUcRMEGJzAO0qUZ2oxdrx53XMzsI9KMJldgQDPsgPYtLgK4fCoeigMmgA2R2fCG83YMohxCFlQAHCDSlgE8Tkytx8yDZmbHCKMxIMQSdcJueWFU8Y8pRDiA3KgAJ0yJ1wJMwqGrlSWxQ6Jkg4wjWBamfCzQzfqmOrqGwNXo/c56uoeaTFejSuOWjxmNx7KXiHwYIlpnIr4I1xVo9TPF8nyFgwiYFV6LidhZfgJaFXv6vvUeCEHVmBy7UZ0fAAds3rUq+BcD8X0SFZcR5XWJcecGhFqEnrjkW12rfEJoV5PRlgJg+1QM4MGqG6uroHKWEZsNXnCfzNmWpe3iL1z9LjJmGuux+AF3MlTO1rrDb1FExutS5GQB5tj3Q/WxbRSElJyWVjPZOwBLxe70mI8sKXrTaZn59/pLKy8p+xYJqwz+eLFhUVtUH6aCRuZMwC/tBba2pqvlnz04SFUFVV9Zsj1krSd2vCOvwYNdo4sx9UOUphIfJ9f8XsRXxclbgGNiuiHNOXdjxbYUlgtuMINzN8Y1dAgU+BtTDxfkUsBWUUFhYFfmKCTKAvlWU/kDfPJo7mO3vKSiR5V69Fkrg8DPj32IHtwE2+FhvzmFivx+M5xz/ENV8sJM+xsC4yMjKyKx6P32YC8rdE2iz9HKu8m/QcfqxbWOry7N2CkRfznZzR0/yIvjBeV/sPFdozA8TD8zUAAAAASUVORK5CYII=',
 					width: '15',
-		               height: '17',
-		               alt: '위치 아이콘'
+		            height: '17',
+		            alt: '위치 아이콘'
 		        })).append($('<div/>', {
 		        	text: items.product_location
 		        }))
 		        )).appendTo($('.listWrap'));
 				
+				// css
 				$('.location > img').next().css('position', 'absolute');
+				
+				$('.productOneInner'+index).css({'border': '1px solid rgb(238, 238, 238)',
+				     'background': 'rgb(255, 255, 255)',
+				     'display': 'block'});	
+				
+				// 클릭 -> 상세페이지 이동
+				$('.productOneInner'+index).click(function(){
+					console.log("클릭 페이지이동 "+items.product_seq);
+					$('.productOneInner'+index).attr('href','/market/product/productDetail?seq=' + items.product_seq);
+				});
+				
 				
 				// 배송비 *배송비 별도는 표시 없음
 				if(items.product_delivery_fee == 1){

@@ -12,10 +12,8 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/store/store.css">    
 
 <div id="productTop">
-
 	<!-- 상품+개수 -->
 	<div>상품 <span class="productNum"></span></div>
-	
 </div><!-- //productTop -->
 
 <!-- 정렬 hidden sortNum -->

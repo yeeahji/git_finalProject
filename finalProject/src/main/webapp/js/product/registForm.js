@@ -1,3 +1,4 @@
+
 $('#registForm').ready(function(){
 	$('#imageDiv').hide();
 	$('#subjectDiv').hide();
@@ -6,7 +7,6 @@ $('#registForm').ready(function(){
 	$('#locationDiv').hide();
 	initTagArea();
 });
-
 
 
 /* 상품 이미지 */
@@ -154,7 +154,7 @@ $('.contentArea').on("click", '.category >.btn', function(){
 
 /* 거래지역 */
 //내 지역
-$('#myLocation').click(function(){
+/*$('#myLocation').click(function(){
 	$.ajax({
 		type: 'post',
 		url: '/market/product/getMyLocation',
@@ -167,9 +167,9 @@ $('#myLocation').click(function(){
 			console.log(err);
 		}
 	});
-});
+});*/
 
-//최근 지역
+/*//최근 지역
 $('#myRecentLocation').click(function(){
 	$.ajax({
 		type: 'post',
@@ -183,7 +183,7 @@ $('#myRecentLocation').click(function(){
 			console.log(err);
 		}
 	});
-});
+});*/
 
 //지도 (미리 생성)
 var mapContainer = document.getElementById('map'), // 지도를 표시할 div
@@ -304,9 +304,6 @@ function initTagArea() {
 
 
 
-
-
-
 /* 등록하기 */
 $('#registBtn').click(function(){
 	$('#imageDiv').hide();
@@ -315,14 +312,20 @@ $('#registBtn').click(function(){
 	$('#priceDiv').hide();
 	$('#locationDiv').hide();
 	
+	console.log("중간임다");
+
+	
 	//유효성 검사
 	if(!fileBuffer.length) { $('#imageDiv').show(); $('#inputImage').focus(); }
 	else if($('#product_subject').val()=='') { $('#subjectDiv').show(); $('#product_subject').focus(); }
 	else if(cate_code == null) { $('#categoryDiv').show(); $('#large_categories').focus(); } //!!!!!!!!포커스 안됨. 해결하기
 	else if($('#product_location').val()=='') { $('#locationDiv').show(); $('#product_location').focus(); }
-	else if($('#product_price').val()=='') { $('#priceDiv').show(); $('#product_price').focus(); }
+	else if($('#product_price').val()=='') { $('#priceDiv').show(); $('#product_price').focus(); 
+	console.log("유효성검사완료");//test
+	}
 	
 	else{
+
 		alert("뜽록");
 		
 		$.each(fileBuffer, function(index, items){
@@ -332,6 +335,7 @@ $('#registBtn').click(function(){
 			console.log(items.innerText);
 		});
 		
+		
 		$('#registForm').ajaxForm({
 			type: 'post',
 			enctype: 'multipart/form-data',
@@ -340,8 +344,12 @@ $('#registBtn').click(function(){
 			url: '/market/product/productRegist',
 			dataType: 'json',
 			beforeSubmit: function(data, form, option) { //submit 전 실행
-				console.log(data);
 				//이미지 정보 동적 할당
+				console.log("비폴써빔ㅅ");
+				console.log("비폴써빔ㅅ");
+				console.log("비폴써빔ㅅ");
+				console.log("비폴써빔ㅅ");
+				console.log("비폴써빔ㅅ");
 				fileBuffer.forEach(function(e, i) {
 					const imgObj = {
 						name : 'img',
@@ -375,13 +383,18 @@ $('#registBtn').click(function(){
 					}
 					data.push(tagObj);
 				});
+				
+				console.log("비폴썹밋 끘");
 			},
 			success: function(data) {
-				alert('상품이 등록되었습니다. ')
+				alert('상품이 등록되었습니다. ');
 			},
 			error: function(error) {
-				alert('error : ', error)
+				alert('error : ', error);
+
 			}
+			
 		});
 	}
 });
+

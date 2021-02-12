@@ -7,7 +7,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 	<insert id="productRegist" parameterType="product">
 		INSERT INTO product VALUES(seq_product.NEXTVAL,
-								   'test1',
+								   'eunk',
 								   #{cate_code},
 								   #{product_subject},
 								   #{product_content},
