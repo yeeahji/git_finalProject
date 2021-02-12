@@ -1,6 +1,6 @@
 $('.revel2_5_main').on('click', 'article', function(){
 	var check = $(this);
-	console.log(check.attr('class'));
+//	console.log(check.attr('class'));
 	if(check.attr('class') == 'qnaListOpen'){
 		$(this).attr('class','qnaListClose');
 	}else if(check.attr('class') == 'qnaListClose'){
@@ -13,21 +13,22 @@ $(document).ready(function(){
 	if($('#mem_id').val()=='비회원'){
 		location.href="/market/member/loginForm";
 	}
+	//전체 리스트 출력
 	$.ajax({
 		type: 'post',
 		url: '/market/notice/getQnaList',
 		data: 'mem_id='+$('#mem_id').val(),
 		dataType: 'json',
 		success: function(data){
-			console.log(JSON.stringify(data));
 			resultHtml(data);
 		}
 	});		
 });
 
 function resultHtml(data){
-	var html;
+	var html="";
 	$.each(data.list, function(index, items){
+		
 		html += "<article id='qnaListClose' class='qnaListClose'>";
 		html += "<button class='article_btn'>";
 		html += "<div class='aticle_btn_subject' style='width:900px'>"
