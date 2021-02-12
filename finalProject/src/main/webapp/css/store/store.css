@@ -147,6 +147,24 @@ textarea {
 .storeStar {
 	display: flex;
 }
+/* 바다톡 */
+.badaTalkWrap {
+	display: flex;
+    margin-top: 20px;
+}
+.badaTalk_btn {
+	width: 110px;
+    height: 40px;
+    display: flex;
+    -webkit-box-pack: center;
+    justify-content: center;
+    -webkit-box-align: center;
+    align-items: center;
+    margin-left: 10px;
+    font-size: 13px;
+    border: 1px solid rgb(255, 255, 255);
+    cursor: pointer;
+}
 /* 프로필 사진 변경 -> 라벨 클릭 + [파일]버튼숨김   */
 .imageEdit {
     display: flex;
@@ -590,8 +608,6 @@ textarea {
     transition: height 0.3s ease-out 0s;
 	
 }
-
-
 /****************** storeBottom  ******************/
 /* 메뉴 바 */
 .menuBar {
@@ -659,67 +675,6 @@ textarea {
 	font-size: 13pt;
 	color: #0a58ca;
 }
-/* #productTop .categoryWrap {
-	width: 140px;
-}
-#productTop .categoryInner {
-	border: 1px solid rgb(238, 238, 238);
-    display: flex;
-    width: 100%;
-    height: 28px;
-    -webkit-box-align: center;
-    align-items: center;
-    position: relative;
-    font-size: 12px;
-    color: rgb(77, 77, 77);
-    background: rgb(255, 255, 255);
-}
-.categoryMain {
-	display: flex;
-    -webkit-box-align: center;
-    align-items: center;
-    padding: 0px 25px 0px 10px;
-    position: relative;
-    width: 100%;
-}
-.categoryMain img {
-	position: absolute;
-    right: 10px;
-    top: 50%;
-    transform: translateY(-50%);	
-}
-.categoryList {
-	position: absolute;
-    top: 27px;
-    left: -1px;
-    width: calc(100% + 2px);
-    background: rgb(255, 255, 255);
-    max-height: 280px;
-    overflow-y: auto;
-    z-index: 1;
-    border-left: 1px solid rgb(238, 238, 238);
-    border-bottom: 1px solid rgb(238, 238, 238);
-    border-right: 1px solid rgb(238, 238, 238);
-    display: none;
-}
-.categoryCheck {
-    width: 100%;
-    height: 28px;
-    padding: 0px 10px;
-    display: flex;
-    -webkit-box-align: center;
-    align-items: center;
-    color: rgb(247, 47, 51);
-    color: #0a58ca;
-}
-.categoryOther {
-	width: 100%;
-    height: 28px;
-    padding: 0px 10px;
-    display: flex;
-    -webkit-box-align: center;
-    align-items: center;
-} */
 #productList {
     margin-top: 30px;
 }
@@ -789,39 +744,11 @@ textarea {
     margin-right: 11px;
     margin-bottom: 11px;
 }
-.productOneInner {
-    border: 1px solid rgb(238, 238, 238);
-    background: rgb(255, 255, 255);
-    display: block;
-}
 .productImg {
 	position: relative;
     width: 100%;
     height: 194px;
 }
-/* .deliveryFee {
-	background: rgba(0, 0, 0, 0.4);
-    font-size: 13px;
-    padding: 2px 3px 3px;
-    position: absolute;
-    left: 10px;
-    bottom: 10px;
-    color: rgb(255, 255, 255);
-} */
-/* .sellCheck {
-	position: absolute;
-    top: 0px;
-    left: 0px;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.6);
-    display: flex;
-    -webkit-box-pack: center;
-    justify-content: center;
-    -webkit-box-align: center;
-    align-items: center;
-    color: rgb(255, 255, 255);
-} */
 .productNameWrap {
 	padding: 15px 10px;
     height: 80px;

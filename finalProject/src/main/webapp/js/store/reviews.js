@@ -112,8 +112,8 @@ $(document).ready(function(){
 	$(function() {
 	      $('.reviewTextarea').keyup(function (e){
 	          var content = $(this).val();
-	         /* $(this).height(((content.split('\n').length + 1) * 1.5) + 'em');*/
-	          $('.numOfChar').html(content.length + '/100&ensp;');
+	          $('.numOfChar').html(content.length + '/100&ensp;<div id="reviewTextareaDiv" style="display:inline-block;"></div>');
+	          
 	      });
 	      $('.numOfChar').keyup();
 	});
@@ -167,8 +167,63 @@ $(document).ready(function(){
 		});// 재클릭
 	});// 처음 별 클릭
 
-	
-	// 신고하기
+	// 리뷰 등록 버튼 클릭
+	$('.reviewRegis > button').click(function(){
+		console.log("등록버튼클릭");
+		$('#reviewTextareaDiv').text('');
+		
+		if($('.reviewTextarea').val()=='' || starScore==0){
+			if(starScore==0){
+				console.log("별점수는요"+starScore);
+				$('#reviewTextareaDiv').text('별 평가를 입력해주세요.');
+			}else if($('.reviewTextarea').val()==''){
+				console.log("글자가업슴");
+				$('#reviewTextareaDiv').text('최소 20자 이상 입력해주세요.');
+			}
+			$('#reviewTextareaDiv').css('color', '	#FF0000');
+			$('#reviewTextareaDiv').css('font-size', '10pt');
+			$('#reviewTextareaDiv').css('font-weight','bold');
+		}else {
+			// 일단 구매내역에 있는지
+			$.ajax({
+				type: 'post',
+				url: '/market/store/purchaseExist',
+				data: {'my_id' : $('.loginId').val(), // 로그인 중인 아이디
+					   'seller_id' : $('.hiddenId').val()}, // 상점주인 아이디
+				dataType: 'json',
+				success : function(data){
+					//false 면 얼럴트 후기 권한없다고
+				},
+				error: function(err){
+					console.log(err);
+				}
+			});// ajax
+		}// else 
+			/*$.ajax({
+				type: 'post',
+				url: '/market/store/reviewRegister',
+				data: {'review_score' : starScore, // 별 평가
+					   'review_content' : $('.reviewTextarea').val(), // 후기 내용
+					   'mem_id' : $('.loginId').val(), //리뷰 쓴 사람의 아이디 (현재 접속 중인)
+					   'seq' : // 상품번호},
+				dataType: 'json',
+				success : function(data){
+					alert("리뷰가 등록되었씁니다");
+					// 별평가 + 텍스트에리아 빈칸으로
+				},
+				error: function(err){
+					console.log(err);
+				}
+			});// ajax
+*/		
+		
+
+			 
+
+		
+	});
+
+	// ==================================== 신고하기 모달 ====================================
 	$('.reviewsBottom').on('click', '.reviewSingoBtn', function(){      
           $("#reviewModal").css('display','flex'); 
               
@@ -226,25 +281,9 @@ $(document).ready(function(){
 	   }); // 신고모달
 
 	
-	
-	
-	
 });	//$(document).ready
 		
 
-//등록 버튼 클릭
-//$('.storeContent').on('click', '.reviewRegisBtn', function(){
-$('.reviewRegis > button').click(function(){
-	console.log("등록버튼클릭");
-	//$('#reviewTextareaDiv').empty();
-	if($('.reviewTextarea').val()==''){
-		$('#reviewTextareaDiv').text('최소 20자 이상 입력해주세요.');
-		$('#reviewTextareaDiv').css('color', '	#FF0000');
-		$('#reviewTextareaDiv').css('font-size', '10pt');
-		$('#reviewTextareaDiv').css('font-weight','bold');
-	}
-	
-});
 
 
 

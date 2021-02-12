@@ -6,6 +6,7 @@ import java.util.Map;
 import product.bean.ProductDTO;
 import store.bean.StorePaging;
 import store.bean.PurchaseDTO;
+import store.bean.PurchaseExistDTO;
 import store.bean.PurchasePaging;
 import store.bean.ReviewDTO;
 import store.bean.StoreDTO;
@@ -63,5 +64,7 @@ public interface StoreService {
 	public int salesNum(String mem_id);
 	// 에코 업뎃
 	public void echoUpdate(Map<String, String> map);
+	// 구매 내역 존재 여부
+	public List<PurchaseExistDTO> purchaseExist(Map<String, String> map);
 	
 }

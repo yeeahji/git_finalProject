@@ -5,6 +5,7 @@ import java.util.Map;
 
 import product.bean.ProductDTO;
 import store.bean.PurchaseDTO;
+import store.bean.PurchaseExistDTO;
 import store.bean.ReviewDTO;
 import store.bean.StoreDTO;
 
@@ -59,5 +60,7 @@ public interface StoreDAO {
 	public int salesNum(String mem_id);
 	
 	public void echoUpdate(Map<String, String> map);
+	
+	public List<PurchaseExistDTO> purchaseExist(Map<String, String> map);
 	
 }

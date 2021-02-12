@@ -25,7 +25,26 @@ $(document).ready(function(){
 		dataType: 'json',
 		success : function(data){
 			console.log("상점데이타"+data.storeDTO);
+			
 			$.each(data, function(key, value){
+				// 남의 상점 - 바다톡 연결
+				$('.badaTalk_btn').click(function(){
+					console.log("바다톡 버튼 클릭");
+					console.log("판매자 아디->"+value.mem_id);
+					
+					$.ajax({
+						type: 'GET',
+						url: '/market/chat/chatRoom',
+						data: {'mem_id' : value.mem_id }, // 판매자 아이디
+						dataType: 'json',
+						success : function(data){ 
+							
+						},error: function(err){
+							console.log(err);
+						}
+					}); //ajax 
+				})
+				
 				// [프로필] 
 				$('.profileNickname').text(value.store_nickname); // 프로필 상점명
 				
@@ -109,6 +128,9 @@ $(document).ready(function(){
 					      });//arr.forEach
 					 }
 				}); //프로필 사진 변경
+				
+
+				
 				
 				// 상점평점
 				var scoreAvg = value.store_scoreavg;

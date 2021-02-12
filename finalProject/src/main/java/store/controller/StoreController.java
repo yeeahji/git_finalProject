@@ -28,6 +28,7 @@ import org.springframework.web.servlet.ModelAndView;
 import product.bean.ProductDTO;
 import store.bean.StorePaging;
 import store.bean.PurchaseDTO;
+import store.bean.PurchaseExistDTO;
 import store.bean.PurchasePaging;
 import store.bean.ReviewDTO;
 import store.bean.StoreDTO;
@@ -205,6 +206,37 @@ public class StoreController {
 		mav.setViewName("jsonView");
 		return mav;
 	}
+	
+	// 상품후기 작성
+	// 1. 구매내역 여부 확인
+	@RequestMapping(value="purchaseExist", method=RequestMethod.POST)
+	@ResponseBody
+	public ModelAndView purchaseExist(@RequestParam Map<String, String> map) {
+		List<PurchaseExistDTO> purchaseList = storeService.purchaseExist(map);
+		
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("jsonView");
+		return mav;
+	}
+	
+	
+	
+	// 2. 후기 등록하기
+//	@RequestMapping(value="reviewRegister", method=RequestMethod.POST)
+//	@ResponseBody
+//	public ModelAndView reviewRegister(@RequestParam Map<String, String> map) {
+//
+//		ModelAndView mav = new ModelAndView();
+//		mav.setViewName("jsonView");
+//		return mav;
+//	}
+	
+	
+	
+	
+	
+	
+	
 	
 	// 3. [찜] ------------------------------------------------------------
 	// 찜 리스트 가져오기

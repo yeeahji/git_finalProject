@@ -7,9 +7,11 @@
 <title>아나바다::상품등록</title>
 
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<!-- <script src='https://malsup.github.com/jquery.form.js'></script> ajaxForm 플러그인 -->
+<script defer src="../js/product/jquery.form.js"></script>
+
 <script defer src="../js/product/registForm.js"></script>
 <script defer src="../js/product/registForm_btn.js"></script>
-<script src='https://malsup.github.com/jquery.form.js'></script> <!-- ajaxForm 플러그인 -->
 <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script> <!-- 다음 우편번호API -->
 <script src="//dapi.kakao.com/v2/maps/sdk.js?appkey=8095222083350c138bd6b2dbc5bfd79a&libraries=services"></script>
 
@@ -20,7 +22,7 @@
 </head>
 
 <body>
-	<form id="registForm">
+	<form id="registForm" >
 	<div class="registWrap"> <!-- /* eFCEB */ -->
 		<!--------- registTop : 상품등록, 상품관리  --------->
 		<div class="registTop">
@@ -220,6 +222,7 @@
 		<!--------- registBtm : 등록하기  --------->
 		<footer class="registBtm">
 			<div class="btmArea">
+				<!-- <button type="submit" class="registBtn" id="registBtn"></button> -->
 				<button type="submit" class="registBtn" id="registBtn"></button>
 			</div>
 		</footer>

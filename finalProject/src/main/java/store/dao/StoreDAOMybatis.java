@@ -11,6 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import product.bean.ProductDTO;
 import store.bean.PurchaseDTO;
+import store.bean.PurchaseExistDTO;
 import store.bean.ReviewDTO;
 import store.bean.StoreDTO;
 
@@ -147,6 +148,12 @@ public class StoreDAOMybatis implements StoreDAO {
 	@Override
 	public void echoUpdate(Map<String, String> map) {
 		sqlSession.update("storeSQL.echoUpdate", map);
+	}
+
+	// 구매 내역 존재 여부
+	@Override
+	public List<PurchaseExistDTO> purchaseExist(Map<String, String> map) {
+		return sqlSession.selectList("storeSQL.purchaseExist", map);
 	}
 
 	

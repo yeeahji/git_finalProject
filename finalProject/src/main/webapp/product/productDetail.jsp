@@ -6,6 +6,7 @@
 <%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec" %>
 <!-- 사용자 정보 가져오기 -->
 <sec:authentication property="principal" var="member"/>
+
 <!-- 회원/비회원 구분 -->
 <sec:authorize access="isAnonymous()">
 	<input type="hidden" class="loginId" value="비회원">
@@ -14,7 +15,10 @@
 	<input type="hidden" class="loginId" value="${member.username}">
 </sec:authorize>
 
+<input type="hidden" class="storeOwner" value="">
+
 <link rel="stylesheet" href="../css/product/productDetail.css">
+
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.min.js"></script> 
 <script src="../js/product/productDetail.js"></script>
@@ -27,7 +31,7 @@
 <input type="hidden" class="storeOwner" value=""><!--상품 올린 상점 주인 mem_id -->
 <div class="detail__area">
 <div class="detail__div">
-	<!-- 상단 카테고리  -->
+	<!-- ************************ 카테고리 ************************ -->
     <div id="prodDetailCateWrap1">
        <div id="prodDetailCateWrap2">
           <div class="cateHome"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAYAAAA7MK6iAAAAAXNSR0IArs4c6QAAAkRJREFUSA3tlb9LHEEUx2/vzhQXESxsTau1aWxsFDkQA0ljEcv78RfY2EQbwT/hflU2KjGkCASRgI1FQEVstNU2QkD0YnXn5x03x7vZXXfnXGzMwPBm3pv5fubNj10vNUCpVCpDTNuibpfL5e8DSKTSrpME6nneDvOWqLv1en3RVUPGO4ENtN1uf2RukzrUarW+4l8QMZcSG2xBb9Lp9DSgdRbxBrtH5nkXsBdncAB0tlgsnstcYmuYL2z/A/UD/gPxR5VI8FNQI27g9P9lMpnFQqHwy8TC7JPgOFAjrOBNjmGBzA9NLMiGnrELVIR5VmuYdWqOc//Bmc/QDi2BGbtCtbrK/I5tz7PtRzpu2r6MnwMVUZX5ME/tZ6PRkNvvK30ZPxeq1VXmt/jnWdBvHe9lnCRUACrzEbr7ZP5egzsZW9AU7zFfKpX29cBB29Vq9Vv3S/cXjTkWdCpaWRsqTsA3Yk1hTI4nMmn6YZYzvUf4UseB/un2R9E9YCGzJHWWRXCF4DjOE6yI5/REaQsU0WPbb/dFA1/flqoxsqB7GJsk8jnLQ9/AITXFao4JTEk7pDQRv7BjzHmLb8L26z6LX4YlC+uUrGnEsQJlm3wZ1Wq1qTg7ohm9W62dL9H+D36JXe4wnC4Xt3eMi1SyV8fFemf7ovpOYMTGgVSiROPEY4GBydenGiXIc7uKGmPiscB8Bq+ZUDaTkrCv7zkFbjVn+kk+g0lsKS9hkuqTCgQzahW4b3CSjj4wt1J+2r0/SJKg7svoST4CXawe/d9nd+gAAAAASUVORK5CYII=" width="15" height="15" alt="홈 아이콘">홈</div>
@@ -74,7 +78,7 @@
        </div><!-- //wrap2 -->
     </div><!-- //wrap1 -->
 	
-	<!-- 상품 정보 -->
+	<!-- ************************ 상단 상품정보 ************************ -->
 	<div class="detail-info__area">
 		<div class="detail-info__div">
 			<div class="detail-info__image__div">
@@ -87,7 +91,8 @@
 					<!-- 워터마크 -->
 					<div class="detail-info__image__watermark"></div>
 					<!-- 확대 버튼-->
-					<button class="detail-info__image--enlg" onclick="javascript:viewPic('../image/product/product_test.png')">
+					<!-- <button class="detail-info__image--enlg" onclick="javascript:viewPic('../image/product/product_test.png')"> -->
+					<button class="detail-info__image--enlg">
 						<i class="fas fa-search"></i> 확대
 					</button>
 					<div class="detail-info__image--prev swiper-button-next swiper-button-white" onclick="moveSlides(-1)">&#10094;</div>
@@ -99,6 +104,24 @@
 						</div>
 					</div>
 					
+					<!-- 확대버튼 하는 중 -->
+					<div class="prodDetailImgWrap1">
+						<div class="prodDetailImgWrap2"> 
+							<button type="button" class="detailImg_closeBtn">
+								<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEQAAABACAYAAACjgtGkAAAAAXNSR0IArs4c6QAAAolJREFUeAHl20tSxCAQANCJW12ql3DtKTxE9GQ6h/AU7j2EutT12J1qUowhCZ/+AFLFgIEU9pvApjPDAcrpdLqH5gHqJ9TjMAzf0HZfIO4rCHKEegP1FeJ+u6Co36H9oIGRJtJQn80fDIwdDQ6DCxcmXEIftW6hdv2kBDBwV/ygxQyCf/wHlC2MBUjvKHsYQZBeUWIwVkF6Q4nF2ATpBSUFYxekdZRUjCiQVlFyMKJBWkPJxUgCaQWlBCMZpHaUUowskFpRODCyQWpD4cIoAqkFhROjGMQahRuDBcQKRQKDDUQbRQqDFUQLRRKDHUQaRRpDBEQKRQNDDIQbRQtDFIQLRRNDHKQURRtDBSQXxQJDDSQVxQpDFSQWxRJDHWQPxRrDBGQNBa9DcYlnzLXO6cVpROnjLJWptOa0DDwNfi75i9a+htYMA/8HMxBcnFCeoIsQWBDm2SWepyvKH+51COVl5+VCX0jo2nyDdMcMxDtA8enAJwMr9kcag65+Mfk2PAx8c2c6Myh08/dT1EFCGO7MgDH/oDV5aUcVZAvDbQ5rFDWQGIwaUFRAUjCsUcRBcjAsUURBSjCsUMRAODAsUERAODG0UdhBJDA0UVhBJDG0UNhANDA0UFhANDGkUYpBLDAkUYpALDGkULJBasCQQMkCqQmDGyUZpEYMTpQkkJoxuFCiQVrA4ECJAmkJoxRlF6RFjBKUTZCWMXJRVkF6wMhBCSaqesJAFEpzHKGLOSDMBY0QI6Y8FmUBQhNdFt7lRqYf+S7ubuiCh4IxIcpjCOVsy9CER7oBb3xxSSTod1H2YpxB9iZ2oUFBbMU6gWxN6AnCj2UtZneG3MFk3FddbhMfwvUDZwoaHH4B+xHVOFecBB4AAAAASUVORK5CYII=" width="34" height="32" alt="닫기 버튼 아이콘">
+							</button>
+							<div class="detailImgListWrap">
+								<div class="dtailImg_prodName"></div>
+								<!-- 이미지 리스트 -->
+								<div class="detailImgList" > 
+									<!-- productDetail.js -->
+								</div>
+								<div class="detailImg_buttonWrap">
+									<!-- productDetail.js -->
+								</div>
+							</div> <!--//ImgListWrap  -->
+						</div>
+					</div>
 				</div>
 			</div><!-- //detail-info__image__div -->
 			
@@ -206,7 +229,7 @@
 	</div><!-- //wrap1 -->
 	
 	
-	<!-- ****************** 하단 상품 정보 ******************-->
+	<!-- ************************ 하단 상품 정보 ************************ -->
 	<div id="btmProdInfo_Wrap1">
 		<div id="btmProdInfo_Wrap2">
 			<!-- '상품정보'-->
@@ -335,8 +358,19 @@
 		</div><!-- //RightWrap -->
 	</div><!-- //btmProdInfo_Wrap1 -->
 	
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	<!-- ************************ 신고하기 모달창 ************************ -->
-   <div id="modalHidden">
+    <div id="modalHidden">
       <div class="singoModalWrap">
          <div id="singoModalTop">
             <div class="title">신고하기</div>
@@ -458,9 +492,43 @@
 </div>
 </div>
 
+<script>
+// 슬라이더 관련
+var slideIndex = 0; // slide index
 
+function currentSlide(n) {
+	  slideIndex = n;
+	  showSlides(slideIndex);
+	}
+	
+function moveSlides(n) { // Next/previous controls
+  slideIndex = slideIndex + n
+  showSlides(slideIndex);
+}
 
+function showSlides(n) {
+    var slides = document.getElementsByClassName("swiper-slide");
+    var dots = document.getElementsByClassName("dot");
+    var size = slides.length;
 
+    if ((n+1) > size) {
+      slideIndex = 0; n = 0;
+    }else if (n < 0) {
+      slideIndex = (size-1);
+      n = (size-1);
+    }
+
+    for (i = 0; i < slides.length; i++) {
+        slides[i].style.display = "none";
+    }
+    for (i = 0; i < dots.length; i++) {
+        dots[i].className = dots[i].className.replace(" active", "");
+    }
+	
+    slides[n].style.display = "block";
+    dots[n].className += " active";
+  }
+</script>
 
 
 
