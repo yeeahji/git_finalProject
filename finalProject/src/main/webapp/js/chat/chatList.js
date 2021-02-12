@@ -43,13 +43,17 @@ $.ajax({
 					id: 'chatDeleteBtn',
 					text: '나가기'
 				})
-
-			)).append($('<input/>', { //2단계 --- hidden
-				type: 'hidden',
-				name: 'other_store_nickname',
-				value: items.other_store_nickname
-
-			})).appendTo($('.chatRoomWrap'));
+				
+			)).appendTo($('.chatRoomWrap'));
+			
+			//변수 설정
+			if($('.chatRoomWrap').find('input').length == 0) { //중복 설정 방지
+				$('.chatRoomWrap').append($('<input/>', {
+					type: 'hidden',
+					name: 'other_store_nickname',
+					value: items.other_store_nickname
+				}))
+			}
 			 
 			//채팅방 연결(post방식으로 팝업창)
 			$('.chatRoomBox').click(function() {

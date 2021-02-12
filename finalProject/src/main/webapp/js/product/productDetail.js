@@ -390,21 +390,24 @@ $(document).ready(function(){
 				
 				// 바다톡 연결
 				$('#callBtn').click(function(){
-					$('.storeInfo_name').append($('<input/>', {
-						type: 'hidden',
-						name: 'other_store_nickname',
-						value: $('.storeInfo_name').text()
-					}))
-					$('.storeInfo_name').append($('<input/>', {
-						type: 'hidden',
-						name: 'product_seq',
-						value: $('.hiddenProdSeq').val()
-					}))
-					$('.storeInfo_name').append($('<input/>', {
-						type: 'hidden',
-						name: 'product_subject',
-						value: dto.product_subject
-					}))
+					//변수 설정
+					if($('.storeInfo_name').find('input').length == 0) { //중복 설정 방지
+						$('.storeInfo_name').append($('<input/>', {
+							type: 'hidden',
+							name: 'other_store_nickname',
+							value: $('.storeInfo_name').text()
+						}))
+						$('.storeInfo_name').append($('<input/>', {
+							type: 'hidden',
+							name: 'product_seq',
+							value: $('.hiddenProdSeq').val()
+						}))
+						$('.storeInfo_name').append($('<input/>', {
+							type: 'hidden',
+							name: 'product_subject',
+							value: dto.product_subject
+						}))
+					}
 					
 					window.open('', 'chatRoom', 'width=370 height=670');
 					$('#productDetailForm').submit();

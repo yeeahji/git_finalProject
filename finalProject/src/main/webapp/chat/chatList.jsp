@@ -17,6 +17,9 @@
 
 	<!-- 채팅방 목록 -->
 	<div class="chatRoomWrap"></div>
+	
+	<!-- hidden -->
+	<div class="onlyHidden"></div>
 </div>	
 </form>
 </body>

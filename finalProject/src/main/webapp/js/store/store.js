@@ -29,12 +29,14 @@ $(document).ready(function(){
 			$.each(data, function(key, value){
 				// 남의 상점 - 바다톡 연결
 				$('.badaTalk_btn').click(function(){
-					$('.nickNameText').append($('<input/>', {
-						type: 'hidden',
-						name: 'other_store_nickname',
-						value: value.store_nickname
-
-					}))
+					if($('.nickNameText').find('input').length == 0) { //중복 설정 방지
+						$('.nickNameText').append($('<input/>', {
+							type: 'hidden',
+							name: 'other_store_nickname',
+							value: value.store_nickname
+	
+						}))
+					}
 					
 					window.open('', 'chatRoom', 'width=370 height=670');
 					$('#storeForm').submit();
