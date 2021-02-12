@@ -34,82 +34,91 @@ import store.bean.ReviewDTO;
 import store.bean.StoreDTO;
 
 @Controller
-@RequestMapping(value="product")
+@RequestMapping(value = "product")
 public class ProductController {
 	@Autowired
 	private ProductService productService;
-	
-	@RequestMapping(value="registForm", method=RequestMethod.GET) //상품 등록 페이지
+
+	@RequestMapping(value = "registForm", method = RequestMethod.GET) // 상품 등록 페이지
 	public String registForm(Model model) {
 		model.addAttribute("display", "/product/registForm.jsp");
 		return "/index";
 	}
-	
-	@RequestMapping(value="productRegist", method=RequestMethod.POST) //상품 등록
+
+	@RequestMapping(value = "productRegist", method = RequestMethod.POST) // 상품 등록
 	@ResponseBody
-	public void productRegist(@ModelAttribute ProductDTO productDTO,
-							  @RequestParam MultipartFile[] img,
-							  @RequestParam(required=false, defaultValue="") String[] hashtag) {
-		//이미지 파일 복사
+	public void productRegist(@ModelAttribute ProductDTO productDTO, @RequestParam MultipartFile[] img,
+			@RequestParam(required = false, defaultValue = "") String[] hashtag) {
+		// 이미지 파일 복사
 		String filePath = "D:/git_home/git_final/finalProject/src/main/webapp/storage";
 		File file;
-		
-		for(int i=0; i<=img.length-1; i++) {
+
+		for (int i = 0; i <= img.length - 1; i++) {
 			String fileName = img[i].getOriginalFilename();
 			file = new File(filePath, fileName);
-			
+
 			try {
 				FileCopyUtils.copy(img[i].getInputStream(), new FileOutputStream(file));
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
-			
-			if(i == 0) productDTO.setProduct_img1(fileName);
-			else if(i == 1) productDTO.setProduct_img2(fileName);
-			else if(i == 2) productDTO.setProduct_img3(fileName);
-			else if(i == 3) productDTO.setProduct_img4(fileName);
-			else if(i == 4) productDTO.setProduct_img5(fileName);
+
+			if (i == 0)
+				productDTO.setProduct_img1(fileName);
+			else if (i == 1)
+				productDTO.setProduct_img2(fileName);
+			else if (i == 2)
+				productDTO.setProduct_img3(fileName);
+			else if (i == 3)
+				productDTO.setProduct_img4(fileName);
+			else if (i == 4)
+				productDTO.setProduct_img5(fileName);
 		}
-		
-		//연관태그
-		if(hashtag.length > 0) {
-			for(int i=0; i<=hashtag.length-1; i++) {
+
+		// 연관태그
+		if (hashtag.length > 0) {
+			for (int i = 0; i <= hashtag.length - 1; i++) {
 				String tagName = hashtag[i];
-				if(i == 0) productDTO.setProduct_hashtag1(tagName);
-				else if(i == 1) productDTO.setProduct_hashtag2(tagName);
-				else if(i == 2) productDTO.setProduct_hashtag3(tagName);
-				else if(i == 3) productDTO.setProduct_hashtag4(tagName);
-				else if(i == 4) productDTO.setProduct_hashtag5(tagName);
+				if (i == 0)
+					productDTO.setProduct_hashtag1(tagName);
+				else if (i == 1)
+					productDTO.setProduct_hashtag2(tagName);
+				else if (i == 2)
+					productDTO.setProduct_hashtag3(tagName);
+				else if (i == 3)
+					productDTO.setProduct_hashtag4(tagName);
+				else if (i == 4)
+					productDTO.setProduct_hashtag5(tagName);
 			}
 		}
-		
-		//DB 연결
+
+		// DB 연결
 		productService.productRegist(productDTO);
 	}
-	
-	@RequestMapping(value="getSmallCategoryList", method=RequestMethod.POST) //소분류 카테고리 불러오기
+
+	@RequestMapping(value = "getSmallCategoryList", method = RequestMethod.POST) // 소분류 카테고리 불러오기
 	@ResponseBody
 	public ModelAndView getSmallCategoryList(@RequestParam String cate_parent) {
 		List<CategoryDTO> list = productService.getSmallCategoryList(cate_parent);
-		
+
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("cate_parent", cate_parent);
 		mav.addObject("list", list);
 		mav.setViewName("jsonView");
 		return mav;
 	}
-	
-	@RequestMapping(value="getMyLocation", method=RequestMethod.POST) //내 위치 불러오기
+
+	@RequestMapping(value = "getMyLocation", method = RequestMethod.POST) // 내 위치 불러오기
 	@ResponseBody
 	public String getMyLocation(HttpSession session) {
-		String mem_id = (String)session.getAttribute("memId");
+		String mem_id = (String) session.getAttribute("memId");
 		return productService.getMyLocation(mem_id);
 	}
-	
-	@RequestMapping(value="getMyRecentLocation", method=RequestMethod.POST) //최근 위치 불러오기
+
+	@RequestMapping(value = "getMyRecentLocation", method = RequestMethod.POST) // 최근 위치 불러오기
 	@ResponseBody
 	public String getMyRecentLocation(HttpSession session) {
-		String mem_id = (String)session.getAttribute("memId");
+		String mem_id = (String) session.getAttribute("memId");
 		return productService.getMyRecentLocation(mem_id);
 	}
 	
@@ -119,18 +128,26 @@ public class ProductController {
 		 // 최근 본 상품 목록들
 		 ArrayList<String> list = (ArrayList)session.getAttribute("recentlyProduct");
 		 
-		 if(list==null)
-		 {
-		  list = new ArrayList<String>();
-		  session.setAttribute("recentlyProduct", list);
-		 }
-		 list.add(seq);
-		 System.out.println("seq"+seq);
+		 if (list == null) {
+				list = new ArrayList<String>();
+				session.setAttribute("recentlyProduct", list);
+			}else {
+				for ( int i=0; i < list.size(); i++) {
+					if ( list.get(i).equals(seq) ) {
+						list.remove(i);
+						System.out.println("remove seq :" + seq);
+						break;
+					}
+				}
+			}
+		 
+		list.add(seq); 
 		 
 		// 상품 정보 받아옴
 		ProductDTO productDTO = productService.productDetail(seq);
 		model.addAttribute("product_logtime", productDTO.getProduct_logtime());
 		model.addAttribute("seq", seq);
+		model.addAttribute("productDTO", productDTO);
 		model.addAttribute("display", "/product/productDetail.jsp");
 		return "/index";
 	}
@@ -238,18 +255,4 @@ public class ProductController {
 		return mav;
 	}
 	
-
 }
-
-
-
-
-
-
-
-
-
-
-
-
-

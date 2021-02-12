@@ -4,7 +4,7 @@
 var categoray_list
 
 $(document).ready(function() {
-
+	
 	// 카테고리 목록 조회
 	$.ajax({
 		type : 'post',
@@ -18,6 +18,8 @@ $(document).ready(function() {
 		}
 	});// 세부카테고리 리스트
 
+	
+
 })
 
 $('#chat').click(
@@ -27,7 +29,9 @@ $('#chat').click(
 		});
 
 function search() {
-	var keyword = $("#searchProduct").val()
+	var keyword = $("#searchProduct").val();
+	// 쿠기에 추가하기
+	addCookie(keyword);
 	location.href = '/market/index/searchDisplay?keyword=' + keyword
 }
 
@@ -82,3 +86,122 @@ $(".dropmenu").mouseleave(function() {
 	$(".dropmenu li:first a").removeClass("active");
 	$(".dropmenu").hide();
 })
+
+var expire = 1; // 쿠키값을 저장할 기간
+
+// 검색
+$("#searchProduct").focus(function() {
+	console.log("포커스 인")
+	$(".dropSearch").show();
+	add_recentlySearch();
+});
+
+$("#searchProduct").blur(function() {
+	console.log("포커스 아웃")
+	// $(".dropSearch").hide();
+});
+
+// 최근 검색어 전체 삭제
+// 쿠기 전체 초기화
+function recentlySearch_deleteAll() {
+	setCookie('recentlySearch', "", expire);
+	add_recentlySearch();
+}
+
+// 최근 검색어 닫기
+function recentlySearch_close() {
+	$(".dropSearch").hide();
+}
+
+/* 쿠기 관련 */
+/* https://webisfree.com/2015-02-04/[%EC%9E%90%EB%B0%94%EC%8A%A4%ED%81%AC%EB%A6%BD%ED%8A%B8]-%EC%BF%A0%ED%82%A4(cookie)-%EC%A0%80%EC%9E%A5-%EB%B0%8F-%EC%82%AD%EC%A0%9C-%EC%98%88%EC%A0%9C%EB%B3%B4%EA%B8%B0 */
+function setCookie(cookie_name, value, days) {
+	var exdate = new Date();
+	exdate.setDate(exdate.getDate() + days);
+	// 설정 일수만큼 현재시간에 만료값으로 지정
+	var cookie_value = escape(value) +'; path=/' +((days == null) ? '' : '; expires=' + exdate.toUTCString());
+	// 삭제 후 다시 생성
+	document.cookie = cookie_name + '=' + cookie_value;
+}
+
+// 쿠기 가져오기
+function getCookie(cookie_name) {
+	var x, y;
+	var val = document.cookie.split(';');
+	for (var i = 0; i < val.length; i++) {
+		x = val[i].substr(0, val[i].indexOf('='));
+		y = val[i].substr(val[i].indexOf('=') + 1);
+		x = x.replace(/^\s+|\s+$/g, ''); // 앞과 뒤의 공백 제거하기
+		if (x == cookie_name) {
+			return unescape(y); // unescape로 디코딩 후 값 리턴
+		}
+	}
+}
+
+// 최근 검색어 쿠기에서 삭제
+function deleteCookie(keyword) {
+	var items = getCookie('recentlySearch'); // 이미 저장된 값을 쿠키에서 가져오기
+	if (items) {
+		var itemArray = items.split(',');
+		if (itemArray.indexOf(keyword) != -1) {
+			// 이미 존재하는 경우 종료
+			itemArray.splice(itemArray.indexOf(keyword), 1);
+			console.log('delete cookie :' + keyword);
+			items = itemArray.join(',');
+			setCookie('recentlySearch', items, expire);
+		}
+		add_recentlySearch();
+	}
+}
+
+// 최근 검색어 쿠기에 추가
+function addCookie(keyword) {
+	console.log("addCookie :" + keyword)
+	var items = getCookie('recentlySearch'); // 이미 저장된 값을 쿠키에서 가져오기
+	var maxItemNum = 20; // 최대 저장 가능한 아이템개수
+	if (items) {
+		
+		console.log("쿠기 이미 존재")
+		
+		var itemArray = items.split(',');
+		if (itemArray.indexOf(keyword) != -1) {
+			// 이미 존재하는 경우 종료
+			console.log('Already exists.');
+		} else {
+			// 새로운 값 저장 및 최대 개수 유지하기
+			itemArray.unshift(keyword);
+			if (itemArray.length > maxItemNum)
+				itemArray.length = 30;
+			items = itemArray.join(',');
+			setCookie('recentlySearch', items, expire);
+		}
+	} else {
+		console.log("쿠기 이미 없음")
+		// 신규 id값 저장하기
+		setCookie('recentlySearch', keyword, expire);
+	}
+}
+
+// 최근 검색어 클릭
+function recenltyKeyword(keyword) {
+	location.href = '/market/index/searchDisplay?keyword=' + keyword
+}
+
+// 최근 검색어 추가
+function add_recentlySearch() {
+	var searchList = getCookie("recentlySearch")
+	$("#recentlySearchList").empty();
+	if (searchList != null) {
+		var itemArray = searchList.split(',');
+		console.log(itemArray)
+		$.each(itemArray, function(index) {
+			if ( index > 9)
+				return false;
+			if (this != '' && this != null){
+				var html = '<div><a style="cursor:pointer;" onclick="recenltyKeyword(\'' + this + '\')">' + this
+						+ '</a><i class="fas fa-times" onclick="deleteCookie(\'' + this + '\')"></i></div>'
+				$("#recentlySearchList").append(html)
+			}
+		})
+	}
+}

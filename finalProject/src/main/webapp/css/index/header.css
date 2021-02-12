@@ -7,6 +7,12 @@
 	.dropdown-button:hover .dropmenu {
 		display: block;
 	}
+	.dropSearch {
+		display: none;
+	}
+	#searchProduct:focus .dropSearch {
+		display: block;
+	}
 }
 
 .dropmenu {
@@ -45,7 +51,7 @@
 }
 
 .dropmenu li ul {
-	display : block;
+	display: block;
 	border: 1px solid #eee;
 	background: white;
 	width: 250px;
@@ -105,4 +111,79 @@
 
 .dropmenu p {
 	clear: left;
+	margin-bottom: 0px;
+}
+
+.dropSearch {
+	top: 54px;
+	height: 425px;
+	width: 394px;
+	background: white;
+	position: absolute;
+	border: 1px solid #eee;
+	border-top: none;
+	margin: 0px;
+	padding: 0px;
+	top: 54px;
+	display:none;
+}
+
+.dropSearch ul>li>ul>div {
+	padding: 4px 20px;
+	border: none;
+	color: #333;
+}
+
+.dropSearch ul>li>ul>div>i {
+	float: right;
+	position: relative;
+	color: #aaa;
+	line-height: inherit;
+	cursor: pointer;
+}
+
+.dropSearch ul>li>p {
+	color: #5587ED;
+	padding: 8px 15px;
+	font-size: 14px;
+	font-weight: bold;
+	border-bottom: 2px solid #5587ED;
+}
+
+.dropSearch ul {
+	width: 100%;
+	list-style: none;
+	margin: 0;
+	padding: 0;
+	min-height: 325px;
+	list-style: none;
+}
+
+.dropSearch .close {
+	display : inline-block;
+	width: 100%;
+	border: none;
+}
+
+/* 최근 검색어 전체 삭제, 닫기 */
+.dropSearch .close a {
+	cursor: pointer;
+	color: #aaa;
+}
+
+/* 최근 검색어 전체 삭제 */
+.dropSearch .close a:first-child {
+	float: left;
+}
+
+/* 최근 검색어 목록 닫기 */
+.dropSearch .close a:last-child {
+	float: right;
+}
+
+.dropSearch li {
+	width: 100%;
+	float: left;
+	padding: 0px;
+	float: left;
 }

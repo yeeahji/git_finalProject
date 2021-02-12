@@ -8,8 +8,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<!-- 상품 목록 -->
 	<select id="getProductList" parameterType="java.util.HashMap" resultType="product">
 		SELECT * 
-		FROM ( SELECT 
+		FROM 
+			( 
+			SELECT
 				rownum rn,
+				a.* 
+				FROM 
+				( SELECT 
 				product_seq,
 				mem_id,
 				cate_code,
@@ -33,11 +38,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			FROM product
 			WHERE product_manage=1
 			ORDER BY product_logtime asc
+			) a
 		)
 		WHERE rn BETWEEN nvl(#{start},0) AND nvl(#{end},20) ORDER BY product_logtime asc
-			
-		<!-- SELECT * FROM (SELECT rownum rn, tt.* FROM (select * FROM product 
-			WHERE 1=1 ORDER BY seq desc) tt) WHERE rn BETWEEN #{startNum} and #{endNum} -->
 	</select>
 
 
@@ -52,7 +55,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			AND p.product_manage = 1
 			AND p.mem_id = s.mem_id
 			<if test=" productSubject != null and productSubject != '' "> 
-			AND p.product_subject Like '%' || #{productSubject} || '%'
+			AND (p.product_subject Like '%' || #{productSubject} || '%'
+			OR p.product_hashtag1 Like '%' || #{productSubject} || '%'
+			OR p.product_hashtag2 Like '%' || #{productSubject} || '%'
+			OR p.product_hashtag3 Like '%' || #{productSubject} || '%'
+			OR p.product_hashtag4 Like '%' || #{productSubject} || '%'
+			OR p.product_hashtag5 Like '%' || #{productSubject} || '%')
 			</if> 
 			<if test=" storeName != null and storeName != '' "> 
 			AND s.store_nickname Like '%' || #{storeName} || '%'
@@ -128,6 +136,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<foreach collection="list" item="item" separator="," open="AND p.product_seq IN (" close=")">
 			#{item}
 		</foreach>
+		<foreach collection="list" item="item" separator="," index="index" open="ORDER BY" close="">
+			CASE WHEN p.product_seq = to_number(#{item}) THEN #{index} ELSE -1 END
+		</foreach>
+		
 	</select>
 
 
@@ -163,8 +175,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 					ROUND((sysdate - p.product_logtime)*24*60) as product_logtime,
 					s.store_nickname
 				FROM product p, store s
-				WHERE 
-				p.cate_code=#{cate_code}
+				WHERE p.mem_id = s.mem_id
+				<choose>
+					<when test=' cateState == "cate_parent" '> AND p.cate_code IN(select cate_code from category where cate_parent=#{cate_code}) </when>
+					<when test=' cateState == "cate_code" '> AND p.cate_code=#{cate_code} </when>
+				</choose>
 				ORDER BY 
 				<!-- 최신순 -->
 				<choose>
@@ -185,8 +200,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="cateProductCount" parameterType="java.util.HashMap" resultType="int">
 		SELECT count(0)
 		FROM product p, store s
-		WHERE 
-		p.cate_code=#{cate_code}
+		WHERE p.mem_id = s.mem_id
+		<choose>
+			<when test=' cateState == "cate_parent" '> AND p.cate_code IN(select cate_code from category where cate_parent=#{cate_code}) </when>
+			<when test=' cateState == "cate_code" '> AND p.cate_code=#{cate_code} </when>
+		</choose>
 	</select>
 	
 	<select id="categoryList" resultType="category">
@@ -203,7 +221,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 
 	<select id="cateCodeName" resultType="String">
-		select cate_name from category where cate_parent=#{cate_code}
+		select cate_name from category where cate_code=#{cate_code}
 	</select>
 
 </mapper>

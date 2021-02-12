@@ -22,7 +22,7 @@
 		<div class="recentlyText">최근본상품</div>
 		<div class="recentlyProduct">
 			<span id="recentlyCnt"></span>
-			<div id="recentlyArea" style="margin-left: 18px;">
+			<div id="recentlyArea">
 				<a id="recentlyList" > </a>
 				<!-- 최근본상품  -->
 				<a id="noList"></a>
