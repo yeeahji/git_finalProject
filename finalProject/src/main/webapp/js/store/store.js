@@ -29,20 +29,15 @@ $(document).ready(function(){
 			$.each(data, function(key, value){
 				// 남의 상점 - 바다톡 연결
 				$('.badaTalk_btn').click(function(){
-					console.log("바다톡 버튼 클릭");
-					console.log("판매자 아디->"+value.mem_id);
+					$('.nickNameText').append($('<input/>', {
+						type: 'hidden',
+						name: 'other_store_nickname',
+						value: value.store_nickname
+
+					}))
 					
-					$.ajax({
-						type: 'GET',
-						url: '/market/chat/chatRoom',
-						data: {'mem_id' : value.mem_id }, // 판매자 아이디
-						dataType: 'json',
-						success : function(data){ 
-							
-						},error: function(err){
-							console.log(err);
-						}
-					}); //ajax 
+					window.open('', 'chatRoom', 'width=370 height=670');
+					$('#storeForm').submit();
 				})
 				
 				// [프로필] 

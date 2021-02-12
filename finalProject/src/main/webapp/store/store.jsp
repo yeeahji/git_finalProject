@@ -13,7 +13,7 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/store/store.css">
 <script defer src="${pageContext.request.contextPath}/js/store/reviews.js"></script><!-- 상점 상품후기 수 -->
 
-
+<form id="storeForm" method="post" action="/market/chat/chatRoom" target="chatRoom">
 <div id="storeBody">
 <div id="storeWrap">
 	<div id="storeTop">
@@ -259,5 +259,6 @@
 	
 </div><!-- //storeWrap -->
 </div><!-- //storeBody -->
+</form>
 
 

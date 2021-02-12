@@ -13,7 +13,6 @@
 
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.4.0/sockjs.js"></script>
-<!-- <script defer src="../js/chat/chatRoom.js"></script> -->
 <script type="text/javascript">
 var webSocket = {
 	//sockjs 관련 스크립트----------------------------------------------------------
@@ -127,13 +126,25 @@ var webSocket = {
 					}
 				}
 			}//if
+			
+			
+			//상품 상세페이지를 통해 들어왔을 경우 (수정 필요 : 간혹 div 태그 깨짐, 상대방에겐 뒤늦게 메시지 출력)
+			if('${product_seq}' != '0') {
+				var likeMsg = "'${product_subject}'에 관심있어요!";
+				var likeUrl = '<a class="productPage" href="http://localhost:8080/market/product/productDetail?seq=${product_seq}" target="_blank">상품 확인</a>';
+				
+				if(msgData.checkId == '${member.username}') { 
+					$('#chat-container').append('<div class="my-chat-box"><div class="chat my-chat"><input type="hidden" value="${member.username}">'+likeMsg+'</div>');
+					$('#chat-container').append('<div class="my-chat-box"><div class="chat my-chat"><input type="hidden" value="${member.username}">'+likeUrl+'</div>');
+				}
+			}
 		}
+		
 		//------------ 퇴장 --------------
 		else if(msgData.cmd == 'CMD_EXIT') {					
-/* 			$('#chat-container').append('<div class="chat notice">' + msgData.msg + '</div>');
-			$('#chat-container').scrollTop($('#chat-container')[0].scrollHeight+20); */
 			//오프라인 변경
 			$('#olineCheck').attr('src', '../image/chat/houseClose.png');
+			/*$('#chat-container').append('<div class="chat notice">' + msgData.msg + '</div>');*/
 		}
 	},
 

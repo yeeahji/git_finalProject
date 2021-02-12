@@ -18,6 +18,7 @@ public class HandlerChat extends TextWebSocketHandler {
 	//(<"chat_seq", 방ID>, <"session", 세션>) - (<"chat_seq", 방ID>, <"session", 세션>) - (<"chat_seq", 방ID>, <"session", 세션>) 형태 
 	private List<Map<String, Object>> sessionList = new ArrayList<Map<String, Object>>();
 	String my_store_nickname;
+	String my_mem_id;
 	
 	//*********이미지 첨부시 <img src="" width..> 여기에 넣어주기 (크기는 고정)
 	
@@ -29,6 +30,7 @@ public class HandlerChat extends TextWebSocketHandler {
 		//세션 데이터 저장 - handShaker
 		Map<String,Object> sessionMap = session.getAttributes();
 		my_store_nickname = (String)sessionMap.get("my_store_nickname");
+		my_mem_id = session.getPrincipal().getName();
 		
 		//JSON --> Map으로 변환 (GSON 사용 안할 시)
 		ObjectMapper objectMapper = new ObjectMapper();
@@ -54,7 +56,8 @@ public class HandlerChat extends TextWebSocketHandler {
 					Map<String, String> mapToSend = new HashMap<String, String>();
 					mapToSend.put("chat_seq", chat_seq);
 					mapToSend.put("cmd", "CMD_ENTER");
-					mapToSend.put("checkId", session.getPrincipal().getName());
+					mapToSend.put("msg", "올바른 채팅 매너 준수해주세요.\n도움말이 필요하면");
+					mapToSend.put("checkId", my_mem_id);
 					mapToSend.put("current_user_num", sessionList.size()+"");
 					
 					String jsonStr = objectMapper.writeValueAsString(mapToSend);
@@ -76,7 +79,7 @@ public class HandlerChat extends TextWebSocketHandler {
 					mapToSend.put("chat_seq", chat_seq);
 					mapToSend.put("cmd", "CMD_MSG_SEND");
 					mapToSend.put("msg", mapReceive.get("msg"));
-					mapToSend.put("checkId", session.getPrincipal().getName());
+					mapToSend.put("checkId", my_mem_id);
 
 					String jsonStr = objectMapper.writeValueAsString(mapToSend);
 					sess.sendMessage(new TextMessage(jsonStr));

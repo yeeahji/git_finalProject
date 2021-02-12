@@ -44,8 +44,13 @@ $.ajax({
 					text: '나가기'
 				})
 
-			)).appendTo($('.chatRoomWrap'));
-			
+			)).append($('<input/>', { //2단계 --- hidden
+				type: 'hidden',
+				name: 'other_store_nickname',
+				value: items.other_store_nickname
+
+			})).appendTo($('.chatRoomWrap'));
+			 
 			//채팅방 연결(post방식으로 팝업창)
 			$('.chatRoomBox').click(function() {
 				window.open('', 'chatRoom', 'width=370 height=670');

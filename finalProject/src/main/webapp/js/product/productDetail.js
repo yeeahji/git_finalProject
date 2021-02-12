@@ -378,6 +378,7 @@ $(document).ready(function(){
 				})))).append($('<button/>', {
 					class: 'detail-call__btn',
 					id: 'callBtn',
+					type: 'button'
 					//text: '번개톡'
 				}).append($('<img/>', {
 					src: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACgAAAAoCAYAAACM/rhtAAAAAXNSR0IArs4c6QAAAy1JREFUWAndmM1LFVEYxp2bVxDsA0GhIoygAo2I7EKLoKJsYZG7iDYG/QNCUZvctSkIAqVFCze1toIWrkqynUaJ0VKUSkr7okubpG6/J+Zc5w7jzJ1zxnulFx7O1/s+7zMzZ86cOV5DlVYqlfK4HgN9oBNsA9tBC4izIoMLPt5SPgbjnuctU7obwtrBEPgOsjJxibPdWiHBTWAQ/ABrZeJWjqZUQgloAxOgVqZcbVWJxLETzNVKWSCPcmpuV5gXbOGgq5gEHcH+GtbnyVXgBVoyOXOmgjjNg1FQL3GSotyjvha1G8oCqV8DR9SZsc3C9y0FpzRIy4qhWEvJWrytY/AOgLQmLStLEA2tSVnbTQhbwUdL4qF/t5DgPMhyEf4J33mRU94BtiZNeZH02DJExGmpOOCL20d9OcInTVePXhJ9W7OwCUgOsUS89smGKRsdifsksMuRROEj4CTiPqvBLdIjPqq6o3XpCrUrsbU/BF5F2O0QwR7a90J9+2kfDvUlNbfqaotpJkXAV0vB6aQMGsfvHNDLk9aKCraxWYISpwY+Hrhhk8DEiOALF9lazZ0I+IS/DtM85kuBcV34RtoPwNlgf8r6VxHNGLUO5fFgYnh2gTcOfCZ0Rm+xtuMu9oi798wQwHyC+iRInAImJqZckMCpGIekoV84XDFOiBugPgbSThlDES6n9IgL5n5alLfESFwzuG8RnxRS0EuiTes7oD+0NLaI826wBTwEB0GW9gGyHTnmT4mKPktpbZCAbvASZC1OWoZ9beVH9D7pfgfGp6lfBq6bgQBlRVVamqWybHT0V7jEN+bih51H+8vCghVoR5yp3Qm08Yg2uPWz/sI9hzWDcsf/xOOgbfpT6xT2gcpZ3fqJYyO4a58rdaRypd/cEtQLsvhWr6ZY3L3RE67KXghy4CJ4Dn4DVxOHuMSpT22sVRx9xHoyCKGORs4AnaFoJy5oW7UXrHZOOM6YNiSCzgefsAAvUdbOEH4dRJkOL+tvKNsM5iMUfqq/Ol8B4rpB+BRBn8IN60lkB4LCb/2FdSNQQhCovaEOjF4B2SI4ta5EGjEIawE7wSbT99+VfwFl/vSZOTmkgQAAAABJRU5ErkJggg==',
@@ -389,23 +390,25 @@ $(document).ready(function(){
 				
 				// 바다톡 연결
 				$('#callBtn').click(function(){
-					console.log("바다톡버튼클릭");
+					$('.storeInfo_name').append($('<input/>', {
+						type: 'hidden',
+						name: 'other_store_nickname',
+						value: $('.storeInfo_name').text()
+					}))
+					$('.storeInfo_name').append($('<input/>', {
+						type: 'hidden',
+						name: 'product_seq',
+						value: $('.hiddenProdSeq').val()
+					}))
+					$('.storeInfo_name').append($('<input/>', {
+						type: 'hidden',
+						name: 'product_subject',
+						value: dto.product_subject
+					}))
 					
-					$.ajax({
-						type: 'GET',
-						url: '/market/chat/chatRoom',
-						data: {'mem_id' : dto.mem_id, // 판매자 아이디
-							   'seq':$('.hiddenProdSeq').val()}, // 상품번호
-						dataType: 'json',
-						success : function(data){ 
-							
-						},error: function(err){
-							console.log(err);
-						}
-					}); //ajax 	
-				
-				})
-				
+					window.open('', 'chatRoom', 'width=370 height=670');
+					$('#productDetailForm').submit();
+				})			
 				
 				
 				// 찜 버튼 css
