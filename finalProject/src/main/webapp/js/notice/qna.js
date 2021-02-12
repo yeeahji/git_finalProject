@@ -4,6 +4,18 @@ $('#qnaCate_parent').hover(function(){
 	$(this).css('border','0.5px solid lightgray');
 });
 
+
+var uploadFile = $('.fileBox .uploadBtn');
+uploadFile.on('change', function(){
+	if(window.FileReader){
+		var filename = $(this)[0].files[0].name;
+	} else {
+		var filename = $(this).val().split('/').pop().split('\\').pop();
+	}
+	$(this).siblings('.fileName').val(filename);
+});
+
+
 $(document).ready(function(){
 	console.log($('#mem_id').val());
 	if($('#mem_id').val()=='비회원'){

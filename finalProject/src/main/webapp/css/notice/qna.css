@@ -1,11 +1,47 @@
 @charset "UTF-8";
+
+.file_input_textbox {float:left; height:29px;}
+.file_input_div {
+	position:relative; width:120px; height:36px; overflow:hidden;}
+.file_input_img_btn {
+	padding:0 0 0 5px;
+	width: 120px;
+	height:30px;
+	}
+.file_input_hidden {font-size:29px; position:absolute; right:0px; top:0px; opacity:0; filter: alpha(opacity=0); -ms-filter: alpha(opacity=0); cursor:pointer;}
+
+
+#qnaBtn {
+    background-color: #0a58ca;
+    border: 0px;
+    width: 365px;
+    height: 60px;
+    color: white;
+    font-weight: bold;
+    font-size: 14pt;
+}
+input[type=button]:hover{
+	background: #0d47a1;
+	
+}
+/* input[type=file] { */
+/*     height: 30px; */
+/*     background-color: #0a58ca; */
+/*     border: 0px; */
+/*     width: 120px; */
+/*     color: white; */
+/*     font-weight: bold; */
+/* } */
 .caution{
     color : rgba(153, 0, 33, 0.781);
     border : 1px;
     font-size: 10pt;
     font-weight: bold;
 }
-
+#findImgFileDiv{
+	display:flex;
+	justify-content:  center ;
+}
 
 html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, main, menu, nav, output, ruby, section, summary, time, mark, audio, video {
     vertical-align: baseline;

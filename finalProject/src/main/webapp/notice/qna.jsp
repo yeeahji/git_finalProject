@@ -64,12 +64,18 @@
   					</div>
   				</div>
   				<textarea rows="20" id="qna_content" name="qna_content" class="qmd_textarea"></textarea>
-  				<div id="qna_contentDiv" class="caution"></div>
-  				<div class="qmd_div">
-  					<input id="fileUp" name="img[]" multiple="" type="file" accept="image/jpg, image/jpeg, image/png" class="sc-hgeeVt">
-<!--   					<button class="qmd_divPictureBtn" for="fileUp">사진첨부</button> -->
-  					<input value="문의글 등록"type="button" class="qmd_divQnaBtn" id="qnaBtn">
+  				<div id="qna_contentDiv" class="caution"></div><br>
+  				<div id="findImgFileDiv">
+  					<input type="text" id="fileName" class="file_input_textbox" readonly >
+					<div class="file_input_div">
+						<img src="/market/image/member/findImgBtn2.jpg" class="file_input_img_btn" alt="open" />
+						<input type="file" name="file_1" class="file_input_hidden" onchange="javascript: document.getElementById('fileName').value = this.value"/>
+					</div>
+
+
   				</div>
+  				<input value="문의글 등록"type="button" class="qmd_divQnaBtn" id="qnaBtn">
+  				
   			</div>
   		</form>
   			
