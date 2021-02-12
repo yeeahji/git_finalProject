@@ -1,5 +1,10 @@
 package chat.controller;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.FileReader;
+import java.io.IOException;
 import java.security.Principal;
 import java.util.HashMap;
 import java.util.List;
@@ -13,12 +18,14 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import chat.bean.ChatListDTO;
 import chat.bean.ChatRoomDTO;
 import chat.service.ChatService;
+import chat.service.ChatServiceImpl;
 import member.bean.MemberDTO;
 import store.bean.StoreDTO;
 import store.service.StoreService;
@@ -108,24 +115,93 @@ public class ChatController {
 			chat_seq = chatRoomDTO.getChat_seq();
 		}
 		
+		
 		//데이터 전달
-		//request.setAttribute("chat_seq", chat_seq);
+		session.setAttribute("chat_seq", chat_seq);
 		session.setAttribute("my_store_nickname", one_store_nickname);
 		session.setAttribute("other_store_nickname", two_store_nickname);
+		session.setAttribute("two_mem_id", two_mem_id);
 
 		return "/chat/chatRoom";
 			
 	}
-
+	
+	//메시지 저장
+	@RequestMapping(value="saveMsg", method=RequestMethod.POST)
+	@ResponseBody
+	public void saveMsg(@RequestParam String message_content,
+						@RequestParam String chat_seq, Principal principal) {
+		//상대방과 나를 바꿔서 저장(css 때문에)
+//		//내가 1인데 my-chat-box에 
+//		String me = "<div class=\"my-chat-box\"><div class=\"chat my-chat\"><input type=\"hidden\" value=\""+other_mem_id+"\">";
+//		String other = "<div class=\"chat-box\"><div class=\"chat\"><input type=\"hidden\" value=\""+other_mem_id+"\">";
+//		
+//		String fakeMe = "<div class=\"chat-box\"><div class=\"chat\"><input type=\"hidden\" value=\""+principal.getName()+"\">";
+//		String goodMe = "<div class=\"my-chat-box\"><div class=\"chat my-chat\"><input type=\"hidden\" value=\""+principal.getName()+"\">";
+//		String replaceOther = "<div class=\"my-chat-box\"><div class=\"chat my-chat\"><input type=\"hidden\" value=\""+principal.getName()+"\">";
+//		
+//		message_content.replace(me, replaceMe);
+//		message_content.replace(other, replaceOther);
+//		//message_content.replace("@#1%BUFFER$93*", other);
+//		
+		//파일로 저장
+		String filePath = "D:/git_home/git_final/finalProject/src/main/webapp/storageMsg";
+		String fileName = chat_seq + ".txt";
+		File file = new File(filePath, fileName);
+        FileOutputStream fos = null;
+        
+        try {
+            byte[] content = message_content.getBytes(); //문자열을 바이트로 변환
+            fos = new FileOutputStream(file);
+            fos.write(content);
+            fos.flush();
+            fos.close();
+            
+        } catch(IOException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if(fos != null) fos.close();
+            } catch(IOException e) {
+                e.printStackTrace();
+            }
+        }
+	}
+	
+	//메시지 불러오기
+	@RequestMapping(value="loadMsg", method=RequestMethod.POST)
+	@ResponseBody
+	public String loadMsg(@RequestParam String chat_seq) {
+		//처음 입장이 아닐 때만 수행
+        BufferedReader reader = null;
+        String msg = null;
+        
+        //DB
+        //chatService.getMessage_content();
+        try {
+        	String filePath = "D:/git_home/git_final/finalProject/src/main/webapp/storageMsg";
+        	String fileName = chat_seq + ".txt";
+            File file = new File(filePath, fileName);
+            reader = new BufferedReader(new FileReader(file));
+              
+            //파일 읽기
+            while(reader.readLine() != null) {
+            	msg = reader.readLine();
+            }
+        } catch(IOException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if(reader != null) reader.close();
+            } catch(IOException e) {
+                e.printStackTrace();
+            }
+        }
+        System.out.println(msg);
+        return msg;
+	}
 }
-
-
-
-
-
-
-
-
+	 
 
 
 

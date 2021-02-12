@@ -11,18 +11,18 @@
 
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/chat/chatRoom.css">
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.4.0/sockjs.js"></script>
 <!-- <script defer src="../js/chat/chatRoom.js"></script> -->
 <script type="text/javascript">
 var webSocket = {
-	//sockjs 관련 스크립트
+	//sockjs 관련 스크립트----------------------------------------------------------
 	init: function(param) { 
 		this._url = param.url;
 		this._initSocket();
 	},
 	
-	//메시지 세팅
+	//메시지 세팅------------------------------------------------------------------
 	sendChat: function() {
 		this._sendMessage('${chat_seq}', 'CMD_MSG_SEND', $('#inputMessage').val()); //메시지 창에 있는 값으로 세팅
 		$('#inputMessage').val(''); //메시지 창 비우기
@@ -32,7 +32,7 @@ var webSocket = {
 		$('#inputMessage').val('');
 	},
 	
-	//메시지 보낼 때
+	//메시지 보낼 때-----------------------------------------------------------------
 	_sendMessage: function(chat_seq, cmd, msg, checkId) {
 		var msgData = {
 				chat_seq : chat_seq,
@@ -44,43 +44,84 @@ var webSocket = {
 		this._socket.send(jsonData);
 	},	
 	
-	//메시지 받을 때 (정의된 CMD 코드에 따라서 분류함)
+	//메시지 받을 때 (정의된 CMD 코드에 따라서 분류함)-----------------------------------------
 	receiveMessage: function(msgData) {
-		//메시지
+		//----------- 메세지 -------------
 		if(msgData.cmd == 'CMD_MSG_SEND') {
 			if(msgData.msg.trim() == '') return; //받은 메시지가 공백일 시 벗어나기
 			
 			if(msgData.checkId == '${member.username}') { //내가 보낸 메세지일 때
-				$('#chat-container').append('<div class="my-chat-box"><div class="chat my-chat">' + msgData.msg + '</div>');
+				$('#chat-container').append('<div class="my-chat-box"><div class="chat my-chat"><input type="hidden" value="${member.username}">'+msgData.msg+'</div>');
 			}
 			else { //상대방이 보낸 메세지일 때
-				$('#chat-container').append('<div class="chat-box"><div class="chat">' + msgData.msg + '</div>');
+				$('#chat-container').append('<div class="chat-box"><div class="chat"><input type="hidden" value="${two_mem_id}">'+msgData.msg+'</div>');
 			}
 			$('#chat-container').scrollTop($('#chat-container')[0].scrollHeight+20);
+
+			//메시지 저장
+			var message_content = document.getElementById("chat-container").innerHTML;
+
+			$.ajax({
+				type: 'post',
+				url: '/market/chat/saveMsg',
+				data: {'message_content' : message_content,
+					   'chat_seq' : msgData.chat_seq}
+			});
 		}
-		//입장
+		//------------ 입장 --------------
 		else if(msgData.cmd == 'CMD_ENTER') {
-			$('#chat-container').append('<div class="chat notice">' + msgData.msg + '</div>');
-			$('#chat-container').scrollTop($('#chat-container')[0].scrollHeight+20);
+			//메세지 불러오기
+			if(msgData.checkId == '${member.username}') {
+				var loadMsg;
+				var xhttp = new XMLHttpRequest();
+				var loadMsg;
+				
+				xhttp.onreadystatechange = callFunction; 
+				xhttp.open("GET", "/market/storageMsg/"+msgData.chat_seq+".txt", true); //서버에 GET방식으로 파일을 비동기 요청
+				xhttp.send(null);
+				      
+				function callFunction(){
+					if(xhttp.readyState == 4) { //서버-클라이언트 간의 통신 완료
+						if(xhttp.status == 200){ 
+							loadMsg = xhttp.responseText;
+							
+							//문자열 치환
+							var otherChatBefore = '<div class="my-chat-box"><div class="chat my-chat"><input type="hidden" value="${two_mem_id}">';
+							var otherChatAfter = '<div class="chat-box"><div class="chat"><input type="hidden" value="${two_mem_id}">';
+							var myChatBefore = '<div class="chat-box"><div class="chat"><input type="hidden" value="${member.username}">';
+							var myChatAfter = '<div class="my-chat-box"><div class="chat my-chat"><input type="hidden" value="${member.username}">';
+							
+							function replaceAll(str, searchStr, replaceStr) {
+								  return str.split(searchStr).join(replaceStr);
+							}
+							
+							loadMsg = replaceAll(loadMsg, otherChatBefore, otherChatAfter);
+							loadMsg = replaceAll(loadMsg, myChatBefore, myChatAfter);
+							
+							$('#chat-container').prepend(loadMsg); //통신 종료 전에 불러온 메시지를 채팅방에 출력
+						}
+					}
+				}
+			}//if
 		}
-		//퇴장
+		//------------ 퇴장 --------------
 		else if(msgData.cmd == 'CMD_EXIT') {					
-			$('#chat-container').append('<div class="chat notice">' + msgData.msg + '</div>');
-			$('#chat-container').scrollTop($('#chat-container')[0].scrollHeight+20);
+/* 			$('#chat-container').append('<div class="chat notice">' + msgData.msg + '</div>');
+			$('#chat-container').scrollTop($('#chat-container')[0].scrollHeight+20); */
 		}
 	},
-	
-	//연결이 끊겼을 때 메시지 띄우기
+
+	//연결이 끊겼을 때 메시지 띄우기--------------------------------------------------------
 	closeMessage: function(str) {
-		$('#chat-container').append('<div class="chat notice">' + msgData.msg + '</div>');
+		/* $('#chat-container').append('<div class="chat notice">' + msgData.msg + '</div>'); */
 	},
 	
-	//소켓 종료
+	//소켓 종료---------------------------------------------------------------------
 	disconnect: function() {
 		this._socket.close();
 	},
 	
-	//sockjs 관련 스크립트
+	//sockjs 관련 스크립트-----------------------------------------------------------
 	_initSocket: function() { 
 		//소켓 연결
 		this._socket = new SockJS(this._url);
@@ -101,33 +142,30 @@ var webSocket = {
 		}
 	}	
 };
-</script>	
+</script>
 <script type="text/javascript">
-//모듈 init(하단에 위치해야 함)
+//모듈 init(하단에 위치해야 함)-----------------------------------------------------------------
 $(window).on('load', function () {
-	webSocket.init({ url: '<c:url value="/chat" />' });	
+	webSocket.init({ url: '<c:url value="/chat" />' });
 });
 </script>
 </head>
 
 <body>
-	<input type="button" value="목록" id="chatListBtn">
-	<div class="col-12" style="clear: both;">
-		<div class="col-10" id="chatRoomSubject">
-			${other_store_nickname}님과 대화
+	<div class="chatRoomHeader">
+		<div class="chatRoomSubject" id="chatRoomSubject">
+			${other_store_nickname}
 		</div>
+<!-- 		<div class="chatList_btns">
+			<input type="button" value="목록" id="chatListBtn">
+		</div> -->
 	</div>
 	
 	
-	<div id="main-container">
-		<div id="chat-container">
-			<div id="divChatData"></div>
-		</div>
-		
-		<div id="bottom-container">
-			<input type="text" id="inputMessage" onkeypress="if(event.keyCode==13){webSocket.sendChat();}" autofocus/>
-			<input type="button" id="sendBtn" value="전송" onclick="webSocket.sendChat()"/>
-		</div>
+	<div id="chat-container"></div>
+	<div id="bottom-container">
+		<input type="text" id="inputMessage" onkeypress="if(event.keyCode==13){webSocket.sendChat();}" autofocus/>
+		<input type="button" id="sendBtn" value="전송" onclick="webSocket.sendChat()"/>
 	</div>
 </body>
 </html>

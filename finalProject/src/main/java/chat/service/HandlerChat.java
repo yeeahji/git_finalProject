@@ -55,6 +55,7 @@ public class HandlerChat extends TextWebSocketHandler {
 					mapToSend.put("chat_seq", chat_seq);
 					mapToSend.put("cmd", "CMD_ENTER");
 					mapToSend.put("msg", my_store_nickname+"님이 입장 했습니다.");
+					mapToSend.put("checkId", session.getPrincipal().getName());
 					
 					String jsonStr = objectMapper.writeValueAsString(mapToSend);
 					sess.sendMessage(new TextMessage(jsonStr)); //메시지 전송
@@ -69,7 +70,7 @@ public class HandlerChat extends TextWebSocketHandler {
 				Map<String, Object> mapSessionList = sessionList.get(i);
 				String chat_seq = (String) mapSessionList.get("chat_seq");
 				WebSocketSession sess = (WebSocketSession) mapSessionList.get("session");
-
+				
 				if (chat_seq.equals(mapReceive.get("chat_seq"))) {
 					Map<String, String> mapToSend = new HashMap<String, String>();
 					mapToSend.put("chat_seq", chat_seq);

@@ -1,39 +1,40 @@
 @charset "UTF-8";
-#inputMessage{
-	width: 290px;
-	height: 30px;
-	backgorund-color: #f4f4fa;
-	border: solid 1px #039be5;
-	border-radius: 10px;
+
+/* 상단 */
+#chatListBtn {
+	font-size: 15px;
+	cursor: pointer;
+	border: 0;
+	color: black;
 }
-#sendBtn{
-	background: #039be5;
-	width: 40px;
-	height: 30px;
-	color: rgb(255, 255, 255);
+/* 더치트 조회 버튼, 나가기 버튼 정도..? */
+
+#chatRoomSubject {
+	font-size: 20px;
+	font-weight: bold;
+	margin: 10px auto;
+	text-align: center;
+	color: black;
+	background-color: white;
 	border: none;
-	border-radius: 30px 30px 30px 30px;
+	padding: 5px 5px;
 }
-/* #main-container{
-	width: 100%;
-	height: 100%;
-	border: none;
-	margin: 10px;
-	display: inline-block;
-} */
+
+
+/* 메세지 출력창 */
 #chat-container{
 	vertical-align: bottom;
+	width: 100%;
 	min-height: 400px;
 	max-height: 400px;
-	border-radius: 10px;
 	overflow: scroll;
 	overflow-x: hidden;
 	background: #f4f4fa;
+	display: inline-block;
 }
 
 .chat{
 	font-size: 15px;
-	/* font-weight: bold; */
 	color: black;
 	background: #ffffff;
 	margin: 3px;
@@ -48,19 +49,27 @@
     border-radius: 30px 30px 30px 30px;
 }
 
-.notice{
-	font-size: 12px;
-	color: #039be5; /* #607080; */
-	border : none;
-	text-align: center;
-	background-color: #f4f4fa;
-	display: block;
-}
-
 .my-chat{
 	text-align: left;
 	color: rgb(255, 255, 255);
 	background: #0a58ca;
+}
+
+.chat-box{
+	text-align:left;
+}
+
+.my-chat-box{
+	text-align: right;
+}
+
+.notice{
+	font-size: 12px;
+	color: #039be5;
+	border : none;
+	text-align: center;
+	background-color: #f4f4fa;
+	display: block;
 }
 
 .chat-info{
@@ -72,84 +81,20 @@
 
 }
 
-.chat-box{
-	text-align:left;
-}
-.my-chat-box{
-	text-align: right;
-}
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-#chatListBtn {
-	margin-top: 20px;
+/* 메세지 입력창 */
+#inputMessage{
+	width: 300px;
 	height: 30px;
-	font-size: 15px;
+	backgorund-color: #f4f4fa;
+	border: solid 1px #039be5;
 	border-radius: 10px;
-	cursor: pointer;
-	border: 0;
-	color: black;
 }
-
-#chatRoomSubject {
-	margin: 10px auto;
-	text-align: center;
-	color: white;
-	background-color: #039be5;
+#sendBtn{
+	background: #039be5;
+	width: 40px;
+	height: 30px;
+	color: rgb(255, 255, 255);
 	border: none;
-	padding: 10px 10px;
-	border-radius: 8px;
-}
-
-/* 메세지 출력창 크기 */
-#chatContent {
-	margin: 0 auto;
-	border: 1px solid #01D1FE;
-	height: 400px;
-	border-radius: 10px;
-	overflow:scroll;	
-}
-
-#chatInputArea {
-	width: 100%; 
-	height: 10%;
-	padding: 10px;
-}
-
-/* 메세지 입력창 크기 */
-#message {
-	border: 1px solid #59a9ff;
-	height: 35px;
-	float: left;
-	width: 250px;
-	margin-right: 20px;
-}
-
-#btnSend {
-	height: 30px;
-	font-size: 15px;
-	border-radius: 10px;
-	cursor: pointer;
-	background-color: #59a9ff;
-	color: white;
+	border-radius: 30px 30px 30px 30px;
 }
