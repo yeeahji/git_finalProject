@@ -7,6 +7,8 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import admin.bean.AdminMembersDTO;
+import admin.bean.QnaDTO;
+import admin.bean.WithdrawDTO;
 import board.bean.BoardDTO;
 import board.bean.CommentDTO;
 import member.bean.ComplainDTO;
@@ -148,9 +150,67 @@ public class AdminDAOMybatis implements AdminDAO {
 
 	@Override
 	public ReviewDTO getReviewContent(String review_seq) {
-		
 		return sqlSession.selectOne("adminSQL.getReviewContent", review_seq);
 	}
+	@Override
+	public void solveComplain(Map<String, Integer> map) {
+		 sqlSession.update("adminSQL.solveComplain", map);
+	}
+//	[1:1문의]=========================================================================
+	//A.1:1문의 전체 리스트 출력
+	@Override
+	public List<QnaDTO> getQnaList(Map<String, Integer> map) {
+		return sqlSession.selectList("adminSQL.getQnaList", map);
+	}
+	//A.1:1문의 전체 리스트 개수
+	@Override
+	public int getQnaTotal() {
+		return sqlSession.selectOne("adminSQL.getQnaTotal");
+	}
+	@Override
+	public QnaDTO getQnaContent(int qna_seq) {
+		return sqlSession.selectOne("adminSQL.getQnaContent", qna_seq);
+	}
+	@Override
+	public void writeAnswer(Map<String, Object> map) {
+		sqlSession.update("adminSQL.writeAnswer", map);
+	}
+//	[탈퇴회원관리]=========================================================================
+	@Override
+	public List<WithdrawDTO> getWithdrawList(Map<String, Integer> map) {
+		List<WithdrawDTO> list=sqlSession.selectList("adminSQL.getWithdrawList", map);
+		System.out.println("3:"+list);
+		return list;
+	}
+	@Override
+	public int getWithdrawTotal() {
+		return sqlSession.selectOne("adminSQL.getWithdrawTotal");
+	}
+	@Override
+	public int getWithdraw_lowFrequencyTotal() {
+		return sqlSession.selectOne("adminSQL.getWithdraw_lowFrequencyTotal");
+	}
+	@Override
+	public int getWithdraw_rejoinTotal() {
+		return sqlSession.selectOne("adminSQL.getWithdraw_rejoinTotal");
+	}
+	@Override
+	public int getWithdraw_lowContentsTotal() {
+		return sqlSession.selectOne("adminSQL.getWithdraw_lowContentsTotal");
+	}
+	@Override
+	public int getWithdraw_protectInfoTotal() {
+		return sqlSession.selectOne("adminSQL.getWithdraw_protectInfoTotal");
+	}
+	@Override
+	public int getWithdraw_lowBenefitTotal() {
+		return sqlSession.selectOne("adminSQL.getWithdraw_lowBenefitTotal");
+	}
+	@Override
+	public int getWithdraw_othersTotal() {
+		return sqlSession.selectOne("adminSQL.getWithdraw_othersTotal");
+	}
+	
 
 
 

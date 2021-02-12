@@ -3,6 +3,8 @@ import java.util.List;
 import java.util.Map;
 
 import admin.bean.AdminMembersDTO;
+import admin.bean.QnaDTO;
+import admin.bean.WithdrawDTO;
 import board.bean.CommentDTO;
 import member.bean.ComplainDTO;
 import member.bean.MemberDTO;
@@ -51,19 +53,36 @@ public interface AdminDAO {
 	public List<ProductDTO> getStoreViewOrderby(Map<String, String> map);
 
 
-
+	//신고
 	public List<StoreDTO> getComplainList(Map<String, Integer> map);
-
 	public List<ComplainDTO> searchReportedMember(Map<String, String> map);
-
-	public int getTotalReportedMember(Map<String, String> map);
-
-
+	
 	public int getComplainTotal();
-
+	public int getTotalReportedMember(Map<String, String> map);
+	
+	
 	public CommentDTO getCommentContent(String comment_content);
-
 	public ReviewDTO getReviewContent(String review_seq);
+	
+	public void solveComplain(Map<String, Integer> map);
+	
+	
+	//1:1문의
+	public List<QnaDTO> getQnaList(Map<String, Integer> map);
+	public int getQnaTotal();
+	public QnaDTO getQnaContent(int qna_seq);
+	public void writeAnswer(Map<String, Object> map);
+	
+	//탈퇴회원관리
+	public List<WithdrawDTO> getWithdrawList(Map<String, Integer> map);
+	public int getWithdrawTotal();
+	 
+	public int getWithdraw_lowFrequencyTotal() ;
+	public int getWithdraw_rejoinTotal() ;
+	public int getWithdraw_lowContentsTotal();
+	public int getWithdraw_protectInfoTotal() ;
+	public int getWithdraw_lowBenefitTotal() ;
+	public int getWithdraw_othersTotal() ;
 
 
 }

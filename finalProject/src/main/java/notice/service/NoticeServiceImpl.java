@@ -6,9 +6,10 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import admin.bean.QnaDTO;
 import notice.bean.NoticeDTO;
 import notice.bean.QnaBoardDTO;
-import notice.bean.QnaDTO;
+import notice.bean.QnaCateDTO;
 import notice.dao.NoticeDAO;
 
 @Service
@@ -26,34 +27,31 @@ public class NoticeServiceImpl implements NoticeService {
 		List<NoticeDTO> list = noticeDAO.getFagContent(select2);
 		return list;
 	}
+//	[1:1문의]==============================================================================
 
 	@Override
-	public List<QnaDTO> getMain_id() {
-		List<QnaDTO> list = noticeDAO.getMain_id();
-		return list;
+	public List<QnaCateDTO> getMainCate() {
+		return noticeDAO.getMainCate();
 	}
 
 	@Override
-	public List<QnaDTO> getSub_id(int qnaCate_main_id) {
-		List<QnaDTO> list = noticeDAO.getSub_id(qnaCate_main_id);
-		return list;
+	public List<QnaCateDTO> getSubCate(int qnaCate_main) {
+		return noticeDAO.getSubCate(qnaCate_main);
 	}
 
 	@Override
-	public QnaDTO qnaCate_Content(int qnaCate_sub_id) {
-		QnaDTO qnaDTO = noticeDAO.qnaCate_Content(qnaCate_sub_id);
-		return qnaDTO;
+	public QnaDTO qnaCate_Content(int qnaCate_sub) {
+		return noticeDAO.qnaCate_Content(qnaCate_sub);
 	}
 
 	@Override
-	public void qnaWrite(QnaBoardDTO qnaBoardDTO) {
-		noticeDAO.qnaWrite(qnaBoardDTO);
+	public void writeQna(QnaDTO qnaDTO) {
+		noticeDAO.writeQna(qnaDTO);
 	}
 
 	@Override
-	public List<QnaBoardDTO> getQnaList() {
-		List<QnaBoardDTO> list = noticeDAO.getQnaList();
-		return list;
+	public List<QnaBoardDTO> getQnaList(String mem_id) {
+		return noticeDAO.getQnaList(mem_id);
 	}
 
 	

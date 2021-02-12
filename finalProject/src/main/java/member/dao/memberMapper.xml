@@ -116,7 +116,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  	</select>
  	
  	
-<!--  	신고하기  .. 채팅 생기면 수정해야함-->
+<!--  	신고하기  .. 채팅 생기면 전면수정해야함-->
 	<insert id="complain" parameterType="java.util.Map">
 		begin
 			insert into complain values(#{mem_id}, #{reporter_id}
@@ -129,6 +129,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 										, #{complain_content}
 										, sysdate
 										, #{store_seq}
+										, 0
  									);
 			update members SET mem_complain = (mem_complain+1) where mem_id = #{mem_id};
 		end;

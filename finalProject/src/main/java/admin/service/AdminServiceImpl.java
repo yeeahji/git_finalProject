@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import admin.bean.AdminBoardPaging;
 import admin.bean.AdminMembersDTO;
+import admin.bean.QnaDTO;
+import admin.bean.WithdrawDTO;
 import admin.dao.AdminDAO;
 import board.bean.CommentDTO;
 import member.bean.ComplainDTO;
@@ -246,7 +248,6 @@ public class AdminServiceImpl implements AdminService {
 		map.put("startNum", startNum);
 		map.put("endNum", endNum); 
 		List<StoreDTO> complainList= adminDAO.getComplainList(map );
-		System.out.println("complainList:"+complainList);
 		return complainList;
 	}
 	//A.신고 전체 리스트 페이징
@@ -306,8 +307,95 @@ public class AdminServiceImpl implements AdminService {
 		
 		return adminDAO.getReviewContent(review_seq);
 	}
-
 	
+	//신고내용 처리상태 변경하기
+	@Override
+	public void solveComplain(Map<String, Integer> map) {
+		adminDAO.solveComplain( map);
+	}
+	
+//	[1:1문의]=========================================================================
+	//A.1:1문의 전체 리스트 출력
+	@Override
+	public List<QnaDTO> getQnaList(String pg, String viewNum) {
+		int endNum = Integer.parseInt(pg)*Integer.parseInt(viewNum);
+		int startNum = endNum-(Integer.parseInt(viewNum)-1);
+		
+		Map <String, Integer> map = new HashMap<String, Integer>();
+		map.put("startNum", startNum);
+		map.put("endNum", endNum); 
+		
+		return adminDAO.getQnaList(map );
+	}
+	@Override
+	public AdminBoardPaging qnaBP(String pg, String viewNum) {
+		int qnaTotal = adminDAO.getQnaTotal();
+		
+		adminBoardPaging.setCurrentPage(Integer.parseInt(pg));
+		adminBoardPaging.setPageBlock(10);
+		adminBoardPaging.setPageSize(Integer.parseInt(viewNum));//위에endNum,startNum과 맞아야함
+		adminBoardPaging.setTotalA(qnaTotal);
+		
+		adminBoardPaging.makePagingHTML();
+		return adminBoardPaging;
+	}
+	@Override
+	public QnaDTO getQnaContent(int qna_seq) {
+		return adminDAO.getQnaContent(qna_seq) ;
+	}
+	@Override
+	public void writeAnswer(Map<String, Object> map) {
+		System.out.println(map);
+		adminDAO.writeAnswer( map);
+		
+	}
+//	[탈퇴회원 관리]=========================================================================
+
+	@Override
+	public List<WithdrawDTO> getWithdrawList(String pg, String viewNum) {
+		int endNum = Integer.parseInt(pg)*Integer.parseInt(viewNum);
+		int startNum = endNum-(Integer.parseInt(viewNum)-1);
+		
+		Map <String, Integer> map = new HashMap<String, Integer>();
+		map.put("startNum", startNum);
+		map.put("endNum", endNum); 
+		
+		return adminDAO.getWithdrawList(map );
+	}
+	@Override
+	public AdminBoardPaging withdrawBP(String pg, String viewNum) {
+		int withdrawTotal = adminDAO.getWithdrawTotal();
+		
+		adminBoardPaging.setCurrentPage(Integer.parseInt(pg));
+		adminBoardPaging.setPageBlock(10);
+		adminBoardPaging.setPageSize(Integer.parseInt(viewNum));//위에endNum,startNum과 맞아야함
+		adminBoardPaging.setTotalA(withdrawTotal);
+		
+		adminBoardPaging.makePagingHTML();
+		return adminBoardPaging;
+	}
+	@Override
+	public Map <String, Integer> getWithdrawTotal() {
+		int withdrawTotal =adminDAO.getWithdrawTotal();
+		int lowFrequencyTotal =adminDAO.getWithdraw_lowFrequencyTotal();
+		int rejoinTotal =adminDAO.getWithdraw_rejoinTotal();
+		int lowContentsTotal =adminDAO.getWithdraw_lowContentsTotal();
+		int protectInfoTotal =adminDAO.getWithdraw_protectInfoTotal();
+		int lowBenefitTotal =adminDAO.getWithdraw_lowBenefitTotal();
+		int othersTotal =adminDAO.getWithdraw_othersTotal();
+		
+		Map <String, Integer> map = new HashMap<String, Integer>();
+		map.put("withdrawTotal", withdrawTotal);
+		map.put("lowFrequencyTotal", lowFrequencyTotal);
+		map.put("rejoinTotal", rejoinTotal);
+		map.put("lowContentsTotal", lowContentsTotal);
+		map.put("protectInfoTotal", protectInfoTotal);
+		map.put("lowBenefitTotal", lowBenefitTotal);
+		map.put("othersTotal", othersTotal); 
+		
+		return map;
+	}
+
 
 	
 

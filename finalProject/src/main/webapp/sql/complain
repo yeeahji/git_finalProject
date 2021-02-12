@@ -13,3 +13,4 @@ CREATE TABLE COMPLAIN (-- TALK 테이블 아직 안만들어져서 추가해야�
 CREATE SEQUENCE COMPLAIN_SEQ NOCYCLE NOCACHE;
 
 alter table COMPLAIN add store_seq varchar2(50);
+alter table COMPLAIN add comlain_status number;
