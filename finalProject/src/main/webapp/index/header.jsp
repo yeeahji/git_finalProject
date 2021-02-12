@@ -39,14 +39,15 @@
 
 
 	<!-- 우측메뉴 -->
-	<div class="header-btn">
-		<a onclick="location.href='/market/product/registForm'"> <i
-			style="color: #0a58ca;" class="fas fa-won-sign"></i> 판매하기
-		</a><a onclick="location.href='/market/store/store'"> <i
-			style="color: #0a58ca;" class="fas fa-user-check"></i> 내 상점
-		</a> <a id="chat"><i style="color: #0a58ca;" class="far fa-comments"></i>
-			바다톡</a> <a onclick="location.href='/market/board/list?pg=1'"><i
-			class="fas fa-book-open" style="color: #0a58ca;"></i> 커뮤니티</a>
+	<div  class="header-btn">
+		<a onclick="location.href='/market/product/registForm'">
+			<i style="color:#0a58ca;" class="fas fa-won-sign"></i>판매하기</a>
+		<a onclick="location.href='/market/store/store'">
+			<i style="color:#0a58ca;" class="fas fa-user-check"></i>내 상점</a>
+		<a id="chat">
+			<i style="color:#0a58ca;" class="far fa-comments"></i>바다톡</a> 
+		<a onclick="location.href='/market/board/list?pg=1'">
+			<i class="fas fa-book-open" style="color:#0a58ca;"></i>커뮤니티</a>
 	</div>
 
 </div>

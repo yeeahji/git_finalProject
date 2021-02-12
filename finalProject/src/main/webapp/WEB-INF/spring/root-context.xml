@@ -2,7 +2,9 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xmlns:context="http://www.springframework.org/schema/context"
-	xsi:schemaLocation="http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd
+	xmlns:websocket="http://www.springframework.org/schema/websocket"
+	xsi:schemaLocation="http://www.springframework.org/schema/websocket http://www.springframework.org/schema/websocket/spring-websocket-4.3.xsd
+		http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd">
 	
 	<context:component-scan base-package="spring.conf"/>
@@ -46,6 +48,17 @@
 	<context:component-scan base-package="admin.bean"/>
 	<context:component-scan base-package="admin.dao"/>
 	<context:component-scan base-package="admin.service"/>
+	
+	<!-- WebSocket -->
+	<websocket:handlers allowed-origins="*" >
+        <websocket:mapping handler="handlerChat" path="/chat"/>
+		<websocket:handshake-interceptors> <!-- HttpSession의 파라미터를 WebSocketSession에 전달 및 1:1채팅, 알림 구현 -->
+			<bean class="org.springframework.web.socket.server.support.HttpSessionHandshakeInterceptor"/>
+		</websocket:handshake-interceptors>
+        <websocket:sockjs websocket-enabled="true"/>
+    </websocket:handlers>
+    
+    <bean id="handlerChat" class="chat.service.HandlerChat" />
 
 	<!-- 이메일 인증 -->
 	<bean id="mainSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">

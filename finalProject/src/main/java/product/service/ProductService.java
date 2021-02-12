@@ -9,14 +9,13 @@ import product.bean.RelProdPaging;
 import store.bean.StoreDTO;
 
 public interface ProductService {
-
+	public int getCurrentProductSeq();
+	
 	public void productRegist(ProductDTO productDTO);
 	
 	public List<CategoryDTO> getSmallCategoryList(String cate_parent);
 
 	public String getMyLocation(String mem_id);
-
-	public String getMyRecentLocation(String mem_id);
 
 	public ProductDTO productDetail(String seq); //상품 디테일
 

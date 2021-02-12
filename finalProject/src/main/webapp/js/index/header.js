@@ -22,11 +22,9 @@ $(document).ready(function() {
 
 })
 
-$('#chat').click(
-		function() {
-			window.open("/market/chat/chatList", "chat",
-					"width=500 height=650 scrollbars=yes");
-		});
+$('#chat').click(function(){
+	window.open("/market/chat/chatList", "chatList" ,"width=370 height=670 scrollbars=yes");
+});
 
 function search() {
 	var keyword = $("#searchProduct").val();

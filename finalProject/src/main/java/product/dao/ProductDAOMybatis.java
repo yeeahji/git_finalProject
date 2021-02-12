@@ -19,6 +19,11 @@ public class ProductDAOMybatis implements ProductDAO {
 	private SqlSession sqlSession;
 
 	@Override
+	public int getCurrentProductSeq() {
+		return sqlSession.selectOne("productSQL.getCurrentProductSeq");
+	}
+	
+	@Override
 	public void productRegist(ProductDTO productDTO) {
 		sqlSession.insert("productSQL.productRegist", productDTO);
 	}
@@ -31,11 +36,6 @@ public class ProductDAOMybatis implements ProductDAO {
 	@Override
 	public String getMyLocation(String mem_id) {
 		return sqlSession.selectOne("productSQL.getMyLocation", mem_id);
-	}
-
-	@Override
-	public String getMyRecentLocation(String mem_id) {
-		return sqlSession.selectOne("productSQL.getMyRecentLocation", mem_id);
 	}
 
 	@Override

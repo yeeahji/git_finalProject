@@ -23,6 +23,11 @@ public class ProductServiceImpl implements ProductService {
 	private RelProdPaging relProdPaging;
 
 	@Override
+	public int getCurrentProductSeq() {
+		return productDAO.getCurrentProductSeq();
+	}
+	
+	@Override
 	public void productRegist(ProductDTO productDTO) {
 		productDAO.productRegist(productDTO);
 	}
@@ -35,11 +40,6 @@ public class ProductServiceImpl implements ProductService {
 	@Override
 	public String getMyLocation(String mem_id) {
 		return productDAO.getMyLocation(mem_id);
-	}
-
-	@Override
-	public String getMyRecentLocation(String mem_id) {
-		return productDAO.getMyRecentLocation(mem_id);
 	}
 
 	@Override
