@@ -35,7 +35,7 @@ public class HandlerChat extends TextWebSocketHandler {
 		Map<String, String> mapReceive = objectMapper.readValue(message.getPayload(), Map.class);
 
 		switch (mapReceive.get("cmd")) {
-		
+
 		//클라이언트 입장
 		case "CMD_ENTER":
 			//세션 리스트에 저장
@@ -44,7 +44,7 @@ public class HandlerChat extends TextWebSocketHandler {
 			map.put("session", session);
 			sessionList.add(map); //클라이언트의 세션 저장
 			
-			//같은 채팅방에 입장 메세지 전송
+			//같은 채팅방에 입장 신호 전송
 			for (int i = 0; i < sessionList.size(); i++) {
 				Map<String, Object> mapSessionList = sessionList.get(i);
 				String chat_seq = (String) mapSessionList.get("chat_seq");
@@ -54,8 +54,8 @@ public class HandlerChat extends TextWebSocketHandler {
 					Map<String, String> mapToSend = new HashMap<String, String>();
 					mapToSend.put("chat_seq", chat_seq);
 					mapToSend.put("cmd", "CMD_ENTER");
-					mapToSend.put("msg", my_store_nickname+"님이 입장 했습니다.");
 					mapToSend.put("checkId", session.getPrincipal().getName());
+					mapToSend.put("current_user_num", sessionList.size()+"");
 					
 					String jsonStr = objectMapper.writeValueAsString(mapToSend);
 					sess.sendMessage(new TextMessage(jsonStr)); //메시지 전송
@@ -63,9 +63,9 @@ public class HandlerChat extends TextWebSocketHandler {
 			}
 			break;
 			
-		// CLIENT 메세지
+		//클라이언트 메세지
 		case "CMD_MSG_SEND":
-			// 같은 채팅방에 메세지 전송
+			//같은 채팅방에 메세지 전송
 			for (int i = 0; i < sessionList.size(); i++) {
 				Map<String, Object> mapSessionList = sessionList.get(i);
 				String chat_seq = (String) mapSessionList.get("chat_seq");
@@ -83,10 +83,10 @@ public class HandlerChat extends TextWebSocketHandler {
 				}
 			}
 			break;
-		}
+		}//switch
 	}
 
-	//클라이언트가 연결을 끊음 처리
+	//클라이언트 퇴장
 	@Override
 	public void afterConnectionClosed(WebSocketSession session, CloseStatus status) throws Exception {
 
@@ -108,7 +108,7 @@ public class HandlerChat extends TextWebSocketHandler {
 			}	
 		}
 		
-		//같은 채팅방에 퇴장 메세지 전송 
+		//같은 채팅방에 퇴장 신호 전송 
 		for (int i = 0; i < sessionList.size(); i++) {
 			Map<String, Object> mapSessionList = sessionList.get(i);
 			String chat_seq = (String)mapSessionList.get("chat_seq");
@@ -118,7 +118,6 @@ public class HandlerChat extends TextWebSocketHandler {
 				Map<String, String> mapToSend = new HashMap<String, String>();
 				mapToSend.put("chat_seq", chat_seq);
 				mapToSend.put("cmd", "CMD_EXIT");
-				mapToSend.put("msg", my_store_nickname+"님이 퇴장 했습니다.");
 
 				String jsonStr = objectMapper.writeValueAsString(mapToSend);
 				sess.sendMessage(new TextMessage(jsonStr));
