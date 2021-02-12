@@ -126,7 +126,7 @@ public class IndexServiceImpl implements IndexService {
 		map.put("order", order);
 		map.put("cate_code", Integer.parseInt(cate_code));
 
-		System.out.println("cate"+cate_code.substring(0, cate_code.length()-1)+"0");
+		//System.out.println("cate"+cate_code.substring(0, cate_code.length()-1)+"0");
 		// 목록 조회
 		List<ProductDTO> list = indexDAO.cateProductList(map);
 		// 개수 조회
@@ -135,8 +135,8 @@ public class IndexServiceImpl implements IndexService {
 		String cate_parent = indexDAO.cateParentName(cate_code.substring(0, cate_code.length()-1)+"0");
 		
 		
-//		System.out.println("list	: " + list);
-//		System.out.println("count	: " + count);
+		System.out.println("list	: " + list);
+		System.out.println("count	: " + count);
 
 		model.addAttribute("cate_name", cate_name);
 		model.addAttribute("cate_parent", cate_parent);

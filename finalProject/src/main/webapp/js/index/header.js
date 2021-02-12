@@ -198,7 +198,7 @@ function add_recentlySearch() {
 			if ( index > 9)
 				return false;
 			if (this != '' && this != null){
-				var html = '<div><a onclick="recenltyKeyword(\'' + this + '\')">' + this
+				var html = '<div><a style="cursor:pointer;" onclick="recenltyKeyword(\'' + this + '\')">' + this
 						+ '</a><i class="fas fa-times" onclick="deleteCookie(\'' + this + '\')"></i></div>'
 				$("#recentlySearchList").append(html)
 			}

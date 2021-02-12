@@ -55,7 +55,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			AND p.product_manage = 1
 			AND p.mem_id = s.mem_id
 			<if test=" productSubject != null and productSubject != '' "> 
-			AND p.product_subject Like '%' || #{productSubject} || '%'
+			AND (p.product_subject Like '%' || #{productSubject} || '%'
+			OR p.product_hashtag1 Like '%' || #{productSubject} || '%'
+			OR p.product_hashtag2 Like '%' || #{productSubject} || '%'
+			OR p.product_hashtag3 Like '%' || #{productSubject} || '%'
+			OR p.product_hashtag4 Like '%' || #{productSubject} || '%'
+			OR p.product_hashtag5 Like '%' || #{productSubject} || '%')
 			</if> 
 			<if test=" storeName != null and storeName != '' "> 
 			AND s.store_nickname Like '%' || #{storeName} || '%'
@@ -170,10 +175,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 					ROUND((sysdate - p.product_logtime)*24*60) as product_logtime,
 					s.store_nickname
 				FROM product p, store s
-				WHERE 
+				WHERE p.mem_id = s.mem_id
 				<choose>
-					<when test=' cateState == "cate_parent" '> p.cate_code IN(select cate_code from category where cate_parent=#{cate_code}) </when>
-					<when test=' cateState == "cate_code" '> p.cate_code=#{cate_code} </when>
+					<when test=' cateState == "cate_parent" '> AND p.cate_code IN(select cate_code from category where cate_parent=#{cate_code}) </when>
+					<when test=' cateState == "cate_code" '> AND p.cate_code=#{cate_code} </when>
 				</choose>
 				ORDER BY 
 				<!-- 최신순 -->
@@ -195,10 +200,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="cateProductCount" parameterType="java.util.HashMap" resultType="int">
 		SELECT count(0)
 		FROM product p, store s
-		WHERE 
+		WHERE p.mem_id = s.mem_id
 		<choose>
-			<when test=' cateState == "cate_parent" '> p.cate_code IN(select cate_code from category where cate_parent=#{cate_code}) </when>
-			<when test=' cateState == "cate_code" '> p.cate_code=#{cate_code} </when>
+			<when test=' cateState == "cate_parent" '> AND p.cate_code IN(select cate_code from category where cate_parent=#{cate_code}) </when>
+			<when test=' cateState == "cate_code" '> AND p.cate_code=#{cate_code} </when>
 		</choose>
 	</select>
 	
