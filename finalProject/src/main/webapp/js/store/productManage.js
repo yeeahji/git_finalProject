@@ -1,4 +1,4 @@
-// 1. 기본
+// 기본
 $(document).ready(function(){
 	$.ajax({
 		type: 'GET',
@@ -10,7 +10,8 @@ $(document).ready(function(){
 		success : function(data){ 
 			
 			$('#prodMangeTbody > tr').remove();
-			// # 상품 리스트 
+			
+			// 상품 리스트 
 			$.each(data.productManageList, function(index, items){
 				   $('<tr/>').append($('<td/>'
 					).append($('<a/>', {
@@ -31,7 +32,6 @@ $(document).ready(function(){
 						class: 'tabSortProdText'+index, // 현재 상품 상태
 						style: 'color: rgb(51, 51, 51);margin-left: 2px; margin-right: 2px;max-width: calc(100% - 8px);overflow: hidden;position: absolute;text-overflow: ellipsis;white-space: nowrap;top: 50%;transform: translateY(-50%);box-sizing: border-box;'
 				  })).append($('<input/>', {
-					  //뭔가잇었는데 뺌
 				 }))).append($('<div/>', {
 						class: 'tabSortProdBtn'+index,
 						style: 'background-position: 0px center; background-repeat: no-repeat; background-size: 1rem 1rem;width: 2rem;height: 100%;background-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNiIgaGVpZ2h0PSIxNiIgdmlld0JveD0iMCAwIDE2IDE2Ij4KICAgIDxwYXRoIGZpbGw9IiM1RTVDNkIiIGZpbGwtcnVsZT0iZXZlbm9kZCIgZD0iTTAgNC44YzAgLjIyOS4wOTguNDQ2LjI3LjU5OGw3LjIgNi40YS44LjggMCAwIDAgMS4wNjEgMGw3LjItNi40YS44LjggMCAxIDAtMS4wNjItMS4xOTVMOCAxMC4xMyAxLjMzMSA0LjIwM2EuOC44IDAgMCAwLTEuMzMuNTk3Ii8+Cjwvc3ZnPgo=);'
@@ -60,10 +60,12 @@ $(document).ready(function(){
 						text: '삭제'
 				 }))).appendTo($('#prodMangeTbody'))
 				
-				// # 페이징 처리				
+				var product_img1 = items.product_img1;
+				 
+				// 페이징 처리				
 				$('#storePagingDiv').html(data.storePaging.pagingHTML);	
 				
-				// # [UP]버튼  
+				// [UP]버튼  
 				$('.upBtn'+index).css({'width': '3.25rem',
 									   'height': '2rem',
 									   'text-align': 'center',
@@ -73,7 +75,7 @@ $(document).ready(function(){
 									   'margin-bottom': '0.5rem' });	
 				
 				$('.upBtn'+index).click(function(){
-					// # 모달  
+					// 상태변경 모달  
 					$('#conditionModal').css('display', 'flex');
 					
 					if(items.product_manage == 2 || items.product_manage == 3){
@@ -105,7 +107,7 @@ $(document).ready(function(){
 					});
 				});// [UP] 버튼
 				
-				//#[삭제] 버튼 
+				// [삭제] 버튼 
 				$('.deleteBtn'+index).css({'width': '3.25rem',
 									    'height': '2rem',
 									    'text-align': 'center',
@@ -167,7 +169,7 @@ $(document).ready(function(){
 					});
 				});// [삭제] 버튼
 				
-				// # 각 상품의 찜 개수 - DB
+				// 각 상품의 찜 개수 - DB
 				$.ajax({
 					type: 'post',
 					url: '/market/store/favoritesOfProd',
@@ -181,7 +183,7 @@ $(document).ready(function(){
 					}
 				});
 	
-				// # [판매상태] input 테두리 마우스 오버  & 포커스  
+				// [판매상태] input 테두리 마우스 오버  & 포커스  
 				$('.tabSortProdWrap2_'+index).on({
 				    mouseenter : function (){
 						$(this).css('border', '1px solid black');
@@ -191,7 +193,7 @@ $(document).ready(function(){
 					}
 				});		
 	 	
-				// # [판매상태] 클릭 - 상태리스트 띄우기, 상태변경
+				// [판매상태] 클릭 - 상태리스트 띄우기, 상태변경
 				$('.tabSortProdWrap1_'+index).on("click", '.tabSortProdWrap2_'+index, function(){
 					// 화살표 ∨ --> ∧
 					$('.tabSortProdBtn'+index).css('background-image', 'url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNiIgaGVpZ2h0PSIxNiIgdmlld0JveD0iMCAwIDE2IDE2Ij4KICAgIDxwYXRoIGZpbGw9IiM1RTVDNkIiIGZpbGwtcnVsZT0iZXZlbm9kZCIgZD0iTTE2IDExLjJhLjc5NS43OTUgMCAwIDAtLjI2OS0uNTk4bC03LjItNi40YS44LjggMCAwIDAtMS4wNjIgMGwtNy4yIDYuNGEuOC44IDAgMSAwIDEuMDYyIDEuMTk1TDggNS44NjlsNi42NjkgNS45MjhhLjguOCAwIDAgMCAxLjMzLS41OTgiLz4KPC9zdmc+Cg==)');
@@ -229,7 +231,7 @@ $(document).ready(function(){
 											      'display': 'flex',
 											      '-webkit-box-align': 'center',
 											      'align-items': 'center',
-											      'padding': '0px 0.7rem', /*원래1rem 판매완료글깨져서줄임*/
+											      'padding': '0px 0.7rem',
 											      'background': 'rgb(234, 233, 241)',
 											      'color': 'rgb(30, 29, 41)'});
 					
@@ -238,19 +240,17 @@ $(document).ready(function(){
 											     'display': 'flex',
 											     '-webkit-box-align': 'center',
 											     'align-items': 'center',
-											     'padding': '0px 0.7rem', /* 원래1rem 판매완료글깨져서줄임*/
+											     'padding': '0px 0.7rem',
 											     'color': 'rgb(94, 92, 107)' });
 
 					
-					// # [판매 상태] - defaultList -> nowCondition + 현재 상태 찐회색 배경
+					// [판매 상태] - defaultList -> nowCondition + 현재 상태 찐회색 배경
 					var listChildren = $('.tabSortProdWrap2_'+index+'_click .btnList'+index).children('div');
 					var divChange = 0;
 					if(items.product_manage == 2){
-						// 예약 중
-						divChange = 1;
+						divChange = 1; // 예약 중
 					}else if(items.product_manage == 3){
-						// 판매완료
-						divChange = 2;
+						divChange = 2; // 판매완료
 					}
 					
 					listChildren.eq(divChange).attr('class', 'nowCondition'+index);
@@ -263,17 +263,17 @@ $(document).ready(function(){
 					$('.defaultList'+index).css('background', 'rgb(255, 255, 255)');
 					$('.defaultList'+index).css('color', 'rgb(94, 92, 107)');
 					
-					// # 상태 리스트 마우스 오버  & 마우스리브
+					// 상태 리스트 마우스 오버  & 마우스리브
 					// ( 현재 상태 : nowList(찐회색) -> 마우스오버(연회색) / 기본 : defaultList(흰색) -> 마우스오버(연회색) )
 					$('.nowCondition'+index+', .defaultList'+index).on({
 						mouseenter : function (){
 							$(this).css('background', 'rgb(246, 245, 250)');
 							$(this).css('color', 'rgb(30, 29, 41)');
 							
-							// 클릭 시 바로 리스트 사라짐-> # 모달 창 띄우기
+							// 클릭 시 바로 리스트 사라짐-> 모달 창 띄우기
 							$(this).click(function(){
 								
-								// #판매상태 변경 ~ DB
+								// 판매상태 변경 
 								var submit_product_manage = items.product_manage; //디폴트는 기존 상태 값
 								
 								if($(this).attr('class') == 'nowCondition'+index){
@@ -284,10 +284,115 @@ $(document).ready(function(){
 								}else if($(this).text() == '예약 중'){
 									$('.condiModalTopText > p').html('상태가 변경되었습니다.');
 									submit_product_manage = 2;
-								}else if($(this).text() == '판매완료'){ 
-									$('.condiModalTopText > p').html('상태가 변경되었습니다.');
+								}else if($(this).text() == '판매완료'){
 									submit_product_manage = 3;
-								}
+									
+									// 판매완료 모달 
+									$('#soldOutModal').css('display', 'flex');
+									// 상품 이미지, 상품명
+									$('.itemImgWrap > img').attr('src', '/market/storage/'+items.product_img1);
+									$('.itemName').text(items.product_subject);
+									// 상품번호 
+									var chat_product_seq= items.product_seq;
+									
+									// 채팅방 리스트 
+									$.ajax({
+										type: 'get',
+										url: '/market/store/getChatList',
+										data: { 'mem_id': userId }, 
+										dataType: 'json',
+										success : function(data){ //chatList
+											if(data.chatListDTO == ''){
+												console.log("대화목록이없음");
+												$('.chatListWrap').append($('<div/>',{
+													class: 'noChatList',
+													text: '대화 목록이 없습니다.'
+												}))
+											}else if(data.chatListDTO != ''){
+												//$('.chatListWrap .chatOne').remove();
+												
+												$.each(data.chatList, function(index, items){
+													$('.chatListWrap').append($('<div/>', {
+														class: 'chatOne'
+													}).append($('<div/>', {
+														class: 'chat_storeImg'
+													}).append($('<img/>', {
+														src: '/market/storage/'+items.other_store_img,
+														width: '48',
+														alt: '프로필 이미지', // style="height: 48px;">
+														id: 'storeImg'+index
+													}))).append($('<div/>', {
+														class: 'chat_storeInfo'
+													}).append($('<div/>', {
+														class: 'chat_storeName'+index,
+														text: items.other_store_nickname
+													})).append($('<div/>', {
+														class: 'chat_lastLogtime',
+														text: '마지막 대화 '+items.chat_logtime
+													}))))
+													
+													$('.soldOutModalCancelBtn').click(function(){
+															$('#soldOutModal').css('display', 'none');
+														})
+														
+														
+													$('.chat_storeName'+index).css({'margin-top': '10px',
+																					'display': 'block',
+																					'font-weight': 'bold',
+																					'cursor': 'pointer'});
+													
+													
+													$('.chat_storeName'+index+', #storeImg'+index).click(function(){
+														
+														$('#soldOutModal').css('display', 'none');
+														
+														// 상점명으로 상대방 상점 아디 구하기
+														$.ajax({
+															type: 'get',
+															url: '/market/store/getStoreNick',
+															data: {'other_store_nickname': items.other_store_nickname},
+															dataType: 'json',
+															success : function(data){ 
+																console.log(data.other_mem_id); // 채팅리스트에서 선택한 사람의 아이디
+																
+																// purchase - DB
+																$.ajax({
+																	type: 'get',
+																	url: '/market/store/purchaseInsert',
+																	data: { 'seller_id': userId, // 내아이디(판매자)
+																		    'pur_nick': data.other_mem_id, // 구매자 아이디
+																		    'product_seq': chat_product_seq}, // 해당 상품 번호
+																	success : function(data){ 
+																		// 거래 완료
+																	},
+																	error: function(err){
+																		console.log(err);
+																	}
+																});// ajax
+																
+															},
+															error: function(err){
+																console.log(err);
+															}
+														});// ajax
+														
+														
+														
+														
+														// 확인 모달
+														$('.condiModalTopText > p').html('<strong>'+items.other_store_nickname+'</strong>님과의<br>거래가 완료되었습니다.');
+														$('#conditionModal').css('display', 'flex');
+													})
+													
+												});// each
+												
+											}//else if
+										},
+										error: function(err){
+											console.log(err);
+										}
+									});// ajax\
+								}// 판매 완료일 때
 			
 								// DB
 								$.ajax({
@@ -297,7 +402,7 @@ $(document).ready(function(){
 										    'product_seq': items.product_seq, // 해당 상품
 										    'product_manage' : submit_product_manage}, // 해당 상품의 변경 상태
 									success : function(data){
-										console.log(data); //업뎃확인용
+										//console.log(data); //업뎃확인용
 									},
 									error: function(err){
 										console.log(err);
@@ -310,9 +415,11 @@ $(document).ready(function(){
 								$('.tabSortProdWrap2_'+index).css('border', '1px solid rgb(195, 194, 204)');
 								$('.tabSortProdBtn'+index).css('background-image', 'url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNiIgaGVpZ2h0PSIxNiIgdmlld0JveD0iMCAwIDE2IDE2Ij4KICAgIDxwYXRoIGZpbGw9IiM1RTVDNkIiIGZpbGwtcnVsZT0iZXZlbm9kZCIgZD0iTTAgNC44YzAgLjIyOS4wOTguNDQ2LjI3LjU5OGw3LjIgNi40YS44LjggMCAwIDAgMS4wNjEgMGw3LjItNi40YS44LjggMCAxIDAtMS4wNjItMS4xOTVMOCAxMC4xMyAxLjMzMSA0LjIwM2EuOC44IDAgMCAwLTEuMzMuNTk3Ii8+Cjwvc3ZnPgo=)');
 																
-								// # 모달 
-								$('#conditionModal').css('display', 'flex');
-								// 확인 버튼 클릭
+								// 모달 - 판매완료 제외
+								if(submit_product_manage!=3){
+									$('#conditionModal').css('display', 'flex');
+								}
+								
 								$('.modalBottomBtn').on({
 									click : function(){
 										$('#conditionModal').css('display', 'none');
@@ -331,17 +438,16 @@ $(document).ready(function(){
 						}//mouseleave
 					});	//마우스오버  & 마우스리브
 					
-					// # 리스트 닫기 (2가지)
-					// (1) [판매상태] 한번 더 클릭 시 리스트 닫기
+					// 리스트 닫기 (2가지)
+					// - [판매상태] 한번 더 클릭 시 리스트 닫기
 					$('.tabSortProdWrap1_'+index).on("click", '.tabSortProdWrap2_'+index+'_click', function(){
 						$('.tabSortProdWrap2_'+index+'_click > .btnListWrap').remove();
 						$('.tabSortProdWrap2_'+index+'_click').attr('class', 'tabSortProdWrap2_'+index);
 						$('.tabSortProdBtn'+index).css('background-image', 'url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNiIgaGVpZ2h0PSIxNiIgdmlld0JveD0iMCAwIDE2IDE2Ij4KICAgIDxwYXRoIGZpbGw9IiM1RTVDNkIiIGZpbGwtcnVsZT0iZXZlbm9kZCIgZD0iTTAgNC44YzAgLjIyOS4wOTguNDQ2LjI3LjU5OGw3LjIgNi40YS44LjggMCAwIDAgMS4wNjEgMGw3LjItNi40YS44LjggMCAxIDAtMS4wNjItMS4xOTVMOCAxMC4xMyAxLjMzMSA0LjIwM2EuOC44IDAgMCAwLTEuMzMuNTk3Ii8+Cjwvc3ZnPgo=)');
 					});
-					// (2) 다른 영역 클릭 시 리스트 닫기
+					// - 다른 영역 클릭 시 리스트 닫기
 					$(document).click(function(e){
 						var parent = $(e.target).parent()[0].className;
-						//console.log(parent);
 						if(parent == 'tabSortProdWrap2_'+index+'_click' || parent == 'tabSortProdTitle' || parent == 'btnList'){
 							return false;
 							}
@@ -353,7 +459,7 @@ $(document).ready(function(){
 					 });
 				}); // [판매상태] 클릭 이벤트
 				
-				// # 판매상태  - 타이틀 설정
+				// 판매상태  - 타이틀 설정
 				// product_manage 별 분류 1:판매중 2:예약중 3:판매완료
 				if( items.product_manage == 1 ){
 					$('.tabSortProdText'+index).text('판매 중');
@@ -411,361 +517,455 @@ $('#productSearchBtn').click(function(event, str){
 				$('#prodMangeTable tr:gt(0)').remove(); //기존 상품 리스트는 삭제
 				
 				$.each(data.prodSearchList, function(index, items){
-						$('<tr/>').append($('<td/>'
-						).append($('<a/>', {
-							href: '#'
-					   }).append($('<img/>',{
-							src: '/market/storage/'+items.product_img1, 
-							alt: '상품이미지'
-					})))).append($('<td/>'
-						).append($('<div/>', {
-							class: 'tabSortProdWrap1_'+index,
-							style: 'position: relative;box-sizing: border-box;'
-					   }).append($('<div/>', {
-							class: 'tabSortProdWrap2_'+index, 
-							style: 'width: 100%;height: 3rem;display: flex;border: 1px solid rgb(195, 194, 204);border-radius: 2px;'
-					   }).append($('<div/>', {
-							class: 'tabSortProdTitle'
-					   }).append($('<div/>', {
-							class: 'tabSortProdText'+index, // 현재 상품 상태
-							style: 'color: rgb(51, 51, 51);margin-left: 2px; margin-right: 2px;max-width: calc(100% - 8px);overflow: hidden;position: absolute;text-overflow: ellipsis;white-space: nowrap;top: 50%;transform: translateY(-50%);box-sizing: border-box;'
-					  })).append($('<input/>', {
-						  //뭔가잇었는데 뺌
-					 }))).append($('<div/>', {
-							class: 'tabSortProdBtn'+index,
-							style: 'background-position: 0px center; background-repeat: no-repeat; background-size: 1rem 1rem;width: 2rem;height: 100%;background-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNiIgaGVpZ2h0PSIxNiIgdmlld0JveD0iMCAwIDE2IDE2Ij4KICAgIDxwYXRoIGZpbGw9IiM1RTVDNkIiIGZpbGwtcnVsZT0iZXZlbm9kZCIgZD0iTTAgNC44YzAgLjIyOS4wOTguNDQ2LjI3LjU5OGw3LjIgNi40YS44LjggMCAwIDAgMS4wNjEgMGw3LjItNi40YS44LjggMCAxIDAtMS4wNjItMS4xOTVMOCAxMC4xMyAxLjMzMSA0LjIwM2EuOC44IDAgMCAwLTEuMzMuNTk3Ii8+Cjwvc3ZnPgo=);'
-				   }))))).append($('<td/>'
-					    ).append($('<a/>', {
-							href: '#',
-							text: items.product_subject
-					 }))).append($('<td/>', {
-							text: items.product_price.toLocaleString()+'원'
-					  })).append($('<td/>', {
-						    class: 'favorites'+index
-						    // 찜 개수
-					  })).append($('<td/>', {
-							text: items.product_logtime
-					  })).append($('<td/>'
-						).append($('<button/>', {
-							type: 'button',
-							class: 'upBtn'+index,
-							text: 'UP'
-					  })).append($('<a/>', {
-							class: 'editBtn',
-							href: '#',
-							text: '수정'
-					  })).append($('<button/>',{
-							type: 'button',
-							class: 'deleteBtn'+index,
-							text: '삭제'
-					 }))).appendTo($('#prodMangeTbody'))
-						
-					// # 페이징 처리				
-					$('#storePagingDiv').html(data.storePaging.pagingHTML); 
-							
-					// # [UP]버튼 
-					$('.upBtn'+index).css({'width': '3.25rem',
-										   'height': '2rem',
-										   'text-align': 'center',
-										   'border-radius': '2px',
-										   'border': '1px solid rgb(195, 194, 204)',
-										   'color': 'rgb(255, 80, 88)',
-										   'margin-bottom': '0.5rem' });	
+					$('<tr/>').append($('<td/>'
+					).append($('<a/>', {
+						href: '#'
+				   }).append($('<img/>',{
+						src: '/market/storage/'+items.product_img1, 
+						alt: '상품이미지'
+				})))).append($('<td/>'
+					).append($('<div/>', {
+						class: 'tabSortProdWrap1_'+index,
+						style: 'position: relative;box-sizing: border-box;'
+				   }).append($('<div/>', {
+						class: 'tabSortProdWrap2_'+index, 
+						style: 'width: 100%;height: 3rem;display: flex;border: 1px solid rgb(195, 194, 204);border-radius: 2px;'
+				   }).append($('<div/>', {
+						class: 'tabSortProdTitle'
+				   }).append($('<div/>', {
+						class: 'tabSortProdText'+index, // 현재 상품 상태
+						style: 'color: rgb(51, 51, 51);margin-left: 2px; margin-right: 2px;max-width: calc(100% - 8px);overflow: hidden;position: absolute;text-overflow: ellipsis;white-space: nowrap;top: 50%;transform: translateY(-50%);box-sizing: border-box;'
+				  })).append($('<input/>', {
+				 }))).append($('<div/>', {
+						class: 'tabSortProdBtn'+index,
+						style: 'background-position: 0px center; background-repeat: no-repeat; background-size: 1rem 1rem;width: 2rem;height: 100%;background-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNiIgaGVpZ2h0PSIxNiIgdmlld0JveD0iMCAwIDE2IDE2Ij4KICAgIDxwYXRoIGZpbGw9IiM1RTVDNkIiIGZpbGwtcnVsZT0iZXZlbm9kZCIgZD0iTTAgNC44YzAgLjIyOS4wOTguNDQ2LjI3LjU5OGw3LjIgNi40YS44LjggMCAwIDAgMS4wNjEgMGw3LjItNi40YS44LjggMCAxIDAtMS4wNjItMS4xOTVMOCAxMC4xMyAxLjMzMSA0LjIwM2EuOC44IDAgMCAwLTEuMzMuNTk3Ii8+Cjwvc3ZnPgo=);'
+			   }))))).append($('<td/>'
+				    ).append($('<a/>', {
+						href: '#',
+						text: items.product_subject
+				 }))).append($('<td/>', {
+						text: items.product_price.toLocaleString()+'원'
+				  })).append($('<td/>', {
+					    class: 'favorites'+index
+				  })).append($('<td/>', {
+						text: items.product_logtime
+				  })).append($('<td/>'
+					).append($('<button/>', {
+						type: 'button',
+						class: 'upBtn'+index,
+						text: 'UP'
+				  })).append($('<a/>', {
+						class: 'editBtn',
+						href: '#',
+						text: '수정'
+				  })).append($('<button/>',{
+						type: 'button',
+						class: 'deleteBtn'+index,
+						text: '삭제'
+				 }))).appendTo($('#prodMangeTbody'))
+				
+				var product_img1 = items.product_img1;
+				 
+				// 페이징 처리				
+				$('#storePagingDiv').html(data.storePaging.pagingHTML);	
+				
+				// [UP]버튼  
+				$('.upBtn'+index).css({'width': '3.25rem',
+									   'height': '2rem',
+									   'text-align': 'center',
+									   'border-radius': '2px',
+									   'border': '1px solid rgb(195, 194, 204)',
+									   'color': 'rgb(255, 80, 88)',
+									   'margin-bottom': '0.5rem' });	
+				
+				$('.upBtn'+index).click(function(){
+					// 상태변경 모달  
+					$('#conditionModal').css('display', 'flex');
 					
-					$('.upBtn'+index).click(function(){
-						// # 모달  
-						$('#conditionModal').css('display', 'flex');
-						
-						if(items.product_manage==2 || items.product_manage==3){
-							$('.condiModalTopText > p').html('<h6>예약 중/판매완료 상품은<br><strong>UP하기</strong>를 이용할 수 없습니다.</h6>');
-						}else if(items.product_manage == 1){
-							$.ajax({
-								type: 'get',
-								url: '/market/store/productUp',
-								dataType: 'json',
-								data: { 'mem_id': userId, // 상점 주인의 아이디 
-								        'product_seq': items.product_seq}, // UP할 상품의 번호items.product_seq
-								success : function(data){ 
-									if(data.cookieNum == '0' || data.cookieNum == ''){
-										$('.condiModalTopText > p').html('<h5>오늘의 <strong>UP하기</strong>를<br>모두 사용하였습니다.</h5>');
-									}else {
-										$('.condiModalTopText > p').html('<h4><strong>UP하기 사용!</strong></h4><h5>(오늘 남은 UP하기 <strong>'+data.cookieNum+'</strong>개)</h5>');
-									}
-								},error: function(err){
-									console.log(err);
-								}
-							});//ajax
-						}
-					 	// 확인 버튼 클릭
-						$('.modalBottomBtn').on({
-							click : function(){
-								$('#conditionModal').css('display', 'none');
-								return false; // 새로고침 방지
-							}
-						});
-					});// [UP]버튼
-					
-					//#[삭제] 버튼 
-					$('.deleteBtn'+index).css({'width': '3.25rem',
-										    'height': '2rem',
-										    'text-align': 'center',
-										    'border-radius': '2px',
-										    'border': '1px solid rgb(195, 194, 204)',
-										    'color': 'black',
-										    'font-size': '10pt'});
-					$('.deleteBtn'+index).click(function(){
+					if(items.product_manage == 2 || items.product_manage == 3){
+						$('.condiModalTopText > p').html('<h6>예약 중/판매완료 상품은<br><strong>UP하기</strong>를 이용할 수 없습니다.</h6>');
+					}else if(items.product_manage == 1){ // 판매 중
 						$.ajax({
 							type: 'get',
-							url: '/market/store/existProd',
+							url: '/market/store/productUp',
 							dataType: 'json',
 							data: { 'mem_id': userId, // 상점 주인의 아이디 
-							        'product_seq': items.product_seq},
-							success : function(data){
-								if(data.productDTO == null){
-									$('#conditionModal').css('display', 'flex');	
-									$('.condiModalTopText > p').text('삭제된 상품입니다.');
-									
-								}else if(data.productDTO != null){
-									$('#deleteModal').css('display', 'flex'); // '상품을 삭제하시겠습니까?' 
-									
-									// [취소][확인] 
-								 	$('.dltModalCancelBtn, .dltModalOkBtn').on({
-										click : function(){
-											$('#deleteModal').css('display', 'none');
-
-											// [확인] - 삭제하겠다
-											if($(this).attr('class') == 'dltModalOkBtn'){
-												$.ajax({
-													type: 'get',
-													url: '/market/store/productDlt',
-													dataType: 'json',
-													data: { 'mem_id': userId, // 상점 주인의 아이디 
-													        'product_seq': items.product_seq},
-													success : function(data){
-														console.log(data);
-													},error: function(err){
-														console.log(err);
-													}
-												});
-												// 두 번째 모달
-												$('#conditionModal').css('display', 'flex');	
-												$('.condiModalTopText > p').text('상품이 삭제되었습니다');
-											}// if
-										}// click
-									});	// [취소][확인]
+							        'product_seq': items.product_seq}, // UP할 상품의 번호items.product_seq
+							success : function(data){ 
+								if(data.cookieNum == '0'){
+									$('.condiModalTopText > p').html('<h5>오늘의 <strong>UP하기</strong>를<br>모두 사용하였습니다.</h5>');
+								}else if(data.cookieNum != '0'){
+									$('.condiModalTopText > p').html('<h4><strong>UP하기 사용!</strong></h4><h5>(오늘 남은 UP하기 <strong>'+data.cookieNum+'</strong>개)</h5>');
 								}
-								// [확인] 버튼 클릭
+							},error: function(err){
+								console.log(err);
+							}
+						});//ajax
+					}
+				 	// 확인 버튼 클릭 (모달 닫기)
+					$('.modalBottomBtn').on({
+						click : function(){
+							$('#conditionModal').css('display', 'none');
+							return false; // 새로고침 방지
+						}
+					});
+				});// [UP] 버튼
+				
+				// [삭제] 버튼 
+				$('.deleteBtn'+index).css({'width': '3.25rem',
+									    'height': '2rem',
+									    'text-align': 'center',
+									    'border-radius': '2px',
+									    'border': '1px solid rgb(195, 194, 204)',
+									    'color': 'black',
+									    'font-size': '10pt'});
+				$('.deleteBtn'+index).click(function(){
+					$.ajax({
+						type: 'get',
+						url: '/market/store/existProd',
+						dataType: 'json',
+						data: { 'mem_id': userId, // 상점 주인의 아이디 
+						        'product_seq': items.product_seq},
+						success : function(data){
+							if(data.productDTO == null){
+								$('#conditionModal').css('display', 'flex');	
+								$('.condiModalTopText > p').text('삭제된 상품입니다.');
+								
+							}else if(data.productDTO != null){
+								$('#deleteModal').css('display', 'flex'); // '상품을 삭제하시겠습니까?' 
+								
+								// [취소][확인] 
+							 	$('.dltModalCancelBtn, .dltModalOkBtn').on({
+									click : function(){
+										$('#deleteModal').css('display', 'none');
+
+										// [확인] - 삭제하겠다
+										if($(this).attr('class') == 'dltModalOkBtn'){
+											$.ajax({
+												type: 'get',
+												url: '/market/store/productDlt',
+												dataType: 'json',
+												data: { 'mem_id': userId, // 상점 주인의 아이디 
+												        'product_seq': items.product_seq},
+												success : function(data){
+													console.log(data);
+												},error: function(err){
+													console.log(err);
+												}
+											});
+											// 두 번째 모달
+											$('#conditionModal').css('display', 'flex');	
+											$('.condiModalTopText > p').text('상품이 삭제되었습니다');
+										}// if
+									}// click
+								});	// [취소][확인]
+							}
+							// [확인] 버튼 클릭
+							$('.modalBottomBtn').on({
+								click : function(){
+									$('#conditionModal').css('display', 'none');
+									return false; // 새로고침 방지
+								}
+							});
+						},error: function(err){
+							console.log(err);
+						}
+					});
+				});// [삭제] 버튼
+				
+				// 각 상품의 찜 개수 - DB
+				$.ajax({
+					type: 'post',
+					url: '/market/store/favoritesOfProd',
+					data: { 'mem_id': userId, // 상점 주인의 아이디 
+						    'product_seq': items.product_seq}, // 찜 수 구할 상품의 번호
+					success : function(data){
+						$('.favorites'+index).text(data);
+					},
+					error: function(err){
+						console.log(err);
+					}
+				});
+	
+				// [판매상태] input 테두리 마우스 오버  & 포커스  
+				$('.tabSortProdWrap2_'+index).on({
+				    mouseenter : function (){
+						$(this).css('border', '1px solid black');
+					},//mouseenter				
+					mouseleave : function (){
+						$(this).css('border', '1px solid rgb(195, 194, 204)');
+					}
+				});		
+	 	
+				// [판매상태] 클릭 - 상태리스트 띄우기, 상태변경
+				$('.tabSortProdWrap1_'+index).on("click", '.tabSortProdWrap2_'+index, function(){
+					// 화살표 ∨ --> ∧
+					$('.tabSortProdBtn'+index).css('background-image', 'url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNiIgaGVpZ2h0PSIxNiIgdmlld0JveD0iMCAwIDE2IDE2Ij4KICAgIDxwYXRoIGZpbGw9IiM1RTVDNkIiIGZpbGwtcnVsZT0iZXZlbm9kZCIgZD0iTTE2IDExLjJhLjc5NS43OTUgMCAwIDAtLjI2OS0uNTk4bC03LjItNi40YS44LjggMCAwIDAtMS4wNjIgMGwtNy4yIDYuNGEuOC44IDAgMSAwIDEuMDYyIDEuMTk1TDggNS44NjlsNi42NjkgNS45MjhhLjguOCAwIDAgMCAxLjMzLS41OTgiLz4KPC9zdmc+Cg==)');
+					
+					// wrap2 -> wrap2_click
+					$('.tabSortProdWrap2_'+index).attr('class', 'tabSortProdWrap2_'+index+'_click');
+					$('.tabSortProdWrap2_'+index+'_click').css({'width' : '100%',
+																'height' : '3rem',
+																'display' : 'flex',
+																'border' : '1px solid rgb(30, 29, 41)',
+																'border-radius' : '2px'});	
+					// 상태 List
+					$('.tabSortProdWrap2_'+index+'_click').append($('<div/>', {
+						class: 'btnListWrap'
+					}).append($('<div/>', {
+						class: 'btnList'+index,
+						style: 'max-height: 12.5rem;overflow-y: scroll;'
+					}).append($('<div/>', {
+						class: 'nowCondition'+index,
+						text: '판매 중',
+						tabindex: '-1',
+					})).append($('<div/>', {
+						class: 'defaultList'+index, 
+						text: '예약 중',
+						tabindex: '-1',
+					})).append($('<div/>', {
+						class: 'defaultList'+index, 
+						text: '판매완료',
+						tabindex: '-1',
+					}))));
+					
+					// # nowCondition & defaultList CSS
+					$('.nowCondition'+index).css({'width': '100%',
+												  'height': '2.5rem',
+											      'display': 'flex',
+											      '-webkit-box-align': 'center',
+											      'align-items': 'center',
+											      'padding': '0px 0.7rem',
+											      'background': 'rgb(234, 233, 241)',
+											      'color': 'rgb(30, 29, 41)'});
+					
+					$('.defaultList'+index).css({'width': '100%',
+											     'height': '2.5rem',
+											     'display': 'flex',
+											     '-webkit-box-align': 'center',
+											     'align-items': 'center',
+											     'padding': '0px 0.7rem',
+											     'color': 'rgb(94, 92, 107)' });
+
+					
+					// [판매 상태] - defaultList -> nowCondition + 현재 상태 찐회색 배경
+					var listChildren = $('.tabSortProdWrap2_'+index+'_click .btnList'+index).children('div');
+					var divChange = 0;
+					if(items.product_manage == 2){
+						divChange = 1; // 예약 중
+					}else if(items.product_manage == 3){
+						divChange = 2; // 판매완료
+					}
+					
+					listChildren.eq(divChange).attr('class', 'nowCondition'+index);
+					listChildren.eq(divChange).css('background', 'rgb(234, 233, 241)');
+					listChildren.eq(divChange).css('color', 'rgb(30, 29, 41)');
+					
+					listChildren.eq(divChange).prevAll().attr('class', 'defaultList'+index);
+					listChildren.eq(divChange).nextAll().attr('class', 'defaultList'+index);
+					
+					$('.defaultList'+index).css('background', 'rgb(255, 255, 255)');
+					$('.defaultList'+index).css('color', 'rgb(94, 92, 107)');
+					
+					// 상태 리스트 마우스 오버  & 마우스리브
+					// ( 현재 상태 : nowList(찐회색) -> 마우스오버(연회색) / 기본 : defaultList(흰색) -> 마우스오버(연회색) )
+					$('.nowCondition'+index+', .defaultList'+index).on({
+						mouseenter : function (){
+							$(this).css('background', 'rgb(246, 245, 250)');
+							$(this).css('color', 'rgb(30, 29, 41)');
+							
+							// 클릭 시 바로 리스트 사라짐-> 모달 창 띄우기
+							$(this).click(function(){
+								
+								// 판매상태 변경 
+								var submit_product_manage = items.product_manage; //디폴트는 기존 상태 값
+								
+								if($(this).attr('class') == 'nowCondition'+index){
+									$('.condiModalTopText > p').html('상품이 삭제되었거나<br>상품의 판매 상태가 변경하시려는 <br>판매 상태와 같습니다.'); 
+								}else if($(this).text() == '판매 중'){ 
+									$('.condiModalTopText > p').html('상태가 변경되었습니다.');
+									submit_product_manage = 1;
+								}else if($(this).text() == '예약 중'){
+									$('.condiModalTopText > p').html('상태가 변경되었습니다.');
+									submit_product_manage = 2;
+								}else if($(this).text() == '판매완료'){
+									submit_product_manage = 3;
+									
+									// 판매완료 모달 
+									$('#soldOutModal').css('display', 'flex');
+									// 상품 이미지, 상품명
+									$('.itemImgWrap > img').attr('src', '/market/storage/'+items.product_img1);
+									$('.itemName').text(items.product_subject);
+									// 상품번호 
+									var chat_product_seq= items.product_seq;
+									
+									// 채팅방 리스트 
+									$.ajax({
+										type: 'get',
+										url: '/market/store/getChatList',
+										data: { 'mem_id': userId }, 
+										dataType: 'json',
+										success : function(data){ //chatList
+											if(data.chatListDTO == ''){
+												$('.chatListWrap').append($('<div/>',{
+													class: 'noChatList',
+													text: '대화 목록이 없습니다.'
+												}))
+											}else if(data.chatListDTO != ''){
+												$('.chatListWrap .chatOne').remove();
+												
+												$.each(data.chatList, function(index, items){
+													$('.chatListWrap').append($('<div/>', {
+														class: 'chatOne'
+													}).append($('<div/>', {
+														class: 'chat_storeImg'
+													}).append($('<img/>', {
+														src: '/market/storage/'+items.other_store_img,
+														width: '48',
+														alt: '프로필 이미지', // style="height: 48px;">
+														id: 'storeImg'+index
+													}))).append($('<div/>', {
+														class: 'chat_storeInfo'
+													}).append($('<div/>', {
+														class: 'chat_storeName'+index,
+														text: items.other_store_nickname
+													})).append($('<div/>', {
+														class: 'chat_lastLogtime',
+														text: '마지막 대화 '+items.chat_logtime
+													}))))
+													
+													$('.chat_storeName'+index).css({'margin-top': '10px',
+																					'display': 'block',
+																					'font-weight': 'bold',
+																					'cursor': 'pointer'});
+													
+													
+													$('.chat_storeName'+index+', #storeImg'+index).click(function(){
+														
+														$('#soldOutModal').css('display', 'none');
+														
+														// 상점명으로 상대방 상점 아디 구하기
+														$.ajax({
+															type: 'get',
+															url: '/market/store/getStoreNick',
+															data: {'other_store_nickname': items.other_store_nickname},
+															dataType: 'json',
+															success : function(data){ 
+																console.log(data.other_mem_id); // 채팅리스트에서 선택한 사람의 아이디
+																
+																// purchase - DB
+																$.ajax({
+																	type: 'get',
+																	url: '/market/store/purchaseInsert',
+																	data: { 'seller_id': userId, // 내아이디(판매자)
+																		    'pur_nick': data.other_mem_id, // 구매자 아이디
+																		    'product_seq': chat_product_seq}, // 해당 상품 번호
+																	success : function(data){ 
+																		// 거래 완료
+																	},
+																	error: function(err){
+																		console.log(err);
+																	}
+																});// ajax
+																
+															},
+															error: function(err){
+																console.log(err);
+															}
+														});// ajax
+														
+														// 확인 모달
+														$('.condiModalTopText > p').html('<strong>'+items.other_store_nickname+'</strong>님과의<br>거래가 완료되었습니다.');
+														$('#conditionModal').css('display', 'flex');
+													})
+													
+												});// each
+												
+											}//else if
+										},
+										error: function(err){
+											console.log(err);
+										}
+									});// ajax\
+								}// 판매 완료일 때
+			
+								// DB
+								$.ajax({
+									type: 'get',
+									url: '/market/store/prodManageUpdate',
+									data: { 'mem_id': userId, // 상점 주인의 아이디 
+										    'product_seq': items.product_seq, // 해당 상품
+										    'product_manage' : submit_product_manage}, // 해당 상품의 변경 상태
+									success : function(data){
+										//console.log(data); //업뎃확인용
+									},
+									error: function(err){
+										console.log(err);
+									}
+								});// ajax
+
+								// 리스트 닫기
+								$('.tabSortProdWrap2_'+index+'_click > .btnListWrap').remove();
+								$('.tabSortProdWrap2_'+index+'_click').attr('class', 'tabSortProdWrap2_'+index);
+								$('.tabSortProdWrap2_'+index).css('border', '1px solid rgb(195, 194, 204)');
+								$('.tabSortProdBtn'+index).css('background-image', 'url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNiIgaGVpZ2h0PSIxNiIgdmlld0JveD0iMCAwIDE2IDE2Ij4KICAgIDxwYXRoIGZpbGw9IiM1RTVDNkIiIGZpbGwtcnVsZT0iZXZlbm9kZCIgZD0iTTAgNC44YzAgLjIyOS4wOTguNDQ2LjI3LjU5OGw3LjIgNi40YS44LjggMCAwIDAgMS4wNjEgMGw3LjItNi40YS44LjggMCAxIDAtMS4wNjItMS4xOTVMOCAxMC4xMyAxLjMzMSA0LjIwM2EuOC44IDAgMCAwLTEuMzMuNTk3Ii8+Cjwvc3ZnPgo=)');
+																
+								// 모달 - 판매완료 제외
+								if(submit_product_manage!=3){
+									$('#conditionModal').css('display', 'flex');
+								}
+								
 								$('.modalBottomBtn').on({
 									click : function(){
 										$('#conditionModal').css('display', 'none');
 										return false; // 새로고침 방지
 									}
-								});
-							},error: function(err){
-								console.log(err);
-							}
-						});
-					});// [삭제] 버튼
-					
-					// # 각 상품의 찜 개수 - DB
-					$.ajax({
-						type: 'post',
-						url: '/market/store/favoritesOfProd',
-						data: { 'mem_id': userId, // 상점 주인의 아이디 
-							    'product_seq': items.product_seq}, // 찜 수 구할 상품의 번호
-						success : function(data){
-							$('.favorites'+index).text(data);
-						},
-						error: function(err){
-							console.log(err);
-						}
-					});
-		
-					// # [판매상태] input 테두리 마우스 오버  & 포커스  
-					$('.tabSortProdWrap2_'+index).on({
-					    mouseenter : function (){
-							$(this).css('border', '1px solid black');
-						},//mouseenter				
+								});	
+							});// 상태 클릭
+						}, // mouseenter		
 						mouseleave : function (){
-							$(this).css('border', '1px solid rgb(195, 194, 204)');
-						}
-					});		
-		 	
-					// # [판매상태] 클릭 - 상태리스트 띄우기, 상태변경
-					$('.tabSortProdWrap1_'+index).on("click", '.tabSortProdWrap2_'+index, function(){
-						// 화살표 ∨ --> ∧
-						$('.tabSortProdBtn'+index).css('background-image', 'url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNiIgaGVpZ2h0PSIxNiIgdmlld0JveD0iMCAwIDE2IDE2Ij4KICAgIDxwYXRoIGZpbGw9IiM1RTVDNkIiIGZpbGwtcnVsZT0iZXZlbm9kZCIgZD0iTTE2IDExLjJhLjc5NS43OTUgMCAwIDAtLjI2OS0uNTk4bC03LjItNi40YS44LjggMCAwIDAtMS4wNjIgMGwtNy4yIDYuNGEuOC44IDAgMSAwIDEuMDYyIDEuMTk1TDggNS44NjlsNi42NjkgNS45MjhhLjguOCAwIDAgMCAxLjMzLS41OTgiLz4KPC9zdmc+Cg==)');
-						
-						// wrap2 -> wrap2_click
-						$('.tabSortProdWrap2_'+index).attr('class', 'tabSortProdWrap2_'+index+'_click');
-						$('.tabSortProdWrap2_'+index+'_click').css({'width' : '100%',
-																	'height' : '3rem',
-																	'display' : 'flex',
-																	'border' : '1px solid rgb(30, 29, 41)',
-																	'border-radius' : '2px'});	
-			
-						// 상태 List
-						$('.tabSortProdWrap2_'+index+'_click').append($('<div/>', {
-							class: 'btnListWrap'
-						}).append($('<div/>', {
-							class: 'btnList'+index,
-							style: 'max-height: 12.5rem;overflow-y: scroll;'
-						}).append($('<div/>', {
-							class: 'nowCondition'+index,
-							text: '판매 중',
-							tabindex: '-1',
-						})).append($('<div/>', {
-							class: 'defaultList'+index, 
-							text: '예약 중',
-							tabindex: '-1',
-						})).append($('<div/>', {
-							class: 'defaultList'+index, 
-							text: '판매완료',
-							tabindex: '-1',
-						}))));
-						
-						// # nowCondition & defaultList CSS
-						$('.nowCondition'+index).css({'width': '100%',
-													  'height': '2.5rem',
-												      'display': 'flex',
-												      '-webkit-box-align': 'center',
-												      'align-items': 'center',
-												      'padding': '0px 0.7rem',
-												      'background': 'rgb(234, 233, 241)',
-												      'color': 'rgb(30, 29, 41)'});
-						
-						$('.defaultList'+index).css({'width': '100%',
-												     'height': '2.5rem',
-												     'display': 'flex',
-												     '-webkit-box-align': 'center',
-												     'align-items': 'center',
-												     'padding': '0px 0.7rem', 
-												     'color': 'rgb(94, 92, 107)' });
-
-						
-						// # [판매 상태] - defaultList -> nowCondition + 현재 상태 찐회색 배경
-						var listChildren = $('.tabSortProdWrap2_'+index+'_click .btnList'+index).children('div');
-						var divChange = 0;
-						if(items.product_manage == 2){
-							// 예약 중
-							divChange = 1;
-						}else if(items.product_manage == 3){
-							// 판매완료
-							divChange = 2;
-						}
-						
-						listChildren.eq(divChange).attr('class', 'nowCondition'+index);
-						listChildren.eq(divChange).css('background', 'rgb(234, 233, 241)');
-						listChildren.eq(divChange).css('color', 'rgb(30, 29, 41)');
-						
-						listChildren.eq(divChange).prevAll().attr('class', 'defaultList'+index);
-						listChildren.eq(divChange).nextAll().attr('class', 'defaultList'+index);
-						
-						$('.defaultList'+index).css('background', 'rgb(255, 255, 255)');
-						$('.defaultList'+index).css('color', 'rgb(94, 92, 107)');
-						
-						// # 상태 리스트 마우스 오버  & 마우스리브
-						// ( 현재 상태 : nowList(찐회색) -> 마우스오버(연회색) / 기본 : defaultList(흰색) -> 마우스오버(연회색) )
-						$('.nowCondition'+index+', .defaultList'+index).on({
-							mouseenter : function (){
-								$(this).css('background', 'rgb(246, 245, 250)');
-								$(this).css('color', 'rgb(30, 29, 41)');
-								
-								// 클릭 시 바로 리스트 사라짐-> # 모달 창 띄우기
-								$(this).click(function(){
-									
-									// #판매상태 변경 ~ DB
-									var submit_product_manage = items.product_manage; //디폴트는 기존 상태 값
-									
-									if($(this).attr('class') == 'nowCondition'+index){
-										$('.condiModalTopText > p').html('상품이 삭제되었거나<br>상품의 판매 상태가 변경하시려는 <br>판매 상태와 같습니다.'); 
-									}else if($(this).text() == '판매 중'){ 
-										$('.condiModalTopText > p').html('상태가 변경되었습니다.');
-										submit_product_manage = 1;
-									}else if($(this).text() == '예약 중'){
-										$('.condiModalTopText > p').html('상태가 변경되었습니다.');
-										submit_product_manage = 2;
-									}else if($(this).text() == '판매완료'){ 
-										$('.condiModalTopText > p').html('상태가 변경되었습니다.');
-										submit_product_manage = 3;
-									}
-				
-									// DB
-									$.ajax({
-										type: 'get',
-										url: '/market/store/prodManageUpdate',
-										data: { 'mem_id': userId, // 상점 주인의 아이디 
-											    'product_seq': items.product_seq, // 해당 상품
-											    'product_manage' : submit_product_manage}, // 해당 상품의 변경 상태
-										success : function(data){
-											console.log(data); //업뎃확인용
-										},
-										error: function(err){
-											console.log(err);
-										}
-									});// ajax
-
-									// 리스트 닫기
-									$('.tabSortProdWrap2_'+index+'_click > .btnListWrap').remove();
-									$('.tabSortProdWrap2_'+index+'_click').attr('class', 'tabSortProdWrap2_'+index);
-									$('.tabSortProdWrap2_'+index).css('border', '1px solid rgb(195, 194, 204)');
-									$('.tabSortProdBtn'+index).css('background-image', 'url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNiIgaGVpZ2h0PSIxNiIgdmlld0JveD0iMCAwIDE2IDE2Ij4KICAgIDxwYXRoIGZpbGw9IiM1RTVDNkIiIGZpbGwtcnVsZT0iZXZlbm9kZCIgZD0iTTAgNC44YzAgLjIyOS4wOTguNDQ2LjI3LjU5OGw3LjIgNi40YS44LjggMCAwIDAgMS4wNjEgMGw3LjItNi40YS44LjggMCAxIDAtMS4wNjItMS4xOTVMOCAxMC4xMyAxLjMzMSA0LjIwM2EuOC44IDAgMCAwLTEuMzMuNTk3Ii8+Cjwvc3ZnPgo=)');
-																	
-									// # 모달 
-									$('#conditionModal').css('display', 'flex');
-									// 확인 버튼 클릭
-									$('.modalBottomBtn').on({
-										click : function(){
-											$('#conditionModal').css('display', 'none');
-											return false; // 새로고침 방지
-										}
-									});	
-								});// 상태 클릭
-							}, // mouseenter		
-							mouseleave : function (){
-								if($(this).attr('class') == 'nowCondition'+index){
-									$(this).css('background', 'rgb(234, 233, 241)');
-								}else if($(this).attr('class') == 'defaultList'+index){
-									$(this).css({'background':'rgb(255, 255, 255)',
-												 'color':'rgb(94, 92, 107)'});
-								}
-							}//mouseleave
-						});	//마우스오버  & 마우스리브
-						
-						// # 리스트 닫기 (2가지)
-						// (1) [판매상태] 한번 더 클릭 시 리스트 닫기
-						$('.tabSortProdWrap1_'+index).on("click", '.tabSortProdWrap2_'+index+'_click', function(){
-							$('.tabSortProdWrap2_'+index+'_click > .btnListWrap').remove();
-							$('.tabSortProdWrap2_'+index+'_click').attr('class', 'tabSortProdWrap2_'+index);
-							$('.tabSortProdBtn'+index).css('background-image', 'url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNiIgaGVpZ2h0PSIxNiIgdmlld0JveD0iMCAwIDE2IDE2Ij4KICAgIDxwYXRoIGZpbGw9IiM1RTVDNkIiIGZpbGwtcnVsZT0iZXZlbm9kZCIgZD0iTTAgNC44YzAgLjIyOS4wOTguNDQ2LjI3LjU5OGw3LjIgNi40YS44LjggMCAwIDAgMS4wNjEgMGw3LjItNi40YS44LjggMCAxIDAtMS4wNjItMS4xOTVMOCAxMC4xMyAxLjMzMSA0LjIwM2EuOC44IDAgMCAwLTEuMzMuNTk3Ii8+Cjwvc3ZnPgo=)');
-						});
-						// (2) 다른 영역 클릭 시 리스트 닫기
-						$(document).click(function(e){
-							var parent = $(e.target).parent()[0].className;
-							//console.log(parent);
-							if(parent == 'tabSortProdWrap2_'+index+'_click' || parent == 'tabSortProdTitle' || parent == 'btnList'){
-								return false;
-								}
-							else{
-							$('.tabSortProdWrap2_'+index+'_click > .btnListWrap').remove();
-							$('.tabSortProdWrap2_'+index+'_click').attr('class', 'tabSortProdWrap2_'+index);
-							$('.tabSortProdBtn'+index).css('background-image', 'url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNiIgaGVpZ2h0PSIxNiIgdmlld0JveD0iMCAwIDE2IDE2Ij4KICAgIDxwYXRoIGZpbGw9IiM1RTVDNkIiIGZpbGwtcnVsZT0iZXZlbm9kZCIgZD0iTTAgNC44YzAgLjIyOS4wOTguNDQ2LjI3LjU5OGw3LjIgNi40YS44LjggMCAwIDAgMS4wNjEgMGw3LjItNi40YS44LjggMCAxIDAtMS4wNjItMS4xOTVMOCAxMC4xMyAxLjMzMSA0LjIwM2EuOC44IDAgMCAwLTEuMzMuNTk3Ii8+Cjwvc3ZnPgo=)');
+							if($(this).attr('class') == 'nowCondition'+index){
+								$(this).css('background', 'rgb(234, 233, 241)');
+							}else if($(this).attr('class') == 'defaultList'+index){
+								$(this).css({'background':'rgb(255, 255, 255)',
+											 'color':'rgb(94, 92, 107)'});
 							}
-						 });
-					}); // [판매상태] 클릭 이벤트
+						}//mouseleave
+					});	//마우스오버  & 마우스리브
 					
-					// # 판매상태  - 타이틀 설정
-					// product_manage 별 분류 1:판매중 2:예약중 3:판매완료
-					if( items.product_manage == 1 ){
-						$('.tabSortProdText'+index).text('판매 중');
-					// 기본 nowCondition은 판매중
-					}else if(items.product_manage == 2 ){
-						$('.tabSortProdText'+index).text('예약 중');
-						$('.tabSortProdWrap2_'+index+'_click .btnList'+index).children('div').eq(1).attr('class', 'nowCondition'+index);
-					}else if( items.product_manage == 3 ){
-						$('.tabSortProdText'+index).text('판매완료');
-					}
-				});//each
+					// 리스트 닫기 (2가지)
+					// - [판매상태] 한번 더 클릭 시 리스트 닫기
+					$('.tabSortProdWrap1_'+index).on("click", '.tabSortProdWrap2_'+index+'_click', function(){
+						$('.tabSortProdWrap2_'+index+'_click > .btnListWrap').remove();
+						$('.tabSortProdWrap2_'+index+'_click').attr('class', 'tabSortProdWrap2_'+index);
+						$('.tabSortProdBtn'+index).css('background-image', 'url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNiIgaGVpZ2h0PSIxNiIgdmlld0JveD0iMCAwIDE2IDE2Ij4KICAgIDxwYXRoIGZpbGw9IiM1RTVDNkIiIGZpbGwtcnVsZT0iZXZlbm9kZCIgZD0iTTAgNC44YzAgLjIyOS4wOTguNDQ2LjI3LjU5OGw3LjIgNi40YS44LjggMCAwIDAgMS4wNjEgMGw3LjItNi40YS44LjggMCAxIDAtMS4wNjItMS4xOTVMOCAxMC4xMyAxLjMzMSA0LjIwM2EuOC44IDAgMCAwLTEuMzMuNTk3Ii8+Cjwvc3ZnPgo=)');
+					});
+					// - 다른 영역 클릭 시 리스트 닫기
+					$(document).click(function(e){
+						var parent = $(e.target).parent()[0].className;
+						if(parent == 'tabSortProdWrap2_'+index+'_click' || parent == 'tabSortProdTitle' || parent == 'btnList'){
+							return false;
+							}
+						else{
+						$('.tabSortProdWrap2_'+index+'_click > .btnListWrap').remove();
+						$('.tabSortProdWrap2_'+index+'_click').attr('class', 'tabSortProdWrap2_'+index);
+						$('.tabSortProdBtn'+index).css('background-image', 'url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNiIgaGVpZ2h0PSIxNiIgdmlld0JveD0iMCAwIDE2IDE2Ij4KICAgIDxwYXRoIGZpbGw9IiM1RTVDNkIiIGZpbGwtcnVsZT0iZXZlbm9kZCIgZD0iTTAgNC44YzAgLjIyOS4wOTguNDQ2LjI3LjU5OGw3LjIgNi40YS44LjggMCAwIDAgMS4wNjEgMGw3LjItNi40YS44LjggMCAxIDAtMS4wNjItMS4xOTVMOCAxMC4xMyAxLjMzMSA0LjIwM2EuOC44IDAgMCAwLTEuMzMuNTk3Ii8+Cjwvc3ZnPgo=)');
+						}
+					 });
+				}); // [판매상태] 클릭 이벤트
+				
+				// 판매상태  - 타이틀 설정
+				// product_manage 별 분류 1:판매중 2:예약중 3:판매완료
+				if( items.product_manage == 1 ){
+					$('.tabSortProdText'+index).text('판매 중');
+				// 기본 nowCondition은 판매중
+				}else if(items.product_manage == 2 ){
+					$('.tabSortProdText'+index).text('예약 중');
+					$('.tabSortProdWrap2_'+index+'_click .btnList'+index).children('div').eq(1).attr('class', 'nowCondition'+index);
+				}else if( items.product_manage == 3 ){
+					$('.tabSortProdText'+index).text('판매완료');
+				}
+			});//each
 				}//else
 			},//success
 			error: function(err){
@@ -795,368 +995,455 @@ function storePaging(pg){
 				
 				// # 상품 리스트 
 				$.each(data.productManageList, function(index, items){
-						$('<tr/>').append($('<td/>'
-						).append($('<a/>', {
-							href: '#'
-					   }).append($('<img/>',{
-							src: '/market/storage/'+items.product_img1, 
-							alt: '상품이미지'
-					})))).append($('<td/>'
-						).append($('<div/>', {
-							class: 'tabSortProdWrap1_'+index,
-							style: 'position: relative;box-sizing: border-box;'
-					   }).append($('<div/>', {
-							class: 'tabSortProdWrap2_'+index, 
-							style: 'width: 100%;height: 3rem;display: flex;border: 1px solid rgb(195, 194, 204);border-radius: 2px;'
-					   }).append($('<div/>', {
-							class: 'tabSortProdTitle'
-					   }).append($('<div/>', {
-							class: 'tabSortProdText'+index, // 현재 상품 상태
-							style: 'color: rgb(51, 51, 51);margin-left: 2px; margin-right: 2px;max-width: calc(100% - 8px);overflow: hidden;position: absolute;text-overflow: ellipsis;white-space: nowrap;top: 50%;transform: translateY(-50%);box-sizing: border-box;'
-					  })).append($('<input/>', {
-						  //뭔가잇었는데 뺌
-					 }))).append($('<div/>', {
-							class: 'tabSortProdBtn'+index,
-							style: 'background-position: 0px center; background-repeat: no-repeat; background-size: 1rem 1rem;width: 2rem;height: 100%;background-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNiIgaGVpZ2h0PSIxNiIgdmlld0JveD0iMCAwIDE2IDE2Ij4KICAgIDxwYXRoIGZpbGw9IiM1RTVDNkIiIGZpbGwtcnVsZT0iZXZlbm9kZCIgZD0iTTAgNC44YzAgLjIyOS4wOTguNDQ2LjI3LjU5OGw3LjIgNi40YS44LjggMCAwIDAgMS4wNjEgMGw3LjItNi40YS44LjggMCAxIDAtMS4wNjItMS4xOTVMOCAxMC4xMyAxLjMzMSA0LjIwM2EuOC44IDAgMCAwLTEuMzMuNTk3Ii8+Cjwvc3ZnPgo=);'
-				   }))))).append($('<td/>'
-					    ).append($('<a/>', {
-							href: '#',
-							text: items.product_subject
-					 }))).append($('<td/>', {
-							text: items.product_price.toLocaleString()+'원'
-					  })).append($('<td/>', {
-						    class: 'favorites'+index
-						    // 찜 개수
-					  })).append($('<td/>', {
-							text: items.product_logtime
-					  })).append($('<td/>'
-						).append($('<button/>', {
-							type: 'button',
-							class: 'upBtn'+index,
-							text: 'UP'
-					  })).append($('<a/>', {
-							class: 'editBtn',
-							href: '#',
-							text: '수정'
-					  })).append($('<button/>',{
-							type: 'button',
-							class: 'deleteBtn'+index,
-							text: '삭제'
-					 }))).appendTo($('#prodMangeTbody'))
-						
-					// # 페이징 처리				
-					$('#storePagingDiv').html(data.storePaging.pagingHTML); 
+					$('<tr/>').append($('<td/>'
+					).append($('<a/>', {
+						href: '#'
+				   }).append($('<img/>',{
+						src: '/market/storage/'+items.product_img1, 
+						alt: '상품이미지'
+				})))).append($('<td/>'
+					).append($('<div/>', {
+						class: 'tabSortProdWrap1_'+index,
+						style: 'position: relative;box-sizing: border-box;'
+				   }).append($('<div/>', {
+						class: 'tabSortProdWrap2_'+index, 
+						style: 'width: 100%;height: 3rem;display: flex;border: 1px solid rgb(195, 194, 204);border-radius: 2px;'
+				   }).append($('<div/>', {
+						class: 'tabSortProdTitle'
+				   }).append($('<div/>', {
+						class: 'tabSortProdText'+index, // 현재 상품 상태
+						style: 'color: rgb(51, 51, 51);margin-left: 2px; margin-right: 2px;max-width: calc(100% - 8px);overflow: hidden;position: absolute;text-overflow: ellipsis;white-space: nowrap;top: 50%;transform: translateY(-50%);box-sizing: border-box;'
+				  })).append($('<input/>', {
+				 }))).append($('<div/>', {
+						class: 'tabSortProdBtn'+index,
+						style: 'background-position: 0px center; background-repeat: no-repeat; background-size: 1rem 1rem;width: 2rem;height: 100%;background-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNiIgaGVpZ2h0PSIxNiIgdmlld0JveD0iMCAwIDE2IDE2Ij4KICAgIDxwYXRoIGZpbGw9IiM1RTVDNkIiIGZpbGwtcnVsZT0iZXZlbm9kZCIgZD0iTTAgNC44YzAgLjIyOS4wOTguNDQ2LjI3LjU5OGw3LjIgNi40YS44LjggMCAwIDAgMS4wNjEgMGw3LjItNi40YS44LjggMCAxIDAtMS4wNjItMS4xOTVMOCAxMC4xMyAxLjMzMSA0LjIwM2EuOC44IDAgMCAwLTEuMzMuNTk3Ii8+Cjwvc3ZnPgo=);'
+			   }))))).append($('<td/>'
+				    ).append($('<a/>', {
+						href: '#',
+						text: items.product_subject
+				 }))).append($('<td/>', {
+						text: items.product_price.toLocaleString()+'원'
+				  })).append($('<td/>', {
+					    class: 'favorites'+index
+				  })).append($('<td/>', {
+						text: items.product_logtime
+				  })).append($('<td/>'
+					).append($('<button/>', {
+						type: 'button',
+						class: 'upBtn'+index,
+						text: 'UP'
+				  })).append($('<a/>', {
+						class: 'editBtn',
+						href: '#',
+						text: '수정'
+				  })).append($('<button/>',{
+						type: 'button',
+						class: 'deleteBtn'+index,
+						text: '삭제'
+				 }))).appendTo($('#prodMangeTbody'))
+				
+				var product_img1 = items.product_img1;
+				 
+				// 페이징 처리				
+				$('#storePagingDiv').html(data.storePaging.pagingHTML);	
+				
+				// [UP]버튼  
+				$('.upBtn'+index).css({'width': '3.25rem',
+									   'height': '2rem',
+									   'text-align': 'center',
+									   'border-radius': '2px',
+									   'border': '1px solid rgb(195, 194, 204)',
+									   'color': 'rgb(255, 80, 88)',
+									   'margin-bottom': '0.5rem' });	
+				
+				$('.upBtn'+index).click(function(){
+					// 상태변경 모달  
+					$('#conditionModal').css('display', 'flex');
 					
-					// # [UP]버튼 
-					$('.upBtn'+index).css({'width': '3.25rem',
-										   'height': '2rem',
-										   'text-align': 'center',
-										   'border-radius': '2px',
-										   'border': '1px solid rgb(195, 194, 204)',
-										   'color': 'rgb(255, 80, 88)',
-										   'margin-bottom': '0.5rem' });	
-					
-					
-					$('.upBtn'+index).click(function(){
-						// # 모달  
-						$('#conditionModal').css('display', 'flex');
-						
-						if(items.product_manage==2 || items.product_manage==3){
-							$('.condiModalTopText > p').html('<h6>예약 중/판매완료 상품은<br><strong>UP하기</strong>를 이용할 수 없습니다.</h6>');
-						}else if(items.product_manage == 1){
-							$.ajax({
-								type: 'get',
-								url: '/market/store/productUp',
-								dataType: 'json',
-								data: { 'mem_id': userId, // 상점 주인의 아이디 
-								        'product_seq': items.product_seq}, // UP할 상품의 번호items.product_seq
-								success : function(data){ 
-									if(data.cookieNum == '0' || data.cookieNum == ''){
-										$('.condiModalTopText > p').html('<h5>오늘의 <strong>UP하기</strong>를<br>모두 사용하였습니다.</h5>');
-									}else {
-										$('.condiModalTopText > p').html('<h4><strong>UP하기 사용!</strong></h4><h5>(오늘 남은 UP하기 <strong>'+data.cookieNum+'</strong>개)</h5>');
-									}
-								},error: function(err){
-									console.log(err);
-								}
-							});//ajax
-						}
-					 	// 확인 버튼 클릭
-						$('.modalBottomBtn').on({
-							click : function(){
-								$('#conditionModal').css('display', 'none');
-								return false; // 새로고침 방지
-							}
-						});
-					});// [UP]버튼
-					
-					//#[삭제] 버튼 
-					$('.deleteBtn'+index).css({'width': '3.25rem',
-										    'height': '2rem',
-										    'text-align': 'center',
-										    'border-radius': '2px',
-										    'border': '1px solid rgb(195, 194, 204)',
-										    'color': 'black',
-										    'font-size': '10pt'});
-					$('.deleteBtn'+index).click(function(){
+					if(items.product_manage == 2 || items.product_manage == 3){
+						$('.condiModalTopText > p').html('<h6>예약 중/판매완료 상품은<br><strong>UP하기</strong>를 이용할 수 없습니다.</h6>');
+					}else if(items.product_manage == 1){ // 판매 중
 						$.ajax({
 							type: 'get',
-							url: '/market/store/existProd',
+							url: '/market/store/productUp',
 							dataType: 'json',
 							data: { 'mem_id': userId, // 상점 주인의 아이디 
-							        'product_seq': items.product_seq},
-							success : function(data){
-								console.log(data.productDTO);
-								
-								if(data.productDTO == null){
-									$('#conditionModal').css('display', 'flex');	
-									$('.condiModalTopText > p').text('삭제된 상품입니다.');
-									
-								}else if(data.productDTO != null){
-									$('#deleteModal').css('display', 'flex'); // '상품을 삭제하시겠습니까?' 
-									
-									// [취소][확인] 
-								 	$('.dltModalCancelBtn, .dltModalOkBtn').on({
-										click : function(){
-											$('#deleteModal').css('display', 'none');
-
-											// [확인] - 삭제하겠다
-											if($(this).attr('class') == 'dltModalOkBtn'){
-												console.log("삭제할번호->"+items.product_seq);
-												$.ajax({
-													type: 'get',
-													url: '/market/store/productDlt',
-													dataType: 'json',
-													data: { 'mem_id': userId, // 상점 주인의 아이디 
-													        'product_seq': items.product_seq},
-													success : function(data){
-														console.log(data);
-													},error: function(err){
-														console.log(err);
-													}
-												});
-												// 두 번째 모달
-												$('#conditionModal').css('display', 'flex');	
-												$('.condiModalTopText > p').text('상품이 삭제되었습니다');
-											}// if
-										}// click
-									});	// [취소][확인]
+							        'product_seq': items.product_seq}, // UP할 상품의 번호items.product_seq
+							success : function(data){ 
+								if(data.cookieNum == '0'){
+									$('.condiModalTopText > p').html('<h5>오늘의 <strong>UP하기</strong>를<br>모두 사용하였습니다.</h5>');
+								}else if(data.cookieNum != '0'){
+									$('.condiModalTopText > p').html('<h4><strong>UP하기 사용!</strong></h4><h5>(오늘 남은 UP하기 <strong>'+data.cookieNum+'</strong>개)</h5>');
 								}
-								// [확인] 버튼 클릭
+							},error: function(err){
+								console.log(err);
+							}
+						});//ajax
+					}
+				 	// 확인 버튼 클릭 (모달 닫기)
+					$('.modalBottomBtn').on({
+						click : function(){
+							$('#conditionModal').css('display', 'none');
+							return false; // 새로고침 방지
+						}
+					});
+				});// [UP] 버튼
+				
+				// [삭제] 버튼 
+				$('.deleteBtn'+index).css({'width': '3.25rem',
+									    'height': '2rem',
+									    'text-align': 'center',
+									    'border-radius': '2px',
+									    'border': '1px solid rgb(195, 194, 204)',
+									    'color': 'black',
+									    'font-size': '10pt'});
+				$('.deleteBtn'+index).click(function(){
+					$.ajax({
+						type: 'get',
+						url: '/market/store/existProd',
+						dataType: 'json',
+						data: { 'mem_id': userId, // 상점 주인의 아이디 
+						        'product_seq': items.product_seq},
+						success : function(data){
+							if(data.productDTO == null){
+								$('#conditionModal').css('display', 'flex');	
+								$('.condiModalTopText > p').text('삭제된 상품입니다.');
+								
+							}else if(data.productDTO != null){
+								$('#deleteModal').css('display', 'flex'); // '상품을 삭제하시겠습니까?' 
+								
+								// [취소][확인] 
+							 	$('.dltModalCancelBtn, .dltModalOkBtn').on({
+									click : function(){
+										$('#deleteModal').css('display', 'none');
+
+										// [확인] - 삭제하겠다
+										if($(this).attr('class') == 'dltModalOkBtn'){
+											$.ajax({
+												type: 'get',
+												url: '/market/store/productDlt',
+												dataType: 'json',
+												data: { 'mem_id': userId, // 상점 주인의 아이디 
+												        'product_seq': items.product_seq},
+												success : function(data){
+													console.log(data);
+												},error: function(err){
+													console.log(err);
+												}
+											});
+											// 두 번째 모달
+											$('#conditionModal').css('display', 'flex');	
+											$('.condiModalTopText > p').text('상품이 삭제되었습니다');
+										}// if
+									}// click
+								});	// [취소][확인]
+							}
+							// [확인] 버튼 클릭
+							$('.modalBottomBtn').on({
+								click : function(){
+									$('#conditionModal').css('display', 'none');
+									return false; // 새로고침 방지
+								}
+							});
+						},error: function(err){
+							console.log(err);
+						}
+					});
+				});// [삭제] 버튼
+				
+				// 각 상품의 찜 개수 - DB
+				$.ajax({
+					type: 'post',
+					url: '/market/store/favoritesOfProd',
+					data: { 'mem_id': userId, // 상점 주인의 아이디 
+						    'product_seq': items.product_seq}, // 찜 수 구할 상품의 번호
+					success : function(data){
+						$('.favorites'+index).text(data);
+					},
+					error: function(err){
+						console.log(err);
+					}
+				});
+	
+				// [판매상태] input 테두리 마우스 오버  & 포커스  
+				$('.tabSortProdWrap2_'+index).on({
+				    mouseenter : function (){
+						$(this).css('border', '1px solid black');
+					},//mouseenter				
+					mouseleave : function (){
+						$(this).css('border', '1px solid rgb(195, 194, 204)');
+					}
+				});		
+	 	
+				// [판매상태] 클릭 - 상태리스트 띄우기, 상태변경
+				$('.tabSortProdWrap1_'+index).on("click", '.tabSortProdWrap2_'+index, function(){
+					// 화살표 ∨ --> ∧
+					$('.tabSortProdBtn'+index).css('background-image', 'url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNiIgaGVpZ2h0PSIxNiIgdmlld0JveD0iMCAwIDE2IDE2Ij4KICAgIDxwYXRoIGZpbGw9IiM1RTVDNkIiIGZpbGwtcnVsZT0iZXZlbm9kZCIgZD0iTTE2IDExLjJhLjc5NS43OTUgMCAwIDAtLjI2OS0uNTk4bC03LjItNi40YS44LjggMCAwIDAtMS4wNjIgMGwtNy4yIDYuNGEuOC44IDAgMSAwIDEuMDYyIDEuMTk1TDggNS44NjlsNi42NjkgNS45MjhhLjguOCAwIDAgMCAxLjMzLS41OTgiLz4KPC9zdmc+Cg==)');
+					
+					// wrap2 -> wrap2_click
+					$('.tabSortProdWrap2_'+index).attr('class', 'tabSortProdWrap2_'+index+'_click');
+					$('.tabSortProdWrap2_'+index+'_click').css({'width' : '100%',
+																'height' : '3rem',
+																'display' : 'flex',
+																'border' : '1px solid rgb(30, 29, 41)',
+																'border-radius' : '2px'});	
+					// 상태 List
+					$('.tabSortProdWrap2_'+index+'_click').append($('<div/>', {
+						class: 'btnListWrap'
+					}).append($('<div/>', {
+						class: 'btnList'+index,
+						style: 'max-height: 12.5rem;overflow-y: scroll;'
+					}).append($('<div/>', {
+						class: 'nowCondition'+index,
+						text: '판매 중',
+						tabindex: '-1',
+					})).append($('<div/>', {
+						class: 'defaultList'+index, 
+						text: '예약 중',
+						tabindex: '-1',
+					})).append($('<div/>', {
+						class: 'defaultList'+index, 
+						text: '판매완료',
+						tabindex: '-1',
+					}))));
+					
+					// # nowCondition & defaultList CSS
+					$('.nowCondition'+index).css({'width': '100%',
+												  'height': '2.5rem',
+											      'display': 'flex',
+											      '-webkit-box-align': 'center',
+											      'align-items': 'center',
+											      'padding': '0px 0.7rem',
+											      'background': 'rgb(234, 233, 241)',
+											      'color': 'rgb(30, 29, 41)'});
+					
+					$('.defaultList'+index).css({'width': '100%',
+											     'height': '2.5rem',
+											     'display': 'flex',
+											     '-webkit-box-align': 'center',
+											     'align-items': 'center',
+											     'padding': '0px 0.7rem',
+											     'color': 'rgb(94, 92, 107)' });
+
+					
+					// [판매 상태] - defaultList -> nowCondition + 현재 상태 찐회색 배경
+					var listChildren = $('.tabSortProdWrap2_'+index+'_click .btnList'+index).children('div');
+					var divChange = 0;
+					if(items.product_manage == 2){
+						divChange = 1; // 예약 중
+					}else if(items.product_manage == 3){
+						divChange = 2; // 판매완료
+					}
+					
+					listChildren.eq(divChange).attr('class', 'nowCondition'+index);
+					listChildren.eq(divChange).css('background', 'rgb(234, 233, 241)');
+					listChildren.eq(divChange).css('color', 'rgb(30, 29, 41)');
+					
+					listChildren.eq(divChange).prevAll().attr('class', 'defaultList'+index);
+					listChildren.eq(divChange).nextAll().attr('class', 'defaultList'+index);
+					
+					$('.defaultList'+index).css('background', 'rgb(255, 255, 255)');
+					$('.defaultList'+index).css('color', 'rgb(94, 92, 107)');
+					
+					// 상태 리스트 마우스 오버  & 마우스리브
+					// ( 현재 상태 : nowList(찐회색) -> 마우스오버(연회색) / 기본 : defaultList(흰색) -> 마우스오버(연회색) )
+					$('.nowCondition'+index+', .defaultList'+index).on({
+						mouseenter : function (){
+							$(this).css('background', 'rgb(246, 245, 250)');
+							$(this).css('color', 'rgb(30, 29, 41)');
+							
+							// 클릭 시 바로 리스트 사라짐-> 모달 창 띄우기
+							$(this).click(function(){
+								
+								// 판매상태 변경 
+								var submit_product_manage = items.product_manage; //디폴트는 기존 상태 값
+								
+								if($(this).attr('class') == 'nowCondition'+index){
+									$('.condiModalTopText > p').html('상품이 삭제되었거나<br>상품의 판매 상태가 변경하시려는 <br>판매 상태와 같습니다.'); 
+								}else if($(this).text() == '판매 중'){ 
+									$('.condiModalTopText > p').html('상태가 변경되었습니다.');
+									submit_product_manage = 1;
+								}else if($(this).text() == '예약 중'){
+									$('.condiModalTopText > p').html('상태가 변경되었습니다.');
+									submit_product_manage = 2;
+								}else if($(this).text() == '판매완료'){
+									submit_product_manage = 3;
+									
+									// 판매완료 모달 
+									$('#soldOutModal').css('display', 'flex');
+									// 상품 이미지, 상품명
+									$('.itemImgWrap > img').attr('src', '/market/storage/'+items.product_img1);
+									$('.itemName').text(items.product_subject);
+									// 상품번호 
+									var chat_product_seq= items.product_seq;
+									
+									// 채팅방 리스트 
+									$.ajax({
+										type: 'get',
+										url: '/market/store/getChatList',
+										data: { 'mem_id': userId }, 
+										dataType: 'json',
+										success : function(data){ //chatList
+											if(data.chatListDTO == ''){
+												$('.chatListWrap').append($('<div/>',{
+													class: 'noChatList',
+													text: '대화 목록이 없습니다.'
+												}))
+											}else if(data.chatListDTO != ''){
+												$('.chatListWrap .chatOne').remove();
+												
+												$.each(data.chatList, function(index, items){
+													$('.chatListWrap').append($('<div/>', {
+														class: 'chatOne'
+													}).append($('<div/>', {
+														class: 'chat_storeImg'
+													}).append($('<img/>', {
+														src: '/market/storage/'+items.other_store_img,
+														width: '48',
+														alt: '프로필 이미지', // style="height: 48px;">
+														id: 'storeImg'+index
+													}))).append($('<div/>', {
+														class: 'chat_storeInfo'
+													}).append($('<div/>', {
+														class: 'chat_storeName'+index,
+														text: items.other_store_nickname
+													})).append($('<div/>', {
+														class: 'chat_lastLogtime',
+														text: '마지막 대화 '+items.chat_logtime
+													}))))
+													
+													$('.chat_storeName'+index).css({'margin-top': '10px',
+																					'display': 'block',
+																					'font-weight': 'bold',
+																					'cursor': 'pointer'});
+													
+													
+													$('.chat_storeName'+index+', #storeImg'+index).click(function(){
+														
+														$('#soldOutModal').css('display', 'none');
+														
+														// 상점명으로 상대방 상점 아디 구하기
+														$.ajax({
+															type: 'get',
+															url: '/market/store/getStoreNick',
+															data: {'other_store_nickname': items.other_store_nickname},
+															dataType: 'json',
+															success : function(data){ 
+																console.log(data.other_mem_id); // 채팅리스트에서 선택한 사람의 아이디
+																
+																// purchase - DB
+																$.ajax({
+																	type: 'get',
+																	url: '/market/store/purchaseInsert',
+																	data: { 'seller_id': userId, // 내아이디(판매자)
+																		    'pur_nick': data.other_mem_id, // 구매자 아이디
+																		    'product_seq': chat_product_seq}, // 해당 상품 번호
+																	success : function(data){ 
+																		// 거래 완료
+																	},
+																	error: function(err){
+																		console.log(err);
+																	}
+																});// ajax
+																
+															},
+															error: function(err){
+																console.log(err);
+															}
+														});// ajax
+														
+														// 확인 모달
+														$('.condiModalTopText > p').html('<strong>'+items.other_store_nickname+'</strong>님과의<br>거래가 완료되었습니다.');
+														$('#conditionModal').css('display', 'flex');
+													})
+													
+												});// each
+												
+											}//else if
+										},
+										error: function(err){
+											console.log(err);
+										}
+									});// ajax\
+								}// 판매 완료일 때
+			
+								// DB
+								$.ajax({
+									type: 'get',
+									url: '/market/store/prodManageUpdate',
+									data: { 'mem_id': userId, // 상점 주인의 아이디 
+										    'product_seq': items.product_seq, // 해당 상품
+										    'product_manage' : submit_product_manage}, // 해당 상품의 변경 상태
+									success : function(data){
+										//console.log(data); //업뎃확인용
+									},
+									error: function(err){
+										console.log(err);
+									}
+								});// ajax
+
+								// 리스트 닫기
+								$('.tabSortProdWrap2_'+index+'_click > .btnListWrap').remove();
+								$('.tabSortProdWrap2_'+index+'_click').attr('class', 'tabSortProdWrap2_'+index);
+								$('.tabSortProdWrap2_'+index).css('border', '1px solid rgb(195, 194, 204)');
+								$('.tabSortProdBtn'+index).css('background-image', 'url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNiIgaGVpZ2h0PSIxNiIgdmlld0JveD0iMCAwIDE2IDE2Ij4KICAgIDxwYXRoIGZpbGw9IiM1RTVDNkIiIGZpbGwtcnVsZT0iZXZlbm9kZCIgZD0iTTAgNC44YzAgLjIyOS4wOTguNDQ2LjI3LjU5OGw3LjIgNi40YS44LjggMCAwIDAgMS4wNjEgMGw3LjItNi40YS44LjggMCAxIDAtMS4wNjItMS4xOTVMOCAxMC4xMyAxLjMzMSA0LjIwM2EuOC44IDAgMCAwLTEuMzMuNTk3Ii8+Cjwvc3ZnPgo=)');
+																
+								// 모달 - 판매완료 제외
+								if(submit_product_manage!=3){
+									$('#conditionModal').css('display', 'flex');
+								}
+								
 								$('.modalBottomBtn').on({
 									click : function(){
 										$('#conditionModal').css('display', 'none');
 										return false; // 새로고침 방지
 									}
-								});
-							},error: function(err){
-								console.log(err);
-							}
-						});
-					});// [삭제] 버튼
-					
-					// # 각 상품의 찜 개수 - DB
-					$.ajax({
-						type: 'post',
-						url: '/market/store/favoritesOfProd',
-						data: { 'mem_id': userId, // 상점 주인의 아이디 
-							    'product_seq': items.product_seq}, // 찜 수 구할 상품의 번호
-						success : function(data){
-							$('.favorites'+index).text(data);
-						},
-						error: function(err){
-							console.log(err);
-						}
-					});
-		
-					// # [판매상태] input 테두리 마우스 오버  & 포커스  
-					$('.tabSortProdWrap2_'+index).on({
-					    mouseenter : function (){
-							$(this).css('border', '1px solid black');
-						},//mouseenter				
+								});	
+							});// 상태 클릭
+						}, // mouseenter		
 						mouseleave : function (){
-							$(this).css('border', '1px solid rgb(195, 194, 204)');
-						}
-					});		
-		 	
-					// # [판매상태] 클릭 - 상태리스트 띄우기, 상태변경
-					$('.tabSortProdWrap1_'+index).on("click", '.tabSortProdWrap2_'+index, function(){
-						// 화살표 ∨ --> ∧
-						$('.tabSortProdBtn'+index).css('background-image', 'url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNiIgaGVpZ2h0PSIxNiIgdmlld0JveD0iMCAwIDE2IDE2Ij4KICAgIDxwYXRoIGZpbGw9IiM1RTVDNkIiIGZpbGwtcnVsZT0iZXZlbm9kZCIgZD0iTTE2IDExLjJhLjc5NS43OTUgMCAwIDAtLjI2OS0uNTk4bC03LjItNi40YS44LjggMCAwIDAtMS4wNjIgMGwtNy4yIDYuNGEuOC44IDAgMSAwIDEuMDYyIDEuMTk1TDggNS44NjlsNi42NjkgNS45MjhhLjguOCAwIDAgMCAxLjMzLS41OTgiLz4KPC9zdmc+Cg==)');
-						
-						// wrap2 -> wrap2_click
-						$('.tabSortProdWrap2_'+index).attr('class', 'tabSortProdWrap2_'+index+'_click');
-						$('.tabSortProdWrap2_'+index+'_click').css({'width' : '100%',
-																	'height' : '3rem',
-																	'display' : 'flex',
-																	'border' : '1px solid rgb(30, 29, 41)',
-																	'border-radius' : '2px'});	
-			
-						// 상태 List
-						$('.tabSortProdWrap2_'+index+'_click').append($('<div/>', {
-							class: 'btnListWrap'
-						}).append($('<div/>', {
-							class: 'btnList'+index,
-							style: 'max-height: 12.5rem;overflow-y: scroll;'
-						}).append($('<div/>', {
-							class: 'nowCondition'+index,
-							text: '판매 중',
-							tabindex: '-1',
-						})).append($('<div/>', {
-							class: 'defaultList'+index, 
-							text: '예약 중',
-							tabindex: '-1',
-						})).append($('<div/>', {
-							class: 'defaultList'+index, 
-							text: '판매완료',
-							tabindex: '-1',
-						}))));
-						
-						// # nowCondition & defaultList CSS
-						$('.nowCondition'+index).css({'width': '100%',
-													  'height': '2.5rem',
-												      'display': 'flex',
-												      '-webkit-box-align': 'center',
-												      'align-items': 'center',
-												      'padding': '0px 0.7rem', 
-												      'background': 'rgb(234, 233, 241)',
-												      'color': 'rgb(30, 29, 41)'});
-						
-						$('.defaultList'+index).css({'width': '100%',
-												     'height': '2.5rem',
-												     'display': 'flex',
-												     '-webkit-box-align': 'center',
-												     'align-items': 'center',
-												     'padding': '0px 0.7rem',  
-												     'color': 'rgb(94, 92, 107)' });
-
-						
-						// # [판매 상태] - defaultList -> nowCondition + 현재 상태 찐회색 배경
-						var listChildren = $('.tabSortProdWrap2_'+index+'_click .btnList'+index).children('div');
-						var divChange = 0;
-						if(items.product_manage == 2){
-							// 예약 중
-							divChange = 1;
-						}else if(items.product_manage == 3){
-							// 판매완료
-							divChange = 2;
-						}
-						
-						listChildren.eq(divChange).attr('class', 'nowCondition'+index);
-						listChildren.eq(divChange).css('background', 'rgb(234, 233, 241)');
-						listChildren.eq(divChange).css('color', 'rgb(30, 29, 41)');
-						
-						listChildren.eq(divChange).prevAll().attr('class', 'defaultList'+index);
-						listChildren.eq(divChange).nextAll().attr('class', 'defaultList'+index);
-						
-						$('.defaultList'+index).css('background', 'rgb(255, 255, 255)');
-						$('.defaultList'+index).css('color', 'rgb(94, 92, 107)');
-						
-						// # 상태 리스트 마우스 오버  & 마우스리브
-						// ( 현재 상태 : nowList(찐회색) -> 마우스오버(연회색) / 기본 : defaultList(흰색) -> 마우스오버(연회색) )
-						$('.nowCondition'+index+', .defaultList'+index).on({
-							mouseenter : function (){
-								$(this).css('background', 'rgb(246, 245, 250)');
-								$(this).css('color', 'rgb(30, 29, 41)');
-								
-								// 클릭 시 바로 리스트 사라짐-> # 모달 창 띄우기
-								$(this).click(function(){
-									
-									// #판매상태 변경 ~ DB
-									var submit_product_manage = items.product_manage; //디폴트는 기존 상태 값
-									
-									if($(this).attr('class') == 'nowCondition'+index){
-										$('.condiModalTopText > p').html('상품이 삭제되었거나<br>상품의 판매 상태가 변경하시려는 <br>판매 상태와 같습니다.'); 
-									}else if($(this).text() == '판매 중'){ 
-										$('.condiModalTopText > p').html('상태가 변경되었습니다.');
-										submit_product_manage = 1;
-									}else if($(this).text() == '예약 중'){
-										$('.condiModalTopText > p').html('상태가 변경되었습니다.');
-										submit_product_manage = 2;
-									}else if($(this).text() == '판매완료'){ 
-										$('.condiModalTopText > p').html('상태가 변경되었습니다.');
-										submit_product_manage = 3;
-									}
-				
-									// DB
-									$.ajax({
-										type: 'get',
-										url: '/market/store/prodManageUpdate',
-										data: { 'mem_id': userId, // 상점 주인의 아이디 
-											    'product_seq': items.product_seq, // 해당 상품
-											    'product_manage' : submit_product_manage}, // 해당 상품의 변경 상태
-										success : function(data){
-											console.log(data); //업뎃확인용
-										},
-										error: function(err){
-											console.log(err);
-										}
-									});// ajax
-
-									// 리스트 닫기
-									$('.tabSortProdWrap2_'+index+'_click > .btnListWrap').remove();
-									$('.tabSortProdWrap2_'+index+'_click').attr('class', 'tabSortProdWrap2_'+index);
-									$('.tabSortProdWrap2_'+index).css('border', '1px solid rgb(195, 194, 204)');
-									$('.tabSortProdBtn'+index).css('background-image', 'url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNiIgaGVpZ2h0PSIxNiIgdmlld0JveD0iMCAwIDE2IDE2Ij4KICAgIDxwYXRoIGZpbGw9IiM1RTVDNkIiIGZpbGwtcnVsZT0iZXZlbm9kZCIgZD0iTTAgNC44YzAgLjIyOS4wOTguNDQ2LjI3LjU5OGw3LjIgNi40YS44LjggMCAwIDAgMS4wNjEgMGw3LjItNi40YS44LjggMCAxIDAtMS4wNjItMS4xOTVMOCAxMC4xMyAxLjMzMSA0LjIwM2EuOC44IDAgMCAwLTEuMzMuNTk3Ii8+Cjwvc3ZnPgo=)');
-																	
-									// # 모달 
-									$('#conditionModal').css('display', 'flex');
-									// 확인 버튼 클릭
-									$('.modalBottomBtn').on({
-										click : function(){
-											$('#conditionModal').css('display', 'none');
-											return false; // 새로고침 방지
-										}
-									});	
-								});// 상태 클릭
-							}, // mouseenter		
-							mouseleave : function (){
-								if($(this).attr('class') == 'nowCondition'+index){
-									$(this).css('background', 'rgb(234, 233, 241)');
-								}else if($(this).attr('class') == 'defaultList'+index){
-									$(this).css({'background':'rgb(255, 255, 255)',
-												 'color':'rgb(94, 92, 107)'});
-								}
-							}//mouseleave
-						});	//마우스오버  & 마우스리브
-						
-					
-						// # 리스트 닫기 (2가지)
-						// (1) [판매상태] 한번 더 클릭 시 리스트 닫기
-						$('.tabSortProdWrap1_'+index).on("click", '.tabSortProdWrap2_'+index+'_click', function(){
-							$('.tabSortProdWrap2_'+index+'_click > .btnListWrap').remove();
-							$('.tabSortProdWrap2_'+index+'_click').attr('class', 'tabSortProdWrap2_'+index);
-							$('.tabSortProdBtn'+index).css('background-image', 'url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNiIgaGVpZ2h0PSIxNiIgdmlld0JveD0iMCAwIDE2IDE2Ij4KICAgIDxwYXRoIGZpbGw9IiM1RTVDNkIiIGZpbGwtcnVsZT0iZXZlbm9kZCIgZD0iTTAgNC44YzAgLjIyOS4wOTguNDQ2LjI3LjU5OGw3LjIgNi40YS44LjggMCAwIDAgMS4wNjEgMGw3LjItNi40YS44LjggMCAxIDAtMS4wNjItMS4xOTVMOCAxMC4xMyAxLjMzMSA0LjIwM2EuOC44IDAgMCAwLTEuMzMuNTk3Ii8+Cjwvc3ZnPgo=)');
-						});
-						// (2) 다른 영역 클릭 시 리스트 닫기
-						$(document).click(function(e){
-							var parent = $(e.target).parent()[0].className;
-							//console.log(parent);
-							if(parent == 'tabSortProdWrap2_'+index+'_click' || parent == 'tabSortProdTitle' || parent == 'btnList'){
-								return false;
-								}
-							else{
-							$('.tabSortProdWrap2_'+index+'_click > .btnListWrap').remove();
-							$('.tabSortProdWrap2_'+index+'_click').attr('class', 'tabSortProdWrap2_'+index);
-							$('.tabSortProdBtn'+index).css('background-image', 'url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNiIgaGVpZ2h0PSIxNiIgdmlld0JveD0iMCAwIDE2IDE2Ij4KICAgIDxwYXRoIGZpbGw9IiM1RTVDNkIiIGZpbGwtcnVsZT0iZXZlbm9kZCIgZD0iTTAgNC44YzAgLjIyOS4wOTguNDQ2LjI3LjU5OGw3LjIgNi40YS44LjggMCAwIDAgMS4wNjEgMGw3LjItNi40YS44LjggMCAxIDAtMS4wNjItMS4xOTVMOCAxMC4xMyAxLjMzMSA0LjIwM2EuOC44IDAgMCAwLTEuMzMuNTk3Ii8+Cjwvc3ZnPgo=)');
+							if($(this).attr('class') == 'nowCondition'+index){
+								$(this).css('background', 'rgb(234, 233, 241)');
+							}else if($(this).attr('class') == 'defaultList'+index){
+								$(this).css({'background':'rgb(255, 255, 255)',
+											 'color':'rgb(94, 92, 107)'});
 							}
-						 });
-						
-						
-					}); // [판매상태] 클릭 이벤트
+						}//mouseleave
+					});	//마우스오버  & 마우스리브
 					
-					// # 판매상태  - 타이틀 설정
-					// product_manage 별 분류 1:판매중 2:예약중 3:판매완료
-					if( items.product_manage == 1 ){
-						$('.tabSortProdText'+index).text('판매 중');
-					// 기본 nowCondition은 판매중
-					}else if(items.product_manage == 2 ){
-						$('.tabSortProdText'+index).text('예약 중');
-						$('.tabSortProdWrap2_'+index+'_click .btnList'+index).children('div').eq(1).attr('class', 'nowCondition'+index);
-					}else if( items.product_manage == 3 ){
-						$('.tabSortProdText'+index).text('판매완료');
-					}
-				});//each
+					// 리스트 닫기 (2가지)
+					// - [판매상태] 한번 더 클릭 시 리스트 닫기
+					$('.tabSortProdWrap1_'+index).on("click", '.tabSortProdWrap2_'+index+'_click', function(){
+						$('.tabSortProdWrap2_'+index+'_click > .btnListWrap').remove();
+						$('.tabSortProdWrap2_'+index+'_click').attr('class', 'tabSortProdWrap2_'+index);
+						$('.tabSortProdBtn'+index).css('background-image', 'url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNiIgaGVpZ2h0PSIxNiIgdmlld0JveD0iMCAwIDE2IDE2Ij4KICAgIDxwYXRoIGZpbGw9IiM1RTVDNkIiIGZpbGwtcnVsZT0iZXZlbm9kZCIgZD0iTTAgNC44YzAgLjIyOS4wOTguNDQ2LjI3LjU5OGw3LjIgNi40YS44LjggMCAwIDAgMS4wNjEgMGw3LjItNi40YS44LjggMCAxIDAtMS4wNjItMS4xOTVMOCAxMC4xMyAxLjMzMSA0LjIwM2EuOC44IDAgMCAwLTEuMzMuNTk3Ii8+Cjwvc3ZnPgo=)');
+					});
+					// - 다른 영역 클릭 시 리스트 닫기
+					$(document).click(function(e){
+						var parent = $(e.target).parent()[0].className;
+						if(parent == 'tabSortProdWrap2_'+index+'_click' || parent == 'tabSortProdTitle' || parent == 'btnList'){
+							return false;
+							}
+						else{
+						$('.tabSortProdWrap2_'+index+'_click > .btnListWrap').remove();
+						$('.tabSortProdWrap2_'+index+'_click').attr('class', 'tabSortProdWrap2_'+index);
+						$('.tabSortProdBtn'+index).css('background-image', 'url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNiIgaGVpZ2h0PSIxNiIgdmlld0JveD0iMCAwIDE2IDE2Ij4KICAgIDxwYXRoIGZpbGw9IiM1RTVDNkIiIGZpbGwtcnVsZT0iZXZlbm9kZCIgZD0iTTAgNC44YzAgLjIyOS4wOTguNDQ2LjI3LjU5OGw3LjIgNi40YS44LjggMCAwIDAgMS4wNjEgMGw3LjItNi40YS44LjggMCAxIDAtMS4wNjItMS4xOTVMOCAxMC4xMyAxLjMzMSA0LjIwM2EuOC44IDAgMCAwLTEuMzMuNTk3Ii8+Cjwvc3ZnPgo=)');
+						}
+					 });
+				}); // [판매상태] 클릭 이벤트
+				
+				// 판매상태  - 타이틀 설정
+				// product_manage 별 분류 1:판매중 2:예약중 3:판매완료
+				if( items.product_manage == 1 ){
+					$('.tabSortProdText'+index).text('판매 중');
+				// 기본 nowCondition은 판매중
+				}else if(items.product_manage == 2 ){
+					$('.tabSortProdText'+index).text('예약 중');
+					$('.tabSortProdWrap2_'+index+'_click .btnList'+index).children('div').eq(1).attr('class', 'nowCondition'+index);
+				}else if( items.product_manage == 3 ){
+					$('.tabSortProdText'+index).text('판매완료');
+				}
+			});//each
 			},//success
 			error: function(err){
 				console.log(err);

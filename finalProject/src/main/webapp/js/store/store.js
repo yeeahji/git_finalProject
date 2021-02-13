@@ -12,7 +12,7 @@ if(loginId == paramId){ // 내 상점
 // 상점 기본 정보 -----------------------------------------------------------------
 var isStore = false; // ajax 중복 호출 방지
 $(document).ready(function(){
-	console.log("[상점] 로그인중인아이디는?"+$('.loginId').val());
+	//console.log("[상점] 로그인중인아이디는?"+$('.loginId').val());
 	if(paramId=='') userId = loginId;
 	
 	if(isStore) return;
@@ -24,15 +24,10 @@ $(document).ready(function(){
 		data: {'mem_id' : userId},
 		dataType: 'json',
 		success : function(data){
-			console.log("상점데이타"+data.storeDTO);
-			
 			$.each(data, function(key, value){
 				// 남의 상점 - 바다톡 연결
 				$('.badaTalk_btn').click(function(){
-					console.log("바다톡 버튼 클릭");
-					console.log("판매자 아디->"+value.mem_id);
-					
-					$.ajax({
+					/*$.ajax({
 						type: 'GET',
 						url: '/market/chat/chatRoom',
 						data: {'mem_id' : value.mem_id }, // 판매자 아이디
@@ -43,7 +38,7 @@ $(document).ready(function(){
 							console.log(err);
 						}
 					}); //ajax 
-				})
+*/				})
 				
 				// [프로필] 
 				$('.profileNickname').text(value.store_nickname); // 프로필 상점명
@@ -129,9 +124,6 @@ $(document).ready(function(){
 					 }
 				}); //프로필 사진 변경
 				
-
-				
-				
 				// 상점평점
 				var scoreAvg = value.store_scoreavg;
 				switch(scoreAvg){
@@ -210,7 +202,7 @@ $(document).ready(function(){
 								data: {'mem_id' : userId,
 									   'store_echo': actSum },
 							    success: function(data){
-							    	console.log('!!에코지수 업데이트 완료');
+							    	console.log('에코지수 업데이트 완료');
 							    },error: function(err){
 							    	console.log(err);
 							    }
@@ -319,8 +311,6 @@ $(document).ready(function(){
 	
 	// 에코지수 마우스오버 - 설명 
 	$('a[rel=tooltip]').mouseover(function(e){
-		console.log("에코지수설명");
-		
     	$('a[rel=tooltip]').attr('title','에코지수는 아나바다<br>사용자의 판매 및 구매 횟수를<br>기준으로 만든 지표입니다.'); // 문구
     	
         var tip = $(this).attr('title');         

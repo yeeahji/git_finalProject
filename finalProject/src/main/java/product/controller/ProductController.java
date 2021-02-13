@@ -8,12 +8,16 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.FileCopyUtils;
+import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -23,6 +27,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import index.bean.wishDTO;
+import member.bean.MemberDTO;
 import product.bean.CategoryDTO;
 
 import org.springframework.web.servlet.ModelAndView;
@@ -125,10 +131,12 @@ public class ProductController {
 	
 	// 상품 리스트 - > 상세페이지
 	@RequestMapping(value="productDetail", method=RequestMethod.GET)
-	public String registDetail(@RequestParam String seq, Model model, HttpSession session) {
+	public String registDetail(@RequestParam String seq, Model model, 
+							   @AuthenticationPrincipal MemberDTO memberDTO, 
+							   HttpSession session,
+							   HttpServletResponse response) {
 		 // 최근 본 상품 목록들
 		 ArrayList<String> list = (ArrayList)session.getAttribute("recentlyProduct");
-		 
 		 if (list == null) {
 				list = new ArrayList<String>();
 				session.setAttribute("recentlyProduct", list);
@@ -141,9 +149,16 @@ public class ProductController {
 					}
 				}
 			}
-		 
 		list.add(seq); 
-		 
+		
+		// 상품 상세페이지 조회수  
+		if(memberDTO != null) {
+			//System.out.println(" 지금로그인중인아디->"+memberDTO.getUsername());
+			Cookie cookie = new Cookie("memHit", "0");//생성
+			cookie.setMaxAge(60*60*24);//초 단위 생존기간
+			response.addCookie(cookie);//클라이언트에게 보내기
+		}
+		
 		// 상품 정보 받아옴
 		ProductDTO productDTO = productService.productDetail(seq);
 		model.addAttribute("product_logtime", productDTO.getProduct_logtime());
@@ -156,7 +171,16 @@ public class ProductController {
 	// 상품상세페이지 - 상품 정보 받아오기
 	@RequestMapping(value="getProductDetail", method=RequestMethod.GET)
 	@ResponseBody
-	public ModelAndView getProductDetail(@RequestParam String seq) {
+	public ModelAndView getProductDetail(@CookieValue(value="memHit", required=false) Cookie cookie,
+										 HttpServletResponse response,
+										 @RequestParam String seq) {
+		if(cookie != null) {
+			//System.out.println("쿠키.."+cookie);
+			productService.hitUpdate(seq); //조회수 증가
+			cookie.setMaxAge(0); //쿠키 삭제
+ 			response.addCookie(cookie); //쿠키 삭제된걸 클라이언트에게 보내주기.
+ 		}
+		
 		ProductDTO productDTO = productService.productDetail(seq);
 		ModelAndView mav = new ModelAndView();
 		
@@ -221,29 +245,6 @@ public class ProductController {
 		return mav;
 	}
 	
-	// 해당 상품이 찜 받은 수
-	@RequestMapping(value="getZzimNum", method=RequestMethod.GET)
-	@ResponseBody
-	public ModelAndView getZzimNum(@RequestParam String seq) {
-		int zzimNum = productService.getZzimNum(seq);
-		
-		ModelAndView mav = new ModelAndView();
-		mav.addObject("zzimNum", zzimNum);
-		mav.setViewName("jsonView");
-		return mav;
-	}
-	
-	// 찜 업데이트
-	@RequestMapping(value="zzimInsert", method=RequestMethod.GET)
-	@ResponseBody
-	public ModelAndView zzimInsert(@RequestParam Map<String, String> map) {
-		productService.zzimInsert(map);
-		
-		ModelAndView mav = new ModelAndView();
-		mav.setViewName("jsonView");
-		return mav;
-	}
-	
 	// 대분류 이름 
 	@RequestMapping(value="getProdBigCate", method=RequestMethod.GET)
 	@ResponseBody
@@ -256,4 +257,59 @@ public class ProductController {
 		return mav;
 	}
 	
+	
+	// 해당 상품이 찜 받은 수
+	@RequestMapping(value="getZzimNum", method=RequestMethod.GET)
+	@ResponseBody
+	public ModelAndView getZzimNum(@RequestParam String seq) {
+		int zzimNum = productService.getZzimNum(seq);
+		
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("zzimNum", zzimNum);
+		mav.setViewName("jsonView");
+		return mav;
+	}
+	
+	// 찜 눌렀는지 조회
+	@RequestMapping(value="zzimExistCheck", method=RequestMethod.GET)
+	@ResponseBody
+	public ModelAndView zzimExistCheck(@RequestParam Map<String, String> map) {
+		wishDTO wishDTO = productService.zzimExistCheck(map);
+		
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("wishDTO", wishDTO);
+		mav.setViewName("jsonView");
+		return mav;
+	}
+	
+	// 찜 업데이트
+	@RequestMapping(value="zzimInsert", method=RequestMethod.GET)
+	@ResponseBody
+	public void zzimInsert(@RequestParam Map<String, String> map) {
+		productService.zzimInsert(map);
+
+	}
+	
+	// 찜 해제
+	@RequestMapping(value="zzimDelete", method=RequestMethod.GET)
+	@ResponseBody
+	public void zzimDelete(@RequestParam Map<String, String> map) {
+		productService.zzimDelete(map);
+
+	}
+
+	
 }
+
+
+
+
+
+
+
+
+
+
+
+
+

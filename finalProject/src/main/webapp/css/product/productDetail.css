@@ -1047,31 +1047,6 @@ to {
 	padding: 10px 0px 14px;
     border-bottom: 1px solid rgb(238, 238, 238);
 }
-.storeInfo_callBtn {
-	position: absolute;
-    bottom: 0px;
-    left: 0px;
-    display: flex;
-    width: 100%;
-    padding: 16px 15px 80px 25px;
-}
-.callBtn {
-	background: rgb(10, 88, 202);
-    border: 1px solid rgb(10, 88, 202);
-    color: rgb(255, 255, 255);
-}
-.storeInfo_callBtn > * {
-    flex: 1 1 0%;
-    display: flex;
-    margin-right: 10px;
-    -webkit-box-pack: center;
-    justify-content: center;
-    height: 56px;
-    font-size: 18px;
-    -webkit-box-align: center;
-    align-items: center;
-    font-weight: 600;
-}
 /* ************** 상품정보(상품내용, 지역, 카테고리, 상품태그) ************** */
 .prodInfo_wrap1 {
 	padding-right: 30px;

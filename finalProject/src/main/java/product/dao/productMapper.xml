@@ -134,6 +134,15 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		insert into wish values(#{mem_id}, #{seq}, sysdate)
 	</insert>
 	
+	<!-- 찜(-1) 삭제  -->
+	<insert id="zzimDelete" parameterType="java.util.Map">
+		delete 
+		from wish 
+		where mem_id = #{mem_id} and product_seq = #{seq}
+	</insert>
+	
+	
+	
 	<!-- 해당 상품의 대분류 이름 -->
 	<select id="getProdBigCate" parameterType="String" resultType="String"> 
 		select cate_name
@@ -141,10 +150,19 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		where cate_code = #{cate_code}
 	</select>
 	
-	<!-- 모든 대분류 이름 -->
-
-
-
+	<!-- 찜 이미 했는지 확인 zzimExistCheck -->
+	<select id="zzimExistCheck" parameterType="java.util.Map" resultType="index.bean.wishDTO"> 
+		select*
+		from wish
+		where mem_id = #{mem_id} and product_seq = #{seq}
+	</select>
+	
+	<!-- 게시물 조회수 업뎃  -->
+	<update id="hitUpdate" parameterType="int">
+		update product 
+		set product_view = product_view+1 
+		where product_seq=#{seq}
+	</update>
 
 
 </mapper>

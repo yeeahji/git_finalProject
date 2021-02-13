@@ -29,6 +29,7 @@
 
 <input type="hidden" class="hiddenProdSeq" value="${seq}"><!-- product_seq 받아옴  -->
 <input type="hidden" class="storeOwner" value=""><!--상품 올린 상점 주인 mem_id -->
+
 <div class="detail__area">
 <div class="detail__div">
 	<!-- ************************ 카테고리 ************************ -->
@@ -349,24 +350,10 @@
 						</div>
 					
 					</div>
-					<!-- 연락하기 버튼 -->
-					<div class="storeInfo_callBtn">
-						<button class="callBtn">연락하기</button>
-					</div>
 				</div><!-- //storeDetailWrap -->
 			</div><!-- //prodInfo_storeWrap1 -->
 		</div><!-- //RightWrap -->
 	</div><!-- //btmProdInfo_Wrap1 -->
-	
-
-	
-	
-	
-	
-	
-	
-	
-	
 	
 	
 	<!-- ************************ 신고하기 모달창 ************************ -->
@@ -490,7 +477,7 @@
    </div><!-- //modalHidden -->
 	
 </div>
-</div>
+
 
 <script>
 // 슬라이더 관련

@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import chat.bean.ChatListDTO;
 import product.bean.ProductDTO;
 import store.bean.PurchaseDTO;
 import store.bean.PurchaseExistDTO;
@@ -154,6 +155,34 @@ public class StoreDAOMybatis implements StoreDAO {
 	@Override
 	public List<PurchaseExistDTO> purchaseExist(Map<String, String> map) {
 		return sqlSession.selectList("storeSQL.purchaseExist", map);
+	}
+
+	// 채팅방 리스트
+	@Override
+	public List<ChatListDTO> getChatList(String mem_id) {
+		return sqlSession.selectList("storeSQL.getChatList", mem_id);
+	}
+
+	// 구매내역 insert
+	@Override
+	public void purchaseInsert(Map<String, String> map) {
+		sqlSession.insert("storeSQL.purchaseInsert", map);
+		
+	}
+	// 닉으로 상대방 상점 아디 구하기
+	@Override
+	public String getStoreNick(String other_store_nickname) {
+		return sqlSession.selectOne("storeSQL.getStoreNick", other_store_nickname);
+	}
+
+	@Override
+	public ProductDTO purchaseListSelect(String product_seq) {
+		return sqlSession.selectOne("storeSQL.purchaseListSelect", product_seq);
+	}
+
+	@Override
+	public void reviewRegister(Map<String, String> map) {
+		sqlSession.insert("storeSQL.reviewRegister", map);
 	}
 
 	

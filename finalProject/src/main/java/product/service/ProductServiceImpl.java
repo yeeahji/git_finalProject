@@ -8,6 +8,7 @@ import org.apache.commons.collections.map.HashedMap;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import index.bean.wishDTO;
 import product.bean.CategoryDTO;
 import product.bean.ProductDTO;
 import product.bean.RelProdPaging;
@@ -106,6 +107,26 @@ public class ProductServiceImpl implements ProductService {
 	public String getProdBigCate(String cate_code) {
 		return productDAO.getProdBigCate(cate_code);
 	}
+
+	@Override
+	public wishDTO zzimExistCheck(Map<String, String> map) {
+		return productDAO.zzimExistCheck(map);
+	}
+
+	@Override
+	public void zzimDelete(Map<String, String> map) {
+		productDAO.zzimDelete(map);
+	}
+
+	@Override
+	public void hitUpdate(String seq) {
+		productDAO.hitUpdate(seq);
+	}
+	
+	
+	
+	
+	
 
 }
 

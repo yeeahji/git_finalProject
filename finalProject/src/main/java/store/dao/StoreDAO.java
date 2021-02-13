@@ -3,6 +3,7 @@ package store.dao;
 import java.util.List;
 import java.util.Map;
 
+import chat.bean.ChatListDTO;
 import product.bean.ProductDTO;
 import store.bean.PurchaseDTO;
 import store.bean.PurchaseExistDTO;
@@ -62,5 +63,15 @@ public interface StoreDAO {
 	public void echoUpdate(Map<String, String> map);
 	
 	public List<PurchaseExistDTO> purchaseExist(Map<String, String> map);
+	
+	public List<ChatListDTO> getChatList(String mem_id);
+	
+	public void purchaseInsert(Map<String, String> map);
+	
+	public String getStoreNick(String other_store_nickname);
+	
+	public ProductDTO purchaseListSelect(String product_seq);
+	
+	public void reviewRegister(Map<String, String> map);
 	
 }
