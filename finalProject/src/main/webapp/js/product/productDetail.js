@@ -401,8 +401,8 @@ $(document).ready(function(){
 				// 바다톡 연결
 				$('#callBtn').click(function(){
 					//변수 설정
-					if($('.storeInfo_name').find('input').length == 0) { //중복 설정 방지
-						$('.storeInfo_name').append($('<input/>', {
+					if($('#callBtn').find('input').length == 0) { //중복 설정 방지
+						$('#callBtn').append($('<input/>', {
 							type: 'hidden',
 							name: 'other_store_nickname',
 							value: $('.storeInfo_name').text()
@@ -513,6 +513,7 @@ $(document).ready(function(){
 				// 찜 메시지 사라짐
 				$('.zzimCancelMsg').css('display', 'none');
 				$('.zzimCheckMsg').css('display', 'flex').delay(500).fadeOut(1000);
+				return false; //[추가됨]
 			});
 			
 			// 찜 해제
@@ -549,6 +550,8 @@ $(document).ready(function(){
 				
 				$('.zzimCheckMsg').css('display', 'none');
 				$('.zzimCancelMsg').css('display', 'flex').delay(500).fadeOut(1000);
+			
+				return false; //[추가됨]
 			});// 찜 해제
 
 		},error: function(err){
@@ -556,9 +559,7 @@ $(document).ready(function(){
 		}
 	}); // 찜 zzimExistCheck
 	
-	
-	
-	// 카테고리 (대분류/소분류) ---------------------------------------------------------
+	// 카테고리 (대분류/소분류)
 	$.ajax({
 		type: 'GET',
 		url: '/market/product/getProdCateName',
@@ -724,7 +725,8 @@ $(document).ready(function(){
 	         $(openInBtn).parent().next().attr('class', 'singoContent');            
 	      }
 	      
-	      $("#modalDisplay").attr('id','modalHidden'); 
+	      $("#modalDisplay").attr('id','modalHidden');
+	      return false;
 	      });
 	   
 	   //글자수 카운팅
@@ -737,6 +739,8 @@ $(document).ready(function(){
 				$(this).val(content.substring(0, 200)); //글자수 초과하면 안써지게
 			}
 		});
+		
+		 return false;
 	}); // 신고모달
 	
 	

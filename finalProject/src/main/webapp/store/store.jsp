@@ -53,13 +53,13 @@
 					</c:if>
 					<!-- 남의 상점 - 바다톡-->
 					<c:if test="${member.username!=param.id && not empty param.id}">
+					<form id="storeForm" method="post" action="/market/chat/chatRoom" target="chatRoom">
 						<div class="badaTalkWrap">
-							 <form id="storeForm" method="post" action="/market/chat/chatRoom" target="chatRoom">
-			                 <div class="badaTalk_btn">
+			                 <button type="button" class="badaTalk_btn">
 								<span class="badaTalk_btn_text">바다톡</span>
-							 </div>
-							 </form>
+							 </button>
 						</div><!-- //imageEdit -->
+					</form>
 					</c:if>
 					
 				</div><!-- //(2)background2 -->
