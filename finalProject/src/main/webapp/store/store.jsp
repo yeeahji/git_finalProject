@@ -13,7 +13,6 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/store/store.css">
 <script defer src="${pageContext.request.contextPath}/js/store/reviews.js"></script><!-- 상점 상품후기 수 -->
 
-<form id="storeForm" method="post" action="/market/chat/chatRoom" target="chatRoom">
 <div id="storeBody">
 <div id="storeWrap">
 	<div id="storeTop">
@@ -55,9 +54,11 @@
 					<!-- 남의 상점 - 바다톡-->
 					<c:if test="${member.username!=param.id && not empty param.id}">
 						<div class="badaTalkWrap">
+							 <form id="storeForm" method="post" action="/market/chat/chatRoom" target="chatRoom">
 			                 <div class="badaTalk_btn">
 								<span class="badaTalk_btn_text">바다톡</span>
 							 </div>
+							 </form>
 						</div><!-- //imageEdit -->
 					</c:if>
 					
@@ -259,6 +260,5 @@
 	
 </div><!-- //storeWrap -->
 </div><!-- //storeBody -->
-</form>
 
 
