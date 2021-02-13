@@ -58,7 +58,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 				order by decode(product_manage,3,1) desc, product_logtime desc
 			</when> 
 			<when test="sortNum==1"> <!-- 인기순  -->
-				<!-- 추가!! -->
+				order by product_view desc
 			</when> 
 			<when test="sortNum==2"> <!-- 저가순 -->
 				order by product_price 
@@ -98,7 +98,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  	
  	<!-- [찜] -->
  	<!-- 리스트 출력 -->
- 	<select id="storeFavoritesList" parameterType="String" resultType="product">
+ 	<select id="storeFavoritesList" parameterType="java.util.Map" resultType="product">
 		select product.mem_id,  <!-- 상품 올린 사람의 id -->
 			   product_seq, 
 			   cate_code, 
@@ -107,7 +107,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			   product_img1, 
 			   product_img2, 
 			   product_img3, 
-			   product_price, 
+			   TO_CHAR(product_price, '999,999,999') as product_price, 
 			   product_location, 
 			   product_condition, 
 			   product_delivery_fee, 
@@ -118,10 +118,25 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			   product_hashtag5, 
 			   product_view, 
 			   product_manage, 
-			   product_logtime
+			   TO_CHAR(product_logtime,'YYYY-MM-DD hh:mm') as product_logtime 
 		from wish
 		join product using(product_seq)
 		where wish.mem_id = #{mem_id} <!-- 찜한 사람의 아이디 -->
+		<choose>
+			<when test="sortNum==0"> <!-- 최신순 정렬; 판매완료상품은 맨뒤로 -->
+				order by decode(product_manage,3,1) desc, product_logtime desc
+			</when> 
+			<when test="sortNum==1"> <!-- 인기순  -->
+				order by product_view desc
+			</when> 
+			<when test="sortNum==2"> <!-- 저가순 -->
+				order by product_price 
+			</when> 
+			<when test="sortNum==3"> <!-- 고가순 -->
+				order by product_price desc
+			</when> 
+			
+		</choose>
 	</select> 
 	
 	<!-- 해당 상점이 찜한 상품 수-->
@@ -318,6 +333,18 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		values(#{product_seq}, #{mem_id}, #{review_content}, #{review_score}, sysdate, seq_review.NEXTVAL)
 	</insert>
 	
+	<!-- 찜 삭제 -->
+	<delete id="favoritesDelete" parameterType="java.util.Map">
+		delete 
+		from wish 
+		where mem_id = #{mem_id} and product_seq=#{product_seq}
+		
+		<!-- <foreach item="item" index="index" collection="clickArray"
+	      open="(" separator="," close=")">
+	        #{item.value}
+	    </foreach> -->
+		
+	</delete>
 </mapper>
 
 

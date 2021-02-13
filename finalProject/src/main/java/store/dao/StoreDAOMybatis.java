@@ -43,8 +43,11 @@ public class StoreDAOMybatis implements StoreDAO {
 	}
 
 	@Override
-	public List<ProductDTO> storeFavoritesList(String mem_id) {
-		return sqlSession.selectList("storeSQL.storeFavoritesList", mem_id);
+	public List<ProductDTO> storeFavoritesList(String mem_id, String sortNum) {
+		Map<String, String> map = new HashMap<String, String>();
+		map.put("mem_id", mem_id);
+		map.put("sortNum", sortNum);
+		return sqlSession.selectList("storeSQL.storeFavoritesList", map);
 	}
 
 	@Override
@@ -183,6 +186,12 @@ public class StoreDAOMybatis implements StoreDAO {
 	@Override
 	public void reviewRegister(Map<String, String> map) {
 		sqlSession.insert("storeSQL.reviewRegister", map);
+	}
+
+	@Override
+	public void favoritesDelete(Map<String, Object> map) {
+		System.out.println(map.get("clickArray"));
+		sqlSession.delete("storeSQL.favoritesDelete", map);
 	}
 
 	

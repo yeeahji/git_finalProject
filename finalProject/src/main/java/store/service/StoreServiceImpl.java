@@ -52,8 +52,8 @@ public class StoreServiceImpl implements StoreService {
 	}
 
 	@Override
-	public List<ProductDTO> storeFavoritesList(String mem_id) {
-		return storeDAO.storeFavoritesList(mem_id);
+	public List<ProductDTO> storeFavoritesList(String mem_id, String sortNum) {
+		return storeDAO.storeFavoritesList(mem_id, sortNum);
 	}
 
 	@Override
@@ -247,6 +247,12 @@ public class StoreServiceImpl implements StoreService {
 	@Override
 	public void reviewRegister(Map<String, String> map) {
 		storeDAO.reviewRegister(map);
+		
+	}
+
+	@Override
+	public void favoritesDelete(Map<String, Object> map) {
+		storeDAO.favoritesDelete(map);
 		
 	}
 

@@ -20,7 +20,7 @@ public interface StoreDAO {
 
 	public int nicknameUpdate(Map<String, String> map);
 
-	public List<ProductDTO> storeFavoritesList(String mem_id);
+	public List<ProductDTO> storeFavoritesList(String mem_id, String sortNum);
 
 	public int storeFavoritesTotalA(String mem_id);
 
@@ -73,5 +73,7 @@ public interface StoreDAO {
 	public ProductDTO purchaseListSelect(String product_seq);
 	
 	public void reviewRegister(Map<String, String> map);
+	
+	public void favoritesDelete(Map<String, Object> map);
 	
 }
