@@ -13,7 +13,6 @@
 
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.4.0/sockjs.js"></script>
-<!-- <script defer src="../js/chat/chatRoom.js"></script> -->
 <script type="text/javascript">
 var webSocket = {
 	//sockjs 관련 스크립트----------------------------------------------------------
@@ -33,12 +32,13 @@ var webSocket = {
 	},
 	
 	//메시지 보낼 때-----------------------------------------------------------------
-	_sendMessage: function(chat_seq, cmd, msg, checkId) {
+	_sendMessage: function(chat_seq, cmd, msg, checkId, current_user_num) {
 		var msgData = {
 				chat_seq : chat_seq,
 				cmd : cmd,
 				msg : msg,
-				checkId : checkId
+				checkId : checkId,
+				current_user_num : current_user_num
 		};
 		var jsonData = JSON.stringify(msgData);
 		this._socket.send(jsonData);
@@ -48,12 +48,30 @@ var webSocket = {
 	receiveMessage: function(msgData) {
 		//----------- 메세지 -------------
 		if(msgData.cmd == 'CMD_MSG_SEND') {
-			if(msgData.msg.trim() == '') return; //받은 메시지가 공백일 시 벗어나기
+			//만약 이미지를 올렸다면
+			/*
+			$('#uploadImg').on('change', function() {
+	            if(input.files && input.files[0]) {
+		            var reader = new FileReader();
+					
+		            //URL 얻기
+		            alert(reader.readAsDataURL(input.files[0]));
+		            console.log(reader.readAsDataURL(input.files[0]));
+		            //msgData.msg 앞에 이미지 태그 생성해서 위의 url값 넣어주기
+				}
+			});
+			*/
 			
-			if(msgData.checkId == '${member.username}') { //내가 보낸 메세지일 때
+			//받은 메시지가 공백일 시 벗어나기
+			if(msgData.msg.trim() == '') return;
+			
+			//내가 보낸 메세지일 때
+			if(msgData.checkId == '${member.username}') { 
 				$('#chat-container').append('<div class="my-chat-box"><div class="chat my-chat"><input type="hidden" value="${member.username}">'+msgData.msg+'</div>');
 			}
-			else { //상대방이 보낸 메세지일 때
+			
+			//상대방이 보낸 메세지일 때
+			else { 
 				$('#chat-container').append('<div class="chat-box"><div class="chat"><input type="hidden" value="${two_mem_id}">'+msgData.msg+'</div>');
 			}
 			$('#chat-container').scrollTop($('#chat-container')[0].scrollHeight+20);
@@ -70,6 +88,11 @@ var webSocket = {
 		}
 		//------------ 입장 --------------
 		else if(msgData.cmd == 'CMD_ENTER') {
+			//온라인 변경
+			if(msgData.current_user_num != '1') { //첫번째로 채팅방에 들어온게 아니라면(=이미 채팅방에 다른 유저가 있다면)
+				$('#olineCheck').attr('src', '../image/chat/houseOpen.png');
+			}
+			
 			//메세지 불러오기
 			if(msgData.checkId == '${member.username}') {
 				var loadMsg;
@@ -85,7 +108,7 @@ var webSocket = {
 						if(xhttp.status == 200){ 
 							loadMsg = xhttp.responseText;
 							
-							//문자열 치환
+							//문자열 치환(상대방과 나를 구분하는 CSS 뒤바꾸기)
 							var otherChatBefore = '<div class="my-chat-box"><div class="chat my-chat"><input type="hidden" value="${two_mem_id}">';
 							var otherChatAfter = '<div class="chat-box"><div class="chat"><input type="hidden" value="${two_mem_id}">';
 							var myChatBefore = '<div class="chat-box"><div class="chat"><input type="hidden" value="${member.username}">';
@@ -103,11 +126,25 @@ var webSocket = {
 					}
 				}
 			}//if
+			
+			
+			//상품 상세페이지를 통해 들어왔을 경우 (수정 필요 : 간혹 div 태그 깨짐, 상대방에겐 뒤늦게 메시지 출력)
+			if('${product_seq}' != '0') {
+				var likeMsg = "'${product_subject}'에 관심있어요!";
+				var likeUrl = '<a class="productPage" href="http://localhost:8080/market/product/productDetail?seq=${product_seq}" target="_blank">상품 확인</a>';
+				
+				if(msgData.checkId == '${member.username}') { 
+					$('#chat-container').append('<div class="my-chat-box"><div class="chat my-chat"><input type="hidden" value="${member.username}">'+likeMsg+'</div>');
+					$('#chat-container').append('<div class="my-chat-box"><div class="chat my-chat"><input type="hidden" value="${member.username}">'+likeUrl+'</div>');
+				}
+			}
 		}
+		
 		//------------ 퇴장 --------------
 		else if(msgData.cmd == 'CMD_EXIT') {					
-/* 			$('#chat-container').append('<div class="chat notice">' + msgData.msg + '</div>');
-			$('#chat-container').scrollTop($('#chat-container')[0].scrollHeight+20); */
+			//오프라인 변경
+			$('#olineCheck').attr('src', '../image/chat/houseClose.png');
+			/*$('#chat-container').append('<div class="chat notice">' + msgData.msg + '</div>');*/
 		}
 	},
 
@@ -154,11 +191,9 @@ $(window).on('load', function () {
 <body>
 	<div class="chatRoomHeader">
 		<div class="chatRoomSubject" id="chatRoomSubject">
-			${other_store_nickname}
+			<img id="olineCheck" src="../image/chat/houseClose.png"> ${other_store_nickname}
 		</div>
-<!-- 		<div class="chatList_btns">
-			<input type="button" value="목록" id="chatListBtn">
-		</div> -->
+		<!-- <input type="file" id="uploadImg"> -->
 	</div>
 	
 	

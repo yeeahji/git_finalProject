@@ -70,7 +70,6 @@ public class ChatController {
 		String one_store_img = one_storeDTO.getStore_img();
 
 			//상대방
-		System.out.println("상대방의 상점 닉네임 : " + other_store_nickname);
 		StoreDTO two_storeDTO = storeService.getMember(other_store_nickname);
 		String two_mem_id = two_storeDTO.getMem_id();
 		String two_store_nickname = other_store_nickname;
