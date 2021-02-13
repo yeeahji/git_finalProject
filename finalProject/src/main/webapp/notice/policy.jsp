@@ -27,11 +27,12 @@
 					</nav>
 					<main calss="policy_main">
 						<div calss="pm_inner" id="pm_inner">
-							<div classs="main_content1">
+							<div classs="main_content1" id="main_content1">
 								<div class="main_content1_text1">
 									<h2>
-										<small>이용 제재 / 3아웃 정책</small>
-										"번개장터 운영정책"
+										<p><span id="smallSpan">이용 제재 / 3아웃 정책</span></p>
+										<br>
+										번개장터 운영정책
 									</h2>
 								</div>		
 								
@@ -69,10 +70,10 @@
 								</div>
 								
 								<div class="main_content2_text2">
-									<div calss="c2_t2_content1">
+									<div calss="c2_t2_content1" id="c2_t2_content1">
 									위의 약속을 위배하는 경우 3아웃 정책으로 이용을 제한합니다.</div>
 									
-									<div calss="c2_t2_content2">
+									<div calss="c2_t2_content2" id="c2_t2_content2">
 									
 										<div class="c2_t2_content2_1">
 										  <div>3아웃 정책</div>
@@ -82,22 +83,21 @@
 										<div class="c2_t2_content2_2">
 											<div class="c2t2c2_inner">
 												<div><b>1차</b></div>
-												<div>"물품삭제 /&nbsp;"<b>3</b>"일 이용제한"</div>
+												<div>물품삭제 /&nbsp;<b>3</b>일 이용제한</div>
 											</div>
 											<div class="c2t2c2_inner">
 												<div><b>2차</b></div>
-												<div>"물품삭제 /&nbsp;"<b>15</b>"일 이용제한"</div>
+												<div>물품삭제 /&nbsp;<b>15</b>일 이용제한</div>
 											</div>
 											<div class="c2t2c2_inner">
 												<div><b>3차</b></div>
-												<div>"물품삭제 /&nbsp;"<b>30</b>"일 이용제한"</div>
+												<div>물품삭제 /&nbsp;<b>30</b>일 이용제한</div>
 											</div>
-										</div> <%--c2_t2_content2 --%>
+									   </div> <%--c2_t2_content2 --%>
+								  </div>
 										<p class="gddZtI">
 										  "항목에 따라 사전 안내 없이 영구적으로 제한될 수 있습니다."
 										</p>
-										
-									</div> <%-- c2_t2_content2 --%>
 								</div> <%-- main_content2_text2 --%>
 							</div> <%-- main_content2--%>
 							

@@ -88,6 +88,7 @@
 	           		 상세정보
 	            &nbsp;&nbsp;&nbsp;&nbsp;
 		        <button type="button" class="btn btn-danger btn-sm" id="memberBlockBtn">영구정지</button>
+		        <button type="button" class="btn btn-primary btn-sm" id="memberReleaseBtn">영구정지해제</button>
 	        </div>
 	        <div class="card-body">
 	        	<table class="table table-bordered border-primary table-sm">
@@ -97,7 +98,7 @@
 				      <th width="10%">Tel</th><th width="40%"><span id="HpSpan"></span></th>
 				    </tr>
 				    <tr>
-				      <th>생년월일</th><th><span id="birthSpan"></span></th> 
+				      <th>계정상태</th><th><span id="enabledSpan"></span></th> 
 				      <th>상점이름</th><th><span id="store1NameSpan"></span></th>
 				    </tr>
 				    <tr>
@@ -187,11 +188,11 @@
 	<table id="memberTable" class="table table-bordered table-striped table table-sm">
         <thead class="table-dark">
             <tr>
-                <th>mem_id</th>
-                <th>mem_name</th>
-                <th>mem_email</th>
-                <th>mem_tel1</th>
-                <th>mem_add1</th>
+                <th>회원아이디</th>
+                <th>회원닉네임</th>
+                <th>이메일</th>
+                <th>계정상태</th>
+                <th>주소</th>
             </tr>
         </thead>
         <tbody id="tbody">
@@ -204,7 +205,7 @@
             <tr>
               	<th>mem_id</th>
                 <th>mem_name</th>
-                <th>mem_email</th>
+                <th>mem_enabled</th>
                 <th>mem_tel1</th>
                 <th>mem_add1</th>
             </tr>

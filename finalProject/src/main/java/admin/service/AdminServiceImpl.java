@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import admin.bean.AdminBoardPaging;
 import admin.bean.AdminMembersDTO;
+import admin.bean.AdminProductDTO;
 import admin.dao.AdminDAO;
 import board.bean.CommentDTO;
 import member.bean.ComplainDTO;
@@ -320,11 +321,126 @@ public class AdminServiceImpl implements AdminService {
       
       return adminDAO.getReviewContent(review_seq);
    }
+ //신고내용 처리상태 변경하기
+ 	@Override
+ 	public void solveComplain(Map<String, Integer> map) {
+ 		adminDAO.solveComplain( map);
+ 	}
+ 	
+// 	[1:1문의]=========================================================================
+ 	//A.1:1문의 전체 리스트 출력
+ 	@Override
+ 	public List<QnaDTO> getQnaList(String pg, String viewNum) {
+ 		int endNum = Integer.parseInt(pg)*Integer.parseInt(viewNum);
+ 		int startNum = endNum-(Integer.parseInt(viewNum)-1);
+ 		
+ 		Map <String, Integer> map = new HashMap<String, Integer>();
+ 		map.put("startNum", startNum);
+ 		map.put("endNum", endNum); 
+ 		
+ 		return adminDAO.getQnaList(map );
+ 	}
+ 	@Override
+ 	public AdminBoardPaging qnaBP(String pg, String viewNum) {
+ 		int qnaTotal = adminDAO.getQnaTotal();
+ 		
+ 		adminBoardPaging.setCurrentPage(Integer.parseInt(pg));
+ 		adminBoardPaging.setPageBlock(10);
+ 		adminBoardPaging.setPageSize(Integer.parseInt(viewNum));//위에endNum,startNum과 맞아야함
+ 		adminBoardPaging.setTotalA(qnaTotal);
+ 		
+ 		adminBoardPaging.makePagingHTML();
+ 		return adminBoardPaging;
+ 	}
+ 	@Override
+ 	public QnaDTO getQnaContent(int qna_seq) {
+ 		return adminDAO.getQnaContent(qna_seq) ;
+ 	}
+ 	@Override
+ 	public void writeAnswer(Map<String, Object> map) {
+ 		System.out.println(map);
+ 		adminDAO.writeAnswer( map);
+ 		
+ 	}
+// 	[탈퇴회원 관리]=========================================================================
 
-   
+ 	@Override
+ 	public List<WithdrawDTO> getWithdrawList(String pg, String viewNum) {
+ 		int endNum = Integer.parseInt(pg)*Integer.parseInt(viewNum);
+ 		int startNum = endNum-(Integer.parseInt(viewNum)-1);
+ 		
+ 		Map <String, Integer> map = new HashMap<String, Integer>();
+ 		map.put("startNum", startNum);
+ 		map.put("endNum", endNum); 
+ 		
+ 		return adminDAO.getWithdrawList(map );
+ 	}
+ 	@Override
+ 	public AdminBoardPaging withdrawBP(String pg, String viewNum) {
+ 		int withdrawTotal = adminDAO.getWithdrawTotal();
+ 		
+ 		adminBoardPaging.setCurrentPage(Integer.parseInt(pg));
+ 		adminBoardPaging.setPageBlock(10);
+ 		adminBoardPaging.setPageSize(Integer.parseInt(viewNum));//위에endNum,startNum과 맞아야함
+ 		adminBoardPaging.setTotalA(withdrawTotal);
+ 		
+ 		adminBoardPaging.makePagingHTML();
+ 		return adminBoardPaging;
+ 	}
+ 	@Override
+ 	public Map <String, Integer> getWithdrawTotal() {
+ 		int withdrawTotal =adminDAO.getWithdrawTotal();
+ 		int lowFrequencyTotal =adminDAO.getWithdraw_lowFrequencyTotal();
+ 		int rejoinTotal =adminDAO.getWithdraw_rejoinTotal();
+ 		int lowContentsTotal =adminDAO.getWithdraw_lowContentsTotal();
+ 		int protectInfoTotal =adminDAO.getWithdraw_protectInfoTotal();
+ 		int lowBenefitTotal =adminDAO.getWithdraw_lowBenefitTotal();
+ 		int othersTotal =adminDAO.getWithdraw_othersTotal();
+ 		
+ 		Map <String, Integer> map = new HashMap<String, Integer>();
+ 		map.put("withdrawTotal", withdrawTotal);
+ 		map.put("lowFrequencyTotal", lowFrequencyTotal);
+ 		map.put("rejoinTotal", rejoinTotal);
+ 		map.put("lowContentsTotal", lowContentsTotal);
+ 		map.put("protectInfoTotal", protectInfoTotal);
+ 		map.put("lowBenefitTotal", lowBenefitTotal);
+ 		map.put("othersTotal", othersTotal); 
+ 		
+ 		return map;
+ 	}
+ 	@Override
+ 	public void blindComplain(String board_seq, String comment_seq, String review_seq, String thisIs) {
+ 		System.out.println("2:"+board_seq+"/"+comment_seq+"/"+review_seq+"/"+thisIs);
 
-	
+ 		adminDAO.blindComplain(board_seq, comment_seq, review_seq, thisIs);
+ 		
+ 	}
 
+ //회원 영구정지
+    @Override
+    public void memberBlock(String id) {
+ 	   adminDAO.memberBlock(id);
+ 	
+    }
+    //회원_영구정지 복구
+    @Override
+    public void memberReleaseBtn(String id) {
+ 	   adminDAO.memberReleaseBtn(id);
+    }
+    //물품_카테고리
+ 	@Override
+ 	public AdminProductDTO getCatagory(String seq) {
+ 		AdminProductDTO adminProductDTO = adminDAO.getCatagory(seq);
+ 		return adminProductDTO;		
+ 	}
+ 	//물품_상세보기 대분류
+
+ 	@Override
+ 	public String getCate_code(String cate_code) {
+ 		String product_cate_code = adminDAO.getCate_code(cate_code);
+ 		return product_cate_code;
+ 	}
+ 	
 	
 
 

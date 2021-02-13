@@ -104,7 +104,7 @@
 				      	<select class="form-select form-select-sm" id="searchType" aria-label=".form-select-sm example">
 						  <option selected>선택</option>
 						  <option value="product_seq">상품번호</option>
-						  <option value="product_subject">상품이름</option>
+						  <option value="product_subject">상품명</option>
 						  <option value="mem_id">판매자ID</option>
 						</select>
 				        <input class="form-control input-sm" type="search" name="productKeyword" id="productKeyword" placeholder="Search" aria-label="Search">
@@ -177,7 +177,7 @@
 					    	<th>내용</th><th colspan="3"><span id="product_contentSpan"></span></th>
 					    </tr>
 					    <tr>
-					    	<th>사진</th><th colspan="3"><span id="product_imgSpan"></span></th>
+					    	<th>사진</th><th colspan="3"><img id="product_imgSpan" src="" width="300px" height="300px" alt="상품사진"></th>
 					    </tr>
 					    
 					  </tbody>

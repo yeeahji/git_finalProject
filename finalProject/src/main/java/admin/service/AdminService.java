@@ -5,6 +5,7 @@ import java.util.Map;
 
 import admin.bean.AdminBoardPaging;
 import admin.bean.AdminMembersDTO;
+import admin.bean.AdminProductDTO;
 import board.bean.CommentDTO;
 import member.bean.ComplainDTO;
 import member.bean.MemberDTO;
@@ -58,7 +59,7 @@ public interface AdminService {
 	public List<ProductDTO> getStoreViewOrderby(Map<String, String> map);
 
 
-	 //신고내역 출력
+	//신고내역 출력
 	public List<StoreDTO> getComplainList(String pg, String viewNum);
 	public AdminBoardPaging adminComplainBP(String pg, String viewNum);
 
@@ -68,6 +69,35 @@ public interface AdminService {
 	public CommentDTO getCommentContent(String comment_content);
 
 	public ReviewDTO getReviewContent(String review_seq);
+
+	public void solveComplain(Map<String, Integer> map);
+
+	
+	//1:1 문의내역 출력
+	public List<QnaDTO> getQnaList(String pg, String viewNum);
+	public AdminBoardPaging qnaBP(String pg, String viewNum);
+	public QnaDTO getQnaContent(int qna_seq);
+	public void writeAnswer(Map<String, Object> map);
+
+	
+	//탈퇴회원관리
+	public List<WithdrawDTO> getWithdrawList(String pg, String viewNum);
+	public AdminBoardPaging withdrawBP(String pg, String viewNum);
+
+	public Map <String, Integer> getWithdrawTotal();
+
+	public void blindComplain(String board_seq, String comment_seq, String review_seq, String thisIs);
+
+	
+	
+	//회원 영구정지
+	public void memberBlock(String id);
+	//회원_영구정지 복구
+	public void memberReleaseBtn(String id);
+	//물품_상세정보_카테고리
+	public AdminProductDTO getCatagory(String seq);
+	//물품_상세보기 대분류
+	public String getCate_code(String cate_code);
    
    
 

@@ -89,7 +89,7 @@
 	</select>
 <!-- 물품관련 상세정보 -->
 	<select id="getProductView" parameterType="String" resultType="admin.bean.AdminMembersDTO">
-		select * from product join members using(mem_id) where product_seq = #{seq}
+		select * from product join members using(mem_id) join store using(mem_id) where product_seq = #{seq}
 	</select>
 <!-- 물품 조건검색 -->
 	<select id="getSearchProductList" parameterType="java.util.Map" resultType="product.bean.ProductDTO">
@@ -160,4 +160,134 @@
    </select>
    
 
+<!-- [신고]========================================================================= -->
+<!-- A.신고 리스트 전체 출력 -->
+   <select id="getComplainList" parameterType="java.util.Map" resultType="member.bean.ComplainDTO">
+      select * from(
+         select rownum rn, tt.* from(select * from complain)tt)
+               where rn between #{startNum} and #{endNum} order by complain_seq asc
+   </select>
+
+<!-- A.신고 리스트 개수 -->
+   <select id="getComplainTotal" resultType="Integer">
+      select count(*) from complain
+   </select>
+
+<!-- B.신고 검색 리스트 전체 출력 -->
+   <select id="searchReportedMember" parameterType="java.util.Map" resultType="member.bean.ComplainDTO">
+      <![CDATA[
+      select * from
+         (select rownum rn, tt.* from
+         (select * from complain where ${searchType} like '%'||#{keyword}||'%')tt
+         )where rn>=#{startNum} and rn<=#{endNum}
+      ]]>
+   </select>
+<!-- B.신고 검색 리스트 개수 -->
+   <select id="getTotalReportedMember" parameterType="java.util.Map" resultType="Integer">
+      select count(*) from complain where ${searchType} like '%'||#{keyword}||'%'
+   </select>
+
+<!-- 신고 댓글 보이기 -->
+   <select id="getCommentContent" parameterType="String" resultType="board.bean.CommentDTO">
+      select * from comments where comment_seq=#{comment_seq} 
+   </select>
+<!-- 신고 리뷰 보이기 -->
+   <select id="getReviewContent" parameterType="String" resultType="store.bean.ReviewDTO">
+      select * from comments where review_seq=#{review_seq}
+   </select>
+<!-- 신고내용 처리상태 변경 -->
+	<update id="solveComplain" parameterType="java.util.Map" >
+ 		update complain set complain_status = #{complain_status} where complain_seq = #{complain_seq}
+ 	</update>
+ 	
+ 	
+ 	<update id="boardBlindComplain" parameterType="Integer" >
+ 		update boards set board_subject = '관리자에 의해 블라인드 처리된 글입니다.', board_content = '관리자에 의해 블라인드 처리된 글입니다.' where board_seq = #{board_seq}
+ 	</update>
+ 	<update id="commentBlindComplain" parameterType="Integer" >
+ 		update comments set comment_content = '관리자에 의해 블라인드 처리된 글입니다.' where comment_seq = #{ comment_seq}
+ 	</update>
+ 	<update id="reviewBlindComplain" parameterType="Integer" >
+ 		update review set review_content = '관리자에 의해 블라인드 처리된 글입니다.' where review_seq = #{review_seq}
+ 	</update>
+ 	
+<!-- [1:1문의]========================================================================= -->
+<!-- A.1:1문의 리스트 전체 출력 -->
+   <select id="getQnaList" parameterType="java.util.Map" resultType="admin.bean.QnaDTO">
+      select * from(
+         select rownum rn, tt.* from(select * from qna)tt)
+               where rn between #{startNum} and #{endNum} order by qna_seq asc
+   </select>
+
+<!-- A.1:1문의 리스트 개수 -->
+   <select id="getQnaTotal" resultType="Integer">
+      select count(*) from qna
+   </select>
+   
+<!-- C.원하는 1:1문의글 가져오기 -->
+   <select id="getQnaContent" parameterType="Integer" resultType="admin.bean.QnaDTO">
+      select * from qna where qna_seq=#{qna_seq} 
+   </select>
+<!-- C.답글 달기 -->
+ 	<update id="writeAnswer" parameterType="java.util.Map" >
+ 		update qna set qna_answer = #{qna_answer}, qna_answerLogtime = sysdate where qna_seq = #{qna_seq}
+ 	</update>
+ 	
+ 	
+<!-- [탈퇴회원관리]========================================================================= -->
+<!-- A.탈퇴회원 리스트 전체 출력 -->
+   <select id="getWithdrawList" parameterType="java.util.Map" resultType="admin.bean.WithdrawDTO">
+      select * from(
+         select rownum rn, tt.* from(select * from withdraw)tt)
+               where rn between #{startNum} and #{endNum}
+   </select>
+
+<!-- A.탈퇴회원 리스트 개수 -->
+   <select id="getWithdrawTotal" resultType="Integer">
+      select count(*) from withdraw
+   </select>
+<!-- C.탈퇴사유  이용빈도 낮음 개수 -->
+   <select id="getWithdraw_lowFrequencyTotal" resultType="Integer">
+      select count(*) from withdraw where withdraw_lowFrequency is not null
+   </select>
+<!-- C.탈퇴회원 재가입 개수 -->
+   <select id="getWithdraw_rejoinTotal" resultType="Integer">
+      select count(*) from withdraw where withdraw_rejoin is not null
+   </select>
+<!-- C.탈퇴회원 상품 부족 개수 -->
+   <select id="getWithdraw_lowContentsTotal" resultType="Integer">
+      select count(*) from withdraw where withdraw_lowContents is not null
+   </select>
+<!-- C.탈퇴회원 개인정보보호 개수 -->
+   <select id="getWithdraw_protectInfoTotal" resultType="Integer">
+      select count(*) from withdraw where withdraw_protectInfo is not null
+   </select>
+<!-- C.탈퇴회원 혜택 부족 개수 -->
+   <select id="getWithdraw_lowBenefitTotal" resultType="Integer">
+      select count(*) from withdraw where withdraw_lowBenefit is not null
+   </select>
+<!-- C.탈퇴회원 기타사항 개수 -->  
+    <select id="getWithdraw_othersTotal" resultType="Integer">
+      select count(*) from withdraw where withdraw_others is not null
+   </select>
+     
+
+
+<!-- 회원 영구정지 -->
+	<update id="memberBlock" parameterType="String">
+		update members set enabled=0 where mem_id=#{id}
+	</update>
+<!-- 회원 영구정지 복구 -->
+	<update id="memberReleaseBtn" parameterType="String">
+		update members set enabled=1 where mem_id=#{id}
+	</update>
+<!-- 물품_상세정보_카테고리 -->
+	<select id="getCatagory" parameterType="String" resultType="admin.bean.AdminProductDTO">
+		select * from product join category using(cate_code) where product_seq = #{seq}
+	</select>
+<!-- 물품_상세보기 대분류 -->
+	<select id="getCate_code" parameterType="String" resultType="String">
+		select cate_name from category
+		where cate_code=(select cate_parent from category where cate_code=#{cate_code})
+	</select>
 </mapper>

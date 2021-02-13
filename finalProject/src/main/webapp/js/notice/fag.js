@@ -12,8 +12,7 @@ $('.f_revel2_5_1').on('click', '.fmi_nav_up', function(){
 			success: function(data){
 				//alert(JSON.stringify(data));
 				
-				
-				var html="";
+				var html=""; 
 				$.each(data.list, function(index, items){
 					html += "<li class='inner_li'>";
 					html += "<article class='f01'>";
@@ -23,18 +22,20 @@ $('.f_revel2_5_1').on('click', '.fmi_nav_up', function(){
 					html += "<h1>"+items.subject+"</h1></span>";
 					html += "<div class='f_artBtn_arrow'></div></button>";
 					
-					html += "<div class='f_artP_"+index+"'>";
+					html += "<div id='f_artP' class='f_artP_"+index+"'>";
 					html += "<p>"+items.content+"</p>";
 					html += "</div></article></li>";
 				});
 				
 				$('.fmi_ul').append(html);
+				$('#f_artP').hide();
 			}
+			
 		}); //ajax
-	   
+	  
 });
 $('.fag_main_inner').on('click','span',function(){
-	$('.f_artP').hide();
+	//$('.f_artP').hide();
 	//alert($(this).parent().next().prop('tagName'));
 	$(this).parent().next().slideToggle();
 });
