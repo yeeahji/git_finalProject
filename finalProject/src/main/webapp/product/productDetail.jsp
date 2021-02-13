@@ -26,7 +26,6 @@
 <script src="https://unpkg.com/swiper/swiper-bundle.js"></script>
 <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
 
-<form id="productDetailForm" method="post" action="/market/chat/chatRoom" target="chatRoom">
 <input type="hidden" class="hiddenProdSeq" value="${seq}"><!-- product_seq 받아옴  -->
 <input type="hidden" class="storeOwner" value=""><!--상품 올린 상점 주인 mem_id -->
 <div class="detail__area">
@@ -490,8 +489,6 @@
    </div><!-- //modalHidden -->
 	
 </div>
-</div>
-</form>
 
 <script>
 // 슬라이더 관련

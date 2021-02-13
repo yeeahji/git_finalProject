@@ -364,28 +364,38 @@ $(document).ready(function(){
 				}).append($('<button/>',{
 					class: 'detail-info__btn-zzim',
 					id: 'zzimBtn'
+						
 				}).append($('<img/>', {
 					src: 'data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNiIgaGVpZ2h0PSIxNiIgdmlld0JveD0iMCAwIDE2IDE2Ij4KICAgIDxwYXRoIGZpbGw9IiNGRkYiIGZpbGwtcnVsZT0ibm9uemVybyIgZD0iTTcuMDA1IDEuMDQ1aC4yMzNjLjI4LjIyOC41MzcuNDkuNzYyLjc3Ny4yMjUtLjI4OC40ODEtLjU0OS43NjItLjc3N2guMjMzYTYuMTYgNi4xNiAwIDAgMC0uMDktLjExM0M5LjY4NC4zNDQgMTAuNjI4IDAgMTEuNiAwIDE0LjA2NCAwIDE2IDIuMTEgMTYgNC43OTZjMCAzLjI5Ni0yLjcyIDUuOTgxLTYuODQgMTAuMDYyTDggMTZsLTEuMTYtMS4xNTFDMi43MiAxMC43NzcgMCA4LjA5MiAwIDQuNzk2IDAgMi4xMSAxLjkzNiAwIDQuNCAwYy45NzIgMCAxLjkxNi4zNDQgMi42OTUuOTMyYTYuMTYgNi4xNiAwIDAgMC0uMDkuMTEzeiIvPgo8L3N2Zz4K',
 					width: '16',
 					height: '16',
 					alt: '찜 아이콘'
+						
 				})).append($('<span/>',{
 					class: 'zzimSpan',
 					text: '찜'
+						
 				})).append($('<span/>', {
 					class: 'zzimSpanNum'
 					// DB
-				})))).append($('<button/>', {
+				}))
+				)).append($('<form/>', {
+					id: 'productDetailForm',
+					method: 'post',
+					action: '/market/chat/chatRoom',
+					target: 'chatRoom'
+
+				}).append($('<div/>', {
 					class: 'detail-call__btn',
 					id: 'callBtn',
 					type: 'button'
-					//text: '번개톡'
+						
 				}).append($('<img/>', {
 					src: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACgAAAAoCAYAAACM/rhtAAAAAXNSR0IArs4c6QAAAy1JREFUWAndmM1LFVEYxp2bVxDsA0GhIoygAo2I7EKLoKJsYZG7iDYG/QNCUZvctSkIAqVFCze1toIWrkqynUaJ0VKUSkr7okubpG6/J+Zc5w7jzJ1zxnulFx7O1/s+7zMzZ86cOV5DlVYqlfK4HgN9oBNsA9tBC4izIoMLPt5SPgbjnuctU7obwtrBEPgOsjJxibPdWiHBTWAQ/ABrZeJWjqZUQgloAxOgVqZcbVWJxLETzNVKWSCPcmpuV5gXbOGgq5gEHcH+GtbnyVXgBVoyOXOmgjjNg1FQL3GSotyjvha1G8oCqV8DR9SZsc3C9y0FpzRIy4qhWEvJWrytY/AOgLQmLStLEA2tSVnbTQhbwUdL4qF/t5DgPMhyEf4J33mRU94BtiZNeZH02DJExGmpOOCL20d9OcInTVePXhJ9W7OwCUgOsUS89smGKRsdifsksMuRROEj4CTiPqvBLdIjPqq6o3XpCrUrsbU/BF5F2O0QwR7a90J9+2kfDvUlNbfqaotpJkXAV0vB6aQMGsfvHNDLk9aKCraxWYISpwY+Hrhhk8DEiOALF9lazZ0I+IS/DtM85kuBcV34RtoPwNlgf8r6VxHNGLUO5fFgYnh2gTcOfCZ0Rm+xtuMu9oi798wQwHyC+iRInAImJqZckMCpGIekoV84XDFOiBugPgbSThlDES6n9IgL5n5alLfESFwzuG8RnxRS0EuiTes7oD+0NLaI826wBTwEB0GW9gGyHTnmT4mKPktpbZCAbvASZC1OWoZ9beVH9D7pfgfGp6lfBq6bgQBlRVVamqWybHT0V7jEN+bih51H+8vCghVoR5yp3Qm08Yg2uPWz/sI9hzWDcsf/xOOgbfpT6xT2gcpZ3fqJYyO4a58rdaRypd/cEtQLsvhWr6ZY3L3RE67KXghy4CJ4Dn4DVxOHuMSpT22sVRx9xHoyCKGORs4AnaFoJy5oW7UXrHZOOM6YNiSCzgefsAAvUdbOEH4dRJkOL+tvKNsM5iMUfqq/Ol8B4rpB+BRBn8IN60lkB4LCb/2FdSNQQhCovaEOjF4B2SI4ta5EGjEIawE7wSbT99+VfwFl/vSZOTmkgQAAAABJRU5ErkJggg==',
 					width: '20',
 					height: '19',
 					alt: '바다톡 버튼 아이콘',
-				})).append('바다톡'))
+				})).append('바다톡')))
 
 				
 				// 바다톡 연결
