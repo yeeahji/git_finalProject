@@ -6,7 +6,7 @@
 
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/chat/chatList.css">
 
-<body>
+<body style="margin: 0;">
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <script defer src="../js/chat/chatList.js"></script>
 
@@ -17,21 +17,59 @@
 
 	<!-- 채팅방 목록 -->	
 	<div class="chatRoomWrap">
-		<a href="/market/store/store" class="chatImage">
-		<img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0OCIgaGVpZ2h0PSI0OCIgdmlld0JveD0iMCAwIDQ4IDQ4Ij4KICAgIDxnIGZpbGw9Im5vbmUiIGZpbGwtcnVsZT0iZXZlbm9kZCI+CiAgICAgICAgPGNpcmNsZSBjeD0iMjQiIGN5PSIyNCIgcj0iMjQiIGZpbGw9IiNEQ0RCRTQiLz4KICAgICAgICA8ZyBmaWxsPSIjRkZGIiBmaWxsLXJ1bGU9Im5vbnplcm8iPgogICAgICAgICAgICA8cGF0aCBkPSJNMjUgMjNjNi4xNDIgMCAxMSA0LjM4NyAxMSA5LjY2NyAwIC43MzYtLjU4IDEuMzMzLTEuMjk0IDEuMzMzSDE1LjI5NEMxNC41OCAzNCAxNCAzMy40MDMgMTQgMzIuNjY3IDE0IDI3LjM4IDE4Ljg1NCAyMyAyNSAyM3pNMjUgMTFhNSA1IDAgMSAxIDAgMTAgNS4wMSA1LjAxIDAgMCAxLTUtNSA1IDUgMCAwIDEgNS01eiIvPgogICAgICAgIDwvZz4KICAgIDwvZz4KPC9zdmc+Cg==" 
-		width="48" height="48" alt="프로필 이미지"></a>
+		<div class="chatRoom_profile" onclick="href='/market/store/store'">
+         	<img id="other_store_img" src="/market/storage/logo_black.png">
+      	</div>
 		<a href="/market/chat/chatRoom" class="chatRoomList">
-			<div class="chatRoomTab">
-				<div class="chatRoomTitle">상대방 닉네임
+			<div class="chatRoom_content">
+				<div class="chatRoomTitle" id="other_store_nickname">상대방 닉네임
 				</div>
-				<div class="chatRoomContent">마지막 멘트 나오기
+				<div class="chatRoomContent" id="last_message">마지막 멘트 나오기
 				</div>
 			</div>
 		</a>
-		<div class="chatRoomSysdate">2021. 1. 11 월요일	
-			<a class="chatRoomReport" onclick="location.href='/market/index'">
+		<div class="chatRoomSysdate" id="chat_logtime">2021. 1. 11 월요일	
+			<a class="chatRoomReport" id="chatComplainBtn" onclick="location.href='/market/index'">
 			<img src="/market/image/chat/bell.JPG"
-			style="weight:11px; height: 11px; cursor: pointer;" alt="신고"></i>신고하기</a>
+			style="weight:11px; height: 11px; cursor: pointer;" alt="신고">신고하기</a>
+		</div>
+	</div>
+	
+	<div class="chatRoomWrap">
+		<div class="chatRoom_profile" onclick="href='/market/store/store'">
+         	<img id="other_store_img" src="/market/storage/logo_black.png">
+      	</div>
+		<a href="/market/chat/chatRoom" class="chatRoomList">
+			<div class="chatRoom_content">
+				<div class="chatRoomTitle" id="other_store_nickname">상대방 닉네임
+				</div>
+				<div class="chatRoomContent" id="last_message">마지막 멘트 나오기
+				</div>
+			</div>
+		</a>
+		<div class="chatRoomSysdate" id="chat_logtime">2021. 1. 11 월요일	
+			<a class="chatRoomReport" id="chatComplainBtn" onclick="location.href='/market/index'">
+			<img src="/market/image/chat/bell.JPG"
+			style="weight:11px; height: 11px; cursor: pointer;" alt="신고">신고하기</a>
+		</div>
+	</div>
+	
+	<div class="chatRoomWrap">
+		<div class="chatRoom_profile" onclick="href='/market/store/store'">
+         	<img id="other_store_img" src="/market/storage/logo_black.png">
+      	</div>
+		<a href="/market/chat/chatRoom" class="chatRoomList">
+			<div class="chatRoom_content">
+				<div class="chatRoomTitle" id="other_store_nickname">상대방 닉네임
+				</div>
+				<div class="chatRoomContent" id="last_message">마지막 멘트 나오기
+				</div>
+			</div>
+		</a>
+		<div class="chatRoomSysdate" id="chat_logtime">2021. 1. 11 월요일	
+			<a class="chatRoomReport" id="chatComplainBtn" onclick="location.href='/market/index'">
+			<img src="/market/image/chat/bell.JPG"
+			style="weight:11px; height: 11px; cursor: pointer;" alt="신고">신고하기</a>
 		</div>
 	</div>
 	
