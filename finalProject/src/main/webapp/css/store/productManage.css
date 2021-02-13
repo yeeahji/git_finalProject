@@ -21,6 +21,10 @@ img {
     vertical-align: bottom;
     border-style: none;
 }
+#prodMangeTbody img {
+	width: 152px;
+	height: 152px;
+}
 #prodMangeTable { /* table */
 	border-collapse: collapse;
     border-spacing: 0px;
@@ -497,22 +501,135 @@ main {
     padding: 0px 0.7rem;
     color: rgb(94, 92, 107);
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+/* 판매완료 모달 */
+#soldOutModal {
+	width: 100%;
+    height: 100%;
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    background: rgba(0, 0, 0, 0.6);
+    z-index: 3000;
+    -webkit-box-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    justify-content: center;
+    display: none;
+}
+.soldOutModalWrap {
+	width: 23.5rem; /* 18.5 */
+    background: rgb(255, 255, 255);
+    padding: 1.5rem;
+    border-radius: 2px;
+}
+.soldOutModalText {
+	white-space: pre-wrap;
+    word-break: keep-all;
+    text-align: center;
+    font-size: 15px;
+    margin-bottom: 0.2rem; /* 1.5 */
+    line-height: 1.4;
+}
+.soldOutModalBtm {
+	display: flex;
+    flex-direction: row-reverse;
+}
+.soldOutModalBtm > button:first-child {
+	margin-left: 0.5rem;
+}
+.soldOutModalBtm > button {
+	flex: 1 1 0%;
+}
+.soldOutModalBtm button {
+	height: 3rem;
+    text-align: center;
+    font-size: 1rem;
+}
+.soldOutModalOkBtn {
+	color: rgb(255, 255, 255);
+    background: rgb(10, 88, 202);
+    font-weight: bold;
+}
+.soldOutModalCancelBtn {
+	background-color: rgb(244, 244, 250);
+    color: rgb(114, 112, 127);
+}
+.itemDetail {
+	width: 100%;
+    height: 60px;
+    display: flex;
+    /* border: 1px solid rgb(238, 238, 238); */
+    position: relative;
+    margin-bottom: 30px;
+    margin-top: 10px;
+    background-color: rgb(252,252,252);
+}
+.itemImgWrap {
+	position: relative;
+    width: 60px; 
+    flex-shrink: 0;
+    height: 100%;
+}
+.itemImgWrap > img {
+	width: 60px;
+    height: 60px;
+}
+.itemContentWrap {
+	width: 200px;
+    flex-shrink: 0;
+}
+.itemName, .itemName_Title {
+    width: 100%;
+    white-space: nowrap;
+    overflow: hidden;
+    padding-left: 8px;
+}
+.itemName_Title {
+	font-size: 14px;
+	color: #6e6e6e;
+	padding-top: 4px;
+}
+.itemName {
+	font-size: 16px;
+	font-weight: bold;
+}
+/* 채팅방 리스트 하나 */
+.chatListWrap:first-child{
+	border-top: 1px solid rgb(238, 238, 238);
+}
+.chatOne {
+	display: flex;
+	/* border-top: 1px solid rgb(238, 238, 238); */
+	border-bottom: 1px solid rgb(238, 238, 238);
+	margin-bottom: 10px;
+}
+.chat_storeImg {
+	margin-right: 16px;
+	margin-top: 10px;
+	margin-bottom: 10px;
+}
+.chat_storeImg > img {
+    border-radius: 50%;
+    cursor: pointer;
+}
+/* .chat_storeName {
+	margin-top: 10px;
+	display: block;
+	font-weight: bold;
+	cursor: pointer;
+} */
+.chat_lastLogtime {
+	display: block;
+}
+/* 대화목록이없습니다 */
+.noChatList {
+	color: rgb(155, 153, 169);
+    background-position: center 0px;
+    background-repeat: no-repeat;
+    background-size: 60px 60px;
+    background-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI2MCIgaGVpZ2h0PSI2MCIgdmlld0JveD0iMCAwIDYwIDYwIj4KICAgIDxnIGZpbGw9IiNDM0MyQ0MiIGZpbGwtcnVsZT0ibm9uemVybyI+CiAgICAgICAgPHBhdGggZD0iTTguNzgzIDguNzg3QzE0LjQ0MyAzLjEyNiAyMS45NjMgMCAyOS45NyAwczE1LjUyNyAzLjExMyAyMS4xODggOC43NzRjOS40MzIgOS40MzIgMTEuMzA4IDIzLjczNCA1LjM3NiAzNS4wNzVhMjkuNzU4IDI5Ljc1OCAwIDAgMS0zLjM5MyA1LjExOGMxLjM0MyAyLjc0OCAyLjkzOCA0LjU4MSA0LjcyIDUuNDZhMi44MDYgMi44MDYgMCAwIDEgMS41MzEgMi45MjRBMi43ODMgMi43ODMgMCAwIDEgNTcuMDYgNTkuN2MtLjY2Ni4xLTEuMzgxLjE2My0yLjEyMi4xNjMtMy42NzggMC03LjU0NC0xLjI2OC0xMC43Ny0zLjQ5YTI5Ljk5OCAyOS45OTggMCAwIDEtMTQuMTk2IDMuNTY1Yy04LjAwOSAwLTE1LjUyNy0zLjExMy0yMS4xODgtOC43NzRDMy4xMiA0NS41MDMuMDA4IDM3Ljk3MS4wMDggMjkuOTc1YzAtNy45OTYgMy4xMTMtMTUuNTI3IDguNzc1LTIxLjE4OHptNC4yMTEgMzguMTVjNC41MzcgNC41MzIgMTAuNTcgNy4wMjUgMTYuOTc3IDcuMDI1IDQuMjg2IDAgOC4yMTItMS4xMSAxMS44NzUtMy4yNjMuMjM4LS4xMzYuNTYzLS4zODggMS4wMi0uMzg4LjQ1NiAwIC44NzYuMTM2IDEuMTQ4LjM0IDMuMDggMi42NjQgNS41ODUgMy4xOTggNy4xMTYgMy4yMzItMS44MjUtMS4zNi0zLjI1Ny0zLjU4Ny0zLjY1Ni02LjI0OC0uMDg4LS41ODcuMTU5LTEuNDQ3Ljc0NC0yLjE1OSA4LjI0Ny0xMC4wMjcgNy42ODgtMjMuNTM2LTEuMjcxLTMyLjQ4OC00LjUzNi00LjUzMy0xMC41Ny03LjAyNi0xNi45NzYtNy4wMjYtNi40MTkgMC0xMi40NCAyLjQ5My0xNi45NzcgNy4wMjYtOS4zNjYgOS4zNy05LjM2NiAyNC42IDAgMzMuOTQ5eiIvPgogICAgICAgIDxwYXRoIGQ9Ik0yNS42MDcgNDUuNDQ5Yy0uMjYyLjMzMi0uNDM3LjM3Mi0uNjczLjQwOGEuODE3LjgxNyAwIDAgMS0uNTU4LS4xMTQuOC44IDAgMCAxLS4zNC0uOTI1bDMuMDYtMTAuNzk0SDIxLjc1Yy0uMjM0IDAtLjQ1NS0uMjA0LS41OTYtLjQxNmExLjA1MiAxLjA1MiAwIDAgMS0uMTI3LS43ODZsNC4xMjUtMTcuMTYyYy4wOS0uMzcxLjM4Ni0uNjYuNzIzLS42Nmg5LjIyYy4yNTMgMCAuNDg5LjE1Ni42MjcuMzk2LjEzOS4yNC4xNjIuNjM2LjA2My45bC00LjUyMSAxMC44ODhoNi45ODZjLjI5NiAwIC41NjUuMTE0LjY4NS40MjMuMTIuMzA5LjA3LjU4NC0uMTI3LjgzNkwyNS42MDcgNDUuNDQ5eiIvPgogICAgPC9nPgo8L3N2Zz4K);
+    padding-top: 76px;
+    font-size: 1rem;
+    text-align: center;
+    margin-bottom: 20px;
+}

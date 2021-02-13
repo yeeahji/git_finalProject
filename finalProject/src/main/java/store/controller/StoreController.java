@@ -25,6 +25,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import chat.bean.ChatListDTO;
 import product.bean.ProductDTO;
 import store.bean.StorePaging;
 import store.bean.PurchaseDTO;
@@ -215,28 +216,30 @@ public class StoreController {
 		List<PurchaseExistDTO> purchaseList = storeService.purchaseExist(map);
 		
 		ModelAndView mav = new ModelAndView();
+		mav.addObject("purchaseList", purchaseList);
 		mav.setViewName("jsonView");
 		return mav;
 	}
 	
+	// 2. 후기 등록
+	@RequestMapping(value="reviewRegister", method=RequestMethod.POST)
+	@ResponseBody
+	public void reviewRegister(@RequestParam Map<String, String> map) {
+		storeService.reviewRegister(map);
+	}
 	
-	
-	// 2. 후기 등록하기
-//	@RequestMapping(value="reviewRegister", method=RequestMethod.POST)
-//	@ResponseBody
-//	public ModelAndView reviewRegister(@RequestParam Map<String, String> map) {
-//
-//		ModelAndView mav = new ModelAndView();
-//		mav.setViewName("jsonView");
-//		return mav;
-//	}
-	
-	
-	
-	
-	
-	
-	
+	// 후기 쓸 상품 선택
+	@RequestMapping(value="purchaseListSelect", method=RequestMethod.POST)
+	@ResponseBody
+	public ModelAndView purchaseListSelect(@RequestParam String product_seq) {
+		ProductDTO productDTO = storeService.purchaseListSelect(product_seq);
+		
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("productDTO", productDTO);
+		mav.setViewName("jsonView");
+		return mav;
+	}
+
 	
 	// 3. [찜] ------------------------------------------------------------
 	// 찜 리스트 가져오기
@@ -280,6 +283,26 @@ public class StoreController {
 		mav.addObject("purchaseTotalA", purchaseTotalA);
 		mav.setViewName("jsonView");
 		return mav;
+	}
+	
+	// 닉으로 거래 상대방 아이디 구하기
+	@RequestMapping(value="getStoreNick", method=RequestMethod.GET)
+	@ResponseBody
+	public ModelAndView getStoreNick(@RequestParam String other_store_nickname) { 
+		String other_mem_id = storeService.getStoreNick(other_store_nickname);
+		
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("other_mem_id", other_mem_id);
+		mav.setViewName("jsonView");
+		return mav;
+	}
+	
+	// 구매내역 데이터 넣기
+	@RequestMapping(value="purchaseInsert", method=RequestMethod.GET)
+	@ResponseBody
+	public void purchaseInsert(@RequestParam Map<String, String> map) { 
+		storeService.purchaseInsert(map);
+
 	}
 	
 	// 5. [내 상품 관리] --------------------------------------------------------
@@ -391,6 +414,17 @@ public class StoreController {
 		
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("productDTO", productDTO);
+		mav.setViewName("jsonView");
+		return mav;
+	}
+	
+	// 판매완료 -> 거래내역 채팅방 리스트 
+	@RequestMapping(value="getChatList", method=RequestMethod.GET)
+	@ResponseBody
+	public ModelAndView getChatList(@RequestParam String mem_id) { 
+		List<ChatListDTO> chatList = storeService.getChatList(mem_id);
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("chatList", chatList);
 		mav.setViewName("jsonView");
 		return mav;
 	}

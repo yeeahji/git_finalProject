@@ -7,6 +7,7 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import chat.bean.ChatListDTO;
 import product.bean.ProductDTO;
 import store.bean.StorePaging;
 import store.bean.PurchaseDTO;
@@ -220,6 +221,33 @@ public class StoreServiceImpl implements StoreService {
 	@Override
 	public List<PurchaseExistDTO> purchaseExist(Map<String, String> map) {
 		return storeDAO.purchaseExist(map);
+	}
+
+	@Override
+	public List<ChatListDTO> getChatList(String mem_id) {
+		return storeDAO.getChatList(mem_id);
+	}
+	// 구매내역 인서트
+	@Override
+	public void purchaseInsert(Map<String, String> map) {
+		storeDAO.purchaseInsert(map);
+		
+	}
+
+	@Override
+	public String getStoreNick(String other_store_nickname) {
+		return storeDAO.getStoreNick(other_store_nickname);
+	}
+
+	@Override
+	public ProductDTO purchaseListSelect(String product_seq) {
+		return storeDAO.purchaseListSelect(product_seq);
+	}
+
+	@Override
+	public void reviewRegister(Map<String, String> map) {
+		storeDAO.reviewRegister(map);
+		
 	}
 
 	

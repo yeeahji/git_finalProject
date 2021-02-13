@@ -47,14 +47,9 @@ body, input, textarea, select, button {
     display: flex;
     border-bottom: 1px solid rgb(238, 238, 238);
 }
-.reviewProfile {
-	width: 60px;
-    margin-right: 15px;
-    display: block;
-}
-.reviewProfile > img {
+#reviewProfile {
 	border-radius: 50%;
-}
+} 
 #reviewContent {
 	flex: 1 1 0%;
 }
@@ -73,11 +68,6 @@ body, input, textarea, select, button {
     -webkit-box-align: center;
     align-items: center;
 }
-.reviewStoreName {
-	display: flex;
-    -webkit-box-align: center;
-    align-items: center;
-}
 .reviewDate {
 	font-size: 13px;
     color: rgb(204, 204, 204);
@@ -87,9 +77,6 @@ body, input, textarea, select, button {
 }
 .storeStars {
 	display: flex;
-}
-.reviewProductLink {
-	margin: 10px 0px;
 }
 .reviewProductBtn {
 	padding: 0px 10px;
@@ -209,7 +196,7 @@ body, input, textarea, select, button {
 	margin-right: 7px;
 }
 /* ************** 신고하기 모달창 ************** */
-#reviewModal { 
+#reviewModal_singo { 
     width: 100%;
     height: 100%;
     position: fixed;
@@ -403,3 +390,100 @@ body, input, textarea, select, button {
     overflow: hidden;
     transition: height 0.3s ease-out 0s;
 }
+/* 거래 리스트 모달 */
+/* 판매완료 모달 */
+#reviewModal {
+	width: 100%;
+    height: 100%;
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    background: rgba(0, 0, 0, 0.6);
+    z-index: 3000;
+    -webkit-box-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    justify-content: center;
+    display: none;
+}
+.reviewModalWrap {
+	width: 23.5rem; /* 18.5 */
+    background: rgb(255, 255, 255);
+    padding: 1.5rem;
+    border-radius: 2px;
+}
+.reviewModalText {
+	white-space: pre-wrap;
+    word-break: keep-all;
+    text-align: center;
+    font-size: 17px;
+    margin-bottom: 1.5rem; /* 1.5 */
+    line-height: 1.4;
+}
+.reviewModalBtm {
+	display: flex;
+    flex-direction: row-reverse;
+}
+.reviewModalBtm > button:first-child {
+	margin-left: 0.5rem;
+}
+.reviewModalBtm > button {
+	flex: 1 1 0%;
+}
+.reviewModalBtm button {
+	height: 3rem;
+    text-align: center;
+    font-size: 1rem;
+}
+.reviewModalOkBtn {
+	color: rgb(255, 255, 255);
+    background: rgb(10, 88, 202);
+    font-weight: bold;
+}
+.reviewModalCancelBtn {
+	margin-top: 20px;
+	background-color: rgb(244, 244, 250);
+    color: rgb(114, 112, 127);
+}
+/* .itemDetail{
+	width: 100%;
+    height: 60px;
+    display: flex;
+    border: 1px solid rgb(238, 238, 238);
+    position: relative;
+    margin-top: 2px; 
+} */
+.itemImgWrap {
+	position: relative;
+    width: 60px; 
+    flex-shrink: 0;
+    height: 100%;
+}
+.itemImgWrap > img {
+	width: 60px;
+    height: 60px;
+    cursor: pointer;
+}
+.itemContentWrap {
+	width: 200px;
+    flex-shrink: 0;
+}
+.itemName, .itemName_Title {
+    width: 100%;
+    white-space: nowrap;
+    overflow: hidden;
+    padding-left: 8px;
+    cursor: pointer;
+}
+.itemName_Title {
+	font-size: 14px;
+	color: #6e6e6e;
+	padding-top: 4px;
+}
+.itemName {
+	font-size: 16px;
+	font-weight: bold;
+}
+
+
+

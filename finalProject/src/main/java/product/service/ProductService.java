@@ -3,6 +3,7 @@ package product.service;
 import java.util.List;
 import java.util.Map;
 
+import index.bean.wishDTO;
 import product.bean.CategoryDTO;
 import product.bean.ProductDTO;
 import product.bean.RelProdPaging;
@@ -36,5 +37,11 @@ public interface ProductService {
 	public void zzimInsert(Map<String, String> map);
 
 	public String getProdBigCate(String cate_code);
+
+	public wishDTO zzimExistCheck(Map<String, String> map);
+
+	public void zzimDelete(Map<String, String> map);
+
+	public void hitUpdate(String seq);
 
 }

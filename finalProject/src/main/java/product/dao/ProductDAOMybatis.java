@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import index.bean.wishDTO;
 import product.bean.CategoryDTO;
 import product.bean.ProductDTO;
 import store.bean.StoreDTO;
@@ -82,6 +83,23 @@ public class ProductDAOMybatis implements ProductDAO {
 	@Override
 	public String getProdBigCate(String cate_code) {
 		return sqlSession.selectOne("productSQL.getProdBigCate", cate_code);
+	}
+
+	@Override
+	public wishDTO zzimExistCheck(Map<String, String> map) {
+		return sqlSession.selectOne("productSQL.zzimExistCheck", map);
+	}
+
+	@Override
+	public void zzimDelete(Map<String, String> map) {
+		sqlSession.delete("productSQL.zzimDelete", map);
+		
+	}
+
+	@Override
+	public void hitUpdate(String seq) {
+		sqlSession.update("productSQL.hitUpdate", Integer.parseInt(seq));
+		
 	}
 	
 }

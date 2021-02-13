@@ -94,6 +94,46 @@
 	</div>
 </div><!-- //deleteModal -->
 
+<!-- 판매완료 모달 -->
+<div id="soldOutModal">
+	<div class="soldOutModalWrap">
+		<div align="center" style="margin-bottom:12px;"><img width="30" height="30" alt="infoIcon" src="/market/image/store/check.svg"></div>
+		<p class="soldOutModalText">상태가 변경되었습니다.</p>
+		<p class="soldOutModalText" style="font-weight:bold;margin-bottom:30px;">구매자를 선택해주세요.</p>
+		<!-- 거래한 물건 정보 -->
+		<div class="itemDetail">
+			<!-- 상품 이미지 -->
+			<div class="itemImgWrap">
+				<img src="" alt="거래 상품 이미지">
+			</div>
+			<div class="itemContentWrap">
+				<div class="itemName_Title">거래한 물건</div>
+				<div class="itemName"></div>
+			</div>
+		</div>
+		<!-- 채팅방 사람 리스트 -->
+		<div class="chatListWrap">
+			<!-- 한 개  -->
+			<!-- <div class="chatOne">
+				상점 이미지 
+				<div class="chat_storeImg">
+					<img src="/market/storage/maskRyan.jpg" widht="48" alt="프로필 이미지" style="height: 48px;">
+				</div>
+				상점명 & 마지막 대화시간
+				<div class="chat_storeInfo">
+					<div class="chat_storeName">zzz</div>
+					<div class="chat_lastLogtime">마지막 대화 19시45일</div>
+				</div>
+			</div> -->
+		</div>
+		
+		<!-- 확인/취소 버튼 -->
+		<div class="soldOutModalBtm">
+			<!-- <button type="button" class="soldOutModalOkBtn">확인</button> -->
+			<button type="button" class="soldOutModalCancelBtn">다음에</button>
+		</div>
+	</div>
+</div><!-- //soldOutModal -->
 
 
 

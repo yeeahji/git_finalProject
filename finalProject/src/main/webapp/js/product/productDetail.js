@@ -1,4 +1,4 @@
-var zzimNum; //test중
+var zzimNum;
 
 $(document).ready(function(){
 	// 상품 정보
@@ -412,6 +412,7 @@ $(document).ready(function(){
 					window.open('', 'chatRoom', 'width=370 height=670');
 					$('#productDetailForm').submit();
 				})			
+
 				
 				
 				// 찜 버튼 css
@@ -440,52 +441,71 @@ $(document).ready(function(){
 					// 찜 값 넣어주기
 					$('#zzim').text(data.zzimNum); 
 					$('.zzimSpanNum').text(data.zzimNum);
+					zzimNum = data.zzimNum;
 				},error: function(err){
 					console.log(err);
 				}
 			});// ajax 해당 상품 찜 받은 수
+
+		},error: function(err){
+			console.log(err);
+		}
 		
-			// ====================== 찜  ======================
-			// 찜 눌름
-			$('.detail-info__btn-list').on("click", '.detail-info__btn-zzim', function(){
+	}); // ajax getProductDetail
+	
+	// 찜 ----------------------------------------------------------------------------
+	$.ajax({
+		type: 'GET',
+		url: '/market/product/zzimExistCheck',
+		data: {'mem_id' : $('.loginId').val(),
+			   'seq': $('.hiddenProdSeq').val()},
+		dataType: 'json',
+		success : function(data){ 
+			if(data.wishDTO != null){
+				// 내가 찜한 상품 (검정 배경  + 빨강하트)
 				$('.detail-info__btn-zzim').attr('class', 'detail-info__btn-zzim_click');
 				$('.detail-info__btn-zzim_click img').attr('src', 'data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNiIgaGVpZ2h0PSIxNiIgdmlld0JveD0iMCAwIDE2IDE2Ij4KICAgIDxwYXRoIGZpbGw9IiNGNzJGMzMiIGZpbGwtcnVsZT0ibm9uemVybyIgZD0iTTcuMDA1IDEuMDQ1aC4yMzNjLjI4LjIyOC41MzcuNDkuNzYyLjc3Ny4yMjUtLjI4OC40ODEtLjU0OS43NjItLjc3N2guMjMzYTYuMTYgNi4xNiAwIDAgMC0uMDktLjExM0M5LjY4NC4zNDQgMTAuNjI4IDAgMTEuNiAwIDE0LjA2NCAwIDE2IDIuMTEgMTYgNC43OTZjMCAzLjI5Ni0yLjcyIDUuOTgxLTYuODQgMTAuMDYyTDggMTZsLTEuMTYtMS4xNTFDMi43MiAxMC43NzcgMCA4LjA5MiAwIDQuNzk2IDAgMi4xMSAxLjkzNiAwIDQuNCAwYy45NzIgMCAxLjkxNi4zNDQgMi42OTUuOTMyYTYuMTYgNi4xNiAwIDAgMC0uMDkuMTEzeiIvPgo8L3N2Zz4K');
+			}
 			
-					// 현재 로그인 중인 이 아디(시큘티ㅣ)가 이 상품을 찜,,
-					// 찜(+1) 업데이트 DB
-					$.ajax({
-						type: 'GET',
-						url: '/market/product/zzimInsert',
-						data: {'mem_id' : $('.loginId').val(),
-							   'seq': $('.hiddenProdSeq').val()}, 
-						//dataType: 'json',
-						success : function(data){ 
-							console.log(data);
-						},error: function(err){
-							console.log(err);
-						}
-					});
-					
-					// 찜 메시지 등장
-					$('.detail-info__btn-zzim__div').append($('<div/>', {
-						class:'zzimCheckMsg'
-					}).append($('<img/>', {
-						src: 'data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNCIgaGVpZ2h0PSIxNCIgdmlld0JveD0iMCAwIDE0IDE0Ij4KICAgIDxwYXRoIGZpbGw9Im5vbmUiIGZpbGwtcnVsZT0iZXZlbm9kZCIgc3Ryb2tlPSIjMzMzIiBzdHJva2Utd2lkdGg9IjEuNSIgZD0iTTIuMTA2IDdsMy42NjMgNCA3LjAxNS04IiBvcGFjaXR5PSIuNDA2Ii8+Cjwvc3ZnPgo=',
-						widht: '14',
-						height: '14',
-						alt: '찜 아이콘'
-					})).append($('<span/>', {
-						class:'zzimCheckMsgText',
-						text: '상품을 찜 했습니다'
-					})))
-					
-					// 찜 메시지 사라짐
-					$('.zzimCancelMsg').css('display', 'none');
-					$('.zzimCheckMsg').css('display', 'flex').delay(500).fadeOut(1000);
-			});// 찜 눌름
+			// 찜 누름 
+			$('.detail-info__btn-list').on("click", '.detail-info__btn-zzim', function(){
+				// 검정 배경  + 빨강하트
+				$('.detail-info__btn-zzim').attr('class', 'detail-info__btn-zzim_click');
+				$('.detail-info__btn-zzim_click img').attr('src', 'data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNiIgaGVpZ2h0PSIxNiIgdmlld0JveD0iMCAwIDE2IDE2Ij4KICAgIDxwYXRoIGZpbGw9IiNGNzJGMzMiIGZpbGwtcnVsZT0ibm9uemVybyIgZD0iTTcuMDA1IDEuMDQ1aC4yMzNjLjI4LjIyOC41MzcuNDkuNzYyLjc3Ny4yMjUtLjI4OC40ODEtLjU0OS43NjItLjc3N2guMjMzYTYuMTYgNi4xNiAwIDAgMC0uMDktLjExM0M5LjY4NC4zNDQgMTAuNjI4IDAgMTEuNiAwIDE0LjA2NCAwIDE2IDIuMTEgMTYgNC43OTZjMCAzLjI5Ni0yLjcyIDUuOTgxLTYuODQgMTAuMDYyTDggMTZsLTEuMTYtMS4xNTFDMi43MiAxMC43NzcgMCA4LjA5MiAwIDQuNzk2IDAgMi4xMSAxLjkzNiAwIDQuNCAwYy45NzIgMCAxLjkxNi4zNDQgMi42OTUuOTMyYTYuMTYgNi4xNiAwIDAgMC0uMDkuMTEzeiIvPgo8L3N2Zz4K');
+				
+				// 찜(+1) 업데이트 DB
+				$.ajax({
+					type: 'get',
+					url: '/market/product/zzimInsert',
+					data: {'mem_id' : $('.loginId').val(),
+						   'seq': $('.hiddenProdSeq').val()}, 
+					success : function(data){
+						// 버튼누르자마자 찜 +1
+						$('#zzim').text(Number($('#zzim').text())+1); 
+						$('.zzimSpanNum').text(Number($('.zzimSpanNum').text())+1);
+						
+					},error: function(err){
+						console.log(err);
+					}
+				});
+				
+				$('.detail-info__btn-zzim__div').append($('<div/>', {
+				class:'zzimCheckMsg'
+				}).append($('<img/>', {
+					src: 'data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNCIgaGVpZ2h0PSIxNCIgdmlld0JveD0iMCAwIDE0IDE0Ij4KICAgIDxwYXRoIGZpbGw9Im5vbmUiIGZpbGwtcnVsZT0iZXZlbm9kZCIgc3Ryb2tlPSIjMzMzIiBzdHJva2Utd2lkdGg9IjEuNSIgZD0iTTIuMTA2IDdsMy42NjMgNCA3LjAxNS04IiBvcGFjaXR5PSIuNDA2Ii8+Cjwvc3ZnPgo=',
+					widht: '14',
+					height: '14',
+					alt: '찜 아이콘'
+				})).append($('<span/>', {
+					class:'zzimCheckMsgText',
+					text: '상품을 찜 했습니다'
+				})))
+				// 찜 메시지 사라짐
+				$('.zzimCancelMsg').css('display', 'none');
+				$('.zzimCheckMsg').css('display', 'flex').delay(500).fadeOut(1000);
+			});
 			
-			
-			/*// 찜 해제 --------------------------------------------------------------------------
+			// 찜 해제
 			$('.detail-info__btn-list').on("click", '.detail-info__btn-zzim_click', function(){
 				$('.detail-info__btn-zzim_click').attr('class', 'detail-info__btn-zzim');
 				$('.detail-info__btn-zzim img').attr('src','data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNiIgaGVpZ2h0PSIxNiIgdmlld0JveD0iMCAwIDE2IDE2Ij4KICAgIDxwYXRoIGZpbGw9IiNGRkYiIGZpbGwtcnVsZT0ibm9uemVybyIgZD0iTTcuMDA1IDEuMDQ1aC4yMzNjLjI4LjIyOC41MzcuNDkuNzYyLjc3Ny4yMjUtLjI4OC40ODEtLjU0OS43NjItLjc3N2guMjMzYTYuMTYgNi4xNiAwIDAgMC0uMDktLjExM0M5LjY4NC4zNDQgMTAuNjI4IDAgMTEuNiAwIDE0LjA2NCAwIDE2IDIuMTEgMTYgNC43OTZjMCAzLjI5Ni0yLjcyIDUuOTgxLTYuODQgMTAuMDYyTDggMTZsLTEuMTYtMS4xNTFDMi43MiAxMC43NzcgMCA4LjA5MiAwIDQuNzk2IDAgMi4xMSAxLjkzNiAwIDQuNCAwYy45NzIgMCAxLjkxNi4zNDQgMi42OTUuOTMyYTYuMTYgNi4xNiAwIDAgMC0uMDkuMTEzeiIvPgo8L3N2Zz4K');
@@ -503,21 +523,32 @@ $(document).ready(function(){
 				})))
 				
 				// 찜(-1) 업데이트 DB
-				
-				
+				$.ajax({
+					type: 'get',
+					url: '/market/product/zzimDelete',
+					data: {'mem_id' : $('.loginId').val(),
+						   'seq': $('.hiddenProdSeq').val()}, 
+					success : function(data){ 
+						$('#zzim').text(Number($('#zzim').text())-1); 
+						$('.zzimSpanNum').text(Number($('.zzimSpanNum').text())-1);
+					}
+					,error: function(err){
+						console.log(err);
+					}
+				});
 				
 				$('.zzimCheckMsg').css('display', 'none');
 				$('.zzimCancelMsg').css('display', 'flex').delay(500).fadeOut(1000);
 			});// 찜 해제
-*/			
-				
+
 		},error: function(err){
 			console.log(err);
 		}
-		
-	}); // ajax getProductDetail
+	}); // 찜 zzimExistCheck
 	
-	// 카테고리 (대분류/소분류)
+	
+	
+	// 카테고리 (대분류/소분류) ---------------------------------------------------------
 	$.ajax({
 		type: 'GET',
 		url: '/market/product/getProdCateName',

@@ -275,14 +275,49 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		where mem_id = #{mem_id}
 	</select>
    	
-   	
    	<!-- 구매 내역 존재 여부 purchaseExist -->
   	<select id="purchaseExist" parameterType="java.util.Map" resultType="store.bean.PurchaseExistDTO">
 		select*
 		from purchase
 		where my_id = #{my_id} and seller_id = #{seller_id}
-		
+		<!-- OR (my_id = #{seller_id} and seller_id = #{my_id}) -->
 	</select>
+	
+	<!-- 상점주인 - 채팅방 리스트 조회  -->
+	<select id="getChatList" parameterType="String" resultType="chat.bean.ChatListDTO">
+		select mem_id, other_store_nickname, other_store_img, chat_logtime
+		from chatlist 
+		where mem_id = #{mem_id} 
+		order by chat_logtime desc
+	</select>
+	
+	<!-- 구매내역 추가  -->
+	<insert id="purchaseInsert" parameterType="java.util.Map">
+		insert into purchase(my_id, seller_id, product_seq, purchase_logtime)
+		values(#{pur_nick}, #{seller_id}, #{product_seq}, sysdate)
+	</insert>
+	
+	<!-- 닉으로 상대방 상점 아이디 구하기 -->
+	<select id="getStoreNick" parameterType="String" resultType="String">
+		select mem_id
+		from store
+		where store_nickname = #{other_store_nickname}
+	</select>
+	
+	<!-- 거래한 상품 선택 -->
+	<select id="purchaseListSelect" parameterType="String" resultType="product">
+		select product_seq, product_subject, product_img1, product_price
+		from product
+		where product_seq = #{product_seq}
+		order by product_seq desc
+	</select>
+	
+	<!-- 리뷰 등록  -->
+	<insert id="reviewRegister" parameterType="java.util.Map">
+		insert into review
+		values(#{product_seq}, #{mem_id}, #{review_content}, #{review_score}, sysdate, seq_review.NEXTVAL)
+	</insert>
+	
 </mapper>
 
 
