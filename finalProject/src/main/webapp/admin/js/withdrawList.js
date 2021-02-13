@@ -1,67 +1,77 @@
 $(document).ready(function(){
+	withdrawList();
+});
+
+//selectPrint눌렀을때 (20개보기 50개보기..)
+$('#selectPrint').change(function(){
+	var viewNum = $(this).val();
+	$('#viewNum').val(viewNum);
+	
+	withdrawList();
+});
+
+//리스트 전체 출력
+function withdrawList(data){
 	$.ajax({
 		type: 'post',
 		url: '/market/admin/getWithdrawList',
-		data: {'pg': $('#pg').val(), 
-				'viewNum': $('#viewNum').val()},
+		data: {'pg': $('#pg').val(),
+			   'viewNum': $('#viewNum').val()},
 		dataType: 'json',
 		success: function(data){
 			$("#tbody tr:gt(0)").remove();
-			withdrawList(data); //전체 출력
+			let withdrawReason;
+			$.each(data.list, function(index, items){
+				withdrawReason='';
+				if(items.withdraw_lowFrequency ==1){
+					withdrawReason = '이용빈도 낮음'
+				}if(items.withdraw_rejoin ==1){
+					if (withdrawReason==''){
+						withdrawReason += "재가입"
+					}else withdrawReason += ", 재가입"
+				}if(items.withdraw_lowContents ==1){
+					if (withdrawReason==''){
+						withdrawReason += "콘텐츠/상품 부족"
+					}else withdrawReason += ", 콘텐츠/상품 부족"
+				}if(items.withdraw_protectInfo ==1){
+					if (withdrawReason==''){
+						withdrawReason += "개인정보보호"
+					}else withdrawReason += ", 개인정보보호"
+				}if(items.withdraw_lowBenefit ==1){
+					if (withdrawReason==''){
+						withdrawReason += "혜택 부족"
+					}else withdrawReason += ", 혜택 부족"
+				}if(items.withdraw_others ==1){
+					if (withdrawReason==''){
+						withdrawReason += "기타"
+					}else withdrawReason += ", 기타"
+				}
+					
+				console.log("탈퇴사유:"+withdrawReason);
+				
+				$('<tr/>').append($('<td/>',{
+					text: items.withdraw_seq
+				})).append($('<td/>',{
+					text: items.mem_id
+				})).append($('<td/>',{
+					text: withdrawReason,
+				})).append($('<td/>',{
+					text: items.withdraw_detailReason
+				})).append($('<td/>',{
+					text: items.withdraw_logtime
+				})).appendTo($('#tbody'));
+					
+			});//each
+			//페이징처리
+			$('#boardPagingDiv').html(data.withdrawBP.pagingHTML);
 			drawPie();
 			drawGraph();
 		},error: function(err){
 			console.log(err);
 		}
 	});//ajax
-});
-//리스트 전체 출력
-function withdrawList(data){
-	let withdrawReason;
-	$.each(data.list, function(index, items){
-		withdrawReason='';
-		if(items.withdraw_lowFrequency ==1){
-			withdrawReason = '이용빈도 낮음'
-		}if(items.withdraw_rejoin ==1){
-			if (withdrawReason==''){
-				withdrawReason += "재가입"
-			}else withdrawReason += ", 재가입"
-		}if(items.withdraw_lowContents ==1){
-			if (withdrawReason==''){
-				withdrawReason += "콘텐츠/상품 부족"
-			}else withdrawReason += ", 콘텐츠/상품 부족"
-		}if(items.withdraw_protectInfo ==1){
-			if (withdrawReason==''){
-				withdrawReason += "개인정보보호"
-			}else withdrawReason += ", 개인정보보호"
-		}if(items.withdraw_lowBenefit ==1){
-			if (withdrawReason==''){
-				withdrawReason += "혜택 부족"
-			}else withdrawReason += ", 혜택 부족"
-		}if(items.withdraw_others ==1){
-			if (withdrawReason==''){
-				withdrawReason += "기타"
-			}else withdrawReason += ", 기타"
-		}
-			
-		console.log("탈퇴사유:"+withdrawReason);
-		
-		$('<tr/>').append($('<td/>',{
-			text: items.withdraw_seq
-		})).append($('<td/>',{
-			text: items.mem_id
-		})).append($('<td/>',{
-			text: withdrawReason,
-		})).append($('<td/>',{
-			text: items.withdraw_detailReason
-		})).append($('<td/>',{
-			text: items.withdraw_logtime
-		})).appendTo($('#tbody'));
-			
-	});//each
-	//페이징처리
-	$('#boardPagingDiv').html(data.withdrawBP.pagingHTML);
 }
+
 //탈퇴 회원 분석(파이)
 function drawPie(){
 	$.ajax({
@@ -110,8 +120,91 @@ function drawGraph(){
 }		
 
 
+//조건검색======================================================
+
+//검색
+$('#storeSearchBtn').click(function(event, str){
+	if(str != 'research'){
+		$('input[name=searchPg]').val(1);
+	}
+	if($('#keyword').val() == ''){
+		alert('검색어를 입력하세요');
+	}else{
+		search_viewNum_change();
+		
+		//조건 검색후 selectPrint눌렀을때 (20개보기 50개보기..)
+		$('#selectPrint').change(function(){
+			var viewNum = $(this).val();
+			$('#viewNum').val(viewNum);
+			
+			search_viewNum_change();
+		});
+	}
+});
 
 
+function search_viewNum_change(){
+	$.ajax({
+		type: 'post',
+		url: '/market/admin/getSearchWithdrawList',
+		data: {'pg': $('#pg').val(), 
+			   'viewNum': $('#viewNum').val(),
+			   'searchType':$('#searchType').val(),
+			   'keyword':$('#keyword').val()},
+		dataType: 'json',
+		success: function(data){
+			$("#tbody tr:gt(0)").remove();
+			let withdrawReason;
+			$.each(data.list, function(index, items){
+				withdrawReason='';
+				if(items.withdraw_lowFrequency ==1){
+					withdrawReason = '이용빈도 낮음'
+				}if(items.withdraw_rejoin ==1){
+					if (withdrawReason==''){
+						withdrawReason += "재가입"
+					}else withdrawReason += ", 재가입"
+				}if(items.withdraw_lowContents ==1){
+					if (withdrawReason==''){
+						withdrawReason += "콘텐츠/상품 부족"
+					}else withdrawReason += ", 콘텐츠/상품 부족"
+				}if(items.withdraw_protectInfo ==1){
+					if (withdrawReason==''){
+						withdrawReason += "개인정보보호"
+					}else withdrawReason += ", 개인정보보호"
+				}if(items.withdraw_lowBenefit ==1){
+					if (withdrawReason==''){
+						withdrawReason += "혜택 부족"
+					}else withdrawReason += ", 혜택 부족"
+				}if(items.withdraw_others ==1){
+					if (withdrawReason==''){
+						withdrawReason += "기타"
+					}else withdrawReason += ", 기타"
+				}
+					
+				console.log("탈퇴사유:"+withdrawReason);
+				
+				$('<tr/>').append($('<td/>',{
+					text: items.withdraw_seq
+				})).append($('<td/>',{
+					text: items.mem_id
+				})).append($('<td/>',{
+					text: withdrawReason,
+				})).append($('<td/>',{
+					text: items.withdraw_detailReason
+				})).append($('<td/>',{
+					text: items.withdraw_logtime
+				})).appendTo($('#tbody'));
+					
+			});//each
+			//페이징처리
+			$('#boardPagingDiv').html(data.withdrawBP.pagingHTML);
+			drawPie();
+			drawGraph();
+		},error: function(err){
+			console.log(err);
+		}
+	});//ajax
+}
 
 
 

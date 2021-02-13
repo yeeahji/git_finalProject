@@ -57,7 +57,7 @@
 		                            <a class="nav-link" href="/market/admin/memberQna">고객 상담관리</a>
 		                            <a class="nav-link" href="/market/admin/noticeMG">공지사항 관리</a>
 		                            <a class="nav-link" href="/market/admin/noticeWrite">공지사항 등록</a>
-	                    		</ul>
+	                    	   </ul>
                             
 
                             <div class="sb-sidenav-menu-heading">Addons</div>
@@ -103,7 +103,11 @@
 	  
       <form class="d-flex" id="memberSearchForm">
       	<input type="hidden" id="searchPg" name="searchPg" value="1">
+<<<<<<< HEAD
       	<select class="form-select form-select-sm" id="searchType" aria-label=".form-select-sm example">
+=======
+      	<select class="form-select form-select-sm" id="searchType1" aria-label=".form-select-sm example">
+>>>>>>> gt
 		  <option selected>카테고리1</option>
 		  <option value="">계정문의</option>
 		  <option value="">거래신고</option>
@@ -111,14 +115,22 @@
 		  <option value="">광고</option>
 		  <option value="">장애신고</option>
 		</select>&emsp;
+<<<<<<< HEAD
       	<select class="form-select form-select-sm" id="searchType" aria-label=".form-select-sm example">
+=======
+      	<select class="form-select form-select-sm" id="searchType2" aria-label=".form-select-sm example">
+>>>>>>> gt
 		  <option selected>카테고리2</option>
 		  <option value="">제목</option>
 		  <option value="">내용</option>
 		  <option value="">아이디</option>
 		</select>&emsp;&emsp;
         <input class="form-control me-2" type="search" name="keyword" id="keyword" placeholder="회원 아이디" aria-label="Search">
+<<<<<<< HEAD
         <button class="btn btn-outline-success" type="button" id="memberSearchBtn">search</button>
+=======
+        <button class="btn btn-outline-success" type="button" id="memberQnaSearchBtn">search</button>
+>>>>>>> gt
       </form>  
       
     </div>
@@ -224,4 +236,19 @@
 </footer>
 </div>
 </div>
+<<<<<<< HEAD
+=======
+<script type="text/javascript">
+	function boardPaging(pg){
+		var keyword = document.getElementById("keyword").value;
+		$('#pg').val(pg);
+	
+		 if(keyword ==''){
+			location.href='/market/admin/memberQna?pg='+pg+'&viewNum='+$('#viewNum').val();
+		 }else{
+			$('#memberQnaSearchBtn').trigger('click','research');
+		 }
+	}
+	</script>
+>>>>>>> gt
 </body>

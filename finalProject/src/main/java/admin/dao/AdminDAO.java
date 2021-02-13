@@ -3,6 +3,7 @@ import java.util.List;
 import java.util.Map;
 
 import admin.bean.AdminMembersDTO;
+import admin.bean.AdminProductDTO;
 import admin.bean.QnaDTO;
 import admin.bean.WithdrawDTO;
 import board.bean.CommentDTO;
@@ -53,36 +54,58 @@ public interface AdminDAO {
 	public List<ProductDTO> getStoreViewOrderby(Map<String, String> map);
 
 
-	//신고
-	public List<StoreDTO> getComplainList(Map<String, Integer> map);
-	public List<ComplainDTO> searchReportedMember(Map<String, String> map);
-	
-	public int getComplainTotal();
-	public int getTotalReportedMember(Map<String, String> map);
-	
-	
-	public CommentDTO getCommentContent(String comment_content);
-	public ReviewDTO getReviewContent(String review_seq);
-	
-	public void solveComplain(Map<String, Integer> map);
-	
-	
-	//1:1문의
-	public List<QnaDTO> getQnaList(Map<String, Integer> map);
-	public int getQnaTotal();
-	public QnaDTO getQnaContent(int qna_seq);
-	public void writeAnswer(Map<String, Object> map);
-	
-	//탈퇴회원관리
-	public List<WithdrawDTO> getWithdrawList(Map<String, Integer> map);
-	public int getWithdrawTotal();
-	 
-	public int getWithdraw_lowFrequencyTotal() ;
-	public int getWithdraw_rejoinTotal() ;
-	public int getWithdraw_lowContentsTotal();
-	public int getWithdraw_protectInfoTotal() ;
-	public int getWithdraw_lowBenefitTotal() ;
-	public int getWithdraw_othersTotal() ;
+  //신고
+  	public List<StoreDTO> getComplainList(Map<String, Integer> map);
+  	public List<ComplainDTO> searchReportedMember(Map<String, String> map);
+  	
+  	public int getComplainTotal();
+  	public int getTotalReportedMember(Map<String, String> map);
+  	
+  	
+  	public CommentDTO getCommentContent(String comment_content);
+  	public ReviewDTO getReviewContent(String review_seq);
+  	
+  	public void solveComplain(Map<String, Integer> map);
+  	
+  	
+  	//1:1문의
+  	public List<QnaDTO> getQnaList(Map<String, Integer> map);
+  	public int getQnaTotal();
+  	public QnaDTO getQnaContent(int qna_seq);
+  	public void writeAnswer(Map<String, Object> map);
+  	
+  	//탈퇴회원관리
+  	public List<WithdrawDTO> getWithdrawList(Map<String, Integer> map);
+  	public int getWithdrawTotal();
+  	 
+  	public int getWithdraw_lowFrequencyTotal() ;
+  	public int getWithdraw_rejoinTotal() ;
+  	public int getWithdraw_lowContentsTotal();
+  	public int getWithdraw_protectInfoTotal() ;
+  	public int getWithdraw_lowBenefitTotal() ;
+  	public int getWithdraw_othersTotal() ;
+  	public void blindComplain(String board_seq, String comment_seq, String review_seq, String thisIs);
+    	//회원 영구정지
+  	public void memberBlock(String id);
+  	//회원_영구정지 복구
+  	public void memberReleaseBtn(String id);
+  	//물품_상세정보_카테고리
+  	public AdminProductDTO getCatagory(String seq);
+  	//물품_상세보기 대분류
+  	public String getCate_code(String cate_code);
 
+  	//조건검색 후 문의 내역 출력
+	public List<QnaDTO> getSearchQnaList(Map<String, String> map);
+	//조건검색 후 문의 내역 출력 페이징
+	public int totalG(Map<String, String> map);
+	
+	//탈퇴회원 조건검색 리스트 출력
+	public List<WithdrawDTO> getSearchWithdrawList(Map<String, String> map);
+	//탈퇴회원 조건검색 리스트 출력_페이징
+	public int totalH(Map<String, String> map);
+	
+
+
+	
 
 }

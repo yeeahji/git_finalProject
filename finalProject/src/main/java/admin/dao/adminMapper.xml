@@ -86,7 +86,7 @@
 	</select>
 <!-- 물품관련 상세정보 -->
 	<select id="getProductView" parameterType="String" resultType="admin.bean.AdminMembersDTO">
-		select * from product join members using(mem_id) where product_seq = #{seq}
+		select * from product join members using(mem_id) join store using(mem_id) where product_seq = #{seq}
 	</select>
 <!-- 물품 조건검색 -->
 	<select id="getSearchProductList" parameterType="java.util.Map" resultType="product.bean.ProductDTO">
@@ -120,7 +120,7 @@
 				</when>
 			</choose>
 	</select>
-
+	
 <!-- [신고]========================================================================= -->
 <!-- A.신고 리스트 전체 출력 -->
    <select id="getComplainList" parameterType="java.util.Map" resultType="member.bean.ComplainDTO">
@@ -150,11 +150,39 @@
 
 <!-- 신고 댓글 보이기 -->
    <select id="getCommentContent" parameterType="String" resultType="board.bean.CommentDTO">
-      select mem_id, comment_content, comment_logtime from comments where comment_seq=#{comment_seq} 
+      select * from comments where comment_seq=#{comment_seq} 
    </select>
 <!-- 신고 리뷰 보이기 -->
    <select id="getReviewContent" parameterType="String" resultType="store.bean.ReviewDTO">
-      select mem_id, review_content, review_date from comments where review_seq=#{review_seq}
+      select * from comments where review_seq=#{review_seq}
+   </select>
+<!-- 신고내용 처리상태 변경 -->
+	<update id="solveComplain" parameterType="java.util.Map" >
+ 		update complain set complain_status = #{complain_status} where complain_seq = #{complain_seq}
+ 	</update>
+ 	
+ 	
+ 	<update id="boardBlindComplain" parameterType="Integer" >
+ 		update boards set board_subject = '관리자에 의해 블라인드 처리된 글입니다.', board_content = '관리자에 의해 블라인드 처리된 글입니다.' where board_seq = #{board_seq}
+ 	</update>
+ 	<update id="commentBlindComplain" parameterType="Integer" >
+ 		update comments set comment_content = '관리자에 의해 블라인드 처리된 글입니다.' where comment_seq = #{ comment_seq}
+ 	</update>
+ 	<update id="reviewBlindComplain" parameterType="Integer" >
+ 		update review set review_content = '관리자에 의해 블라인드 처리된 글입니다.' where review_seq = #{review_seq}
+ 	</update>
+ 	
+<!-- [1:1문의]========================================================================= -->
+<!-- A.1:1문의 리스트 전체 출력 -->
+   <select id="getQnaList" parameterType="java.util.Map" resultType="admin.bean.QnaDTO">
+      select * from(
+         select rownum rn, tt.* from(select * from qna)tt)
+               where rn between #{startNum} and #{endNum} order by qna_seq asc
+   </select>
+
+<!-- A.1:1문의 리스트 개수 -->
+   <select id="getQnaTotal" resultType="Integer">
+      select count(*) from qna
    </select>
 <!-- 신고내용 처리상태 변경 -->
 	<update id="solveComplain" parameterType="java.util.Map" >
@@ -220,5 +248,54 @@
     <select id="getWithdraw_othersTotal" resultType="Integer">
       select count(*) from withdraw where withdraw_others is not null
    </select>
-   
-</mapper> 
+     
+
+
+<!-- 회원 영구정지 -->
+	<update id="memberBlock" parameterType="String">
+		update members set enabled=0 where mem_id=#{id}
+	</update>
+<!-- 회원 영구정지 복구 -->
+	<update id="memberReleaseBtn" parameterType="String">
+		update members set enabled=1 where mem_id=#{id}
+	</update>
+<!-- 물품_상세정보_카테고리 -->
+	<select id="getCatagory" parameterType="String" resultType="admin.bean.AdminProductDTO">
+		select * from product join category using(cate_code) where product_seq = #{seq}
+	</select>
+<!-- 물품_상세보기 대분류 -->
+	<select id="getCate_code" parameterType="String" resultType="String">
+		select cate_name from category
+		where cate_code=(select cate_parent from category where cate_code=#{cate_code})
+	</select>
+	
+	
+<!-- 조건검색 후 문의 내역 출력-->
+	<select id="getSearchQnaList" parameterType="java.util.Map" resultType="admin.bean.QnaDTO">
+		<![CDATA[
+		select * from
+		(select rownum rn, tt.* from
+		(select * from qna where ${searchType2} like '%'||#{keyword}||'%')tt
+		)where rn>=#{startNum} and rn<=#{endNum}
+		]]>
+	</select>
+<!-- 조건검색 후 문의 내역 출력 페이징 -->
+	<select id="totalG" parameterType="java.util.Map" resultType="Integer">
+		select count(*) from qna where ${searchType} like '%'||#{keyword}||'%'
+	</select>
+	
+<!-- 조건검색 후 문의 내역 출력-->
+	<select id="getSearchWithdrawList" parameterType="java.util.Map" resultType="admin.bean.WithdrawDTO">
+		<![CDATA[
+		select * from
+		(select rownum rn, tt.* from
+		(select * from withdraw where ${searchType} like '%'||#{keyword}||'%')tt
+		)where rn>=#{startNum} and rn<=#{endNum}
+		]]>
+	</select>
+<!-- 조건검색 후 문의 내역 출력 페이징 -->
+	<select id="totalH" parameterType="java.util.Map" resultType="Integer">
+		select count(*) from withdraw where ${searchType} like '%'||#{keyword}||'%'
+	</select>
+	
+</mapper>

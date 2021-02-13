@@ -4,6 +4,7 @@ import java.util.Map;
 
 import admin.bean.AdminBoardPaging;
 import admin.bean.AdminMembersDTO;
+import admin.bean.AdminProductDTO;
 import admin.bean.QnaDTO;
 import admin.bean.WithdrawDTO;
 import board.bean.CommentDTO;
@@ -57,8 +58,6 @@ public interface AdminService {
 	//상점_정보출력 후 물품 정렬
 	public List<ProductDTO> getStoreViewOrderby(Map<String, String> map);
 
-
-
 	//신고내역 출력
 	public List<StoreDTO> getComplainList(String pg, String viewNum);
 	public AdminBoardPaging adminComplainBP(String pg, String viewNum);
@@ -71,7 +70,6 @@ public interface AdminService {
 	public ReviewDTO getReviewContent(String review_seq);
 
 	public void solveComplain(Map<String, Integer> map);
-
 	
 	//1:1 문의내역 출력
 	public List<QnaDTO> getQnaList(String pg, String viewNum);
@@ -86,6 +84,29 @@ public interface AdminService {
 
 	public Map <String, Integer> getWithdrawTotal();
 
+	public void blindComplain(String board_seq, String comment_seq, String review_seq, String thisIs);
+
+	
+	
+	//회원 영구정지
+	public void memberBlock(String id);
+	//회원_영구정지 복구
+	public void memberReleaseBtn(String id);
+	//물품_상세정보_카테고리
+	public AdminProductDTO getCatagory(String seq);
+	//물품_상세보기 대분류
+	public String getCate_code(String cate_code);
+	
+	//조건검색 후 문의 내역 출력
+	public List<QnaDTO> getSearchQnaList(Map<String, String> map);
+	//조건검색 후 문의 내역 출력_페이징
+	public AdminBoardPaging getSearchqnaBP(Map<String, String> map);
+	
+	//탈퇴회원 조건검색 리스트 출력
+	public List<WithdrawDTO> getSearchWithdrawList(Map<String, String> map);
+	//탈퇴회원 조건검색 리스트 출력_페이징
+	public AdminBoardPaging getSearchWithdrawBP(Map<String, String> map);
+	
 	
 	
 }

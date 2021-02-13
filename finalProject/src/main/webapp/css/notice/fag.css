@@ -103,7 +103,6 @@ button, input[type="text"], input[type="tel"], input[type="number"] {
 /* ---------------------------------- */
 
 .f_revel2_5 {
-	display: flex;
     -webkit-box-pack: center;
     justify-content: center;
     padding: 18px 0px 100px;
@@ -241,7 +240,10 @@ b, strong {
     font-weight: bolder;
 }
 
-
+#f_artP{
+	margin: 10px 10px 10px 10px;
+	padding: 10px 10px 10px 10px;
+}
 
 
 
