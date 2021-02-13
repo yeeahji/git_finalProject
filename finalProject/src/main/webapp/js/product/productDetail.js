@@ -407,12 +407,12 @@ $(document).ready(function(){
 							name: 'other_store_nickname',
 							value: $('.storeInfo_name').text()
 						}))
-						$('.storeInfo_name').append($('<input/>', {
+						$('#callBtn').append($('<input/>', {
 							type: 'hidden',
 							name: 'product_seq',
 							value: $('.hiddenProdSeq').val()
 						}))
-						$('.storeInfo_name').append($('<input/>', {
+						$('#callBtn').append($('<input/>', {
 							type: 'hidden',
 							name: 'product_subject',
 							value: dto.product_subject
