@@ -340,6 +340,16 @@ public class AdminController {
 		map.put("complain_status", Integer.parseInt(complain_status));
 		adminService.solveComplain(map);
 	}
+	//신고 리뷰/댓글/게시글 블라인드 처리
+	@ResponseBody
+	@RequestMapping(value="blindComplain", method=RequestMethod.POST)
+	public void blindComplain(@RequestParam String board_seq, @RequestParam String comment_seq,
+								@RequestParam String review_seq, @RequestParam String thisIs) {
+		Map <String, Integer> map = new HashMap<String, Integer>();
+		System.out.println("1:"+board_seq+"/"+comment_seq+"/"+review_seq+"/"+thisIs);
+		
+		adminService.blindComplain(board_seq, comment_seq, review_seq, thisIs);
+	}
 	
 	
 //	[1:1문의]=========================================================================
@@ -432,6 +442,9 @@ public class AdminController {
 	
 		return mav;
 	}
+	
+	
+	
 }
 
 

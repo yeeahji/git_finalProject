@@ -395,6 +395,13 @@ public class AdminServiceImpl implements AdminService {
 		
 		return map;
 	}
+	@Override
+	public void blindComplain(String board_seq, String comment_seq, String review_seq, String thisIs) {
+		System.out.println("2:"+board_seq+"/"+comment_seq+"/"+review_seq+"/"+thisIs);
+
+		adminDAO.blindComplain(board_seq, comment_seq, review_seq, thisIs);
+		
+	}
 
 
 	

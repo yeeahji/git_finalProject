@@ -13,6 +13,60 @@ $(document).ready(function() {
 			console.log(err);
 		}
 	});//ajax
+	
+
+	//회원 영구 정지
+	$('#stopMemberBtn').click(function(){
+		var result = confirm($('#reported_id').text()+'님을 영구정지 하시겠습니까?');
+	    if(result){
+	       $.ajax({
+	          type: 'get',
+	          url: '/market/admin/memberBlock',
+	          data: {'id':$('#reported_id').text()},
+	          success: function(){
+	             alert('계정을 정지했습니다.');
+	          },
+	          error: function(){
+	             alert($('#reported_id').text()+'님의 계정을 영구정지 했습니다.');
+	             location.reload();
+	          }
+	       });
+	    }
+	});//stopMemberBtn
+
+	//신고글 블라인드 처리
+	$('#blindComplainBtn').click(function(){
+		var result = confirm('해당 글을 블라인드 처리하시겠습니까?');
+	    if(result){
+	       $.ajax({
+	          type: 'post',
+	          url: '/market/admin/blindComplain',
+	          data: {'board_seq':$('#mother_seq').text(),
+	        	  'comment_seq':$('#daughter_seq').text(),
+	        	  'review_seq':$('#daughter_seq').text(),
+	        	  'thisIs':$('#thisIs').val(),
+	        	  },
+	          success: function(){
+	             alert('글을 블라인드 처리했습니다.');
+	          }, error: function(err){
+	             console.log(err);
+	          }
+	       });
+	    }
+	});
+	
+	//
+	$('#goComplainPage').click(function(){
+		//게시글, 상점, 상품은 해당 페이지를 바로 띄운다.
+		//댓글은 '페이지 이동'을 띄워야만 해당 페이지가 뜬다.
+//		리뷰는 '페이지 이동하지 않는다.
+//		if($('#mother').text()=='댓글 번호'){
+			window.open("/market/board/articleForm?seq="+$('#mother_seq').text()+"&pg=1",
+					"PopupWin","width=800,height=800");
+		       
+//		}
+		
+	});
 });	
 	
 //20, 50개 출력
@@ -110,7 +164,6 @@ function complainList(data){
 					checked:checkOX 
 				}))
 			)).appendTo($('#complainTbody'));
-			
 	});//each
 	//페이징처리
 	$('#boardPagingDiv').html(data.adminComplainBP.pagingHTML);
@@ -119,6 +172,13 @@ function complainList(data){
 //신고 내용 확인
 function findComplainContent(){
 	$('#complainTbody').on('click', '#subjectA', function(){
+		$('#reported_id').text('');
+		$('#reported_logtime').text('');
+		$('#reported_content').text('');
+		$('#mother').text('');
+		$('#daughter').text('');
+		$('#mother_seq').text('');
+		$('#daughter_seq').text('');
 		if($(this).parent().prev().text()=='댓글 신고'){// 댓글 내용 우측에 띄우기
 			$.ajax({
 				type: 'post',
@@ -129,24 +189,56 @@ function findComplainContent(){
 					$('#reported_id').text(data.commentDTO.mem_id);
 					$('#reported_logtime').text(data.commentDTO.comment_logtime);
 					$('#reported_content').text(data.commentDTO.comment_content);
+					$('#mother').text('게시글 번호');
+					$('#daughter').text('댓글 번호');
+					$('#thisIs').val('댓글');
+					$('#mother_seq').text(data.commentDTO.board_seq);
+					$('#daughter_seq').text(data.commentDTO.comment_seq);
 				}
 			});//ajax
 		}else if($(this).parent().prev().text()=='게시글 신고'){//게시글 페이지 업
 			let seq = $(this).parent().text();
 			window.open("/market/board/articleForm?seq="+seq+"&pg=1","PopupWin","width=800,height=800");
+			$('#thisIs').val('게시글');
+			
+			$.ajax({
+				type : 'post',
+				url : '/market/board/getArticle',
+				data : 'seq='+$(this).parent().text(), 
+				dataType : 'json', 
+				success : function(data){
+					$('#reported_id').text(data.boardDTO.mem_id);
+					$('#reported_logtime').text(data.boardDTO.board_logtime);
+					$('#reported_content').text(data.boardDTO.board_content);
+					$('#mother').text('게시글 번호');
+					$('#daughter').text('댓글 번호');
+					$('#thisIs').val('게시글');
+					$('#mother_seq').text(data.boardDTO.board_seq);
+					$('#daughter_seq').text('-');
+				},error: function(err){
+					console.log(err);
+				}
+			});
+			
+			
 		}else if($(this).parent().prev().text()=='상품 신고'){//상품 페이지 업
 			let seq = $(this).parent().text();
 			window.open("/market/product/productDetail?seq="+seq,"PopupWin","width=800,height=800");
 		}else if($(this).parent().prev().text()=='리뷰 신고'){// 리뷰 내용 우측에 띄우기
 			$.ajax({
 				type: 'post',
-				url: '/market/admin/getCommentContent',
+				url: '/market/admin/getReviewContent',
 				data: {'comment_seq': $(this).parent().text() },
 				dataType: 'json',
 				success: function(data){
-					$('#reported_id').text(data.commentDTO.mem_id);
-					$('#reported_logtime').text(data.commentDTO.comment_logtime);
-					$('#reported_content').text(data.commentDTO.comment_content);
+					$('#reported_id').text(data.reviewDTO.mem_id);
+					$('#reported_logtime').text(data.reviewDTO.review_date);
+					$('#reported_content').text(data.reviewDTO.review_content);
+					$('#mother').text('상품글 번호');
+					$('#daughter').text('리뷰 번호');
+					$('#thisIs').val('리뷰');
+					$('#mother_seq').text(data.reviewDTO.product_seq);
+					$('#daughter_seq').text(data.reviewDTO.review_seq);
 				}
 			});//ajax
 		}else if($(this).parent().prev().text()=='상점 신고'){//상점 페이지 업
@@ -196,4 +288,9 @@ function checkStatus(complain_status, complain_seq){
 		});
 	}
 }
+
+
+
+
+
 

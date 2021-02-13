@@ -60,6 +60,7 @@ $("#qnaBtn").click(function(){
 		$('#qna_contentDiv').text("문의 내용을 입력하세요");
 	}else{
 		let formData = new FormData($('#QnaWriteForm')[0]);
+		console.log(formData);
 		$.ajax({
 			type: 'post',
 			enctype: 'multipart/form-data',
@@ -68,7 +69,7 @@ $("#qnaBtn").click(function(){
 			url: '/market/notice/writeQna',
 			data: formData,
 			success: function(data){
-				alert("상담 신청이 완료되었습니다." +
+				alert("상담 신청이 완료되었습니다.<br>" +
 						"빠른 시일 안에 확인 후 답변 드리겠습니다. 감사합니다.");
 				location.href = '/market/notice/qnaList';
 			},error:function(err){

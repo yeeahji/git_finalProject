@@ -135,8 +135,8 @@
 						<option value="talk_seq">번개톡 신고</option>
 					</select>
 			</th>
-				<th>항목 번호</th><!-- eachPart_seq -->
-				<th>내용</th><!-- complain_content -->
+				<th style="text-align:center;">항목 번호</th><!-- eachPart_seq -->
+				<th style="text-align:center;">내용</th><!-- complain_content -->
                 <th>신고당한 사람</th><!-- mem_id -->
                 <th>신고자</th><!--reporter_id -->
                 <th>신고 날짜</th><!-- complain_logtime -->
@@ -177,13 +177,6 @@
 <div class="col-xl-5"><!-- 우측 -->
 <div class="card mb-4">
   <h5 class="card-header">신고 내용 확인</h5>
-<!--   		<div class="container"> -->
-<!-- 		<div class="row"> -->
-<!-- 		<h3>작성자</h3><div class="col" id="reported_id"></div> -->
-<!-- 		<h3>작성일</h3><div class="col" id="reported_logtime"></div> -->
-<!-- 		</div> -->
-<!-- 		</div>end.container  -->
-<!-- 		<h3>내용</h3><div id="reported_content"></div> -->
 	 <div class="card-body">
        	<table class="table table-bordered border-primary table-sm">
 		  <tbody>
@@ -192,14 +185,20 @@
 		      <th width="20%">작성일</th><th width="30%"><span class="col" id="reported_logtime"></span></th>
 		    </tr>
 		    <tr>
+		      <th id="mother" width="20%"></th><th width="30%"><span class="col" id="mother_seq"></span></th> 
+		      <th id="daughter" width="20%"></th><th width="30%"><span class="col" id="daughter_seq"></span></th>
+		    </tr>
+		    <tr>
 		      <th>내용</th><th colspan="3"><span id="reported_content"></span></th>
 		    </tr>
 		   <tr>
 		   </tr>
 		  </tbody>
 		</table>
+		<input type="hidden" id="thisIs">
 		<button type="button" class="btn btn-secondary btn-sm" id="goComplainPage">페이지로 이동</button>
-		<button type="button" class="btn btn-secondary btn-sm" id="deleteComplain">신고글 삭제</button>
+		<button type="button" class="btn btn-secondary btn-sm" id="blindComplainBtn">신고글 블라인드 처리</button>
+		<button type="button" class="btn btn-secondary btn-sm" id="stopMemberBtn">회원 영구 정지</button>
 		   
 	 </div>    
 </div>

@@ -86,6 +86,8 @@ public interface AdminService {
 
 	public Map <String, Integer> getWithdrawTotal();
 
+	public void blindComplain(String board_seq, String comment_seq, String review_seq, String thisIs);
+
 	
 	
 }

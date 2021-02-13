@@ -83,6 +83,7 @@ public interface AdminDAO {
 	public int getWithdraw_protectInfoTotal() ;
 	public int getWithdraw_lowBenefitTotal() ;
 	public int getWithdraw_othersTotal() ;
+	public void blindComplain(String board_seq, String comment_seq, String review_seq, String thisIs);
 
 
 }
