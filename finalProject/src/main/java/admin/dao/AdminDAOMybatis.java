@@ -137,42 +137,6 @@ public class AdminDAOMybatis implements AdminDAO {
 	public List<ProductDTO> getStoreViewOrderby(Map<String, String> map) {
 		return sqlSession.selectList("adminSQL.getStoreViewOrderby", map);
 	}
-//  [신고]=========================================================================
-
-	// 신고 전체 리스트 출력
-	@Override
-	public List<StoreDTO> getComplainList(Map<String, Integer> map) {
-		return sqlSession.selectList("adminSQL.getComplainList", map);
-	}
-
-	// 신고 전체 개수(for 신고 전체 리스트 페이징)
-	@Override
-	public int getComplainTotal() {
-		return sqlSession.selectOne("adminSQL.getComplainTotal");
-	}
-
-	// 신고 검색 결과 출력
-	@Override
-	public List<ComplainDTO> searchReportedMember(Map<String, String> map) {
-		return sqlSession.selectList("adminSQL.searchReportedMember", map);
-	}
-
-	// 신고 검색 개수(for 신고 검색 리스트 페이징)
-	@Override
-	public int getTotalReportedMember(Map<String, String> map) {
-		return sqlSession.selectOne("adminSQL.getTotalReportedMember", map);
-	}
-
-	@Override
-	public CommentDTO getCommentContent(String comment_seq) {
-		return sqlSession.selectOne("adminSQL.getCommentContent", comment_seq);
-	}
-
-	@Override
-	public ReviewDTO getReviewContent(String review_seq) {
-
-		return sqlSession.selectOne("adminSQL.getReviewContent", review_seq);
-	}
 
 //	[신고]=========================================================================
 
@@ -297,7 +261,8 @@ public class AdminDAOMybatis implements AdminDAO {
 		
 	}
 	System.out.println("3:"+board_seq+"/"+comment_seq+"/"+review_seq+"/"+thisIs);
-
+	}
+	
 	//회원_영구정지
 	@Override
 	public void memberBlock(String id) {
@@ -323,6 +288,7 @@ public class AdminDAOMybatis implements AdminDAO {
 		System.out.println(cate_code);
 		return sqlSession.selectOne("adminSQL.getCate_code", cate_code);
 	}	
-	}
+	
 
+	
 }

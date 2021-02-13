@@ -6,6 +6,8 @@ import java.util.Map;
 import admin.bean.AdminBoardPaging;
 import admin.bean.AdminMembersDTO;
 import admin.bean.AdminProductDTO;
+import admin.bean.QnaDTO;
+import admin.bean.WithdrawDTO;
 import board.bean.CommentDTO;
 import member.bean.ComplainDTO;
 import member.bean.MemberDTO;

@@ -11,6 +11,8 @@ import org.springframework.stereotype.Service;
 import admin.bean.AdminBoardPaging;
 import admin.bean.AdminMembersDTO;
 import admin.bean.AdminProductDTO;
+import admin.bean.QnaDTO;
+import admin.bean.WithdrawDTO;
 import admin.dao.AdminDAO;
 import board.bean.CommentDTO;
 import member.bean.ComplainDTO;

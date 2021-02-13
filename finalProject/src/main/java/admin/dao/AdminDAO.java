@@ -57,16 +57,7 @@ public interface AdminDAO {
 	public int storeReviewTotalA(String id);
 	//상점_정보출력 후 물품 정렬
 	public List<ProductDTO> getStoreViewOrderby(Map<String, String> map);
-	public List<StoreDTO> getComplainList(Map<String, Integer> map);
 
-	public List<ComplainDTO> searchReportedMember(Map<String, String> map);
-
-	public int getTotalReportedMember(Map<String, String> map);
-
-
-	public int getComplainTotal();
-
-  	public CommentDTO getCommentContent(String comment_content);
 
   //신고
   	public List<StoreDTO> getComplainList(Map<String, Integer> map);
@@ -99,7 +90,6 @@ public interface AdminDAO {
   	public int getWithdraw_lowBenefitTotal() ;
   	public int getWithdraw_othersTotal() ;
   	public void blindComplain(String board_seq, String comment_seq, String review_seq, String thisIs);
-  	public ReviewDTO getReviewContent(String review_seq);
     	//회원 영구정지
   	public void memberBlock(String id);
   	//회원_영구정지 복구
