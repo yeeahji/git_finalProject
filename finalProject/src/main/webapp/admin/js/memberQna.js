@@ -114,7 +114,7 @@ function search_viewNum_qnaList(){
 				})).append($('<td/>',{
 					text: items.qna_logtime
 				})).append($('<td/>',{
-					text: answerOX
+					text: answerOX,
 				})).append($('<td/>',{
 					text: items.qna_answerLogtime
 				})).appendTo($('#tbody'));
@@ -136,6 +136,7 @@ function showQnaContent(){
 	
 	$('#tbody').on('click', '#subjectA', function(){
 		$('#qnaAnswerTextarea').val('');
+		$('#qnaImg1').attr('src','');
 		$.ajax({
 			type: 'post',
 			url: '/market/admin/getQnaContent',
@@ -148,7 +149,11 @@ function showQnaContent(){
 				$('#qna_logtime').text(data.qnaDTO.qna_logtime);
 				$('#qnaContent').text(data.qnaDTO.qna_content);
 				$('#qna_seq').text(data.qnaDTO.qna_seq);
-				
+				if(data.qnaDTO.qna_img1 != null){
+					$('#qnaImg1').attr('src','/market/storage/'+data.qnaDTO.qna_img1)
+				}else{
+					$('#noImg').text('[이미지 없음]');
+				}
 				if(data.qnaDTO.qna_answer != null){
 					$('#qnaAnswerTextarea').val(data.qnaDTO.qna_answer);
 					$("#qnaAnswerTextarea").attr("readonly", true);

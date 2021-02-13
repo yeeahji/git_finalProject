@@ -103,11 +103,8 @@
 	  
       <form class="d-flex" id="memberSearchForm">
       	<input type="hidden" id="searchPg" name="searchPg" value="1">
-<<<<<<< HEAD
-      	<select class="form-select form-select-sm" id="searchType" aria-label=".form-select-sm example">
-=======
+<!--       	<select class="form-select form-select-sm" id="searchType" aria-label=".form-select-sm example"> -->
       	<select class="form-select form-select-sm" id="searchType1" aria-label=".form-select-sm example">
->>>>>>> gt
 		  <option selected>카테고리1</option>
 		  <option value="">계정문의</option>
 		  <option value="">거래신고</option>
@@ -115,22 +112,16 @@
 		  <option value="">광고</option>
 		  <option value="">장애신고</option>
 		</select>&emsp;
-<<<<<<< HEAD
-      	<select class="form-select form-select-sm" id="searchType" aria-label=".form-select-sm example">
-=======
+<!--       	<select class="form-select form-select-sm" id="searchType" aria-label=".form-select-sm example"> -->
       	<select class="form-select form-select-sm" id="searchType2" aria-label=".form-select-sm example">
->>>>>>> gt
 		  <option selected>카테고리2</option>
 		  <option value="">제목</option>
 		  <option value="">내용</option>
 		  <option value="">아이디</option>
 		</select>&emsp;&emsp;
         <input class="form-control me-2" type="search" name="keyword" id="keyword" placeholder="회원 아이디" aria-label="Search">
-<<<<<<< HEAD
-        <button class="btn btn-outline-success" type="button" id="memberSearchBtn">search</button>
-=======
+<!--         <button class="btn btn-outline-success" type="button" id="memberSearchBtn">search</button> -->
         <button class="btn btn-outline-success" type="button" id="memberQnaSearchBtn">search</button>
->>>>>>> gt
       </form>  
       
     </div>
@@ -141,13 +132,13 @@
 	<table id="memberTable" class="table table-bordered table-striped table table-sm">
         <thead class="table-dark">
             <tr>
-                <th width="5%">no.</th>
-                <th width="10%">카테고리1</th>
-                <th width="30%">카테고리2</th>
-                <th width="22%">작성자</th>
-                <th width="10%">등록일</th>
-                <th width="10%">답변여부</th>
-                <th width="8%">답변일</th>
+                <th style="text-align:center;" width="5%">no.</th>
+                <th style="text-align:center;" width="10%">카테고리1</th>
+                <th style="text-align:center;" width="30%">카테고리2</th>
+                <th style="text-align:center;" width="22%">작성자</th>
+                <th style="text-align:center;" width="10%">등록일</th>
+                <th style="text-align:center;" width="10%">답변여부</th>
+                <th style="text-align:center;" width="8%">답변일</th>
             </tr>
         </thead>
         <tbody id="tbody">
@@ -156,13 +147,13 @@
         </tbody>
 	   	<tfoot class="table-secondary">
             <tr>
-              	<th width="5%">번호</th>
-                <th width="10%">카테고리1</th>
-                <th width="30%">카테고리2</th>
-                <th width="20%">작성자</th>
-                <th width="10%">등록일</th>
-                <th width="10%">답변여부</th>
-                <th width="120%">답변일</th>
+              	<th style="text-align:center;" width="5%">번호</th>
+                <th style="text-align:center;" width="10%">카테고리1</th>
+                <th style="text-align:center;" width="30%">카테고리2</th>
+                <th style="text-align:center;" width="20%">작성자</th>
+                <th style="text-align:center;" width="10%">등록일</th>
+                <th style="text-align:center;" width="10%">답변여부</th>
+                <th style="text-align:center;" width="120%">답변일</th>
             </tr>
         </tfoot>
 	</table>
@@ -190,23 +181,23 @@
   <table class="table table-bordered border-primary table-sm">
 	  <tbody>
 	    <tr>
-	      <th width="20%">문의글 번호</th><td colspan="3"><span id="qna_seq"></span></td> 
+	      <th style="text-align:center;" width="20%">문의글 번호</th><td colspan="3"><span id="qna_seq"></span></td> 
 	    </tr>
 	    <tr>
-	      <th>카테고리1</th><td width="30%"><span id="qnaCate_main"></span></td> 
-	      <th width="20%">카테고리2</th><td width="30%"><span id="qnaCate_sub"></span></td>
+	      <th style="text-align:center;">카테고리1</th><td width="30%"><span id="qnaCate_main"></span></td> 
+	      <th style="text-align:center;" width="20%">카테고리2</th><td width="30%"><span id="qnaCate_sub"></span></td>
 	    </tr>
 	    <tr>
-	      <th>작성자 ID</th><td><span id="mem_id"></span></td> 
-	      <th>작성일</th><td><span id="qna_logtime"></span></td>
+	      <th style="text-align:center;">작성자 ID</th><td><span id="mem_id"></span></td> 
+	      <th style="text-align:center;">작성일</th><td><span id="qna_logtime"></span></td>
 	    </tr>
 	    <tr>
-	      <th>1:1문의 내용</th><td colspan="3"><span id="qnaContent"></span></td>
+	      <th style="text-align:center;">1:1문의 내용</th><td colspan="3"><span id="qnaContent"></span></td>
 	    </tr>
 	    <tr>
-	      <th>사진</th><td colspan="3"><span id="product_imgSpan">
-<!--       	<img src="..." class="img-thumbnail" id="qnaImg1" alt="첨부이미지1"> -->
-<!--       	<img src="..." class="img-thumbnail" id="qnaImg2" alt="첨부이미지2"> -->
+	      <th style="text-align:center;">사진</th><td colspan="3"><span id="product_imgSpan">
+      	<img src="" class="img-thumbnail" id="qnaImg1" alt="첨부이미지1">
+      	<span id="noImg"></span>
 	      </span></td>
 	    </tr>
 	  </tbody>
@@ -236,8 +227,6 @@
 </footer>
 </div>
 </div>
-<<<<<<< HEAD
-=======
 <script type="text/javascript">
 	function boardPaging(pg){
 		var keyword = document.getElementById("keyword").value;
@@ -250,5 +239,4 @@
 		 }
 	}
 	</script>
->>>>>>> gt
 </body>

@@ -122,8 +122,8 @@
 	<table id="compTable" class="table table-bordered table-striped table table-sm">
         <thead class="table-dark">
             <tr>
-                <th>번호</th><!-- complain_seq -->
-                <th><!-- category -->
+                <th style="text-align:center;">번호</th><!-- complain_seq -->
+                <th style="text-align:center;"><!-- category -->
                 	<input type="hidden" id="viewNumHidden" name="viewNumHidden" value="20">
 					<select class="form-select form-select-sm" id="selectPrint" aria-label=".form-select-sm example" >
 						<option selected>구분</option>
@@ -137,10 +137,10 @@
 			</th>
 				<th style="text-align:center;">항목 번호</th><!-- eachPart_seq -->
 				<th style="text-align:center;">내용</th><!-- complain_content -->
-                <th>신고당한 사람</th><!-- mem_id -->
-                <th>신고자</th><!--reporter_id -->
-                <th>신고 날짜</th><!-- complain_logtime -->
-                <th>처리</th><!-- complain_status -->
+                <th style="text-align:center;">신고당한 사람</th><!-- mem_id -->
+                <th style="text-align:center;">신고자</th><!--reporter_id -->
+                <th style="text-align:center;">신고 날짜</th><!-- complain_logtime -->
+                <th style="text-align:center;">처리</th><!-- complain_status -->
             </tr>
         </thead>
         <tbody id="complainTbody">
@@ -150,14 +150,14 @@
         </tbody>
 	   	<tfoot class="table-secondary">
             <tr>
-              	<th>번호</th>
-                <th>구분</th>
-                <th>항목 번호</th><!-- eachPart_seq -->
-				<th>내용</th><!-- complain_content -->
-                <th>신고당한 사람</th><!-- mem_id -->
-                <th>신고자</th><!--reporter_id -->
-                <th>신고 날짜</th><!-- complain_logtime -->
-                <th>처리</th><!-- complain_status -->
+              	<th style="text-align:center;">번호</th>
+                <th style="text-align:center;">구분</th>
+                <th style="text-align:center;">항목 번호</th><!-- eachPart_seq -->
+				<th style="text-align:center;">내용</th><!-- complain_content -->
+                <th style="text-align:center;">신고당한 사람</th><!-- mem_id -->
+                <th style="text-align:center;">신고자</th><!--reporter_id -->
+                <th style="text-align:center;">신고 날짜</th><!-- complain_logtime -->
+                <th style="text-align:center;">처리</th><!-- complain_status -->
             </tr>
         </tfoot>
 	</table>
@@ -177,33 +177,24 @@
 <div class="col-xl-5"><!-- 우측 -->
 <div class="card mb-4">
   <h5 class="card-header">신고 내용 확인</h5>
-<!--   		<div class="container"> -->
-<!-- 		<div class="row"> -->
-<!-- 		<h3>작성자</h3><div class="col" id="reported_id"></div> -->
-<!-- 		<h3>작성일</h3><div class="col" id="reported_logtime"></div> -->
-<!-- 		</div> -->
-<!-- 		</div>end.container  -->
-<!-- 		<h3>내용</h3><div id="reported_content"></div> -->
 	 <div class="card-body">
        	<table class="table table-bordered border-primary table-sm">
 		  <tbody>
 		    <tr>
-		      <th width="20%">작성자 ID</th><th width="30%"><span class="col" id="reported_id"></span></th> 
-		      <th width="20%">작성일</th><th width="30%"><span class="col" id="reported_logtime"></span></th>
+		      <th style="text-align:center;" width="20%">작성자 ID</th><th width="30%"><span class="col" id="reported_id"></span></th> 
+		      <th style="text-align:center;" width="20%">작성일</th><th width="30%"><span class="col" id="reported_logtime"></span></th>
 		    </tr>
 		    <tr>
-		      <th id="mother" width="20%"></th><th width="30%"><span class="col" id="mother_seq"></span></th> 
-		      <th id="daughter" width="20%"></th><th width="30%"><span class="col" id="daughter_seq"></span></th>
+		      <th style="text-align:center;" id="mother" width="20%"></th><th width="30%"><span class="col" id="mother_seq"></span></th> 
+		      <th style="text-align:center;" id="daughter" width="20%"></th><th width="30%"><span class="col" id="daughter_seq"></span></th>
 		    </tr>
 		    <tr>
-		      <th>내용</th><th colspan="3"><span id="reported_content"></span></th>
+		      <th style="text-align:center;">내용</th><th colspan="3"><span id="reported_content"></span></th>
 		    </tr>
 		   <tr>
 		   </tr>
 		  </tbody>
 		</table>
-		<button type="button" class="btn btn-secondary btn-sm" id="goComplainPage">페이지로 이동</button>
-		<button type="button" class="btn btn-secondary btn-sm" id="deleteComplain">신고글 삭제</button>
 		<input type="hidden" id="thisIs">
 		<button type="button" class="btn btn-secondary btn-sm" id="goComplainPage">페이지로 이동</button>
 		<button type="button" class="btn btn-secondary btn-sm" id="blindComplainBtn">신고글 블라인드 처리</button>

@@ -52,11 +52,7 @@
 		                            <a class="nav-link" href="/market/admin/memberList">전체 회원 목록</a>
 		                            <a class="nav-link" href="/market/admin/productList">전체 상품 목록</a>
 		                            <a class="nav-link" href="/market/admin/storeList">전체 상점 목록</a>
-<<<<<<< HEAD
-		                            <a class="nav-link" href="/market/admin/withdrawList">탈퇴 회원 관리</a>
-=======
 		                            <a class="nav-link" href="/market/admin/withdrawList">탈퇴 사유 분석</a>
->>>>>>> gt
 		                            <a class="nav-link" href="/market/admin/complainList">신고관리</a>
 		                            <a class="nav-link" href="/market/admin/memberQna">고객 상담관리</a>
 		                            <a class="nav-link" href="/market/admin/noticeMG">공지사항 관리</a>
@@ -131,11 +127,11 @@
 				<table id="productTable" class="table table-bordered table-striped table table-sm">
 			        <thead class="table-dark">
 			            <tr>
-			           		<th width="5%">no.</th>
-			                <th width="20%">회원ID</th>
-			                <th width="25%">탈퇴 사유</th>
-			                <th width="40%">불편/개선사항</th>
-			                <th width="10%">탈퇴일</th>
+			           		<th style="text-align:center;" width="5%">no.</th>
+			                <th style="text-align:center;" width="20%">회원ID</th>
+			                <th style="text-align:center;" width="25%">탈퇴 사유</th>
+			                <th style="text-align:center;" width="40%">불편/개선사항</th>
+			                <th  style="text-align:center;" width="10%">탈퇴일</th>
 			            </tr>
 			        </thead>
 			        <tbody id="tbody">
@@ -144,11 +140,11 @@
 			        </tbody>
 				   	<tfoot class="table-secondary">
 			            <tr>
-				            <th>no.</th>
-			              	<th>회원ID</th>
-			                <th>탈퇴 사유</th>
-			                <th>불편/개선사항</th>
-			                <th>탈퇴일</th>
+				            <th style="text-align:center;">no.</th>
+			              	<th style="text-align:center;">회원ID</th>
+			                <th style="text-align:center;">탈퇴 사유</th>
+			                <th style="text-align:center;">불편/개선사항</th>
+			                <th style="text-align:center;">탈퇴일</th>
 			            </tr>
 			        </tfoot>
 				</table>
