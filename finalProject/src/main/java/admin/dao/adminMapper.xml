@@ -124,42 +124,6 @@
 			</choose>
 	</select>
 	
-	<!-- A.신고 리스트 전체 출력 -->
-   <select id="getComplainList" parameterType="java.util.Map" resultType="member.bean.ComplainDTO">
-      select * from(
-         select rownum rn, tt.* from(select * from complain)tt)
-               where rn between #{startNum} and #{endNum} order by complain_seq asc
-   </select>
-
-<!-- A.신고 리스트 개수 -->
-   <select id="getComplainTotal" resultType="Integer">
-      select count(*) from complain
-   </select>
-   
-<!-- B.신고 검색 리스트 전체 출력 -->
-   <select id="searchReportedMember" parameterType="java.util.Map" resultType="member.bean.ComplainDTO">
-      <![CDATA[
-      select * from
-         (select rownum rn, tt.* from
-         (select * from complain where ${searchType} like '%'||#{keyword}||'%')tt
-         )where rn>=#{startNum} and rn<=#{endNum}
-      ]]>
-   </select>
-<!-- B.신고 검색 리스트 개수 -->
-   <select id="getTotalReportedMember" parameterType="java.util.Map" resultType="Integer">
-      select count(*) from complain where ${searchType} like '%'||#{keyword}||'%'
-   </select>
-   
-<!-- 신고 댓글 보이기 -->
-   <select id="getCommentContent" parameterType="String" resultType="board.bean.CommentDTO">
-      select mem_id, comment_content, comment_logtime from comments where comment_seq=#{comment_seq} 
-   </select>
-<!-- 신고 리뷰 보이기 -->
-   <select id="getReviewContent" parameterType="String" resultType="store.bean.ReviewDTO">
-      select mem_id, review_content, review_date from comments where review_seq=#{review_seq}
-   </select>
-   
-
 <!-- [신고]========================================================================= -->
 <!-- A.신고 리스트 전체 출력 -->
    <select id="getComplainList" parameterType="java.util.Map" resultType="member.bean.ComplainDTO">
@@ -290,4 +254,5 @@
 		select cate_name from category
 		where cate_code=(select cate_parent from category where cate_code=#{cate_code})
 	</select>
+	
 </mapper>

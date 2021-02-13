@@ -2,14 +2,21 @@
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta name="viewport" content="width=device-width, initial-  scale=1, shrink-to-fit=no" />
-        <meta name="description" content="" />
-        <meta name="author" content="" />
-        <title>신고 관리</title>
-        <link href="/market/admin/css/styles.css" rel="stylesheet" />
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/js/all.min.js" crossorigin="anonymous"></script>
-    </head>
+<head>
+    <meta name="viewport" content="width=device-width, initial-  scale=1, shrink-to-fit=no" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <title>신고 관리</title>
+    
+    <link rel="stylesheet" href="//unpkg.com/bootstrap@4/dist/css/bootstrap.min.css">
+
+    
+	<link href="/market/admin/css/styles.css" rel="stylesheet" />
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/js/all.min.js" crossorigin="anonymous"></script>
+	<script src="https://code.jquery.com/jquery-3.4.1.js" crossorigin="anonymous"></script>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+	<script src="/market/admin/js/complain.js"></script>
+</head>
 <body>
     <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
             <a class="navbar-brand" href="/market/admin/adminIndex">아나바다</a>
@@ -49,7 +56,7 @@
 		                            <a class="nav-link" href="/market/admin/memberList">전체 회원 목록</a>
 		                            <a class="nav-link" href="/market/admin/productList">전체 상품 목록</a>
 		                            <a class="nav-link" href="/market/admin/storeList">전체 상점 목록</a>
-		                            <a class="nav-link" href="/market/admin/boardList">게시글목록</a>
+		                            <a class="nav-link" href="/market/admin/withdrawList">탈퇴 사유 분석</a>
 		                            <a class="nav-link" href="/market/admin/complainList">신고관리</a>
 		                            <a class="nav-link" href="/market/admin/memberQna">고객 상담관리</a>
 		                            <a class="nav-link" href="/market/admin/noticeMG">공지사항 관리</a>
@@ -74,13 +81,13 @@
 <%-- ======================================================= --%>
 <%-- ======================================================= --%>
 <div id="layoutSidenav_content">
-           <main>
-               <div class="container-fluid">
-                   <h3 class="mt-4">전체 상품목록</h3>
-                   <hr>                  		
-<div class="container-fluid">
+   <main>
+       <div class="container-fluid">
+           <h3 class="mt-4">신고 내역 관리</h3>
+           <hr>                  		
+<!-- <div class="container-fluid"> -->
   <div class="row">
-    <div class="col">
+    <div class="col-xl-7">
       <nav class="navbar navbar-expand-lg navbar-light bg-light">
 	  <div class="container-fluid">
 	  
@@ -120,6 +127,7 @@
                 	<input type="hidden" id="viewNumHidden" name="viewNumHidden" value="20">
 					<select class="form-select form-select-sm" id="selectPrint" aria-label=".form-select-sm example" >
 						<option selected>구분</option>
+						<option value="product_seq">상점 신고</option>
 						<option value="product_seq">상품 신고</option>
 						<option value="review_seq">후기 신고</option>
 						<option value="board_seq">게시글 신고</option>
@@ -131,22 +139,25 @@
 				<th>내용</th><!-- complain_content -->
                 <th>신고당한 사람</th><!-- mem_id -->
                 <th>신고자</th><!--reporter_id -->
+                <th>신고 날짜</th><!-- complain_logtime -->
+                <th>처리</th><!-- complain_status -->
             </tr>
         </thead>
         <tbody id="complainTbody">
         	<tr>
         	
         	</tr>
-        	
         </tbody>
 	   	<tfoot class="table-secondary">
             <tr>
-              	<th>comment_seq</th>
-                <th>categorize</th>
-                <th>eachPart_seq</th>
-                <th>complain_content</th>
-                <th>mem_id</th>
-                <th>reporter_id</th>
+              	<th>번호</th>
+                <th>구분</th>
+                <th>항목 번호</th><!-- eachPart_seq -->
+				<th>내용</th><!-- complain_content -->
+                <th>신고당한 사람</th><!-- mem_id -->
+                <th>신고자</th><!--reporter_id -->
+                <th>신고 날짜</th><!-- complain_logtime -->
+                <th>처리</th><!-- complain_status -->
             </tr>
         </tfoot>
 	</table>
@@ -161,20 +172,40 @@
 			<div id="boardPagingDiv" class="paging" align="center"></div>
 		</ul>
 	</nav>
-    </div>
-    <div class="col">
-		<div class="card">
-			  <h5 class="card-header">Featured</h5>
-			  <div class="card-body">
-				    <h5 class="card-title">Special title treatment</h5>
-				    <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-				    <a href="#" class="btn btn-primary">Go somewhere</a>
-			  </div>
-		</div>
-    </div>
+</div><!-- 좌측 끝 -->
+<!-- ========================================= -->
+<div class="col-xl-5"><!-- 우측 -->
+<div class="card mb-4">
+  <h5 class="card-header">신고 내용 확인</h5>
+	 <div class="card-body">
+       	<table class="table table-bordered border-primary table-sm">
+		  <tbody>
+		    <tr>
+		      <th width="20%">작성자 ID</th><th width="30%"><span class="col" id="reported_id"></span></th> 
+		      <th width="20%">작성일</th><th width="30%"><span class="col" id="reported_logtime"></span></th>
+		    </tr>
+		    <tr>
+		      <th id="mother" width="20%"></th><th width="30%"><span class="col" id="mother_seq"></span></th> 
+		      <th id="daughter" width="20%"></th><th width="30%"><span class="col" id="daughter_seq"></span></th>
+		    </tr>
+		    <tr>
+		      <th>내용</th><th colspan="3"><span id="reported_content"></span></th>
+		    </tr>
+		   <tr>
+		   </tr>
+		  </tbody>
+		</table>
+		<input type="hidden" id="thisIs">
+		<button type="button" class="btn btn-secondary btn-sm" id="goComplainPage">페이지로 이동</button>
+		<button type="button" class="btn btn-secondary btn-sm" id="blindComplainBtn">신고글 블라인드 처리</button>
+		<button type="button" class="btn btn-secondary btn-sm" id="stopMemberBtn">회원 영구 정지</button>
+		   
+	 </div>    
+</div>
   </div>
-
-
+</div><!-- 우측 끝 -->
+</div><!-- end.row-->
+</div>
 </div>               
 </div>
 </main>
@@ -197,8 +228,5 @@
         </footer>
     </div><!--layoutSidenav_content  -->
 </div>
-<script src="https://code.jquery.com/jquery-3.4.1.js" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
-<script src="/market/admin/dist/js/scripts.js"></script>
-<script src="/market/admin/js/complain.js"></script>
+
 </body>

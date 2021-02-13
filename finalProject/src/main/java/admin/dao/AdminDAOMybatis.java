@@ -266,16 +266,12 @@ public class AdminDAOMybatis implements AdminDAO {
 	//회원_영구정지
 	@Override
 	public void memberBlock(String id) {
-		  System.out.println("영구정지 맵퍼에 들어가기전");
-		  sqlSession.update("adminSQL.memberBlock", id);
-		  System.out.println("영구정지 맵퍼에 들어가고난 후");
+		 sqlSession.update("adminSQL.memberBlock", id);
 	}
 	//회원_영구정지 복구
 	@Override
 	public void memberReleaseBtn(String id) {
-		  System.out.println("계정복구 맵퍼에 들어가기전");
-		  sqlSession.update("adminSQL.memberReleaseBtn", id);
-		  System.out.println("계정복구 맵퍼에 들어가고난 후");
+		 sqlSession.update("adminSQL.memberReleaseBtn", id);
 	}
 	//물품_상세정보_카테고리
 	@Override

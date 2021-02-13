@@ -2,14 +2,17 @@
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-        <meta name="description" content="" />
-        <meta name="author" content="" />
-        <title>상품관리</title>
-        <link href="/market/admin/css/productList.css" rel="stylesheet" />
-        <link rel="icon" href="data:;base64,=">
-    </head>
+<head>
+   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+   <meta name="description" content="" />
+   <meta name="author" content="" />
+   <title>게시판 관리</title>
+   <link href="/market/admin/css/styles.css" rel="stylesheet" />
+   <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+   <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script> 
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script> 
+   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+</head>
 <body>
     <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
             <a class="navbar-brand" href="/market/admin/adminIndex">아나바다</a>
@@ -72,17 +75,17 @@
                 </nav>
             </div>
             
-            
+               
 <%-- ======================================================= --%>
 <%-- ======================================================= --%>
 <div id="layoutSidenav_content">
 	<main>
 	<div class="container-fluid">
-	<h3 class="mt-4">전체 상품목록</h3>
+	<h3 class="mt-4">탈퇴 회원 관리</h3>
 	<hr>                  		
 
 <div class="row">
-    <div class="col-xl-5">
+    <div class="col-xl-6">
       
 			<nav class="navbar navbar-expand-lg navbar-light bg-light">
 				  <div class="container-fluid">
@@ -103,13 +106,14 @@
 				      	<input type="hidden" id="searchPg" name="searchPg" value="1">
 				      	<select class="form-select form-select-sm" id="searchType" aria-label=".form-select-sm example">
 						  <option selected>선택</option>
-						  <option value="product_seq">상품번호</option>
-						  <option value="product_subject">상품명</option>
-						  <option value="mem_id">판매자ID</option>
+						  <option value="lowFrequency">낮은 이용빈도</option>
+						  <option value="rejoin">재가입</option>
+						  <option value="lowContents">상품 부족</option>
+						  <option value="protectInfo">개인정보보호</option>
+						  <option value="lowBenefit">혜택 부족</option>
+						  <option value="others">기타</option>
 						</select>
-				        <input class="form-control input-sm" type="search" name="productKeyword" id="productKeyword" placeholder="Search" aria-label="Search">
-				        <button class="btn btn-outline-success" type="button" id="productSearchBtn">Search</button>
-				      </form>  
+				         </form>  
 				      
 				    </div>
 				  </div>
@@ -119,9 +123,11 @@
 				<table id="productTable" class="table table-bordered table-striped table table-sm">
 			        <thead class="table-dark">
 			            <tr>
-			                <th width="20%">상품번호</th>
-			                <th width="60%">상품명</th>
-			                <th width="20%">판매자id</th>
+			           		<th width="5%">no.</th>
+			                <th width="20%">회원ID</th>
+			                <th width="25%">탈퇴 사유</th>
+			                <th width="40%">불편/개선사항</th>
+			                <th width="10%">탈퇴일</th>
 			            </tr>
 			        </thead>
 			        <tbody id="tbody">
@@ -130,9 +136,11 @@
 			        </tbody>
 				   	<tfoot class="table-secondary">
 			            <tr>
-			              	<th>상품번호</th>
-			                <th>상품명</th>
-			                <th>판매자id</th>
+				            <th>no.</th>
+			              	<th>회원ID</th>
+			                <th>탈퇴 사유</th>
+			                <th>불편/개선사항</th>
+			                <th>탈퇴일</th>
 			            </tr>
 			        </tfoot>
 				</table>
@@ -148,52 +156,37 @@
 			  </ul>
 			</nav>
 	</div> <%--col-xl-5 --%>
-    
-    <div class="col-xl-7">
-		    <div class="card mb-4">
-		        <div class="card-header">
-		            <i class="fas fa-chart-area mr-1"></i>
-		            	상품 상세정보
-		           &nbsp;&nbsp;
-			        <button type="button" class="btn btn-danger btn-sm">삭제</button>
-			        <button type="button" class="btn btn-secondary btn-sm" id="moveProductPageBtn">페이지로 이동</button>
-		        </div>
-		        <div class="card-body">
-		        	<table class="table table-bordered border-primary table-sm">
-					  <tbody>
-					    <tr>
-					      <th width="20%">판매자ID</th><th width="30%"><span id="mem_idSpan"></span></th> 
-					      <th width="20%">상점이름</th><th width="30%"><span id="storeNameSpan"></span></th>
-					    </tr>
-					    <tr>
-					      <th>카테고리1</th><th><span id="category1Span"></span></th> 
-					      <th>카테고리2</th><th><span id="category2Span"></span></th>
-					    </tr>
-					    <tr>
-					      <th>가격</th><th><span id="priceSpan"></span>원</th> 
-					      <th>수량</th><th><span id="amountSpan"></span></th>
-					    </tr>
-					    <tr>
-					    	<th>내용</th><th colspan="3"><span id="product_contentSpan"></span></th>
-					    </tr>
-					    <tr>
-					    	<th>사진</th><th colspan="3"><img id="product_imgSpan" src="" width="300px" height="300px" alt="상품사진"></th>
-					    </tr>
-					    
-					  </tbody>
-					</table>
-		        </div>
-		    </div>
-		    
-		    <div class="card mb-4">
-		        
-		        
-		    </div>	<%-- card mb-4 --%>	
-	</div>  <%-- col-xl-7 --%>     
+<!--  우측   ================================================================================== -->
+<div class="col-xl-6">
+    <div class="container">
+    <div class="row my-3"> 
+    <div class="col-12"> 
+    <h4>탈퇴 사유 분석</h4> 
+    </div> </div> 
+    <div class="row my-2"> 
+    <div class="col-lg-6"> 
+    <div class="card"> <div class="card-body"> 
+    <canvas id="myChart1"></canvas> </div> 
+    <div class="card-footer text-center text-dark"> 
+    <h5>탈퇴 사유</h5> </div> </div> </div> 
+
+
+	<div class="container"> 
+	<div class="row my-3"> 
+	<div class="col"> 
+	<h4>회원 현황</h4> </div> </div> 
+	<div class="row my-2"> 
+	<div class="col"> 
+	<div class="card"> 
+	<div class="card-body"> 
+	<canvas id="myChart" height="100"></canvas> </div> </div> </div> </div> </div>
+
+
+</div>  <%-- col-xl-7 --%>     
 </div> <%--row --%> 
 		</div> <%--container-fluid --%>
 	</main>
-            
+                   
 <%-- ======================================================= --%>
 <%-- ======================================================= --%>
                
@@ -210,22 +203,11 @@
                         </div>
                     </div>
                 </footer>
-    </div>
-    </div>
-    <script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.min.js" crossorigin="anonymous"></script>
+            </div>
+        </div>
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/js/all.min.js" crossorigin="anonymous"></script>
-    <script src="/market/admin/js/productList.js"></script>
-    <script type="text/javascript">
-		function boardPaging(pg){
-			var productKeyword = document.getElementById("productKeyword").value;
-			$('#pg').val(pg);
-		
-			 if(productKeyword ==''){
-				location.href='/market/admin/productList?pg='+pg+'&viewNum='+$('#viewNum').val();
-			 }else{
-				$('#productSearchBtn').trigger('click','research');
-			 }
-		}
-	</script>
+    <script src="/market/admin/js/withdrawList.js"></script>
+
 </body>
