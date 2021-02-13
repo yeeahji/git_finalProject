@@ -56,70 +56,63 @@ public class ChatController {
 		return mav;
 	}
 	
-	// 채팅방 (연락하기 눌렀을 때 바로 여기로 연결)
-	@RequestMapping(value="/chatRoom", method=RequestMethod.POST)
-	public String chatRoom(@RequestParam String other_store_nickname,
-						   @RequestParam(required=false, defaultValue="0") String product_seq,
-						   @RequestParam(required=false, defaultValue="") String product_subject,
-						   Principal principal, HttpSession session) throws Exception {
-		//데이터 가져오기
-			//사용자
-		String one_mem_id = principal.getName();
-		StoreDTO one_storeDTO = storeService.storeInfo(one_mem_id);
-		String one_store_nickname = one_storeDTO.getStore_nickname();
-		String one_store_img = one_storeDTO.getStore_img();
-
-			//상대방
-		System.out.println("상대방의 상점 닉네임 : " + other_store_nickname);
-		StoreDTO two_storeDTO = storeService.getMember(other_store_nickname);
-		String two_mem_id = two_storeDTO.getMem_id();
-		String two_store_nickname = other_store_nickname;
-		String two_store_img = two_storeDTO.getStore_img(); 
-		
-		//기존에 두 아이디로 생성된 채팅방이 있는지 체크
-		Map<String, String> chatId = new HashMap<String, String>();
-		chatId.put("one_mem_id", one_mem_id);
-		chatId.put("two_mem_id", two_mem_id);
-		ChatRoomDTO chatRoomDTO = chatService.checkChatId(chatId);
-		int chat_seq = 0;
-
-		//처음 연락 시 채팅방 생성
-		if(chatRoomDTO == null) {
-			//채팅방 번호 난수 부여
-			chat_seq = new Random().nextInt(5784675);
-
-			//처음 연락한 사람(현재 로그인한 사람)이 ONE으로 들어감
-			Map<String, String> map = new HashMap<String, String>();
-			map.put("chat_seq", chat_seq+"");
-			map.put("one_mem_id", one_mem_id);
-			map.put("two_mem_id", two_mem_id); 
-			map.put("one_store_nickname", one_store_nickname);
-			map.put("two_store_nickname", two_store_nickname);
-			map.put("one_store_img", one_store_img);
-			map.put("two_store_img", two_store_img);
-			
-			//메시지 내용 파일화
-			map.put("message_content", "안녕하세요"); //나중에 split
-			map.put("last_message", "마지막 메시지");
-			
-			//DB에 저장 (1개의 채팅방 생성, 2개의 채팅리스트 생성(두 명 모두 생성되어야 하니까))
-			chatService.insertRoomInfo(map);
-			
-		} else {
-			//채팅방 번호 가져오기
-			chat_seq = chatRoomDTO.getChat_seq();
+	// 채팅방입장
+		@RequestMapping(value="/chatRoom", method=RequestMethod.GET)
+		public String chatRoom() {
+			return "/chat/chatRoom";
 		}
 		
-		//데이터 전달
-		session.setAttribute("chat_seq", chat_seq);
-		session.setAttribute("product_seq", product_seq);
-		session.setAttribute("product_subject", product_subject);
-		session.setAttribute("my_store_nickname", one_store_nickname);
-		session.setAttribute("other_store_nickname", two_store_nickname);
-		session.setAttribute("two_mem_id", two_mem_id);
-
-		return "/chat/chatRoom";
-	}
+	// 채팅방 (연락하기 눌렀을 때 바로 여기로 연결)
+	/*
+	 * @RequestMapping(value="/chatRoom", method=RequestMethod.POST) public String
+	 * chatRoom(@RequestParam String other_store_nickname,
+	 * 
+	 * @RequestParam(required=false, defaultValue="0") String product_seq,
+	 * 
+	 * @RequestParam(required=false, defaultValue="") String product_subject,
+	 * Principal principal, HttpSession session) throws Exception { //데이터 가져오기 //사용자
+	 * String one_mem_id = principal.getName(); StoreDTO one_storeDTO =
+	 * storeService.storeInfo(one_mem_id); String one_store_nickname =
+	 * one_storeDTO.getStore_nickname(); String one_store_img =
+	 * one_storeDTO.getStore_img();
+	 * 
+	 * //상대방 System.out.println("상대방의 상점 닉네임 : " + other_store_nickname); StoreDTO
+	 * two_storeDTO = storeService.getMember(other_store_nickname); String
+	 * two_mem_id = two_storeDTO.getMem_id(); String two_store_nickname =
+	 * other_store_nickname; String two_store_img = two_storeDTO.getStore_img();
+	 * 
+	 * //기존에 두 아이디로 생성된 채팅방이 있는지 체크 Map<String, String> chatId = new HashMap<String,
+	 * String>(); chatId.put("one_mem_id", one_mem_id); chatId.put("two_mem_id",
+	 * two_mem_id); ChatRoomDTO chatRoomDTO = chatService.checkChatId(chatId); int
+	 * chat_seq = 0;
+	 * 
+	 * //처음 연락 시 채팅방 생성 if(chatRoomDTO == null) { //채팅방 번호 난수 부여 chat_seq = new
+	 * Random().nextInt(5784675);
+	 * 
+	 * //처음 연락한 사람(현재 로그인한 사람)이 ONE으로 들어감 Map<String, String> map = new
+	 * HashMap<String, String>(); map.put("chat_seq", chat_seq+"");
+	 * map.put("one_mem_id", one_mem_id); map.put("two_mem_id", two_mem_id);
+	 * map.put("one_store_nickname", one_store_nickname);
+	 * map.put("two_store_nickname", two_store_nickname); map.put("one_store_img",
+	 * one_store_img); map.put("two_store_img", two_store_img);
+	 * 
+	 * //메시지 내용 파일화 map.put("message_content", "안녕하세요"); //나중에 split
+	 * map.put("last_message", "마지막 메시지");
+	 * 
+	 * //DB에 저장 (1개의 채팅방 생성, 2개의 채팅리스트 생성(두 명 모두 생성되어야 하니까))
+	 * chatService.insertRoomInfo(map);
+	 * 
+	 * } else { //채팅방 번호 가져오기 chat_seq = chatRoomDTO.getChat_seq(); }
+	 * 
+	 * //데이터 전달 session.setAttribute("chat_seq", chat_seq);
+	 * session.setAttribute("product_seq", product_seq);
+	 * session.setAttribute("product_subject", product_subject);
+	 * session.setAttribute("my_store_nickname", one_store_nickname);
+	 * session.setAttribute("other_store_nickname", two_store_nickname);
+	 * session.setAttribute("two_mem_id", two_mem_id);
+	 * 
+	 * return "/chat/chatRoom"; }
+	 */
 	
 	// 메시지 저장
 	@RequestMapping(value="saveMsg", method=RequestMethod.POST)

@@ -23,7 +23,8 @@ $(document).ready(function() {
 })
 
 $('#chat').click(function(){
-	window.open("/market/chat/chatList", "chatList" ,"width=370 height=670 scrollbars=yes");
+	/* 채팅창 높이 */
+	window.open("/market/chat/chatList", "chatList" ,"width=370 height=400 scrollbars=yes");
 });
 
 function search() {
