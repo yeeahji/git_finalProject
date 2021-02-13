@@ -1,10 +1,10 @@
 @charset "UTF-8";
 
-
+/*
 body {
 	background-color: #f4f4fa;
 }
-
+*/
 
 /*
 div {
@@ -16,11 +16,6 @@ div {
     vertical-align: baseline;
 }
 */
-a{
-	color: rgb(33, 33, 33);
-    text-decoration: none;
-    cursor: pointer;
-}
 
 /* 배경 */
 #chatListBody {
@@ -34,39 +29,13 @@ a{
 	height: 5%;
 	text-align:center;
 	font-size: 10px;
-	background-color: #f4f4fa;
+	background-color: rgb(255, 255, 255);
 }
 
 .chatTitleUnderline {
 	border: solid 1px #0a58ca;
-	/* border: solid 1px #0a58ca;
-	background-color: rgb(255, 255, 255); */
 }
 
-/* 방 크기 */
-.chatRoomWrap{
-	display: flex;
-    background: rgb(255, 255, 255);
-    flex-direction: row;
-    -webkit-box-orient: horizontal;
-    -webkit-box-align: center;
-    align-items: center;
-    height: 80px;
-}
-
-/* 채팅 이미지 */
-.chatImage{
-	display: flex;
-    margin: 0px 16px;
-}
-
-.chatRoomTab{
-	margin: 0px;
-    padding: 0px;
-    border: 0px;
-    font: inherit;
-    vertical-align: baseline;
-}
 
 /* 채팅방 표시 */
 .chatRoomBox {
@@ -84,69 +53,6 @@ a{
     cursor: pointer;
     background: rgb(234, 233, 241);
 }
-
-.chatRoomTitle{
-    display: flex;
-    -webkit-box-align: center;
-    align-items: center;
-    line-height: 1.4;
-    margin-top: 15px;
-    font-size: 15px;
-    font-weight: bold;
-    color: rgb(33, 33, 33);
-}
-
-.chatRoomContent{
-	max-width: 9.75rem;
-    line-height: 1.4;
-    font-size: 14px;
-    margin-top: 7px;
-    color: rgb(102, 102, 102);
-    white-space: pre-wrap;
-    text-overflow: ellipsis;
-    display: -webkit-box;
-    word-break: break-all;
-    -webkit-line-clamp: 2;
-    -webkit-box-orient: vertical;
-    overflow-wrap: break-word;
-    max-height: 2.8em;
-    overflow: hidden;
-}
-
-
-.chatRoomSysdate{
-	padding-top: 16px;
-    height: 100%;
-    font-size: 12px;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-end;
-    line-height: 1.4;
-    color: rgb(153, 153, 153);
-}
-
-.chatRoomReport{
-	margin-top: 27px;
-	color: rgb(153, 153, 153);
-}
-
-.chatRoomIcon{
-/* 	display: flex;
-	margin-top: -5px;
-    flex-direction: row;
-    -webkit-box-orient: horizontal;
-    -webkit-box-align: center;
-    align-items: center; */
-    padding-top: 16px;
-    height: 100%;
-    font-size: 12px;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-end;
-    line-height: 1.4;
-    color: rgb(153, 153, 153);
-}
-
 
 #other_store_img {
 	width: 50px;
