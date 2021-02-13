@@ -78,6 +78,7 @@
 	text-align: right;
 	padding: 5px;
 	padding-top: 0px;
+
 }
 
 
@@ -97,17 +98,3 @@
 	border: none;
 	border-radius: 30px 30px 30px 30px;
 }
-
-
-/* 기타 */
-.productPage { 
-	color: #039be5;
-};
-
-.productPage:link { 
-	color: #039be5;
-};
-
-.productPage:visited { 
-	color: #039be5;
-};
