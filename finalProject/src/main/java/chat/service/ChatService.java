@@ -14,5 +14,7 @@ public interface ChatService {
 
 	public ChatRoomDTO checkChatId(Map<String, String> chatId);
 
+	public void setLastMessage(Map<String, String> map);
+
 
 }

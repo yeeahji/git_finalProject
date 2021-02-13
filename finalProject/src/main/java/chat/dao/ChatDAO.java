@@ -13,5 +13,7 @@ public interface ChatDAO {
 	public void insertRoomInfo(Map<String, String> map);
 
 	public ChatRoomDTO checkChatId(Map<String, String> chatId);
+
+	public void setLastMessage(Map<String, String> map);
 	
 }

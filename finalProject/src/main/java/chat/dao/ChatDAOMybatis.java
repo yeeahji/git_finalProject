@@ -32,5 +32,10 @@ public class ChatDAOMybatis implements ChatDAO {
 		return sqlSession.selectOne("chatSQL.checkChatId", chatId);
 	}
 
+	@Override
+	public void setLastMessage(Map<String, String> map) {
+		sqlSession.update("chatSQL.setLastMessage", map);
+	}
+
 
 }

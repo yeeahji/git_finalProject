@@ -15,6 +15,6 @@ public class ChatListDTO {
 	private String other_store_nickname;
 	private String other_store_img;
 	private String last_message;
-	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd HH:mm")
+	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy.MM.dd")
 	private Date chat_logtime;
 }

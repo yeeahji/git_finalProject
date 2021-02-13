@@ -14,9 +14,13 @@
 <div id="chatListBody">
  	<div class="chatTitle"><h2>바다톡</h2></div>
  	<hr class="chatTitleUnderline">
-
+ 	
+	<!-- hidden -->
+	<div class="onlyHidden" style="display: none;"></div>
+	
 	<!-- 채팅방 목록 -->
 	<div class="chatRoomWrap"></div>
+	
 </div>	
 </form>
 </body>

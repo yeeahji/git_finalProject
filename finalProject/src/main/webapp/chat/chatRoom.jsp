@@ -97,7 +97,6 @@ var webSocket = {
 			if(msgData.checkId == '${member.username}') {
 				var loadMsg;
 				var xhttp = new XMLHttpRequest();
-				var loadMsg;
 				
 				xhttp.onreadystatechange = callFunction; 
 				xhttp.open("GET", "/market/storageMsg/"+msgData.chat_seq+".txt", true); //서버에 GET방식으로 파일을 비동기 요청
@@ -137,6 +136,16 @@ var webSocket = {
 					$('#chat-container').append('<div class="my-chat-box"><div class="chat my-chat"><input type="hidden" value="${member.username}">'+likeMsg+'</div>');
 					$('#chat-container').append('<div class="my-chat-box"><div class="chat my-chat"><input type="hidden" value="${member.username}">'+likeUrl+'</div>');
 				}
+				
+				//메시지 저장
+				var message_content = document.getElementById("chat-container").innerHTML;
+
+				$.ajax({
+					type: 'post',
+					url: '/market/chat/saveMsg',
+					data: {'message_content' : message_content,
+						   'chat_seq' : msgData.chat_seq}
+				});
 			}
 		}
 		

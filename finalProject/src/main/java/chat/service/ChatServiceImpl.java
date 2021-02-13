@@ -33,4 +33,9 @@ public class ChatServiceImpl implements ChatService {
 		return chatDAO.checkChatId(chatId);
 	}
 
+	@Override
+	public void setLastMessage(Map<String, String> map) {
+		chatDAO.setLastMessage(map);
+	}
+
 }
