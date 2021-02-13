@@ -74,17 +74,7 @@ public interface AdminDAO {
   	public QnaDTO getQnaContent(int qna_seq);
   	public void writeAnswer(Map<String, Object> map);
   	
-  	//탈퇴회원관리
-  	public List<WithdrawDTO> getWithdrawList(Map<String, Integer> map);
-  	public int getWithdrawTotal();
-  	 
-  	public int getWithdraw_lowFrequencyTotal() ;
-  	public int getWithdraw_rejoinTotal() ;
-  	public int getWithdraw_lowContentsTotal();
-  	public int getWithdraw_protectInfoTotal() ;
-  	public int getWithdraw_lowBenefitTotal() ;
-  	public int getWithdraw_othersTotal() ;
-  	public void blindComplain(String board_seq, String comment_seq, String review_seq, String thisIs);
+  	
     	//회원 영구정지
   	public void memberBlock(String id);
   	//회원_영구정지 복구
@@ -104,6 +94,17 @@ public interface AdminDAO {
 	//탈퇴회원 조건검색 리스트 출력_페이징
 	public int totalH(Map<String, String> map);
 	
+	//탈퇴회원관리
+	public List<WithdrawDTO> getWithdrawList(Map<String, Integer> map);
+	public int getWithdrawTotal();
+	 
+	public int getWithdraw_lowFrequencyTotal() ;
+	public int getWithdraw_rejoinTotal() ;
+	public int getWithdraw_lowContentsTotal();
+	public int getWithdraw_protectInfoTotal() ;
+	public int getWithdraw_lowBenefitTotal() ;
+	public int getWithdraw_othersTotal() ;
+	public void blindComplain(String board_seq, String comment_seq, String review_seq, String thisIs);
 
 
 	

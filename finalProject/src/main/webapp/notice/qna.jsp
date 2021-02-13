@@ -69,7 +69,7 @@
   					<input type="text" id="fileName" class="file_input_textbox" readonly >
 					<div class="file_input_div">
 						<img src="/market/image/member/findImgBtn2.jpg" class="file_input_img_btn" alt="open" />
-						<input type="file" name="file_1" class="file_input_hidden" onchange="javascript: document.getElementById('fileName').value = this.value"/>
+						<input type="file" name="img[]" class="file_input_hidden" accept="image/jpg, image/jpeg, image/png"  onchange="javascript: document.getElementById('fileName').value = this.value"/>
 					</div>
 
 

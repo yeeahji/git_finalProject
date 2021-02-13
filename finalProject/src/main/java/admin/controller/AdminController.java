@@ -375,7 +375,6 @@ public class AdminController {
 		map.put("complain_status", Integer.parseInt(complain_status));
 		adminService.solveComplain(map);
 	}
-
 	//신고 리뷰/댓글/게시글 블라인드 처리
 	@ResponseBody
 	@RequestMapping(value="blindComplain", method=RequestMethod.POST)
@@ -514,7 +513,6 @@ public class AdminController {
 		mav.setViewName("jsonView");
 		return mav;
 	}
-	
 }
 
 

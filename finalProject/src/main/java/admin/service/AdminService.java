@@ -87,7 +87,6 @@ public interface AdminService {
 	public void blindComplain(String board_seq, String comment_seq, String review_seq, String thisIs);
 
 	
-	
 	//회원 영구정지
 	public void memberBlock(String id);
 	//회원_영구정지 복구
@@ -106,7 +105,6 @@ public interface AdminService {
 	public List<WithdrawDTO> getSearchWithdrawList(Map<String, String> map);
 	//탈퇴회원 조건검색 리스트 출력_페이징
 	public AdminBoardPaging getSearchWithdrawBP(Map<String, String> map);
-	
 	
 	
 }

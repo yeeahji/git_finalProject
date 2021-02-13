@@ -19,7 +19,7 @@ public class QnaDTO {
 	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern = "yyyy.MM.dd")
 	private Date qna_logtime;
 	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern = "yyyy.MM.dd")
-	private String qna_answerLogtime;
+	private Date qna_answerLogtime;
 	
 	
 	private int qna_seq;

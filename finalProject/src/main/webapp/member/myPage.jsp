@@ -20,7 +20,7 @@
 		<a href="/market/member/updateForm"><input type="button" value="회원정보수정" id="modifyBtn"></a><br><br>
 		<a href="/market/member/withdrawForm"><input type="button" value="회원탈퇴" id="withdrawBtn"></a><br><br>
 		<a href="/market/notice/qnaList" id=""><input type="button" value="1:1 문의내역" id="qnaBtn"></a><br><br>
-		<input type="button" value="내 게시글" id="myboardBtn"><br><br>
+<!-- 		<input type="button" value="내 게시글" id="myboardBtn"><br><br> -->
 	</ul>
 	<br><br><br><br><br><br>
 </div>	

@@ -227,24 +227,21 @@ public class AdminDAOMybatis implements AdminDAO {
 	public int getWithdraw_othersTotal() {
 		return sqlSession.selectOne("adminSQL.getWithdraw_othersTotal");
 	}
-
 	@Override
 	public void blindComplain(String board_seq, String comment_seq, String review_seq, String thisIs) {
-	if(thisIs.equals("게시글") ){
-		System.out.println("aaa");
-		sqlSession.update("adminSQL.boardBlindComplain", Integer.parseInt(board_seq));
-		
-	}else if(thisIs.equals("댓글")) {
-		System.out.println("bbb");
-		sqlSession.update("adminSQL.commentBlindComplain", Integer.parseInt(comment_seq));
-		
-	}else if(thisIs.equals("리뷰")) {
-		System.out.println("ccc");
-		sqlSession.update("adminSQL.reviewBlindComplain", Integer.parseInt(review_seq));
-		
+		if(thisIs.equals("게시글") ){
+			sqlSession.update("adminSQL.boardBlindComplain", Integer.parseInt(board_seq));
+			
+		}else if(thisIs.equals("댓글")) {
+			sqlSession.update("adminSQL.commentBlindComplain", Integer.parseInt(comment_seq));
+			
+		}else if(thisIs.equals("리뷰")) {
+			sqlSession.update("adminSQL.reviewBlindComplain", Integer.parseInt(review_seq));
+		}
 	}
-	System.out.println("3:"+board_seq+"/"+comment_seq+"/"+review_seq+"/"+thisIs);
-	}
+	
+
+
 	
 	//회원_영구정지
 	@Override
