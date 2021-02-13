@@ -443,7 +443,66 @@ public class AdminServiceImpl implements AdminService {
  		return product_cate_code;
  	}
  	
+ 	//조건검색 후 문의 내역 출력
+	@Override
+	public List<QnaDTO> getSearchQnaList(Map<String, String> map) {
+		int viewNum = Integer.parseInt(map.get("viewNum"));
+		
+		int endNum =  Integer.parseInt(map.get("pg"))*viewNum;
+		int startNum = endNum-(viewNum-1);
+		
+		map.put("startNum", startNum+"");
+		map.put("endNum", endNum+"");
+		return adminDAO.getSearchQnaList(map);
+	}
+	//조건검색 후 문의 내역 출력 페이징
+	@Override
+	public AdminBoardPaging getSearchqnaBP(Map<String, String> map) {
+		int viewNum = Integer.parseInt(map.get("viewNum"));
+		
+		int totalG = adminDAO.totalG(map);
+		
+		adminBoardPaging.setCurrentPage(Integer.parseInt(map.get("pg")));
+		adminBoardPaging.setPageBlock(10);
+		adminBoardPaging.setPageSize(viewNum);
+		adminBoardPaging.setTotalA(totalG);
+		
+		adminBoardPaging.makePagingHTML();
+		
+		return adminBoardPaging;
+	}
+	
+	//탈퇴회원 조건검색 리스트 출력
+	@Override
+	public List<WithdrawDTO> getSearchWithdrawList(Map<String, String> map) {
+		int viewNum = Integer.parseInt(map.get("viewNum"));
+		
+		int endNum =  Integer.parseInt(map.get("pg"))*viewNum;
+		int startNum = endNum-(viewNum-1);
+		
+		map.put("startNum", startNum+"");
+		map.put("endNum", endNum+"");
+		return adminDAO.getSearchWithdrawList(map);
+	}
+	//탈퇴회원 조건검색 리스트 출력_페이징
+	@Override
+	public AdminBoardPaging getSearchWithdrawBP(Map<String, String> map) {
+		int viewNum = Integer.parseInt(map.get("viewNum"));
+		
+		int totalH = adminDAO.totalH(map);
+		
+		adminBoardPaging.setCurrentPage(Integer.parseInt(map.get("pg")));
+		adminBoardPaging.setPageBlock(10);
+		adminBoardPaging.setPageSize(viewNum);
+		adminBoardPaging.setTotalA(totalH);
+		
+		adminBoardPaging.makePagingHTML();
+		
+		return adminBoardPaging;
+	}
+ 	
 	
 
 
 }
+

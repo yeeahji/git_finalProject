@@ -177,7 +177,7 @@ $('#storeSearchBtn').click(function(event, str){
 	}
 });
 
-function search_viewNum_change(data){
+function search_viewNum_change(){
 	$.ajax({
 		type: 'post',
 		url: '/market/admin/getSearchStoreList',

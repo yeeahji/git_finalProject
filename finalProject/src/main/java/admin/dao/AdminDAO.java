@@ -99,6 +99,17 @@ public interface AdminDAO {
   	//물품_상세보기 대분류
   	public String getCate_code(String cate_code);
 
+  	//조건검색 후 문의 내역 출력
+	public List<QnaDTO> getSearchQnaList(Map<String, String> map);
+	//조건검색 후 문의 내역 출력 페이징
+	public int totalG(Map<String, String> map);
+	
+	//탈퇴회원 조건검색 리스트 출력
+	public List<WithdrawDTO> getSearchWithdrawList(Map<String, String> map);
+	//탈퇴회원 조건검색 리스트 출력_페이징
+	public int totalH(Map<String, String> map);
+	
+
 
 	
 	

@@ -72,7 +72,11 @@ public class AdminController {
 	}
 	//탈퇴 사유 분석
 	@RequestMapping(value="/withdrawList", method=RequestMethod.GET)
-	public String boardList() {
+	public String boardList(@RequestParam(required=false, defaultValue="1") String pg,
+							@RequestParam(required=false, defaultValue="20") String viewNum,
+							Model model) {
+		model.addAttribute("pg", pg);
+		model.addAttribute("viewNum", viewNum);
 		return "/admin/adminPage/withdrawList";
 	}
 	//공지사항
@@ -82,7 +86,11 @@ public class AdminController {
 	}
 	//고객상담관리
 	@RequestMapping(value="/memberQna", method=RequestMethod.GET)
-	public String memberQna() {
+	public String memberQna(@RequestParam(required=false, defaultValue="1") String pg,
+		    				@RequestParam(required=false, defaultValue="20") String viewNum,
+		    				Model model) {
+		model.addAttribute("pg", pg);
+		model.addAttribute("viewNum", viewNum);
 		return "/admin/adminPage/memberQna";
 	}
 	//신고 관리
@@ -387,7 +395,7 @@ public class AdminController {
 	//문의 내역 출력
 	@RequestMapping(value="/getQnaList", method=RequestMethod.POST)
 	public ModelAndView getQnaList(@RequestParam(required=false, defaultValue="1") String pg,
-				  						 @RequestParam(required=false, defaultValue="20") String viewNum) {
+				  				   @RequestParam(required=false, defaultValue="20") String viewNum) {
 		List<QnaDTO> list = adminService.getQnaList(pg,viewNum);
 		
 		//페이징처리
@@ -402,6 +410,25 @@ public class AdminController {
 		mav.setViewName("jsonView");
 		return mav;
 	}
+	//조건검색 후 문의 내역 출력
+	@RequestMapping(value="/getSearchQnaList", method=RequestMethod.POST)
+	public ModelAndView getSearchQnaList(@RequestParam Map<String, String> map) {
+		List<QnaDTO> list = adminService.getSearchQnaList(map);
+		
+		//페이징처리
+		AdminBoardPaging getSearchqnaBP = adminService.getSearchqnaBP(map);
+		System.out.println("list:"+list);	
+		
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("list", list);
+		mav.addObject("pg", map.get("pg"));
+		//mav.addObject("viewNum", viewNum);
+		mav.addObject("getSearchqnaBP", getSearchqnaBP);
+		mav.setViewName("jsonView");
+		return mav;
+	}
+	
+	
 	
 //	카테고리별 검색 내역 출력
 //	@RequestMapping(value="selectQnaCount", method=RequestMethod.POST)
@@ -470,6 +497,24 @@ public class AdminController {
 		mav.addObject("map", map);
 		mav.setViewName("jsonView");
 	
+		return mav;
+	}
+	
+	//탈퇴회원 조건검색 리스트 출력
+	@RequestMapping(value="/getSearchWithdrawList", method=RequestMethod.POST)
+	public ModelAndView getSearchWithdrawList(@RequestParam Map<String, String> map) {
+		List<WithdrawDTO> list = adminService.getSearchWithdrawList(map);
+		
+		//페이징처리
+		AdminBoardPaging getSearchWithdrawBP = adminService.getSearchWithdrawBP(map);
+		System.out.println("list:"+list);	
+		
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("list", list);
+		mav.addObject("pg", map.get("pg"));
+		//mav.addObject("viewNum", viewNum);
+		mav.addObject("getSearchWithdrawBP", getSearchWithdrawBP);
+		mav.setViewName("jsonView");
 		return mav;
 	}
 }

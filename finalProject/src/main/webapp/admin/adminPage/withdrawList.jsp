@@ -113,7 +113,10 @@
 						  <option value="lowBenefit">혜택 부족</option>
 						  <option value="others">기타</option>
 						</select>
-				         </form>  
+						
+						<input class="form-control me-2" type="search" name=keyword" id="keyword" placeholder="Search" aria-label="Search">
+			        	<button class="btn btn-outline-success" type="button" id="withdrawSearchBtn">Search</button>
+				     </form>  
 				      
 				    </div>
 				  </div>
@@ -209,5 +212,17 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/js/all.min.js" crossorigin="anonymous"></script>
     <script src="/market/admin/js/withdrawList.js"></script>
+    <script type="text/javascript">
+	function boardPaging(pg){
+		var keyword = document.getElementById("keyword").value;
+		$('#pg').val(pg);
+	
+		 if(keyword ==''){
+			location.href='/market/admin/withdrawList?pg='+pg+'&viewNum='+$('#viewNum').val();
+		 }else{
+			$('#withdrawSearchBtn').trigger('click','research');
+		 }
+	}
+	</script>
 
 </body>
