@@ -90,8 +90,9 @@ a{
     -webkit-box-align: center;
     align-items: center;
     line-height: 1.4;
-    font-size: 16px;
-    font-weight: 500;
+    margin-top: 15px;
+    font-size: 15px;
+    font-weight: bold;
     color: rgb(33, 33, 33);
 }
 
@@ -99,7 +100,7 @@ a{
 	max-width: 9.75rem;
     line-height: 1.4;
     font-size: 14px;
-    margin-top: 4px;
+    margin-top: 7px;
     color: rgb(102, 102, 102);
     white-space: pre-wrap;
     text-overflow: ellipsis;
@@ -113,7 +114,7 @@ a{
 }
 
 
-.Sysdate{
+.chatRoomSysdate{
 	padding-top: 16px;
     height: 100%;
     font-size: 12px;
@@ -124,20 +125,28 @@ a{
     color: rgb(153, 153, 153);
 }
 
+.chatRoomReport{
+	margin-top: 27px;
+	color: rgb(153, 153, 153);
+}
+
 .chatRoomIcon{
-	display: flex;
+/* 	display: flex;
 	margin-top: -5px;
     flex-direction: row;
     -webkit-box-orient: horizontal;
     -webkit-box-align: center;
-    align-items: center;
+    align-items: center; */
+    padding-top: 16px;
+    height: 100%;
+    font-size: 12px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    line-height: 1.4;
+    color: rgb(153, 153, 153);
 }
 
-.chatRoomButton{
-	background-color: transparent;
-    cursor: pointer;
-    outline: none;
-}
 
 #other_store_img {
 	width: 50px;
