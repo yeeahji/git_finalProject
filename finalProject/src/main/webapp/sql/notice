@@ -1,13 +1,5 @@
 --공지사항,자주묻는질문 등록, 출력할떄 사용 
-CREATE TABLE noticeBoard(  예전꺼(삭제예정)
-     notice_seq           
-	SELECT1   NOT NULL VARCHAR2(20)   
-	SELECT2            VARCHAR2(40)   제이쿼리 $(this).nameTag
-	SUBJECT   NOT NULL VARCHAR2(4000) 
-	ADMINNAME NOT NULL VARCHAR2(40)   
-	CONTENT   NOT NULL VARCHAR2(4000) 
-	LOGTIME            DATE  
- );
+
  CREATE TABLE noticeBoard(  수정한거, 다른테이블과 연관 x
     noticeBoard_number  number generated always as identity primary key,        --기본키         
 	option1_id     NOT NULL VARCHAR2(20),   --대분류id
