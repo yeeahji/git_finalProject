@@ -49,14 +49,12 @@
                             
                             <div class="sb-sidenav-menu-heading">Interface</div>
 	                           <ul>
-		                            <a class="nav-link" href="/market/admin/memberList">전체 회원 목록</a>
-		                            <a class="nav-link" href="/market/admin/productList">전체 상품 목록</a>
-		                            <a class="nav-link" href="/market/admin/storeList">전체 상점 목록</a>
+		                            <a class="nav-link" href="/market/admin/memberList">전체 회원 관리</a>
 		                            <a class="nav-link" href="/market/admin/withdrawList">탈퇴 사유 분석</a>
-		                            <a class="nav-link" href="/market/admin/complainList">신고관리</a>
-		                            <a class="nav-link" href="/market/admin/memberQna">고객 상담관리</a>
-		                            <a class="nav-link" href="/market/admin/noticeMG">공지사항 관리</a>
-		                            <a class="nav-link" href="/market/admin/noticeWrite">공지사항 등록</a>
+		                            <a class="nav-link" href="/market/admin/storeList">전체 상점 관리</a>
+		                            <a class="nav-link" href="/market/admin/productList">전체 상품 관리</a>
+		                            <a class="nav-link" href="/market/admin/complainList">신고 내역 관리</a>
+		                            <a class="nav-link" href="/market/admin/memberQna">1:1 문의 관리</a>
 	                    	   </ul>
                             
 
@@ -103,11 +101,7 @@
 	  
       <form class="d-flex" id="memberSearchForm">
       	<input type="hidden" id="searchPg" name="searchPg" value="1">
-<<<<<<< HEAD
-      	<select class="form-select form-select-sm" id="searchType" aria-label=".form-select-sm example">
-=======
       	<select class="form-select form-select-sm" id="searchType1" aria-label=".form-select-sm example">
->>>>>>> gt
 		  <option selected>카테고리1</option>
 		  <option value="">계정문의</option>
 		  <option value="">거래신고</option>
@@ -115,22 +109,14 @@
 		  <option value="">광고</option>
 		  <option value="">장애신고</option>
 		</select>&emsp;
-<<<<<<< HEAD
-      	<select class="form-select form-select-sm" id="searchType" aria-label=".form-select-sm example">
-=======
       	<select class="form-select form-select-sm" id="searchType2" aria-label=".form-select-sm example">
->>>>>>> gt
 		  <option selected>카테고리2</option>
 		  <option value="">제목</option>
 		  <option value="">내용</option>
 		  <option value="">아이디</option>
 		</select>&emsp;&emsp;
         <input class="form-control me-2" type="search" name="keyword" id="keyword" placeholder="회원 아이디" aria-label="Search">
-<<<<<<< HEAD
-        <button class="btn btn-outline-success" type="button" id="memberSearchBtn">search</button>
-=======
         <button class="btn btn-outline-success" type="button" id="memberQnaSearchBtn">search</button>
->>>>>>> gt
       </form>  
       
     </div>
@@ -236,8 +222,6 @@
 </footer>
 </div>
 </div>
-<<<<<<< HEAD
-=======
 <script type="text/javascript">
 	function boardPaging(pg){
 		var keyword = document.getElementById("keyword").value;
@@ -250,5 +234,4 @@
 		 }
 	}
 	</script>
->>>>>>> gt
 </body>

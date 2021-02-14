@@ -49,6 +49,11 @@ public class BoardPaging {
 //		3) 1페이지는 [이전] 페이지가 없다.	
 	}
 
+	public void setCurrentPage(int parseInt) {
+		// TODO Auto-generated method stub
+		
+	}
+
 	
 	
 }

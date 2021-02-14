@@ -65,11 +65,9 @@ public class AdminController {
 	@RequestMapping(value="/storeList", method=RequestMethod.GET)
 	public String storeList(@RequestParam(required=false, defaultValue="1") String pg,
 						    @RequestParam(required=false, defaultValue="20") String viewNum,
-						    @RequestParam String id,
 							Model model) {
 		model.addAttribute("pg", pg);
 		model.addAttribute("viewNum", viewNum);
-		model.addAttribute("mem_id", id);
 		return "/admin/adminPage/storeList";
 	}
 	//탈퇴 사유 분석
