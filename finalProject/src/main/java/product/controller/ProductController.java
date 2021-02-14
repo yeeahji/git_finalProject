@@ -5,6 +5,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.security.Principal;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -23,20 +24,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import index.bean.wishDTO;
 import member.bean.MemberDTO;
 import product.bean.CategoryDTO;
-
-import org.springframework.web.servlet.ModelAndView;
-
 import product.bean.ProductDTO;
 import product.bean.RelProdPaging;
 import product.service.ProductService;
-import store.bean.ReviewDTO;
 import store.bean.StoreDTO;
 
 @Controller
@@ -98,6 +94,14 @@ public class ProductController {
 		//DB 연결
 		productService.productRegist(productDTO);
 		
+		//최근 거래지역 설정
+		String mem_id = principal.getName();
+		String recentLocation = productDTO.getProduct_location();
+		Map<String, String> map = new HashMap<String, String>();
+		map.put("mem_id", mem_id);
+		map.put("recentLocation", recentLocation);
+		productService.setRecentLocation(map);
+		
 		//현재 상품의 seq 가져오기
 		int seq = productService.getCurrentProductSeq() - 1;
 		
@@ -121,14 +125,26 @@ public class ProductController {
 		return mav;
 	}
 	
-	// 최근 위치 불러오기
-	@RequestMapping(value="getMyLocation", method=RequestMethod.POST) 
+	// 내 주소 불러오기
+	@RequestMapping(value="getAddress", method=RequestMethod.POST) 
 	@ResponseBody
-	public ModelAndView getMyLocation(Principal principal) {
-		String myLocation = productService.getMyLocation(principal.getName());
+	public ModelAndView getAddress(Principal principal) {
+		String address = productService.getAddress(principal.getName());
 		
 		ModelAndView mav = new ModelAndView();
-		mav.addObject("myRecentLocation", myLocation);
+		mav.addObject("address", address);
+		mav.setViewName("jsonView");
+		return mav;
+	}
+	
+	// 최근 위치 불러오기
+	@RequestMapping(value="getRecentLocation", method=RequestMethod.POST) 
+	@ResponseBody
+	public ModelAndView getRecentLocation(Principal principal) {
+		String recentLocation = productService.getRecentLocation(principal.getName());
+		
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("recentLocation", recentLocation);
 		mav.setViewName("jsonView");
 		return mav;
 	}

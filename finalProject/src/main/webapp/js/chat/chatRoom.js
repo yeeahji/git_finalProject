@@ -53,21 +53,46 @@ $(document).ready(function() {
 //		webSocket.sendCmd('CMD_MSG_SEND', '<img src="'+resolvedData+'" width="100" height="100">');
 //	});
 	
+	$('#uploadImg').on('change', function(){
+		var imageURL = '';
+		const input = this;
+		if(load()) return true;
+		uploadAction.call(this);
+	
+		function load() {
+			const file = input.files[0];
+			const reader = new FileReader();
+			reader.onload = function(progressEvent) {
+				console.log(progressEvent.target.result);
+				
+				webSocket.sendCmd('CMD_MSG_SEND', '<img src="'+progressEvent.target.result+'" width="100" height="100">');
+			};
+			imageURL = reader.readAsDataURL(file);
+			
+			if(imageURL != '') return true;
+		};
+		
+		function uploadAction() {
+			console.log('왔?');
+			
+		};
+	});
+	
 	
 	//이미지 전송
-	$('#uploadImg').on('change', readURL);
-	
-	function readURL() {
-		var imageURL;
-		const input = this;
-		
-		if(input.files && input.files[0]) {
-	        imageURL = window.URL.createObjectURL(input.files[0]);
-			console.log(imageURL);
-		
-		webSocket.sendCmd('CMD_MSG_SEND', '<img src="'+imageURL+'" width="100" height="100">');
-		}
-	};
+//	$('#uploadImg').on('change', readURL);
+//	
+//	function readURL() {
+//		var imageURL;
+//		const input = this;
+//		
+//		if(input.files && input.files[0]) {
+//	        imageURL = window.URL.createObjectURL(input.files[0]);
+//			console.log(imageURL);
+//		
+//		webSocket.sendCmd('CMD_MSG_SEND', '<img src="'+imageURL+'" width="100" height="100">');
+//		}
+//	};
 	
 });
 
@@ -153,27 +178,3 @@ function word_check(str) {
 	
 	return null;
 }
-
-
-//이미지 올릴 시
-//$('#uploadImg').on('change', function() {
-//    if(input.files && input.files[0]) {
-//        var reader = new FileReader();
-//		
-//        //URL 얻기
-//        alert(reader.readAsDataURL(input.files[0]));
-//        console.log(reader.readAsDataURL(input.files[0]));
-//        //msgData.msg 앞에 이미지 태그 생성해서 위의 url값 넣어주기
-//	}
-//});
-
-//중복 submit 방지
-//var doubleSubmitFlag = false;
-//function doubleSubmitCheck() {
-//	if (doubleSubmitFlag) {
-//		return doubleSubmitFlag;
-//	} else {
-//		doubleSubmitFlag = true;
-//		return false;
-//	}
-//}

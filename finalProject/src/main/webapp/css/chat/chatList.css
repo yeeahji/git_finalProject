@@ -56,11 +56,7 @@ body {
 	text-align: left;
 	justify-content: space-between;
 }
-/* .chatRoom_btns {
-	display: block;
-	padding-left: 10px;
-	padding-right: 8px;
-} */
+
 #chat_logtime {
 	display: inline-block; 
 	font-size: 6px;

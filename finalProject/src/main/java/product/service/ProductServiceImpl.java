@@ -39,8 +39,18 @@ public class ProductServiceImpl implements ProductService {
 	}
 
 	@Override
-	public String getMyLocation(String mem_id) {
-		return productDAO.getMyLocation(mem_id);
+	public String getAddress(String mem_id) {
+		return productDAO.getAddress(mem_id);
+	}
+	
+	@Override
+	public void setRecentLocation(Map<String, String> map) {
+		productDAO.setRecentLocation(map);
+	}
+	
+	@Override
+	public String getRecentLocation(String mem_id) {
+		return productDAO.getRecentLocation(mem_id);
 	}
 
 	@Override
@@ -127,6 +137,8 @@ public class ProductServiceImpl implements ProductService {
 	public ProductDTO getProductInfo(String product_seq) {
 		return productDAO.getProductInfo(product_seq);
 	}
+
+
 	
 	
 	

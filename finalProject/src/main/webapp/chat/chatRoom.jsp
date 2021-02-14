@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta http-equiv="Content-Ty pe" content="text/html; charset=UTF-8">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>바다톡</title>
 
 <sec:authentication property="principal" var="member"/> <!-- 사용자 정보 가져오기 -->
@@ -44,7 +44,6 @@ $(document).ready(function() {
 			dataType: 'json',
 			success:function(data){
 				location = data.location;
-
 				webSocket.sendCmd('CMD_MSG_SEND', location);
 			},
 			error: function(error) {
@@ -61,7 +60,6 @@ var webSocket = {
 		this._url = param.url;
 		this._initSocket();
 	},
-
 	//메시지 세팅-----------------------------------------------------------------
 	_sendMessage: function(chat_seq, cmd, msg, checkId, current_user_num) {
 		var msgData = {
@@ -98,18 +96,6 @@ var webSocket = {
 			return;
 		}
 		
-		// 명령 메세지
-/* 		if($('#message').val().trim().charAt(0) == '/') {
-			// 도움말
-			if($('#message').val().trim().length >= 4 && $('#message').val().trim().substring(1) == '도움말') {
-				$('#divChatData').append('<div style="margin-bottom: 10px;"><font color="orange">' + strHelp + '</font></div>');
-				$("#divChat").scrollTop($("#divChat")[0].scrollHeight);
-				$('#message').val('');
-				$('#message').focus();
-				return;
-			}
-		} */
-		
 		//메시지 보내기
 		this._sendMessage('${chat_seq}', 'CMD_MSG_SEND', $('#inputMessage').val()); //메시지 창에 있는 값으로 세팅
 		$('#inputMessage').val(''); //메시지 창 비우기
@@ -125,7 +111,6 @@ var webSocket = {
 	sendCmd: function(cmd, msg) {
 		this._sendMessage('${chat_seq}', cmd, msg);
 	},
-
 	
 	//메시지 받을 때 (정의된 CMD 코드에 따라서 분류함)-----------------------------------------
 	receiveMessage: function(msgData) {
@@ -141,10 +126,8 @@ var webSocket = {
 				$('#chat-container').append('<div class="chat-box"><div class="chat"><input type="hidden" value="${two_mem_id}">'+msgData.msg+'</div>');
 			}
 			$('#chat-container').scrollTop($('#chat-container')[0].scrollHeight+20);
-
 			//메시지 저장
 			var message_content = document.getElementById("chat-container").innerHTML;
-
 			$.ajax({
 				type: 'post',
 				url: '/market/chat/saveMsg',
@@ -228,7 +211,6 @@ var webSocket = {
 			
 			//메시지 저장
 			var message_content = document.getElementById("chat-container").innerHTML;
-
 			$.ajax({
 				type: 'post',
 				url: '/market/chat/saveMsg',
@@ -244,7 +226,6 @@ var webSocket = {
 			/*$('#chat-container').append('<div class="chat notice">' + msgData.msg + '</div>');*/
 		}
 	},
-
 	//연결이 끊겼을 때 메시지 띄우기--------------------------------------------------------
 	closeMessage: function(str) {
 		/* $('#chat-container').append('<div class="chat notice">' + msgData.msg + '</div>'); */
@@ -325,6 +306,3 @@ $(window).on('load', function () {
 	</div>
 </body>
 </html>
-
-
-
