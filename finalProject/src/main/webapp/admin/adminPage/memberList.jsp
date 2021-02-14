@@ -123,7 +123,6 @@
 	            <i class="fas fa-chart-bar mr-1"></i>
 	       	    	상점이름 : <span id="store2NameSpan"></span>
 	           <button type="button" class="btn btn-secondary btn-sm" id="moveStorePageBtn">상점페이지로 이동</button>
-	           <button type="button" class="btn btn-secondary btn-sm" id="moveStore_adminBtn">상점정보</button>
 	        </div>
 	        <div class="card-body">
 	        	<table class="table table-bordered border-primary table-sm">

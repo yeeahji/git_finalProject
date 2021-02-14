@@ -61,7 +61,7 @@
 		select count(*) from store where ${searchType} like '%'||#{storeKeyword}||'%'
 	</select>
 	
-<!-- 상점상세보기_물건출력 -->	
+<!-- 상점상세보기_상품정보출력 -->	
 	<select id="getStore_ProductList" parameterType="String" resultType="product.bean.ProductDTO">
 		select * from product where mem_id = #{id} order by product_seq desc
 	</select>
@@ -155,6 +155,7 @@
 <!-- 신고 리뷰 보이기 -->
    <select id="getReviewContent" parameterType="String" resultType="store.bean.ReviewDTO">
       select * from comments where review_seq=#{review_seq}
+
    </select>
 <!-- 신고내용 처리상태 변경 -->
 	<update id="solveComplain" parameterType="java.util.Map" >
@@ -170,23 +171,6 @@
  	</update>
  	<update id="reviewBlindComplain" parameterType="Integer" >
  		update review set review_content = '관리자에 의해 블라인드 처리된 글입니다.' where review_seq = #{review_seq}
- 	</update>
- 	
-<!-- [1:1문의]========================================================================= -->
-<!-- A.1:1문의 리스트 전체 출력 -->
-   <select id="getQnaList" parameterType="java.util.Map" resultType="admin.bean.QnaDTO">
-      select * from(
-         select rownum rn, tt.* from(select * from qna)tt)
-               where rn between #{startNum} and #{endNum} order by qna_seq asc
-   </select>
-
-<!-- A.1:1문의 리스트 개수 -->
-   <select id="getQnaTotal" resultType="Integer">
-      select count(*) from qna
-   </select>
-<!-- 신고내용 처리상태 변경 -->
-	<update id="solveComplain" parameterType="java.util.Map" >
- 		update complain set complain_status = #{complain_status} where complain_seq = #{complain_seq}
  	</update>
  	
 <!-- [1:1문의]========================================================================= -->
@@ -298,4 +282,19 @@
 		select count(*) from withdraw where ${searchType} like '%'||#{keyword}||'%'
 	</select>
 	
+	
+<!-- 상점_상세조회_상품정보_판매중 -->
+	<select id="sale_productSpan" parameterType="String" resultType="Integer"> 
+		select count(product_manage) from product where mem_id=#{id} and product_manage=1
+	</select>
+<!-- 상점_상세조회_상품정보_예약중 -->
+	<select id="reservation_productSpan" parameterType="String" resultType="Integer"> 
+		select count(product_manage) from product where mem_id=#{id} and product_manage=2
+	</select>
+<!-- 상점_상세조회_상품정보_판매완료 -->
+	<select id="sold_productSpan" parameterType="String" resultType="Integer"> 
+		select count(product_manage) from product where mem_id=#{id} and product_manage=3
+	</select>
+
+
 </mapper>

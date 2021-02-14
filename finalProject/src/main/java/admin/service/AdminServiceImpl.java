@@ -489,7 +489,23 @@ public class AdminServiceImpl implements AdminService {
 		
 		return adminBoardPaging;
 	}
-
+	
+	//상점_상세조회_상품정보_판매중
+	@Override
+	public int sale_productSpan(String id) {
+		return adminDAO.sale_productSpan(id);
+	}
+	//상점_상세조회_상품정보_예약중
+	@Override
+	public int reservation_productSpan(String id) {
+		return adminDAO.reservation_productSpan(id);
+	}
+	//상점_상세조회_상품정보_판매완료
+	@Override
+	public int sold_productSpan(String id) {
+		return adminDAO.sold_productSpan(id);
+	}
+	
 
 }
 
