@@ -15,7 +15,6 @@ public class ChatRoomDTO {
 	private String two_store_nickname;
 	private String one_store_img;
 	private String two_store_img;
-	private String message_content;
 	private Date chat_logtime;
 
 }

@@ -1,76 +1,34 @@
 @charset "UTF-8";
 
-
 body {
 	background-color: #f4f4fa;
-	margin: 0;
-}
-
-
-/*
-div {
-    display: block;
-    margin: 0px;
-    padding: 0px;
-    border: 0px;
-    font: inherit;
-    vertical-align: baseline;
-}
-*/
-a{
-	color: rgb(33, 33, 33);
-    text-decoration: none;
-    cursor: pointer;
+	margin: 0px;
 }
 
 /* 배경 */
 #chatListBody {
 	width: 100%;
-	background-color: #f4f4fa;
+	height: 100%;
 }
 
 .chatTitle {
-	padding-top: 15px;
-	padding-bottom : 12px;
 	width: 100%;
-	height: 5%;
+	height: 45px;
 	text-align:center;
-	font-size: 10px;
-	background-color: #f4f4fa;
+	background-color: rgb(255, 255, 255);
+	border-bottom: solid 2.2px #0a58ca;
 }
-
+.titleText {
+	padding-top: 13px;
+	font-size: 14px;
+	font-weight: bold;
+}
 .chatTitleUnderline {
 	border: solid 1px #0a58ca;
-	/* border: solid 1px #0a58ca;
-	background-color: rgb(255, 255, 255); */
 }
 
-/* 방 크기 */
-.chatRoomWrap{
-	display: flex;
-    background: rgb(255, 255, 255);
-    flex-direction: row;
-    -webkit-box-orient: horizontal;
-    -webkit-box-align: center;
-    align-items: center;
-    height: 80px;
-}
 
-/* 채팅 이미지 */
-.chatRoom_profile{
-	display: flex;
-    margin: 0px 16px;
-}
-
-.chatRoom_content{
-	margin: 0px;
-    padding: 0px;
-    border: 0px;
-    font: inherit;
-    vertical-align: baseline;
-}
-
-/* 채팅방 표시 */
+/* 1단계 */
 .chatRoomBox {
     width: 100%;
     z-index: 1;
@@ -87,71 +45,44 @@ a{
     background: rgb(234, 233, 241);
 }
 
-.chatRoomTitle{
-    display: flex;
-    -webkit-box-align: center;
-    align-items: center;
-    line-height: 1.4;
-    margin-top: 15px;
-    font-size: 15px;
-    font-weight: bold;
-    color: rgb(33, 33, 33);
+/* 2단계 */
+.chatRoom_profile {
+	padding-left: 8px;
+	padding-right: 15px;
+}
+.chatRoom_content {
+	display: block;
+	width: 100%;
+	text-align: left;
+	justify-content: space-between;
+}
+/* .chatRoom_btns {
+	display: block;
+	padding-left: 10px;
+	padding-right: 8px;
+} */
+#chat_logtime {
+	display: inline-block; 
+	font-size: 6px;
+	padding-bottom: 30px;
+	padding-right: 8px;
 }
 
-.chatRoomContent{
-	max-width: 9.75rem;
-    line-height: 1.4;
-    font-size: 14px;
-    margin-top: 7px;
-    color: rgb(102, 102, 102);
-    white-space: pre-wrap;
-    text-overflow: ellipsis;
-    display: -webkit-box;
-    word-break: break-all;
-    -webkit-line-clamp: 2;
-    -webkit-box-orient: vertical;
-    overflow-wrap: break-word;
-    max-height: 2.8em;
-    overflow: hidden;
-}
-
-
-.chatRoomSysdate{
-	padding-top: 16px;
-    height: 100%;
-    font-size: 12px;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-end;
-    line-height: 1.4;
-    color: rgb(153, 153, 153);
-}
-
-.chatRoomReport{
-	margin-top: 27px;
-	color: rgb(153, 153, 153);
-}
-
-.chatRoomIcon{
-/* 	display: flex;
-	margin-top: -5px;
-    flex-direction: row;
-    -webkit-box-orient: horizontal;
-    -webkit-box-align: center;
-    align-items: center; */
-    padding-top: 16px;
-    height: 100%;
-    font-size: 12px;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-end;
-    line-height: 1.4;
-    color: rgb(153, 153, 153);
-}
-
-
+/* 3단계 */
 #other_store_img {
 	width: 50px;
 	height: 50px;
 	border-radius: 50%;
+}
+
+#other_store_nickname {
+	display: inline-block;
+	color: black;
+	font-size: 15px;
+	font-weight: bold;
+}
+
+#last_message {
+	padding-top: 3px;
+	display: block;
 }

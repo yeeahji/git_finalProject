@@ -122,6 +122,11 @@ public class ProductServiceImpl implements ProductService {
 	public void hitUpdate(String seq) {
 		productDAO.hitUpdate(seq);
 	}
+
+	@Override
+	public ProductDTO getProductInfo(String product_seq) {
+		return productDAO.getProductInfo(product_seq);
+	}
 	
 	
 	

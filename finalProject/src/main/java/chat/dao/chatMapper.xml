@@ -17,7 +17,6 @@
 										 #{two_store_nickname},
 										 #{one_store_img},
 										 #{two_store_img},
-										 #{message_content},
 										 SYSDATE);
 										
 	 		 INSERT INTO chatList VALUES(#{one_mem_id},

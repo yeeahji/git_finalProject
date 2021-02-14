@@ -5,8 +5,7 @@ $.ajax({
 	dataType: 'json',
 	success:function(data){
 		$.each(data.chatList, function(index, items){
-			//마지막 메시지 나타내기 - XMLHttpRequest의 응답이 늦어 연동이 조금 느림(태그 생성문에 if문 설정해줘도 소용없음)
-			//마지막 메시지를 자바에서 해결할까?
+			//마지막 메시지 나타내기
 			var loadMsg;
 			var xhttp = new XMLHttpRequest();
 
@@ -53,33 +52,20 @@ $.ajax({
 			)).append($('<div/>', { //2단계 --- content
 				class: 'chatRoom_content'
 					
-				}).append($('<span/>', { //3단계
+				}).append($('<div/>', { //3단계
 					id: 'other_store_nickname',
 					text: items.other_store_nickname
 						
-				})).append($('<span/>', { //3단계
-					id: 'chat_logtime',
-					text: items.chat_logtime
-						
-				})).append($('<span/>', { //3단계
+				})).append($('<div/>', { //3단계
 					id: 'last_message',
 					text: items.last_message
 				})
 				
-			)).append($('<div/>', { //2단계 --- btns
-				class: 'chatRoom_btns'
+			)).append($('<div/>', { //2단계 --- logtime
+				id: 'chat_logtime',
+				text: items.chat_logtime
 					
-				}).append($('<button/>', { //3단계
-					id: 'chatComplainBtn',
-					text: '신고'
-						
-				})).append($('<button/>', { //3단계
-					id: 'chatDeleteBtn',
-					text: '나가기',
-					style: 'z-index: 9999;'
-				})
-				
-			)).appendTo($('.chatRoomWrap'));
+			})).appendTo($('.chatRoomWrap'));
 			
 			//변수 설정
 			if($('.chatRoomWrap').find('input').length == 0) { //중복 설정 방지
@@ -97,26 +83,7 @@ $.ajax({
 				
 				window.open('', 'chatRoom', 'width=370 height=670');
 				$('#chatList').submit();
-			});
-			
-			//채팅방 나가기
-			//전체 채팅방 클릭되니까 버튼 따로 나타내기.. 모달이든 뭐든
-			$('#'+items.chat_seq+' > #chatDeleteBtn').click(function() {
-				alert('나갈래?');
-				
-				$.ajax({
-					type: 'post',
-					url: '/market/chat/deleteChatRoom',
-					data: { 'chat_seq' : items.chat_seq },
-					success:function(){
-						loading = true;
-					},
-					error:function(error){
-						console.log(error);
-					}					
-				});//ajax
-			});
-			
+			});		
 
 		});//each
     },

@@ -101,5 +101,10 @@ public class ProductDAOMybatis implements ProductDAO {
 		sqlSession.update("productSQL.hitUpdate", Integer.parseInt(seq));
 		
 	}
+
+	@Override
+	public ProductDTO getProductInfo(String product_seq) {
+		return sqlSession.selectOne("productSQL. getProductInfo", product_seq);
+	}
 	
 }

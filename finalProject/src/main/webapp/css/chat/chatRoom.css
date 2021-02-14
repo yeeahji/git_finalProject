@@ -1,47 +1,54 @@
 @charset "UTF-8";
 
 body {
-	background-color: #f4f4fa;
+	background-color: white;
 	margin: 0px;
-	overflow: hidden;
+	/* overflow: hidden; */
 }
 
 /* 상단 */
-.chatList_btns {
+#chatRoomSubject {
+	width: 100%;
+	height: 45px;
+	text-align:center;
+	background-color: rgb(255, 255, 255);
+}
+.subjectText {
+	padding-top: 13px;
+	margin-left:50px;
+	font-size: 14px;
+	font-weight: bold;
+}
+
+.alramBtn {
 	weight: 20px;
 	cursor: pointer;
 	color: #0a58ca;
-	float:right;
-}
-/* 더치트 조회 버튼, 나가기 버튼 정도..? */
-#chatRoomSubject {
-	font-size: 20px;
-	font-weight: bold;
-	text-align: center;
-	color: black;
-	border: none;
-	text-align: center;
-	background-color: white;
-	border-bottom: 2px solid #039be5; border : none;
-	padding: 25px 25px;
-	border: none;
+	float: right;
 }
 
+.alrams img {
+	width: 40px;
+	heigth: 20px;
+	bacground-color: white;
+	padding-right: 10px;
+}
+
+
 /* 메세지 출력창 */
-#chat-container {
-	box-sizing : border-box;
-	padding : 10px 0;
+#chat-container{
 	vertical-align: bottom;
+	padding : 10px 0;
 	width: 100%;
-	min-height: 400px;
-	max-height: 400px;
+	min-height: 470px;
+	max-height: 470px;
 	overflow: scroll;
 	overflow-x: hidden;
 	background: #f4f4fa;
 	display: inline-block;
 }
 
-.chat {
+.chat{
 	font-size: 15px;
 	color: black;
 	background: #ffffff;
@@ -52,90 +59,68 @@ body {
 	width: auto;
 	height: auto;
 	text-align: left;
-	word-break: break-all;
-	display: inline-block;
-	border-radius: 30px 30px 30px 30px;
+    word-break : break-all;
+    display: inline-block;
+    border-radius: 5px 30px 30px 30px;
 }
 
-/* my chat */
-.my-chat-box {
-	padding-right: 10px;
-	text-align: right;
-}
-
-.my-chat-box .my-chat {
-	margin-right: 10px;
-	padding-right: 10px;
+.my-chat{
 	text-align: left;
 	color: rgb(255, 255, 255);
 	background: #0a58ca;
 	border-radius: 30px 5px 30px 30px;
 }
 
-/* you chat */
-.chat-box {
-	padding-left: 10px;
-	text-align: left;
+.chat-box{
+	text-align:left;
+	padding-left: 5px;
 }
 
-.chat-box .my-chat {
-	text-align: left;
-	border-radius: 5px 30px 30px 30px;
-	background: #333;
-	color: #fff;
+.my-chat-box{
+	text-align: right;
+	padding-right: 5px;
 }
 
-.notice {
+.notice{
 	font-size: 12px;
 	color: #039be5;
-	border: none;
+	border : none;
 	text-align: center;
 	background-color: #f4f4fa;
 	display: block;
 }
 
-.chat-info {
-	color: #556677;
+.chat-info{
+	color:#556677;
 	font-size: 10px;
 	text-align: right;
 	padding: 5px;
 	padding-top: 0px;
 }
 
-/* 메세지 입력창 */
-.bottom-container {
-	position: relative;
-	display: flex;
+
+/* 하단 */
+#bottom-container {
+	padding-top: 5px;
+	padding-left: 5px;
 	align-items: center;
+	-webkit-box-orient: horizontal;
 }
-
-.chatRoomPlusImage {
-	display: flex;
-	margin-right: 5px;
-	cursor: pointer;
-	text-align: center;
-	font-size: 30px;
-	color: #039be5;
-	float: left;
-	margin-right: 5px;
-}
-
-#inputMessage {
+#inputMessage{
+	padding-left: 10px;
 	box-sizing: border-box;
-	padding: 0 8px;
-	width: calc(100% - 92px) ;
+	width: 300px;
 	height: 30px;
+	backgorund-color: #f4f4fa;
 	border: solid 1px #039be5;
-	border-radius: 5px;
+	border-radius: 15px;
 }
-
 #inputMessage:focus, #inputMessage:hover {
 	outline: none;
 	border-width: 2px;
 }
-
 #sendBtn {
-	margin-left: 10px;
+	margin-left: 3px;
 	background: #039be5;
 	padding: 5px 10px;
 	color: #fff;
@@ -144,50 +129,66 @@ body {
 	font-weight: blod;
 }
 
-
-.bottom-container{
-	display: flex;
-    -webkit-box-orient: horizontal;
-    flex-flow: row wrap;
-    padding: 10px 20px;
-    background:white;
-    height: 68px;
-}
-
-.bottom-container .select {
-	cursor: pointer;
-	padding: 10px;
-	text-align: center;
-	margin-right: 10px;
-	margin-left: 10px;
-	/* position: relative;
-    display: flex;
-    flex-direction: column;
-    -webkit-box-align: center;
-    align-items: center;
-    -webkit-box-pack: center;
-    justify-content: center;
-    font-size: 14px; */
-}
-
-
 .extra-menu {
-	display: none;
+	display: flex;
+	margin: 0px;
+	padding: 0px;
 	height: 80px;
+	width: 100%;
 }
 
-.bottom-container .select span {
-	display: inline-block;
+.plusOption {
+	width: 100%;
+	padding-left: 23px;
+	padding-top: 25px;
+	display: flex;
+}
+.plusOptions {
+	padding-right: 10px;
+}
+.plusOption img {
+	display: flex;
+	width: 50px;
+	hegiht: 50px;
+	cursor: pointer;
+}
+.plusOption span {
+	display: flex;
 	font-size: 12px;
+	text-aling: center;
 }
 
-
-.bottom-container .select i {
-	display: inline-block;
-	font-size: 20px;
-	padding: 15px 14px;
-	margin-bottom: 5px;
-	color: white;
-	background : #039be5;
-	border-radius: 100%;
+#inputAdd {
+	padding-right: 30px;
 }
+
+#imgOption {
+	position: relative;
+	width: 50px;
+	height: 50px;
+	overflow: hidden;
+}
+
+#uploadImg {
+	font-size: 29px;
+	position: absolute;
+	right: 0px;
+	top: 0px;
+	opacity: 0;
+	filter: alpha(opacity = 0);
+	-ms-filter: alpha(opacity = 0);
+	cursor: pointer;
+}
+
+/* 상품 링크 */
+.productPage { 
+	color: #039be5;
+};
+
+.productPage:link { 
+	color: #039be5;
+};
+
+.productPage:visited { 
+	color: #039be5;
+};

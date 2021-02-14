@@ -168,6 +168,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		set product_view = product_view+1 
 		where product_seq=#{seq}
 	</update>
+	
+	<!-- 상품 DTO 가져오기 -->
+	<select id="getProductDTO" parameterType="String" resultType="product"> 
+		SELECT * FROM product WHERE product_seq=#{product_seq}
+	</select>
 
 
 </mapper>

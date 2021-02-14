@@ -301,8 +301,20 @@ public class ProductController {
 		productService.zzimDelete(map);
 
 	}
-
 	
+	// 상품 번호로 상품 DTO 가져오기
+	@RequestMapping(value="getProductInfo", method=RequestMethod.POST)
+	@ResponseBody
+	public ModelAndView getProductInfo(@RequestParam String product_seq) {
+		ProductDTO productDTO = productService.getProductInfo(product_seq);
+		String location = productDTO.getProduct_location();
+		
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("productDTO", productDTO);
+		mav.addObject("location", location);
+		mav.setViewName("jsonView");
+		return mav;
+	}
 }
 
 

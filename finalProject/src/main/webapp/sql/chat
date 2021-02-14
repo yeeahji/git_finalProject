@@ -1,26 +1,3 @@
---테이블 생성
-CREATE TABLE chatroom_id(
-	
-	mem_id
-	your mem_id
-	
-);
-
-
-CREATE TABLE message_id(
-	sender
-	receiver
-	content
-	sendTime
-	chatroom_id   ???
-	messageReadTime
-	mem_id
-	your mem_id
-	
-);
-
-
-
 CREATE TABLE chatRoom (
     chat_seq NUMBER UNIQUE, --채팅방 번호(난수 부여)
     one_mem_id VARCHAR2(50), --사용자 ID
@@ -29,7 +6,6 @@ CREATE TABLE chatRoom (
     two_store_nickname VARCHAR2(50),
     one_store_img VARCHAR2(100), --상점 이미지(프로필 사진)
     two_store_img VARCHAR2(100), 
-    message_content VARCHAR2(100), --메시지 내용(파일)
     chat_logtime DATE --시간
 );
 --판매자와 구매자의 관계는 뒤바뀔 수 있어서 one, two로 표시함(처음 연락한 사람이 ONE으로 들어감)

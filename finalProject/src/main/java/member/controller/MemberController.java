@@ -408,6 +408,22 @@ public class MemberController {
 		memberService.complain(map);
 	}
 	
+
+//	===========================================================================
+	//내 정보 겸 주소 불러오기(채팅 관련)
+	@RequestMapping(value="getMyInfo", method=RequestMethod.POST) 
+	@ResponseBody
+	public ModelAndView getMyInfo(@RequestParam String mem_id) {
+		MemberDTO memberDTO = memberService.getData(mem_id);
+		String location = memberDTO.getMem_location();
+				
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("memberDTO", memberDTO);
+		mav.addObject("location", location);
+		mav.setViewName("jsonView");
+		return mav;
+	}
+	
 }
 
 
