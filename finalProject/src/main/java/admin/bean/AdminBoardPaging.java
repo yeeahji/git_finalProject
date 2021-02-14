@@ -39,4 +39,7 @@ public class AdminBoardPaging {
 			pagingHTML.append("<a class='page-link' onclick='boardPaging("+(endPage+1)+")' aria-label='Next'><span aria-hidden='true' >&raquo;다음</span></a>");
 	}
 
+
+
+	
 }

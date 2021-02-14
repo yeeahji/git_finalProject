@@ -5,7 +5,6 @@ import java.util.Map;
 
 import admin.bean.QnaDTO;
 import notice.bean.NoticeDTO;
-import notice.bean.QnaBoardDTO;
 import notice.bean.QnaCateDTO;
 
 public interface NoticeService {
@@ -22,7 +21,6 @@ public interface NoticeService {
 
 	public void writeQna(QnaDTO qnaDTO);
 
-	public List<QnaBoardDTO> getQnaList(String mem_id);
 
 	
 

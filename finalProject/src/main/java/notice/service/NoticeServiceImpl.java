@@ -8,7 +8,6 @@ import org.springframework.stereotype.Service;
 
 import admin.bean.QnaDTO;
 import notice.bean.NoticeDTO;
-import notice.bean.QnaBoardDTO;
 import notice.bean.QnaCateDTO;
 import notice.dao.NoticeDAO;
 
@@ -49,10 +48,6 @@ public class NoticeServiceImpl implements NoticeService {
 		noticeDAO.writeQna(qnaDTO);
 	}
 
-	@Override
-	public List<QnaBoardDTO> getQnaList(String mem_id) {
-		return noticeDAO.getQnaList(mem_id);
-	}
 
 	
 

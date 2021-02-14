@@ -498,6 +498,7 @@ js : 한글자 이상 입력 시 나타나는 x 버튼. 내용 지우기 역할
 }
 .tag_con {
     flex: 1 1 0%;
+    padding: 0px 0px 0px 100px;
 }
 .tag_con > .contentArea {
     display: flex;
