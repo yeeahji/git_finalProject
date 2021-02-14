@@ -106,5 +106,18 @@ public interface AdminService {
 	//탈퇴회원 조건검색 리스트 출력_페이징
 	public AdminBoardPaging getSearchWithdrawBP(Map<String, String> map);
 	
+	//상점_상세조회_상품정보_판매중
+	public int sale_productSpan(String id);
+	//상점_상세조회_상품정보_예약중
+	public int reservation_productSpan(String id);
+	//상점_상세조회_상품정보_판매완료
+	public int sold_productSpan(String id);
+
+	//총 구매한 물건 개수
+	public int totalBuyProduct(String id);
+	//신고당한 수
+	public int totalReported(String id);
+
+
 	
 }

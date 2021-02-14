@@ -108,5 +108,10 @@ public interface AdminDAO {
 
 
 	
+	//총 구매한 물건 개수
+	public int totalBuyProduct(String id);
+	//신고당한 수
+	public int totalReported(String id);
+	
 
 }

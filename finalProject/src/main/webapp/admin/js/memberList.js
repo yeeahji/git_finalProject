@@ -223,24 +223,21 @@ function search_viewNum_change(data){
    });//ajax
 }
 
+//상세정보에 나타나는 부분
+function showMember(data){
+	$('#nameSpan').text(data.adminMembersDTO.mem_name)
+	$('#HpSpan').text(data.adminMembersDTO.mem_tel)
+	$('#enabledSpan').text(data.adminMembersDTO.enabled)
+	$('#add1Span').text(data.adminMembersDTO.mem_add1)
+	$('#add2Span').text(data.adminMembersDTO.mem_add2)
+	$('#store1NameSpan').text(data.adminMembersDTO.store_nickname)
+	$('#store2NameSpan').text(data.adminMembersDTO.store_nickname)
+	$('#echo1Span').text(data.adminMembersDTO.store_echo)
+	$('#echo2Span').text(data.adminMembersDTO.store_echo)
+	$('#emailSpan').text(data.adminMembersDTO.mem_email)
+	$('#logSpan').text(data.adminMembersDTO.mem_logtime)
+	$('#productSellSpan').text(data.totalSellProduct)
+	$('#productBuySpan').text(data.totalBuyProduct)
+	$('#reportedSpan').text(data.totalReported)
+};
 
-
-
-
-(function($) {
-    "use strict";
-
-    // Add active state to sidbar nav links
-    var path = window.location.href; // because the 'href' property of the DOM element is the absolute path
-        $("#layoutSidenav_nav .sb-sidenav a.nav-link").each(function() {
-            if (this.href === path) {
-                $(this).addClass("active");
-            }
-        });
-
-    // Toggle the side navigation
-    $("#sidebarToggle").on("click", function(e) {
-        e.preventDefault();
-        $("body").toggleClass("sb-sidenav-toggled");
-    });
-})(jQuery);

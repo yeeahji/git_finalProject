@@ -283,4 +283,26 @@
 		select count(*) from withdraw where ${searchType} like '%'||#{keyword}||'%'
 	</select>
 	
+<!-- 상점_상세조회_상품정보_판매중 -->
+	<select id="sale_productSpan" parameterType="String" resultType="Integer"> 
+		select count(product_manage) from product where mem_id=#{id} and product_manage=1
+	</select>
+<!-- 상점_상세조회_상품정보_예약중 -->
+	<select id="reservation_productSpan" parameterType="String" resultType="Integer"> 
+		select count(product_manage) from product where mem_id=#{id} and product_manage=2
+	</select>
+<!-- 상점_상세조회_상품정보_판매완료 -->
+	<select id="sold_productSpan" parameterType="String" resultType="Integer"> 
+		select count(product_manage) from product where mem_id=#{id} and product_manage=3
+	</select>
+
+<!-- 총 구매한 물건 개수 -->
+	<select id="totalBuyProduct" parameterType="String" resultType="Integer"> 
+		select count(*) from purchase where my_id=#{id}
+	</select>
+<!-- 신고당한 수 -->
+	<select id="totalReported" parameterType="String" resultType="Integer"> 
+		select count(*) from complain where mem_id=#{id}
+	</select>
+
 </mapper>

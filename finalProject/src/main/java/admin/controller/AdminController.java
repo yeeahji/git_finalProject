@@ -142,10 +142,16 @@ public class AdminController {
 		AdminMembersDTO adminMembersDTO= adminService.getMemberView(id);
 		//판매중인물건 총갯수
 		int totalSellProduct = adminService.totalSellProduct(id);
+		//총 구매한 물건 갯수
+		int totalBuyProduct = adminService.totalBuyProduct(id);
+		//신고당한 수
+		int totalReported = adminService.totalReported(id);
 		
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("adminMembersDTO", adminMembersDTO);
 		mav.addObject("totalSellProduct", totalSellProduct);
+		mav.addObject("totalBuyProduct", totalBuyProduct);
+		mav.addObject("totalReported", totalReported);
 		mav.setViewName("jsonView");
 	
 		return mav;
