@@ -104,8 +104,13 @@ public interface AdminDAO {
 	//탈퇴회원 조건검색 리스트 출력_페이징
 	public int totalH(Map<String, String> map);
 	
-
-
+	
+	//상점_상세조회_상품정보_판매중
+	public int sale_productSpan(String id);
+	//상점_상세조회_상품정보_예약중
+	public int reservation_productSpan(String id);
+	//상점_상세조회_상품정보_판매완료
+	public int sold_productSpan(String id);
 	
 
 }

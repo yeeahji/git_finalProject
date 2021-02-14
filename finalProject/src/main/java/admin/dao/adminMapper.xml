@@ -61,7 +61,7 @@
 		select count(*) from store where ${searchType} like '%'||#{storeKeyword}||'%'
 	</select>
 	
-<!-- 상점상세보기_물건출력 -->	
+<!-- 상점상세보기_상품정보출력 -->	
 	<select id="getStore_ProductList" parameterType="String" resultType="product.bean.ProductDTO">
 		select * from product where mem_id = #{id} order by product_seq desc
 	</select>
@@ -282,4 +282,19 @@
 		select count(*) from withdraw where ${searchType} like '%'||#{keyword}||'%'
 	</select>
 	
+	
+<!-- 상점_상세조회_상품정보_판매중 -->
+	<select id="sale_productSpan" parameterType="String" resultType="Integer"> 
+		select count(product_manage) from product where mem_id=#{id} and product_manage=1
+	</select>
+<!-- 상점_상세조회_상품정보_예약중 -->
+	<select id="reservation_productSpan" parameterType="String" resultType="Integer"> 
+		select count(product_manage) from product where mem_id=#{id} and product_manage=2
+	</select>
+<!-- 상점_상세조회_상품정보_판매완료 -->
+	<select id="sold_productSpan" parameterType="String" resultType="Integer"> 
+		select count(product_manage) from product where mem_id=#{id} and product_manage=3
+	</select>
+
+
 </mapper>

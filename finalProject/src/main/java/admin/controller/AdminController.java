@@ -65,9 +65,11 @@ public class AdminController {
 	@RequestMapping(value="/storeList", method=RequestMethod.GET)
 	public String storeList(@RequestParam(required=false, defaultValue="1") String pg,
 						    @RequestParam(required=false, defaultValue="20") String viewNum,
+						    @RequestParam String id,
 							Model model) {
 		model.addAttribute("pg", pg);
 		model.addAttribute("viewNum", viewNum);
+		model.addAttribute("mem_id", id);
 		return "/admin/adminPage/storeList";
 	}
 	//탈퇴 사유 분석
@@ -177,6 +179,9 @@ public class AdminController {
 		int totalSellProduct = adminService.totalSellProduct(id);
 		//상품정보
 		List<ProductDTO> productList = adminService.getStore_ProductList(id);
+		int sale_productSpan = adminService.sale_productSpan(id);//판매중
+		int reservation_productSpan = adminService.reservation_productSpan(id);//예약중
+		int sold_productSpan = adminService.sold_productSpan(id);//판매완료
 		//후기 총 개수
 		int reviewTotalA = adminService.storeReviewTotalA(id);
 		
@@ -185,6 +190,9 @@ public class AdminController {
 		mav.addObject("productList",productList);
 		mav.addObject("totalSellProduct",totalSellProduct);
 		mav.addObject("reviewTotalA",reviewTotalA);
+		mav.addObject("sale_productSpan",sale_productSpan);
+		mav.addObject("reservation_productSpan",reservation_productSpan);
+		mav.addObject("sold_productSpan",sold_productSpan);
 		mav.setViewName("jsonView");
 	
 		return mav;
@@ -514,6 +522,8 @@ public class AdminController {
 		mav.setViewName("jsonView");
 		return mav;
 	}
+	
+	
 	
 }
 

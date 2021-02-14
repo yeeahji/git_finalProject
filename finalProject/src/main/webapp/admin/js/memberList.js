@@ -149,7 +149,7 @@ function clickEvent(data){
 			window.open("/market/store/store?id="+id,"PopupWin","width=800,height=800");
 		});
 		$('#moveStore_adminBtn').click(function(){
-			location.href="/market/admin/storeList?id='+id'"
+			location.href="/market/admin/storeList?id="+id
 		});
 		
 		//영구정지
