@@ -10,7 +10,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import admin.bean.QnaDTO;
 import notice.bean.NoticeDTO;
-import notice.bean.QnaBoardDTO;
 import notice.bean.QnaCateDTO;
 
 @Repository
@@ -50,10 +49,6 @@ public class NoticeDAOMybatis implements NoticeDAO {
 		sqlSession.insert("noticeSQL.writeQna", qnaDTO);
 	}
 
-	@Override
-	public List<QnaBoardDTO> getQnaList(String mem_id) {
-		return sqlSession.selectList("noticeSQL.getQnaList", mem_id);
-	}
 
 	
 	

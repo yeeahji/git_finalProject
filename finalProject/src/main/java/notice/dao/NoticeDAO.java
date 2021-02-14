@@ -4,7 +4,6 @@ import java.util.List;
 import java.util.Map;
 
 import notice.bean.NoticeDTO;
-import notice.bean.QnaBoardDTO;
 import notice.bean.QnaCateDTO;
 import admin.bean.QnaDTO;
 
@@ -22,7 +21,6 @@ public interface NoticeDAO {
 
 	public void writeQna(QnaDTO qnaDTO);
 
-	public List<QnaBoardDTO> getQnaList(String mem_id);
 
 	
 

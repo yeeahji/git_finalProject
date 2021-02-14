@@ -19,7 +19,6 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import notice.bean.NoticeDTO;
-import notice.bean.QnaBoardDTO;
 import notice.bean.QnaCateDTO;
 import admin.bean.QnaDTO;
 import notice.service.NoticeService;
@@ -150,16 +149,5 @@ public class NoticeController {
 		return "/index";
 	}
 		
-	//1:1문의  내역불러오기
-	@RequestMapping(value="/getQnaList", method=RequestMethod.POST)
-	@ResponseBody
-	public ModelAndView getQnaList(@RequestParam String mem_id) {
-		List<QnaBoardDTO> list = noticeService.getQnaList(mem_id);
-		System.out.println("mem_id:"+mem_id);
-		
-		ModelAndView mav = new ModelAndView();
-		mav.addObject("list", list);
-		mav.setViewName("jsonView");
-		return mav;
-	}
+	
 }
