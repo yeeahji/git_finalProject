@@ -98,8 +98,7 @@ public class ChatController {
 			map.put("two_store_img", two_store_img);
 			
 			//메시지 내용 파일화
-			map.put("message_content", "안녕하세요"); //나중에 split
-			map.put("last_message", "마지막 메시지");
+			map.put("last_message", "");
 			
 			//DB에 저장 (1개의 채팅방 생성, 2개의 채팅리스트 생성(두 명 모두 생성되어야 하니까))
 			chatService.insertRoomInfo(map);
