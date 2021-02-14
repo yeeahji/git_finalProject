@@ -19,18 +19,17 @@ window.onblur = function() {
 
 
 $(document).ready(function() {
-	// 알림음 켜기
+	//알림음 켜기
 	$('#btn_alram_on').click(function(){
 		flagAlram = true;
 	});
-	// 알림음 끄기
+	//알림음 끄기
 	$('#btn_alram_off').click(function(){
 		flagAlram = false;
 	});
 	
- 	// 이모티콘 전송
+ 	//이모티콘 전송
 	$('#emoji_1').click(function(){
-		console.log("클릭");
 		webSocket.sendCmd('CMD_MSG_SEND', '<img src="../image/chat/emoji_1.gif" width="100" height="100">');
 	});
 	$('#emoji_2').click(function(){
@@ -39,6 +38,53 @@ $(document).ready(function() {
 	$('#emoji_3').click(function(){
 		webSocket.sendCmd('CMD_MSG_SEND', '<img src="../image/chat/emoji_3.gif" width="100" height="100">');
 	});
+	
+	//이미지 전송
+//	$('#uploadImg').on('change', getData);
+//	
+//	var data;
+//	function getData() {
+//		const input = this;
+//		const file = input.files[0];
+//		const reader = new FileReader();
+//		reader.onload = function(progressEvent) {
+//			console.log(progressEvent.target.result);
+//		};
+//		
+//		return new Promise(function(resolve, reject) {
+//			data = reader.readAsDataURL(file);
+//			console.log(data);
+//		});
+//	};
+//	
+//	getData().then(function(resolvedData) {
+//		console.log('늦게 : ' + resolvedData);
+//		webSocket.sendCmd('CMD_MSG_SEND', '<img src="'+resolvedData+'" width="100" height="100">');
+//	});
+	
+	
+	//이미지 전송
+//	$('#uploadImg').on('change', readURL);
+//	
+//	function readURL() {
+//		const file = event.target.files[0];
+//		const reader = new FileReader();
+//		reader.onload = function(progressEvent) {
+//		  console.log(progressEvent.target.result);
+//		};
+//
+//		imageURL = reader.readAsDataURL(file);
+//		console.log(imageURL);
+//		  
+//		sendImg();
+//	};
+//	
+//	function sendImg () {
+//		webSocket.sendCmd('CMD_MSG_SEND', '<img src="'+imageURL+'" width="100" height="100">');
+//	}
+
+	
+
 });
 
 

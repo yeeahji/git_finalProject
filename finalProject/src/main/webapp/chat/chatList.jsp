@@ -12,8 +12,10 @@
 
 <form id="chatList" method="post" action="chatRoom" target="chatRoom">
 <div id="chatListBody">
- 	<div class="chatTitle"><h2>바다톡</h2></div>
- 	<hr class="chatTitleUnderline">
+ 	<div class="chatTitle">
+ 		<div class="titleText">바다톡</div>
+ 	</div>
+ 	<!-- <hr class="chatTitleUnderline"> -->
  	
 	<!-- hidden -->
 	<div class="onlyHidden" style="display: none;"></div>

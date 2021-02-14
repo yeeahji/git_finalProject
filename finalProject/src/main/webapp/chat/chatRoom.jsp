@@ -4,10 +4,10 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta http-equiv="Content-Ty pe" content="text/html; charset=UTF-8">
 <title>바다톡</title>
 
-<sec:authentication property="principal" var="member"/>
+<sec:authentication property="principal" var="member"/> <!-- 사용자 정보 가져오기 -->
 
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/chat/chatRoom.css">
 
@@ -250,7 +250,6 @@ $(window).on('load', function () {
 		<div class="chatRoomSubject" id="chatRoomSubject">
 			<img id="olineCheck" src="../image/chat/houseClose.png"> ${other_store_nickname}
 		</div>
-		<input type="file" id="uploadImg">
 	</div>
 	
 	
@@ -260,15 +259,23 @@ $(window).on('load', function () {
 		<input type="button" id="sendBtn" value="전송" onclick="webSocket.sendChat()"/>
 	</div>
 	
+	<!-- 알람 -->
 	<button type="button" id="btn_alram_on">알림 켜기</button>
 	<button type="button" id="btn_alram_off">알림 끄기</button>
 	<div style="display: none;">
 		<audio id="chat_alram"><source src="../image/chat/chat_alram.mp3" type="audio/mpeg"></audio>
 	</div>
 	
+	<!-- 이모티콘 -->
 	<img src="../image/chat/emoji_1.gif" id="emoji_1" style="padding-right: 8px; cursor: pointer; width: 30px; height: 30px;">
 	<img src="../image/chat/emoji_2.gif" id="emoji_2" style="padding-right: 8px; cursor: pointer; width: 30px; height: 30px;">
 	<img src="../image/chat/emoji_3.gif" id="emoji_3" style="padding-right: 8px; cursor: pointer; width: 30px; height: 30px;">
 	
+	<!-- 이미지 첨부 -->
+	<input type="file" id="uploadImg">
+	
 </body>
 </html>
+
+
+

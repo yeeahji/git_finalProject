@@ -1,43 +1,34 @@
 @charset "UTF-8";
 
-/*
 body {
 	background-color: #f4f4fa;
+	margin: 0;
 }
-*/
-
-/*
-div {
-    display: block;
-    margin: 0px;
-    padding: 0px;
-    border: 0px;
-    font: inherit;
-    vertical-align: baseline;
-}
-*/
 
 /* 배경 */
 #chatListBody {
 	width: 100%;
 	height: 100%;
-	background-color: #f4f4fa;
 }
 
 .chatTitle {
 	width: 100%;
-	height: 5%;
+	height: 45px;
 	text-align:center;
-	font-size: 10px;
 	background-color: rgb(255, 255, 255);
+	border-bottom: solid 2.2px #0a58ca;
 }
-
+.titleText {
+	padding-top: 13px;
+	font-size: 14px;
+	font-weight: bold;
+}
 .chatTitleUnderline {
 	border: solid 1px #0a58ca;
 }
 
 
-/* 채팅방 표시 */
+/* 1단계 */
 .chatRoomBox {
     width: 100%;
     z-index: 1;
@@ -54,8 +45,44 @@ div {
     background: rgb(234, 233, 241);
 }
 
+/* 2단계 */
+.chatRoom_profile {
+	padding-left: 8px;
+	padding-right: 15px;
+}
+.chatRoom_content {
+	display: block;
+	width: 100%;
+	text-align: left;
+	justify-content: space-between;
+}
+/* .chatRoom_btns {
+	display: block;
+	padding-left: 10px;
+	padding-right: 8px;
+} */
+#chat_logtime {
+	display: inline-block; 
+	font-size: 6px;
+	padding-bottom: 30px;
+	padding-right: 8px;
+}
+
+/* 3단계 */
 #other_store_img {
 	width: 50px;
 	height: 50px;
 	border-radius: 50%;
+}
+
+#other_store_nickname {
+	display: inline-block;
+	color: black;
+	font-size: 15px;
+	font-weight: bold;
+}
+
+#last_message {
+	padding-top: 3px;
+	display: block;
 }
