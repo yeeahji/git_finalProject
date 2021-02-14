@@ -47,7 +47,7 @@ function withdrawList(data){
 					}else withdrawReason += ", 기타"
 				}
 					
-				console.log("탈퇴사유:"+withdrawReason);
+				console.log("탈퇴번호:"+items.withdraw_seq);
 				
 				$('<tr/>').append($('<td/>',{
 					text: items.withdraw_seq

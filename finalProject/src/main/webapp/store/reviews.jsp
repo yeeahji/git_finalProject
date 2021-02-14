@@ -100,18 +100,21 @@
        <!-- 카테고리 (1) -->
        <div class="singoCategoryR">
           <div class="singoTitleR">
-             <span>광고(교신 및 상점홍보)</span>
+             <span>허위/거래와 무관한 내용</span>
              <button type="button" class="titleBtnR"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABoAAAAQCAYAAAAI0W+oAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAXNJREFUeNqslK1Pw1AUxV9fmoq5Ldl/MCSaBLkEAQkIPgxzTUABjoRMsAJmCQ4HJGAAw8yCwGFQaCyOKSpgZmIGzk1OyU1Zu7fRm/yWvtvec1777p0XRVFgjLkGZ+DFFBtzYBeEPn5uwAZYAPPgrSCTGngAVRBY/HTBNxOPoFKASYVaVWp3xegWRGoX97KDf5gE1KhxfSwelosTGkrUwRXwpjDxWFvnWjSP5CIxktcLwRPXDdCawqjFWkOtkNq/RhJDsKaa4VAVuUSDNYYa69Q0aSOJL7AI4hGfIS/0546p8akfsCOKZDfLYMCD7aiDzWrjDp8dsPbPiNiMYhncLX7fsmrVdCQjUeaz21lDb3N2egeaqeErqfsl5pK3barOnchIog3O1d/JBc9BuGTO8LqdJ+Q7HPQemOGBS2e9M7+p2nhnnIiLkbToKngGs+BA3XvlveE4Ees4I32wBD5ULmau7yLgTzCQPbAC9rk+Zc4pfgQYAOZsSsrHKCoBAAAAAElFTkSuQmCC" width="13" height="8" alt="화살표 아이콘"></button>
           </div>
           <div class="singoContentR">
-             <div class="contentListR">
-                <button type="button">교환신청</button>
+         	 <div class="contentListR">
+                <button type="button">허위</button>
              </div>
              <div class="contentListR">
-                <button type="button">상점홍보</button>
+                <button type="button">광고</button>
              </div>
              <div class="contentListR">
-                <button type="button">타사이트, 어플 광고</button>
+                <button type="button">불건전한 내용</button>
+             </div>
+             <div class="contentListR">
+                <button type="button">의미를 알 수 없는 내용</button>
              </div>
           </div>
        </div>
@@ -130,6 +133,7 @@
              </div>
           </div>
        </div>
+      
        <div class="singoCategoryR">
           <div class="singoTitleR">
              <span>기타사유(직접입력)</span>

@@ -8,6 +8,7 @@ import lombok.Data;
 
 @Data
 public class WithdrawDTO {
+	private int withdraw_seq;
 	private String mem_id;
 	private String withdraw_lowFrequency;
 	private String withdraw_rejoin;

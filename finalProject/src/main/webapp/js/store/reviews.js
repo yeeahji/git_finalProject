@@ -14,7 +14,7 @@ if(loginId == paramId){ // 내 상점
 $(document).ready(function(){
 	$.ajax({
 		type: 'post',
-		url: '/market/store/storeReviewsList',
+		url: '/market/store/storeReviewsList', //리뷰 전체 출력
 		data: 'mem_id=' + userId, 
 		dataType: 'json',
 		success : function(data){
@@ -44,7 +44,8 @@ $(document).ready(function(){
 				}).append($('<a/>', {
 					class: 'reviewStoreName'+index,
 					href: '#',
-					text: items.store_nickname
+					text: items.store_nickname //리뷰 쓴 사람의 스토어 닉네임
+					
 				})).append($('<div/>', {
 					class: 'reviewDate',
 					text: items.review_date
@@ -87,17 +88,13 @@ $(document).ready(function(){
 				})).append('신고하기')
 				))).appendTo($('.reviewsBottom'));
 				
-				
 				$('.reviewStoreName'+index).css({'display': 'flex',
 												 '-webkit-box-align': 'center',
 												 'align-items': 'center'});
-				
 				$('.reviewProductLink'+index).css('margin', '10px 0px');
-				
 				$('.reviewProfile'+index).css({'width': '60px',
 											   'margin-right': '15px',
 											   'display': 'block'});
-										
 				
 				// 상품 상세페이지 연결
 				$('.reviewProductLink'+index).click(function(){
@@ -112,11 +109,81 @@ $(document).ready(function(){
 				$('.reviewStoreName'+index).click(function(){
 					$('.reviewStoreName'+index).attr('href','/market/store/store?id='+items.mem_id);
 				})
+				
+				
+				
+//충돌시 이거꼭 살리세요!!! ==================================== 신고하기 모달 ====================================
+	$('.reviewsBottom').on('click', '.reviewSingoBtn', function(){      
+          $("#reviewModal_singo").css('display','flex'); 
+              
+          $('.contentListR>button').mouseenter(function(){
+             $(this).css('text-decoration', 'underline');
+             $(this).mouseleave(function(){
+                 $(this).css('text-decoration', 'none');
+              });
+           
+             $(this).off('click').click(function(){ //클릭 이벤트 중복호출 방지
+            	 $.ajax({
+    				type : 'post',
+    				url : '/market/member/complain',
+    				data: {reporter_id: $('.loginId').val(), //신고자(==로그인한 사람.나)
+    						complain_content : $(this).text(),
+    						review_seq : items.review_seq, //후기 번호
+    						complain_category : '후기 신고',
+    						mem_id: items.mem_id, //후기 쓴 사람(==신고 당할 사람)
+    				},success: function(){
+    					alert("신고가 성공적으로 접수되었습니다.")
+    					closeModal();
+    				},error: function(err){
+    					console.log(err)
+    				}
+    			});//ajax
+             });//this.click
+            	
+          });
+          $('#complainReasonBtn').click(function(){
+			   $.ajax({
+					type : 'post',
+					url : '/market/member/complain',
+					data: {reporter_id: $('.loginId').val(),
+							complain_content : $('#complainReason').val(),
+							review_seq : items.review_seq,
+							complain_category : '후기 신고',
+							mem_id:items.mem_id //댓글쓴 사람(==신고당할 사람)
+					},success: function(){
+						alert("신고가 성공적으로 접수되었습니다.")
+						closeModal();
+					},error: function(err){
+						console.log(err)
+					}
+				});//ajax
+		   });
+	      // 신고 카테고리 펼치기
+	      $('#singoModalBottomR').on("click", '.singoTitleR > .titleBtnR', function(){
+	         $(this).parent().attr('class','singoTitleOpenR'); //$(this).parent() == $(".singoTitle")
+	         
+	         var className = $(this).parent().next().attr('class');
+	        
+	         if(className == 'singoContentOtherR'){ // height=180;인 애만 따로 처리
+	            $(this).parent().next().attr('class','singoContentOtherOpenR');
+	         }else if(className == 'singoContentR') {
+	            $(this).parent().next().attr('class','singoContentOpenR'); 
+	         }
+	         
+	         // 닫기 (다시 클릭)
+	         $('#singoModalBottomR').on("click", '.singoTitleOpenR > .titleBtnR', function(){
+	            $(this).parent().attr('class','singoTitleR');
+	            
+	            if(className == 'singoContentOtherOpenR' || className =='singoContentOtherR'){
+	               $(this).parent().next().attr('class', 'singoContentOtherR');
+	            }else if(className == 'singoContentOpenR' || className == 'singoContentR'){
+	               $(this).parent().next().attr('class', 'singoContentR');            
+	            }
+	         });
+	      });//신고 카테고리 펼치기
+	   }); // 신고모달
 			});//each
-			
-			
-		},
-		error: function(err){
+		},error: function(err){
 			console.log(err);
 		}
 	});//ajax
@@ -315,68 +382,28 @@ $(document).ready(function(){
 		
 	});
 
-	// ==================================== 신고하기 모달 ====================================
-	$('.reviewsBottom').on('click', '.reviewSingoBtn', function(){      
-          $("#reviewModal_singo").css('display','flex'); 
-              
-          $('.contentListR>button').mouseenter(function(){
-             $(this).css('text-decoration', 'underline');
-           
-             $(this).off("click").click(function(){ //클릭 이벤트 중복호출 방지
-                alert("신고가 접수되었습니다.(test)"); 
-             });
-            
-             $(this).mouseleave(function(){
-                $(this).css('text-decoration', 'none');
-             });
-          });
-	         
-	      // 신고 카테고리 펼치기
-	      $('#singoModalBottomR').on("click", '.singoTitleR > .titleBtnR', function(){
-	         $(this).parent().attr('class','singoTitleOpenR'); //$(this).parent() == $(".singoTitle")
-	         
-	         var className = $(this).parent().next().attr('class');
-	        
-	         if(className == 'singoContentOtherR'){ // height=180;인 애만 따로 처리
-	            $(this).parent().next().attr('class','singoContentOtherOpenR');
-	         }else if(className == 'singoContentR') {
-	            $(this).parent().next().attr('class','singoContentOpenR'); 
-	         }
-	         
-	         // 닫기 (다시 클릭)
-	         $('#singoModalBottomR').on("click", '.singoTitleOpenR > .titleBtnR', function(){
-	            $(this).parent().attr('class','singoTitleR');
-	            
-	            if(className == 'singoContentOtherOpenR' || className =='singoContentOtherR'){
-	               $(this).parent().next().attr('class', 'singoContentOtherR');
-	            }else if(className == 'singoContentOpenR' || className == 'singoContentR'){
-	               $(this).parent().next().attr('class', 'singoContentR');            
-	            }
-	         });
-	      });//신고 카테고리 펼치기
-	      
-	      // 모달 창 닫기 modalCloseBtn
-	      $('.singoModalWrapR').on("click", '.modalCloseBtnR', function(){
-	         var openInBtn = $('.singoTitleOpenR > button');
-	         var className = openInBtn.parent().next().attr('class'); //위의 className과 관련없음
-	         
-	         $(openInBtn).parent().attr('class','singoTitleR');
-	         
-	         if(className == 'singoContentOtherOpenR' || className == 'singoContentOtherR'){
-	            $(openInBtn).parent().next().attr('class', 'singoContentOtherR');
-	         }else if(className == 'singoContentOpenR' || className=='singoContentR'){
-	            $(openInBtn).parent().next().attr('class', 'singoContentR');            
-	         }
-	         
-	         $('#reviewModal_singo').css('display','none'); 
-	         });
-	   }); // 신고모달
+	
 
 	
 });	//$(document).ready
 		
 
-
-
+//모달 창 닫기 modalCloseBtn
+function closeModal(){
+	
+    $('.singoModalWrapR').on("click", '.modalCloseBtnR', function(){
+       var openInBtn = $('.singoTitleOpenR > button');
+       var className = openInBtn.parent().next().attr('class'); //위의 className과 관련없음
+       
+       $(openInBtn).parent().attr('class','singoTitleR');
+       
+       if(className == 'singoContentOtherOpenR' || className == 'singoContentOtherR'){
+          $(openInBtn).parent().next().attr('class', 'singoContentOtherR');
+       }else if(className == 'singoContentOpenR' || className=='singoContentR'){
+          $(openInBtn).parent().next().attr('class', 'singoContentR');            
+       }
+       $('#reviewModal_singo').css('display','none'); 
+       });
+}
 
 

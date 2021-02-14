@@ -1,4 +1,4 @@
-let writer;
+let writer;//글쓴 사람
 
 $(document).ready(function(){
 	var comment_writer; //댓글 쓴 사람
@@ -18,7 +18,7 @@ $(document).ready(function(){
 			$('#board_logtime').text(data.boardDTO.board_logtime);
 			$('#board_hit').text(data.boardDTO.board_hit);
 			$('#board_content').text(data.boardDTO.board_content);
-			writer=data.boardDTO.mem_id;
+			writer=data.boardDTO.mem_id;//글쓴 사람
 			
 			
 			//작성자 본인일 경우 : 신고버튼X. OWNER쪽 O
@@ -44,7 +44,6 @@ $(document).ready(function(){
 			dataType : 'json',
 			success: function(data){
 				$.each(data.list, function(index, items){
-					$('#comment_seq').val(items.comment_seq);
 					$('<tr/>',{
 			        	class: 'commentArea'+items.comment_seq
 			        }).append($('<td/>',{
@@ -111,11 +110,12 @@ $(document).ready(function(){
 		data : 'board_seq='+$('#board_seq').val(), 
 		dataType : 'json',
 		success: function(data){
-			//더보기 버튼 클릭
+			
 			$.each(data.list, function(index, items){
+				//더보기 버튼 클릭
 				$('#commentListTable').on('click', '#moreBtn'+items.comment_seq, function(){
-					if ($('#sessionId').val()=='' || $('#sessionId').val()=='none'){
-						location.href='/market/member/loginForm';
+					if ($('#sessionId').val()=='' || $('#sessionId').val()=='none'){//세션 만료로 인해 로그아웃 시, 
+						location.href='/market/member/loginForm';//로그인 페이지로 이동
 					}
 					//댓글쓴이와 세션아이디가 같다면(==내가 댓글 쓴 사람이라면), 수정/삭제버튼
 					if($('#sessionId').val() == items.mem_id){//items.mem_id=댓글쓴이
@@ -130,7 +130,7 @@ $(document).ready(function(){
 							$.ajax({
 								type : 'post',
 								url : '/market/board/deleteComment',
-								data : 'comment_seq='+items.comment_seq,
+								data : 'comment_seq='+items.comment_seq, //삭제할 댓글 번호
 								success: function(){
 									alert("성공적으로 삭제했습니다.");
 									$('#commentListTable tr:gt(0)').remove(); //gt(0) -> eq(0) 순으로!
@@ -156,8 +156,7 @@ $(document).ready(function(){
 								url : '/market/board/getAComment',
 								data : 'comment_seq='+items.comment_seq,
 								dataType:'text',
-								success: function(data){//data=comment content
-									console.log(data);
+								success: function(data){//data=comment content(댓글 내용)
 									$('#commentListTable #modifyContent').val(data);
 								},error: function(err){
 									console.log(err);
@@ -185,13 +184,12 @@ $(document).ready(function(){
 					else{
 						console.log("세션아이디:"+$('#sessionId').val());
 						console.log("댓글쓴이:"+items.mem_id);
-						console.log("notwriterVersion"+$('#comment_seq').val());
+						console.log("notWriterVersion"+$('#comment_seq').val());
 						$('.notWriterVersion'+items.comment_seq).show();
 						$('.writerVersion'+items.comment_seq).hide();
 						
 						//댓글 신고
 						$('#commentListTable').on('click', '#singoBtn'+items.comment_seq, function(){
-							 
 							//★여기서부터 trigger되어야★★★★★
 							$("#modalHidden").attr('id','modalDisplay'); //신고 모달창이 뜬다.
 							
@@ -200,6 +198,7 @@ $(document).ready(function(){
 								 $(this).mouseleave(function(){
 							        $(this).css('text-decoration', 'none');
 								 });
+								 
 //								 신고접수
 								 $(this).off('click').on('click',function(){
 									if($('#sessionId').val()==null){ //세션 만료로 인해 로그인 풀렸을때
@@ -210,30 +209,30 @@ $(document).ready(function(){
 											url : '/market/member/complain',
 											data: {reporter_id: $('#sessionId').val(),
 													complain_content : $(this).text(),
-													comment_seq : $('#comment_seq').val(),
+													comment_seq : items.comment_seq, //댓글 seq
 													complain_category : '댓글 신고',
-													mem_id: writer
+													mem_id: items.mem_id //댓글쓴 사람(==신고당할 사람)
 											},success: function(){
 												alert("신고가 성공적으로 접수되었습니다.")
 											},error: function(err){
 												console.log(err)
 											}
 										});//ajax
-									}
+									}//else
 									
 								 });//click
 							});//mouseenter
 							
-							//기타 사유 서술했을 때
+							//기타 사유 서술했을 때(this.text()대신에 직접쓴 내용이 content로 전달되어야 한다)
 						   $('#complainReasonBtn').click(function(){
 							   $.ajax({
 									type : 'post',
 									url : '/market/member/complain',
-									data: {reporter_id: $('.loginId').val(),
+									data: {reporter_id: $('#sessionId').val(),
 											complain_content : $('#complainReason').val(),
-											product_seq : $('.hiddenProdSeq').val(),
-											complain_category : '상품 신고',
-											mem_id: $('.storeOwner').val(),
+											comment_seq : items.comment_seq,
+											complain_category : '댓글 신고',
+											mem_id:items.mem_id //댓글쓴 사람(==신고당할 사람)
 									},success: function(){
 										alert("신고가 성공적으로 접수되었습니다.")
 									},error: function(err){
@@ -389,7 +388,7 @@ $(document).ready(function(){
 							data: {reporter_id: $('#sessionId').val(),
 									complain_content : $(this).text(),
 									board_seq : $('#board_seq').val(),
-									mem_id: writer,
+									mem_id: writer, //글쓴 사람
 									complain_category : '게시글 신고'
 							},success: function(){
 								alert("신고가 성공적으로 접수되었습니다.")
@@ -407,11 +406,11 @@ $(document).ready(function(){
 			   $.ajax({
 					type : 'post',
 					url : '/market/member/complain',
-					data: {reporter_id: $('.loginId').val(),
+					data: {reporter_id: $('#sessionId').val(),
 							complain_content : $('#complainReason').val(),
-							product_seq : $('.hiddenProdSeq').val(),
-							complain_category : '상품 신고',
-							mem_id: $('.storeOwner').val(),
+							board_seq : $('#board_seq').val(),
+							complain_category : '게시글 신고', 
+							mem_id: writer,
 					},success: function(){
 						alert("신고가 성공적으로 접수되었습니다.")
 					},error: function(err){

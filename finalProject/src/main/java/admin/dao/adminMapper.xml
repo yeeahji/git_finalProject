@@ -126,7 +126,7 @@
    <select id="getComplainList" parameterType="java.util.Map" resultType="member.bean.ComplainDTO">
       select * from(
          select rownum rn, tt.* from(select * from complain)tt)
-               where rn between #{startNum} and #{endNum} order by complain_seq asc
+               where rn between #{startNum} and #{endNum} order by complain_seq desc
    </select>
 
 <!-- A.신고 리스트 개수 -->
@@ -178,7 +178,7 @@
    <select id="getQnaList" parameterType="java.util.Map" resultType="admin.bean.QnaDTO">
       select * from(
          select rownum rn, tt.* from(select * from qna)tt)
-               where rn between #{startNum} and #{endNum} order by qna_seq asc
+               where rn between #{startNum} and #{endNum} order by qna_seq desc
    </select>
 
 <!-- A.1:1문의 리스트 개수 -->
@@ -202,6 +202,7 @@
       select * from(
          select rownum rn, tt.* from(select * from withdraw)tt)
                where rn between #{startNum} and #{endNum}
+               order by withdraw_seq desc
    </select>
 
 <!-- A.탈퇴회원 리스트 개수 -->
