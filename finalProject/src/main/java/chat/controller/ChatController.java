@@ -149,39 +149,6 @@ public class ChatController {
         }
 	}
 	
-	// 메시지 불러오기
-//	@RequestMapping(value="loadMsg", method=RequestMethod.POST)
-//	@ResponseBody
-//	public String loadMsg(@RequestParam String chat_seq) {
-//		//처음 입장이 아닐 때만 수행
-//        BufferedReader reader = null;
-//        String msg = null;
-//        
-//        //DB
-//        //chatService.getMessage_content();
-//        try {
-//        	String filePath = "D:/git_home/git_final/finalProject/src/main/webapp/storageMsg";
-//        	String fileName = chat_seq + ".txt";
-//            File file = new File(filePath, fileName);
-//            reader = new BufferedReader(new FileReader(file));
-//              
-//            //파일 읽기
-//            while(reader.readLine() != null) {
-//            	msg = reader.readLine();
-//            }
-//        } catch(IOException e) {
-//            e.printStackTrace();
-//        } finally {
-//            try {
-//                if(reader != null) reader.close();
-//            } catch(IOException e) {
-//                e.printStackTrace();
-//            }
-//        }
-//        System.out.println(msg);
-//        return msg;
-//	}
-	
 	// 마지막 메시지
 	@RequestMapping(value="getLastMessage", method={RequestMethod.GET, RequestMethod.POST})
 	@ResponseBody
@@ -193,22 +160,6 @@ public class ChatController {
 		
 		chatService.setLastMessage(map);
 	}
-	
-//	// 채팅방 나가기
-//	@RequestMapping(value="deleteChatRoom", method={RequestMethod.POST})
-//	@ResponseBody
-//	public void deleteChatRoom(@RequestParam String chat_seq) {
-//		//만약 채팅방을 나간다면	
-//		//chatRoom은 chatList의 부모이고, chatRoom이 null인 조건에서만 chatList가 각각 생성되기 때문에
-//		//데이터를 한쪽은 보존하고 다른 한쪽은 삭제할 수가 없다
-//		//한쪽은 보존, 한쪽은 삭제하려면(번개장터식) 메시지 내용을 2개의 파일로 나눠서 저장해야할듯 하다 (하지만 남은 시간이..)
-//		//여기서 여러 방법으로 나뉠 수 있는데
-//		
-//		//1. 채팅방 나가기 없음 - 나간다면 채팅리스트에선 안보이나 다시 연락하면 언제든지 예전 대화 내용이 있는 방 생성됨
-//		//2. 채팅방 나가기 없음 - 나가기 버튼 자체가 없음(걍 구현안함)
-//		//3. 채팅방 나가기 있음 - 나가고 모든 데이터 삭제(상대도 강제로 나가짐. 말도안되는듯). 그 전에 둘이 했던 대화 내용은 알아볼수 있는 제목으로 변경하여 따로 백업해두기(나중에 관리자 문의를 위해)
-//		
-//	}
 }
 	 
 

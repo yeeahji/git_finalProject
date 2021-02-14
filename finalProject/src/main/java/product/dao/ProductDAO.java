@@ -43,4 +43,6 @@ public interface ProductDAO {
 
 	public void hitUpdate(String seq);
 
+	public ProductDTO getProductInfo(String product_seq);
+
 }

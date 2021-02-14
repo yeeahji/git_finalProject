@@ -19,15 +19,6 @@ window.onblur = function() {
 
 
 $(document).ready(function() {
-	//알림음 켜기
-	$('#btn_alram_on').click(function(){
-		flagAlram = true;
-	});
-	//알림음 끄기
-	$('#btn_alram_off').click(function(){
-		flagAlram = false;
-	});
-	
  	//이모티콘 전송
 	$('#emoji_1').click(function(){
 		webSocket.sendCmd('CMD_MSG_SEND', '<img src="../image/chat/emoji_1.gif" width="100" height="100">');
@@ -64,27 +55,20 @@ $(document).ready(function() {
 	
 	
 	//이미지 전송
-//	$('#uploadImg').on('change', readURL);
-//	
-//	function readURL() {
-//		const file = event.target.files[0];
-//		const reader = new FileReader();
-//		reader.onload = function(progressEvent) {
-//		  console.log(progressEvent.target.result);
-//		};
-//
-//		imageURL = reader.readAsDataURL(file);
-//		console.log(imageURL);
-//		  
-//		sendImg();
-//	};
-//	
-//	function sendImg () {
-//		webSocket.sendCmd('CMD_MSG_SEND', '<img src="'+imageURL+'" width="100" height="100">');
-//	}
-
+	$('#uploadImg').on('change', readURL);
 	
-
+	function readURL() {
+		var imageURL;
+		const input = this;
+		
+		if(input.files && input.files[0]) {
+	        imageURL = window.URL.createObjectURL(input.files[0]);
+			console.log(imageURL);
+		
+		webSocket.sendCmd('CMD_MSG_SEND', '<img src="'+imageURL+'" width="100" height="100">');
+		}
+	};
+	
 });
 
 

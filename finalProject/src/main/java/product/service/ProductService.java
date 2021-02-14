@@ -44,4 +44,6 @@ public interface ProductService {
 
 	public void hitUpdate(String seq);
 
+	public ProductDTO getProductInfo(String product_seq);
+
 }

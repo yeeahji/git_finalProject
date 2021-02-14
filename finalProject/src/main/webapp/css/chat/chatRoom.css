@@ -1,32 +1,47 @@
 @charset "UTF-8";
 
-/* 상단 */
-#chatListBtn {
-	font-size: 15px;
-	cursor: pointer;
-	border: 0;
-	color: black;
-}
-/* 더치트 조회 버튼, 나가기 버튼 정도..? */
-
-#chatRoomSubject {
-	font-size: 20px;
-	font-weight: bold;
-	margin: 10px auto;
-	text-align: center;
-	color: black;
+body {
 	background-color: white;
-	border: none;
-	padding: 5px 5px;
+	margin: 0px;
+	/* overflow: hidden; */
+}
+
+/* 상단 */
+#chatRoomSubject {
+	width: 100%;
+	height: 45px;
+	text-align:center;
+	background-color: rgb(255, 255, 255);
+}
+.subjectText {
+	padding-top: 13px;
+	margin-left:50px;
+	font-size: 14px;
+	font-weight: bold;
+}
+
+.alramBtn {
+	weight: 20px;
+	cursor: pointer;
+	color: #0a58ca;
+	float: right;
+}
+
+.alrams img {
+	width: 40px;
+	heigth: 20px;
+	bacground-color: white;
+	padding-right: 10px;
 }
 
 
 /* 메세지 출력창 */
 #chat-container{
 	vertical-align: bottom;
+	padding : 10px 0;
 	width: 100%;
-	min-height: 400px;
-	max-height: 400px;
+	min-height: 470px;
+	max-height: 470px;
 	overflow: scroll;
 	overflow-x: hidden;
 	background: #f4f4fa;
@@ -46,21 +61,24 @@
 	text-align: left;
     word-break : break-all;
     display: inline-block;
-    border-radius: 30px 30px 30px 30px;
+    border-radius: 5px 30px 30px 30px;
 }
 
 .my-chat{
 	text-align: left;
 	color: rgb(255, 255, 255);
 	background: #0a58ca;
+	border-radius: 30px 5px 30px 30px;
 }
 
 .chat-box{
 	text-align:left;
+	padding-left: 5px;
 }
 
 .my-chat-box{
 	text-align: right;
+	padding-right: 5px;
 }
 
 .notice{
@@ -81,25 +99,88 @@
 }
 
 
-/* 메세지 입력창 */
+/* 하단 */
+#bottom-container {
+	padding-top: 5px;
+	padding-left: 5px;
+	align-items: center;
+	-webkit-box-orient: horizontal;
+}
 #inputMessage{
+	padding-left: 10px;
+	box-sizing: border-box;
 	width: 300px;
 	height: 30px;
 	backgorund-color: #f4f4fa;
 	border: solid 1px #039be5;
-	border-radius: 10px;
+	border-radius: 15px;
 }
-#sendBtn{
+#inputMessage:focus, #inputMessage:hover {
+	outline: none;
+	border-width: 2px;
+}
+#sendBtn {
+	margin-left: 3px;
 	background: #039be5;
-	width: 40px;
-	height: 30px;
-	color: rgb(255, 255, 255);
+	padding: 5px 10px;
+	color: #fff;
 	border: none;
-	border-radius: 30px 30px 30px 30px;
+	border-radius: 15px;
+	font-weight: blod;
 }
 
+.extra-menu {
+	display: flex;
+	margin: 0px;
+	padding: 0px;
+	height: 80px;
+	width: 100%;
+}
 
-/* 기타 */
+.plusOption {
+	width: 100%;
+	padding-left: 23px;
+	padding-top: 25px;
+	display: flex;
+}
+.plusOptions {
+	padding-right: 10px;
+}
+.plusOption img {
+	display: flex;
+	width: 50px;
+	hegiht: 50px;
+	cursor: pointer;
+}
+.plusOption span {
+	display: flex;
+	font-size: 12px;
+	text-aling: center;
+}
+
+#inputAdd {
+	padding-right: 30px;
+}
+
+#imgOption {
+	position: relative;
+	width: 50px;
+	height: 50px;
+	overflow: hidden;
+}
+
+#uploadImg {
+	font-size: 29px;
+	position: absolute;
+	right: 0px;
+	top: 0px;
+	opacity: 0;
+	filter: alpha(opacity = 0);
+	-ms-filter: alpha(opacity = 0);
+	cursor: pointer;
+}
+
+/* 상품 링크 */
 .productPage { 
 	color: #039be5;
 };

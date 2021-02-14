@@ -14,6 +14,46 @@
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <script src="../js/chat/chatRoom.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.4.0/sockjs.js"></script>
+<script>
+$(document).ready(function() {
+	var alramCount = 0;
+	$('#btn_alram').click(function(){
+		//알림음 켜기
+		if(alramCount == 0) {
+			document.getElementById("btn_alram").src = "../image/chat/alramOn.png";
+			flagAlram = true;
+			alramCount ++;
+		}
+		//알림음 끄기
+		else if(alramCount == 1) {
+			document.getElementById("btn_alram").src = "../image/chat/alramOff.png";
+			flagAlram = false;
+			alramCount --;
+		}
+	});
+	
+	
+	//주소 전송
+	$('#addOption').click(function(){
+		var location = null;
+		
+		$.ajax({
+			type: 'post',
+			url: '/market/member/getMyInfo',
+			data: { 'mem_id' : '${member.username}' },
+			dataType: 'json',
+			success:function(data){
+				location = data.location;
+
+				webSocket.sendCmd('CMD_MSG_SEND', location);
+			},
+			error: function(error) {
+				alert('error : ', error)
+			}
+		});
+	});
+});
+</script>
 <script type="text/javascript">
 var webSocket = {
 	//sockjs 관련 스크립트----------------------------------------------------------
@@ -246,34 +286,43 @@ $(window).on('load', function () {
 </head>
 
 <body>
-	<div class="chatRoomHeader">
-		<div class="chatRoomSubject" id="chatRoomSubject">
+	<!-- 상단 -->
+	<div class="chatRoomSubject" id="chatRoomSubject">
+		<div class="subjectText">
 			<img id="olineCheck" src="../image/chat/houseClose.png"> ${other_store_nickname}
+			<div class="alramBtn"> <!-- 알람 -->
+				<div class="alrams">
+					<img src="../image/chat/alramOff.png" id="btn_alram">
+				</div>
+				<div style="display: none;">
+					<audio id="chat_alram"><source src="../image/chat/chat_alram.mp3" type="audio/mpeg"></audio>
+				</div>
+			</div>
 		</div>
 	</div>
 	
-	
+	<!-- 채팅창 -->
 	<div id="chat-container"></div>
+	
+	<!-- 하단 + -->
 	<div id="bottom-container">
 		<input type="text" id="inputMessage" onkeypress="if(event.keyCode==13){webSocket.sendChat();}" autofocus/>
 		<input type="button" id="sendBtn" value="전송" onclick="webSocket.sendChat()"/>
+	
+	<!-- 추가 옵션 -->
+	<div class="extra-menu">
+		<div class="plusOption">
+			<div class="plusOptions" id="imgOption"> <!-- 이미지 첨부 -->
+				<img id="inputImg" src="../image/chat/chatRoomInputImg.png">
+				<input type="file" id="uploadImg">
+			</div>
+			<div class="plusOptions" id="addOption"><img id="inputAdd" src="../image/chat/chatRoomInputAdd.png"></div> <!-- 주소 보내기 -->
+			<div class="plusOptions"><img src="../image/chat/emoji_1.gif" id="emoji_1"></div>
+			<div class="plusOptions"><img src="../image/chat/emoji_2.gif" id="emoji_2"></div>
+			<div class="plusOptions"><img src="../image/chat/emoji_3.gif" id="emoji_3"></div>
+		</div>
 	</div>
-	
-	<!-- 알람 -->
-	<button type="button" id="btn_alram_on">알림 켜기</button>
-	<button type="button" id="btn_alram_off">알림 끄기</button>
-	<div style="display: none;">
-		<audio id="chat_alram"><source src="../image/chat/chat_alram.mp3" type="audio/mpeg"></audio>
 	</div>
-	
-	<!-- 이모티콘 -->
-	<img src="../image/chat/emoji_1.gif" id="emoji_1" style="padding-right: 8px; cursor: pointer; width: 30px; height: 30px;">
-	<img src="../image/chat/emoji_2.gif" id="emoji_2" style="padding-right: 8px; cursor: pointer; width: 30px; height: 30px;">
-	<img src="../image/chat/emoji_3.gif" id="emoji_3" style="padding-right: 8px; cursor: pointer; width: 30px; height: 30px;">
-	
-	<!-- 이미지 첨부 -->
-	<input type="file" id="uploadImg">
-	
 </body>
 </html>
 
