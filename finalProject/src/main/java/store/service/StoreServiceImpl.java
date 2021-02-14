@@ -85,8 +85,8 @@ public class StoreServiceImpl implements StoreService {
 	@Override
 	public List<ProductDTO> productManageList(String pg, String mem_id, String product_manage) {
 		// 2개씩으로 테스트
-		int endNum = Integer.parseInt(pg)*2;
-		int startNum = endNum-1;
+		int endNum = Integer.parseInt(pg)*5;
+		int startNum = endNum-4;
 		
 		Map<String, String> map = new HashMap<String, String>();
 		map.put("startNum", startNum+"");
@@ -99,8 +99,8 @@ public class StoreServiceImpl implements StoreService {
     // 상품관리 - 검색 리스트 불러오기 (페이징처리추가)
 	@Override
 	public List<ProductDTO> productManageSearch(Map<String, String> map) {
-		int endNum = Integer.parseInt(map.get("pg"))*2;
-		int startNum = endNum-1;
+		int endNum = Integer.parseInt(map.get("pg"))*5;
+		int startNum = endNum-4;
 		
 		map.put("startNum", startNum+"");
 		map.put("endNum", endNum+"");
@@ -113,8 +113,8 @@ public class StoreServiceImpl implements StoreService {
 		//[내상품관리] 판매상태별 총 개수
 		int productTotalA = storeDAO.prodManageTotalA(mem_id, product_manage);
 		storePaging.setCurrentPage(Integer.parseInt(pg)); //현재페이지
-		storePaging.setPageBlock(2); //[이전][1][2][3][다음]
-		storePaging.setPageSize(2); //1페이지 당 몇 개 - 지금은 2개로 테스트중
+		storePaging.setPageBlock(5); //[이전][1][2][3][다음]
+		storePaging.setPageSize(5); //1페이지 당 몇 개 - 지금은 2개로 테스트중
 		storePaging.setTotalA(productTotalA); //총 글 수 
 		storePaging.makePagingHTML(); 
 		return storePaging;
@@ -126,8 +126,8 @@ public class StoreServiceImpl implements StoreService {
 		// 검색 글 총 수 
 		int productTotalA = storeDAO.prodManageTotalA(map);
 		storePaging.setCurrentPage(Integer.parseInt(map.get("pg"))); //현재페이지
-		storePaging.setPageBlock(2); //[이전][1][2][3][다음]
-		storePaging.setPageSize(2); //1페이지 당 몇 개 - 지금은 2개로 테스트중
+		storePaging.setPageBlock(5); //[이전][1][2][3][다음]
+		storePaging.setPageSize(5); //1페이지 당 몇 개 - 지금은 2개로 테스트중
 		storePaging.setTotalA(productTotalA); //총 글 수 
 		storePaging.makePagingHTML(); 
 		return storePaging;
@@ -157,8 +157,8 @@ public class StoreServiceImpl implements StoreService {
 	// 구매내역 리스트
 	@Override
 	public List<PurchaseDTO> purchaseList(String pg, String my_id) {
-		int endNum = Integer.parseInt(pg)*2;
-		int startNum = endNum-1;
+		int endNum = Integer.parseInt(pg)*5;
+		int startNum = endNum-4;
 		
 		Map<String, String> map = new HashMap<String, String>();
 		map.put("my_id", my_id);
@@ -172,8 +172,8 @@ public class StoreServiceImpl implements StoreService {
 		// 구매내역 총 개수
 		int purchaseTotalA = storeDAO.purchaseTotalA(my_id);
 		purchasePaging.setCurrentPage(Integer.parseInt(pg)); //현재페이지
-		purchasePaging.setPageBlock(2); //[이전][1][2][3][다음]
-		purchasePaging.setPageSize(2); //1페이지 당 몇 개 - 지금은 2개로 테스트중
+		purchasePaging.setPageBlock(5); //[이전][1][2][3][다음]
+		purchasePaging.setPageSize(5); //1페이지 당 몇 개 - 지금은 2개로 테스트중
 		purchasePaging.setTotalA(purchaseTotalA); //총 글 수 
 		purchasePaging.makePagingHTML(); 
 		return purchasePaging;

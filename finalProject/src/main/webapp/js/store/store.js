@@ -206,6 +206,9 @@ $(document).ready(function(){
 				
 				// 에코지수 
 				var echoIndi = value.store_echo; // data에서 불러온 에코지수 
+				if(echoIndi==0){
+					echoIndi=20;
+				}
 				$('.echoIndication > img').attr('src','/market/image/store/echo'+echoIndi+'.svg'); // 0이면 알아서 아래서 업뎃
 				
 				// 에코지수 설정 ( 판매+구매 )
