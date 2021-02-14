@@ -178,27 +178,3 @@ function word_check(str) {
 	
 	return null;
 }
-
-
-//이미지 올릴 시
-//$('#uploadImg').on('change', function() {
-//    if(input.files && input.files[0]) {
-//        var reader = new FileReader();
-//		
-//        //URL 얻기
-//        alert(reader.readAsDataURL(input.files[0]));
-//        console.log(reader.readAsDataURL(input.files[0]));
-//        //msgData.msg 앞에 이미지 태그 생성해서 위의 url값 넣어주기
-//	}
-//});
-
-//중복 submit 방지
-//var doubleSubmitFlag = false;
-//function doubleSubmitCheck() {
-//	if (doubleSubmitFlag) {
-//		return doubleSubmitFlag;
-//	} else {
-//		doubleSubmitFlag = true;
-//		return false;
-//	}
-//}

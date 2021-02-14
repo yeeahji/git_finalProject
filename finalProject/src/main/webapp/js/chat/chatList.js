@@ -113,8 +113,3 @@ function loadLstMessage(chat_seq){
 		}
 	}
 };
-
-
-
-
-	
