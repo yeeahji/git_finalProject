@@ -57,7 +57,7 @@ public class ChatController {
 	}
 	
 	// 채팅방 (연락하기 눌렀을 때 바로 여기로 연결)
-	@RequestMapping(value="/chatRoom", method=RequestMethod.POST)
+	@RequestMapping(value="/chatRoom", method=RequestMethod.GET)
 	public String chatRoom(@RequestParam String other_store_nickname,
 						   @RequestParam(required=false, defaultValue="0") String product_seq,
 						   @RequestParam(required=false, defaultValue="") String product_subject,

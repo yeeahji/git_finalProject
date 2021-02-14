@@ -26,7 +26,9 @@ $('#joinBtn').click(function(){
 		$('#pwdDiv').text('비밀번호를 입력하세요');
 	else if($('#repwd').val()=='')
 		$('#repwdDiv').text('비밀번호를 확인하세요');
-	else if($('#email1').val()==''||$('#email2').val()=='')
+	else if($('#email1').val()=='')
+		$('#emailDiv').text('이메일을 입력하세요').css('color', 'rgba(153, 0, 33, 0.781)');
+	else if($('#email2').val()=='')
 		$('#emailDiv').text('이메일을 입력하세요').css('color', 'rgba(153, 0, 33, 0.781)');
 	else if($('#emailNum').val()=='')
 		$('#emailNumDiv').text('');
@@ -90,62 +92,81 @@ $('#pwd').focusout(function(){
 
 //5. 비밀번호 불일치
 $('#repwd').focusout(function(){
-	if($('#repwd').val() != $('#pwd').val())
-		$('#repwdDiv').text('비밀번호가 일치하지 않습니다');
+	if($('#repwd').val()=='')
+		$('#repwdDiv').text('비밀번호를 확인하세요');
+	else if($('#repwd').val() != $('#pwd').val())
+		$('#repwdDiv').text('비밀번호가 일치하지 않습니다').css('color', 'rgba(153, 0, 33, 0.781)');
 	else if($('#repwd').val() == $('#pwd').val())
 		$('#repwdDiv').text('비밀번호가 일치합니다').css('color', '#0a58ca');
 });
 
 //6. 이메일 형식 검사
 $('#email1').focusout(function(){
-	if(!($('#email1').val()==''||$('#email2').val()=='')){
+	if($('#email1').val()=='')
+		$('#emailDiv').text('이메일을 입력하세요').css('color', 'rgba(153, 0, 33, 0.781)');
+	else if($('#email2').val()=='')
+		$('#emailDiv').text('이메일을 입력하세요').css('color', 'rgba(153, 0, 33, 0.781)');
+	else if(!($('#email1').val()==''||$('#email2').val()=='')){
 		let emailForm = $("#email1").val()+"@"+$("#email2").val();
 		if(!email_rule.test(emailForm)){
-			$('#emailDiv').text("이메일을 형식에 맞게 입력해주세요.");
+			$('#emailDiv').text("이메일을 형식에 맞게 입력해주세요.").css('color', 'rgba(153, 0, 33, 0.781)');
 		}else{
 			$('#emailDiv').text("");
 		}
 	}
 });
 $('#email2').focusout(function(){
-	if(!($('#email1').val()==''||$('#email2').val()=='')){
+	if($('#email1').val()=='')
+		$('#emailDiv').text('이메일을 입력하세요').css('color', 'rgba(153, 0, 33, 0.781)');
+	else if($('#email2').val()=='')
+		$('#emailDiv').text('이메일을 입력하세요').css('color', 'rgba(153, 0, 33, 0.781)');
+	else if(!($('#email1').val()==''||$('#email2').val()=='')){
 		let emailForm = $("#email1").val()+"@"+$("#email2").val();
 		if(!email_rule.test(emailForm)){
 			$('#emailDiv').text("이메일을 형식에 맞게 입력해주세요.");
 		}
-	}
-	//이메일 중복검사
-	let email = $('#email').val($('#email1').val() + '@' + $('#email2').val()); 
-	$.ajax({
-		type: 'post',
-		url: '/market/member/checkEmail',
-		data: 'mem_email='+email,
-		dataType : 'text',
-		success: function(result){
-			if(result == "exist"){ //사용불가
-				$('#emailDiv').text('이미 가입된 이메일입니다.');
-			}else if(result =='non_exist'){//사용가능
-				$('#emailDiv').text('사용 가능한 이메일입니다').css('color', '#0a58ca');
+	}else{
+		//이메일 중복검사
+		let email = $('#email').val($('#email1').val() + '@' + $('#email2').val()); 
+		$.ajax({
+			type: 'post',
+			url: '/market/member/checkEmail',
+			data: 'mem_email='+email,
+			dataType : 'text',
+			success: function(result){
+				if(result == "exist"){ //사용불가
+					$('#emailDiv').text('이미 가입된 이메일입니다.');
+				}else if(result =='non_exist'){//사용가능
+					$('#emailDiv').text('사용 가능한 이메일입니다').css('color', '#0a58ca');
+				}
 			}
-		}
-	});
+		});//ajax
+	}
 	
 });
+
 //이메일 인증번호 버튼 클릭(인증번호 발송)
 $('#certifyEmailBtn').click(function(){
-	$('#email').val($('#email1').val() + '@' + $('#email2').val()); 
-	$.ajax({
-		type: 'post',
-		url: '/market/member/sendMail',
-		data: 'mem_email='+$('#email').val(),
-		dataType : 'json',
-		success: function(result){
-			$('#randomNum').val(result.randomNum); 
-			$('#emailNumDiv').text('작성하신 이메일로 인증번호를 발송했습니다');
-		},error: function(err){
-			console.log(err);
-		}
-	});
+	if($('#email1').val()=='')
+		$('#emailNumDiv').text('먼저 이메일을 입력하세요').css('color', 'rgba(153, 0, 33, 0.781)');
+	else if($('#email2').val()=='')
+		$('#emailNumDiv').text('먼저 이메일을 입력하세요').css('color', 'rgba(153, 0, 33, 0.781)');
+	else{
+		$('#email').val($('#email1').val() + '@' + $('#email2').val()); 
+		$.ajax({
+			type: 'post',
+			url: '/market/member/sendMail',
+			data: 'mem_email='+$('#email').val(),
+			dataType : 'json',
+			success: function(result){
+				$('#randomNum').val(result.randomNum); 
+				$('#emailNumDiv').text('작성하신 이메일로 인증번호를 발송했습니다');
+			},error: function(err){
+				console.log(err);
+			}
+		});//ajax
+	}
+	
 });
 
 ////이메일 인증 확인
