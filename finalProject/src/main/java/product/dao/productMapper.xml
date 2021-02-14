@@ -42,8 +42,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		SELECT * FROM category WHERE cate_parent=#{cate_parent} ORDER BY cate_code
 	</select>
 	
-	<!-- 내 위치 가져오기 -->
-	<select id="getMyLocation" parameterType="String" resultType="String">
+	<!-- 내 주소 가져오기 -->
+	<select id="getAddress" parameterType="String" resultType="String">
+		SELECT mem_add1 FROM members WHERE mem_id=#{mem_id}
+	</select>
+	
+	<!-- 내 최근 위치 가져오기 -->
+	<select id="getRecentLocation" parameterType="String" resultType="String">
 		SELECT mem_location FROM members WHERE mem_id=#{mem_id}
 	</select>
 
@@ -173,6 +178,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="getProductDTO" parameterType="String" resultType="product"> 
 		SELECT * FROM product WHERE product_seq=#{product_seq}
 	</select>
+	
+	<!-- 상품등록 시 멤버의 최근거래지역으로 설정 -->
+	<update id="setRecentLocation">
+		UPDATE members SET mem_location=#{recentLocation}
+		WHERE mem_id=#{mem_id}
+	</update>
 
 
 </mapper>

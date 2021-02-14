@@ -33,10 +33,20 @@ public class ProductDAOMybatis implements ProductDAO {
 	public List<CategoryDTO> getSmallCategoryList(String cate_parent) {
 		return sqlSession.selectList("productSQL.getSmallCategoryList", cate_parent);
 	}
+	
+	@Override
+	public String getAddress(String mem_id) {
+		return sqlSession.selectOne("productSQL.getAddress", mem_id);
+	}
+	
+	@Override
+	public void setRecentLocation(Map<String, String> map) {
+		sqlSession.update("productSQL.setRecentLocation", map);
+	}
 
 	@Override
-	public String getMyLocation(String mem_id) {
-		return sqlSession.selectOne("productSQL.getMyLocation", mem_id);
+	public String getRecentLocation(String mem_id) {
+		return sqlSession.selectOne("productSQL.getRecentLocation", mem_id);
 	}
 
 	@Override
@@ -104,7 +114,7 @@ public class ProductDAOMybatis implements ProductDAO {
 
 	@Override
 	public ProductDTO getProductInfo(String product_seq) {
-		return sqlSession.selectOne("productSQL. getProductInfo", product_seq);
+		return sqlSession.selectOne("productSQL.getProductInfo", product_seq);
 	}
 	
 }

@@ -15,8 +15,12 @@ public interface ProductDAO {
 	public void productRegist(ProductDTO productDTO);
 	
 	public List<CategoryDTO> getSmallCategoryList(String cate_parent);
+	
+	public String getAddress(String mem_id);
+	
+	public void setRecentLocation(Map<String, String> map);
 
-	public String getMyLocation(String mem_id);
+	public String getRecentLocation(String mem_id);
 
 	public ProductDTO productDetail(String seq); //상품 상세페이지
 

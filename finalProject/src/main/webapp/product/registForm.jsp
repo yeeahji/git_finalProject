@@ -21,28 +21,16 @@
 
 <body>
 	<form id="registForm" >
-	<div class="registWrap"> <!-- /* eFCEB */ -->
-		<!--------- registTop : 상품등록, 상품관리  --------->
-		<div class="registTop">
-			<nav class="topArea">
-				<div class="topList1">
-					<a class="topText1" href="#">상품등록</a>
-				</div>
-				<div class="topList2">
-					<a class="topText2" href="#">상품관리</a>
-				</div>
-			</nav>
-		</div><!-- registTop -->
-		
+	<div class="registWrap">
 		<!--------- registBody : 본문  --------->
-		<div class="registBody"> <!-- /* owOgK */ -->
-			<main id="registMain"> <!-- /* fzZuLM */ -->
+		<div class="registBody">
+			<main id="registMain">
 			
 				<!-- section -->
 				<section class="section">
 					<h2>기본정보<span>*필수항목</span></h2>
 					
-					<ul class="listBody"> <!-- /* bEbvUk */ -->
+					<ul class="listBody">
 						<li class="list">
 							<div class="image_sub">상품이미지<span>*</span><small>(0/12)</small></div>
 							<div class="image_con">
@@ -70,9 +58,8 @@
 								<div class="contentArea">
 									<div class="subjectBox">
 										<input type="text" placeholder="상품 제목을 입력해주세요." class="subjectInput" id="product_subject" name="product_subject">
-										<button type="button" class="subjectCancle"></button>
 									</div>
-									<div class="subjectSize"><span>0</span>/40</div>
+									<div class="subjectSize"><span>최대 40글자</div>
 								</div>
 								<div class="subjectDiv" id="subjectDiv">상품명을 2자 이상 입력해주세요.</div>
 							</div>
@@ -175,7 +162,7 @@
 									<a target="_blank" href="/market/notice/fag">
 										<img src="/market/image/product/warning_icon.svg">거래금지품목
 									</a><!-- 자주묻는질문 -> '거래하면 안되는 것들'로 새 창 띄우기-->
-									<div class="limit">0/2000</div>
+									<div class="limit">최대 2000자</div>
 								</div>
 							</div>
 						</li><!-- 설명 -->

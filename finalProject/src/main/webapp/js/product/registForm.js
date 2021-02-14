@@ -155,35 +155,35 @@ $('.contentArea').on("click", '.category >.btn', function(){
 
 
 /* 거래지역 */
-//내 지역 ---> 여유되면 진짜 내 위치 가져오는걸로 수정
-//$('#myLocation').click(function(){
-//	$.ajax({
-//		type: 'post',
-//		url: '/market/product/getMyLocation',
-//		dataType: 'text',
-//		success: function(data){
-//			data = 컨트롤러에서 보내온 값
-//		},
-//		error: function(err){
-//			console.log(err);
-//		}
-//	});
-//});
-
-/*//최근 지역
-$('#myRecentLocation').click(function(){
+//내 주소
+$('#myLocation').click(function(){
 	$.ajax({
 		type: 'post',
-		url: '/market/product/getMyLocation',
+		url: '/market/product/getAddress',
 		dataType: 'json',
 		success: function(data){
-			$('#product_location').val(data.myRecentLocation);
+			$('#product_location').val(data.address);
 		},
 		error: function(err){
 			console.log(err);
 		}
 	});
-});*/
+});
+
+//최근 지역
+$('#myRecentLocation').click(function(){
+	$.ajax({
+		type: 'post',
+		url: '/market/product/getRecentLocation',
+		dataType: 'json',
+		success: function(data){
+			$('#product_location').val(data.recentLocation);
+		},
+		error: function(err){
+			console.log(err);
+		}
+	});
+});
 
 //지도 (미리 생성)
 var mapContainer = document.getElementById('map'), // 지도를 표시할 div
@@ -312,30 +312,21 @@ $('#registBtn').click(function(){
 	$('#priceDiv').hide();
 	$('#locationDiv').hide();
 	
-	console.log("중간임다");
-
+	if(verify()) return false;
+	
+	registAction.call(this);
 	
 	//유효성 검사
-	if(!fileBuffer.length) { $('#imageDiv').show(); $('#inputImage').focus(); }
-	else if($('#product_subject').val()=='') { $('#subjectDiv').show(); $('#product_subject').focus(); }
-	else if(cate_code == null) { $('#categoryDiv').show(); $('#large_categories').focus(); } //!!!!!!!!포커스 안됨. 해결하기
-	else if($('#product_location').val()=='') { $('#locationDiv').show(); $('#product_location').focus(); }
-	else if($('#product_price').val()=='') { $('#priceDiv').show(); $('#product_price').focus(); 
-	console.log("유효성검사완료");//test
+	function verify() {
+		if(!fileBuffer.length) { $('#imageDiv').show(); $('#inputImage').focus(); return true; }
+		else if($('#product_subject').val()=='') { $('#subjectDiv').show(); $('#product_subject').focus(); return true; }
+		else if(cate_code == null) { $('#categoryDiv').show(); $('#large_categories').focus(); return true; }
+		else if($('#product_location').val()=='') { $('#locationDiv').show(); $('#product_location').focus(); return true; }
+		else if($('#product_price').val()=='') { $('#priceDiv').show(); $('#product_price').focus(); return true;}
 	}
-	
-	else{
 
-		alert("뜽록");
-		
-		$.each(fileBuffer, function(index, items){
-			console.log(items.name);
-		});
-		$.each($('.hash_btnText'), function(index, items){
-			console.log(items.innerText);
-		});
-		
-		
+	function registAction() {
+		console.log('들어왔');
 		$('#registForm').ajaxForm({
 			type: 'post',
 			enctype: 'multipart/form-data',
@@ -345,11 +336,6 @@ $('#registBtn').click(function(){
 			dataType: 'json',
 			beforeSubmit: function(data, form, option) { //submit 전 실행
 				//이미지 정보 동적 할당
-				console.log("비폴써빔ㅅ");
-				console.log("비폴써빔ㅅ");
-				console.log("비폴써빔ㅅ");
-				console.log("비폴써빔ㅅ");
-				console.log("비폴써빔ㅅ");
 				fileBuffer.forEach(function(e, i) {
 					const imgObj = {
 						name : 'img',
@@ -383,8 +369,6 @@ $('#registBtn').click(function(){
 					}
 					data.push(tagObj);
 				});
-				
-				console.log("비폴썹밋 끘");
 			},
 			success: function(data) {
 				alert('상품이 등록되었습니다.');
