@@ -14,16 +14,13 @@ CREATE TABLE members(
 	mem_location varchar2(50),
 	mem_logtime DATE DEFAULT SYSDATE NOT NULL,
 	enabled number DEFAULT 1 NOT NULL, -- 계정 사용 가능 여부 / 시큐리티
-	authority varchar2(50) NOT NULL -- 권한 부여할 role 이름 / 시큐리티 
+	authority varchar2(50) NOT NULL, -- 권한 부여할 role 이름 / 시큐리티 
+	mem_kakao number,----'on'/null  카카오 회원 여부
+	mem_agree varchar(20), --선택항목 동의
+	mem_complain number --신고 회수
 );
 
 
---컬럼 추가
-alter table members add mem_kakao number;
-
-alter table members add mem_agree varchar(20);--'on'/null
-
-alter table members add mem_complain number;
 
 
 --컬럼 삭제
