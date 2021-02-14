@@ -578,6 +578,18 @@ to {
 	align-items: center;
 	flex: 1 1 0%;
 }
+#productDetailForm > *{
+	font-weight: 600;
+	margin-right: 10px;
+	display: flex;
+	-webkit-box-pack: center;
+	justify-content: center;
+	height: 56px;
+	font-size: 18px;
+	-webkit-box-align: center;
+	align-items: center;
+	flex: 1 1 0%;
+}
 .detail-info__btn-zzim {
 	width: 100%;
     height: 100%;

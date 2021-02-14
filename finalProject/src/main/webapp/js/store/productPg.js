@@ -21,7 +21,7 @@ $(document).ready(function(){
 			   'sortNum' : sortNum}, //정렬번호
 		dataType: 'json',
 		success : function(data){
-			//console.log("상품리스트->"+JSON.stringify(data.productList));
+			
 			$('.productOne').remove(); // 창 이동 시 계속 append 되는 거 방지
 			
 			//상품 총 개수
@@ -90,7 +90,6 @@ $(document).ready(function(){
 				
 				// 클릭 -> 상세페이지 이동
 				$('.productOneInner'+index).click(function(){
-					console.log("클릭 페이지이동 "+items.product_seq);
 					$('.productOneInner'+index).attr('href','/market/product/productDetail?seq=' + items.product_seq);
 				});
 				
@@ -165,7 +164,6 @@ $('.listTopInner').on('click', '.groupOther', function(){
 			   'sortNum' : sortNum}, //정렬번호
 		dataType: 'json',
 		success : function(data){
-			console.log("상품리스트->"+JSON.stringify(data.productList));
 			$('.productOne').remove(); // 창 이동 시 계속 append 되는 거 방지
 			
 			//상품 총 개수
@@ -234,7 +232,6 @@ $('.listTopInner').on('click', '.groupOther', function(){
 				
 				// 클릭 -> 상세페이지 이동
 				$('.productOneInner'+index).click(function(){
-					console.log("클릭 페이지이동 "+items.product_seq);
 					$('.productOneInner'+index).attr('href','/market/product/productDetail?seq=' + items.product_seq);
 				});
 				

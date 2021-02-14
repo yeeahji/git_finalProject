@@ -93,6 +93,7 @@
 			      
 				  &nbsp;&nbsp;
 				  <input type="hidden" id="viewNumHidden" name="viewNumHidden" value="20">
+				  <input type="hidden" id="memberList_id" name="memberList_id" value="${id }")>
 					<select class="form-select form-select-sm" id="selectPrint" aria-label=".form-select-sm example" >
 					  <option value="20" selected>20개</option>
 					  <option value="50">50개</option>

@@ -245,9 +245,10 @@ public class StoreController {
 	// 찜 리스트 가져오기
 	@RequestMapping(value="storeFavoritesList", method=RequestMethod.POST)
 	@ResponseBody
-	public ModelAndView storeFavoritesList(@RequestParam String mem_id) { // 상점 주인 아이디
+	public ModelAndView storeFavoritesList(@RequestParam String mem_id,
+										   @RequestParam String sortNum) { // 상점 주인 아이디
 		// 찜 리스트
-		List<ProductDTO> favoritesList = storeService.storeFavoritesList(mem_id);
+		List<ProductDTO> favoritesList = storeService.storeFavoritesList(mem_id, sortNum);
 		// 찜 총 개수
 		int favoritesTotalA = storeService.storeFavoritesTotalA(mem_id);
 		
@@ -264,6 +265,21 @@ public class StoreController {
 	public void storeSoldOutDelete() {
 		storeService.storeSoldOutDelete();
 	}
+	
+	
+	// 찜 삭제 - 체크버튼
+	@RequestMapping(value="favoritesDelete", method=RequestMethod.POST)
+	@ResponseBody
+	public void favoritesDelete(@RequestParam Map<String, Object> map)  { // 상점 주인 아이디
+		storeService.favoritesDelete(map);
+		System.out.println("디비 안료다");
+		
+	}
+	
+	
+	
+	
+	
 	
 	// 4. [구매내역] ----------------------------------------------------------
 	@RequestMapping(value="purchaseList", method=RequestMethod.GET)

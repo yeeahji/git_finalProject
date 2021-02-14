@@ -11,6 +11,9 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/store/store.css">  
 
 
+<!-- 정렬 hidden sortNum -->
+<input type="hidden" class="hiddenSortNum" value="0">
+
 <div class="favoritesTop">
 	<div>
 	찜

@@ -1,28 +1,36 @@
 @charset "UTF-8";
 
+body {
+	background-color: #f4f4fa;
+	margin: 0px;
+	overflow: hidden;
+}
+
 /* 상단 */
-#chatListBtn {
-	font-size: 15px;
+.chatList_btns {
+	weight: 20px;
 	cursor: pointer;
-	border: 0;
-	color: black;
+	color: #0a58ca;
+	float:right;
 }
 /* 더치트 조회 버튼, 나가기 버튼 정도..? */
-
 #chatRoomSubject {
 	font-size: 20px;
 	font-weight: bold;
-	margin: 10px auto;
 	text-align: center;
 	color: black;
-	background-color: white;
 	border: none;
-	padding: 5px 5px;
+	text-align: center;
+	background-color: white;
+	border-bottom: 2px solid #039be5; border : none;
+	padding: 25px 25px;
+	border: none;
 }
 
-
 /* 메세지 출력창 */
-#chat-container{
+#chat-container {
+	box-sizing : border-box;
+	padding : 10px 0;
 	vertical-align: bottom;
 	width: 100%;
 	min-height: 400px;
@@ -33,7 +41,7 @@
 	display: inline-block;
 }
 
-.chat{
+.chat {
 	font-size: 15px;
 	color: black;
 	background: #ffffff;
@@ -44,70 +52,142 @@
 	width: auto;
 	height: auto;
 	text-align: left;
-    word-break : break-all;
-    display: inline-block;
-    border-radius: 30px 30px 30px 30px;
+	word-break: break-all;
+	display: inline-block;
+	border-radius: 30px 30px 30px 30px;
 }
 
-.my-chat{
-	text-align: left;
-	color: rgb(255, 255, 255);
-	background: #0a58ca;
-}
-
-.chat-box{
-	text-align:left;
-}
-
-.my-chat-box{
+/* my chat */
+.my-chat-box {
+	padding-right: 10px;
 	text-align: right;
 }
 
-.notice{
+.my-chat-box .my-chat {
+	margin-right: 10px;
+	padding-right: 10px;
+	text-align: left;
+	color: rgb(255, 255, 255);
+	background: #0a58ca;
+	border-radius: 30px 5px 30px 30px;
+}
+
+/* you chat */
+.chat-box {
+	padding-left: 10px;
+	text-align: left;
+}
+
+.chat-box .my-chat {
+	text-align: left;
+	border-radius: 5px 30px 30px 30px;
+	background: #333;
+	color: #fff;
+}
+
+.notice {
 	font-size: 12px;
 	color: #039be5;
-	border : none;
+	border: none;
 	text-align: center;
 	background-color: #f4f4fa;
 	display: block;
 }
 
-.chat-info{
-	color:#556677;
+.chat-info {
+	color: #556677;
 	font-size: 10px;
 	text-align: right;
 	padding: 5px;
 	padding-top: 0px;
 }
 
-
 /* 메세지 입력창 */
-#inputMessage{
-	width: 300px;
+.bottom-container {
+	position: relative;
+	display: flex;
+	align-items: center;
+}
+
+.chatRoomPlusImage {
+	display: flex;
+	margin-right: 5px;
+	cursor: pointer;
+	text-align: center;
+	font-size: 30px;
+	color: #039be5;
+	float: left;
+	margin-right: 5px;
+}
+
+#inputMessage {
+	box-sizing: border-box;
+	padding: 0 8px;
+	width: calc(100% - 92px) ;
 	height: 30px;
-	backgorund-color: #f4f4fa;
 	border: solid 1px #039be5;
-	border-radius: 10px;
+	border-radius: 5px;
 }
-#sendBtn{
+
+#inputMessage:focus, #inputMessage:hover {
+	outline: none;
+	border-width: 2px;
+}
+
+#sendBtn {
+	margin-left: 10px;
 	background: #039be5;
-	width: 40px;
-	height: 30px;
-	color: rgb(255, 255, 255);
+	padding: 5px 10px;
+	color: #fff;
 	border: none;
-	border-radius: 30px 30px 30px 30px;
+	border-radius: 15px;
+	font-weight: blod;
 }
 
 
-/* 기타 */
-.productPage { 
-	color: #039be5;
-};
+.bottom-container{
+	display: flex;
+    -webkit-box-orient: horizontal;
+    flex-flow: row wrap;
+    padding: 10px 20px;
+    background:white;
+    height: 68px;
+}
 
-.productPage:link { 
-	color: #039be5;
-};
+.bottom-container .select {
+	cursor: pointer;
+	padding: 10px;
+	text-align: center;
+	margin-right: 10px;
+	margin-left: 10px;
+	/* position: relative;
+    display: flex;
+    flex-direction: column;
+    -webkit-box-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    justify-content: center;
+    font-size: 14px; */
+}
 
-.productPage:visited { 
-	color: #039be5;
-};
+
+.extra-menu {
+	display: none;
+	height: 80px;
+}
+
+.bottom-container .select span {
+	display: inline-block;
+	font-size: 12px;
+}
+
+
+.bottom-container .select i {
+	display: inline-block;
+	font-size: 20px;
+	padding: 15px 14px;
+	margin-bottom: 5px;
+	color: white;
+	background : #039be5;
+	border-radius: 100%;
+}
