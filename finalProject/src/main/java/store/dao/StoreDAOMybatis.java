@@ -190,8 +190,17 @@ public class StoreDAOMybatis implements StoreDAO {
 
 	@Override
 	public void favoritesDelete(Map<String, Object> map) {
-		System.out.println(map.get("clickArray"));
 		sqlSession.delete("storeSQL.favoritesDelete", map);
+	}
+
+	@Override
+	public PurchaseExistDTO purchaseCompleted(Map<String, String> map) {
+		return sqlSession.selectOne("storeSQL.purchaseCompleted", map);
+	}
+
+	@Override
+	public int storeScoreSum(String mem_id) {
+		return sqlSession.selectOne("storeSQL.storeScoreSum", mem_id);
 	}
 
 	

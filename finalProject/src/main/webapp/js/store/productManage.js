@@ -287,7 +287,7 @@ $(document).ready(function(){
 								}else if($(this).text() == '판매완료'){
 									submit_product_manage = 3;
 									
-									// 판매완료 모달 
+									// 판매완료 모달 ================================================================
 									$('#soldOutModal').css('display', 'flex');
 									// 상품 이미지, 상품명
 									$('.itemImgWrap > img').attr('src', '/market/storage/'+items.product_img1);
@@ -302,14 +302,19 @@ $(document).ready(function(){
 										data: { 'mem_id': userId }, 
 										dataType: 'json',
 										success : function(data){ //chatList
-											if(data.chatListDTO == ''){
-												console.log("대화목록이없음");
+											
+											if(data.chatList == ''){
+												// 대화목록 없음
 												$('.chatListWrap').append($('<div/>',{
 													class: 'noChatList',
 													text: '대화 목록이 없습니다.'
 												}))
-											}else if(data.chatListDTO != ''){
-												//$('.chatListWrap .chatOne').remove();
+												$('.soldOutModalCancelBtn').click(function(){
+													$('#soldOutModal').css('display', 'none');
+												})
+											}else if(data.chatList != ''){
+												// 대화목록 있음
+												$('.chatListWrap > .chatOne').remove();
 												
 												$.each(data.chatList, function(index, items){
 													$('.chatListWrap').append($('<div/>', {
@@ -331,11 +336,6 @@ $(document).ready(function(){
 														text: '마지막 대화 '+items.chat_logtime
 													}))))
 													
-													$('.soldOutModalCancelBtn').click(function(){
-															$('#soldOutModal').css('display', 'none');
-														})
-														
-														
 													$('.chat_storeName'+index).css({'margin-top': '10px',
 																					'display': 'block',
 																					'font-weight': 'bold',
@@ -354,45 +354,71 @@ $(document).ready(function(){
 															dataType: 'json',
 															success : function(data){ 
 																console.log(data.other_mem_id); // 채팅리스트에서 선택한 사람의 아이디
-																
-																// purchase - DB
+																var other_mem_id = data.other_mem_id;
+																// purchase 거래 완료했는지 테이블 조회 ====================================
 																$.ajax({
 																	type: 'get',
-																	url: '/market/store/purchaseInsert',
+																	url: '/market/store/purchaseCompleted',
 																	data: { 'seller_id': userId, // 내아이디(판매자)
-																		    'pur_nick': data.other_mem_id, // 구매자 아이디
+																		    'pur_nick': other_mem_id, // 구매자 아이디
 																		    'product_seq': chat_product_seq}, // 해당 상품 번호
+																	dataType: 'json',
 																	success : function(data){ 
-																		// 거래 완료
+																		if(data.purchaseExistDTO == null){
+																			// 거래 내역 테이블에 없으면
+																			// purchase - DB 테이블 데이터 삽입
+																			$.ajax({
+																				type: 'get',
+																				url: '/market/store/purchaseInsert',
+																				data: { 'seller_id': userId, // 내아이디(판매자)
+																					    'pur_nick': other_mem_id, // 구매자 아이디
+																					    'product_seq': chat_product_seq}, // 해당 상품 번호
+																				success : function(data){ 
+																					// 거래 완료
+																					// 확인 모달
+																					$('.condiModalTopText > p').html('<strong>'+items.other_store_nickname+'</strong>님과의<br>거래가 완료되었습니다.');
+																					$('#conditionModal').css('display', 'flex');
+																				},
+																				error: function(err){
+																					console.log(err);
+																				}
+																			});// ajax
+																		}else if( data.purchaseExistDTO!=null){ 
+																			// 이미 거래내역 테이블에 있으면
+																			alert("거래내역이 존재합니다.");
+																		}
+																		
+																		
 																	},
 																	error: function(err){
 																		console.log(err);
 																	}
 																});// ajax
-																
+																														
 															},
 															error: function(err){
 																console.log(err);
 															}
 														});// ajax
 														
-														
-														
-														
-														// 확인 모달
+														/*// 확인 모달
 														$('.condiModalTopText > p').html('<strong>'+items.other_store_nickname+'</strong>님과의<br>거래가 완료되었습니다.');
-														$('#conditionModal').css('display', 'flex');
+														$('#conditionModal').css('display', 'flex');*/
 													})
 													
 												});// each
 												
+												$('.soldOutModalCancelBtn').click(function(){
+													$('#soldOutModal').css('display', 'none');
+												})
 											}//else if
+											
 										},
 										error: function(err){
 											console.log(err);
 										}
 									});// ajax\
-								}// 판매 완료일 때
+								}// 판매 완료 클릭 =================================================================
 			
 								// DB
 								$.ajax({
@@ -426,6 +452,8 @@ $(document).ready(function(){
 										return false; // 새로고침 방지
 									}
 								});	
+								
+								
 							});// 상태 클릭
 						}, // mouseenter		
 						mouseleave : function (){
@@ -514,6 +542,7 @@ $('#productSearchBtn').click(function(event, str){
 				$('#storePagingDiv').show();
 				
 				$('.noRegistered').remove();
+				
 				$('#prodMangeTable tr:gt(0)').remove(); //기존 상품 리스트는 삭제
 				
 				$.each(data.prodSearchList, function(index, items){
@@ -791,7 +820,7 @@ $('#productSearchBtn').click(function(event, str){
 								}else if($(this).text() == '판매완료'){
 									submit_product_manage = 3;
 									
-									// 판매완료 모달 
+									// 판매완료 모달 ================================================================
 									$('#soldOutModal').css('display', 'flex');
 									// 상품 이미지, 상품명
 									$('.itemImgWrap > img').attr('src', '/market/storage/'+items.product_img1);
@@ -806,13 +835,19 @@ $('#productSearchBtn').click(function(event, str){
 										data: { 'mem_id': userId }, 
 										dataType: 'json',
 										success : function(data){ //chatList
-											if(data.chatListDTO == ''){
+											
+											if(data.chatList == ''){
+												// 대화목록 없음
 												$('.chatListWrap').append($('<div/>',{
 													class: 'noChatList',
 													text: '대화 목록이 없습니다.'
 												}))
-											}else if(data.chatListDTO != ''){
-												$('.chatListWrap .chatOne').remove();
+												$('.soldOutModalCancelBtn').click(function(){
+													$('#soldOutModal').css('display', 'none');
+												})
+											}else if(data.chatList != ''){
+												// 대화목록 있음
+												$('.chatListWrap > .chatOne').remove();
 												
 												$.each(data.chatList, function(index, items){
 													$('.chatListWrap').append($('<div/>', {
@@ -852,42 +887,71 @@ $('#productSearchBtn').click(function(event, str){
 															dataType: 'json',
 															success : function(data){ 
 																console.log(data.other_mem_id); // 채팅리스트에서 선택한 사람의 아이디
-																
-																// purchase - DB
+																var other_mem_id = data.other_mem_id;
+																// purchase 거래 완료했는지 테이블 조회 ====================================
 																$.ajax({
 																	type: 'get',
-																	url: '/market/store/purchaseInsert',
+																	url: '/market/store/purchaseCompleted',
 																	data: { 'seller_id': userId, // 내아이디(판매자)
-																		    'pur_nick': data.other_mem_id, // 구매자 아이디
+																		    'pur_nick': other_mem_id, // 구매자 아이디
 																		    'product_seq': chat_product_seq}, // 해당 상품 번호
+																	dataType: 'json',
 																	success : function(data){ 
-																		// 거래 완료
+																		if(data.purchaseExistDTO == null){
+																			// 거래 내역 테이블에 없으면
+																			// purchase - DB 테이블 데이터 삽입
+																			$.ajax({
+																				type: 'get',
+																				url: '/market/store/purchaseInsert',
+																				data: { 'seller_id': userId, // 내아이디(판매자)
+																					    'pur_nick': other_mem_id, // 구매자 아이디
+																					    'product_seq': chat_product_seq}, // 해당 상품 번호
+																				success : function(data){ 
+																					// 거래 완료
+																					// 확인 모달
+																					$('.condiModalTopText > p').html('<strong>'+items.other_store_nickname+'</strong>님과의<br>거래가 완료되었습니다.');
+																					$('#conditionModal').css('display', 'flex');
+																				},
+																				error: function(err){
+																					console.log(err);
+																				}
+																			});// ajax
+																		}else if( data.purchaseExistDTO!=null){ 
+																			// 이미 거래내역 테이블에 있으면
+																			alert("거래내역이 존재합니다.");
+																		}
+																		
+																		
 																	},
 																	error: function(err){
 																		console.log(err);
 																	}
 																});// ajax
-																
+																														
 															},
 															error: function(err){
 																console.log(err);
 															}
 														});// ajax
 														
-														// 확인 모달
+														/*// 확인 모달
 														$('.condiModalTopText > p').html('<strong>'+items.other_store_nickname+'</strong>님과의<br>거래가 완료되었습니다.');
-														$('#conditionModal').css('display', 'flex');
+														$('#conditionModal').css('display', 'flex');*/
 													})
 													
 												});// each
 												
+												$('.soldOutModalCancelBtn').click(function(){
+													$('#soldOutModal').css('display', 'none');
+												})
 											}//else if
+											
 										},
 										error: function(err){
 											console.log(err);
 										}
 									});// ajax\
-								}// 판매 완료일 때
+								}// 판매 완료 클릭 =================================================================
 			
 								// DB
 								$.ajax({
@@ -921,6 +985,8 @@ $('#productSearchBtn').click(function(event, str){
 										return false; // 새로고침 방지
 									}
 								});	
+								
+								
 							});// 상태 클릭
 						}, // mouseenter		
 						mouseleave : function (){
@@ -966,6 +1032,8 @@ $('#productSearchBtn').click(function(event, str){
 					$('.tabSortProdText'+index).text('판매완료');
 				}
 			});//each
+				
+				
 				}//else
 			},//success
 			error: function(err){
@@ -1269,7 +1337,7 @@ function storePaging(pg){
 								}else if($(this).text() == '판매완료'){
 									submit_product_manage = 3;
 									
-									// 판매완료 모달 
+									// 판매완료 모달 ================================================================
 									$('#soldOutModal').css('display', 'flex');
 									// 상품 이미지, 상품명
 									$('.itemImgWrap > img').attr('src', '/market/storage/'+items.product_img1);
@@ -1284,13 +1352,19 @@ function storePaging(pg){
 										data: { 'mem_id': userId }, 
 										dataType: 'json',
 										success : function(data){ //chatList
-											if(data.chatListDTO == ''){
+											
+											if(data.chatList == ''){
+												// 대화목록 없음
 												$('.chatListWrap').append($('<div/>',{
 													class: 'noChatList',
 													text: '대화 목록이 없습니다.'
 												}))
-											}else if(data.chatListDTO != ''){
-												$('.chatListWrap .chatOne').remove();
+												$('.soldOutModalCancelBtn').click(function(){
+													$('#soldOutModal').css('display', 'none');
+												})
+											}else if(data.chatList != ''){
+												// 대화목록 있음
+												$('.chatListWrap > .chatOne').remove();
 												
 												$.each(data.chatList, function(index, items){
 													$('.chatListWrap').append($('<div/>', {
@@ -1330,42 +1404,71 @@ function storePaging(pg){
 															dataType: 'json',
 															success : function(data){ 
 																console.log(data.other_mem_id); // 채팅리스트에서 선택한 사람의 아이디
-																
-																// purchase - DB
+																var other_mem_id = data.other_mem_id;
+																// purchase 거래 완료했는지 테이블 조회 ====================================
 																$.ajax({
 																	type: 'get',
-																	url: '/market/store/purchaseInsert',
+																	url: '/market/store/purchaseCompleted',
 																	data: { 'seller_id': userId, // 내아이디(판매자)
-																		    'pur_nick': data.other_mem_id, // 구매자 아이디
+																		    'pur_nick': other_mem_id, // 구매자 아이디
 																		    'product_seq': chat_product_seq}, // 해당 상품 번호
+																	dataType: 'json',
 																	success : function(data){ 
-																		// 거래 완료
+																		if(data.purchaseExistDTO == null){
+																			// 거래 내역 테이블에 없으면
+																			// purchase - DB 테이블 데이터 삽입
+																			$.ajax({
+																				type: 'get',
+																				url: '/market/store/purchaseInsert',
+																				data: { 'seller_id': userId, // 내아이디(판매자)
+																					    'pur_nick': other_mem_id, // 구매자 아이디
+																					    'product_seq': chat_product_seq}, // 해당 상품 번호
+																				success : function(data){ 
+																					// 거래 완료
+																					// 확인 모달
+																					$('.condiModalTopText > p').html('<strong>'+items.other_store_nickname+'</strong>님과의<br>거래가 완료되었습니다.');
+																					$('#conditionModal').css('display', 'flex');
+																				},
+																				error: function(err){
+																					console.log(err);
+																				}
+																			});// ajax
+																		}else if( data.purchaseExistDTO!=null){ 
+																			// 이미 거래내역 테이블에 있으면
+																			alert("거래내역이 존재합니다.");
+																		}
+																		
+																		
 																	},
 																	error: function(err){
 																		console.log(err);
 																	}
 																});// ajax
-																
+																														
 															},
 															error: function(err){
 																console.log(err);
 															}
 														});// ajax
 														
-														// 확인 모달
+														/*// 확인 모달
 														$('.condiModalTopText > p').html('<strong>'+items.other_store_nickname+'</strong>님과의<br>거래가 완료되었습니다.');
-														$('#conditionModal').css('display', 'flex');
+														$('#conditionModal').css('display', 'flex');*/
 													})
 													
 												});// each
 												
+												$('.soldOutModalCancelBtn').click(function(){
+													$('#soldOutModal').css('display', 'none');
+												})
 											}//else if
+											
 										},
 										error: function(err){
 											console.log(err);
 										}
 									});// ajax\
-								}// 판매 완료일 때
+								}// 판매 완료 클릭 =================================================================
 			
 								// DB
 								$.ajax({
@@ -1399,6 +1502,8 @@ function storePaging(pg){
 										return false; // 새로고침 방지
 									}
 								});	
+								
+								
 							});// 상태 클릭
 						}, // mouseenter		
 						mouseleave : function (){

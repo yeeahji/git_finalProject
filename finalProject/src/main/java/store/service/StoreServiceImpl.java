@@ -253,7 +253,16 @@ public class StoreServiceImpl implements StoreService {
 	@Override
 	public void favoritesDelete(Map<String, Object> map) {
 		storeDAO.favoritesDelete(map);
-		
+	}
+
+	@Override
+	public PurchaseExistDTO purchaseCompleted(Map<String, String> map) {
+		return storeDAO.purchaseCompleted(map);
+	}
+
+	@Override
+	public int storeScoreSum(String mem_id) {
+		return storeDAO.storeScoreSum(mem_id);
 	}
 
 	

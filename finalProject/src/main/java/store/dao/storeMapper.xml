@@ -290,12 +290,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		where mem_id = #{mem_id}
 	</select>
    	
-   	<!-- 구매 내역 존재 여부 purchaseExist -->
+   	<!-- 구매 내역 존재(1) 여부 purchaseExist -->
   	<select id="purchaseExist" parameterType="java.util.Map" resultType="store.bean.PurchaseExistDTO">
 		select*
 		from purchase
 		where my_id = #{my_id} and seller_id = #{seller_id}
-		<!-- OR (my_id = #{seller_id} and seller_id = #{my_id}) -->
 	</select>
 	
 	<!-- 상점주인 - 채팅방 리스트 조회  -->
@@ -338,13 +337,21 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		delete 
 		from wish 
 		where mem_id = #{mem_id} and product_seq=#{product_seq}
-		
-		<!-- <foreach item="item" index="index" collection="clickArray"
-	      open="(" separator="," close=")">
-	        #{item.value}
-	    </foreach> -->
-		
 	</delete>
+	
+	<!-- 구매내역 조회(2) 상품번호까지 -->
+	<select id="purchaseCompleted" parameterType="java.util.Map" resultType="store.bean.PurchaseExistDTO">
+		select*
+		from purchase
+		where my_id = #{pur_nick} and seller_id=#{seller_id} and product_seq = #{product_seq} 
+	</select>
+	
+	<!-- 총 리뷰 평점 합 계산 -->
+	<select id="storeScoreSum" parameterType="String" resultType="int">
+		select sum(review_score)
+		from review
+		where mem_id = #{mem_id}
+	</select>
 </mapper>
 
 
