@@ -305,6 +305,16 @@ public class AdminDAOMybatis implements AdminDAO {
 	public int sold_productSpan(String id) {
 		return sqlSession.selectOne("adminSQL.sold_productSpan", id);
 	}
+	//총 구매한 물건 개수
+	@Override
+	public int totalBuyProduct(String id) {
+		return sqlSession.selectOne("adminSQL.totalBuyProduct", id);
+	}
+	//신고당한 수
+	@Override
+	public int totalReported(String id) {
+		return sqlSession.selectOne("adminSQL.totalReported", id);
+	}
 
 
 }

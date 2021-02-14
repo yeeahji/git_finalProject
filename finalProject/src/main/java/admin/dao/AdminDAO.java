@@ -112,5 +112,10 @@ public interface AdminDAO {
 	//상점_상세조회_상품정보_판매완료
 	public int sold_productSpan(String id);
 	
+	//총 구매한 물건 개수
+	public int totalBuyProduct(String id);
+	//신고당한 수
+	public int totalReported(String id);
+	
 
 }

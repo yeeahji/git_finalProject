@@ -296,5 +296,13 @@
 		select count(product_manage) from product where mem_id=#{id} and product_manage=3
 	</select>
 
+<!-- 총 구매한 물건 개수 -->
+	<select id="totalBuyProduct" parameterType="String" resultType="Integer"> 
+		select count(*) from purchase where my_id=#{id}
+	</select>
+<!-- 신고당한 수 -->
+	<select id="totalReported" parameterType="String" resultType="Integer"> 
+		select count(*) from complain where mem_id=#{id}
+	</select>
 
 </mapper>

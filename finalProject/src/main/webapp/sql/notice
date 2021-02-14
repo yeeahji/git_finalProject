@@ -17,7 +17,7 @@ CREATE TABLE noticeBoard(  예전꺼(삭제예정)
 	notice_subject NOT NULL VARCHAR2(4000), --제목
 	notice_content NOT NULL VARCHAR2(4000), --내용
 	notice_picture          VARCHAR2(4000), --사진
-	logtime        DATE DEFAULT SYSDATE,
+	logtime        DATE DEFAULT SYSDATE
  );
 
 --1:1문의 카테고리 생성

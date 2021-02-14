@@ -214,6 +214,8 @@ function showMember(data){
 	$('#emailSpan').text(data.adminMembersDTO.mem_email)
 	$('#logSpan').text(data.adminMembersDTO.mem_logtime)
 	$('#productSellSpan').text(data.totalSellProduct)
+	$('#productBuySpan').text(data.totalBuyProduct)
+	$('#reportedSpan').text(data.totalReported)
 };
 
 

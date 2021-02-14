@@ -506,6 +506,18 @@ public class AdminServiceImpl implements AdminService {
 		return adminDAO.sold_productSpan(id);
 	}
 	
+	//총 구매한 물건 개수
+	@Override
+	public int totalBuyProduct(String id) {
+		int totalBuyProduct = adminDAO.totalBuyProduct(id);
+		return totalBuyProduct;
+	}
+	//신고당한 수
+	@Override
+	public int totalReported(String id) {
+		int totalReported = adminDAO.totalReported(id);
+		return totalReported;
+	}
 
 }
 

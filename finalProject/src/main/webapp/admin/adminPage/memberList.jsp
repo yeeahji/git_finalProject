@@ -135,10 +135,10 @@
 				      <th>판매중인 물건</th><th><span id="productSellSpan"></span>개</th> 
 				    </tr>
 				    <tr>
-				      <th>구매한총 물건</th><th><span id="productBuySpan"></span></th> 
+				      <th>구매한총 물건</th><th><span id="productBuySpan"></span>개</th> 
 				    </tr>
 				    <tr>
-				      <th>신고수</th><th><span id="reportedSpan"></span></th> 
+				      <th>신고수</th><th><span id="reportedSpan"></span>건</th> 
 				    </tr>
 				  </tbody>
 				</table>
