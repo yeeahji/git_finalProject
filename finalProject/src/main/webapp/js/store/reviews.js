@@ -126,7 +126,7 @@ $(document).ready(function(){
 	$(function() {
 	      $('.reviewTextarea').keyup(function (e){
 	          var content = $(this).val();
-	          $('.numOfChar').html(content.length + '/100&ensp;<div id="reviewTextareaDiv" style="display:inline-block;"></div>');
+	          $('.numOfChar').html(content.length + '/200&ensp;<div id="reviewTextareaDiv" style="display:inline-block;"></div>');
 	          
 	      });
 	      $('.numOfChar').keyup();
@@ -134,17 +134,17 @@ $(document).ready(function(){
 	
 	// textarea 글자 수 초과
 	$('.reviewTextarea').on('keyup', function() {
-		if($(this).val().length > 100) {
-			alert("최대 100자까지 입력 가능합니다.");
-			$(this).val($(this).val().substring(0, 100));
+		if($(this).val().length > 200) {
+			alert("최대 200자까지 입력 가능합니다.");
+			$(this).val($(this).val().substring(0, 200));
 		}
 	});
+	
 	
 	//별 1~5
 	var starScore = 0; //초기값 0
 	// 클릭 - > 노랑별
 	$('.reviewForm').on('click', '.review_star1, .review_star2, .review_star3, .review_star4, .review_star5', function(){
-		
 		for(var i=1; i<=5; i++){ 
 			if($(this).attr('class') == 'review_star'+i){
 				for(var j=1; j<=i; j++){
@@ -191,12 +191,13 @@ $(document).ready(function(){
 				console.log("별점수는요"+starScore);
 				$('#reviewTextareaDiv').text('별 평가를 입력해주세요.');
 			}else if($('.reviewTextarea').val()==''){
-				console.log("글자가업슴");
 				$('#reviewTextareaDiv').text('최소 20자 이상 입력해주세요.');
 			}
 			$('#reviewTextareaDiv').css('color', '	#FF0000');
 			$('#reviewTextareaDiv').css('font-size', '10pt');
 			$('#reviewTextareaDiv').css('font-weight','bold');
+		}else if($('.reviewTextarea').val().length < 20){
+			alert('최소 20자 이상 입력해주세요.');
 		}else {
 			// 거래 내역 조회
 			$.ajax({
@@ -209,7 +210,7 @@ $(document).ready(function(){
 						if(data.purchaseList==''){
 							alert("거래내역이 존재하지 않습니다.");
 						}else if(data.purchaseList!=''){
-							
+							// 거래 내역이 존재
 							$.each(data.purchaseList, function(index, items){
 								if(data.purchaseList.length == 1){
 									// 거래한 상품의 개수 1개
@@ -298,9 +299,8 @@ $(document).ready(function(){
 									
 								}//else 
 								
-								// 별이랑 텍스트 에리아 초기화
 								
-							});//each
+							});//each ===================================================
 						}//else
 						
 					

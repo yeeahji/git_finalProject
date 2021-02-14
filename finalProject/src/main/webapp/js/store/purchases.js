@@ -16,7 +16,9 @@ $(document).ready(function(){
 					class: 'completedImg'
 			   }).append($('<img/>',{
 					src: '/market/storage/'+items.product_img1, 
-					alt: '상품이미지'
+					alt: '상품이미지',
+					width: '152px',
+					height: '152px'
 			  })).append($('<span/>',{
 					class: 'completedImgBack'
 			   }).append($('<img/>',{
@@ -64,7 +66,9 @@ function purchasePaging(pg){
 					class: 'completedImg'
 			   }).append($('<img/>',{
 					src: '/market/storage/'+items.product_img1, 
-					alt: '상품이미지'
+					alt: '상품이미지',
+					width: '152px',
+					height: '152px'
 			  })).append($('<span/>',{
 					class: 'completedImgBack'
 			   }).append($('<img/>',{
@@ -84,7 +88,7 @@ function purchasePaging(pg){
 			  })).appendTo($('#purchaseTbody'))
 			  
 			// # 페이징 처리				
-				$('#purchasePagingDiv').html(data.purchasePaging.pagingHTML);	
+			$('#purchasePagingDiv').html(data.purchasePaging.pagingHTML);	
 				
 			});//each
 		},error: function(err){

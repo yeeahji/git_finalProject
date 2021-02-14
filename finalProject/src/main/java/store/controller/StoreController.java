@@ -169,7 +169,28 @@ public class StoreController {
 		return mav;
 	}
 	
-	
+	// 리뷰 계산 : 리뷰 총점 / 리뷰 수 ===============================================
+	@RequestMapping(value="reviewCalc", method=RequestMethod.GET)
+	@ResponseBody
+	public ModelAndView reviewCalc(@RequestParam String mem_id) {
+		// 후기 총 개수
+		int reviewTotalA = storeService.storeReviewTotalA(mem_id);
+		// 해당 상점의 상점 평점 계산
+		int storeScoreSum = storeService.storeScoreSum(mem_id);
+		System.out.println("토탈"+reviewTotalA);
+		
+		double storeScoreAvg=0;
+		if(reviewTotalA!=0) {
+			storeScoreAvg = Math.round(storeScoreSum/reviewTotalA); // 반올림
+		}else {
+			storeScoreAvg = 0;
+		}
+		
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("storeScoreAvg", storeScoreAvg);
+		mav.setViewName("jsonView");
+		return mav;
+	}
 	
 	// 1. [상품] ----------------------------------------------------------
 	// 상품 리스트 가져오기
@@ -444,6 +465,25 @@ public class StoreController {
 		mav.setViewName("jsonView");
 		return mav;
 	}
+	
+	// 구매내역 조회 (판매자아이디, 상대방아이디, 상품번호)
+	@RequestMapping(value="purchaseCompleted", method=RequestMethod.GET)
+	@ResponseBody
+	public ModelAndView purchaseCompleted(@RequestParam Map<String, String> map) { 
+		PurchaseExistDTO purchaseExistDTO = storeService.purchaseCompleted(map);
+		
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("purchaseExistDTO", purchaseExistDTO);
+		mav.setViewName("jsonView");
+		return mav;
+	}
+	
+	
+	
+	
+	
+	
+	
 }
 
 

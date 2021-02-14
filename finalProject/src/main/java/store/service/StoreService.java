@@ -80,4 +80,8 @@ public interface StoreService {
 	
 	public void favoritesDelete(Map<String, Object> map);
 	
+	public PurchaseExistDTO purchaseCompleted(Map<String, String> map);
+	
+	public int storeScoreSum(String mem_id);
+	
 }
