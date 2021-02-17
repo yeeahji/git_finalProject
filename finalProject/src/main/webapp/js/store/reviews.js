@@ -284,7 +284,7 @@ $(document).ready(function(){
 									$.ajax({
 										type: 'post',
 										url: '/market/store/reviewRegister',
-										data: {'product_seq' : data.purchaseList.product_seq,// 상품 번호
+										data: {'product_seq' : items.product_seq,// 상품 번호
 											   'mem_id' : $('.loginId').val(), //리뷰 쓴 사람의 아이디 (현재 로그인)
 											   'review_content' : $('.reviewTextarea').val(), // 후기 내용
 											   'review_score' : starScore}, // 별 평가

@@ -24,7 +24,7 @@
 	<input type="hidden" name="seq" id="seq" value="${seq}"> <!-- 게시글 seq -->
 	<input type="hidden" name="pg" id="pg" value="${pg }">
 	<input type="hidden" name="sessionId" id="sessionId" value="${sessionId }">	<!-- 세션아이디 -->
-	<input type="hidden" name="comment_seq" id="comment_seq">	댓글 seq
+	<input type="hidden" name="comment_seq" id="comment_seq">	
 		<h3 id="board_subject" name="board_subject"></h3>
 		<div>
 			<span id="mem_id"></span>

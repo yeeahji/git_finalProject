@@ -12,7 +12,7 @@
     	<security:intercept-url pattern="/resources/**" access="permitAll" /> <!-- 정적리소스는 접근 허용 (로그인 화면 안깨지게) -->
         <security:intercept-url pattern="/chat/**" access="hasRole('ROLE_USER')"/>
         <security:intercept-url pattern="/store/**" access="hasAnyRole('ROLE_USER', 'ROLE_ADMIN')"/> <!-- 다른 사람 상점은 볼 수 있도록 수정하기 -->
-        <security:intercept-url pattern="/product/registForm" access="hasAnyRole('ROLE_USER', 'ROLE_ADMIN')"/>
+        <security:intercept-url pattern="/product/registForm" access="hasRole('ROLE_USER')"/>
         <security:intercept-url pattern="/admin/**" access="hasRole('ROLE_ADMIN')"/> <!-- 관리자페이지는 관리자만 접근 -->
         <security:intercept-url pattern="/**" access="permitAll"/>
 

@@ -129,7 +129,7 @@ $(document).ready(function(){
 				
 				// 상점 평점 계산 
 				// 1. 리뷰 평점/리뷰수
-				$.ajax({
+				/*$.ajax({
 					type:'get',
 					url: '/market/store/reviewCalc',
 					data: {'mem_id' : userId},
@@ -142,7 +142,7 @@ $(document).ready(function(){
 				    error: function(err){
 				    	console.log(err);
 				    }
-				});
+				});*/
 				
 				// 상점평점
 				var scoreAvg = value.store_scoreavg;

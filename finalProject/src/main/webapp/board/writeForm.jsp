@@ -30,7 +30,7 @@
   			<textarea placeholder="내용을 입력해주세요." class="textarea_input" id="contentArea" style="height: 300px;"></textarea>
   			
   			
-  			<input type = "file" name = "image[]" id = "img3" accept ="image/*" multiple>
+<!--   			<input type = "file" name = "image[]" id = "img3" accept ="image/*" multiple> -->
   			<br>
   			<div id="contentAreaDiv" class="caution"></div>
   			<br><br>

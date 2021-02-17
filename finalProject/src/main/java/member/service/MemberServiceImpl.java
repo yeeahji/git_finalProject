@@ -118,6 +118,7 @@ public class MemberServiceImpl implements MemberService, UserDetailsService {
 
 	@Override
 	public void update(MemberDTO memberDTO) {
+		memberDTO.setMem_pwd(pwEncoder.encode(memberDTO.getMem_pwd()));
 		memberDAO.update(memberDTO);
 	}
 

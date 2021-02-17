@@ -31,7 +31,9 @@ $(document).ready(function(){
 					class: 'favoriteOneImg'+index
 				}).append($('<img/>', {
 					src: '/market/storage/'+items.product_img1, 
-					alt: '상품이미지'
+					alt: '상품이미지',
+					width: '100%',
+			        height: '100%'
 				})).append($('<div/>',{
 					// 배송비
 					class: 'deliveryFee'+index // 해당 index에만 효과 적용하기 위해

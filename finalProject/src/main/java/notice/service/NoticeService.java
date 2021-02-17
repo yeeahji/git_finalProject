@@ -21,7 +21,7 @@ public interface NoticeService {
 
 	public void writeQna(QnaDTO qnaDTO);
 
-
+	public List<QnaDTO> getQnaList(String mem_id);
 	
 
 	

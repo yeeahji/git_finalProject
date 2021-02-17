@@ -56,7 +56,8 @@ function withdrawList(data){
 				})).append($('<td/>',{
 					text: withdrawReason,
 				})).append($('<td/>',{
-					text: items.withdraw_detailReason
+					text: items.withdraw_detailReason,
+					width : '300px'
 				})).append($('<td/>',{
 					text: items.withdraw_logtime
 				})).appendTo($('#tbody'));

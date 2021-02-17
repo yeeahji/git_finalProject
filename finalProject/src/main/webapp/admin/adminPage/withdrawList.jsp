@@ -128,7 +128,7 @@
 			           		<th style="text-align:center;" width="5%">no.</th>
 			                <th style="text-align:center;" width="20%">회원ID</th>
 			                <th style="text-align:center;" width="25%">탈퇴 사유</th>
-			                <th style="text-align:center;" width="40%">불편/개선사항</th>
+			                <th style="text-align:center;" width="300px">불편/개선사항</th>
 			                <th  style="text-align:center;" width="10%">탈퇴일</th>
 			            </tr>
 			        </thead>
@@ -173,15 +173,15 @@
     <h5>탈퇴 사유</h5> </div> </div> </div> 
 
 
-	<div class="container"> 
-	<div class="row my-3"> 
-	<div class="col"> 
-	<h4>회원 현황</h4> </div> </div> 
-	<div class="row my-2"> 
-	<div class="col"> 
-	<div class="card"> 
-	<div class="card-body"> 
-	<canvas id="myChart" height="100"></canvas> </div> </div> </div> </div> </div>
+<!-- 	<div class="container">  -->
+<!-- 	<div class="row my-3">  -->
+<!-- 	<div class="col">  -->
+<!-- 	<h4>회원 현황</h4> </div> </div>  -->
+<!-- 	<div class="row my-2">  -->
+<!-- 	<div class="col">  -->
+<!-- 	<div class="card">  -->
+<!-- 	<div class="card-body">  -->
+<!-- 	<canvas id="myChart" height="100"></canvas> </div> </div> </div> </div> </div> -->
 
 
 </div>  <%-- col-xl-7 --%>     

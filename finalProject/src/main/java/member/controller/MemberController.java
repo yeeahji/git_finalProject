@@ -351,19 +351,22 @@ public class MemberController {
 	public String updateForm(HttpSession session, Model model, Principal principal) {
 		String id = (String) session.getAttribute("sessionId");
 		MemberDTO memberDTO = memberService.getData(id);
-		
-		Map<String, String> map = new HashMap<String, String>();
+		System.out.println("나아!!"+memberDTO.getMem_id()+"/"+memberDTO.getMem_email());
+		Map<String, Object> map = new HashMap<String, Object>();
 		int sessionKakao = memberService.distinguishKakao(principal.getName());
-		if (sessionKakao==0) {
+		System.out.println("세션카카오"+sessionKakao);
+		if (sessionKakao==0) {//일반로그인
 			String[] tel = memberDTO.getMem_tel().split("-",3);
 			map.put("tel1", tel[0]);
 			map.put("tel2", tel[1]);
 			map.put("tel3", tel[2]);
 		}
 		String[] email = memberDTO.getMem_email().split("@",2);
+		System.out.println(email);
 		map.put("email1", email[0]);
 		map.put("email2", email[1]);
 		
+		model.addAttribute("sessionKakao", sessionKakao);
 		model.addAttribute("map", map);
 		model.addAttribute("memberDTO", memberDTO);
 		model.addAttribute("display", "/member/updateForm.jsp");

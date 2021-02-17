@@ -65,7 +65,7 @@ $(document).ready(function() {
 			reader.onload = function(progressEvent) {
 				console.log(progressEvent.target.result);
 				
-				webSocket.sendCmd('CMD_MSG_SEND', '<img src="'+progressEvent.target.result+'" width="100" height="100">');
+				webSocket.sendCmd('CMD_MSG_SEND', '<img src="'+progressEvent.target.result+'" width="150" height="150">');
 			};
 			imageURL = reader.readAsDataURL(file);
 			
@@ -73,8 +73,7 @@ $(document).ready(function() {
 		};
 		
 		function uploadAction() {
-			console.log('왔?');
-			
+			console.log('');
 		};
 	});
 	

@@ -216,7 +216,7 @@ $(document).ready(function(){
 					}else {
 						$('.detailContentWrap_hash').append($('<a/>', {
 							class: 'detailContent_hashtag',
-							text: '#'+items.product_hashtag
+							text: items.product_hashtag
 						}))
 					}//else 
 				}
@@ -257,13 +257,17 @@ $(document).ready(function(){
 					$('.storeInfo_name').text(data.storeDTO.store_nickname);
 					
 					// 에코지수
-					$('.echoIndi_title').append($('<div/>',{
-						text: '에코지수'
-					})).append($('<img/>',{
-						src: '/market/image/store/echo'+data.storeDTO.store_echo+'.svg',
-						width: '237',
-						height: '25'
-					}))
+		               var echoIndi = data.storeDTO.store_echo;
+		               if(echoIndi == 0){
+		                  echoIndi=20;
+		               }
+		               $('.echoIndi_title').append($('<div/>',{
+		                  text: '에코지수'
+		               })).append($('<img/>',{
+		                  src: '/market/image/store/echo'+echoIndi+'.svg',
+		                  width: '237',
+		                  height: '25'
+		               }))
 					
 					// 상점평점(별)
 					var scoreAvg = data.storeDTO.store_scoreavg;

@@ -49,7 +49,10 @@ public class NoticeDAOMybatis implements NoticeDAO {
 		sqlSession.insert("noticeSQL.writeQna", qnaDTO);
 	}
 
-
+	@Override
+	public List<QnaDTO> getQnaList(String mem_id) {
+		return sqlSession.selectList("noticeSQL.getQnaList", mem_id);
+	}
 	
 	
 }

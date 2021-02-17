@@ -48,7 +48,10 @@ public class NoticeServiceImpl implements NoticeService {
 		noticeDAO.writeQna(qnaDTO);
 	}
 
-
+	@Override
+	public List<QnaDTO> getQnaList(String mem_id) {
+		return noticeDAO.getQnaList(mem_id);
+	}
 	
 
 

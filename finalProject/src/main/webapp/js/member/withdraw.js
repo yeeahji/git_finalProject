@@ -19,10 +19,12 @@ $(document).ready(function(){
 				|| $('#withdraw_lowContents:checked').val() || $('#withdraw_protectInfo:checked').val()
 				|| $('#withdraw_lowBenefit:checked').val()|| $('#withdraw_others:checked').val()))
 			$('#reasonDiv').text("1가지 이상의 항목에 꼭 체크하셔야합니다");
-		else
+		else{
+
 			$('form[name=withdrawForm]').submit();
 			alert("탈퇴 신청이 성공적으로 이루어졌습니다.");
 		//탈퇴사유 6항목 + 개선사항(주관식) 
+		}
 	});
 	
 	

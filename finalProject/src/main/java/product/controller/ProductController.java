@@ -56,7 +56,7 @@ public class ProductController {
 									  @RequestParam(required=false, defaultValue="") String[] hashtag,
 									  Principal principal) {
 		//이미지 파일 복사
-		String filePath = "D:/git_home/git_final/finalProject/src/main/webapp/storage";
+		String filePath = "C:/git_home/git_final/finalProject/src/main/webapp/storage";
 		File file;
 		
 		for(int i=0; i<=img.length-1; i++) {

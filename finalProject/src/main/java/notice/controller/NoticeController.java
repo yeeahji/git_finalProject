@@ -148,6 +148,19 @@ public class NoticeController {
 		model.addAttribute("display", "/notice/qnaList.jsp");
 		return "/index";
 	}
+	//1:1문의  내역불러오기
+		@RequestMapping(value="/getQnaList", method=RequestMethod.POST)
+		@ResponseBody
+		public ModelAndView getQnaList(@RequestParam String mem_id) {
+			List<QnaDTO> list = noticeService.getQnaList(mem_id);
+			System.out.println("mem_id:"+mem_id);
+			
+			ModelAndView mav = new ModelAndView();
+			mav.addObject("list", list);
+			mav.setViewName("jsonView");
+			return mav;
+		}
+		
 		
 	
 }

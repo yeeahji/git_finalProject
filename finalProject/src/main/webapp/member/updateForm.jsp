@@ -12,7 +12,7 @@
     
 <body>
 	<a href="../index.jsp">
-	<img class="logo_full" src="/market/image/member/logo_full.png" alt="메인">
+	<img class="logo_full" src="/market/image/member/logo_full.png" alt="풀로고">
 	</a>
     <p id ="title" name = "title" align ="center"><strong>회원정보수정</strong></p>
     <hr>
@@ -31,7 +31,7 @@
                 value="${memberDTO.mem_name}" readonly>
             </td>
         </tr>
-        <c:if test="${sessionKakao }==0"><!-- 일반로그인일때만 비밀번호 영역이 보이게 한다. -->
+        <c:if test="${sessionKakao ==0}"><!-- 일반로그인일때만 비밀번호 영역이 보이게 한다. -->
         <tr>
             <td>
                 <input placeholder="비밀번호 8-15자(영문+숫자+특문(.!@#$%^&+=))" type="password" 
@@ -49,9 +49,9 @@
         </c:if>
         <tr>
             <td>
-                <input placeholder="이메일 (abc123)" type="text" name="text" id="email1" size=15px; 
+                <input placeholder="이메일 (abc123)" type="text" name="email1" id="email1" size=15px; 
                 		value="${map.email1}" readonly >@
-                <input placeholder="page.com" type="text" name="mem_email" id="email2" size=16px; 
+                <input placeholder="page.com" type="text" name="email2" id="email2" size=16px; 
                 		value="${map.email2 }" readonly>
                 <input type="hidden" id="mem_email" name="mem_email" >
                 <div class="caution" id="emailDiv"></div>

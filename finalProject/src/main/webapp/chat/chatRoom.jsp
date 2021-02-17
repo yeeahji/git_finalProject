@@ -201,7 +201,7 @@ var webSocket = {
 			//상품 상세페이지를 통해 들어왔을 경우
 			if('${product_seq}' != '0') {
 				var likeMsg = "'${product_subject}'에 관심있어요!";
-				var likeUrl = '<a class="productPage" href="http://localhost:8080/market/product/productDetail?seq=${product_seq}" target="_blank">상품 확인</a>';
+				var likeUrl = '<a class="productPage" href="/market/product/productDetail?seq=${product_seq}" target="_blank">상품 확인</a>';
 				
 				if(msgData.checkId == '${member.username}') { 
 					$('#chat-container').append('<div class="my-chat-box"><div class="chat my-chat"><input type="hidden" value="${member.username}">'+likeMsg+'</div>');

@@ -125,7 +125,7 @@ public class ChatController {
 	public void saveMsg(@RequestParam String message_content,
 						@RequestParam String chat_seq, Principal principal) {
 		//파일로 저장
-		String filePath = "D:/git_home/git_final/finalProject/src/main/webapp/storageMsg";
+		String filePath = "C:/git_home/git_final/finalProject/src/main/webapp/storageMsg";
 		String fileName = chat_seq + ".txt";
 		File file = new File(filePath, fileName);
         FileOutputStream fos = null;

@@ -4,6 +4,7 @@ let pwd_rule=/^.*(?=^.{8,15}$)(?=.*\d)(?=.*[a-zA-Z])(?=.*[.!@#$%^&+=]).*$/;
 let email_rule=/^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
 let phone_rule=/^\d{3}-\d{3,4}-\d{4}$/;
 
+let emailRandom;
 
 
 //회원가입 입력
@@ -32,6 +33,11 @@ $('#joinBtn').click(function(){
 		$('#emailDiv').text('이메일을 입력하세요').css('color', 'rgba(153, 0, 33, 0.781)');
 	else if($('#emailNum').val()=='')
 		$('#emailNumDiv').text('');
+	else if($("#emailNum").val() != emailRandom){
+		$('#emailNumDiv').text('인증번호가 일치하지 않습니다!').css('color', 'rgba(153, 0, 33, 0.781)');
+		console.log(emailRandom);
+	}
+	
 	else if($('#tel2').val()==''|| $('#tel3').val()=='')
 		$('#telDiv').text('전화번호를 입력하세요');
 	else if($('#postcode').val()=='')
@@ -43,7 +49,6 @@ $('#joinBtn').click(function(){
 	else{
 		$('#email').val($('#email1').val() + '@' + $('#email2').val()); 
 		$('#tel').val($('#tel1').val() + '-' + $('#tel2').val() + '-' +$('#tel3').val()); 
-		
 		$('form[name=joinForm]').submit();
 	}
 });
@@ -121,11 +126,13 @@ $('#email2').focusout(function(){
 	else if($('#email2').val()=='')
 		$('#emailDiv').text('이메일을 입력하세요').css('color', 'rgba(153, 0, 33, 0.781)');
 	else if(!($('#email1').val()==''||$('#email2').val()=='')){
+		$('#emailDiv').text('');
 		let emailForm = $("#email1").val()+"@"+$("#email2").val();
 		if(!email_rule.test(emailForm)){
 			$('#emailDiv').text("이메일을 형식에 맞게 입력해주세요.");
 		}
 	}else{
+		$('#emailDiv').text("");
 		//이메일 중복검사
 		let email = $('#email').val($('#email1').val() + '@' + $('#email2').val()); 
 		$.ajax({
@@ -178,6 +185,7 @@ $("#emailNum").on("keyup",function(){
 		data: 'emailNum='+emailNum+"&randomNum="+$('#randomNum').val(),
 		dataType: 'json',
 		success: function(result){
+			emailRandom=result.randomNum;
 			if($("#emailNum").val() ==""){
 				$('#emailNumDiv').text('이메일 인증은 가입 필수 사항입니다').css('color', 'rgba(153, 0, 33, 0.781)');
 			}else if($("#emailNum").val() != result.randomNum){

@@ -321,7 +321,7 @@ public class AdminController {
 	//신고 내역 출력
 	@RequestMapping(value="/getComplainList", method=RequestMethod.POST)
 	public ModelAndView getComplainList(@RequestParam(required=false, defaultValue="1") String pg,
-				  						 @RequestParam(required=false, defaultValue="20") String viewNum) {
+				  						 @RequestParam(required=false, defaultValue="50") String viewNum) {
 		List<StoreDTO> list = adminService.getComplainList(pg,viewNum);
 		//페이징처리
 		AdminBoardPaging adminComplainBP = adminService.adminComplainBP(pg,viewNum);

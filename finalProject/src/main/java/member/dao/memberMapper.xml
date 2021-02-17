@@ -90,7 +90,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  		begin
 <!-- 	 	1. 탈퇴 db에 사유 추가 -->
  			insert into withdraw values
- 						(#{mem_id}
+ 						(#{mem_id}, withdraw_seq.nextval
  						,#{withdraw_lowFrequency}, #{withdraw_rejoin}
  						,#{withdraw_lowContents}, #{withdraw_protectInfo}
  						,#{withdraw_lowBenefit}, #{withdraw_others}

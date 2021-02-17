@@ -12,17 +12,19 @@ $('.revel2_5_main').on('click', 'article', function(){
 $(document).ready(function(){
 	if($('#mem_id').val()=='비회원'){
 		location.href="/market/member/loginForm";
+	}else{
+		//전체 리스트 출력
+		$.ajax({
+			type: 'post',
+			url: '/market/notice/getQnaList',
+			data: 'mem_id='+$('#mem_id').val(),
+			dataType: 'json',
+			success: function(data){
+				resultHtml(data);
+			}
+		});		
 	}
-	//전체 리스트 출력
-	$.ajax({
-		type: 'post',
-		url: '/market/notice/getQnaList',
-		data: 'mem_id='+$('#mem_id').val(),
-		dataType: 'json',
-		success: function(data){
-			resultHtml(data);
-		}
-	});		
+	
 });
 
 function resultHtml(data){
