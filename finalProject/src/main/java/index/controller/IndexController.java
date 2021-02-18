@@ -43,12 +43,15 @@ public class IndexController {
 	@RequestMapping(value = "/wishProduct", method = RequestMethod.POST)
 	@ResponseBody
 	public ModelAndView wishProduct(Principal principal) {
-		int su = indexService.wishProduct(principal.getName());
+		if(principal != null) {
+			int su = indexService.wishProduct(principal.getName());
 
-		ModelAndView mav = new ModelAndView();
-		mav.addObject("su", su);
-		mav.setViewName("jsonView");
-		return mav;
+			ModelAndView mav = new ModelAndView();
+			mav.addObject("su", su);
+			mav.setViewName("jsonView");
+			return mav;
+		}
+		return null;
 	}
 
 	@RequestMapping(value = "/recentlyProduct", method = RequestMethod.POST)
