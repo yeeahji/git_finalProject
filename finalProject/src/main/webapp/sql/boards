@@ -13,4 +13,5 @@ CREATE TABLE boards(
      board_hit NUMBER DEFAULT 0,              -- 조회수
      board_logtime DATE DEFAULT SYSDATE
  );
+ 
  CREATE SEQUENCE seq_boards  NOCACHE NOCYCLE;

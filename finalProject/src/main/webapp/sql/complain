@@ -10,6 +10,7 @@ CREATE TABLE COMPLAIN (-- TALK 테이블 아직 안만들어져서 추가해야�
     complain_content VARCHAR2(600) NOT NULL, -- 신고글 내용
     COMPLAIN_LOGTIME DATE DEFAULT SYSDATE NOT NULL,
     store_seq varchar2(50),
-    comlain_status number
+    complain_status number
 );
+
 CREATE SEQUENCE COMPLAIN_SEQ NOCYCLE NOCACHE;

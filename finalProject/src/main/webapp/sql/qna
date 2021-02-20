@@ -1,0 +1,14 @@
+CREATE TABLE qna(
+    qna_seq   number primary key, --기본키 seq로 변경(1씩증가)
+    qnaCate_main VARCHAR2(20)  NOT NULL,  --대분류 name
+    qnaCate_sub  VARCHAR2(20)  NOT NULL,  --소분류 name
+    mem_id            NOT NULL REFERENCES members(mem_id),  --작성자, 외래키
+    qna_content VARCHAR2(4000) NOT NULL,       --내용
+     qna_img1 VARCHAR2(500), 
+    qna_img2 VARCHAR2(500),
+    qna_logtime DATE DEFAULT SYSDATE,      -- 날짜
+    qna_answer VARCHAR2(4000),
+    qna_answerLogtime DATE
+ );
+ 
+ CREATE SEQUENCE qna_seq NOCYCLE NOCACHE;

@@ -5,4 +5,5 @@ CREATE TABLE COMMENTS(
      mem_id VARCHAR2(50)  NOT NULL REFERENCES members(mem_id),                 -- 댓글 작성자
      comment_logtime DATE DEFAULT SYSDATE
  );
+ 
 CREATE SEQUENCE seq_COMMENTS  NOCACHE NOCYCLE;

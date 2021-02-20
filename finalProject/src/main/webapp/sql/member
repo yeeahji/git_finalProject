@@ -19,22 +19,3 @@ CREATE TABLE members(
 	mem_agree varchar(20), --선택항목 동의
 	mem_complain number --신고 회수
 );
-
-
-
-
---컬럼 삭제
-ALTER TABLE members DROP COLUMN mem_recentPostcode;
-
-ALTER TABLE members DROP COLUMN mem_recentAdd1;
-
-ALTER TABLE members DROP COLUMN mem_recentAdd2;
-
-ALTER TABLE members DROP COLUMN mem_recentLocation;
-
-
-
-
---------아래껀 실행 안해도 됨!!!! 편하려고 임시로 만들어놓은것
-alter table members
-modify (mem_tel varchar2(20) null);

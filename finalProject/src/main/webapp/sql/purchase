@@ -1,5 +1,4 @@
 -- 구매내역 & 판매내역(seller_id='내아이디'로 조회)
-
 CREATE TABLE purchase (
     my_id varchar2(50), -- 내 아이디(구매자)
     seller_id varchar2(50),-- 거래 상대방 ID(=판매자)

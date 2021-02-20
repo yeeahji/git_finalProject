@@ -10,11 +10,5 @@ CREATE TABLE withdraw(
     withdraw_detailReason VARCHAR2(3000), --개선사항(주관식)
     withdraw_logtime DATE DEFAULT SYSDATE NOT NULL --탈퇴 신청일
 );
-CREATE SEQUENCE withdraw_seq  NOCACHE NOCYCLE;
 
---데이터 입력
-insert into withdraw (withdraw_seq, mem_id,	withdraw_lowFrequency,	withdraw_rejoin,	withdraw_lowContents)values (withdraw_seq.nextval, 'test105', '1','1','1');
-insert into withdraw (withdraw_seq, mem_id,	withdraw_protectInfo,	withdraw_rejoin,	withdraw_lowContents)values (withdraw_seq.nextval,'test106', '1','1','1');
-insert into withdraw (withdraw_seq, mem_id,	withdraw_lowFrequency,	withdraw_rejoin,	withdraw_others)values (withdraw_seq.nextval,'test107', '1','1','1');
-insert into withdraw (withdraw_seq, mem_id,	withdraw_rejoin,	withdraw_protectInfo,	withdraw_lowBenefit)values (withdraw_seq.nextval,'test108', '1','1','1');
-insert into withdraw (withdraw_seq, mem_id,	withdraw_lowFrequency,	withdraw_lowBenefit,	withdraw_lowContents)values (withdraw_seq.nextval,'test109', '1','1','1');
+CREATE SEQUENCE withdraw_seq  NOCACHE NOCYCLE;
