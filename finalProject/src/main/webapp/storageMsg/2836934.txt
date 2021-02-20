@@ -1,0 +1,1 @@
+<div class="my-chat-box"><div class="chat my-chat"><input type="hidden" value="imseller">'직접 만든 수제 스티커 팔아여'에 관심있어요!</div></div><div class="my-chat-box"><div class="chat my-chat"><input type="hidden" value="imseller"><a class="productPage" href="/market/product/productDetail?seq=124" target="_blank">상품 확인</a></div></div>
