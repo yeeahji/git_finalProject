@@ -20,8 +20,6 @@ public class HandlerChat extends TextWebSocketHandler {
 	String my_store_nickname;
 	String my_mem_id;
 	
-	//*********이미지 첨부시 <img src="" width..> 여기에 넣어주기 (크기는 고정)
-	
 	//클라이언트가 서버로 메세지 전송 처리
 	@Override
 	protected void handleTextMessage(WebSocketSession session, TextMessage message) throws Exception {
@@ -56,7 +54,7 @@ public class HandlerChat extends TextWebSocketHandler {
 					Map<String, String> mapToSend = new HashMap<String, String>();
 					mapToSend.put("chat_seq", chat_seq);
 					mapToSend.put("cmd", "CMD_ENTER");
-					mapToSend.put("msg", "올바른 채팅 매너 준수해주세요.\n도움말이 필요하면");
+					//mapToSend.put("msg", my_store_nickname + "님이 입장하셨습니다.");
 					mapToSend.put("checkId", my_mem_id);
 					mapToSend.put("current_user_num", sessionList.size()+"");
 					
@@ -92,7 +90,6 @@ public class HandlerChat extends TextWebSocketHandler {
 	//클라이언트 퇴장
 	@Override
 	public void afterConnectionClosed(WebSocketSession session, CloseStatus status) throws Exception {
-
 		super.afterConnectionClosed(session, status);
         
 		ObjectMapper objectMapper = new ObjectMapper();

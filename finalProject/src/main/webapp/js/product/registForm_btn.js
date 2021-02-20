@@ -1,7 +1,3 @@
-//$('#usedCondition').prop('checked', true);
-//	var radioVal = $('input[name="conditions"]:checked').val();
-//if($('#usedCondition').prop('checked')) {}
-
 //default : 중고 상품 버튼 활성
 $('#usedCondition').prop('checked', true);
 $('.usedCondition').addClass('usedActive');

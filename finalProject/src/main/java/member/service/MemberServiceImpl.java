@@ -33,20 +33,15 @@ public class MemberServiceImpl implements MemberService, UserDetailsService {
 		MemberDTO memberDTO = memberDAO.getData(mem_id); //사용자 정보 가져오기
 		
 		if(memberDTO == null) { //사용자 정보 없으면 null 처리
-			//return null;
 			throw new UsernameNotFoundException(mem_id);
-			//자꾸 null 뜨는데.. 해결할 방법? throw 하면 
 			
 		} else { //사용자 정보 있으면 값 넣기
 			memberDTO.setUsername(memberDTO.getMem_id()); //사용자 인증 가져오기
 			memberDTO.setPassword(memberDTO.getMem_pwd());
 			memberDTO.setAuthorities(memberDAO.getAuth(mem_id)); //사용자 권한 인증 가져오기
 			
-			System.out.println(memberDAO.getAuth(mem_id));
-			
 			return memberDTO;
 		}
-		
 	}
 	
 //	[회원가입] ----------------------------------------------------------

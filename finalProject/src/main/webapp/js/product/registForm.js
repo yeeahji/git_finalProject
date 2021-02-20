@@ -231,6 +231,22 @@ $('#searchAddr').click(function(){
 
 
 
+/* 가격 */
+$('.priceInput').on('keyup', priceValidationKeyUpCheck);
+
+//유효성 검사
+function priceValidationKeyUpCheck(event) {
+	const key = event.keyCode;
+	const val = $(this).val();
+	if(!(/^[0-9]*$/.test(val))) { //숫자로만 끝나는게 아니라면
+		$(this).val(val.replace(/[^0-9]/g, '')); //0~9까지를 제외한 문자열이 있으면 공백으로 대체
+	}
+}
+
+
+
+
+
 /* 태그 영역 */
 function initTagArea() {
 	$('#tagInput').on('keyup', hashTagEvent);

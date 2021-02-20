@@ -16,7 +16,6 @@ public interface MemberService {
 
 	public String checkId(String id);
 
-
 	public int join(MemberDTO memberDTO);
 
 	public MemberDTO getData(String id);

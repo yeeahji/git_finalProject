@@ -52,9 +52,6 @@ public class MemberController {
 	@Autowired  
     JavaMailSender mailSender;
 	
-	//private static final Logger logger=LoggerFactory.getLogger(MemberController.class);
-	
-	
 //	[회원가입]===================================================================================
 	@RequestMapping(value = "/joinForm", method =RequestMethod.GET)
 	public String joinForm() {
