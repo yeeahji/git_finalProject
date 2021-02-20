@@ -8,8 +8,6 @@ CREATE TABLE chatRoom (
     two_store_img VARCHAR2(100), 
     chat_logtime DATE --시간
 );
---판매자와 구매자의 관계는 뒤바뀔 수 있어서 one, two로 표시함(처음 연락한 사람이 ONE으로 들어감)
---UNIQUE가 PK보다 빠르게 조회된다고 함
 
 CREATE TABLE chatList (
     mem_id NOT NULL REFERENCES members(mem_id), --사용자의 아이디
