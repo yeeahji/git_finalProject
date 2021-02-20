@@ -5,6 +5,8 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.security.Principal;
 import java.util.HashMap;
 import java.util.List;
@@ -22,6 +24,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.google.gson.JsonElement;
+import com.google.gson.JsonParser;
+
 import chat.bean.ChatListDTO;
 import chat.bean.ChatRoomDTO;
 import chat.service.ChatService;
@@ -38,7 +43,7 @@ public class ChatController {
 	@Autowired
 	private StoreService storeService;
 	
-	// 채팅방 리스트 입장 (바다톡 누르거나(확실) 채팅방에서 목록 누를 시(불확실))
+	// 채팅방 리스트 입장
 	@RequestMapping(value="/chatList", method=RequestMethod.GET)
 	public String chatList() {
 		return "/chat/chatList";
@@ -125,7 +130,7 @@ public class ChatController {
 	public void saveMsg(@RequestParam String message_content,
 						@RequestParam String chat_seq, Principal principal) {
 		//파일로 저장
-		String filePath = "C:/git_home/git_final/finalProject/src/main/webapp/storageMsg";
+		String filePath = "D:/git_home/git_final/finalProject/src/main/webapp/storageMsg";
 		String fileName = chat_seq + ".txt";
 		File file = new File(filePath, fileName);
         FileOutputStream fos = null;
@@ -159,6 +164,37 @@ public class ChatController {
 		
 		chatService.setLastMessage(map);
 	}
+	
+	// 이미지 단축 URL화
+//	@RequestMapping(value="getShortenURL", method=RequestMethod.GET)
+//	@ResponseBody
+//	public String getShortenURL(@RequestParam String originalURL) throws UnsupportedEncodingException {
+//		System.out.println("도착?");
+//		System.out.println(originalURL);
+//
+//        String apiURL = "https://openapi.naver.com/v1/util/shorturl?url=" + originalURL;
+//        String clientId = ""; //애플리케이션 클라이언트 아이디값"
+//        String clientSecret = ""; //애플리케이션 클라이언트 시크릿값"
+//
+//        Map<String, String> requestHeaders = new HashMap<>();
+//        requestHeaders.put("X-Naver-Client-Id", clientId);
+//        requestHeaders.put("X-Naver-Client-Secret", clientSecret);
+//        String responseBody = ShortenURL.get(apiURL,requestHeaders);
+//        
+//        System.out.println("단축 URL의 JSON : " + responseBody);
+//
+//        JsonParser jsonParser = new JsonParser();
+//        JsonElement jsonElement = jsonParser.parse(responseBody);
+//        jsonElement = jsonElement.getAsJsonObject().get("result");
+//
+//        String result = String.valueOf(jsonElement.getAsJsonObject().get("url"));
+//        result = result.substring(1);
+//        result = result.substring(0,result.length()-1);
+//        
+//        System.out.println("단축 URL : " + result);
+//
+//        return result;
+//	}
 }
 	 
 

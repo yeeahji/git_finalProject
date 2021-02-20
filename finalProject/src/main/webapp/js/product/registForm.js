@@ -1,4 +1,3 @@
-
 $('#registForm').ready(function(){
 	$('#imageDiv').hide();
 	$('#subjectDiv').hide();
@@ -73,7 +72,7 @@ function readURL() {
 				reader.readAsDataURL(input.files[++index]);
 			}
 		}
-		//올린 파일 1개 데이터로 보내기
+		//이미지를 데이터 URI로 표현
 		reader.readAsDataURL(input.files[index]);
 	}
 }
@@ -324,9 +323,9 @@ $('#registBtn').click(function(){
 		else if($('#product_location').val()=='') { $('#locationDiv').show(); $('#product_location').focus(); return true; }
 		else if($('#product_price').val()=='') { $('#priceDiv').show(); $('#product_price').focus(); return true;}
 	}
-
+	
+	//submit
 	function registAction() {
-		console.log('들어왔');
 		$('#registForm').ajaxForm({
 			type: 'post',
 			enctype: 'multipart/form-data',

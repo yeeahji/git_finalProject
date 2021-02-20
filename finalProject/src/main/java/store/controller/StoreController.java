@@ -105,7 +105,7 @@ public class StoreController {
 	public void profileImgUpdate(@RequestParam MultipartFile[] profileImg_Name,
 								@ModelAttribute StoreDTO storeDTO){ //storeDTO지만 mem_id만 보냈음
 		
-		String filePath = "C:\\git_home\\git_final\\finalProject\\src\\main\\webapp\\storage";
+		String filePath = "D:\\git_home\\git_final\\finalProject\\src\\main\\webapp\\storage";
 		// 가상 폴더 위치 가져오기
 		String fileName; 
 		File file;

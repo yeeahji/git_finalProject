@@ -16,23 +16,38 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.4.0/sockjs.js"></script>
 <script>
 $(document).ready(function() {
+	//알림음 전송
 	var alramCount = 0;
 	$('#btn_alram').click(function(){
-		//알림음 켜기
-		if(alramCount == 0) {
-			document.getElementById("btn_alram").src = "../image/chat/alramOn.png";
-			flagAlram = true;
-			alramCount ++;
-		}
 		//알림음 끄기
-		else if(alramCount == 1) {
+		if(alramCount == 0) {
 			document.getElementById("btn_alram").src = "../image/chat/alramOff.png";
 			flagAlram = false;
+			alramCount ++;
+		}
+		//알림음 켜기
+		else if(alramCount == 1) {
+			document.getElementById("btn_alram").src = "../image/chat/alramOn.png";
+			flagAlram = true;
 			alramCount --;
 		}
 	});
 	
-	
+	//이미지 전송
+ 	$('#uploadImg').on('change', function(){
+		var imageURL = '';
+		const input = this;
+		const file = input.files[0];
+		const reader = new FileReader(); //이미지를 읽는 함수
+		
+		reader.readAsDataURL(file); //이미지를 데이터 URI로 표현
+		reader.onload = function(event) { //이미지 읽기 완료(콜백 함수)
+			console.log(event.target.result);
+			imageURL = event.target.result;
+			webSocket.sendCmd('CMD_MSG_SEND', '<img src="'+imageURL+'" width="150" height="150">');
+		};
+	});
+		
 	//주소 전송
 	$('#addOption').click(function(){
 		var location = null;
@@ -50,6 +65,17 @@ $(document).ready(function() {
 				alert('error : ', error)
 			}
 		});
+	});
+	
+ 	//이모티콘 전송
+	$('#emoji_1').click(function(){
+		webSocket.sendCmd('CMD_MSG_SEND', '<img src="../image/chat/emoji_1.gif" width="100" height="100">');
+	});
+	$('#emoji_2').click(function(){
+		webSocket.sendCmd('CMD_MSG_SEND', '<img src="../image/chat/emoji_2.gif" width="100" height="100">');
+	});
+	$('#emoji_3').click(function(){
+		webSocket.sendCmd('CMD_MSG_SEND', '<img src="../image/chat/emoji_3.gif" width="100" height="100">');
 	});
 });
 </script>
@@ -125,7 +151,7 @@ var webSocket = {
 			else { 
 				$('#chat-container').append('<div class="chat-box"><div class="chat"><input type="hidden" value="${two_mem_id}">'+msgData.msg+'</div>');
 			}
-			$('#chat-container').scrollTop($('#chat-container')[0].scrollHeight+20);
+			
 			//메시지 저장
 			var message_content = document.getElementById("chat-container").innerHTML;
 			$.ajax({
@@ -137,11 +163,11 @@ var webSocket = {
 			
 			//알림
 			if(typeof msgData.cmd != 'undefined' && msgData.cmd != null) {
-				//창 활성화 되어 있을 때만 입력창에 포커스
+				//창 활성화 상태에서 입력창에 포커스
 				if(flagFocused == true) {
 					$('#inputMessage').focus();
 				}
-				// 창 비활성화 상태에서는 알림
+				//창 비활성화 상태에서 알림 울리기
 				else {
 					if(flagAlram == true) {
 						$('#chat_alram').trigger("play");
@@ -164,6 +190,8 @@ var webSocket = {
 				$('#olineCheck').attr('src', '../image/chat/houseOpen.png');
 			}
 			
+			var loaded = false;
+			
 			//메세지 불러오기
 			if(msgData.checkId == '${member.username}') {
 				var loadMsg;
@@ -174,9 +202,9 @@ var webSocket = {
 				xhttp.send(null);
 				      
 				function callFunction(){
-					if(xhttp.readyState == 4) { //서버-클라이언트 간의 통신 완료
-						if(xhttp.status == 200){ 
-							loadMsg = xhttp.responseText;
+					if(xhttp.readyState == 4) { //서버-클라이언트 간의 통신 완료(데이터 전부 받음)
+						if(xhttp.status == 200){ //서버의 응답 요청 성공
+							loadMsg = xhttp.responseText; //불러온 메시지를 변수로 저장
 							
 							//문자열 치환(상대방과 나를 구분하는 CSS 뒤바꾸기)
 							var otherChatBefore = '<div class="my-chat-box"><div class="chat my-chat"><input type="hidden" value="${two_mem_id}">';
@@ -184,39 +212,43 @@ var webSocket = {
 							var myChatBefore = '<div class="chat-box"><div class="chat"><input type="hidden" value="${member.username}">';
 							var myChatAfter = '<div class="my-chat-box"><div class="chat my-chat"><input type="hidden" value="${member.username}">';
 							
-							function replaceAll(str, searchStr, replaceStr) {
+							function replaceAll(str, searchStr, replaceStr) { 
 								  return str.split(searchStr).join(replaceStr);
-							}
-							
+							}							
 							loadMsg = replaceAll(loadMsg, otherChatBefore, otherChatAfter);
 							loadMsg = replaceAll(loadMsg, myChatBefore, myChatAfter);
 							
-							$('#chat-container').prepend(loadMsg); //통신 종료 전에 불러온 메시지를 채팅방에 출력
+							//불러온 메시지를 채팅방에 출력
+							$('#chat-container').prepend(loadMsg);
+							
+							//상품 상세페이지를 통해 들어왔을 경우 관심 메시지 자동 전송
+							if('${product_seq}' != '0') {
+								var likeMsg = "'${product_subject}'에 관심있어요!";
+								var likeUrl = '<a class="productPage" href="/market/product/productDetail?seq=${product_seq}" target="_blank">상품 확인</a>';
+								
+								if(msgData.checkId == '${member.username}') { 
+									$('#chat-container').append('<div class="my-chat-box"><div class="chat my-chat"><input type="hidden" value="${member.username}">'+likeMsg+'</div>');
+									$('#chat-container').append('<div class="my-chat-box"><div class="chat my-chat"><input type="hidden" value="${member.username}">'+likeUrl+'</div>');
+								}
+							}
+							
+							//메시지 저장
+							var message_content = document.getElementById("chat-container").innerHTML;
+							$.ajax({
+								type: 'post',
+								url: '/market/chat/saveMsg',
+								data: {'message_content' : message_content,
+									   'chat_seq' : msgData.chat_seq}
+							});
+							
+						}else {
+							if(xhttp.status != '404') { //채팅 내용이 없을 때를 제외하고 에러 호출
+								alert('문제발생' + xhttp.status + ' 관리자에게 문의하세요.');
+							}
 						}
 					}
 				}
 			}//if
-			
-			
-			//상품 상세페이지를 통해 들어왔을 경우
-			if('${product_seq}' != '0') {
-				var likeMsg = "'${product_subject}'에 관심있어요!";
-				var likeUrl = '<a class="productPage" href="/market/product/productDetail?seq=${product_seq}" target="_blank">상품 확인</a>';
-				
-				if(msgData.checkId == '${member.username}') { 
-					$('#chat-container').append('<div class="my-chat-box"><div class="chat my-chat"><input type="hidden" value="${member.username}">'+likeMsg+'</div>');
-					$('#chat-container').append('<div class="my-chat-box"><div class="chat my-chat"><input type="hidden" value="${member.username}">'+likeUrl+'</div>');
-				}
-			}
-			
-			//메시지 저장
-			var message_content = document.getElementById("chat-container").innerHTML;
-			$.ajax({
-				type: 'post',
-				url: '/market/chat/saveMsg',
-				data: {'message_content' : message_content,
-					   'chat_seq' : msgData.chat_seq}
-			});
 		}
 		
 		//------------ 퇴장 --------------
@@ -273,7 +305,7 @@ $(window).on('load', function () {
 			<img id="olineCheck" src="../image/chat/houseClose.png"> ${other_store_nickname}
 			<div class="alramBtn"> <!-- 알람 -->
 				<div class="alrams">
-					<img src="../image/chat/alramOff.png" id="btn_alram">
+					<img src="../image/chat/alramOn.png" id="btn_alram">
 				</div>
 				<div style="display: none;">
 					<audio id="chat_alram"><source src="../image/chat/chat_alram.mp3" type="audio/mpeg"></audio>
@@ -285,24 +317,30 @@ $(window).on('load', function () {
 	<!-- 채팅창 -->
 	<div id="chat-container"></div>
 	
-	<!-- 하단 + -->
+	<!-- 하단  -->
 	<div id="bottom-container">
+		<!-- 메시지 입력창 -->
 		<input type="text" id="inputMessage" onkeypress="if(event.keyCode==13){webSocket.sendChat();}" autofocus/>
 		<input type="button" id="sendBtn" value="전송" onclick="webSocket.sendChat()"/>
-	
-	<!-- 추가 옵션 -->
-	<div class="extra-menu">
-		<div class="plusOption">
-			<div class="plusOptions" id="imgOption"> <!-- 이미지 첨부 -->
-				<img id="inputImg" src="../image/chat/chatRoomInputImg.png">
-				<input type="file" id="uploadImg">
+		
+		<!-- 추가 옵션 -->
+		<div class="extra-menu">
+			<div class="plusOption">
+				<!-- 이미지 첨부 -->
+				<div class="plusOptions" id="imgOption"> 
+					<img id="inputImg" src="../image/chat/chatRoomInputImg.png">
+					<input type="file" id="uploadImg">
+				</div>
+				
+				<!-- 주소 보내기 -->
+				<div class="plusOptions" id="addOption"><img id="inputAdd" src="../image/chat/chatRoomInputAdd.png"></div>
+				
+				<!-- 이모티콘 보내기 -->
+				<div class="plusOptions"><img src="../image/chat/emoji_1.gif" id="emoji_1"></div>
+				<div class="plusOptions"><img src="../image/chat/emoji_2.gif" id="emoji_2"></div>
+				<div class="plusOptions"><img src="../image/chat/emoji_3.gif" id="emoji_3"></div>
 			</div>
-			<div class="plusOptions" id="addOption"><img id="inputAdd" src="../image/chat/chatRoomInputAdd.png"></div> <!-- 주소 보내기 -->
-			<div class="plusOptions"><img src="../image/chat/emoji_1.gif" id="emoji_1"></div>
-			<div class="plusOptions"><img src="../image/chat/emoji_2.gif" id="emoji_2"></div>
-			<div class="plusOptions"><img src="../image/chat/emoji_3.gif" id="emoji_3"></div>
 		</div>
-	</div>
 	</div>
 </body>
 </html>

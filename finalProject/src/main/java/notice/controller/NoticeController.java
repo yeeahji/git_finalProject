@@ -119,7 +119,7 @@ public class NoticeController {
 	public void writeQna(@ModelAttribute QnaDTO qnaDTO,
 						 @RequestParam( "img[]") List<MultipartFile> list) {
 		System.out.println("list:"+list);
-		String filePath = "C:\\git_home\\git_final\\finalProject\\src\\main\\webapp\\storage";
+		String filePath = "D:\\git_home\\git_final\\finalProject\\src\\main\\webapp\\storage";
 		
 		for(MultipartFile img: list) {
 			System.out.println("사진이름:"+img.getOriginalFilename());
