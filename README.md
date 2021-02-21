@@ -10,7 +10,7 @@
 또한 커뮤니티 게시판을 통해 자유롭게 글을 남길 수 있고 고객센터를 통한 일대일 문의 서비스가 제공됩니다.
 관리자는 회원 및 게시글을 간편하게 관리할 수 있습니다.
 
-![main](https://user-images.githubusercontent.com/73110638/108618038-23b8e600-745e-11eb-9957-a14652bb7749.png)
+![main](https://user-images.githubusercontent.com/73110638/108618038-23b8e600-745e-11eb-9957-a14652bb7749.png){: width="200" height="200"}
 
 ## 프로젝트 링크
 
