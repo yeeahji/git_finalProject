@@ -116,6 +116,8 @@ public interface AdminDAO {
    public int totalBuyProduct(String id);
    //신고당한 수
    public int totalReported(String id);
+public List<ComplainDTO> findWithdrawCate(Map<String, String> map);
+public int getCateBP(Map<String, String> map);
    
 
 }

@@ -38,8 +38,45 @@ input[type=search]{
     border-color: -internal-light-dark(rgb(118, 118, 118), rgb(133, 133, 133));
 }
 
+/* boardPaging */
+#boardPagingDiv {
+	display: flex;
+}
+#currentPaging {
+	width: 33px;
+    height: 33px;
+    display: flex;
+    -webkit-box-pack: center;
+    justify-content: center;
+    -webkit-box-align: center;
+    align-items: center;
+    margin-right: 2px;
+    border: 1px solid #0a58ca;
+    border-radius: 2px;
+    color: rgb(255, 255, 255);
+    background: #0a58ca;
+}
+#paging {
+	width: 33px;
+    height: 33px;
+    display: flex;
+    -webkit-box-pack: center;
+    justify-content: center;
+    -webkit-box-align: center;
+    align-items: center;
+    margin-right: 2px;
+    border: 1px solid rgb(204, 204, 204);
+    background: rgb(255, 255, 255);
+    border-radius: 2px;
+    color: rgb(155, 153, 169);
+}
 
-
+.pagingWrap {
+    padding: 2rem 0px 3rem;
+    display: flex;
+    -webkit-box-pack: center;
+    justify-content: center;
+}
 
 
 

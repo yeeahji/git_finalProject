@@ -1,7 +1,8 @@
 let name_rule=/^[가-힣]+$/;
 let id_rule=/^[0-9a-z]{7,20}$/;
 let pwd_rule=/^.*(?=^.{8,15}$)(?=.*\d)(?=.*[a-zA-Z])(?=.*[.!@#$%^&+=]).*$/; 
-let email_rule=/^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
+let email_rule=/^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i;
+
 let phone_rule=/^\d{3}-\d{3,4}-\d{4}$/;
 
 let emailRandom;
@@ -111,9 +112,10 @@ $('#email1').focusout(function(){
 		$('#emailDiv').text('이메일을 입력하세요').css('color', 'rgba(153, 0, 33, 0.781)');
 	else if($('#email2').val()=='')
 		$('#emailDiv').text('이메일을 입력하세요').css('color', 'rgba(153, 0, 33, 0.781)');
+	
 	else if(!($('#email1').val()==''||$('#email2').val()=='')){
-		let emailForm = $("#email1").val()+"@"+$("#email2").val();
-		if(!email_rule.test(emailForm)){
+		let email = $('#email').val($('#email1').val() + '@' + $('#email2').val()); 
+		if(!email_rule.test(email.val())){
 			$('#emailDiv').text("이메일을 형식에 맞게 입력해주세요.").css('color', 'rgba(153, 0, 33, 0.781)');
 		}else{
 			$('#emailDiv').text("");
@@ -125,31 +127,33 @@ $('#email2').focusout(function(){
 		$('#emailDiv').text('이메일을 입력하세요').css('color', 'rgba(153, 0, 33, 0.781)');
 	else if($('#email2').val()=='')
 		$('#emailDiv').text('이메일을 입력하세요').css('color', 'rgba(153, 0, 33, 0.781)');
-	else if(!($('#email1').val()==''||$('#email2').val()=='')){
-		$('#emailDiv').text('');
-		let emailForm = $("#email1").val()+"@"+$("#email2").val();
-		if(!email_rule.test(emailForm)){
-			$('#emailDiv').text("이메일을 형식에 맞게 입력해주세요.");
-		}
-	}else{
-		$('#emailDiv').text("");
-		//이메일 중복검사
-		let email = $('#email').val($('#email1').val() + '@' + $('#email2').val()); 
-		$.ajax({
-			type: 'post',
-			url: '/market/member/checkEmail',
-			data: 'mem_email='+email,
-			dataType : 'text',
-			success: function(result){
-				if(result == "exist"){ //사용불가
-					$('#emailDiv').text('이미 가입된 이메일입니다.');
-				}else if(result =='non_exist'){//사용가능
-					$('#emailDiv').text('사용 가능한 이메일입니다').css('color', '#0a58ca');
-				}
-			}
-		});//ajax
-	}
 	
+	else if(!($('#email1').val()==''||$('#email2').val()=='')){
+		let email = $('#email').val($('#email1').val() + '@' + $('#email2').val()); 
+		
+		if(!email_rule.test(email.val())){
+			$('#emailDiv').text("이메일을 형식에 맞게 입력해주세요.");
+		}else{
+			$('#emailDiv').text("");
+			//이메일 중복검사
+			$.ajax({
+				type: 'post',
+				url: '/market/member/checkEmail',
+				data: 'mem_email='+email.val(),
+				dataType : 'text',
+				success: function(result){
+					console.log("이메일:"+result);
+					if(result == "exist"){ //사용불가
+						$('#emailDiv').text('이미 가입된 이메일입니다.');
+					}else if(result =='non_exist'){//사용가능
+						$('#emailDiv').text('사용 가능한 이메일입니다').css('color', '#0a58ca');
+					}
+				}
+			});//ajax
+		}
+		
+	
+	}
 });
 
 //이메일 인증번호 버튼 클릭(인증번호 발송)
@@ -306,16 +310,22 @@ $('#serviceTerm').click(function(){
 
 //▶ 체크박스 전체 선택 & 전체 해제
 $('#all').click(function(){
- 	if($('#all').prop('checked'))
+	
+ 	if($('#all').prop('checked')){
  		$('.allcheck').prop('checked', true);
- 	else
+ 		$('#checkboxDiv').text('');
+ 	}else
  		$('.allcheck').prop('checked', false);
- 	if($('.allcheck').prop('checked'))
- 			$('#all').prop('checked', true);
+ 	if($('.allcheck').prop('checked')){
+		$('#all').prop('checked', true);
+		$('#checkboxDiv').text('');
+ 	}
 });
 $(".allcheck").click(function(){
+	
 	if($(".allcheck:checked").length==4){
 		$('#all').prop('checked', true);
+		$('#checkboxDiv').text('');
 	}else{
 		$('#all').prop('checked', false);
 	}

@@ -5,6 +5,7 @@ $(document).ready(function() {//처음들어가자마자 테이블 출력
 //selectPrint눌렀을때 (20개보기 50개보기..)
 $('#selectPrint').change(function(){
    var viewNum = $(this).val();
+   console.log("출력개수:"+viewNum);
    $('#viewNum').val(viewNum);
    
    memberListPrint();

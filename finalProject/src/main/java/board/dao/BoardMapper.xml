@@ -10,7 +10,8 @@
  
 <!--  ▶ 글 목록 페이징 처리 -->
 	<select id = "showList" parameterType = "java.util.Map" resultType = "board">
-		select * from (select rownum rn, tt.* from
+		select * from (
+				select rownum rn, tt.* from
 						(select * from boards
 							order by board_ref desc, board_step asc)tt
 						)where rn between #{startNum} and #{endNum}

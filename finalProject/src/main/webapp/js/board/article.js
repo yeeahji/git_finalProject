@@ -13,6 +13,7 @@ $(document).ready(function(){
 		data : 'seq='+$('#seq').val(), 
 		dataType : 'json', //sessionId, boardDTO
 		success : function(data){
+			
 			$('#board_subject').text(data.boardDTO.board_subject);
 			$('#mem_id').text(data.boardDTO.mem_id);
 			$('#board_logtime').text(data.boardDTO.board_logtime);

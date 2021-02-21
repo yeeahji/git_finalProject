@@ -51,6 +51,7 @@ public class MemberServiceImpl implements MemberService, UserDetailsService {
 	
 //	[회원가입] ----------------------------------------------------------
 	@Override
+	//아이디 중복검사
 	public String checkId(String id) {
 		MemberDTO memberDTO = memberDAO.checkId(id);
 		
@@ -61,8 +62,11 @@ public class MemberServiceImpl implements MemberService, UserDetailsService {
 			return "exist";
 	}
 	@Override
+	//이메일 중복검사
 	public String checkEmail(String mem_email) {
+		System.out.println("입력 이메일 확인:"+mem_email);
 		MemberDTO memberDTO = memberDAO.checkEmail(mem_email);
+		System.out.println("이메일 확인:"+memberDTO);
 		if(memberDTO == null) {//사용 가능			
 			return "non_exist";
 		}
@@ -71,6 +75,7 @@ public class MemberServiceImpl implements MemberService, UserDetailsService {
 	}
 
 	@Override
+	//회원가입
 	public int join(MemberDTO memberDTO) {
 		//패스워드 암호화
 		memberDTO.setMem_pwd(pwEncoder.encode(memberDTO.getMem_pwd()));
@@ -110,18 +115,18 @@ public class MemberServiceImpl implements MemberService, UserDetailsService {
 		return "success";
 	}
 
-	
+	//회원 정보 가져오기(회원정보 수정 시, 기존 회원 데이터 뿌려주기)
 	@Override
 	public MemberDTO getData(String id) {
 		return memberDAO.getData(id);
 	}
-
+	//회원정보수정
 	@Override
 	public void update(MemberDTO memberDTO) {
 		memberDTO.setMem_pwd(pwEncoder.encode(memberDTO.getMem_pwd()));
 		memberDAO.update(memberDTO);
 	}
-
+	//본인 재확인(마이페이지 들어가기 전)
 	@Override
 	public String  certify(Map<String, String> map) {
 		MemberDTO memberDTO = memberDAO.getData(map.get("mem_id"));
@@ -132,12 +137,12 @@ public class MemberServiceImpl implements MemberService, UserDetailsService {
 		else 
 			return "no";
 	}
-
+	//회원탈퇴
 	@Override
 	public void withdraw(Map<String, String> map) {
 		memberDAO.withdraw(map);
 	}
-
+	//아이디 찾기
 	@Override
 	public MemberDTO findId(String mem_email) {
 		MemberDTO memberDTO = memberDAO.findId(mem_email);
@@ -148,7 +153,7 @@ public class MemberServiceImpl implements MemberService, UserDetailsService {
 			return memberDTO;
 		}
 	}
-
+	//비밀번호찾기
 	@Override
 	public MemberDTO findPwd(Map<String, String> map) {
 		MemberDTO memberDTO = memberDAO.findPwd(map);
@@ -159,22 +164,24 @@ public class MemberServiceImpl implements MemberService, UserDetailsService {
 			return memberDTO;
 		}
 	}
-
+	//비밀번호 재설정(아이디/비번찾기)
 	@Override
-	public void resetPwd(Map<String, String> map) {
+	public void resetPwd(String mem_pwd, String mem_email) {
+		Map <String, String> map = new HashMap<String, String>();
+		map.put("mem_pwd", pwEncoder.encode(mem_pwd));
+		map.put("mem_email", mem_email);
 		memberDAO.resetPwd(map);
 		
 	}
-
+	//카카오 회원 구분
 	@Override
 	public int distinguishKakao(String mem_id) {
 		
 		return memberDAO.distinguishKakao(mem_id);
 	}
-
+	//신고
 	@Override
 	public void complain(Map<String, String> map) {
-		System.out.println("2:" +map);
 		memberDAO.complain(map);
 		
 	}

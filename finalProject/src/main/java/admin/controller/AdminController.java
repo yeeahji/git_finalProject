@@ -50,7 +50,8 @@ public class AdminController {
 							 Model model) {
 		model.addAttribute("pg", pg);
 		model.addAttribute("viewNum", viewNum);
-		return "/admin/adminPage/memberList";
+		model.addAttribute("display", "/admin/adminPage/memberList.jsp");
+		return "adminIndex";
 	}
 	//전체상품리스트
 	@RequestMapping(value="/productList", method=RequestMethod.GET)
@@ -59,7 +60,8 @@ public class AdminController {
 							  Model model) {
 		model.addAttribute("pg", pg);
 		model.addAttribute("viewNum", viewNum);
-		return "/admin/adminPage/productList";
+		model.addAttribute("display", "/admin/adminPage/productList.jsp");
+		return "adminIndex";
 	}
 	//전체상점리스트
 	@RequestMapping(value="/storeList", method=RequestMethod.GET)
@@ -68,7 +70,8 @@ public class AdminController {
 							Model model) {
 		model.addAttribute("pg", pg);
 		model.addAttribute("viewNum", viewNum);
-		return "/admin/adminPage/storeList";
+		model.addAttribute("display", "/admin/adminPage/storeList.jsp");
+		return "adminIndex";
 	}
 	//탈퇴 사유 분석
 	@RequestMapping(value="/withdrawList", method=RequestMethod.GET)
@@ -77,13 +80,14 @@ public class AdminController {
 							Model model) {
 		model.addAttribute("pg", pg);
 		model.addAttribute("viewNum", viewNum);
-		return "/admin/adminPage/withdrawList";
+		model.addAttribute("display", "/admin/adminPage/withdrawList.jsp");
+		return "adminIndex";
 	}
 	//공지사항
-	@RequestMapping(value="/noticeMG", method=RequestMethod.GET)
-	public String noticeWrite() {
-		return "/admin/adminPage/noticeMG";
-	}
+//	@RequestMapping(value="/noticeMG", method=RequestMethod.GET)
+//	public String noticeWrite() {
+//		return "/admin/adminPage/noticeMG";
+//	}
 	//고객상담관리
 	@RequestMapping(value="/memberQna", method=RequestMethod.GET)
 	public String memberQna(@RequestParam(required=false, defaultValue="1") String pg,
@@ -91,12 +95,14 @@ public class AdminController {
 		    				Model model) {
 		model.addAttribute("pg", pg);
 		model.addAttribute("viewNum", viewNum);
-		return "/admin/adminPage/memberQna";
+		model.addAttribute("display", "/admin/adminPage/memberQna.jsp");
+		return "adminIndex";
 	}
 	//신고 관리
 	@RequestMapping(value="/complainList", method=RequestMethod.GET)
-	public String complainList() {
-		return "/admin/adminPage/complainList";
+	public String complainList(Model model) {
+		model.addAttribute("display", "/admin/adminPage/complainList.jsp");
+		return "adminIndex";
 	}
 	
 	
@@ -318,14 +324,18 @@ public class AdminController {
 
 //	[신고]=========================================================================
 
-	//신고 내역 출력
+	//A.신고 내역 출력
 	@RequestMapping(value="/getComplainList", method=RequestMethod.POST)
 	public ModelAndView getComplainList(@RequestParam(required=false, defaultValue="1") String pg,
-				  						 @RequestParam(required=false, defaultValue="50") String viewNum) {
+				  						 @RequestParam(required=false, defaultValue="20") String viewNum) {
+		
+		//전체 리스트 가져오기
 		List<StoreDTO> list = adminService.getComplainList(pg,viewNum);
+		System.out.println("list:"+list);
 		//페이징처리
 		AdminBoardPaging adminComplainBP = adminService.adminComplainBP(pg,viewNum);
-		System.out.println("list:"+list);		
+		System.out.println("adminComplainBP"+adminComplainBP);
+		
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("list", list);
 		mav.addObject("pg", pg);
@@ -335,21 +345,38 @@ public class AdminController {
 		return mav;
 	}
 	
-//	신고자 검색 내역 출력
+//	B.신고자or신고당한사람 검색 내역 출력
 	@RequestMapping(value="searchReportedMember", method=RequestMethod.POST)
 	public ModelAndView searchReportedMember(@RequestParam Map<String,String> map) {
 //		map: keyword, searchType, pg,viewNum
 		List<ComplainDTO> list = adminService.searchReportedMember(map);
-		
-		AdminBoardPaging adminComplainBP = adminService.getSearchReportedBP(map);
+		System.out.println("list:"+list);
+		AdminBoardPaging adminSearchComplainBP = adminService.getSearchReportedBP(map);
 		
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("pg", map.get("pg"));
 		mav.addObject("list", list);
-		mav.addObject("adminComplainBP",adminComplainBP);
+		mav.addObject("adminSearchComplainBP",adminSearchComplainBP);
 		mav.setViewName("jsonView");
 		return mav;
 	}	
+//	C. 신고 카테고리(게시글/댓글/상점/상품/리뷰) 검색 출력
+	@RequestMapping(value="findWithdrawCate", method=RequestMethod.POST)
+	public ModelAndView findWithdrawCate(@RequestParam Map<String,String> map) {
+//		map:  withdrawCate, pg,viewNum
+		System.out.println("map:"+map);
+		List<ComplainDTO> list = adminService.findWithdrawCate(map);
+		System.out.println("list:"+list);
+		AdminBoardPaging adminComplainCateBP = adminService.getCateBP(map);
+		
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("pg", map.get("pg"));
+		mav.addObject("list", list);
+		mav.addObject("adminComplainCateBP",adminComplainCateBP);
+		mav.setViewName("jsonView");
+		return mav;
+	}	
+	
 	//원하는 댓글 내용 가져오기
 	@RequestMapping(value="getCommentContent", method=RequestMethod.POST)
 	public ModelAndView getCommentContent(@RequestParam String comment_seq) {
@@ -403,8 +430,6 @@ public class AdminController {
 		
 		//페이징처리
 		AdminBoardPaging qnaBP = adminService.qnaBP(pg,viewNum);
-		System.out.println("list:"+list);	
-		
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("list", list);
 		mav.addObject("pg", pg);
@@ -416,37 +441,24 @@ public class AdminController {
 	//조건검색 후 문의 내역 출력
 	@RequestMapping(value="/getSearchQnaList", method=RequestMethod.POST)
 	public ModelAndView getSearchQnaList(@RequestParam Map<String, String> map) {
+		//map: searchType, keyword, pg, viewNum
+		
+		System.out.println("map:"+map);
+		
 		List<QnaDTO> list = adminService.getSearchQnaList(map);
 		
 		//페이징처리
 		AdminBoardPaging getSearchqnaBP = adminService.getSearchqnaBP(map);
-		System.out.println("list:"+list);	
 		
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("list", list);
 		mav.addObject("pg", map.get("pg"));
-		//mav.addObject("viewNum", viewNum);
+		mav.addObject("viewNum", map.get("viewNum"));
 		mav.addObject("getSearchqnaBP", getSearchqnaBP);
 		mav.setViewName("jsonView");
 		return mav;
 	}
 	
-		
-//	카테고리별 검색 내역 출력
-//	@RequestMapping(value="selectQnaCount", method=RequestMethod.POST)
-//	public ModelAndView selectQnaCount(@RequestParam Map<String,String> map) {
-////		map: keyword, searchType, pg,viewNum
-//		List<ComplainDTO> list = adminService.selectQnaCount(map);
-//		
-//		AdminBoardPaging qnaCountBP = adminService.getQnaCount(map);
-//		
-//		ModelAndView mav = new ModelAndView();
-//		mav.addObject("pg", map.get("pg"));
-//		mav.addObject("list", list);
-//		mav.addObject("qnaCountBP",qnaCountBP);
-//		mav.setViewName("jsonView");
-//		return mav;
-//	}	
 	
 	//원하는 1:1문의 내용 가져오기
 	@RequestMapping(value="getQnaContent", method=RequestMethod.POST)
@@ -505,6 +517,8 @@ public class AdminController {
 	//탈퇴회원 조건검색 리스트 출력
 	@RequestMapping(value="/getSearchWithdrawList", method=RequestMethod.POST)
 	public ModelAndView getSearchWithdrawList(@RequestParam Map<String, String> map) {
+//		map:pg, viewNum,  keyword
+		
 		List<WithdrawDTO> list = adminService.getSearchWithdrawList(map);
 		
 		//페이징처리

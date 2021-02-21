@@ -28,15 +28,19 @@ $(document).ready(function(){
 		dataType: 'json',
 		success: function(data){
 			$.each(data.list, function(index, items){
-				$('#qnaCate_main').append("<option value='"+items.qnaCate_code+"' name='"+items.qnaCate_name+"'>"+items.qnaCate_name+"</option>");
+				$('#qnaCate_main').append("<option value='"+items.qnaCate_code+"' " 
+										+ "name='"+items.qnaCate_name+"'>"
+										+ items.qnaCate_name+"</option>");
 				$('#qnaCate_mainName').val(items.qnaCate_name);
 			})
+			
 		}
 	});
 	//소분류
 	$(document).on("change","#qnaCate_main",function(){
 		$("option:selected", this).each(function(){
-			var selectValue = $(this).val();//main에서 선택한값
+			let selectValue = $(this).val();//main에서 선택한값(코드값)
+			$('#qnaCate_mainName').val( $(this).text());
 			$.ajax({
 				type: 'post',
 				url: '/market/notice/getSubCate',
@@ -69,7 +73,7 @@ $("#qnaBtn").click(function(){
 			url: '/market/notice/writeQna',
 			data: formData,
 			success: function(data){
-				alert("상담 신청이 완료되었습니다.<br>" +
+				alert("상담 신청이 완료되었습니다." +
 						"빠른 시일 안에 확인 후 답변 드리겠습니다. 감사합니다.");
 				location.href = '/market/notice/qnaList';
 			},error:function(err){
