@@ -4,7 +4,8 @@ $(document).ready(function(){
 			$('#subjectAreaDiv').text("제목을 입력하세요");
 		else if($('#contentArea').val()== '')
 			$('#contentAreaDiv').text("내용을 입력하세요");
-		else
+		else{
+			
 			$.ajax({
 				type : 'post',
 				url : '/market/board/write',
@@ -15,7 +16,9 @@ $(document).ready(function(){
 					alert(err);
 					console.log(request.status + "\n message : " +request.responseText +"\n err:");
 				}
-			});
+			});//ajax
+		}
+			
 		
 	});
 });

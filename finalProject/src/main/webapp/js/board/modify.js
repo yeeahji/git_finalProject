@@ -5,6 +5,7 @@ $(document).ready(function(){
 		data : 'seq='+$('#seq').val(),
 		dataType : 'json',
 		success : function(result){
+			
 			$('#subjectArea').val(result.boardDTO.board_subject);
 			$('#contentArea').val(result.boardDTO.board_content);
 		}, error: function(err){
@@ -22,6 +23,7 @@ $(document).ready(function(){
 		else if($('#contentArea').val()=='')
 			$('#contentAreaDiv').text("내용을 입력하세요.").css('color','red');
 		else{
+			
 			$.ajax({
 				type:'post',
 				url: '/market/board/modifyArticle',

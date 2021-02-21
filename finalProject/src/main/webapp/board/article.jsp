@@ -34,7 +34,8 @@
 			
 		</div>
 <hr><!-- 내용 -->
-		<div id="board_content" name="board_content" style="height:100px;">
+		<div id="board_content" name="board_content"
+			style="white-space : pre-line; word-break : break-all">
 		</div>
 		</article>
 		</form>

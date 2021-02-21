@@ -68,6 +68,7 @@ public class MemberController {
 	@RequestMapping(value ="/checkEmail", method=RequestMethod.POST)
 	@ResponseBody
 	public String checkEmail(@RequestParam String mem_email) {
+		System.out.println("1:"+ mem_email);
 		return memberService.checkEmail(mem_email);
 	}
 	
@@ -303,15 +304,12 @@ public class MemberController {
 
         return mav;
 	}
-//	- 비밀번호 재설정
+//	- 비밀번호 재설정(아이디/비번찾기)
 	@ResponseBody
 	@RequestMapping(value = "/resetPwd", method = RequestMethod.POST)
 	public void resetPwd(@RequestParam String mem_pwd, String mem_email) {
-		Map <String, String> map = new HashMap<String, String>();
-		map.put("mem_pwd", mem_pwd);
-		map.put("mem_email", mem_email);
 		
-		memberService.resetPwd(map);
+		memberService.resetPwd(mem_pwd, mem_email);
 	}
 	
 //	[회원정보수정] ===================================================================================
@@ -347,18 +345,20 @@ public class MemberController {
 	@RequestMapping(value = "/updateForm", method =RequestMethod.GET)
 	public String updateForm(HttpSession session, Model model, Principal principal) {
 		String id = (String) session.getAttribute("sessionId");
+		System.out.println("id:"+id);
 		MemberDTO memberDTO = memberService.getData(id);
-		System.out.println("나아!!"+memberDTO.getMem_id()+"/"+memberDTO.getMem_email());
 		Map<String, Object> map = new HashMap<String, Object>();
 		int sessionKakao = memberService.distinguishKakao(principal.getName());
 		System.out.println("세션카카오"+sessionKakao);
-		if (sessionKakao==0) {//일반로그인
+		if (sessionKakao==0) {//일반로그인일 경우 전화번호 + 이메일 정보를 split하여 가져간다.
 			String[] tel = memberDTO.getMem_tel().split("-",3);
 			map.put("tel1", tel[0]);
 			map.put("tel2", tel[1]);
 			map.put("tel3", tel[2]);
 		}
-		String[] email = memberDTO.getMem_email().split("@",2);
+		System.out.println("dto:"+memberDTO);
+		System.out.println("이메일 : "+memberDTO.getMem_email());
+		String[] email = memberDTO.getMem_email().split("@",2);//카카오 로그인은 이메일만 split해서 가져간다.
 		System.out.println(email);
 		map.put("email1", email[0]);
 		map.put("email2", email[1]);

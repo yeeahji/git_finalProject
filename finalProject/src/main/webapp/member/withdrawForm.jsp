@@ -55,7 +55,7 @@
         </div>
         <div class="check_box">
             <input type="checkbox" name="withdraw_lowBenefit" id="withdraw_lowBenefit" value="1" class="reason">
-            <label for="reason_4">혜택 부족</label>
+            <label for="reason_4">혜택 부족&emsp;&emsp;&emsp;  &emsp; &emsp;&emsp;</label>
         </div>
         <div class="check_box">
             <input type="checkbox" name="withdraw_others" id="withdraw_others" value="1" class="reason">

@@ -256,6 +256,8 @@ public class AdminServiceImpl implements AdminService {
   //A.신고 전체 리스트 페이징
   @Override
   public AdminBoardPaging adminComplainBP(String pg, String viewNum) {
+
+	 //페이징 처리를 위해 전체 개수를 가져온다.
      int complainTotal = adminDAO.getComplainTotal();
      
      adminBoardPaging.setCurrentPage(Integer.parseInt(pg));
@@ -266,15 +268,14 @@ public class AdminServiceImpl implements AdminService {
      adminBoardPaging.makePagingHTML();
      return adminBoardPaging;
   }
+  
   //B.신고 검색 리스트 출력
   @Override
   public List<ComplainDTO> searchReportedMember(Map<String, String> map) {
-     System.out.println("2"+map);
      int viewNum = Integer.parseInt(map.get("viewNum"));
      
      int endNum = Integer.parseInt(map.get("pg"))*viewNum;
      int startNum = endNum-(viewNum-1);
-     
      
      map.put("startNum", startNum+"");
      map.put("endNum", endNum+"");
@@ -283,6 +284,7 @@ public class AdminServiceImpl implements AdminService {
   //B.신고 검색 리스트 페이징
   @Override
   public AdminBoardPaging getSearchReportedBP(Map<String, String> map) {
+//	  map: keyword, searchType, pg,viewNum
      
      int viewNum = Integer.parseInt(map.get("viewNum"));
      System.out.println("view:" +viewNum);
@@ -298,7 +300,43 @@ public class AdminServiceImpl implements AdminService {
      
      return adminBoardPaging;
   }
-
+  
+//	C. 신고 카테고리(게시글/댓글/상점/상품/리뷰) 검색 출력
+  @Override
+  public List<ComplainDTO> findWithdrawCate(Map<String, String> map) {
+	  int viewNum = Integer.parseInt(map.get("viewNum"));
+	     
+     int endNum = Integer.parseInt(map.get("pg"))*viewNum;
+     int startNum = endNum-(viewNum-1);
+     
+     map.put("startNum", startNum+"");
+     map.put("endNum", endNum+"");
+     return adminDAO.findWithdrawCate(map);
+  }
+  
+  
+//  C. 신고 카테고리(게시글/댓글/상점/상품/리뷰) 검색 페이징 처리
+  @Override
+  public AdminBoardPaging getCateBP(Map<String, String> map) {
+	 //map:  withdrawCate, pg,viewNum
+	  
+	 int viewNum = Integer.parseInt(map.get("viewNum"));
+     System.out.println("view:" +viewNum);
+     int total = adminDAO.getCateBP(map);
+     
+     adminBoardPaging.setCurrentPage(Integer.parseInt(map.get("pg")));
+     adminBoardPaging.setPageBlock(10);
+     adminBoardPaging.setPageSize(viewNum);
+     adminBoardPaging.setTotalA(total);
+     
+     adminBoardPaging.makePagingHTML();
+     
+     
+     return adminBoardPaging;
+  }
+  
+  
+  
   @Override
   public CommentDTO getCommentContent(String comment_seq) {
      return adminDAO.getCommentContent(comment_seq) ;
@@ -316,7 +354,11 @@ public class AdminServiceImpl implements AdminService {
   public void solveComplain(Map<String, Integer> map) {
      adminDAO.solveComplain( map);
   }
-  
+//신고 내역 블라인트처리(게시글/댓글/리뷰에 한해 가능)
+  @Override
+  public void blindComplain(String board_seq, String comment_seq, String review_seq, String thisIs) {
+     adminDAO.blindComplain(board_seq, comment_seq, review_seq, thisIs);
+  }
 
 //    [1:1문의]=========================================================================
     //A.1:1문의 전체 리스트 출력
@@ -351,10 +393,39 @@ public class AdminServiceImpl implements AdminService {
     public void writeAnswer(Map<String, Object> map) {
        System.out.println(map);
        adminDAO.writeAnswer( map);
-       
     }
+    
+    //조건검색 후 1:1 문의 내역 출력
+    @Override
+    public List<QnaDTO> getSearchQnaList(Map<String, String> map) {
+       int viewNum = Integer.parseInt(map.get("viewNum"));
+       
+       int endNum =  Integer.parseInt(map.get("pg"))*viewNum;
+       int startNum = endNum-(viewNum-1);
+       
+       map.put("startNum", startNum+"");
+       map.put("endNum", endNum+"");
+       return adminDAO.getSearchQnaList(map);
+    }
+    //조건검색 후 문의 내역 출력 페이징
+    @Override
+    public AdminBoardPaging getSearchqnaBP(Map<String, String> map) {
+       int viewNum = Integer.parseInt(map.get("viewNum"));
+       
+       int totalG = adminDAO.totalG(map);
+       
+       adminBoardPaging.setCurrentPage(Integer.parseInt(map.get("pg")));
+       adminBoardPaging.setPageBlock(10);
+       adminBoardPaging.setPageSize(viewNum);
+       adminBoardPaging.setTotalA(totalG);
+       
+       adminBoardPaging.makePagingHTML();
+       
+       return adminBoardPaging;
+    }
+    
 //    [탈퇴회원 관리]=========================================================================
-
+    //탈퇴회원 리스트 출력
     @Override
     public List<WithdrawDTO> getWithdrawList(String pg, String viewNum) {
        int endNum = Integer.parseInt(pg)*Integer.parseInt(viewNum);
@@ -366,6 +437,7 @@ public class AdminServiceImpl implements AdminService {
        
        return adminDAO.getWithdrawList(map );
     }
+    //탈퇴회원 페이징처리
     @Override
     public AdminBoardPaging withdrawBP(String pg, String viewNum) {
        int withdrawTotal = adminDAO.getWithdrawTotal();
@@ -378,6 +450,7 @@ public class AdminServiceImpl implements AdminService {
        adminBoardPaging.makePagingHTML();
        return adminBoardPaging;
     }
+    //탈퇴회원 전체 수(for 페이징처리)
     @Override
     public Map <String, Integer> getWithdrawTotal() {
        int withdrawTotal =adminDAO.getWithdrawTotal();
@@ -399,15 +472,41 @@ public class AdminServiceImpl implements AdminService {
        
        return map;
     }
+    
+    //탈퇴회원 조건검색 리스트 출력
     @Override
-    public void blindComplain(String board_seq, String comment_seq, String review_seq, String thisIs) {
-       System.out.println("2:"+board_seq+"/"+comment_seq+"/"+review_seq+"/"+thisIs);
-
-       adminDAO.blindComplain(board_seq, comment_seq, review_seq, thisIs);
+    public List<WithdrawDTO> getSearchWithdrawList(Map<String, String> map) {
+ 	   //map:pg, viewNum,  keyword
+       int viewNum = Integer.parseInt(map.get("viewNum"));
+       int endNum =  Integer.parseInt(map.get("pg"))*viewNum;
+       int startNum = endNum-(viewNum-1);
        
+       map.put("startNum", startNum+"");
+       map.put("endNum", endNum+"");
+       return adminDAO.getSearchWithdrawList(map);
     }
+    
+    //탈퇴회원 조건검색 리스트 출력_페이징
+    @Override
+    public AdminBoardPaging getSearchWithdrawBP(Map<String, String> map) {
+       int viewNum = Integer.parseInt(map.get("viewNum"));
+       
+       int totalH = adminDAO.totalH(map);
+       
+       adminBoardPaging.setCurrentPage(Integer.parseInt(map.get("pg")));
+       adminBoardPaging.setPageBlock(10);
+       adminBoardPaging.setPageSize(viewNum);
+       adminBoardPaging.setTotalA(totalH);
+       
+       adminBoardPaging.makePagingHTML();
+       
+       return adminBoardPaging;
+    }
+    
+//==============================================================================================
+    
 
- //회원 영구정지
+    //회원 영구정지
     @Override
     public void memberBlock(String id) {
        adminDAO.memberBlock(id);
@@ -432,63 +531,9 @@ public class AdminServiceImpl implements AdminService {
        return product_cate_code;
     }
     
-    //조건검색 후 문의 내역 출력
-   @Override
-   public List<QnaDTO> getSearchQnaList(Map<String, String> map) {
-      int viewNum = Integer.parseInt(map.get("viewNum"));
-      
-      int endNum =  Integer.parseInt(map.get("pg"))*viewNum;
-      int startNum = endNum-(viewNum-1);
-      
-      map.put("startNum", startNum+"");
-      map.put("endNum", endNum+"");
-      return adminDAO.getSearchQnaList(map);
-   }
-   //조건검색 후 문의 내역 출력 페이징
-   @Override
-   public AdminBoardPaging getSearchqnaBP(Map<String, String> map) {
-      int viewNum = Integer.parseInt(map.get("viewNum"));
-      
-      int totalG = adminDAO.totalG(map);
-      
-      adminBoardPaging.setCurrentPage(Integer.parseInt(map.get("pg")));
-      adminBoardPaging.setPageBlock(10);
-      adminBoardPaging.setPageSize(viewNum);
-      adminBoardPaging.setTotalA(totalG);
-      
-      adminBoardPaging.makePagingHTML();
-      
-      return adminBoardPaging;
-   }
    
-   //탈퇴회원 조건검색 리스트 출력
-   @Override
-   public List<WithdrawDTO> getSearchWithdrawList(Map<String, String> map) {
-      int viewNum = Integer.parseInt(map.get("viewNum"));
-      
-      int endNum =  Integer.parseInt(map.get("pg"))*viewNum;
-      int startNum = endNum-(viewNum-1);
-      
-      map.put("startNum", startNum+"");
-      map.put("endNum", endNum+"");
-      return adminDAO.getSearchWithdrawList(map);
-   }
-   //탈퇴회원 조건검색 리스트 출력_페이징
-   @Override
-   public AdminBoardPaging getSearchWithdrawBP(Map<String, String> map) {
-      int viewNum = Integer.parseInt(map.get("viewNum"));
-      
-      int totalH = adminDAO.totalH(map);
-      
-      adminBoardPaging.setCurrentPage(Integer.parseInt(map.get("pg")));
-      adminBoardPaging.setPageBlock(10);
-      adminBoardPaging.setPageSize(viewNum);
-      adminBoardPaging.setTotalA(totalH);
-      
-      adminBoardPaging.makePagingHTML();
-      
-      return adminBoardPaging;
-   }
+   
+
    
    //상점_상세조회_상품정보_판매중
    @Override
@@ -518,5 +563,7 @@ public class AdminServiceImpl implements AdminService {
       int totalReported = adminDAO.totalReported(id);
       return totalReported;
    }
+
+
 
 }

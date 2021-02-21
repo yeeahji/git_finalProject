@@ -27,7 +27,8 @@
   			<textarea placeholder="제목을 입력해주세요." class="textarea_input" id="subjectArea" style="height: 40px;"></textarea>
   			<div id="subjectAreaDiv" class="caution"></div>
   			<br>
-  			<textarea placeholder="내용을 입력해주세요." class="textarea_input" id="contentArea" style="height: 300px;"></textarea>
+  			
+  			<textarea placeholder="내용을 입력해주세요." rows = "30" class="textarea_input" id="contentArea" style="height: 300px;"></textarea>
   			
   			
 <!--   			<input type = "file" name = "image[]" id = "img3" accept ="image/*" multiple> -->

@@ -132,30 +132,41 @@ public class AdminDAOMybatis implements AdminDAO {
 
 //	[신고]=========================================================================
 
-	// 신고 전체 리스트 출력
+	// A.신고 전체 리스트 출력
 	@Override
 	public List<StoreDTO> getComplainList(Map<String, Integer> map) {
 		return sqlSession.selectList("adminSQL.getComplainList", map);
 	}
 
-	// 신고 전체 개수(for 신고 전체 리스트 페이징)
+	// A.신고 전체 개수(for 신고 전체 리스트 페이징)
 	@Override
 	public int getComplainTotal() {
 		return sqlSession.selectOne("adminSQL.getComplainTotal");
 	}
 
-	// 신고 검색 결과 출력
+	// B.신고 검색 결과 출력
 	@Override
 	public List<ComplainDTO> searchReportedMember(Map<String, String> map) {
 		return sqlSession.selectList("adminSQL.searchReportedMember", map);
 	}
 
-	// 신고 검색 개수(for 신고 검색 리스트 페이징)
+	// B.신고 검색 개수(for 신고 검색 리스트 페이징)
 	@Override
 	public int getTotalReportedMember(Map<String, String> map) {
 		return sqlSession.selectOne("adminSQL.getTotalReportedMember", map);
 	}
-
+	
+	//C. 신고 카테고리(게시글/댓글/상점/상품/리뷰) 검색 출력
+	@Override
+	public List<ComplainDTO> findWithdrawCate(Map<String, String> map) {
+		return sqlSession.selectList("adminSQL.findWithdrawCate", map);
+	}
+	
+	//C. 신고 카테고리(게시글/댓글/상점/상품/리뷰) 검색 페이징 처리
+	@Override
+	public int getCateBP(Map<String, String> map) {
+		return sqlSession.selectOne("adminSQL.getCateBP", map);
+	}
 	@Override
 	public CommentDTO getCommentContent(String comment_seq) {
 		return sqlSession.selectOne("adminSQL.getCommentContent", comment_seq);
@@ -195,38 +206,47 @@ public class AdminDAOMybatis implements AdminDAO {
 	@Override
 	public List<WithdrawDTO> getWithdrawList(Map<String, Integer> map) {
 		List<WithdrawDTO> list = sqlSession.selectList("adminSQL.getWithdrawList", map);
-		System.out.println("3:" + list);
 		return list;
 	}
 
+	//파이 그래프를 그리기 위한 데이터들
+	//탈퇴사유 전체 개수
 	@Override
 	public int getWithdrawTotal() {
 		return sqlSession.selectOne("adminSQL.getWithdrawTotal");
 	}
+	
+	//탈퇴사유 - '낮은 이용' 개수
 	@Override
 	public int getWithdraw_lowFrequencyTotal() {
 		return sqlSession.selectOne("adminSQL.getWithdraw_lowFrequencyTotal");
 	}
+	//탈퇴사유 - '재가입' 개수
 	@Override
 	public int getWithdraw_rejoinTotal() {
 		return sqlSession.selectOne("adminSQL.getWithdraw_rejoinTotal");
 	}
+	//탈퇴사유 - '적은 콘텐츠' 개수
 	@Override
 	public int getWithdraw_lowContentsTotal() {
 		return sqlSession.selectOne("adminSQL.getWithdraw_lowContentsTotal");
 	}
+	//탈퇴사유 - '개인정보보호' 개수
 	@Override
 	public int getWithdraw_protectInfoTotal() {
 		return sqlSession.selectOne("adminSQL.getWithdraw_protectInfoTotal");
 	}
+	//탈퇴사유 - '적은 혜택' 개수
 	@Override
 	public int getWithdraw_lowBenefitTotal() {
 		return sqlSession.selectOne("adminSQL.getWithdraw_lowBenefitTotal");
 	}
+	//탈퇴사유 - '기타 사유' 개수
 	@Override
 	public int getWithdraw_othersTotal() {
 		return sqlSession.selectOne("adminSQL.getWithdraw_othersTotal");
 	}
+	//신고 내역 블라인드 처리(게시글/댓글/리뷰에 한하여)
 	@Override
 	public void blindComplain(String board_seq, String comment_seq, String review_seq, String thisIs) {
 		if(thisIs.equals("게시글") ){
@@ -311,6 +331,7 @@ public class AdminDAOMybatis implements AdminDAO {
 	public int totalReported(String id) {
 		return sqlSession.selectOne("adminSQL.totalReported", id);
 	}
+	
 
 
 	

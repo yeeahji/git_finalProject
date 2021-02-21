@@ -121,12 +121,13 @@
 			</choose>
 	</select>
 	
-<!-- [신고]========================================================================= -->
+<!-- [신고내역관리]========================================================================= -->
 <!-- A.신고 리스트 전체 출력 -->
    <select id="getComplainList" parameterType="java.util.Map" resultType="member.bean.ComplainDTO">
       select * from(
-         select rownum rn, tt.* from(select * from complain)tt)
-               where rn between #{startNum} and #{endNum} order by complain_seq desc
+         select rownum rn, tt.* from
+         	(select * from complain order by complain_seq desc)tt)
+               where rn between #{startNum} and #{endNum} 
    </select>
 
 <!-- A.신고 리스트 개수 -->
@@ -139,7 +140,7 @@
       <![CDATA[
       select * from
          (select rownum rn, tt.* from
-         (select * from complain where ${searchType} like '%'||#{keyword}||'%')tt
+         (select * from complain where ${searchType} like '%'||#{keyword}||'%' order by complain_seq desc)tt
          )where rn>=#{startNum} and rn<=#{endNum}
       ]]>
    </select>
@@ -147,38 +148,63 @@
    <select id="getTotalReportedMember" parameterType="java.util.Map" resultType="Integer">
       select count(*) from complain where ${searchType} like '%'||#{keyword}||'%'
    </select>
+   
+   
+<!-- C.신고 검색 리스트 전체 출력 -->
+   <select id="findWithdrawCate" parameterType="java.util.Map" resultType="member.bean.ComplainDTO">
+      <![CDATA[
+      select * from
+         (select rownum rn, tt.* from
+         (select * from complain where ${withdrawCate} is not null order by complain_seq desc)tt
+         )where rn>=#{startNum} and rn<=#{endNum}
+      ]]>
+   </select>
+<!-- C.신고 검색 리스트 개수 -->
+   <select id="getCateBP" parameterType="java.util.Map" resultType="Integer">
+      select count(*) from complain where ${withdrawCate} is not null
+   </select>
+   
+   
+<!--특정 회원 신고 회수 체크 -->
+	<select id="totalReported" parameterType="String" resultType="Integer"> 
+		select count(*) from complain where mem_id=#{id}
+	</select>
+   
 
-<!-- 신고 댓글 보이기 -->
+<!-- C.신고 댓글 보이기 -->
    <select id="getCommentContent" parameterType="String" resultType="board.bean.CommentDTO">
       select * from comments where comment_seq=#{comment_seq} 
    </select>
-<!-- 신고 리뷰 보이기 -->
+<!-- C.신고 리뷰 보이기 -->
    <select id="getReviewContent" parameterType="String" resultType="store.bean.ReviewDTO">
       select * from comments where review_seq=#{review_seq}
 
    </select>
-<!-- 신고내용 처리상태 변경 -->
+<!-- D.신고내용 처리상태 변경 -->
 	<update id="solveComplain" parameterType="java.util.Map" >
  		update complain set complain_status = #{complain_status} where complain_seq = #{complain_seq}
  	</update>
  	
- 	
+<!-- E.게시글 블라인드 처리 -->
  	<update id="boardBlindComplain" parameterType="Integer" >
  		update boards set board_subject = '관리자에 의해 블라인드 처리된 글입니다.', board_content = '관리자에 의해 블라인드 처리된 글입니다.' where board_seq = #{board_seq}
  	</update>
+<!--  E.댓글 블라인드 처리 -->
  	<update id="commentBlindComplain" parameterType="Integer" >
  		update comments set comment_content = '관리자에 의해 블라인드 처리된 글입니다.' where comment_seq = #{ comment_seq}
  	</update>
+<!--  E.상품후기 블라인드 처리 -->
  	<update id="reviewBlindComplain" parameterType="Integer" >
  		update review set review_content = '관리자에 의해 블라인드 처리된 글입니다.' where review_seq = #{review_seq}
  	</update>
  	
-<!-- [1:1문의]========================================================================= -->
+<!-- [1:1문의관리]========================================================================= -->
 <!-- A.1:1문의 리스트 전체 출력 -->
    <select id="getQnaList" parameterType="java.util.Map" resultType="admin.bean.QnaDTO">
       select * from(
-         select rownum rn, tt.* from(select * from qna)tt)
-               where rn between #{startNum} and #{endNum} order by qna_seq desc
+         select rownum rn, tt.* from
+         	(select * from qna order by qna_seq desc)tt)
+               where rn between #{startNum} and #{endNum} 
    </select>
 
 <!-- A.1:1문의 리스트 개수 -->
@@ -186,6 +212,22 @@
       select count(*) from qna
    </select>
    
+   
+<!-- B.조건검색 후 문의 내역 출력 -->
+	<select id="getSearchQnaList" parameterType="java.util.Map" resultType="admin.bean.QnaDTO">
+		<![CDATA[
+		select * from
+		(select rownum rn, tt.* from
+		(select * from qna where ${searchType2} like '%'||#{keyword}||'%' order by qna_seq desc)tt
+		)where rn>=#{startNum} and rn<=#{endNum}
+		]]>
+	</select>
+<!-- B.조건검색 후 문의 내역 출력 페이징 -->
+	<select id="totalG" parameterType="java.util.Map" resultType="Integer">
+		select count(*) from qna where ${searchType2} like '%'||#{keyword}||'%'
+	</select>
+	
+	
 <!-- C.원하는 1:1문의글 가져오기 -->
    <select id="getQnaContent" parameterType="Integer" resultType="admin.bean.QnaDTO">
       select * from qna where qna_seq=#{qna_seq} 
@@ -194,21 +236,42 @@
  	<update id="writeAnswer" parameterType="java.util.Map" >
  		update qna set qna_answer = #{qna_answer}, qna_answerLogtime = sysdate where qna_seq = #{qna_seq}
  	</update>
+
  	
  	
 <!-- [탈퇴회원관리]========================================================================= -->
 <!-- A.탈퇴회원 리스트 전체 출력 -->
    <select id="getWithdrawList" parameterType="java.util.Map" resultType="admin.bean.WithdrawDTO">
       select * from(
-         select rownum rn, tt.* from(select * from withdraw)tt)
+         select rownum rn, tt.* from
+         	(select * from withdraw
+         		order by withdraw_seq desc)tt)
                where rn between #{startNum} and #{endNum}
-               order by withdraw_seq desc
+               
    </select>
 
 <!-- A.탈퇴회원 리스트 개수 -->
    <select id="getWithdrawTotal" resultType="Integer">
       select count(*) from withdraw
    </select>
+   
+   
+<!-- B.조건검색 후 문의 내역 출력-->
+	<select id="getSearchWithdrawList" parameterType="java.util.Map" resultType="admin.bean.WithdrawDTO">
+		<![CDATA[
+		select * from
+		(select rownum rn, tt.* from
+		(select * from withdraw 
+			where withdraw_detailReason like '%'||#{keyword}||'%' order by withdraw_seq desc)tt
+		)where rn>=#{startNum} and rn<=#{endNum}
+		]]>
+	</select>
+<!-- B.조건검색 후 문의 내역 출력 페이징 -->
+	<select id="totalH" parameterType="java.util.Map" resultType="Integer">
+		select count(*) from withdraw where withdraw_detailReason like '%'||#{keyword}||'%'
+	</select>
+   
+   
 <!-- C.탈퇴사유  이용빈도 낮음 개수 -->
    <select id="getWithdraw_lowFrequencyTotal" resultType="Integer">
       select count(*) from withdraw where withdraw_lowFrequency is not null
@@ -235,6 +298,7 @@
    </select>
      
 
+<!-- [전체 상품관리]========================================================================= -->
 
 <!-- 회원 영구정지 -->
 	<update id="memberBlock" parameterType="String">
@@ -255,34 +319,10 @@
 	</select>
 	
 	
-<!-- 조건검색 후 문의 내역 출력-->
-	<select id="getSearchQnaList" parameterType="java.util.Map" resultType="admin.bean.QnaDTO">
-		<![CDATA[
-		select * from
-		(select rownum rn, tt.* from
-		(select * from qna where ${searchType2} like '%'||#{keyword}||'%')tt
-		)where rn>=#{startNum} and rn<=#{endNum}
-		]]>
-	</select>
-<!-- 조건검색 후 문의 내역 출력 페이징 -->
-	<select id="totalG" parameterType="java.util.Map" resultType="Integer">
-		select count(*) from qna where ${searchType} like '%'||#{keyword}||'%'
-	</select>
+
 	
-<!-- 조건검색 후 문의 내역 출력-->
-	<select id="getSearchWithdrawList" parameterType="java.util.Map" resultType="admin.bean.WithdrawDTO">
-		<![CDATA[
-		select * from
-		(select rownum rn, tt.* from
-		(select * from withdraw where ${searchType} like '%'||#{keyword}||'%')tt
-		)where rn>=#{startNum} and rn<=#{endNum}
-		]]>
-	</select>
-<!-- 조건검색 후 문의 내역 출력 페이징 -->
-	<select id="totalH" parameterType="java.util.Map" resultType="Integer">
-		select count(*) from withdraw where ${searchType} like '%'||#{keyword}||'%'
-	</select>
-	
+
+<!-- [전체상점관리]========================================================================= -->	
 <!-- 상점_상세조회_상품정보_판매중 -->
 	<select id="sale_productSpan" parameterType="String" resultType="Integer"> 
 		select count(product_manage) from product where mem_id=#{id} and product_manage=1
@@ -300,9 +340,6 @@
 	<select id="totalBuyProduct" parameterType="String" resultType="Integer"> 
 		select count(*) from purchase where my_id=#{id}
 	</select>
-<!-- 신고당한 수 -->
-	<select id="totalReported" parameterType="String" resultType="Integer"> 
-		select count(*) from complain where mem_id=#{id}
-	</select>
+
 
 </mapper>

@@ -38,7 +38,7 @@
   			  				<span class="artBtn_arrow"></span>
   			  			</button>
   			  			<p class="artP">
-	  			  			 안녕하세요. 번개장터입니다.<br/><br/>
+	  			  			 안녕하세요. 아나바다 마켓입니다.<br/><br/>
 							 타 사이트 대리결제를 통해 피해가 발생되고 있습니다.<br/>
 							 실물 상품을 확보하지 않은 상태에서 타 사이트 대리결제 거래가 확인 될 경우 상품 삭제 및 제재를 받을 수 있습니다.<br/>
 							 깨끗한 거래 환경이 유지될 수 있도록 협조 부탁 드립니다.<br/>
@@ -53,12 +53,12 @@
   			  		<article class="a02">
   			  			<button class="artBtn">
   			  				<div class="artBtn_subject">
-  			  					<h1>번개장터 개인정보처리방침 개정 안내</h1>
+  			  					<h1>아나바다 마켓 개인정보처리방침 개정 안내</h1>
   			  					<time class="artBtn_time">2020</time>
   			  				</div>
   			  				<span class="artBtn_arrow"></span>
   			  			</button>
-  			  			<p class="artP">안녕하세요. 번개장터입니다.</p>
+  			  			<p class="artP">안녕하세요. 아나바다 마켓입니다.</p>
   			  		</article>
   			  	</li>
   			  	<li class="inner_li">
@@ -70,67 +70,67 @@
   			  				</div>
   			  				<span class="artBtn_arrow"></span>
   			  			</button>
-  			  			<p class="artP">안녕하세요. 번개장터입니다.</p>
+  			  			<p class="artP">안녕하세요. 아나바다 마켓입니다.</p>
   			  		</article>
   			  	</li>
   			  	<li class="inner_li">
   			  		<article class="a04">
   			  			<button class="artBtn">
   			  				<div class="artBtn_subject">
-  			  					<h1>번개장터 상점 통합 안내 </h1>
+  			  					<h1>아나바다 마켓 상점 통합 안내 </h1>
   			  					<time class="artBtn_time">2020</time>
   			  				</div>
   			  				<span class="artBtn_arrow"></span>
   			  			</button>
-  			  			<p class="artP">안녕하세요. 번개장터입니다.</p>
+  			  			<p class="artP">안녕하세요. 아나바다 마켓입니다.</p>
   			  		</article>
   			  	</li>
   			  	<li class="inner_li">
   			  		<article class="a05">
   			  			<button class="artBtn">
   			  				<div class="artBtn_subject">
-  			  					<h1>번개장터 서비스 운영정책 추가 안내</h1>
+  			  					<h1>아나바다 마켓 서비스 운영정책 추가 안내</h1>
   			  					<time class="artBtn_time">2020</time>
   			  				</div>
   			  				<span class="artBtn_arrow"></span>
   			  			</button>
-  			  			<p class="artP">안녕하세요. 번개장터입니다.</p>
+  			  			<p class="artP">안녕하세요. 아나바다 마켓입니다.</p>
   			  		</article>
   			  	</li>
   			  	<li class="inner_li">
   			  		<article class="a06">
   			  			<button class="artBtn">
   			  				<div class="artBtn_subject">
-  			  					<h1>번개장터 이용약관 개정 안내</h1>
+  			  					<h1>아나바다 마켓 이용약관 개정 안내</h1>
   			  					<time class="artBtn_time">2020</time>
   			  				</div>
   			  				<span class="artBtn_arrow"></span>
   			  			</button>
-  			  			<p class="artP">안녕하세요. 번개장터입니다.</p>
+  			  			<p class="artP">안녕하세요. 아나바다 마켓입니다.</p>
   			  		</article>
   			  	</li>
   			  	<li class="inner_li">
   			  		<article class="a07">
   			  			<button class="artBtn">
   			  				<div class="artBtn_subject">
-  			  					<h1>번개장터 개인정보처리방침 개정 안내</h1>
+  			  					<h1>아나바다 마켓 개인정보처리방침 개정 안내</h1>
   			  					<time class="artBtn_time">2020</time>
   			  				</div>
   			  				<span class="artBtn_arrow"></span>
   			  			</button>
-  			  			<p class="artP">안녕하세요. 번개장터입니다.</p>
+  			  			<p class="artP">안녕하세요. 아나바다 마켓입니다.</p>
   			  		</article>
   			  	</li>
   			  	<li class="inner_li">
   			  		<article class="a08">
   			  			<button class="artBtn">
   			  				<div class="artBtn_subject">
-  			  					<h1>[공지] 추석 연휴 사기 거래 주의! 꼭 읽어주세요!</h1>
+  			  					<h1>[공지] 명절 연휴 사기 거래 주의! 꼭 읽어주세요!</h1>
   			  					<time class="artBtn_time">2020</time>
   			  				</div>
   			  				<span class="artBtn_arrow"></span>
   			  			</button>
-  			  			<p class="artP">안녕하세요. 번개장터입니다.</p>
+  			  			<p class="artP">안녕하세요. 아나바다 마켓입니다.</p>
   			  		</article>
   			  	</li>
   			  	<li class="inner_li">
@@ -142,7 +142,7 @@
   			  				</div>
   			  				<span class="artBtn_arrow"></span>
   			  			</button>
-  			  			<p class="artP">안녕하세요. 번개장터입니다.</p>
+  			  			<p class="artP">안녕하세요. 아나바다 마켓입니다.</p>
   			  		</article>
   			  	</li>
   			  	

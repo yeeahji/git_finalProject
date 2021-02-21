@@ -47,11 +47,11 @@
 <!-- - 리스트 -->
 		<table class="table table-bordered table-hover" id="boardListTable" border="1" cellpadding="10" cellspacing="1" frame="hside" rules="rows" align="center">
 			<tr align="center">
-				<th width="100">글번호</th>
-				<th width="700">제목</th>
-				<th width="150">작성자</th>
-				<th width="100">조회수</th>
-				<th width="150">작성일</th>
+				<th width="100" style="text-align:center">글번호</th>
+				<th width="700" style="text-align:center;">제목</th>
+				<th width="150" style="text-align:center;">작성자</th>
+				<th width="100" style="text-align:center;">조회수</th>
+				<th width="150" style="text-align:center;">작성일</th>
 			</tr>
 			<!-- 비회원 -->
 			<sec:authorize access="isAnonymous()">	
@@ -64,7 +64,10 @@
 		</table><br>
 	
 <!-- - 페이징 처리 -->
-		<div id="boardPagingDiv" class="paging" align="center" cursor="point"></div><br><br>
+		<div class="pagingWrap">
+		<div id="boardPagingDiv" class="paging" align="center" cursor="point">
+
+		</div></div><br><br>
 		
 <!-- - 검색 -->
 		<form id="boardSearchForm" name="boardSearchForm">

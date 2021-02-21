@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+    
 <!DOCTYPE html>
 <html>
 <head>
@@ -10,6 +12,9 @@
 	<script type="text/javascript" src="../js/board/modify.js"></script>
 </head>
 <body>
+<%	pageContext.setAttribute("br", "<br/>");
+	pageContext.setAttribute("cn", "\n");
+%>
 <div id="root">
 <div class="section1">
 <div class="section2">
@@ -23,10 +28,12 @@
 		<input type = "hidden" name="pg" id="pg" value="${pg }">
   			<div class="row">
   			<div class="FlexableTextArea">
-	  			<textarea placeholder="제목을 입력해주세요." class="textarea_input" id="subjectArea" style="height: 40px;"></textarea>
+	  			<textarea placeholder="제목을 입력해주세요." class="textarea_input" 
+	  					id="subjectArea" style="height: 40px;"></textarea>
   			<div id="subjectAreaDiv" class="caution"></div>
   			<br>
-	  			<textarea placeholder="내용을 입력해주세요." class="textarea_input" id="contentArea" style="height: 300px;"></textarea>
+	  			<textarea placeholder="내용을 입력해주세요." class="textarea_input" 
+	  					id="contentArea" style="height: 300px;">${fn:replace(b.board_content,br,cn)}</textarea>
   			<div id="contentAreaDiv" class="caution"></div>
   			</div></div>
   			<div align="center">
