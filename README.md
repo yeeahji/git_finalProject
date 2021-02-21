@@ -38,8 +38,8 @@
 
 * 일반 회원
 
-| 기능 | 세부 기능 |
-|:---:|:---:|
+|   기능   | 세부 기능 |
+|:-----------:|:---:|
 | 메인 | 전체 상품 목록 / 상품 리스트 더보기 / 찜한 상품 / 최근본 상품 / 상품 검색/ 최근 검색어 /  상품 카테고리 / 광고 슬라이드 |
 | 회원 | 회원가입 / 로그인 / SNS 로그인 / 관리자 & 유저 권한 설정 / 회원 정보 수정 / 회원 탈퇴 / 아이디&비번 찾기 / 이메일 인증 |
 | 상점 | 상점 정보 설정 / 에코지수, 상점평점 확인 / 상품 후기 / 찜 / 구매내역 / 내 상품 관리(상품 검색, 삭제, 상태변경) / 상점 신고 / 후기 신고 |
@@ -67,7 +67,8 @@
  > 제 담당파트는 크게 **시큐리티**, **상품 등록하기**, **바다톡(채팅)** 으로 나눌 수 있습니다. 이 외의 파트에도 여기저기 참여했지만요!
 <br/>
 
-* _시큐리티_
+* **_시큐리티_**
+---------------
 
 UserDetails를 커스텀하여 [MemberDTO.java](https://github.com/yeeahji/git_finalProject/blob/main/finalProject/src/main/java/member/bean/MemberDTO.java)를 생성했습니다.
 
@@ -78,7 +79,8 @@ UserDetailsService를 implements한 [MemberServiceImpl.java](https://github.com/
 이 외에도 자동 로그인, 로그인 페이지 커스텀, 접근 권한 에러 페이지 커스텀, 비밀번호 암호화 등을 구현했으며 [security-context.xml](https://github.com/yeeahji/git_finalProject/blob/main/finalProject/src/main/webapp/WEB-INF/spring/security-context.xml)에서 확인할 수 있습니다.
 <br/><br/>
 
-* _상품 등록하기_
+* **_상품 등록하기_**
+---------------
 
 상품 등록에 관한 프론트, 백 모두 구현하였습니다.
 
@@ -87,7 +89,8 @@ UserDetailsService를 implements한 [MemberServiceImpl.java](https://github.com/
 코드는 [registForm.jsp](https://github.com/yeeahji/git_finalProject/blob/main/finalProject/src/main/webapp/product/registForm.jsp)와 [registForm.js](https://github.com/yeeahji/git_finalProject/blob/main/finalProject/src/main/webapp/js/product/registForm.js) 그리고 [product.java](https://github.com/yeeahji/git_finalProject/tree/main/finalProject/src/main/java/product)에서 확인할 수 있습니다. (CSS 관련 파일은 따로 링크 걸지 않았습니다)
 <br/><br/>
 
-* _바다톡(채팅)_
+* **_바다톡(채팅)_**
+---------------
 
 중고 거래라는 특성으로 인해 이 사이트의 거래는 채팅으로 이루어집니다. 채팅에 관한 프론트, 백 모두 구현하였으며 웹소켓을 이용했습니다.   
 
@@ -103,15 +106,20 @@ UserDetailsService를 implements한 [MemberServiceImpl.java](https://github.com/
 
  > 상품 등록하기  /  상품 상세페이지  /  신고하기
 
-<img src="https://user-images.githubusercontent.com/73110638/108618390-10f3e080-7461-11eb-971b-086e6779803b.png" width="200" height="250"> <img src="https://user-images.githubusercontent.com/73110638/108618981-76e26700-7465-11eb-9ac4-097ea5bc6577.png" width="200" height="250"> <img src="https://user-images.githubusercontent.com/73110638/108618990-8661b000-7465-11eb-9006-cd311f7d1940.png" width="200" height="250"><br/><br/>
+<img src="https://user-images.githubusercontent.com/73110638/108618390-10f3e080-7461-11eb-971b-086e6779803b.png" width="200" height="250"> <img src="https://user-images.githubusercontent.com/73110638/108618981-76e26700-7465-11eb-9ac4-097ea5bc6577.png" width="200" height="250"> <img src="https://user-images.githubusercontent.com/73110638/108618990-8661b000-7465-11eb-9006-cd311f7d1940.png" width="200" height="250">
+---
+<br/>
 
  > 내 상점 - 상품, 상품 후기, 찜, 구매내역, 내 상품 관리
 
-<img src="https://user-images.githubusercontent.com/73110638/108618795-51a12900-7464-11eb-99fd-e643351c731b.png" width="300" height="200"> <img src="https://user-images.githubusercontent.com/73110638/108618902-09ced180-7465-11eb-8325-ae61e972428f.png" width="300" height="200"> <img src="https://user-images.githubusercontent.com/73110638/108618891-fde30f80-7464-11eb-8462-6f18ce54f355.png" width="300" height="200"> <img src="https://user-images.githubusercontent.com/73110638/108618893-ffacd300-7464-11eb-818f-b4a70f58466a.png" width="300" height="200"> <img src="https://user-images.githubusercontent.com/73110638/108618661-371a8000-7463-11eb-86f9-9aff1f87562e.png" width="300" height="200"> <img src="https://user-images.githubusercontent.com/73110638/108618765-1141ab00-7464-11eb-81ea-69e570f75854.png" width="300" height="200"><br/><br/>
+<img src="https://user-images.githubusercontent.com/73110638/108618795-51a12900-7464-11eb-99fd-e643351c731b.png" width="300" height="200"> <img src="https://user-images.githubusercontent.com/73110638/108618902-09ced180-7465-11eb-8325-ae61e972428f.png" width="300" height="200"> <img src="https://user-images.githubusercontent.com/73110638/108618891-fde30f80-7464-11eb-8462-6f18ce54f355.png" width="300" height="200"> <img src="https://user-images.githubusercontent.com/73110638/108618893-ffacd300-7464-11eb-818f-b4a70f58466a.png" width="300" height="200"> <img src="https://user-images.githubusercontent.com/73110638/108618661-371a8000-7463-11eb-86f9-9aff1f87562e.png" width="300" height="200"> <img src="https://user-images.githubusercontent.com/73110638/108618765-1141ab00-7464-11eb-81ea-69e570f75854.png" width="300" height="200">
+---
+<br/>
 
  > 채팅방
 
-<img src="https://user-images.githubusercontent.com/73110638/108618519-65e42680-7462-11eb-9d37-e4918fe520fc.png" width="400" height="200"><br/><br/>
+<img src="https://user-images.githubusercontent.com/73110638/108618519-65e42680-7462-11eb-9d37-e4918fe520fc.png" width="400" height="200">
+<br/>
 
  > 관리자 페이지
 
