@@ -57,8 +57,7 @@
 | 탈퇴 사유 분석 | 탈퇴 사유 분석 |
 | 전체 상점 관리 | 상점 목록 출력 / 상점 상세 정보 확인 |
 | 전체 상품 관리 | 상품 목록 출력 / 상품 상세 정보 확인 |
-| 신고 내역 관리 |상점, 상품, 리뷰, 게시글, 댓글 신고 내역 출력 / 신고 상세 내용 확인 /
-신고 내용 블라인드 처리 & 계정 영구정지 / 신고 내역 처리 여부 체크 |
+| 신고 내역 관리 | 상점, 상품, 리뷰, 게시글, 댓글 신고 내역 출력 / 신고 상세 내용 확인 / 신고 내용 블라인드 처리 & 계정 영구정지 / 신고 내역 처리 여부 체크 |
 | 1:1 문의 관리 | 1:1 문의 내역 출력 / 문의 상세 내용 확인 / 문의글 답변 달기 |   
 <p/>
 <br/><br/><br/>
@@ -107,13 +106,11 @@ UserDetailsService를 implements한 [MemberServiceImpl.java](https://github.com/
  > 상품 등록하기  /  상품 상세페이지  /  신고하기
 
 <img src="https://user-images.githubusercontent.com/73110638/108618390-10f3e080-7461-11eb-971b-086e6779803b.png" width="200" height="250"> <img src="https://user-images.githubusercontent.com/73110638/108618981-76e26700-7465-11eb-9ac4-097ea5bc6577.png" width="200" height="250"> <img src="https://user-images.githubusercontent.com/73110638/108618990-8661b000-7465-11eb-9006-cd311f7d1940.png" width="200" height="250">
----
 <br/>
 
  > 내 상점 - 상품, 상품 후기, 찜, 구매내역, 내 상품 관리
 
 <img src="https://user-images.githubusercontent.com/73110638/108618795-51a12900-7464-11eb-99fd-e643351c731b.png" width="300" height="200"> <img src="https://user-images.githubusercontent.com/73110638/108618902-09ced180-7465-11eb-8325-ae61e972428f.png" width="300" height="200"> <img src="https://user-images.githubusercontent.com/73110638/108618891-fde30f80-7464-11eb-8462-6f18ce54f355.png" width="300" height="200"> <img src="https://user-images.githubusercontent.com/73110638/108618893-ffacd300-7464-11eb-818f-b4a70f58466a.png" width="300" height="200"> <img src="https://user-images.githubusercontent.com/73110638/108618661-371a8000-7463-11eb-86f9-9aff1f87562e.png" width="300" height="200"> <img src="https://user-images.githubusercontent.com/73110638/108618765-1141ab00-7464-11eb-81ea-69e570f75854.png" width="300" height="200">
----
 <br/>
 
  > 채팅방
