@@ -10,7 +10,7 @@
 	</insert>
 <!-- 공지사항 -->
 	<select id="getFagContent" parameterType="Integer" resultType="notice.bean.NoticeDTO">
-		select * from noticeBoard where select1=2 and select2=#{select2}
+		select * from noticeBoard where option1_id=2 and option2_id=#{option2_id}
 	</select>
 	
 	

@@ -1,11 +1,39 @@
-CREATE TABLE noticeBoard(
-   noticeBoard_number  number generated always as identity primary key,        --기본키         
-   option1_id     NOT NULL VARCHAR2(20),   --대분류id
-   option1_name   NOT NULL VARCHAR2(200),  --대분류name   
-   option2_id     NOT NULL VARCHAR2(20),   --소분류id  
-   option2_name   NOT NULL VARCHAR2(200),  --소분류name   
-   notice_subject NOT NULL VARCHAR2(4000), --제목
-   notice_content NOT NULL VARCHAR2(4000), --내용
-   notice_picture          VARCHAR2(4000), --사진
+CREATE table noticeBoard(           
+   option1_id      VARCHAR2(20),   --대분류id  
+   option2_id      VARCHAR2(20),   --소분류id   
+   notice_subject  VARCHAR2(4000), --제목
+   notice_content  VARCHAR2(4000), --내용
+   notice_picture  VARCHAR2(4000), --사진
    logtime        DATE DEFAULT SYSDATE
 );
+
+insert into noticeBoard(option1_id,option2_id,notice_subject,notice_content) values(2,1,'팔로우 숫자가 갑자기 줄었어요','자주묻는 질문의 내용 부분입니다. 필요한 내용을 넣으세요.');
+insert into noticeBoard(option1_id,option2_id,notice_subject,notice_content) values(2,1,'통신판매업자임녀 상품 판매에 필요한 절차가 있나요?','자주묻는 질문의 내용 부분입니다. 필요한 내용을 넣으세요.');
+insert into noticeBoard(option1_id,option2_id,notice_subject,notice_content) values(2,1,'상품 판매는 어떻게 하나요?','자주묻는 질문의 내용 부분입니다. 필요한 내용을 넣으세요.');
+insert into noticeBoard(option1_id,option2_id,notice_subject,notice_content) values(2,2,'거래를 하면 안되는 것들은 어떤 것이 있나요?','자주묻는 질문의 내용 부분입니다. 필요한 내용을 넣으세요.');
+insert into noticeBoard(option1_id,option2_id,notice_subject,notice_content) values(2,2,'사기거래 피해 발생 시 수사기관 신고는 어떻게 하나요?','자주묻는 질문의 내용 부분입니다. 필요한 내용을 넣으세요.');
+insert into noticeBoard(option1_id,option2_id,notice_subject,notice_content) values(2,2,'교환이나 환불은 어떻게 하나요?','자주묻는 질문의 내용 부분입니다. 필요한 내용을 넣으세요.');
+insert into noticeBoard(option1_id,option2_id,notice_subject,notice_content) values(2,3,'택배거래는 택배 운송장 번호만 등록 가능한가요?','자주묻는 질문의 내용 부분입니다. 필요한 내용을 넣으세요.');
+insert into noticeBoard(option1_id,option2_id,notice_subject,notice_content) values(2,3,'택배결제로 구매 했는데 직거래로 변경하고 싶어요','자주묻는 질문의 내용 부분입니다. 필요한 내용을 넣으세요.');
+insert into noticeBoard(option1_id,option2_id,notice_subject,notice_content) values(2,3,'번개페이란 무엇인가요?','자주묻는 질문의 내용 부분입니다. 필요한 내용을 넣으세요.');
+insert into noticeBoard(option1_id,option2_id,notice_subject,notice_content) values(2,4,'개안정보 설정은 어떻게 하나요?','자주묻는 질문의 내용 부분입니다. 필요한 내용을 넣으세요.');
+insert into noticeBoard(option1_id,option2_id,notice_subject,notice_content) values(2,4,'내 상점 소개는 어떻게 설정 하나요?','자주묻는 질문의 내용 부분입니다. 필요한 내용을 넣으세요.');
+insert into noticeBoard(option1_id,option2_id,notice_subject,notice_content) values(2,4,'상점명을 변경하고 싶어요','자주묻는 질문의 내용 부분입니다. 필요한 내용을 넣으세요.');
+insert into noticeBoard(option1_id,option2_id,notice_subject,notice_content) values(2,5,'택배사별 비용은 얼마 인가요?','자주묻는 질문의 내용 부분입니다. 필요한 내용을 넣으세요.');
+insert into noticeBoard(option1_id,option2_id,notice_subject,notice_content) values(2,5,'번개장터 편의점택배는 어떻게 이용하나요?','자주묻는 질문의 내용 부분입니다. 필요한 내용을 넣으세요.');
+insert into noticeBoard(option1_id,option2_id,notice_subject,notice_content) values(2,5,'번개장터 편의점택배를 이용했는데 발송 확인은 어떻게 하나요?','자주묻는 질문의 내용 부분입니다. 필요한 내용을 넣으세요.');
+insert into noticeBoard(option1_id,option2_id,notice_subject,notice_content) values(2,6,'내 계정 이용제한을 해제하려면 어떻게 해야 하나요?','자주묻는 질문의 내용 부분입니다. 필요한 내용을 넣으세요.');
+insert into noticeBoard(option1_id,option2_id,notice_subject,notice_content) values(2,6,'홍보로 제재 받는 경우는?','자주묻는 질문의 내용 부분입니다. 필요한 내용을 넣으세요.');
+insert into noticeBoard(option1_id,option2_id,notice_subject,notice_content) values(2,7,'UP하기 서비스가 뭐에요?','자주묻는 질문의 내용 부분입니다. 필요한 내용을 넣으세요.');
+insert into noticeBoard(option1_id,option2_id,notice_subject,notice_content) values(2,7,'UP하기 예약 설정은 어떻게 하나요?','자주묻는 질문의 내용 부분입니다. 필요한 내용을 넣으세요.');
+insert into noticeBoard(option1_id,option2_id,notice_subject,notice_content) values(2,8,'팔로우 숫자가 갑자기 줄었어요','자주묻는 질문의 내용 부분입니다. 필요한 내용을 넣으세요.');
+insert into noticeBoard(option1_id,option2_id,notice_subject,notice_content) values(2,8,'팔로우 숫자가 갑자기 줄었어요','자주묻는 질문의 내용 부분입니다. 필요한 내용을 넣으세요.');
+insert into noticeBoard(option1_id,option2_id,notice_subject,notice_content) values(2,9,'팔로우 숫자가 갑자기 줄었어요','자주묻는 질문의 내용 부분입니다. 필요한 내용을 넣으세요.');
+insert into noticeBoard(option1_id,option2_id,notice_subject,notice_content) values(2,9,'팔로우 숫자가 갑자기 줄었어요','자주묻는 질문의 내용 부분입니다. 필요한 내용을 넣으세요.');
+insert into noticeBoard(option1_id,option2_id,notice_subject,notice_content) values(2,10,'팔로우 숫자가 갑자기 줄었어요','자주묻는 질문의 내용 부분입니다. 필요한 내용을 넣으세요.');
+insert into noticeBoard(option1_id,option2_id,notice_subject,notice_content) values(2,10,'팔로우 숫자가 갑자기 줄었어요','자주묻는 질문의 내용 부분입니다. 필요한 내용을 넣으세요.');
+insert into noticeBoard(option1_id,option2_id,notice_subject,notice_content) values(2,11,'팔로우 숫자가 갑자기 줄었어요','자주묻는 질문의 내용 부분입니다. 필요한 내용을 넣으세요.');
+insert into noticeBoard(option1_id,option2_id,notice_subject,notice_content) values(2,11,'팔로우 숫자가 갑자기 줄었어요','자주묻는 질문의 내용 부분입니다. 필요한 내용을 넣으세요.');
+insert into noticeBoard(option1_id,option2_id,notice_subject,notice_content) values(2,12,'팔로우 숫자가 갑자기 줄었어요','자주묻는 질문의 내용 부분입니다. 필요한 내용을 넣으세요.');
+insert into noticeBoard(option1_id,option2_id,notice_subject,notice_content) values(2,12,'팔로우 숫자가 갑자기 줄었어요','자주묻는 질문의 내용 부분입니다. 필요한 내용을 넣으세요.');
+

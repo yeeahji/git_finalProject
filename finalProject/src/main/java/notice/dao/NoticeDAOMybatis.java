@@ -25,8 +25,8 @@ public class NoticeDAOMybatis implements NoticeDAO {
 	}
 
 	@Override
-	public List<NoticeDTO> getFagContent(int select2) {
-		return sqlSession.selectList("noticeSQL.getFagContent", select2);
+	public List<NoticeDTO> getFagContent(int option2_id) {
+		return sqlSession.selectList("noticeSQL.getFagContent", option2_id);
 	}
 
 //	[1:1문의]==============================================================================
