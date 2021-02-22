@@ -39,8 +39,8 @@
 					<a class="fmi_nav_up" id="12">번개장터 포장택배</a>
    				</nav>
    				
-   				<ul class="fmi_ul">
-   				</ul>
+   				<div class="fmi_div_accordion">
+   				</div>
    			</div> <%--fag_main_inner --%>
    		</main> <%--fag_main --%>
    	

@@ -257,7 +257,48 @@ b, strong {
     background: rgb(255, 255, 255);
 }
 
-
+input[id*="answer"]{
+    display:none;
+}
+input[id*="answer"]+label{
+    display: block;
+    padding: 27px;
+	margin: 2px;
+    border-bottom: 0;
+    color: #000040;
+    font-weight:900;
+    background: #ffffff;
+    cursor: pointer;
+    position: relative;
+}
+input[id*="answer"]+label em{
+    position: absolute;
+    top: 50%;
+    right: 10px;
+    width: 30px;
+    height: 30px;
+    margin-top: -15px;
+    display: inline-block;
+    background: url('./img/arrow.png') 0 0 no-repeat;
+}
+input[id*="answer"]+label+div{
+    max-height:0;
+    transition: all .35s;
+    overflow: hidden;
+    font-size: 11px;
+}
+input[id*="answer"]+label+div p{
+    display: inline-block;
+    padding: 20px;
+    font-size: 15px;
+    line-height: 20px;
+}
+input[id*="answer"]:checked + label + div{
+    max-height: 100px;
+}
+input[id*="answer"]:checked + label em{
+    background-position: 0 -30px;
+}
 
 
 

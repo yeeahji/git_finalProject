@@ -11,7 +11,7 @@ public interface NoticeDAO {
 
 	public void noticeBoardWrite(Map<String, String> map);
 
-	public List<NoticeDTO> getFagContent(int select2);
+	public List<NoticeDTO> getFagContent(int option2_id);
 
 	public List<QnaCateDTO> getMainCate();
 
