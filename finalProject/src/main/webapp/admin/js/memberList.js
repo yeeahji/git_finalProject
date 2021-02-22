@@ -148,9 +148,11 @@ function clickEvent(data){
       $('#moveStorePageBtn').click(function(){
          window.open("/market/store/store?id="+id,"PopupWin","width=800,height=800");
       });
+
       $('#moveStore_adminBtn').click(function(){
          location.href="/market/admin/storeList?id='+id'"
       });
+
       
       //영구정지
       $('#memberBlockBtn').click(function(){
@@ -214,6 +216,9 @@ function showMember(data){
    $('#emailSpan').text(data.adminMembersDTO.mem_email)
    $('#logSpan').text(data.adminMembersDTO.mem_logtime)
    $('#productSellSpan').text(data.totalSellProduct)
+   $('#productBuySpan').text(data.totalBuyProduct)
+   $('#reportedSpan').text(data.totalReported)
+
 };
 
 
@@ -238,5 +243,4 @@ function showMember(data){
     });
 })(jQuery);
 
-   
  
