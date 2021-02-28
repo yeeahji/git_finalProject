@@ -240,7 +240,7 @@ public class AdminServiceImpl implements AdminService {
 
 
     
-//  [신고]=========================================================================
+//  [명경-신고]=========================================================================
   //A.신고 전체 리스트 출력
   @Override
   public List<StoreDTO> getComplainList(String pg, String viewNum) {
@@ -360,7 +360,7 @@ public class AdminServiceImpl implements AdminService {
      adminDAO.blindComplain(board_seq, comment_seq, review_seq, thisIs);
   }
 
-//    [1:1문의]=========================================================================
+//   [명경-1:1문의]=========================================================================
     //A.1:1문의 전체 리스트 출력
     @Override
     public List<QnaDTO> getQnaList(String pg, String viewNum) {
@@ -424,7 +424,7 @@ public class AdminServiceImpl implements AdminService {
        return adminBoardPaging;
     }
     
-//    [탈퇴회원 관리]=========================================================================
+//    [명경-탈퇴회원 관리]=========================================================================
     //탈퇴회원 리스트 출력
     @Override
     public List<WithdrawDTO> getWithdrawList(String pg, String viewNum) {

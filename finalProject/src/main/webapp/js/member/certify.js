@@ -1,5 +1,7 @@
+//담당 : 김명경
+
 $(document).ready(function(){
-	
+//	아이디를 기반으로 수시로 회원 정보를 이용할 수 있게 세션 저장
 	$.ajax({
 		type: 'post',
 		url: '/market/member/sessionLogin',
@@ -14,6 +16,7 @@ $(document).ready(function(){
 
 
 $('#certifyBtn').click(function(){
+	//유효성 검사
 	if($('#certifyPwd').val()== '')
 		$('#certifyPwdDiv').text("비밀번호를 입력하세요");
 	else
@@ -23,7 +26,7 @@ $('#certifyBtn').click(function(){
 			data : 'mem_id='+$('#certifyId').val()+'&mem_pwd='+$('#certifyPwd').val(),
 			dataType : 'text',
 			success : function(result){
-				if(result == 'yes'){
+				if(result == 'yes'){//아이디/비번 일치 시
 					location.href='/market/member/myPage';
 				}else if(result =='no'){
 					alert("올바르지 않은 비밀번호입니다.");

@@ -1,6 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec" %>
+    
 <!DOCTYPE html>
+<!-- 담당 : 김명경 -->
 <html>
 <head>
 <meta charset="UTF-8">
@@ -20,11 +23,14 @@
   	<div class="section2-5">
 	<div class="section2-5-1">
 	<form name = "article" method="post" >
+	
 	<article><!-- list.js에서 받은 값 -->
+	<sec:authentication property="principal" var="member"/> <!-- 사용자 정보 가져오기 -->
+	<input type="hidden" name="sessionId" id="sessionId" value="${member.username }"><!-- 세션아이디 -->
 	<input type="hidden" name="seq" id="seq" value="${seq}"> <!-- 게시글 seq -->
 	<input type="hidden" name="pg" id="pg" value="${pg }">
-	<input type="hidden" name="sessionId" id="sessionId" value="${sessionId }">	<!-- 세션아이디 -->
 	<input type="hidden" name="comment_seq" id="comment_seq">	
+	
 		<h3 id="board_subject" name="board_subject"></h3>
 		<div>
 			<span id="mem_id"></span>
@@ -44,7 +50,8 @@
 		<div class="textarea_input">
 		
 		댓글 <hr>
-			<table id="commentListTable" ></table><div id="triggerList"></div>
+			<table id="commentListTable" ></table>
+			<div id="commentList"></div>
 			<input name="board_seq" id="board_seq" type="hidden" value="${seq}">
 			<textarea id="comment_content" name="comment_content" placeholder="댓글을 남겨보세요" class="textarea_input" ></textarea>
 			<input value="등록" type="button" id="commentBtn">
@@ -75,7 +82,7 @@
  </div>
 </div>
 
-<!-- ************************ 신고하기 모달창 ************************ -->
+<!-- ************************ 신고하기 모달창 (기본적으로 숨겨져있다)************************ -->
 <div id="modalHidden">
       <div class="singoModalWrap">
          <div id="singoModalTop">

@@ -3,7 +3,7 @@
 <%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec" %>
 
 <link rel="stylesheet" type = "text/css" href="../css/member/member.css">
-
+<!-- 담당 : 김명경 -->
 <body>
 <script defer src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <script defer src="../js/member/certify.js"></script>

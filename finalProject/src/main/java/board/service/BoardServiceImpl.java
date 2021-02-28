@@ -97,31 +97,32 @@ public class BoardServiceImpl implements BoardService {
 	}
 	
 	
-//	[글쓰기/수정/삭제]===============================================================================
+//	[글쓰기/보기/수정/삭제]===============================================================================
 	@Override
+	//글쓰기
 	public void write(Map<String, String> map) {
 		
 		String sessionId = sessionId(session);
 		map.put("sessionId",sessionId);
 		boardDAO.write(map);//subject, content, id 담겨있음
 	}
-
+	//선택한 글 조회수 증가
 	@Override
 	public void hitUpdate(String seq) {
 		boardDAO.hitUpdate(seq);
 	}
-
+	//선택한 글 보기
 	@Override
 	public BoardDTO getArticle(String seq) {
 		return boardDAO.getArticle(seq);
 	}
-
+	//글 수정
 	@Override
 	public void modifyArticle(Map<String, String> map) {
 		boardDAO.modifyArticle(map);
 		
 	}
-
+	//글 삭제
 	@Override
 	public void deleteArticle(String seq) {
 		boardDAO.deleteArticle(seq);
@@ -147,31 +148,37 @@ public class BoardServiceImpl implements BoardService {
 		
 	}
 //	[댓글]===================================================================================
-
+//	댓글 출력
+	@Override
+	public List<CommentDTO> showComment(String board_seq) {
+		return boardDAO.showComment(board_seq);
+	}
+	
+//	댓글쓰기
 	@Override
 	public void writeComment(Map<String, String> map) {
 		String sessionId = sessionId(session);
 		map.put("sessionId", sessionId);
 		boardDAO.writeComment(map);
 	}
-	@Override
-	public List<CommentDTO> showComment(String board_seq) {
-		return boardDAO.showComment(board_seq);
+//	댓글 수정 1. 기존 댓글 가져오기	@Override
+	public CommentDTO getAComment(String comment_seq) {
+		return boardDAO.getAComment(comment_seq);
 	}
+
+//	댓글 수정2. 새로 쓴 댓글으로 덮어쓰기
+	@Override
+	public void modifyComment(Map<String, String> map) {
+//		map : {comment_seq, comment_content}
+		boardDAO.modifyComment(map);
+	}
+	
+//	댓글 삭제
 	@Override
 	public void deleteComment(String comment_seq) {
 		boardDAO.deleteComment(comment_seq);
 	}
-	@Override
-	public void modifyComment(Map<String, String> map) {
-		
-		boardDAO.modifyComment(map);
-	}
-	@Override
-	public CommentDTO getAComment(String comment_seq) {
-		return boardDAO.getAComment(comment_seq);
-		
-	}
+
 	
 
 

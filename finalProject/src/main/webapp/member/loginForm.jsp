@@ -2,19 +2,21 @@
     pageEncoding="UTF-8"%>
 <script type="text/javascript" defer src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <script type="text/javascript" defer src="../js/member/login.js"></script>
+<!-- 담당 : 김명경 / 이예지-->
 
 <form name ="loginForm" action="${pageContext.request.contextPath}/member/login" method="post">
-<!-- <form name ="loginForm"> -->
     <p id ="title" name = "title" align ="center"><strong>로그인</strong></p>
     <table align= "center">
-        <tr>
-            <td>
-                <input placeholder="아이디" type="text" name="mem_id" id="id" size=46px align="center">
-            </td>
-        </tr>
+    <tr>
+       <td>
+          <input placeholder="아이디" type="text" name="mem_id" id="id" size=46px align="center">
+       </td>
+    </tr>
+    <tr>
         <td>
             <input placeholder="비밀번호" type="password" name="mem_pwd" id="pwd" size=46px>
             <div class="caution" id="failLoginDiv">${requestScope.loginFailMsg}</div>
+            <!-- '존재하지 않는 사용자, 아이디/비번 오타, 비활성화된 계정'의 조건에 충족하면 해당 메시지가 뜬다-->
         </td>
     </tr>
     <tr>
@@ -41,7 +43,6 @@
     </tr>
     <tr>
         <td align='center'>
-        	
             <a href="/market/member/findIdForm">아이디/비밀번호 찾기</a>&emsp;｜&emsp;<a href="/market/member/joinForm">회원가입</a>
         </td>
     </tr>

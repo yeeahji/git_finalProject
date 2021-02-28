@@ -49,6 +49,16 @@ public class AdminDAOMybatis implements AdminDAO {
 	public AdminMembersDTO getMemberView(String id) {
 		return sqlSession.selectOne("adminSQL.getMemberView", id);
 	}
+	//회원_영구정지
+	@Override
+	public void memberBlock(String id) {
+		 sqlSession.update("adminSQL.memberBlock", id);
+	}
+	//회원_영구정지 복구
+	@Override
+	public void memberReleaseBtn(String id) {
+		 sqlSession.update("adminSQL.memberReleaseBtn", id);
+	}
 
 	// 상점출력
 	@Override
@@ -87,6 +97,27 @@ public class AdminDAOMybatis implements AdminDAO {
 	public void store_productDelete(Map<String, String[]> map) {
 		sqlSession.delete("adminSQL.store_productDelete", map);
 	}
+	//상점_상세조회_상품정보_판매중
+	@Override
+	public int sale_productSpan(String id) {
+		return sqlSession.selectOne("adminSQL.sale_productSpan", id);
+	}
+	//상점_상세조회_상품정보_예약중
+	@Override
+	public int reservation_productSpan(String id) {
+		return sqlSession.selectOne("adminSQL.reservation_productSpan", id);
+	}
+	//상점_상세조회_상품정보_판매완료
+	@Override
+	public int sold_productSpan(String id) {
+		return sqlSession.selectOne("adminSQL.sold_productSpan", id);
+	}
+	//총 구매한 물건 개수
+	@Override
+	public int totalBuyProduct(String id) {
+		return sqlSession.selectOne("adminSQL.totalBuyProduct", id);
+	}
+	
 
 	// 물품전체 출력
 	@Override
@@ -117,6 +148,17 @@ public class AdminDAOMybatis implements AdminDAO {
 	public int getTotalF(Map<String, String> map) {
 		return sqlSession.selectOne("adminSQL.getTotalF", map);
 	}
+	//물품_상세정보_카테고리
+	@Override
+	public AdminProductDTO getCatagory(String seq) {
+		return sqlSession.selectOne("adminSQL.getCatagory", seq);
+	}
+	//물품_상세보기 대분류
+	@Override
+	public String getCate_code(String cate_code) {
+		System.out.println(cate_code);
+		return sqlSession.selectOne("adminSQL.getCate_code", cate_code);
+	}
 
 	// 상점_클릭후_후기 총 개수
 	@Override
@@ -130,7 +172,7 @@ public class AdminDAOMybatis implements AdminDAO {
 		return sqlSession.selectList("adminSQL.getStoreViewOrderby", map);
 	}
 
-//	[신고]=========================================================================
+//	[명경-신고]=========================================================================
 
 	// A.신고 전체 리스트 출력
 	@Override
@@ -181,9 +223,28 @@ public class AdminDAOMybatis implements AdminDAO {
 	public void solveComplain(Map<String, Integer> map) {
 		sqlSession.update("adminSQL.solveComplain", map);
 	}
+	//신고 내역 블라인드 처리(게시글/댓글/리뷰에 한하여)
+	@Override
+	public void blindComplain(String board_seq, String comment_seq, String review_seq, String thisIs) {
+		if(thisIs.equals("게시글") ){
+			sqlSession.update("adminSQL.boardBlindComplain", Integer.parseInt(board_seq));
+			
+		}else if(thisIs.equals("댓글")) {
+			sqlSession.update("adminSQL.commentBlindComplain", Integer.parseInt(comment_seq));
+			
+		}else if(thisIs.equals("리뷰")) {
+			sqlSession.update("adminSQL.reviewBlindComplain", Integer.parseInt(review_seq));
+		}
+	}
+	//신고당한 수
+	@Override
+	public int totalReported(String id) {
+		return sqlSession.selectOne("adminSQL.totalReported", id);
+	}
 
-//[1:1문의]=========================================================================
-//A.1:1문의 전체 리스트 출력
+
+//  [명경-1:1문의]=========================================================================
+//  A.1:1문의 전체 리스트 출력
 	@Override
 	public List<QnaDTO> getQnaList(Map<String, Integer> map) {
 		return sqlSession.selectList("adminSQL.getQnaList", map);
@@ -201,15 +262,36 @@ public class AdminDAOMybatis implements AdminDAO {
 	public void writeAnswer(Map<String, Object> map) {
 		sqlSession.update("adminSQL.writeAnswer", map);
 	}
-
-//	[탈퇴회원관리]=========================================================================
+	//1:1문의 - 조건검색 후 문의 내역 출력
 	@Override
+	public List<QnaDTO> getSearchQnaList(Map<String, String> map) {
+		return sqlSession.selectList("adminSQL.getSearchQnaList", map);
+	}
+	//1:1문의 조건검색 후 문의 내역 출력 페이징
+	@Override
+	public int totalG(Map<String, String> map) {
+		return sqlSession.selectOne("adminSQL.totalG", map);
+	}
+//	[명경-탈퇴회원관리]=========================================================================
+	@Override
+	//탈퇴사유 리스트 출력
 	public List<WithdrawDTO> getWithdrawList(Map<String, Integer> map) {
 		List<WithdrawDTO> list = sqlSession.selectList("adminSQL.getWithdrawList", map);
 		return list;
 	}
 
-	//파이 그래프를 그리기 위한 데이터들
+	//탈퇴사유 조건검색 리스트 출력
+	@Override
+	public List<WithdrawDTO> getSearchWithdrawList(Map<String, String> map) {
+		return sqlSession.selectList("adminSQL.getSearchWithdrawList", map);
+	}
+	//탈퇴사유 조건검색 리스트 출력_페이징
+	@Override
+	public int totalH(Map<String, String> map) {
+		return sqlSession.selectOne("adminSQL.totalH", map);
+	}	
+	
+//	[탈퇴사유 파이 그래프를 그리기 위한 데이터들(사유별 개수)]
 	//탈퇴사유 전체 개수
 	@Override
 	public int getWithdrawTotal() {
@@ -246,91 +328,7 @@ public class AdminDAOMybatis implements AdminDAO {
 	public int getWithdraw_othersTotal() {
 		return sqlSession.selectOne("adminSQL.getWithdraw_othersTotal");
 	}
-	//신고 내역 블라인드 처리(게시글/댓글/리뷰에 한하여)
-	@Override
-	public void blindComplain(String board_seq, String comment_seq, String review_seq, String thisIs) {
-		if(thisIs.equals("게시글") ){
-			sqlSession.update("adminSQL.boardBlindComplain", Integer.parseInt(board_seq));
-			
-		}else if(thisIs.equals("댓글")) {
-			sqlSession.update("adminSQL.commentBlindComplain", Integer.parseInt(comment_seq));
-			
-		}else if(thisIs.equals("리뷰")) {
-			sqlSession.update("adminSQL.reviewBlindComplain", Integer.parseInt(review_seq));
-		}
-	}
 	
-
-
-	
-	//회원_영구정지
-	@Override
-	public void memberBlock(String id) {
-		 sqlSession.update("adminSQL.memberBlock", id);
-	}
-	//회원_영구정지 복구
-	@Override
-	public void memberReleaseBtn(String id) {
-		 sqlSession.update("adminSQL.memberReleaseBtn", id);
-	}
-	//물품_상세정보_카테고리
-	@Override
-	public AdminProductDTO getCatagory(String seq) {
-		return sqlSession.selectOne("adminSQL.getCatagory", seq);
-	}
-	//물품_상세보기 대분류
-	@Override
-	public String getCate_code(String cate_code) {
-		System.out.println(cate_code);
-		return sqlSession.selectOne("adminSQL.getCate_code", cate_code);
-	}
-	
-	//조건검색 후 문의 내역 출력
-	@Override
-	public List<QnaDTO> getSearchQnaList(Map<String, String> map) {
-		return sqlSession.selectList("adminSQL.getSearchQnaList", map);
-	}
-	//조건검색 후 문의 내역 출력 페이징
-	@Override
-	public int totalG(Map<String, String> map) {
-		return sqlSession.selectOne("adminSQL.totalG", map);
-	}
-	//탈퇴회원 조건검색 리스트 출력
-	@Override
-	public List<WithdrawDTO> getSearchWithdrawList(Map<String, String> map) {
-		return sqlSession.selectList("adminSQL.getSearchWithdrawList", map);
-	}
-	//탈퇴회원 조건검색 리스트 출력_페이징
-	@Override
-	public int totalH(Map<String, String> map) {
-		return sqlSession.selectOne("adminSQL.totalH", map);
-	}	
-	
-	//상점_상세조회_상품정보_판매중
-	@Override
-	public int sale_productSpan(String id) {
-		return sqlSession.selectOne("adminSQL.sale_productSpan", id);
-	}
-	//상점_상세조회_상품정보_예약중
-	@Override
-	public int reservation_productSpan(String id) {
-		return sqlSession.selectOne("adminSQL.reservation_productSpan", id);
-	}
-	//상점_상세조회_상품정보_판매완료
-	@Override
-	public int sold_productSpan(String id) {
-		return sqlSession.selectOne("adminSQL.sold_productSpan", id);
-	}
-	//총 구매한 물건 개수
-	@Override
-	public int totalBuyProduct(String id) {
-		return sqlSession.selectOne("adminSQL.totalBuyProduct", id);
-	}
-	//신고당한 수
-	@Override
-	public int totalReported(String id) {
-		return sqlSession.selectOne("adminSQL.totalReported", id);
-	}
 	
 
 
