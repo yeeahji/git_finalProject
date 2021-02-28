@@ -3,24 +3,20 @@ package board.bean;
 import org.springframework.stereotype.Component;
 
 import lombok.Data;
-
+//담당 : 김명경
 @Data
 @Component
 public class BoardPaging {
 	public int currentPage; //현재페이지 
 	public int pageBlock;  //[이전][1][2][3][다음]한 페이지당 띄울 페이지 번호. ->> 5 
-	public int pageSize; //->> 1페이지당 10개씩
+	public int pageSize; //1페이지당 출력할 글 수. (1페이지당 10개씩)
 	public int total; //총 글 수 
 	public StringBuffer pagingHTML;
 	
-//	▶ StringBuffer / String
-//	:둘다 문자열 클래스
-//	- StringBuffer:편집이 가능하다. 내가 있는 현재페이지가 어디인지에 따라 내용을 바꿀 수 있다. 
 	
 	public void makePagingHTML() {
 		pagingHTML = new StringBuffer();
 		int totalP = (total+(pageSize-1))/pageSize; // ★공식!   총 페이지 수  : 5개
-		System.out.println("totalP:"+totalP);
 		
 		int startPage = (currentPage-1) / pageBlock * pageBlock + 1;
 		

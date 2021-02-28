@@ -213,7 +213,7 @@
    </select>
    
    
-<!-- B.조건검색 후 문의 내역 출력 -->
+<!-- B.1:1문의 조건검색 후 문의 내역 출력 -->
 	<select id="getSearchQnaList" parameterType="java.util.Map" resultType="admin.bean.QnaDTO">
 		<![CDATA[
 		select * from
@@ -222,7 +222,7 @@
 		)where rn>=#{startNum} and rn<=#{endNum}
 		]]>
 	</select>
-<!-- B.조건검색 후 문의 내역 출력 페이징 -->
+<!-- B.1:1문의-조건검색 후 문의 내역 출력 페이징 -->
 	<select id="totalG" parameterType="java.util.Map" resultType="Integer">
 		select count(*) from qna where ${searchType2} like '%'||#{keyword}||'%'
 	</select>
@@ -232,7 +232,7 @@
    <select id="getQnaContent" parameterType="Integer" resultType="admin.bean.QnaDTO">
       select * from qna where qna_seq=#{qna_seq} 
    </select>
-<!-- C.답글 달기 -->
+<!-- C.1:1문의 답글 달기 -->
  	<update id="writeAnswer" parameterType="java.util.Map" >
  		update qna set qna_answer = #{qna_answer}, qna_answerLogtime = sysdate where qna_seq = #{qna_seq}
  	</update>

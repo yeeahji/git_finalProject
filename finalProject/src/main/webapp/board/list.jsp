@@ -1,17 +1,20 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec" %>
-    
+    <!-- 담당 : 김명경 -->
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>아나바다 커뮤니티</title>
 	<link rel="stylesheet" href="../css/board/list.css">
-	
-	<script type="text/javascript" src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
+	 <!-- 합쳐지고 최소화된 최신 CSS -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+	<!-- 부가적인 테마 -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
+	<!-- 합쳐지고 최소화된 최신 자바스크립트 -->
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 	<script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-	
 	<script type="text/javascript" src="../js/board/list.js"></script>
 </head>
 <body>
@@ -30,13 +33,13 @@
   			<nav class="notice_navBar"></nav>
   			<main class="notice_main">
 				<h3 class="title"><strong>커뮤니티</strong></h3>
-				<!-- 비회원 -->
+				<!-- '글쓰기'버튼 클릭했을 때 비회원/로그인 전일 경우, 로그인 페이지로 이동 -->
 				<sec:authorize access="isAnonymous()">	
 				<input value="글쓰기" type="button" 
 						onclick="location.href='/market/member/loginForm'"  style="float:right;">
 				</sec:authorize>
 				<br><br>
-				<!-- 권한이 있을 때(회원) -->
+				<!-- '글쓰기'버튼 클릭했을 때  로그인 상태라면, 글쓰기페이지로 이동(list.js() -->
 				<sec:authorize access="isAuthenticated()">   
 				<input value="글쓰기" type="button" id="goWriteBtn" style="float:right;">
 				</sec:authorize>
@@ -69,7 +72,7 @@
 
 		</div></div><br><br>
 		
-<!-- - 검색 -->
+<!-- - 검색 : serialize로 가져갈 데이터 : searchType, searchText, pg-->
 		<form id="boardSearchForm" name="boardSearchForm">
 			<div style="text-align:center;" >
 			<select name="searchType" id="searchType" align="center">
@@ -79,7 +82,7 @@
 			<input type="hidden" name="pg" value="1"> <!-- 기본페이지.boardSearchForm안에 있어야한다. -->
 			<input type="search" name="searchText" id="searchText"align="center">
 			<input type="button" id="boardSearchBtn" value="검색"><br><br>
-			<div id="searchDiv"></div>
+			<div id="searchDiv" class="caution"></div>
 			</div>
 		</form>
 			
@@ -95,13 +98,6 @@
   	<div class="section2-4"></div>
   </div> <%-- revel2--%>
  </div>
- <!-- 합쳐지고 최소화된 최신 CSS -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
 
-<!-- 부가적인 테마 -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
-
-<!-- 합쳐지고 최소화된 최신 자바스크립트 -->
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 </body>
 </html>

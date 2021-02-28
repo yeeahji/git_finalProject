@@ -6,6 +6,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 
 import lombok.Data;
 
+//담당 : 김명경
 @Data
 public class ComplainDTO {
 	private String reporter_id;

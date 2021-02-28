@@ -3,6 +3,7 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
     
 <!DOCTYPE html>
+<!-- 담당 : 김명경 -->
 <html>
 <head>
 <meta charset="UTF-8">
@@ -12,9 +13,6 @@
 	<script type="text/javascript" src="../js/board/modify.js"></script>
 </head>
 <body>
-<%	pageContext.setAttribute("br", "<br/>");
-	pageContext.setAttribute("cn", "\n");
-%>
 <div id="root">
 <div class="section1">
 <div class="section2">
@@ -33,7 +31,7 @@
   			<div id="subjectAreaDiv" class="caution"></div>
   			<br>
 	  			<textarea placeholder="내용을 입력해주세요." class="textarea_input" 
-	  					id="contentArea" style="height: 300px;">${fn:replace(b.board_content,br,cn)}</textarea>
+	  					id="contentArea" style="height: 300px;"></textarea>
   			<div id="contentAreaDiv" class="caution"></div>
   			</div></div>
   			<div align="center">

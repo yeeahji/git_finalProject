@@ -13,7 +13,7 @@ import org.springframework.security.authentication.DisabledException;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.authentication.AuthenticationFailureHandler;
 import org.springframework.stereotype.Service;
-
+//담당 : 이예지
 @Service
 public class MemberLoginFailHandler implements AuthenticationFailureHandler {
 

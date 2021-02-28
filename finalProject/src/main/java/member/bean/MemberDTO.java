@@ -14,6 +14,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Getter;
 import lombok.Setter;
 
+//담당 : 김명경 / SpringSecurity 이예지
 @Getter
 @Setter
 public class MemberDTO implements UserDetails {
@@ -40,6 +41,7 @@ public class MemberDTO implements UserDetails {
 	private List<GrantedAuthority> authority;
 	
 	
+//	by 예지
 	//세터(시큐리티 관련만)-----------------------------------------------------
 	public void setUsername(String mem_id) {
 		this.mem_id = mem_id;

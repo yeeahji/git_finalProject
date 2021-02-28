@@ -1,8 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
+<!-- 담당 : 김명경 -->
 <html>
-
 <head>
     <meta charset="UTF-8" />
     <title>아나바다 마켓 회원가입</title>

@@ -322,7 +322,7 @@ public class AdminController {
 	}
 
 
-//	[신고]=========================================================================
+//	[명경-신고]=========================================================================
 
 	//A.신고 내역 출력
 	@RequestMapping(value="/getComplainList", method=RequestMethod.POST)
@@ -420,7 +420,7 @@ public class AdminController {
 	}
 	
 	
-//	[1:1문의]=========================================================================
+//	[명경 - 1:1문의]=========================================================================
 	
 	//문의 내역 출력
 	@RequestMapping(value="/getQnaList", method=RequestMethod.POST)
@@ -482,7 +482,7 @@ public class AdminController {
 		adminService.writeAnswer(map);
 	}	
 	
-//	[탈퇴회원 관리]=========================================================================
+//	[명경-탈퇴회원 관리]=========================================================================
 
 	//탈퇴회원 전체리스트 가져오기
 	@RequestMapping(value="/getWithdrawList", method=RequestMethod.POST)

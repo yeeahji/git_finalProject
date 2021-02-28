@@ -5,56 +5,57 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 <mapper namespace="memberSQL" >
 
-<!-- ▶ 시큐리티: 권한 가져오기  -->
+<!-- ▶ 시큐리티: 권한 가져오기 (by 예지) -->
  	<select id="getAuth" parameterType="String" resultType="String">
  		select authority from members where mem_id = #{mem_id}
  	</select>
 
 
 <!-- ========================================================================= --> 		
-<!-- ▶  회원가입 -->
+<!-- ▶  회원가입(by 명경/은경) -->
  	<insert id="join" parameterType="member">
  		begin
+ 		<!-- 1. 회원 정보 생성 -->
 	 		insert into members values(#{mem_id}, #{mem_pwd}, #{mem_name}, #{mem_email}, 
 	 									#{mem_add1},#{mem_add2}, #{mem_postcode},
 	 									#{mem_tel}, '최근 거래지역이 없습니다', sysdate,
 	 									1, 'ROLE_USER',
 	 									0, #{mem_agree}, 0);
-
+		<!-- 2. 회원 상점 생성 -->
  			insert into store(mem_id, store_nickname, store_img) 
-			values(#{mem_id}, '상점'||seq_store.NEXTVAL||'호', 'logo_black.png');
+				values(#{mem_id}, '상점'||seq_store.NEXTVAL||'호', 'logo_black.png');
  		end;
  	</insert> 
-<!-- ▶ 아이디 중복 체크 / 회원정보수정용 회원 데이터 전체 출력  -->
+<!-- ▶ 아이디 중복 체크 / 회원정보수정용 회원 데이터 전체 출력 (by명경) -->
  	<select id="getData" parameterType="String" resultType="member">
  		select * from members where mem_id = #{mem_id}
  	</select>
  	
 <!-- ========================================================================= -->
-<!-- ▶  로그인 / 본인 재확인-->
+<!-- ▶  로그인 / 본인 재확인(by명경)-->
  	<select id="login" parameterType="java.util.Map" resultType="member">
  		select * from members where mem_id = #{mem_id} and mem_pwd = #{mem_pwd}
  	</select>
-<!-- ▶ 아이디찾기-->
+<!-- ▶ 아이디찾기(by명경)-->
  	<select id="findId" parameterType="String" resultType="member">
  		select * from members where mem_email = #{mem_email}
  	</select>
-<!-- ▶ 비밀번호찾기-->
+<!-- ▶ 비밀번호찾기(by명경)-->
  	<select id="findPwd" parameterType="java.util.Map" resultType="member">
  		select * from members where mem_id = #{mem_id} and mem_email = #{mem_email}
  	</select>
-<!-- ▶  비밀번호 재설정 -->
+<!-- ▶  비밀번호 재설정(by명경) -->
  	<update id="resetPwd" parameterType="java.util.Map" >
  		update members set mem_pwd = #{mem_pwd} where mem_email = #{mem_email}
  	</update>
  	
 
 <!-- ========================================================================= -->
-<!-- ▶ 카카오 로그인 -->
+<!-- ▶ 카카오 로그인 (by명경)-->
  	<select id="checkEmail" parameterType="String" resultType="member">
  		select * from members where mem_email = #{email}
  	</select>
-<!-- ▶ 처음 로그인한 카카오 데이터 회원가입 -->
+<!-- ▶ 처음 로그인한 카카오 데이터 회원가입 (by명경)-->
  	<insert id="joinKakao" parameterType="member">
  		begin
 	 		insert into members values(#{mem_id}, #{mem_pwd}, #{mem_name}, #{mem_email}, 
@@ -67,14 +68,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			values(#{mem_id}, '상점'||seq_store.NEXTVAL||'호', 'logo_black.png');
  		end; 									
  	</insert> 
-<!-- ▶ 카카오 데이터의 유니크 값 email가져오기 -->
+<!-- ▶ 카카오 데이터의 유니크 값 email가져오기 (by명경)-->
  	<select id="selectKakao" parameterType="java.util.Map" resultType="member">
  		select * from members where mem_email = #{email}
  	</select>
 
 
 <!-- ========================================================================= -->
-<!-- ▶  수정 데이터로 업데이트 -->
+<!-- ▶  수정 데이터로 업데이트 (by명경)-->
  	<update id="update" parameterType="member" >
  		update members set mem_name = #{mem_name}
 	 						, mem_pwd = #{mem_pwd}
@@ -85,7 +86,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	 						, mem_add2 = #{mem_add2}
  		where mem_id = #{mem_id}
  	</update>
-<!-- ▶  탈퇴 -->
+<!-- ▶  탈퇴 (by명경)-->
  	<delete id="withdraw" parameterType="java.util.Map">
  		begin
 <!-- 	 	1. 탈퇴 db에 사유 추가 -->
@@ -110,13 +111,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  		end;
  	</delete>
  	
-<!--  	카카오로그인/일반로그인 구분 -->
+<!--  	카카오로그인/일반로그인 구분 (by명경)-->
  	<select id="distinguishKakao" parameterType="String" resultType="Integer">
  		select mem_kakao from members where mem_id = #{mem_id}
  	</select>
  	
  	
-<!--  	신고하기  .. 채팅 생기면 전면수정해야함-->
+<!--  	신고하기 (by명경)-->
 	<insert id="complain" parameterType="java.util.Map">
 		begin
 			insert into complain values(#{mem_id}, #{reporter_id}

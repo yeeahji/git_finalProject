@@ -5,7 +5,7 @@ import java.util.Date;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 import lombok.Data;
-
+//담당 : 김명경
 @Data
 public class CommentDTO {
 	private int board_seq, comment_seq;

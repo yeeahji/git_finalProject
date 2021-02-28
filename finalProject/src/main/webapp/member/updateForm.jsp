@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core"  %>
 <!DOCTYPE html>
+<!-- 담당 : 김명경 -->
 <html>
 <head>
 <meta charset="UTF-8">
@@ -89,9 +90,8 @@
                 		value="${memberDTO.mem_add2 }">
                 <div class="caution" id="addDiv"></div>
                  <div id="map" style="width:365px;height:365px;margin-top:10px;display:none"></div>
-                
-                
-                
+<!--                 지도가 뜰 자리 -->
+               
             </td>
         </tr>
         <tr>
