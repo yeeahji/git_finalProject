@@ -2,7 +2,7 @@
 
 <p align="center"><img src="https://user-images.githubusercontent.com/73110638/108618038-23b8e600-745e-11eb-9957-a14652bb7749.png" width="600" height="700"></p>
 
-> <div align="center">아나바다 마켓은 환경을 생각하는 중고 거래 웹 애플리케이션입니다.</div>
+> <div align="center">아나바다 마켓은 환경을 생각하는 중고 거래 웹 사이트입니다.</div>
 
 아나바다 마켓은 웹이라는 공간에서 보다 편리하게 중고물품을 거래할 수 있습니다.
 사이트명 '아나바다'는 아껴 쓰고, 나눠 쓰고, 바꿔 쓰고, 다시 쓴다는 뜻으로 중고 거래를 의미하며
